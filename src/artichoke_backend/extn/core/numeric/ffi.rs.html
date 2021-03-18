@@ -19,21 +19,6 @@
 <span id="18">18</span>
 <span id="19">19</span>
 <span id="20">20</span>
-<span id="21">21</span>
-<span id="22">22</span>
-<span id="23">23</span>
-<span id="24">24</span>
-<span id="25">25</span>
-<span id="26">26</span>
-<span id="27">27</span>
-<span id="28">28</span>
-<span id="29">29</span>
-<span id="30">30</span>
-<span id="31">31</span>
-<span id="32">32</span>
-<span id="33">33</span>
-<span id="34">34</span>
-<span id="35">35</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">float</span>::<span class="ident">Float</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">integer</span>::<span class="ident">Integer</span>;
@@ -54,21 +39,6 @@
         <span class="prelude-val">Ok</span>(<span class="ident">flt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">flt</span>,
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error</span>::<span class="ident">raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
-}
-
-<span class="comment">// ```c</span>
-<span class="comment">// MRB_API mrb_value mrb_int_value(mrb_state *mrb, mrb_float f);</span>
-<span class="comment">// ```</span>
-<span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_int_value</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">f</span>: <span class="ident">sys</span>::<span class="ident">mrb_float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
-    <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">Float</span>::<span class="ident">with_f64</span>(<span class="ident">f</span>);
-    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">fixnum</span>) <span class="op">=</span> <span class="ident">f</span>.<span class="ident">try_into_fixnum</span>() {
-        <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">fixnum</span>)
-    } <span class="kw">else</span> {
-        <span class="ident">guard</span>.<span class="ident">convert_mut</span>(<span class="ident">f</span>)
-    };
-    <span class="ident">value</span>.<span class="ident">inner</span>()
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="artichoke_backend" data-search-js="../../../../../search-index.js"></div>
