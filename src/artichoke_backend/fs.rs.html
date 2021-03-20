@@ -253,19 +253,29 @@
 <span id="252">252</span>
 <span id="253">253</span>
 <span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Virtual filesystem.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Artichoke proxies all filesystem access through a virtual filesystem. The</span>
-<span class="doccomment">//! filesystem can store Ruby sources and [extension hooks](ExtensionHook) in</span>
-<span class="doccomment">//! memory and will support proxying to the host filesystem for reads and</span>
-<span class="doccomment">//! writes.</span>
+<span class="doccomment">//! filesystem can store Ruby sources and [extension hooks] in memory and will</span>
+<span class="doccomment">//! support proxying to the host filesystem for reads and writes.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Artichoke uses the virtual filesystem to track metadata about loaded</span>
 <span class="doccomment">//! features.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Artichoke has several virtual filesystem implementations. Only some of them</span>
 <span class="doccomment">//! support reading from the system fs.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! [extension hooks]: ExtensionHook</span>
 
 <span class="kw">use</span> <span class="ident">bstr</span>::<span class="ident">ByteVec</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">path</span>::{<span class="ident">Component</span>, <span class="ident">Path</span>, <span class="ident">PathBuf</span>};
@@ -274,13 +284,21 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">ffi</span>::<span class="ident">ConvertBytesError</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Artichoke</span>;
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;native-filesystem-access&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">hybrid</span>;
 <span class="kw">mod</span> <span class="ident">memory</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;native-filesystem-access&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">native</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rubylib-source-loader&quot;</span>)]</span>
+<span class="kw">mod</span> <span class="ident">rubylib</span>;
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;native-filesystem-access&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">hybrid</span>::<span class="ident">Hybrid</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">memory</span>::<span class="ident">Memory</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;native-filesystem-access&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">native</span>::<span class="ident">Native</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rubylib-source-loader&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rubylib</span>::<span class="ident">Rubylib</span>;
 
 <span class="doccomment">/// Directory at which the [in-memory filesystem](Memory) is mounted.</span>
 <span class="doccomment">///</span>

@@ -109,7 +109,7 @@
 <span class="doccomment">/// This struct stores all of these components and allows them to be passed</span>
 <span class="doccomment">/// around as one bundle. This is useful in FFI contexts because this `State`</span>
 <span class="doccomment">/// can be [`Box`]ed and stored in a user data pointer.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">State</span> {
     <span class="kw">pub</span> <span class="ident">parser</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">parser</span>::<span class="ident">State</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">classes</span>: <span class="ident">class</span>::<span class="ident">Registry</span>,
