@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["load",""],["require",""]],"struct":[["RelativePath",""]]});
+initSidebarItems({"fn":[["load",""],["require",""],["require_relative",""]],"struct":[["RelativePath",""]]});
