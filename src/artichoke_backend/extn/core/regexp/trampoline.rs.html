@@ -164,6 +164,11 @@
 <span id="163">163</span>
 <span id="164">164</span>
 <span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">TryFrom</span>;
 
@@ -191,7 +196,12 @@
         <span class="ident">pattern_vec</span> <span class="op">=</span> <span class="ident">symbol</span>.<span class="ident">bytes</span>(<span class="ident">interp</span>).<span class="ident">to_vec</span>();
         <span class="ident">pattern_vec</span>.<span class="ident">as_slice</span>()
     } <span class="kw">else</span> {
-        <span class="kw">unsafe</span> { <span class="ident">implicitly_convert_to_string</span>(<span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">pattern</span>)<span class="question-mark">?</span> }
+        <span class="comment">// Safety:</span>
+        <span class="comment">//</span>
+        <span class="comment">// Convert the bytes to an owned vec to prevent the underlying `RString`</span>
+        <span class="comment">// backing `pattern` from being freed during a garbage collection.</span>
+        <span class="ident">pattern_vec</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">implicitly_convert_to_string</span>(<span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">pattern</span>)<span class="question-mark">?</span>.<span class="ident">to_vec</span>() };
+        <span class="ident">pattern_vec</span>.<span class="ident">as_slice</span>()
     };
     <span class="kw">let</span> <span class="ident">pattern</span> <span class="op">=</span> <span class="ident">Regexp</span>::<span class="ident">escape</span>(<span class="ident">pattern</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="ident">pattern</span>))

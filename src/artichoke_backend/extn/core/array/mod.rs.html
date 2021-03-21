@@ -616,6 +616,11 @@
 <span id="615">615</span>
 <span id="616">616</span>
 <span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">spinoso_array</span>::<span class="ident">Array</span> <span class="kw">as</span> <span class="ident">SpinosoArray</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">TryFrom</span>;
@@ -935,6 +940,11 @@
                     <span class="ident">out</span>.<span class="ident">push</span>(<span class="ident">formatted</span>.<span class="ident">into_bytes</span>());
                 }
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="comment">// Safety:</span>
+                    <span class="comment">//</span>
+                    <span class="comment">// `s` is converted to an owned byte vec immediately before</span>
+                    <span class="comment">// any intervening operaitons on the VM which may cause a</span>
+                    <span class="comment">// garbage collection of the `RString` that backs `value`.</span>
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">s</span>) <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">implicitly_convert_to_string</span>(<span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">value</span>) } {
                         <span class="ident">out</span>.<span class="ident">push</span>(<span class="ident">s</span>.<span class="ident">to_vec</span>());
                     } <span class="kw">else</span> {
