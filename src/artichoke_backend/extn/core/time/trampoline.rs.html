@@ -366,11 +366,24 @@
 <span id="365">365</span>
 <span id="366">366</span>
 <span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Glue between mruby FFI and `Time` Rust implementation.</span>
 
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">convert</span>::<span class="ident">implicitly_convert_to_int</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">time</span>::<span class="ident">Time</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">spinoso_time</span>::<span class="ident">MICROS_IN_NANO</span>;
 
 <span class="comment">// Constructor</span>
 
@@ -380,13 +393,22 @@
     <span class="prelude-val">Ok</span>(<span class="ident">result</span>)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">at</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">args</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Value</span><span class="op">&gt;</span>,
-{
-    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
-    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">args</span>;
-    <span class="prelude-val">Err</span>(<span class="ident">NotImplementedError</span>::<span class="ident">new</span>().<span class="ident">into</span>())
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">at</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">seconds</span>: <span class="ident">Value</span>, <span class="ident">microseconds</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">seconds</span> <span class="op">=</span> <span class="ident">implicitly_convert_to_int</span>(<span class="ident">interp</span>, <span class="ident">seconds</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">sub_second_nanos</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">microseconds</span>) <span class="op">=</span> <span class="ident">microseconds</span> {
+        <span class="ident">implicitly_convert_to_int</span>(<span class="ident">interp</span>, <span class="ident">microseconds</span>)<span class="question-mark">?</span>
+            .<span class="ident">checked_mul</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">MICROS_IN_NANO</span>))
+            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="string">&quot;Time too large&quot;</span>))<span class="question-mark">?</span>
+    } <span class="kw">else</span> {
+        <span class="number">0_i64</span>
+    };
+
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">time</span>) <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">at</span>(<span class="ident">seconds</span>, <span class="ident">sub_second_nanos</span>) {
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">alloc_value</span>(<span class="ident">time</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">result</span>)
+    } <span class="kw">else</span> {
+        <span class="prelude-val">Err</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="string">&quot;Time too large&quot;</span>).<span class="ident">into</span>())
+    }
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mkutc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">args</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span>

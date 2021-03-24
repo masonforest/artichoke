@@ -141,6 +141,10 @@
 <span id="138">138</span>
 <span id="139">139</span>
 <span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">pedantic</span>)]</span>
@@ -214,6 +218,10 @@
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_possible_truncation</span>)]</span> <span class="comment">// 1e9 &lt; u32::MAX</span>
 <span class="kw">const</span> <span class="ident">NANOS_IN_SECOND</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">Duration</span>::<span class="ident">from_secs</span>(<span class="number">1</span>).<span class="ident">as_nanos</span>() <span class="kw">as</span> <span class="ident">u32</span>;
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_possible_truncation</span>)]</span> <span class="comment">// 1000 &lt; u32::MAX</span>
+<span class="doccomment">/// Number of microseconds in one nano second</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MICROS_IN_NANO</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">Duration</span>::<span class="ident">from_micros</span>(<span class="number">1</span>).<span class="ident">as_nanos</span>() <span class="kw">as</span> <span class="ident">u32</span>;
 
 <span class="doccomment">/// Error returned when constructing a [`Time`] from a [`ToA`].</span>
 <span class="doccomment">///</span>
