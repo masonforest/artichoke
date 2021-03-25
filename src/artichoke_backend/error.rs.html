@@ -202,8 +202,8 @@
         <span class="comment">// `mrb_sys_raise` will call longjmp which will unwind the stack.</span>
         <span class="ident">sys</span>::<span class="ident">mrb_sys_raise</span>(
             <span class="ident">mrb</span>,
-            <span class="string">&quot;RuntimeError\0&quot;</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">i8</span>,
-            <span class="string">&quot;Unable to raise exception&quot;</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">i8</span>,
+            <span class="string">&quot;RuntimeError\0&quot;</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(),
+            <span class="string">&quot;Unable to raise exception&quot;</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(),
         );
     }
     <span class="comment">// unreachable: `raise` will unwind the stack with longjmp.</span>

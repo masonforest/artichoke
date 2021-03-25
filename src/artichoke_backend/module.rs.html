@@ -457,7 +457,7 @@
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">is_defined</span> <span class="op">=</span> <span class="ident">sys</span>::<span class="ident">mrb_const_defined_at</span>(
                 <span class="ident">mrb</span>,
-                <span class="ident">sys</span>::<span class="ident">mrb_sys_obj_value</span>((<span class="kw-2">*</span><span class="ident">mrb</span>).<span class="ident">object_class</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>),
+                <span class="ident">sys</span>::<span class="ident">mrb_sys_obj_value</span>((<span class="kw-2">*</span><span class="ident">mrb</span>).<span class="ident">object_class</span>.<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">c_void</span><span class="op">&gt;</span>()),
                 <span class="self">self</span>.<span class="ident">sym</span>,
             );
             <span class="kw">if</span> <span class="ident">is_defined</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {

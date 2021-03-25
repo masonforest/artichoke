@@ -196,8 +196,6 @@
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">RubyException</span>;
 
-<span class="kw">const</span> <span class="ident">DEFAULT_MESSAGE</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;FiberError&quot;</span>;
-
 <span class="doccomment">/// Ruby `FiberError` error type.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Descendants of class [`Exception`] are used to communicate between</span>
@@ -230,6 +228,8 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">const</span> <span class="ident">DEFAULT_MESSAGE</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;FiberError&quot;</span>;
+
         <span class="comment">// `Exception` objects initialized via (for example)</span>
         <span class="comment">// `raise RuntimeError` or `RuntimeError.new` have `message`</span>
         <span class="comment">// equal to the exception&#39;s class name.</span>
