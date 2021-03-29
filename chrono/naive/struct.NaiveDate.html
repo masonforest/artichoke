@@ -565,7 +565,7 @@ You are recommended to immediately use <code>DelayedFormat</code> for this reaso
 rounding to the closest integral number of days towards <code>Duration::zero()</code>.</p>
 <p>Panics on underflow or overflow.
 Use <a href="#method.checked_add_signed"><code>NaiveDate::checked_add_signed</code></a> to detect that.</p>
-<h1 id="example-49" class="section-header"><a href="#example-49">Example</a></h1>
+<h1 id="example-50" class="section-header"><a href="#example-50">Example</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Duration</span>, <span class="ident">NaiveDate</span>};
 
@@ -810,7 +810,7 @@ which is false when the year predates the epoch (BCE/BC) and true otherwise (CE/
 </div><div class="impl-items"><h4 id="method.fmt-1" class="method hidden"><code>fn <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt" class="fnname">fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>&lt;'_&gt;) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code><a class="srclink" href="../../src/chrono/naive/date.rs.html#1675-1677" title="goto source code">[src]</a></h4><div class='docblock hidden'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt">Read more</a></p>
 </div></div><h3 id="impl-Eq" class="impl"><code class="in-band">impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="struct" href="../../chrono/naive/struct.NaiveDate.html" title="struct chrono::naive::NaiveDate">NaiveDate</a></code><a href="#impl-Eq" class="anchor"></a><a class="srclink" href="../../src/chrono/naive/date.rs.html#98" title="goto source code">[src]</a></h3><div class="impl-items"></div><h3 id="impl-FromStr" class="impl"><code class="in-band">impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/str/traits/trait.FromStr.html" title="trait core::str::traits::FromStr">FromStr</a> for <a class="struct" href="../../chrono/naive/struct.NaiveDate.html" title="struct chrono::naive::NaiveDate">NaiveDate</a></code><a href="#impl-FromStr" class="anchor"></a><a class="srclink" href="../../src/chrono/naive/date.rs.html#1696-1715" title="goto source code">[src]</a></h3><div class="docblock"><p>Parsing a <code>str</code> into a <code>NaiveDate</code> uses the same format,
 <a href="../format/strftime/index.html"><code>%Y-%m-%d</code></a>, as in <code>Debug</code> and <code>Display</code>.</p>
-<h1 id="example-50" class="section-header"><a href="#example-50">Example</a></h1>
+<h1 id="example-49" class="section-header"><a href="#example-49">Example</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">chrono</span>::<span class="ident">NaiveDate</span>;
 
