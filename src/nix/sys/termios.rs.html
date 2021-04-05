@@ -1341,7 +1341,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span>{
+<span class="macro">libc_enum!</span>{
     <span class="doccomment">/// Baud rates supported by the system.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// For the BSDs, arbitrary baud rates can be specified by using `u32`s directly instead of this</span>
@@ -1541,7 +1541,7 @@
 }
 
 <span class="comment">// TODO: Add TCSASOFT, which will require treating this as a bitfield.</span>
-<span class="macro">libc_enum</span><span class="macro">!</span> {
+<span class="macro">libc_enum!</span> {
     <span class="doccomment">/// Specify when a port configuration change should occur.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Used as an argument to `tcsetattr()`</span>
@@ -1556,7 +1556,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span> {
+<span class="macro">libc_enum!</span> {
     <span class="doccomment">/// Specify a combination of the input and output buffers to flush</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Used as an argument to `tcflush()`.</span>
@@ -1571,7 +1571,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span> {
+<span class="macro">libc_enum!</span> {
     <span class="doccomment">/// Specify how transmission flow should be altered</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Used as an argument to `tcflow()`.</span>
@@ -1589,7 +1589,7 @@
 }
 
 <span class="comment">// TODO: Make this usable directly as a slice index.</span>
-<span class="macro">libc_enum</span><span class="macro">!</span> {
+<span class="macro">libc_enum!</span> {
     <span class="doccomment">/// Indices into the `termios.c_cc` array for special characters.</span>
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">usize</span>)]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SpecialCharacterIndices</span> {
@@ -1649,7 +1649,7 @@
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;openbsd&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">libc</span>::<span class="ident">_POSIX_VDISABLE</span>;
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Flags for configuring the input mode of a terminal</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">InputFlags</span>: <span class="ident">tcflag_t</span> {
         <span class="ident">IGNBRK</span>;
@@ -1670,7 +1670,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Flags for configuring the output mode of a terminal</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OutputFlags</span>: <span class="ident">tcflag_t</span> {
         <span class="ident">OPOST</span>;
@@ -1853,7 +1853,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Flags for setting the control mode of a terminal</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ControlFlags</span>: <span class="ident">tcflag_t</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;dragonfly&quot;</span>,
@@ -1921,7 +1921,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Flags for setting any local modes</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LocalFlags</span>: <span class="ident">tcflag_t</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span>
@@ -1962,7 +1962,7 @@
     }
 }
 
-<span class="macro">cfg_if</span><span class="macro">!</span>{
+<span class="macro">cfg_if!</span>{
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>,
                  <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;dragonfly&quot;</span>,
                  <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;ios&quot;</span>,
@@ -2178,8 +2178,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">try_from</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Ok</span>(<span class="ident">BaudRate</span>::<span class="ident">B0</span>), <span class="ident">BaudRate</span>::<span class="ident">try_from</span>(<span class="ident">libc</span>::<span class="ident">B0</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">BaudRate</span>::<span class="ident">try_from</span>(<span class="number">999999999</span>).<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Ok</span>(<span class="ident">BaudRate</span>::<span class="ident">B0</span>), <span class="ident">BaudRate</span>::<span class="ident">try_from</span>(<span class="ident">libc</span>::<span class="ident">B0</span>));
+        <span class="macro">assert!</span>(<span class="ident">BaudRate</span>::<span class="ident">try_from</span>(<span class="number">999999999</span>).<span class="ident">is_err</span>());
     }
 }
 </pre></div>

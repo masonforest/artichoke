@@ -1206,7 +1206,7 @@
 
     <span class="doccomment">/// Swap the given states in place.</span>
     <span class="kw">fn</span> <span class="ident">swap_states</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">id1</span>: <span class="ident">S</span>, <span class="ident">id2</span>: <span class="ident">S</span>) {
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">premultiplied</span>, <span class="string">&quot;can&#39;t swap states in premultiplied DFA&quot;</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">premultiplied</span>, <span class="string">&quot;can&#39;t swap states in premultiplied DFA&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">o1</span> <span class="op">=</span> <span class="ident">id1</span>.<span class="ident">to_usize</span>() <span class="op">*</span> <span class="self">self</span>.<span class="ident">alphabet_len</span>();
         <span class="kw">let</span> <span class="ident">o2</span> <span class="op">=</span> <span class="ident">id2</span>.<span class="ident">to_usize</span>() <span class="op">*</span> <span class="self">self</span>.<span class="ident">alphabet_len</span>();
@@ -1228,7 +1228,7 @@
     <span class="doccomment">/// This updates `self.max_match` to point to the last matching state as</span>
     <span class="doccomment">/// well as `self.start` if the starting state was moved.</span>
     <span class="kw">fn</span> <span class="ident">shuffle_match_states</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="macro">assert</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(
             <span class="op">!</span><span class="self">self</span>.<span class="ident">premultiplied</span>,
             <span class="string">&quot;cannot shuffle match states of premultiplied DFA&quot;</span>
         );
@@ -1244,7 +1244,7 @@
             <span class="ident">first_non_match</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         }
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">swaps</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">fail_id</span>(); <span class="self">self</span>.<span class="ident">state_count</span>];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">swaps</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">fail_id</span>(); <span class="self">self</span>.<span class="ident">state_count</span>];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cur</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state_count</span> <span class="op">-</span> <span class="number">1</span>;
         <span class="kw">while</span> <span class="ident">cur</span> <span class="op">&gt;</span> <span class="ident">first_non_match</span> {
             <span class="kw">if</span> <span class="self">self</span>.<span class="ident">matches</span>[<span class="ident">cur</span>].<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0</span> {
@@ -1344,8 +1344,8 @@
             <span class="ident">ByteClasses</span>::<span class="ident">singletons</span>()
         };
         <span class="kw">let</span> <span class="ident">alphabet_len</span> <span class="op">=</span> <span class="ident">byte_classes</span>.<span class="ident">alphabet_len</span>();
-        <span class="kw">let</span> <span class="ident">trans</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">fail_id</span>(); <span class="ident">alphabet_len</span> <span class="op">*</span> <span class="ident">nfa</span>.<span class="ident">state_len</span>()];
-        <span class="kw">let</span> <span class="ident">matches</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="macro">vec</span><span class="macro">!</span>[]; <span class="ident">nfa</span>.<span class="ident">state_len</span>()];
+        <span class="kw">let</span> <span class="ident">trans</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">fail_id</span>(); <span class="ident">alphabet_len</span> <span class="op">*</span> <span class="ident">nfa</span>.<span class="ident">state_len</span>()];
+        <span class="kw">let</span> <span class="ident">matches</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="macro">vec!</span>[]; <span class="ident">nfa</span>.<span class="ident">state_len</span>()];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">repr</span> <span class="op">=</span> <span class="ident">Repr</span> {
             <span class="ident">match_kind</span>: <span class="ident">nfa</span>.<span class="ident">match_kind</span>().<span class="ident">clone</span>(),
             <span class="ident">anchored</span>: <span class="ident">nfa</span>.<span class="ident">anchored</span>(),

@@ -705,13 +705,13 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">RoundingError</span>::<span class="ident">DurationExceedsTimestamp</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;duration in nanoseconds exceeds timestamp&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;duration in nanoseconds exceeds timestamp&quot;</span>)
             }
             <span class="ident">RoundingError</span>::<span class="ident">DurationExceedsLimit</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;duration exceeds num_nanoseconds limit&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;duration exceeds num_nanoseconds limit&quot;</span>)
             }
             <span class="ident">RoundingError</span>::<span class="ident">TimestampExceedsLimit</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;timestamp exceeds num_nanoseconds limit&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;timestamp exceeds num_nanoseconds limit&quot;</span>)
             }
         }
     }
@@ -736,42 +736,42 @@
         <span class="kw">let</span> <span class="ident">pst</span> <span class="op">=</span> <span class="ident">FixedOffset</span>::<span class="ident">east</span>(<span class="number">8</span> <span class="op">*</span> <span class="number">60</span> <span class="op">*</span> <span class="number">60</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">pst</span>.<span class="ident">ymd</span>(<span class="number">2018</span>, <span class="number">1</span>, <span class="number">11</span>).<span class="ident">and_hms_nano</span>(<span class="number">10</span>, <span class="number">5</span>, <span class="number">13</span>, <span class="number">084_660_684</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">10</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">8</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_680</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">7</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_700</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">6</span>).<span class="ident">nanosecond</span>(), <span class="number">084_661_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">5</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">4</span>).<span class="ident">nanosecond</span>(), <span class="number">084_700_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">3</span>).<span class="ident">nanosecond</span>(), <span class="number">085_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">080_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">100_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">10</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">8</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_680</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">7</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_700</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">6</span>).<span class="ident">nanosecond</span>(), <span class="number">084_661_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">5</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">4</span>).<span class="ident">nanosecond</span>(), <span class="number">084_700_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">3</span>).<span class="ident">nanosecond</span>(), <span class="number">085_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">080_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">100_000_000</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">13</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">13</span>);
 
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2018</span>, <span class="number">1</span>, <span class="number">11</span>).<span class="ident">and_hms_nano</span>(<span class="number">10</span>, <span class="number">5</span>, <span class="number">27</span>, <span class="number">750_500_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">4</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">3</span>).<span class="ident">nanosecond</span>(), <span class="number">751_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">750_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">800_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">4</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">3</span>).<span class="ident">nanosecond</span>(), <span class="number">751_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">750_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">800_000_000</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">28</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">28</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_round_leap_nanos</span>() {
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2016</span>, <span class="number">12</span>, <span class="number">31</span>).<span class="ident">and_hms_nano</span>(<span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>, <span class="number">1_750_500_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">4</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">1_750_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">1_800_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">1</span>).<span class="ident">second</span>(), <span class="number">59</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">4</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">1_750_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">1_800_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">1</span>).<span class="ident">second</span>(), <span class="number">59</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">round_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">0</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -779,79 +779,79 @@
         <span class="kw">let</span> <span class="ident">pst</span> <span class="op">=</span> <span class="ident">FixedOffset</span>::<span class="ident">east</span>(<span class="number">8</span> <span class="op">*</span> <span class="number">60</span> <span class="op">*</span> <span class="number">60</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">pst</span>.<span class="ident">ymd</span>(<span class="number">2018</span>, <span class="number">1</span>, <span class="number">11</span>).<span class="ident">and_hms_nano</span>(<span class="number">10</span>, <span class="number">5</span>, <span class="number">13</span>, <span class="number">084_660_684</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">10</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">8</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_680</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">7</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_600</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">6</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">5</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">4</span>).<span class="ident">nanosecond</span>(), <span class="number">084_600_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">3</span>).<span class="ident">nanosecond</span>(), <span class="number">084_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">080_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">10</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">8</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_680</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">7</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_600</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">6</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">5</span>).<span class="ident">nanosecond</span>(), <span class="number">084_660_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">4</span>).<span class="ident">nanosecond</span>(), <span class="number">084_600_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">3</span>).<span class="ident">nanosecond</span>(), <span class="number">084_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">080_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">13</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">13</span>);
 
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">pst</span>.<span class="ident">ymd</span>(<span class="number">2018</span>, <span class="number">1</span>, <span class="number">11</span>).<span class="ident">and_hms_nano</span>(<span class="number">10</span>, <span class="number">5</span>, <span class="number">27</span>, <span class="number">750_500_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">4</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">3</span>).<span class="ident">nanosecond</span>(), <span class="number">750_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">750_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">700_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">4</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">3</span>).<span class="ident">nanosecond</span>(), <span class="number">750_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">750_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">700_000_000</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">27</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">27</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_trunc_leap_nanos</span>() {
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2016</span>, <span class="number">12</span>, <span class="number">31</span>).<span class="ident">and_hms_nano</span>(<span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>, <span class="number">1_750_500_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">4</span>), <span class="ident">dt</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">1_750_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">1_700_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">1</span>).<span class="ident">second</span>(), <span class="number">59</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">9</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">4</span>), <span class="ident">dt</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">2</span>).<span class="ident">nanosecond</span>(), <span class="number">1_750_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">1</span>).<span class="ident">nanosecond</span>(), <span class="number">1_700_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">1</span>).<span class="ident">second</span>(), <span class="number">59</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">1_000_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">59</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">nanosecond</span>(), <span class="number">1_000_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">trunc_subsecs</span>(<span class="number">0</span>).<span class="ident">second</span>(), <span class="number">59</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_duration_round</span>() {
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2016</span>, <span class="number">12</span>, <span class="number">31</span>).<span class="ident">and_hms_nano</span>(<span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>, <span class="number">175_500_000</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">milliseconds</span>(<span class="number">10</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2016-12-31 23:59:59.180 UTC&quot;</span>
         );
 
         <span class="comment">// round up</span>
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">12</span>, <span class="number">12</span>).<span class="ident">and_hms_milli</span>(<span class="number">18</span>, <span class="number">22</span>, <span class="number">30</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">5</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:25:00 UTC&quot;</span>
         );
         <span class="comment">// round down</span>
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">12</span>, <span class="number">12</span>).<span class="ident">and_hms_milli</span>(<span class="number">18</span>, <span class="number">22</span>, <span class="number">29</span>, <span class="number">999</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">5</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:20:00 UTC&quot;</span>
         );
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">10</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:20:00 UTC&quot;</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">30</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:30:00 UTC&quot;</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">hours</span>(<span class="number">1</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:00:00 UTC&quot;</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">days</span>(<span class="number">1</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-13 00:00:00 UTC&quot;</span>
         );
@@ -860,7 +860,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_duration_round_pre_epoch</span>() {
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">1969</span>, <span class="number">12</span>, <span class="number">12</span>).<span class="ident">and_hms</span>(<span class="number">12</span>, <span class="number">12</span>, <span class="number">12</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">10</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;1969-12-12 12:10:00 UTC&quot;</span>
         );
@@ -870,36 +870,36 @@
     <span class="kw">fn</span> <span class="ident">test_duration_trunc</span>() {
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2016</span>, <span class="number">12</span>, <span class="number">31</span>).<span class="ident">and_hms_nano</span>(<span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>, <span class="number">1_75_500_000</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">milliseconds</span>(<span class="number">10</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2016-12-31 23:59:59.170 UTC&quot;</span>
         );
 
         <span class="comment">// would round up</span>
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">12</span>, <span class="number">12</span>).<span class="ident">and_hms_milli</span>(<span class="number">18</span>, <span class="number">22</span>, <span class="number">30</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">5</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:20:00 UTC&quot;</span>
         );
         <span class="comment">// would round down</span>
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">12</span>, <span class="number">12</span>).<span class="ident">and_hms_milli</span>(<span class="number">18</span>, <span class="number">22</span>, <span class="number">29</span>, <span class="number">999</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">5</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:20:00 UTC&quot;</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">10</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:20:00 UTC&quot;</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">30</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:00:00 UTC&quot;</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">hours</span>(<span class="number">1</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 18:00:00 UTC&quot;</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">days</span>(<span class="number">1</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;2012-12-12 00:00:00 UTC&quot;</span>
         );
@@ -908,7 +908,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_duration_trunc_pre_epoch</span>() {
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">1969</span>, <span class="number">12</span>, <span class="number">12</span>).<span class="ident">and_hms</span>(<span class="number">12</span>, <span class="number">12</span>, <span class="number">12</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">minutes</span>(<span class="number">10</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
             <span class="string">&quot;1969-12-12 12:10:00 UTC&quot;</span>
         );

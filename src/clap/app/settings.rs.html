@@ -1200,7 +1200,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">BitOr</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">str</span>::<span class="ident">FromStr</span>;
 
-<span class="macro">bitflags</span><span class="macro">!</span> {
+<span class="macro">bitflags!</span> {
     <span class="kw">struct</span> <span class="ident">Flags</span>: <span class="ident">u64</span> {
         <span class="kw">const</span> <span class="ident">SC_NEGATE_REQS</span>       <span class="op">=</span> <span class="number">1</span>;
         <span class="kw">const</span> <span class="ident">SC_REQUIRED</span>          <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">1</span>;
@@ -1279,7 +1279,7 @@
         <span class="ident">AppFlags</span>(<span class="ident">Flags</span>::<span class="ident">empty</span>())
     }
 
-    <span class="macro">impl_settings</span><span class="macro">!</span> { <span class="ident">AppSettings</span>,
+    <span class="macro">impl_settings!</span> { <span class="ident">AppSettings</span>,
         <span class="ident">ArgRequiredElseHelp</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Flags</span>::<span class="ident">A_REQUIRED_ELSE_HELP</span>,
         <span class="ident">ArgsNegateSubcommands</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Flags</span>::<span class="ident">ARGS_NEGATE_SCS</span>,
         <span class="ident">AllArgsOverrideSelf</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Flags</span>::<span class="ident">ARGS_OVERRIDE_SELF</span>,
@@ -2243,147 +2243,147 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">app_settings_fromstr</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;disablehelpflags&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">DisableHelpFlags</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;argsnegatesubcommands&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">ArgsNegateSubcommands</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;argrequiredelsehelp&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">ArgRequiredElseHelp</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;allowexternalsubcommands&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">AllowExternalSubcommands</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;allowinvalidutf8&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">AllowInvalidUtf8</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;allowleadinghyphen&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">AllowLeadingHyphen</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;allownegativenumbers&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">AllowNegativeNumbers</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;coloredhelp&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">ColoredHelp</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;colorauto&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">ColorAuto</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;coloralways&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">ColorAlways</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;colornever&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">ColorNever</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;disablehelpsubcommand&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">DisableHelpSubcommand</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;disableversion&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">DisableVersion</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;dontcollapseargsinusage&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">DontCollapseArgsInUsage</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;dontdelimittrailingvalues&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">DontDelimitTrailingValues</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;derivedisplayorder&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">DeriveDisplayOrder</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;globalversion&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">GlobalVersion</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;hidden&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">Hidden</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;hidepossiblevaluesinhelp&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">HidePossibleValuesInHelp</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;lowindexmultiplePositional&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">LowIndexMultiplePositional</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;nobinaryname&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">NoBinaryName</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;nextlinehelp&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">NextLineHelp</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;subcommandsnegatereqs&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">SubcommandsNegateReqs</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;subcommandrequired&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">SubcommandRequired</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;subcommandrequiredelsehelp&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">SubcommandRequiredElseHelp</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;strictutf8&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">StrictUtf8</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;trailingvararg&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">TrailingVarArg</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;unifiedhelpmessage&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">UnifiedHelpMessage</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;versionlesssubcommands&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">VersionlessSubcommands</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;waitonerror&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">WaitOnError</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;validnegnumfound&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">ValidNegNumFound</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;validargfound&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">ValidArgFound</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;propagated&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">Propagated</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;trailingvalues&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">TrailingValues</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="string">&quot;infersubcommands&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
             <span class="ident">AppSettings</span>::<span class="ident">InferSubcommands</span>
         );
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="string">&quot;hahahaha&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">is_err</span>());
+        <span class="macro">assert!</span>(<span class="string">&quot;hahahaha&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">AppSettings</span><span class="op">&gt;</span>().<span class="ident">is_err</span>());
     }
 }
 </pre></div>

@@ -165,7 +165,7 @@
 <span class="doccomment">/// Returns true if the given character is non-printable and needs to be quoted.</span>
 <span class="attribute">#[<span class="ident">must_use</span>]</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_non_printable_character</span>(<span class="ident">c</span>: <span class="ident">char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-    <span class="macro">matches</span><span class="macro">!</span>(
+    <span class="macro">matches!</span>(
         <span class="ident">c</span>,
         <span class="string">&#39;\n&#39;</span> <span class="op">|</span> <span class="string">&#39;\r&#39;</span> <span class="op">|</span> <span class="string">&#39;\t&#39;</span> <span class="op">|</span>
         <span class="comment">// form feed aka &quot;\f&quot;</span>
@@ -190,7 +190,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">escape_meta</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">escape</span>(<span class="string">r&quot;\.+*?()|[]{}^$#&amp;-~&quot;</span>),
             <span class="string">r&quot;\\\.\+\*\?\(\)\|\[\]\{\}\^\$\#\&amp;\-\~&quot;</span>.<span class="ident">to_string</span>()
         );

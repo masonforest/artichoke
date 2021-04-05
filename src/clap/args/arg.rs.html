@@ -4068,53 +4068,53 @@
 
         <span class="kw">for</span> (<span class="ident">k</span>, <span class="ident">v</span>) <span class="kw">in</span> <span class="ident">arg_settings</span>.<span class="ident">iter</span>() {
             <span class="ident">a</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">k</span>.<span class="ident">as_str</span>().<span class="ident">unwrap</span>() {
-                <span class="string">&quot;short&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">short</span>),
-                <span class="string">&quot;long&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">long</span>),
-                <span class="string">&quot;aliases&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">alias</span>),
-                <span class="string">&quot;help&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">help</span>),
-                <span class="string">&quot;long_help&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">long_help</span>),
-                <span class="string">&quot;required&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">required</span>),
-                <span class="string">&quot;required_if&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple2</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">required_if</span>),
-                <span class="string">&quot;required_ifs&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple2</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">required_if</span>),
-                <span class="string">&quot;takes_value&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">takes_value</span>),
-                <span class="string">&quot;index&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_u64</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">index</span>),
-                <span class="string">&quot;global&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">global</span>),
-                <span class="string">&quot;multiple&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">multiple</span>),
-                <span class="string">&quot;hidden&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">hidden</span>),
-                <span class="string">&quot;next_line_help&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">next_line_help</span>),
-                <span class="string">&quot;empty_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">empty_values</span>),
-                <span class="string">&quot;group&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">group</span>),
-                <span class="string">&quot;number_of_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_u64</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">number_of_values</span>),
-                <span class="string">&quot;max_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_u64</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">max_values</span>),
-                <span class="string">&quot;min_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_u64</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">min_values</span>),
-                <span class="string">&quot;value_name&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">value_name</span>),
-                <span class="string">&quot;use_delimiter&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">use_delimiter</span>),
-                <span class="string">&quot;allow_hyphen_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">allow_hyphen_values</span>),
-                <span class="string">&quot;last&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">last</span>),
-                <span class="string">&quot;require_delimiter&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">require_delimiter</span>),
-                <span class="string">&quot;value_delimiter&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">value_delimiter</span>),
-                <span class="string">&quot;required_unless&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">required_unless</span>),
-                <span class="string">&quot;display_order&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_usize</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">display_order</span>),
-                <span class="string">&quot;default_value&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">default_value</span>),
-                <span class="string">&quot;default_value_if&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple3</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">default_value_if</span>),
-                <span class="string">&quot;default_value_ifs&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple3</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">default_value_if</span>),
-                <span class="string">&quot;env&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">env</span>),
-                <span class="string">&quot;value_names&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">value_name</span>),
-                <span class="string">&quot;groups&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">group</span>),
-                <span class="string">&quot;requires&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">requires</span>),
-                <span class="string">&quot;requires_if&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple2</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">requires_if</span>),
-                <span class="string">&quot;requires_ifs&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple2</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">requires_if</span>),
-                <span class="string">&quot;conflicts_with&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">conflicts_with</span>),
-                <span class="string">&quot;overrides_with&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">overrides_with</span>),
-                <span class="string">&quot;possible_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">possible_value</span>),
-                <span class="string">&quot;case_insensitive&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">case_insensitive</span>),
-                <span class="string">&quot;required_unless_one&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">required_unless</span>),
+                <span class="string">&quot;short&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">short</span>),
+                <span class="string">&quot;long&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">long</span>),
+                <span class="string">&quot;aliases&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">alias</span>),
+                <span class="string">&quot;help&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">help</span>),
+                <span class="string">&quot;long_help&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">long_help</span>),
+                <span class="string">&quot;required&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">required</span>),
+                <span class="string">&quot;required_if&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple2!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">required_if</span>),
+                <span class="string">&quot;required_ifs&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple2!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">required_if</span>),
+                <span class="string">&quot;takes_value&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">takes_value</span>),
+                <span class="string">&quot;index&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_u64!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">index</span>),
+                <span class="string">&quot;global&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">global</span>),
+                <span class="string">&quot;multiple&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">multiple</span>),
+                <span class="string">&quot;hidden&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">hidden</span>),
+                <span class="string">&quot;next_line_help&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">next_line_help</span>),
+                <span class="string">&quot;empty_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">empty_values</span>),
+                <span class="string">&quot;group&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">group</span>),
+                <span class="string">&quot;number_of_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_u64!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">number_of_values</span>),
+                <span class="string">&quot;max_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_u64!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">max_values</span>),
+                <span class="string">&quot;min_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_u64!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">min_values</span>),
+                <span class="string">&quot;value_name&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">value_name</span>),
+                <span class="string">&quot;use_delimiter&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">use_delimiter</span>),
+                <span class="string">&quot;allow_hyphen_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">allow_hyphen_values</span>),
+                <span class="string">&quot;last&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">last</span>),
+                <span class="string">&quot;require_delimiter&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">require_delimiter</span>),
+                <span class="string">&quot;value_delimiter&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">value_delimiter</span>),
+                <span class="string">&quot;required_unless&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">required_unless</span>),
+                <span class="string">&quot;display_order&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_usize!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">display_order</span>),
+                <span class="string">&quot;default_value&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">default_value</span>),
+                <span class="string">&quot;default_value_if&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple3!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">default_value_if</span>),
+                <span class="string">&quot;default_value_ifs&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple3!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">default_value_if</span>),
+                <span class="string">&quot;env&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_str!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">env</span>),
+                <span class="string">&quot;value_names&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">value_name</span>),
+                <span class="string">&quot;groups&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">group</span>),
+                <span class="string">&quot;requires&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">requires</span>),
+                <span class="string">&quot;requires_if&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple2!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">requires_if</span>),
+                <span class="string">&quot;requires_ifs&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_tuple2!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">requires_if</span>),
+                <span class="string">&quot;conflicts_with&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">conflicts_with</span>),
+                <span class="string">&quot;overrides_with&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">overrides_with</span>),
+                <span class="string">&quot;possible_values&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">possible_value</span>),
+                <span class="string">&quot;case_insensitive&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_to_bool!</span>(<span class="ident">a</span>, <span class="ident">v</span>, <span class="ident">case_insensitive</span>),
+                <span class="string">&quot;required_unless_one&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">required_unless</span>),
                 <span class="string">&quot;required_unless_all&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="ident">a</span> <span class="op">=</span> <span class="macro">yaml_vec_or_str</span><span class="macro">!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">required_unless</span>);
+                    <span class="ident">a</span> <span class="op">=</span> <span class="macro">yaml_vec_or_str!</span>(<span class="ident">v</span>, <span class="ident">a</span>, <span class="ident">required_unless</span>);
                     <span class="ident">a</span>.<span class="ident">setb</span>(<span class="ident">ArgSettings</span>::<span class="ident">RequiredUnlessAll</span>);
                     <span class="ident">a</span>
                 }
-                <span class="ident">s</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(
+                <span class="ident">s</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(
                     <span class="string">&quot;Unknown Arg setting &#39;{}&#39; in YAML file for arg &#39;{}&#39;&quot;</span>,
                     <span class="ident">s</span>, <span class="ident">name_str</span>
                 ),
@@ -4366,7 +4366,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">als</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">aliases</span> {
             <span class="ident">als</span>.<span class="ident">push</span>((<span class="ident">name</span>.<span class="ident">into</span>(), <span class="bool-val">false</span>));
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">aliases</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[(<span class="ident">name</span>.<span class="ident">into</span>(), <span class="bool-val">false</span>)]);
+            <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">aliases</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[(<span class="ident">name</span>.<span class="ident">into</span>(), <span class="bool-val">false</span>)]);
         }
         <span class="self">self</span>
     }
@@ -4427,7 +4427,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">als</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">aliases</span> {
             <span class="ident">als</span>.<span class="ident">push</span>((<span class="ident">name</span>.<span class="ident">into</span>(), <span class="bool-val">true</span>));
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">aliases</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[(<span class="ident">name</span>.<span class="ident">into</span>(), <span class="bool-val">true</span>)]);
+            <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">aliases</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[(<span class="ident">name</span>.<span class="ident">into</span>(), <span class="bool-val">true</span>)]);
         }
         <span class="self">self</span>
     }
@@ -4912,7 +4912,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">vec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">r_unless</span> {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">name</span>);
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">r_unless</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">name</span>]);
+            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">r_unless</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[<span class="ident">name</span>]);
         }
         <span class="self">self</span>.<span class="ident">required</span>(<span class="bool-val">true</span>)
     }
@@ -5108,7 +5108,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">vec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">blacklist</span> {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">name</span>);
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">blacklist</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">name</span>]);
+            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">blacklist</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[<span class="ident">name</span>]);
         }
         <span class="self">self</span>
     }
@@ -5267,7 +5267,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">vec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">overrides</span> {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">name</span>);
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">overrides</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">name</span>]);
+            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">overrides</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[<span class="ident">name</span>]);
         }
         <span class="self">self</span>
     }
@@ -5369,7 +5369,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">vec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">requires</span> {
             <span class="ident">vec</span>.<span class="ident">push</span>((<span class="prelude-val">None</span>, <span class="ident">name</span>));
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec!</span>[];
             <span class="ident">vec</span>.<span class="ident">push</span>((<span class="prelude-val">None</span>, <span class="ident">name</span>));
             <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">requires</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">vec</span>);
         }
@@ -5439,7 +5439,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">vec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">requires</span> {
             <span class="ident">vec</span>.<span class="ident">push</span>((<span class="prelude-val">Some</span>(<span class="ident">val</span>), <span class="ident">arg</span>));
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">requires</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[(<span class="prelude-val">Some</span>(<span class="ident">val</span>), <span class="ident">arg</span>)]);
+            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">requires</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[(<span class="prelude-val">Some</span>(<span class="ident">val</span>), <span class="ident">arg</span>)]);
         }
         <span class="self">self</span>
     }
@@ -5501,7 +5501,7 @@
                 <span class="ident">vec</span>.<span class="ident">push</span>((<span class="prelude-val">Some</span>(<span class="ident">val</span>), <span class="ident">arg</span>));
             }
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec!</span>[];
             <span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="ident">val</span>, <span class="ident">arg</span>) <span class="kw">in</span> <span class="ident">ifs</span> {
                 <span class="ident">vec</span>.<span class="ident">push</span>((<span class="prelude-val">Some</span>(<span class="ident">val</span>), <span class="ident">arg</span>));
             }
@@ -5577,7 +5577,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">vec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">r_ifs</span> {
             <span class="ident">vec</span>.<span class="ident">push</span>((<span class="ident">arg</span>, <span class="ident">val</span>));
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">r_ifs</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[(<span class="ident">arg</span>, <span class="ident">val</span>)]);
+            <span class="self">self</span>.<span class="ident">r_ifs</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[(<span class="ident">arg</span>, <span class="ident">val</span>)]);
         }
         <span class="self">self</span>
     }
@@ -5668,7 +5668,7 @@
                 <span class="ident">vec</span>.<span class="ident">push</span>((<span class="ident">r_if</span>.<span class="number">0</span>, <span class="ident">r_if</span>.<span class="number">1</span>));
             }
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec!</span>[];
             <span class="kw">for</span> <span class="ident">r_if</span> <span class="kw">in</span> <span class="ident">ifs</span> {
                 <span class="ident">vec</span>.<span class="ident">push</span>((<span class="ident">r_if</span>.<span class="number">0</span>, <span class="ident">r_if</span>.<span class="number">1</span>));
             }
@@ -5745,7 +5745,7 @@
                 <span class="ident">vec</span>.<span class="ident">push</span>((<span class="prelude-val">None</span>, <span class="ident">s</span>));
             }
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="macro">vec!</span>[];
             <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="ident">names</span> {
                 <span class="ident">vec</span>.<span class="ident">push</span>((<span class="prelude-val">None</span>, <span class="kw-2">*</span><span class="ident">s</span>));
             }
@@ -6432,7 +6432,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">vec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">v</span>.<span class="ident">possible_vals</span> {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">name</span>);
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">v</span>.<span class="ident">possible_vals</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">name</span>]);
+            <span class="self">self</span>.<span class="ident">v</span>.<span class="ident">possible_vals</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[<span class="ident">name</span>]);
         }
         <span class="self">self</span>
     }
@@ -6524,7 +6524,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">vec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">groups</span> {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">name</span>);
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">groups</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">name</span>]);
+            <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">groups</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[<span class="ident">name</span>]);
         }
         <span class="self">self</span>
     }

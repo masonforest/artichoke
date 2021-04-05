@@ -16,8 +16,8 @@ SIGSEGVs.</p>
     <span class="ident">mprotect</span>(<span class="ident">mem</span>, <span class="ident">ONE_K</span>, <span class="ident">ProtFlags</span>::<span class="ident">PROT_READ</span> <span class="op">|</span> <span class="ident">ProtFlags</span>::<span class="ident">PROT_WRITE</span>).<span class="ident">unwrap</span>();
     <span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts_mut</span>(<span class="ident">mem</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">ONE_K</span>)
 };
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">slice</span>[<span class="number">0</span>], <span class="number">0x00</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">slice</span>[<span class="number">0</span>], <span class="number">0x00</span>);
 <span class="ident">slice</span>[<span class="number">0</span>] <span class="op">=</span> <span class="number">0xFF</span>;
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">slice</span>[<span class="number">0</span>], <span class="number">0xFF</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">slice</span>[<span class="number">0</span>], <span class="number">0xFF</span>);</pre></div>
 </div></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nix" data-search-js="../../../search-index.js"></div>
     <script src="../../../main.js"></script></body></html>

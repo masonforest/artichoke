@@ -24,7 +24,7 @@ Artichoke Ruby VM.</p>
 <span class="kw">fn</span> <span class="ident">exception_inspect</span>(<span class="ident">exc</span>: <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RubyException</span>) {
     <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">exc</span>.<span class="ident">message</span>();
     <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">message</span>);
-    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{} ({})&quot;</span>, <span class="ident">exc</span>.<span class="ident">name</span>(), <span class="ident">message</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;{} ({})&quot;</span>, <span class="ident">exc</span>.<span class="ident">name</span>(), <span class="ident">message</span>);
 }</pre></div>
 <h1 id="implementation-notes" class="section-header"><a href="#implementation-notes">Implementation notes</a></h1>
 <p>This method returns a byte slice since Ruby <code>String</code>s are best
@@ -35,7 +35,7 @@ represented as a <a href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec
 <span class="kw">fn</span> <span class="ident">exception_inspect</span>(<span class="ident">exc</span>: <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RubyException</span>) {
     <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">exc</span>.<span class="ident">message</span>();
     <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">message</span>);
-    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{} ({})&quot;</span>, <span class="ident">exc</span>.<span class="ident">name</span>(), <span class="ident">message</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;{} ({})&quot;</span>, <span class="ident">exc</span>.<span class="ident">name</span>(), <span class="ident">message</span>);
 }</pre></div>
 <h1 id="implementation-notes-1" class="section-header"><a href="#implementation-notes-1">Implementation notes</a></h1>
 <p>This method returns a byte slice since Ruby <code>String</code>s are best

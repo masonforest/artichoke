@@ -24,7 +24,7 @@ need to be used directly (unless implementing a derived back-end).</p>
 <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">1</span>..<span class="op">=</span><span class="number">10</span>) {
     <span class="comment">// sample a point from the square with sides -10 - 10 in two dimensions</span>
     <span class="kw">let</span> (<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span> (<span class="ident">rng</span>.<span class="ident">sample</span>(<span class="ident">side</span>), <span class="ident">rng</span>.<span class="ident">sample</span>(<span class="ident">side</span>));
-    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Point: {}, {}&quot;</span>, <span class="ident">x</span>, <span class="ident">y</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;Point: {}, {}&quot;</span>, <span class="ident">x</span>, <span class="ident">y</span>);
 }</pre></div>
 <h1 id="extending-uniform-to-support-a-custom-type" class="section-header"><a href="#extending-uniform-to-support-a-custom-type">Extending <code>Uniform</code> to support a custom type</a></h1>
 <p>To extend <a href="../../../rand/distributions/struct.Uniform.html" title="Uniform"><code>Uniform</code></a> to support your own types, write a back-end which

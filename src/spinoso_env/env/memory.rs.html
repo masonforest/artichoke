@@ -749,7 +749,7 @@
     <span class="kw">fn</span> <span class="ident">get_name_empty</span>() {
         <span class="kw">let</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
     }
 
     <span class="comment">// ```consol</span>
@@ -762,7 +762,7 @@
     <span class="kw">fn</span> <span class="ident">get_name_nul_byte_err</span>() {
         <span class="kw">let</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;980b1f2f-a155-4cc6-97f3-cafc3cea2b1a-foo\0bar&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>),
             <span class="prelude-val">Err</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
@@ -778,7 +778,7 @@
     <span class="kw">fn</span> <span class="ident">get_name_equal_byte_unset</span>() {
         <span class="kw">let</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;fa7575b4-3224-4fbb-9201-85d54ea95b93-foo=bar&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
     }
 
     <span class="comment">// ``console</span>
@@ -792,7 +792,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;0f87d787-bf18-437a-a205-ed38d81fa4da-foo\0bar&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;3427d141-700f-494f-bfa6-877147333249-baz&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
@@ -810,7 +810,7 @@
     <span class="kw">fn</span> <span class="ident">put_name_nul_byte_err_unset_value</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;1437e58a-b7e3-4c5e-9b1f-a67b78fe1e42-foo\0bar&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">None</span>),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
@@ -829,7 +829,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;75b8c10e-4a1d-4f61-9800-5f5c29087edd-foo\0bar&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;a19660e3-304d-45b8-8746-297a2065a076-baz\0quux&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
@@ -848,7 +848,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;044f35c0-f711-4b80-8de5-4579075cd754-foo-bar&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;52bb4d27-6d8a-4a83-90f8-51940ce1f1a7-baz\0quux&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;bad environment variable value: contains null byte&quot;</span>
@@ -863,7 +863,7 @@
     <span class="kw">fn</span> <span class="ident">put_name_eq_unset</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;=&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">None</span>), <span class="prelude-val">Ok</span>(()));
+        <span class="macro">assert_eq!</span>(<span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">None</span>), <span class="prelude-val">Ok</span>(()));
     }
 
     <span class="comment">// ```console</span>
@@ -877,7 +877,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;=&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Invalid</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;Invalid argument - setenv(=)&quot;</span>
@@ -896,7 +896,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;=&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;4ac79e15-2b8c-4771-8fc8-ff0b095ce7d0-baz-quux&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Invalid</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;Invalid argument - setenv(=)&quot;</span>
@@ -915,7 +915,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;=&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;42db3f11-46f5-4cab-93f4-ee543c1634f9-baz\0quux&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;bad environment variable value: contains null byte&quot;</span>
@@ -934,7 +934,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;=71cb1499-3a0d-476a-8334-aa7a334f387e-\0&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;42db3f11-46f5-4cab-93f4-ee543c1634f9-baz\0quux&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
@@ -949,7 +949,7 @@
     <span class="kw">fn</span> <span class="ident">put_name_empty_value_unset</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">None</span>), <span class="prelude-val">Ok</span>(()));
+        <span class="macro">assert_eq!</span>(<span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">None</span>), <span class="prelude-val">Ok</span>(()));
     }
 
     <span class="comment">// ```console</span>
@@ -963,7 +963,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Invalid</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;Invalid argument - setenv()&quot;</span>
@@ -982,7 +982,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;157f6920-04e5-4561-8f06-6f00d09c3610-foo&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Invalid</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;Invalid argument - setenv()&quot;</span>
@@ -1001,7 +1001,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;1d50869d-e71a-4347-8b28-b274f34e2892-foo\0bar&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
                 <span class="string">&quot;bad environment variable value: contains null byte&quot;</span>
@@ -1015,14 +1015,14 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;308a3d98-2f87-46fd-b996-ae471a76b64e&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;value&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
 
         <span class="comment">// when</span>
         <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">retrieved</span> <span class="op">=</span> <span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>);
 
         <span class="comment">// then</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">retrieved</span>.<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(), <span class="ident">value</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">retrieved</span>.<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(), <span class="ident">value</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1031,7 +1031,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;7a6885c3-0c17-4310-a5e7-ed971cac69b6&quot;</span>;
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;value&quot;</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
 
         <span class="comment">// when</span>
         <span class="ident">backend</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)).<span class="ident">unwrap</span>();
@@ -1039,7 +1039,7 @@
         <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">backend</span>.<span class="ident">get</span>(<span class="ident">name</span>);
 
         <span class="comment">// then</span>
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">value</span>.<span class="ident">unwrap</span>().<span class="ident">is_none</span>());
+        <span class="macro">assert!</span>(<span class="ident">value</span>.<span class="ident">unwrap</span>().<span class="ident">is_none</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1059,13 +1059,13 @@
         <span class="kw">let</span> <span class="ident">size_after</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">len</span>();
 
         <span class="comment">// then</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">size_after</span> <span class="op">-</span> <span class="ident">size_before</span>, <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">size_after</span> <span class="op">-</span> <span class="ident">size_before</span>, <span class="number">2</span>);
         <span class="kw">let</span> <span class="ident">value1</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">name_a</span>);
         <span class="kw">let</span> <span class="ident">value2</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">name_b</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">value1</span>.<span class="ident">is_some</span>());
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">value2</span>.<span class="ident">is_some</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">value1</span>.<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span><span class="ident">value_a</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">value2</span>.<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span><span class="ident">value_b</span>);
+        <span class="macro">assert!</span>(<span class="ident">value1</span>.<span class="ident">is_some</span>());
+        <span class="macro">assert!</span>(<span class="ident">value2</span>.<span class="ident">is_some</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">value1</span>.<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span><span class="ident">value_a</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">value2</span>.<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span><span class="ident">value_b</span>);
     }
 }
 </pre></div>

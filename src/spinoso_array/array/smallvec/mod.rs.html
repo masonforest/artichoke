@@ -2961,98 +2961,98 @@
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_end_empty</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">5</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_out_of_bounds_empty</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_interior_empty</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">2</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_begin_empty</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_end_empty</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, []);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_out_of_bounds_empty</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_begin_empty</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, []);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_end</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">5</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_out_of_bounds</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_interior</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_begin</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_end</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_out_of_bounds</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_begin</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="comment">// `set_slice`</span>
@@ -3061,449 +3061,449 @@
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">5</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_greater_than_insert_length_to_end</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_greater_than_insert_length_overrun_end</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_non_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_non_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_non_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_non_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">5</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_non_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_non_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_non_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_non_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">5</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">6</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>.<span class="ident">len</span>(), <span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">6</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>.<span class="ident">len</span>(), <span class="number">5</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_equal_to_insert_length_to_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_greater_than_insert_length_to_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_less_than_insert_length_overrun_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">3</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_equal_to_insert_length_overrun_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">3</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_greater_than_insert_length_overrun_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">3</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">6</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">6</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_equal_to_insert_length_to_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_greater_than_insert_length_to_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_less_than_insert_length_overrun_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_equal_to_insert_length_overrun_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">5</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_greater_than_insert_length_overrun_tail</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_non_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_non_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_non_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_begin_non_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_non_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_non_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_non_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_non_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, []);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, []);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, []);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_begin_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, []);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_empty_drain_0</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_empty_drain_less_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_empty_drain_equal_to_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_empty_drain_greater_than_insert_length</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">SmallArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 }
 </pre></div>

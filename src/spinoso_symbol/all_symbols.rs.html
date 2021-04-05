@@ -726,108 +726,108 @@
     <span class="kw">fn</span> <span class="ident">zero_offset_count</span>() {
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">Interner</span>::<span class="ident">default</span>();
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">0</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">Interner</span>(<span class="number">100</span>);
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">100</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">100</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">Interner</span>(<span class="ident">u32</span>::<span class="ident">MAX</span>);
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="ident">u32</span>::<span class="ident">MAX</span> <span class="kw">as</span> <span class="ident">usize</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="ident">u32</span>::<span class="ident">MAX</span> <span class="kw">as</span> <span class="ident">usize</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">zero_offset_yielded</span>() {
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">Interner</span>::<span class="ident">default</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">Interner</span>(<span class="number">5</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">0</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">1</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">2</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">3</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">4</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">0</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">1</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">2</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">3</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">4</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">Interner</span>(<span class="ident">u32</span>::<span class="ident">MAX</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">0</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next_back</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">1</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">0</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next_back</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">1</span>)));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">one_offset_count</span>() {
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">OffByOneInterner</span>::<span class="ident">default</span>();
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">0</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">OffByOneInterner</span>(<span class="number">100</span>);
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">100</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">100</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">OffByOneInterner</span>(<span class="ident">u32</span>::<span class="ident">MAX</span>);
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), (<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">usize</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), (<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">usize</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">one_offset_yielded</span>() {
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">OffByOneInterner</span>::<span class="ident">default</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">OffByOneInterner</span>(<span class="number">5</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">1</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">2</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">3</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">4</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">5</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">1</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">2</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">3</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">4</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">5</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">OffByOneInterner</span>(<span class="ident">u32</span>::<span class="ident">MAX</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">1</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next_back</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">1</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="number">1</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next_back</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">1</span>)));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">high_offset_count</span>() {
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">NonZeroInterner</span>::<span class="ident">default</span>();
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">0</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">NonZeroInterner</span>(<span class="number">100</span>);
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">16</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">16</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">NonZeroInterner</span>(<span class="ident">u32</span>::<span class="ident">MAX</span>);
         <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">16</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">count</span>(), <span class="number">16</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">high_offset_yielded</span>() {
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">NonZeroInterner</span>::<span class="ident">default</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">NonZeroInterner</span>(<span class="number">5</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">16</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">15</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">14</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">13</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">12</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">16</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">15</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">14</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">13</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">12</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
 
         <span class="kw">let</span> <span class="ident">interner</span> <span class="op">=</span> <span class="ident">NonZeroInterner</span>(<span class="ident">u32</span>::<span class="ident">MAX</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interner</span>.<span class="ident">all_symbols</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">16</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">all_symbols</span>.<span class="ident">next_back</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">1</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">16</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">all_symbols</span>.<span class="ident">next_back</span>(), <span class="prelude-val">Some</span>(<span class="ident">Symbol</span>::<span class="ident">new</span>(<span class="ident">u32</span>::<span class="ident">MAX</span> <span class="op">-</span> <span class="number">1</span>)));
     }
 }
 </pre></div>

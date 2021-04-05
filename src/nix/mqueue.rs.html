@@ -191,7 +191,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sys</span>::<span class="ident">stat</span>::<span class="ident">Mode</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>{
+<span class="macro">libc_bitflags!</span>{
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MQ_OFlag</span>: <span class="ident">libc</span>::<span class="ident">c_int</span> {
         <span class="ident">O_RDONLY</span>;
         <span class="ident">O_WRONLY</span>;
@@ -203,7 +203,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>{
+<span class="macro">libc_bitflags!</span>{
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FdFlag</span>: <span class="ident">libc</span>::<span class="ident">c_int</span> {
         <span class="ident">FD_CLOEXEC</span>;
     }

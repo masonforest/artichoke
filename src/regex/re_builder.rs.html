@@ -443,7 +443,7 @@
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">RegexOptions</span> {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">RegexOptions</span> {
-            <span class="ident">pats</span>: <span class="macro">vec</span><span class="macro">!</span>[],
+            <span class="ident">pats</span>: <span class="macro">vec!</span>[],
             <span class="ident">size_limit</span>: <span class="number">10</span> <span class="op">*</span> (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">20</span>),
             <span class="ident">dfa_size_limit</span>: <span class="number">2</span> <span class="op">*</span> (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">20</span>),
             <span class="ident">nest_limit</span>: <span class="number">250</span>,
@@ -458,7 +458,7 @@
     }
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">define_builder</span> {
+<span class="macro">macro_rules!</span> <span class="ident">define_builder</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">regex_mod</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">only_utf8</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">pub</span> <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> {
             <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">RegexOptions</span>;
@@ -653,10 +653,10 @@
     };
 }
 
-<span class="macro">define_builder</span><span class="macro">!</span>(<span class="ident">bytes</span>, <span class="ident">re_bytes</span>, <span class="bool-val">false</span>);
-<span class="macro">define_builder</span><span class="macro">!</span>(<span class="ident">unicode</span>, <span class="ident">re_unicode</span>, <span class="bool-val">true</span>);
+<span class="macro">define_builder!</span>(<span class="ident">bytes</span>, <span class="ident">re_bytes</span>, <span class="bool-val">false</span>);
+<span class="macro">define_builder!</span>(<span class="ident">unicode</span>, <span class="ident">re_unicode</span>, <span class="bool-val">true</span>);
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">define_set_builder</span> {
+<span class="macro">macro_rules!</span> <span class="ident">define_set_builder</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">regex_mod</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">only_utf8</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">pub</span> <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> {
             <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">RegexOptions</span>;
@@ -842,8 +842,8 @@
     };
 }
 
-<span class="macro">define_set_builder</span><span class="macro">!</span>(<span class="ident">set_bytes</span>, <span class="ident">bytes</span>, <span class="bool-val">false</span>);
-<span class="macro">define_set_builder</span><span class="macro">!</span>(<span class="ident">set_unicode</span>, <span class="ident">unicode</span>, <span class="bool-val">true</span>);
+<span class="macro">define_set_builder!</span>(<span class="ident">set_bytes</span>, <span class="ident">bytes</span>, <span class="bool-val">false</span>);
+<span class="macro">define_set_builder!</span>(<span class="ident">set_unicode</span>, <span class="ident">unicode</span>, <span class="bool-val">true</span>);
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="regex" data-search-js="../../search-index.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

@@ -158,7 +158,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>)
     }
 }
 
@@ -195,7 +195,7 @@
         <span class="comment">// `mrb_exc_raise` will call longjmp which will unwind the stack.</span>
         <span class="ident">sys</span>::<span class="ident">mrb_exc_raise</span>(<span class="ident">mrb</span>, <span class="ident">exc</span>);
     } <span class="kw">else</span> {
-        <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;unable to raise {:?}&quot;</span>, <span class="ident">exception</span>);
+        <span class="macro">error!</span>(<span class="string">&quot;unable to raise {:?}&quot;</span>, <span class="ident">exception</span>);
         <span class="comment">// Any non-`Copy` objects that we haven&#39;t cleaned up at this point will</span>
         <span class="comment">// leak, so drop everything.</span>
         <span class="ident">drop</span>(<span class="ident">exception</span>);

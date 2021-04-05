@@ -6,14 +6,14 @@
 non-trivial escapes.</p>
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;\x00&#39;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;&quot;&#39;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;\\&#39;</span>));
+<span class="macro">assert!</span>(<span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;\x00&#39;</span>));
+<span class="macro">assert!</span>(<span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;&quot;&#39;</span>));
+<span class="macro">assert!</span>(<span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;\\&#39;</span>));
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;a&#39;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;Z&#39;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;;&#39;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;💎&#39;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="ident">REPLACEMENT_CHARACTER</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;a&#39;</span>));
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;Z&#39;</span>));
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;;&#39;</span>));
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="string">&#39;💎&#39;</span>));
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">is_ascii_char_with_escape</span>(<span class="ident">REPLACEMENT_CHARACTER</span>));</pre></div>
 </div></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="scolapasta_string_escape" data-search-js="../search-index.js"></div>
     <script src="../main.js"></script></body></html>

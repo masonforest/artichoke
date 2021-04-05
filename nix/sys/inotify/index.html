@@ -17,7 +17,7 @@
 <span class="kw">loop</span> {
     <span class="comment">// We read from our inotify instance for events.</span>
     <span class="kw">let</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">instance</span>.<span class="ident">read_events</span>().<span class="ident">unwrap</span>();
-    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Events: {:?}&quot;</span>, <span class="ident">events</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;Events: {:?}&quot;</span>, <span class="ident">events</span>);
 }</pre></div>
 </div><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
 <table><tr class="module-item"><td><a class="struct" href="struct.AddWatchFlags.html" title="nix::sys::inotify::AddWatchFlags struct">AddWatchFlags</a></td><td class="docblock-short"><p>Configuration options for <a href="fn.inotify_add_watch.html"><code>inotify_add_watch</code></a>.</p>

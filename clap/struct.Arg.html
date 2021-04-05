@@ -139,11 +139,11 @@ non <code>-</code> character will be used as the <a href="./struct.Arg.html#meth
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">App</span>::<span class="ident">new</span>(<span class="string">&quot;prog&quot;</span>)
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">short</span>(<span class="string">&quot;c&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-c&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;config&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;config&quot;</span>));</pre></div>
 </div><h4 id="method.long" class="method"><code>pub fn <a href="#method.long" class="fnname">long</a>(self, l: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#376-379" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets the long version of the argument without the preceding <code>--</code>.</p>
 <p>By default <code>clap</code> automatically assigns <code>version</code> and <code>help</code> to the auto-generated
 <code>version</code> and <code>help</code> arguments respectively. You may use the word <code>version</code> or <code>help</code> for
@@ -164,11 +164,11 @@ will <em>not</em> be stripped (i.e. <code>config-file</code> is allowed)</p>
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">App</span>::<span class="ident">new</span>(<span class="string">&quot;prog&quot;</span>)
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;cfg&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;cfg&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;cfg&quot;</span>));</pre></div>
 </div><h4 id="method.alias" class="method"><code>pub fn <a href="#method.alias" class="fnname">alias</a>&lt;S:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;&gt;(self, name: S) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#402-409" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows adding a <a href="./struct.Arg.html"><code>Arg</code></a> alias, which function as “hidden” arguments that
 automatically dispatch as if this argument was used. This is more efficient, and easier
 than creating multiple hidden arguments as one only needs to check for the existence of
@@ -180,11 +180,11 @@ this command, and not all variants.</p>
             .<span class="ident">long</span>(<span class="string">&quot;test&quot;</span>)
             .<span class="ident">alias</span>(<span class="string">&quot;alias&quot;</span>)
             .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-       .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+       .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
             <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--alias&quot;</span>, <span class="string">&quot;cool&quot;</span>
         ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;test&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;test&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;cool&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;test&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;test&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;cool&quot;</span>));</pre></div>
 </div><h4 id="method.aliases" class="method"><code>pub fn <a href="#method.aliases" class="fnname">aliases</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#432-441" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows adding <a href="./struct.Arg.html"><code>Arg</code></a> aliases, which function as “hidden” arguments that
 automatically dispatch as if this argument was used. This is more efficient, and easier
 than creating multiple hidden subcommands as one only needs to check for the existence of
@@ -197,10 +197,10 @@ this command, and not all variants.</p>
                     .<span class="ident">aliases</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;do-stuff&quot;</span>, <span class="string">&quot;do-tests&quot;</span>, <span class="string">&quot;tests&quot;</span>])
                     .<span class="ident">help</span>(<span class="string">&quot;the file to add&quot;</span>)
                     .<span class="ident">required</span>(<span class="bool-val">false</span>))
-            .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+            .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
                 <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--do-tests&quot;</span>
             ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;test&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;test&quot;</span>));</pre></div>
 </div><h4 id="method.visible_alias" class="method"><code>pub fn <a href="#method.visible_alias" class="fnname">visible_alias</a>&lt;S:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;&gt;(self, name: S) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#463-470" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows adding a <a href="./struct.Arg.html"><code>Arg</code></a> alias that functions exactly like those defined with
 <a href="../clap/struct.Arg.html#method.alias" title="Arg::alias"><code>Arg::alias</code></a>, except that they are visible inside the help message.</p>
 <h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
@@ -210,11 +210,11 @@ this command, and not all variants.</p>
                 .<span class="ident">visible_alias</span>(<span class="string">&quot;something-awesome&quot;</span>)
                 .<span class="ident">long</span>(<span class="string">&quot;test&quot;</span>)
                 .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-       .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+       .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
             <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--something-awesome&quot;</span>, <span class="string">&quot;coffee&quot;</span>
         ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;test&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;test&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;coffee&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;test&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;test&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;coffee&quot;</span>));</pre></div>
 </div><h4 id="method.visible_aliases" class="method"><code>pub fn <a href="#method.visible_aliases" class="fnname">visible_aliases</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#490-499" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows adding multiple <a href="./struct.Arg.html"><code>Arg</code></a> aliases that functions exactly like those defined
 with <a href="../clap/struct.Arg.html#method.aliases" title="Arg::aliases"><code>Arg::aliases</code></a>, except that they are visible inside the help message.</p>
 <h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
@@ -223,10 +223,10 @@ with <a href="../clap/struct.Arg.html#method.aliases" title="Arg::aliases"><code
             .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;test&quot;</span>)
                 .<span class="ident">long</span>(<span class="string">&quot;test&quot;</span>)
                 .<span class="ident">visible_aliases</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;something&quot;</span>, <span class="string">&quot;awesome&quot;</span>, <span class="string">&quot;cool&quot;</span>]))
-       .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+       .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
             <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--awesome&quot;</span>
         ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;test&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;test&quot;</span>));</pre></div>
 </div><h4 id="method.help" class="method"><code>pub fn <a href="#method.help" class="fnname">help</a>(self, h: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#551-554" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets the short help text of the argument that will be displayed to the user when they print
 the help information with <code>-h</code>. Typically, this is a short (one line) description of the
 arg.</p>
@@ -249,7 +249,7 @@ the other help text.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;cfg&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">help</span>(<span class="string">&quot;Some help text describing the --config arg&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
@@ -293,7 +293,7 @@ and on, so I&#39;ll stop now.&quot;</span>)</pre></div>
 with only valid keys and may not contain other nonsense
 that cannot be read by this program. Obviously I&#39;m going on
 and on, so I&#39;ll stop now.&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
@@ -342,14 +342,14 @@ and requires that the <code>--</code> syntax be used to access it early.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;first&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;second&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;third&quot;</span>).<span class="ident">last</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;one&quot;</span>, <span class="string">&quot;--&quot;</span>, <span class="string">&quot;three&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">res</span>.<span class="ident">unwrap</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;third&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;three&quot;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;second&quot;</span>).<span class="ident">is_none</span>());</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;third&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;three&quot;</span>));
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;second&quot;</span>).<span class="ident">is_none</span>());</pre></div>
 <p>Even if the positional argument marked <code>.last(true)</code> is the only argument left to parse,
 failing to use the <code>--</code> syntax results in an error.</p>
 
@@ -358,12 +358,12 @@ failing to use the <code>--</code> syntax results in an error.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;first&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;second&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;third&quot;</span>).<span class="ident">last</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">UnknownArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">UnknownArgument</span>);</pre></div>
 </div><h4 id="method.required" class="method"><code>pub fn <a href="#method.required" class="fnname">required</a>(self, r: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#758-764" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets whether or not the argument is required by default. Required by default means it is
 required, when no other conflicting rules have been evaluated. Conflicting rules take
 precedence over being required. <strong>Default:</strong> <code>false</code></p>
@@ -383,11 +383,11 @@ yes/no, or true/false.</p>
         .<span class="ident">required</span>(<span class="bool-val">true</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;file.conf&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
 <p>Setting <a href="./struct.Arg.html#method.required"><code>Arg::required(true)</code></a> and <em>not</em> supplying that argument is an error.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -396,12 +396,12 @@ yes/no, or true/false.</p>
         .<span class="ident">required</span>(<span class="bool-val">true</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.require_equals" class="method"><code>pub fn <a href="#method.require_equals" class="fnname">require_equals</a>(self, r: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#820-827" title="goto source code">[src]</a></h4><div class="docblock"><p>Requires that options use the <code>--option=val</code> syntax (i.e. an equals between the option and
 associated value) <strong>Default:</strong> <code>false</code></p>
 <p><strong>NOTE:</strong> This setting also removes the default of allowing empty values and implies
@@ -421,11 +421,11 @@ it and the associated value.</p>
         .<span class="ident">require_equals</span>(<span class="bool-val">true</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config=file.conf&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
 <p>Setting <a href="./struct.Arg.html#method.require_equals"><code>Arg::require_equals(true)</code></a> and <em>not</em> supplying the equals will cause an error
 unless <a href="./struct.Arg.html#method.empty_values"><code>Arg::empty_values(true)</code></a> is set.</p>
 
@@ -435,12 +435,12 @@ unless <a href="./struct.Arg.html#method.empty_values"><code>Arg::empty_values(t
         .<span class="ident">require_equals</span>(<span class="bool-val">true</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;file.conf&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">EmptyValue</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">EmptyValue</span>);</pre></div>
 </div><h4 id="method.allow_hyphen_values" class="method"><code>pub fn <a href="#method.allow_hyphen_values" class="fnname">allow_hyphen_values</a>(self, a: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#885-891" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows values which start with a leading hyphen (<code>-</code>)</p>
 <p><strong>WARNING</strong>: Take caution when using this setting combined with <a href="./struct.Arg.html#method.multiple"><code>Arg::multiple(true)</code></a>, as
 this becomes ambiguous <code>$ prog --arg -- -- val</code>. All three <code>--, --, val</code> will be values
@@ -463,11 +463,11 @@ shorts.</p>
         .<span class="ident">allow_hyphen_values</span>(<span class="bool-val">true</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">long</span>(<span class="string">&quot;pattern&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--pattern&quot;</span>, <span class="string">&quot;-file&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;pat&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;-file&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;pat&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;-file&quot;</span>));</pre></div>
 <p>Not setting <a href="./struct.Arg.html#method.allow_hyphen_values"><code>Arg::allow_hyphen_values(true)</code></a> and supplying a value which starts with a
 hyphen is an error.</p>
 
@@ -476,12 +476,12 @@ hyphen is an error.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;pat&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">long</span>(<span class="string">&quot;pattern&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--pattern&quot;</span>, <span class="string">&quot;-file&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">UnknownArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">UnknownArgument</span>);</pre></div>
 </div><h4 id="method.required_unless" class="method"><code>pub fn <a href="#method.required_unless" class="fnname">required_unless</a>(self, name: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#948-955" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets an arg that override this arg’s required setting. (i.e. this arg will be required
 unless this other argument is present).</p>
 <p><strong>Pro Tip:</strong> Using <a href="./struct.Arg.html#method.required_unless"><code>Arg::required_unless</code></a> implies <a href="./struct.Arg.html#method.required"><code>Arg::required</code></a> and is therefore not
@@ -502,11 +502,11 @@ provided, but it’s not an error because the <code>unless</code> arg has been s
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;dbg&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;debug&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--debug&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
 <p>Setting <a href="./struct.Arg.html#method.required_unless"><code>Arg::required_unless(name)</code></a> and <em>not</em> supplying <code>name</code> or this arg is an error.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -517,12 +517,12 @@ provided, but it’s not an error because the <code>unless</code> arg has been s
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;dbg&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;debug&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.required_unless_all" class="method"><code>pub fn <a href="#method.required_unless_all" class="fnname">required_unless_all</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1020-1030" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets args that override this arg’s required setting. (i.e. this arg will be required unless
 all these other arguments are present).</p>
 <p><strong>NOTE:</strong> If you wish for this argument to only be required if <em>one of</em> these args are
@@ -547,11 +547,11 @@ supplied.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;infile&quot;</span>)
         .<span class="ident">short</span>(<span class="string">&quot;i&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--debug&quot;</span>, <span class="string">&quot;-i&quot;</span>, <span class="string">&quot;file&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
 <p>Setting <a href="./struct.Arg.html#method.required_unless_all"><code>Arg::required_unless_all(names)</code></a> and <em>not</em> supplying <em>all</em> of <code>names</code> or this
 arg is an error.</p>
 
@@ -566,12 +566,12 @@ arg is an error.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;infile&quot;</span>)
         .<span class="ident">short</span>(<span class="string">&quot;i&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.required_unless_one" class="method"><code>pub fn <a href="#method.required_unless_one" class="fnname">required_unless_one</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1096-1105" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets args that override this arg’s <a href="./struct.Arg.html#method.required">required</a> setting. (i.e. this arg will be required
 unless <em>at least one of</em> these other arguments are present).</p>
 <p><strong>NOTE:</strong> If you wish for this argument to only be required if <em>all of</em> these args are
@@ -596,11 +596,11 @@ have been supplied.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;infile&quot;</span>)
         .<span class="ident">short</span>(<span class="string">&quot;i&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--debug&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());</pre></div>
 <p>Setting <a href="./struct.Arg.html#method.required_unless_one"><code>Arg::required_unless_one(names)</code></a> and <em>not</em> supplying <em>at least one of</em> <code>names</code>
 or this arg is an error.</p>
 
@@ -615,12 +615,12 @@ or this arg is an error.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;infile&quot;</span>)
         .<span class="ident">short</span>(<span class="string">&quot;i&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.conflicts_with" class="method"><code>pub fn <a href="#method.conflicts_with" class="fnname">conflicts_with</a>(self, name: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1144-1151" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets a conflicting argument by name. I.e. when using this argument,
 the following argument can’t be present and vice versa.</p>
 <p><strong>NOTE:</strong> Conflicting rules take precedence over being required by default. Conflict rules
@@ -642,12 +642,12 @@ need to also do B.conflicts_with(A))</p>
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;debug&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;debug&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--debug&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;file.conf&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">ArgumentConflict</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">ArgumentConflict</span>);</pre></div>
 </div><h4 id="method.conflicts_with_all" class="method"><code>pub fn <a href="#method.conflicts_with_all" class="fnname">conflicts_with_all</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1194-1203" title="goto source code">[src]</a></h4><div class="docblock"><p>The same as <a href="./struct.Arg.html#method.conflicts_with"><code>Arg::conflicts_with</code></a> but allows specifying multiple two-way conlicts per
 argument.</p>
 <p><strong>NOTE:</strong> Conflicting rules take precedence over being required by default. Conflict rules
@@ -672,12 +672,12 @@ conflicting argument is an error.</p>
         .<span class="ident">long</span>(<span class="string">&quot;debug&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;input&quot;</span>)
         .<span class="ident">index</span>(<span class="number">1</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;file.conf&quot;</span>, <span class="string">&quot;file.txt&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">ArgumentConflict</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">ArgumentConflict</span>);</pre></div>
 </div><h4 id="method.overrides_with" class="method"><code>pub fn <a href="#method.overrides_with" class="fnname">overrides_with</a>(self, name: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1303-1310" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets a overridable argument by name. I.e. this argument and the following argument
 will override each other in POSIX style (whichever argument was specified at runtime
 <strong>last</strong> “wins”)</p>
@@ -694,14 +694,14 @@ it is simply ignored.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;-d, --debug &#39;other flag&#39;&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;-c, --color &#39;third flag&#39;&quot;</span>)
         .<span class="ident">overrides_with</span>(<span class="string">&quot;flag&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-f&quot;</span>, <span class="string">&quot;-d&quot;</span>, <span class="string">&quot;-c&quot;</span>]);
             <span class="comment">//    ^~~~~~~~~~~~^~~~~ flag is overridden by color</span>
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;color&quot;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;debug&quot;</span>)); <span class="comment">// even though flag conflicts with debug, it&#39;s as if flag</span>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;color&quot;</span>));
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;debug&quot;</span>)); <span class="comment">// even though flag conflicts with debug, it&#39;s as if flag</span>
                                 <span class="comment">// was never used because it was overridden with color</span>
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;flag&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;flag&quot;</span>));</pre></div>
 <p>Care must be taken when using this setting, and having an arg override with itself. This
 is common practice when supporting things like shell aliases, config files, etc.
 However, when combined with multiple values, it can get dicy.
@@ -712,38 +712,38 @@ preventing a “Unexpected multiple usage” error):</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">App</span>::<span class="ident">new</span>(<span class="string">&quot;posix&quot;</span>)
             .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;--flag  &#39;some flag&#39;&quot;</span>).<span class="ident">overrides_with</span>(<span class="string">&quot;flag&quot;</span>))
-            .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;posix&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;--flag&quot;</span>]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;flag&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="number">1</span>);</pre></div>
+            .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[<span class="string">&quot;posix&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;--flag&quot;</span>]);
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;flag&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="number">1</span>);</pre></div>
 <p>Making a arg <code>multiple(true)</code> and override itself is essentially meaningless. Therefore
 clap ignores an override of self if it’s a flag and it already accepts multiple occurrences.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">App</span>::<span class="ident">new</span>(<span class="string">&quot;posix&quot;</span>)
             .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;--flag...  &#39;some flag&#39;&quot;</span>).<span class="ident">overrides_with</span>(<span class="string">&quot;flag&quot;</span>))
-            .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;--flag&quot;</span>]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;flag&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="number">4</span>);</pre></div>
+            .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;--flag&quot;</span>]);
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;flag&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="number">4</span>);</pre></div>
 <p>Now notice with options (which <em>do not</em> set <code>multiple(true)</code>), it’s as if only the last
 occurrence happened.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">App</span>::<span class="ident">new</span>(<span class="string">&quot;posix&quot;</span>)
             .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;--opt [val] &#39;some option&#39;&quot;</span>).<span class="ident">overrides_with</span>(<span class="string">&quot;opt&quot;</span>))
-            .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;--opt=some&quot;</span>, <span class="string">&quot;--opt=other&quot;</span>]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">1</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;other&quot;</span>));</pre></div>
+            .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;--opt=some&quot;</span>, <span class="string">&quot;--opt=other&quot;</span>]);
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">1</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;other&quot;</span>));</pre></div>
 <p>Just like flags, options with <code>multiple(true)</code> set, will ignore the “override self” setting.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">App</span>::<span class="ident">new</span>(<span class="string">&quot;posix&quot;</span>)
             .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;--opt [val]... &#39;some option&#39;&quot;</span>)
                 .<span class="ident">overrides_with</span>(<span class="string">&quot;opt&quot;</span>))
-            .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;--opt&quot;</span>, <span class="string">&quot;first&quot;</span>, <span class="string">&quot;over&quot;</span>, <span class="string">&quot;--opt&quot;</span>, <span class="string">&quot;other&quot;</span>, <span class="string">&quot;val&quot;</span>]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">2</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;opt&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="kw-2">&amp;</span>[<span class="string">&quot;first&quot;</span>, <span class="string">&quot;over&quot;</span>, <span class="string">&quot;other&quot;</span>, <span class="string">&quot;val&quot;</span>]);</pre></div>
+            .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;--opt&quot;</span>, <span class="string">&quot;first&quot;</span>, <span class="string">&quot;over&quot;</span>, <span class="string">&quot;--opt&quot;</span>, <span class="string">&quot;other&quot;</span>, <span class="string">&quot;val&quot;</span>]);
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">2</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;opt&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="kw-2">&amp;</span>[<span class="string">&quot;first&quot;</span>, <span class="string">&quot;over&quot;</span>, <span class="string">&quot;other&quot;</span>, <span class="string">&quot;val&quot;</span>]);</pre></div>
 <p>A safe thing to do if you’d like to support an option which supports multiple values, but
 also is “overridable” by itself, is to use <code>use_delimiter(false)</code> and <em>not</em> use
 <code>multiple(true)</code> while telling users to seperate values with a comma (i.e. <code>val1,val2</code>)</p>
@@ -753,10 +753,10 @@ also is “overridable” by itself, is to use <code>use_delimiter(false)</code>
             .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;--opt [val] &#39;some option&#39;&quot;</span>)
                 .<span class="ident">overrides_with</span>(<span class="string">&quot;opt&quot;</span>)
                 .<span class="ident">use_delimiter</span>(<span class="bool-val">false</span>))
-            .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;--opt=some,other&quot;</span>, <span class="string">&quot;--opt=one,two&quot;</span>]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">1</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;opt&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="kw-2">&amp;</span>[<span class="string">&quot;one,two&quot;</span>]);</pre></div>
+            .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;--opt=some,other&quot;</span>, <span class="string">&quot;--opt=one,two&quot;</span>]);
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">1</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;opt&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="kw-2">&amp;</span>[<span class="string">&quot;one,two&quot;</span>]);</pre></div>
 </div><h4 id="method.overrides_with_all" class="method"><code>pub fn <a href="#method.overrides_with_all" class="fnname">overrides_with_all</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1339-1348" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets multiple mutually overridable arguments by name. I.e. this argument and the following
 argument will override each other in POSIX style (whichever argument was specified at
 runtime <strong>last</strong> “wins”)</p>
@@ -770,15 +770,15 @@ conflicts, requirements, etc. are evaluated <strong>after</strong> all “overri
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;-d, --debug &#39;other flag&#39;&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">from_usage</span>(<span class="string">&quot;-c, --color &#39;third flag&#39;&quot;</span>)
         .<span class="ident">overrides_with_all</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;flag&quot;</span>, <span class="string">&quot;debug&quot;</span>]))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-f&quot;</span>, <span class="string">&quot;-d&quot;</span>, <span class="string">&quot;-c&quot;</span>]);
             <span class="comment">//    ^~~~~~^~~~~~~~~ flag and debug are overridden by color</span>
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;color&quot;</span>)); <span class="comment">// even though flag conflicts with color, it&#39;s as if flag</span>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;color&quot;</span>)); <span class="comment">// even though flag conflicts with color, it&#39;s as if flag</span>
                                 <span class="comment">// and debug were never used because they were overridden</span>
                                 <span class="comment">// with color</span>
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;debug&quot;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;flag&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;debug&quot;</span>));
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;flag&quot;</span>));</pre></div>
 </div><h4 id="method.requires" class="method"><code>pub fn <a href="#method.requires" class="fnname">requires</a>(self, name: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1405-1414" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets an argument by name that is required when this one is present I.e. when
 using this argument, the following argument <em>must</em> be present.</p>
 <p><strong>NOTE:</strong> <a href="./struct.Arg.html#method.conflicts_with">Conflicting</a> rules and <a href="./struct.Arg.html#method.overrides_with">override</a> rules take precedence over being required</p>
@@ -798,11 +798,11 @@ required</p>
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;input&quot;</span>)
         .<span class="ident">index</span>(<span class="number">1</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use cfg, so input wasn&#39;t required</span></pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use cfg, so input wasn&#39;t required</span></pre></div>
 <p>Setting <a href="./struct.Arg.html#method.requires"><code>Arg::requires(name)</code></a> and <em>not</em> supplying that argument is an error.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -813,12 +813,12 @@ required</p>
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;input&quot;</span>)
         .<span class="ident">index</span>(<span class="number">1</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;file.conf&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.requires_if" class="method"><code>pub fn <a href="#method.requires_if" class="fnname">requires_if</a>(self, val: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, arg: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1475-1482" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows a conditional requirement. The requirement will only become valid if this arg’s value
 equals <code>val</code>.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows</p>
@@ -840,11 +840,11 @@ defining argument’s value is equal to <code>val</code>. If the defining argume
         .<span class="ident">requires_if</span>(<span class="string">&quot;my.cfg&quot;</span>, <span class="string">&quot;other&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;other&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;some.cfg&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use --config=my.cfg, so other wasn&#39;t required</span></pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use --config=my.cfg, so other wasn&#39;t required</span></pre></div>
 <p>Setting [<code>Arg::requires_if(val, arg)</code>] and setting the value to <code>val</code> but <em>not</em> supplying
 <code>arg</code> is an error.</p>
 
@@ -855,12 +855,12 @@ defining argument’s value is equal to <code>val</code>. If the defining argume
         .<span class="ident">requires_if</span>(<span class="string">&quot;my.cfg&quot;</span>, <span class="string">&quot;input&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;input&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;my.cfg&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.requires_ifs" class="method"><code>pub fn <a href="#method.requires_ifs" class="fnname">requires_ifs</a>(self, ifs: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a>&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1535-1548" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows multiple conditional requirements. The requirement will only become valid if this arg’s value
 equals <code>val</code>.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows</p>
@@ -892,12 +892,12 @@ than <code>val</code>, <code>arg</code> isn’t required.</p>
         .<span class="ident">long</span>(<span class="string">&quot;option&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;other&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;special.conf&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>()); <span class="comment">// We  used --config=special.conf so --option &lt;val&gt; is required</span>
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>()); <span class="comment">// We  used --config=special.conf so --option &lt;val&gt; is required</span>
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.required_if" class="method"><code>pub fn <a href="#method.required_if" class="fnname">required_if</a>(self, arg: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, val: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1613-1620" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows specifying that an argument is <a href="./struct.Arg.html#method.required">required</a> conditionally. The requirement will only
 become valid if the specified <code>arg</code>’s value equals <code>val</code>.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows</p>
@@ -921,11 +921,11 @@ this argument isn’t required.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--other&quot;</span>, <span class="string">&quot;not-special&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use --other=special, so &quot;cfg&quot; wasn&#39;t required</span></pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use --other=special, so &quot;cfg&quot; wasn&#39;t required</span></pre></div>
 <p>Setting [<code>Arg::required_if(arg, val)</code>] and having <code>arg</code> used with a value of <code>val</code> but <em>not</em>
 using this arg is an error.</p>
 
@@ -938,12 +938,12 @@ using this arg is an error.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--other&quot;</span>, <span class="string">&quot;special&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.required_ifs" class="method"><code>pub fn <a href="#method.required_ifs" class="fnname">required_ifs</a>(self, ifs: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a>&amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1702-1715" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows specifying that an argument is <a href="./struct.Arg.html#method.required">required</a> based on multiple conditions. The
 conditions are set up in a <code>(arg, val)</code> style tuple. The requirement will only become valid
 if one of the specified <code>arg</code>’s value equals it’s corresponding <code>val</code>.</p>
@@ -978,11 +978,11 @@ anything other than <code>val</code>, this argument isn’t required.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;option&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">long</span>(<span class="string">&quot;option&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--option&quot;</span>, <span class="string">&quot;other&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use --option=spec, or --extra=val so &quot;cfg&quot; isn&#39;t required</span></pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use --option=spec, or --extra=val so &quot;cfg&quot; isn&#39;t required</span></pre></div>
 <p>Setting [<code>Arg::required_ifs(&amp;[(arg, val)])</code>] and having any of the <code>arg</code>s used with it’s
 value of <code>val</code> but <em>not</em> using this arg is an error.</p>
 
@@ -1001,12 +1001,12 @@ value of <code>val</code> but <em>not</em> using this arg is an error.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;option&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">long</span>(<span class="string">&quot;option&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--option&quot;</span>, <span class="string">&quot;spec&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 </div><h4 id="method.requires_all" class="method"><code>pub fn <a href="#method.requires_all" class="fnname">requires_all</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1779-1792" title="goto source code">[src]</a></h4><div class="docblock"><p>Sets multiple arguments by names that are required when this one is present I.e. when
 using this argument, the following arguments <em>must</em> be present.</p>
 <p><strong>NOTE:</strong> <a href="./struct.Arg.html#method.conflicts_with">Conflicting</a> rules and <a href="./struct.Arg.html#method.overrides_with">override</a> rules take precedence over being required
@@ -1029,11 +1029,11 @@ argument isn’t required</p>
         .<span class="ident">index</span>(<span class="number">1</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;output&quot;</span>)
         .<span class="ident">index</span>(<span class="number">2</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use cfg, so input and output weren&#39;t required</span></pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>()); <span class="comment">// We didn&#39;t use cfg, so input and output weren&#39;t required</span></pre></div>
 <p>Setting [<code>Arg::requires_all(&amp;[arg, arg2])</code>] and <em>not</em> supplying all the arguments is an
 error.</p>
 
@@ -1047,13 +1047,13 @@ error.</p>
         .<span class="ident">index</span>(<span class="number">1</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;output&quot;</span>)
         .<span class="ident">index</span>(<span class="number">2</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config&quot;</span>, <span class="string">&quot;file.conf&quot;</span>, <span class="string">&quot;in.txt&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
 <span class="comment">// We didn&#39;t use output</span>
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">MissingRequiredArgument</span>);</pre></div>
 <p>[<code>Arg::requires_all(&amp;[arg, arg2])</code>]: ./struct.Arg.html#method.requires_all</p>
 </div><h4 id="method.takes_value" class="method"><code>pub fn <a href="#method.takes_value" class="fnname">takes_value</a>(self, tv: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1832-1838" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies that the argument takes a value at run time.</p>
 <p><strong>NOTE:</strong> values for arguments may be specified in any of the following methods</p>
@@ -1076,12 +1076,12 @@ alternatively you can turn delimiting values <strong>OFF</strong> by using <a hr
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;mode&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;mode&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--mode&quot;</span>, <span class="string">&quot;fast&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;mode&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;fast&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;mode&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;fast&quot;</span>));</pre></div>
 </div><h4 id="method.hide_possible_values" class="method"><code>pub fn <a href="#method.hide_possible_values" class="fnname">hide_possible_values</a>(self, hide: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#1868-1874" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies if the possible values of an argument should be displayed in the help text or
 not. Defaults to <code>false</code> (i.e. show possible values)</p>
 <p>This is useful for args with many values, or ones which are explained elsewhere in the
@@ -1141,12 +1141,12 @@ defined as multiple and is not the highest index</p>
         .<span class="ident">index</span>(<span class="number">1</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;debug&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;debug&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--debug&quot;</span>, <span class="string">&quot;fast&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;mode&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;fast&quot;</span>)); <span class="comment">// notice index(1) means &quot;first positional&quot;</span>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;mode&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;fast&quot;</span>)); <span class="comment">// notice index(1) means &quot;first positional&quot;</span>
                                               <span class="comment">// *not* first argument</span></pre></div>
 </div><h4 id="method.multiple" class="method"><code>pub fn <a href="#method.multiple" class="fnname">multiple</a>(self, multi: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2153-2159" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies that the argument may appear more than once. For flags, this results
 in the number of occurrences of the flag being recorded. For example <code>-ddd</code> or <code>-d -d -d</code>
@@ -1197,12 +1197,12 @@ $ program --ui-paths path1 --ui-paths signer signer
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;verbose&quot;</span>)
         .<span class="ident">multiple</span>(<span class="bool-val">true</span>)
         .<span class="ident">short</span>(<span class="string">&quot;v&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-v&quot;</span>, <span class="string">&quot;-v&quot;</span>, <span class="string">&quot;-v&quot;</span>    <span class="comment">// note, -vvv would have same result</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;verbose&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;verbose&quot;</span>), <span class="number">3</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;verbose&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;verbose&quot;</span>), <span class="number">3</span>);</pre></div>
 <p>An example with options</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1211,14 +1211,14 @@ $ program --ui-paths path1 --ui-paths signer signer
         .<span class="ident">multiple</span>(<span class="bool-val">true</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;file&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;file&quot;</span>), <span class="number">1</span>); <span class="comment">// notice only one occurrence</span>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;file&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;file&quot;</span>), <span class="number">1</span>); <span class="comment">// notice only one occurrence</span>
 <span class="kw">let</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;file&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);</pre></div>
 <p>This is functionally equivalent to the example above</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1227,16 +1227,16 @@ $ program --ui-paths path1 --ui-paths signer signer
         .<span class="ident">multiple</span>(<span class="bool-val">true</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file3&quot;</span>
     ]);
 <span class="kw">let</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;file&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);
+<span class="macro">assert_eq!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;file&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;file&quot;</span>), <span class="number">3</span>); <span class="comment">// Notice 3 occurrences</span>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;file&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;file&quot;</span>), <span class="number">3</span>); <span class="comment">// Notice 3 occurrences</span>
 <span class="kw">let</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;file&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);</pre></div>
 <p>A common mistake is to define an option which allows multiples, and a positional argument</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1247,14 +1247,14 @@ $ program --ui-paths path1 --ui-paths signer signer
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;word&quot;</span>)
         .<span class="ident">index</span>(<span class="number">1</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>, <span class="string">&quot;word&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;file&quot;</span>));
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;file&quot;</span>));
 <span class="kw">let</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;file&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>, <span class="string">&quot;word&quot;</span>]); <span class="comment">// wait...what?!</span>
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;word&quot;</span>)); <span class="comment">// but we clearly used word!</span></pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>, <span class="string">&quot;word&quot;</span>]); <span class="comment">// wait...what?!</span>
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;word&quot;</span>)); <span class="comment">// but we clearly used word!</span></pre></div>
 <p>The problem is clap doesn’t know when to stop parsing values for “files”. This is further
 compounded by if we’d said <code>word -F file1 file2</code> it would have worked fine, so it would
 appear to only fail sometimes…not good!</p>
@@ -1270,15 +1270,15 @@ allowed to appear multiple times</p>
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;word&quot;</span>)
         .<span class="ident">index</span>(<span class="number">1</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file3&quot;</span>, <span class="string">&quot;word&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;file&quot;</span>));
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;file&quot;</span>));
 <span class="kw">let</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;file&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;word&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;word&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;word&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;word&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;word&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;word&quot;</span>));</pre></div>
 <p>As a final example, notice if we define <a href="./struct.Arg.html#method.number_of_values"><code>Arg::number_of_values(1)</code></a> and try to run the
 problem example above, it would have been a runtime error with a pretty message to the
 user :)</p>
@@ -1292,12 +1292,12 @@ user :)</p>
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;word&quot;</span>)
         .<span class="ident">index</span>(<span class="number">1</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>, <span class="string">&quot;word&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">UnknownArgument</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">UnknownArgument</span>);</pre></div>
 </div><h4 id="method.value_terminator" class="method"><code>pub fn <a href="#method.value_terminator" class="fnname">value_terminator</a>(self, term: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2206-2210" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies a value that <em>stops</em> parsing multiple values of a give argument. By default when
 one sets <a href="./struct.Arg.html#method.multiple"><code>multiple(true)</code></a> on an argument, clap will continue parsing values for that
 argument until it reaches another valid argument, or one of the other more specific settings
@@ -1322,12 +1322,12 @@ to perform them</p>
         .<span class="ident">allow_hyphen_values</span>(<span class="bool-val">true</span>)
         .<span class="ident">value_terminator</span>(<span class="string">&quot;;&quot;</span>))
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;location&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;find&quot;</span>, <span class="string">&quot;-type&quot;</span>, <span class="string">&quot;f&quot;</span>, <span class="string">&quot;-name&quot;</span>, <span class="string">&quot;special&quot;</span>, <span class="string">&quot;;&quot;</span>, <span class="string">&quot;/home/clap&quot;</span>
     ]);
 <span class="kw">let</span> <span class="ident">cmds</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;cmds&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="ident">cmds</span>, <span class="kw-2">&amp;</span>[<span class="string">&quot;find&quot;</span>, <span class="string">&quot;-type&quot;</span>, <span class="string">&quot;f&quot;</span>, <span class="string">&quot;-name&quot;</span>, <span class="string">&quot;special&quot;</span>]);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;location&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;/home/clap&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="ident">cmds</span>, <span class="kw-2">&amp;</span>[<span class="string">&quot;find&quot;</span>, <span class="string">&quot;-type&quot;</span>, <span class="string">&quot;f&quot;</span>, <span class="string">&quot;-name&quot;</span>, <span class="string">&quot;special&quot;</span>]);
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;location&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;/home/clap&quot;</span>));</pre></div>
 </div><h4 id="method.global" class="method"><code>pub fn <a href="#method.global" class="fnname">global</a>(self, g: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2255-2261" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies that an argument can be matched to all child <a href="./struct.SubCommand.html"><code>SubCommand</code></a>s.</p>
 <p><strong>NOTE:</strong> Global arguments <em>only</em> propagate down, <strong>not</strong> up (to parent commands), however
 their values once a user uses them will be propagated back up to parents. In effect, this
@@ -1350,13 +1350,13 @@ want to clutter the source with three duplicate <a href="./struct.Arg.html"><cod
         .<span class="ident">global</span>(<span class="bool-val">true</span>))
     .<span class="ident">subcommand</span>(<span class="ident">SubCommand</span>::<span class="ident">with_name</span>(<span class="string">&quot;test&quot;</span>))
     .<span class="ident">subcommand</span>(<span class="ident">SubCommand</span>::<span class="ident">with_name</span>(<span class="string">&quot;do-stuff&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;do-stuff&quot;</span>, <span class="string">&quot;--verbose&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">subcommand_name</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;do-stuff&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">subcommand_name</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;do-stuff&quot;</span>));
 <span class="kw">let</span> <span class="ident">sub_m</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">subcommand_matches</span>(<span class="string">&quot;do-stuff&quot;</span>).<span class="ident">unwrap</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">sub_m</span>.<span class="ident">is_present</span>(<span class="string">&quot;verb&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">sub_m</span>.<span class="ident">is_present</span>(<span class="string">&quot;verb&quot;</span>));</pre></div>
 </div><h4 id="method.empty_values" class="method"><code>pub fn <a href="#method.empty_values" class="fnname">empty_values</a>(self, ev: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2297-2304" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows an argument to accept explicitly empty values. An empty value must be specified at
 the command line with an explicit <code>&quot;&quot;</code>, or <code>''</code></p>
 <p><strong>NOTE:</strong> Defaults to <code>true</code> (Explicitly empty values are allowed)</p>
@@ -1375,12 +1375,12 @@ we can change to make empty values become an error.</p>
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">short</span>(<span class="string">&quot;v&quot;</span>)
         .<span class="ident">empty_values</span>(<span class="bool-val">false</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config=&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">EmptyValue</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">EmptyValue</span>);</pre></div>
 </div><h4 id="method.hidden" class="method"><code>pub fn <a href="#method.hidden" class="fnname">hidden</a>(self, h: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2349-2355" title="goto source code">[src]</a></h4><div class="docblock"><p>Hides an argument from help message output.</p>
 <p><strong>NOTE:</strong> Implicitly sets <a href="./struct.Arg.html#method.hidden_short_help"><code>Arg::hidden_short_help(true)</code></a> and <a href="./struct.Arg.html#method.hidden_long_help"><code>Arg::hidden_long_help(true)</code></a>
 when set to true</p>
@@ -1397,7 +1397,7 @@ when set to true</p>
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">hidden</span>(<span class="bool-val">true</span>)
         .<span class="ident">help</span>(<span class="string">&quot;Some help text describing the --config arg&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
@@ -1425,11 +1425,11 @@ only one of the specified values was used, or fails with an error message.</p>
         .<span class="ident">long</span>(<span class="string">&quot;mode&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">possible_values</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;fast&quot;</span>, <span class="string">&quot;slow&quot;</span>, <span class="string">&quot;medium&quot;</span>]))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--mode&quot;</span>, <span class="string">&quot;fast&quot;</span>
     ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;mode&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;fast&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;mode&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;fast&quot;</span>));</pre></div>
 <p>The next example shows a failed parse from using a value which wasn’t defined as one of the
 possible values.</p>
 
@@ -1439,11 +1439,11 @@ possible values.</p>
         .<span class="ident">long</span>(<span class="string">&quot;mode&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">possible_values</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;fast&quot;</span>, <span class="string">&quot;slow&quot;</span>, <span class="string">&quot;medium&quot;</span>]))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--mode&quot;</span>, <span class="string">&quot;wrong&quot;</span>
     ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">InvalidValue</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">InvalidValue</span>);</pre></div>
 </div><h4 id="method.possible_value" class="method"><code>pub fn <a href="#method.possible_value" class="fnname">possible_value</a>(self, name: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2468-2475" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies a possible value for this argument, one at a time. At runtime, <code>clap</code> verifies
 that only one of the specified values was used, or fails with error message.</p>
 <p><strong>NOTE:</strong> This setting only applies to <a href="./struct.Arg.html#method.takes_value">options</a> and <a href="./struct.Arg.html#method.index">positional arguments</a></p>
@@ -1463,11 +1463,11 @@ that only one of the specified values was used, or fails with error message.</p>
         .<span class="ident">possible_value</span>(<span class="string">&quot;fast&quot;</span>)
         .<span class="ident">possible_value</span>(<span class="string">&quot;slow&quot;</span>)
         .<span class="ident">possible_value</span>(<span class="string">&quot;medium&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--mode&quot;</span>, <span class="string">&quot;fast&quot;</span>
     ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;mode&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;fast&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;mode&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;fast&quot;</span>));</pre></div>
 <p>The next example shows a failed parse from using a value which wasn’t defined as one of the
 possible values.</p>
 
@@ -1479,11 +1479,11 @@ possible values.</p>
         .<span class="ident">possible_value</span>(<span class="string">&quot;fast&quot;</span>)
         .<span class="ident">possible_value</span>(<span class="string">&quot;slow&quot;</span>)
         .<span class="ident">possible_value</span>(<span class="string">&quot;medium&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--mode&quot;</span>, <span class="string">&quot;wrong&quot;</span>
     ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">InvalidValue</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">InvalidValue</span>);</pre></div>
 </div><h4 id="method.case_insensitive" class="method"><code>pub fn <a href="#method.case_insensitive" class="fnname">case_insensitive</a>(self, ci: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2522-2528" title="goto source code">[src]</a></h4><div class="docblock"><p>When used with <a href="../clap/struct.Arg.html#method.possible_values" title="Arg::possible_values"><code>Arg::possible_values</code></a> it allows the argument value to pass validation even if
 the case differs from that of the specified <code>possible_value</code>.</p>
 <p><strong>Pro Tip:</strong> Use this setting with <a href="./macro.arg_enum.html"><code>arg_enum!</code></a></p>
@@ -1495,11 +1495,11 @@ the case differs from that of the specified <code>possible_value</code>.</p>
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">possible_value</span>(<span class="string">&quot;test123&quot;</span>)
         .<span class="ident">case_insensitive</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;pv&quot;</span>, <span class="string">&quot;--option&quot;</span>, <span class="string">&quot;TeSt123&quot;</span>,
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;option&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">eq_ignore_ascii_case</span>(<span class="string">&quot;test123&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;option&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">eq_ignore_ascii_case</span>(<span class="string">&quot;test123&quot;</span>));</pre></div>
 <p>This setting also works when multiple values can be defined:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1512,12 +1512,12 @@ the case differs from that of the specified <code>possible_value</code>.</p>
         .<span class="ident">possible_value</span>(<span class="string">&quot;test321&quot;</span>)
         .<span class="ident">multiple</span>(<span class="bool-val">true</span>)
         .<span class="ident">case_insensitive</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;pv&quot;</span>, <span class="string">&quot;--option&quot;</span>, <span class="string">&quot;TeSt123&quot;</span>, <span class="string">&quot;teST123&quot;</span>, <span class="string">&quot;tESt321&quot;</span>
     ]);
 
 <span class="kw">let</span> <span class="ident">matched_vals</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;option&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">matched_vals</span>, <span class="kw-2">&amp;</span>[<span class="string">&quot;TeSt123&quot;</span>, <span class="string">&quot;teST123&quot;</span>, <span class="string">&quot;tESt321&quot;</span>]);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">matched_vals</span>, <span class="kw-2">&amp;</span>[<span class="string">&quot;TeSt123&quot;</span>, <span class="string">&quot;teST123&quot;</span>, <span class="string">&quot;tESt321&quot;</span>]);</pre></div>
 </div><h4 id="method.group" class="method"><code>pub fn <a href="#method.group" class="fnname">group</a>(self, name: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2560-2567" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies the name of the <a href="./struct.ArgGroup.html"><code>ArgGroup</code></a> the argument belongs to.</p>
 <h1 id="examples-40" class="section-header"><a href="#examples-40">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1535,10 +1535,10 @@ was one of said arguments.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;verbose&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;verbose&quot;</span>)
         .<span class="ident">group</span>(<span class="string">&quot;mode&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--debug&quot;</span>
     ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));</pre></div>
 </div><h4 id="method.groups" class="method"><code>pub fn <a href="#method.groups" class="fnname">groups</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2600-2609" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies the names of multiple <a href="./struct.ArgGroup.html"><code>ArgGroup</code></a>’s the argument belongs to.</p>
 <h1 id="examples-41" class="section-header"><a href="#examples-41">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1556,11 +1556,11 @@ was one of said arguments.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;verbose&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;verbose&quot;</span>)
         .<span class="ident">groups</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;mode&quot;</span>, <span class="string">&quot;verbosity&quot;</span>]))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--debug&quot;</span>
     ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;verbosity&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;mode&quot;</span>));
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;verbosity&quot;</span>));</pre></div>
 </div><h4 id="method.number_of_values" class="method"><code>pub fn <a href="#method.number_of_values" class="fnname">number_of_values</a>(self, qty: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2647-2651" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies how many values are required to satisfy this argument. For example, if you had a
 <code>-f &lt;file&gt;</code> argument where you wanted exactly 3 ‘files’ you would set
 <code>.number_of_values(3)</code>, and this argument wouldn’t be satisfied unless the user provided
@@ -1581,12 +1581,12 @@ as <em>not</em> setting <a href="./struct.Arg.html#method.multiple"><code>Arg::m
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">number_of_values</span>(<span class="number">2</span>)
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">WrongNumberOfValues</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">WrongNumberOfValues</span>);</pre></div>
 </div><h4 id="method.validator" class="method"><code>pub fn <a href="#method.validator" class="fnname">validator</a>&lt;F&gt;(self, f: F) -&gt; Self <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt; + 'static,&nbsp;</span></code><a class="srclink" href="../src/clap/args/arg.rs.html#2689-2695" title="goto source code">[src]</a></h4><div class="docblock"><p>Allows one to perform a custom validation on the argument value. You provide a closure
 which accepts a <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a> value, and return a <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a> where the <a href="https://doc.rust-lang.org/std/result/enum.Result.html#variant.Err"><code>Err(String)</code></a> is a
 message displayed to the user.</p>
@@ -1608,11 +1608,11 @@ scheme of things.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;file&quot;</span>)
         .<span class="ident">index</span>(<span class="number">1</span>)
         .<span class="ident">validator</span>(<span class="ident">has_at</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;some@file&quot;</span>
     ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap</span>().<span class="ident">value_of</span>(<span class="string">&quot;file&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;some@file&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap</span>().<span class="ident">value_of</span>(<span class="string">&quot;file&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;some@file&quot;</span>));</pre></div>
 </div><h4 id="method.validator_os" class="method"><code>pub fn <a href="#method.validator_os" class="fnname">validator_os</a>&lt;F&gt;(self, f: F) -&gt; Self <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(&amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsString.html" title="struct std::ffi::os_str::OsString">OsString</a>&gt; + 'static,&nbsp;</span></code><a class="srclink" href="../src/clap/args/arg.rs.html#2727-2733" title="goto source code">[src]</a></h4><div class="docblock"><p>Works identically to Validator but is intended to be used with values that could
 contain non UTF-8 formatted strings.</p>
 <h1 id="examples-44" class="section-header"><a href="#examples-44">Examples</a></h1>
@@ -1625,11 +1625,11 @@ contain non UTF-8 formatted strings.</p>
    .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;file&quot;</span>)
        .<span class="ident">index</span>(<span class="number">1</span>)
        .<span class="ident">validator_os</span>(<span class="ident">has_ampersand</span>))
-   .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+   .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
        <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;Fish &amp; chips&quot;</span>
    ]);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap</span>().<span class="ident">value_of</span>(<span class="string">&quot;file&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;Fish &amp; chips&quot;</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap</span>().<span class="ident">value_of</span>(<span class="string">&quot;file&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;Fish &amp; chips&quot;</span>));</pre></div>
 </div><h4 id="method.max_values" class="method"><code>pub fn <a href="#method.max_values" class="fnname">max_values</a>(self, qty: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2791-2795" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies the <em>maximum</em> number of values are for this argument. For example, if you had a
 <code>-f &lt;file&gt;</code> argument where you wanted up to 3 ‘files’ you would set <code>.max_values(3)</code>, and
 this argument would be satisfied if the user provided, 1, 2, or 3 values.</p>
@@ -1651,14 +1651,14 @@ occurrences and multiple values.</p>
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">max_values</span>(<span class="number">3</span>)
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">res</span>.<span class="ident">unwrap</span>();
 <span class="kw">let</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;file&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>]);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>]);</pre></div>
 <p>Supplying more than the maximum number of values is an error</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1667,12 +1667,12 @@ occurrences and multiple values.</p>
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">max_values</span>(<span class="number">2</span>)
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">TooManyValues</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">TooManyValues</span>);</pre></div>
 </div><h4 id="method.min_values" class="method"><code>pub fn <a href="#method.min_values" class="fnname">min_values</a>(self, qty: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2854-2857" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies the <em>minimum</em> number of values for this argument. For example, if you had a
 <code>-f &lt;file&gt;</code> argument where you wanted at least 2 ‘files’ you would set
 <code>.min_values(2)</code>, and this argument would be satisfied if the user provided, 2 or more
@@ -1695,14 +1695,14 @@ occurrences and multiple values.</p>
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">min_values</span>(<span class="number">2</span>)
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_ok</span>());
 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">res</span>.<span class="ident">unwrap</span>();
 <span class="kw">let</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;file&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">files</span>, [<span class="string">&quot;file1&quot;</span>, <span class="string">&quot;file2&quot;</span>, <span class="string">&quot;file3&quot;</span>]);</pre></div>
 <p>Supplying less than the minimum number of values is an error</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1711,12 +1711,12 @@ occurrences and multiple values.</p>
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">min_values</span>(<span class="number">2</span>)
         .<span class="ident">short</span>(<span class="string">&quot;F&quot;</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-F&quot;</span>, <span class="string">&quot;file1&quot;</span>
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">TooFewValues</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">res</span>.<span class="ident">unwrap_err</span>().<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">TooFewValues</span>);</pre></div>
 </div><h4 id="method.use_delimiter" class="method"><code>pub fn <a href="#method.use_delimiter" class="fnname">use_delimiter</a>(self, d: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2905-2918" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies whether or not an argument should allow grouping of multiple values via a
 delimiter. I.e. should <code>--option=val1,val2,val3</code> be parsed as three values (<code>val1</code>, <code>val2</code>,
 and <code>val3</code>) or as a single value (<code>val1,val2,val3</code>). Defaults to using <code>,</code> (comma) as the
@@ -1732,13 +1732,13 @@ is the comma <code>,</code>.</p>
         .<span class="ident">long</span>(<span class="string">&quot;option&quot;</span>)
         .<span class="ident">use_delimiter</span>(<span class="bool-val">true</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--option=val1,val2,val3&quot;</span>,
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">delims</span>.<span class="ident">is_present</span>(<span class="string">&quot;option&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">delims</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;option&quot;</span>), <span class="number">1</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">delims</span>.<span class="ident">values_of</span>(<span class="string">&quot;option&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), [<span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>]);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">delims</span>.<span class="ident">is_present</span>(<span class="string">&quot;option&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">delims</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;option&quot;</span>), <span class="number">1</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">delims</span>.<span class="ident">values_of</span>(<span class="string">&quot;option&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), [<span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>]);</pre></div>
 <p>The next example shows the difference when turning delimiters off. This is the default
 behavior</p>
 
@@ -1748,13 +1748,13 @@ behavior</p>
         .<span class="ident">long</span>(<span class="string">&quot;option&quot;</span>)
         .<span class="ident">use_delimiter</span>(<span class="bool-val">false</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--option=val1,val2,val3&quot;</span>,
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">nodelims</span>.<span class="ident">is_present</span>(<span class="string">&quot;option&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">nodelims</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;option&quot;</span>), <span class="number">1</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">nodelims</span>.<span class="ident">value_of</span>(<span class="string">&quot;option&quot;</span>).<span class="ident">unwrap</span>(), <span class="string">&quot;val1,val2,val3&quot;</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">nodelims</span>.<span class="ident">is_present</span>(<span class="string">&quot;option&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">nodelims</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;option&quot;</span>), <span class="number">1</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">nodelims</span>.<span class="ident">value_of</span>(<span class="string">&quot;option&quot;</span>).<span class="ident">unwrap</span>(), <span class="string">&quot;val1,val2,val3&quot;</span>);</pre></div>
 </div><h4 id="method.require_delimiter" class="method"><code>pub fn <a href="#method.require_delimiter" class="fnname">require_delimiter</a>(self, d: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#2992-3003" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies that <em>multiple values</em> may only be set using the delimiter. This means if an
 if an option is encountered, and no delimiter is found, it automatically assumed that no
 additional values for that option follow. This is unlike the default, where it is generally
@@ -1774,12 +1774,12 @@ everything works in this first example, as we use a delimiter, as expected.</p>
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">multiple</span>(<span class="bool-val">true</span>)
         .<span class="ident">require_delimiter</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-o&quot;</span>, <span class="string">&quot;val1,val2,val3&quot;</span>,
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">delims</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">delims</span>.<span class="ident">values_of</span>(<span class="string">&quot;opt&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), [<span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>]);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">delims</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">delims</span>.<span class="ident">values_of</span>(<span class="string">&quot;opt&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), [<span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>]);</pre></div>
 <p>In this next example, we will <em>not</em> use a delimiter. Notice it’s now an error.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1789,13 +1789,13 @@ everything works in this first example, as we use a delimiter, as expected.</p>
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">multiple</span>(<span class="bool-val">true</span>)
         .<span class="ident">require_delimiter</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from_safe</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-o&quot;</span>, <span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>,
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
+<span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_err</span>());
 <span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">res</span>.<span class="ident">unwrap_err</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">err</span>.<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">UnknownArgument</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>, <span class="ident">ErrorKind</span>::<span class="ident">UnknownArgument</span>);</pre></div>
 <p>What’s happening is <code>-o</code> is getting <code>val1</code>, and because delimiters are required yet none
 were present, it stops parsing <code>-o</code>. At this point it reaches <code>val2</code> and because no
 positional arguments have been defined, it’s an error of an unexpected argument.</p>
@@ -1808,12 +1808,12 @@ is <em>not</em> an error.</p>
         .<span class="ident">short</span>(<span class="string">&quot;o&quot;</span>)
         .<span class="ident">takes_value</span>(<span class="bool-val">true</span>)
         .<span class="ident">multiple</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-o&quot;</span>, <span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>,
     ]);
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">delims</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">delims</span>.<span class="ident">values_of</span>(<span class="string">&quot;opt&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), [<span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>]);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">delims</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">delims</span>.<span class="ident">values_of</span>(<span class="string">&quot;opt&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), [<span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>]);</pre></div>
 </div><h4 id="method.value_delimiter" class="method"><code>pub fn <a href="#method.value_delimiter" class="fnname">value_delimiter</a>(self, d: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#3028-3038" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies the separator to use when values are clumped together, defaults to <code>,</code> (comma).</p>
 <p><strong>NOTE:</strong> implicitly sets <a href="./struct.Arg.html#method.use_delimiter"><code>Arg::use_delimiter(true)</code></a></p>
 <p><strong>NOTE:</strong> implicitly sets <a href="./struct.Arg.html#method.takes_value"><code>Arg::takes_value(true)</code></a></p>
@@ -1824,11 +1824,11 @@ is <em>not</em> an error.</p>
         .<span class="ident">short</span>(<span class="string">&quot;c&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">value_delimiter</span>(<span class="string">&quot;;&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--config=val1;val2;val3&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;config&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), [<span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>])</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;config&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), [<span class="string">&quot;val1&quot;</span>, <span class="string">&quot;val2&quot;</span>, <span class="string">&quot;val3&quot;</span>])</pre></div>
 </div><h4 id="method.value_names" class="method"><code>pub fn <a href="#method.value_names" class="fnname">value_names</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#3099-3119" title="goto source code">[src]</a></h4><div class="docblock"><p>Specify multiple names for values of option arguments. These names are cosmetic only, used
 for help and usage strings only. The names are <strong>not</strong> used to access arguments. The values
 of the arguments are accessed in numeric order (i.e. if you specify two names <code>one</code> and
@@ -1854,7 +1854,7 @@ the <em>exact</em> number of values required to satisfy this argument</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;io&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;io-files&quot;</span>)
         .<span class="ident">value_names</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;INFILE&quot;</span>, <span class="string">&quot;OUTFILE&quot;</span>]))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>Running the above program produces the following output</p>
@@ -1887,7 +1887,7 @@ use all capital letters for the value name.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">value_name</span>(<span class="string">&quot;FILE&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>Running the above program produces the following output</p>
@@ -1928,13 +1928,13 @@ conjunction as it ensures that some argument will always be present.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;opt&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;myopt&quot;</span>)
         .<span class="ident">default_value</span>(<span class="string">&quot;myval&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;myval&quot;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">0</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;myval&quot;</span>));
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">0</span>);</pre></div>
 <p>Next we provide a value at runtime to override the default.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1942,13 +1942,13 @@ conjunction as it ensures that some argument will always be present.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;opt&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;myopt&quot;</span>)
         .<span class="ident">default_value</span>(<span class="string">&quot;myval&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--myopt=non_default&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;non_default&quot;</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">1</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;non_default&quot;</span>));
+<span class="macro">assert!</span>(<span class="ident">m</span>.<span class="ident">is_present</span>(<span class="string">&quot;opt&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;opt&quot;</span>), <span class="number">1</span>);</pre></div>
 </div><h4 id="method.default_value_os" class="method"><code>pub fn <a href="#method.default_value_os" class="fnname">default_value_os</a>(self, val: &amp;'a <a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#3251-3255" title="goto source code">[src]</a></h4><div class="docblock"><p>Provides a default value in the exact same manner as <a href="../clap/struct.Arg.html#method.default_value" title="Arg::default_value"><code>Arg::default_value</code></a>
 only using <a href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="OsStr"><code>OsStr</code></a>s instead.
 <a href="../clap/struct.Arg.html#method.default_value" title="Arg::default_value"><code>Arg::default_value</code></a>: ./struct.Arg.html#method.default_value
@@ -1979,11 +1979,11 @@ as <code>null</code> in YAML)</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">default_value_if</span>(<span class="string">&quot;flag&quot;</span>, <span class="prelude-val">None</span>, <span class="string">&quot;default&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--flag&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;default&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;default&quot;</span>));</pre></div>
 <p>Next we run the same test, but without providing <code>--flag</code>.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -1993,11 +1993,11 @@ as <code>null</code> in YAML)</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">default_value_if</span>(<span class="string">&quot;flag&quot;</span>, <span class="prelude-val">None</span>, <span class="string">&quot;default&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">None</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">None</span>);</pre></div>
 <p>Now lets only use the default value if <code>--opt</code> contains the value <code>special</code>.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -2008,11 +2008,11 @@ as <code>null</code> in YAML)</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">default_value_if</span>(<span class="string">&quot;opt&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;special&quot;</span>), <span class="string">&quot;default&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--opt&quot;</span>, <span class="string">&quot;special&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;default&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;default&quot;</span>));</pre></div>
 <p>We can run the same test and provide any value <em>other than</em> <code>special</code> and we won’t get a
 default value.</p>
 
@@ -2024,11 +2024,11 @@ default value.</p>
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;other&quot;</span>)
         .<span class="ident">default_value_if</span>(<span class="string">&quot;opt&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;special&quot;</span>), <span class="string">&quot;default&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--opt&quot;</span>, <span class="string">&quot;hahaha&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">None</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">None</span>);</pre></div>
 </div><h4 id="method.default_value_if_os" class="method"><code>pub fn <a href="#method.default_value_if_os" class="fnname">default_value_if_os</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;arg: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;val: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;'b <a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>&gt;, <br>&nbsp;&nbsp;&nbsp;&nbsp;default: &amp;'b <a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a><br>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#3365-3381" title="goto source code">[src]</a></h4><div class="docblock"><p>Provides a conditional default value in the exact same manner as <a href="../clap/struct.Arg.html#method.default_value_if" title="Arg::default_value_if"><code>Arg::default_value_if</code></a>
 only using <a href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="OsStr"><code>OsStr</code></a>s instead.
 <a href="../clap/struct.Arg.html#method.default_value_if" title="Arg::default_value_if"><code>Arg::default_value_if</code></a>: ./struct.Arg.html#method.default_value_if
@@ -2058,11 +2058,11 @@ if multiple conditions are true, the first one found will be applied and the ult
             (<span class="string">&quot;flag&quot;</span>, <span class="prelude-val">None</span>, <span class="string">&quot;default&quot;</span>),
             (<span class="string">&quot;opt&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;channal&quot;</span>), <span class="string">&quot;chan&quot;</span>),
         ]))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--opt&quot;</span>, <span class="string">&quot;channal&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;chan&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;chan&quot;</span>));</pre></div>
 <p>Next we run the same test, but without providing <code>--flag</code>.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -2075,11 +2075,11 @@ if multiple conditions are true, the first one found will be applied and the ult
             (<span class="string">&quot;flag&quot;</span>, <span class="prelude-val">None</span>, <span class="string">&quot;default&quot;</span>),
             (<span class="string">&quot;opt&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;channal&quot;</span>), <span class="string">&quot;chan&quot;</span>),
         ]))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">None</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">None</span>);</pre></div>
 <p>We can also see that these values are applied in order, and if more than one condition is
 true, only the first evaluated “wins”</p>
 
@@ -2096,11 +2096,11 @@ true, only the first evaluated “wins”</p>
             (<span class="string">&quot;flag&quot;</span>, <span class="prelude-val">None</span>, <span class="string">&quot;default&quot;</span>),
             (<span class="string">&quot;opt&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;channal&quot;</span>), <span class="string">&quot;chan&quot;</span>),
         ]))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--opt&quot;</span>, <span class="string">&quot;channal&quot;</span>, <span class="string">&quot;--flag&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;default&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;other&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;default&quot;</span>));</pre></div>
 </div><h4 id="method.default_value_ifs_os" class="method"><code>pub fn <a href="#method.default_value_ifs_os" class="fnname">default_value_ifs_os</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;ifs: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a>&amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;'b <a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>&gt;, &amp;'b <a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a><br>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#3483-3488" title="goto source code">[src]</a></h4><div class="docblock"><p>Provides multiple conditional default values in the exact same manner as
 <a href="../clap/struct.Arg.html#method.default_value_ifs" title="Arg::default_value_ifs"><code>Arg::default_value_ifs</code></a> only using <a href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="OsStr"><code>OsStr</code></a>s instead.
 <a href="../clap/struct.Arg.html#method.default_value_ifs" title="Arg::default_value_ifs"><code>Arg::default_value_ifs</code></a>: ./struct.Arg.html#method.default_value_ifs
@@ -2129,11 +2129,11 @@ default delimiter is <code>,</code> and follows all the other delimiter rules.</
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;flag&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;flag&quot;</span>)
         .<span class="ident">env</span>(<span class="string">&quot;MY_FLAG&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;env&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;env&quot;</span>));</pre></div>
 <p>In this example, we show the variable coming from an option on the CLI:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -2144,11 +2144,11 @@ default delimiter is <code>,</code> and follows all the other delimiter rules.</
     .<span class="ident">arg</span>(<span class="ident">Arg</span>::<span class="ident">with_name</span>(<span class="string">&quot;flag&quot;</span>)
         .<span class="ident">long</span>(<span class="string">&quot;flag&quot;</span>)
         .<span class="ident">env</span>(<span class="string">&quot;MY_FLAG&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--flag&quot;</span>, <span class="string">&quot;opt&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;opt&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;opt&quot;</span>));</pre></div>
 <p>In this example, we show the variable coming from the environment even with the
 presence of a default:</p>
 
@@ -2161,11 +2161,11 @@ presence of a default:</p>
         .<span class="ident">long</span>(<span class="string">&quot;flag&quot;</span>)
         .<span class="ident">env</span>(<span class="string">&quot;MY_FLAG&quot;</span>)
         .<span class="ident">default_value</span>(<span class="string">&quot;default&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;env&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">value_of</span>(<span class="string">&quot;flag&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">&quot;env&quot;</span>));</pre></div>
 <p>In this example, we show the use of multiple values in a single environment variable:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -2178,11 +2178,11 @@ presence of a default:</p>
         .<span class="ident">env</span>(<span class="string">&quot;MY_FLAG_MULTI&quot;</span>)
         .<span class="ident">multiple</span>(<span class="bool-val">true</span>)
         .<span class="ident">use_delimiter</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>
     ]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;flag&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;env1&quot;</span>, <span class="string">&quot;env2&quot;</span>]);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">m</span>.<span class="ident">values_of</span>(<span class="string">&quot;flag&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="macro">vec!</span>[<span class="string">&quot;env1&quot;</span>, <span class="string">&quot;env2&quot;</span>]);</pre></div>
 </div><h4 id="method.env_os" class="method"><code>pub fn <a href="#method.env_os" class="fnname">env_os</a>(self, name: &amp;'a <a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>) -&gt; Self</code><a class="srclink" href="../src/clap/args/arg.rs.html#3602-3607" title="goto source code">[src]</a></h4><div class="docblock"><p>Specifies that if the value is not passed in as an argument, that it should be retrieved
 from the environment if available in the exact same manner as <a href="../clap/struct.Arg.html#method.env" title="Arg::env"><code>Arg::env</code></a> only using
 <a href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="OsStr"><code>OsStr</code></a>s instead.</p>
@@ -2204,7 +2204,7 @@ This can also be helpful for arguments with very long flag names, or many/long v
                help that makes more sense to be\n\
                on a line after the option&quot;</span>)
         .<span class="ident">next_line_help</span>(<span class="bool-val">true</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays the following help message</p>
@@ -2250,7 +2250,7 @@ order.</p>
                             <span class="comment">// Any other args with a value of 1 will be displayed</span>
                             <span class="comment">// alphabetically with this one...then 2 values, then 3, etc.</span>
         .<span class="ident">help</span>(<span class="string">&quot;I should be first!&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays the following help message</p>
@@ -2294,7 +2294,7 @@ when long help (<code>--help</code>) is called.</p>
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">hidden_short_help</span>(<span class="bool-val">true</span>)
         .<span class="ident">help</span>(<span class="string">&quot;Some help text describing the --config arg&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-h&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
@@ -2315,7 +2315,7 @@ FLAGS:
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">hidden_short_help</span>(<span class="bool-val">true</span>)
         .<span class="ident">help</span>(<span class="string">&quot;Some help text describing the --config arg&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>Then the following would be displayed</p>
@@ -2345,7 +2345,7 @@ when long help (<code>--help</code>) is called.</p>
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">hidden_long_help</span>(<span class="bool-val">true</span>)
         .<span class="ident">help</span>(<span class="string">&quot;Some help text describing the --config arg&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
@@ -2366,7 +2366,7 @@ FLAGS:
         .<span class="ident">long</span>(<span class="string">&quot;config&quot;</span>)
         .<span class="ident">hidden_long_help</span>(<span class="bool-val">true</span>)
         .<span class="ident">help</span>(<span class="string">&quot;Some help text describing the --config arg&quot;</span>))
-    .<span class="ident">get_matches_from</span>(<span class="macro">vec</span><span class="macro">!</span>[
+    .<span class="ident">get_matches_from</span>(<span class="macro">vec!</span>[
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-h&quot;</span>
     ]);</pre></div>
 <p>Then the following would be displayed</p>

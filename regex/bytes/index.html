@@ -23,7 +23,7 @@ matching invalid UTF-8 bytes.</li>
     <span class="ident">re</span>.<span class="ident">captures_iter</span>(<span class="ident">text</span>)
       .<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">name</span>(<span class="string">&quot;cstr&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">as_bytes</span>())
       .<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="kw-2">&amp;</span><span class="string">b&quot;foo&quot;</span>[..], <span class="kw-2">&amp;</span><span class="string">b&quot;bar&quot;</span>[..], <span class="kw-2">&amp;</span><span class="string">b&quot;baz&quot;</span>[..]], <span class="ident">cstrs</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="kw-2">&amp;</span><span class="string">b&quot;foo&quot;</span>[..], <span class="kw-2">&amp;</span><span class="string">b&quot;bar&quot;</span>[..], <span class="kw-2">&amp;</span><span class="string">b&quot;baz&quot;</span>[..]], <span class="ident">cstrs</span>);</pre></div>
 <h1 id="example-selectively-enable-unicode-support" class="section-header"><a href="#example-selectively-enable-unicode-support">Example: selectively enable Unicode support</a></h1>
 <p>This shows how to match an arbitrary byte pattern followed by a UTF-8 encoded
 string (e.g., to extract a title from a Matroska file):</p>
@@ -39,11 +39,11 @@ string (e.g., to extract a title from a Matroska file):</p>
 <span class="comment">// because Unicode mode was enabled with the `u` flag. Without the `u` flag,</span>
 <span class="comment">// the `.*` would match the rest of the bytes.</span>
 <span class="kw">let</span> <span class="ident">mat</span> <span class="op">=</span> <span class="ident">caps</span>.<span class="ident">get</span>(<span class="number">1</span>).<span class="ident">unwrap</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>((<span class="number">7</span>, <span class="number">10</span>), (<span class="ident">mat</span>.<span class="ident">start</span>(), <span class="ident">mat</span>.<span class="ident">end</span>()));
+<span class="macro">assert_eq!</span>((<span class="number">7</span>, <span class="number">10</span>), (<span class="ident">mat</span>.<span class="ident">start</span>(), <span class="ident">mat</span>.<span class="ident">end</span>()));
 
 <span class="comment">// If there was a match, Unicode mode guarantees that `title` is valid UTF-8.</span>
 <span class="kw">let</span> <span class="ident">title</span> <span class="op">=</span> <span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="kw-2">&amp;</span><span class="ident">caps</span>[<span class="number">1</span>]).<span class="ident">unwrap</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&quot;☃&quot;</span>, <span class="ident">title</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="string">&quot;☃&quot;</span>, <span class="ident">title</span>);</pre></div>
 <p>In general, if the Unicode flag is enabled in a capture group and that capture
 is part of the overall match, then the capture is <em>guaranteed</em> to be valid
 UTF-8.</p>

@@ -116,7 +116,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">size</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SparseSet</span> {
         <span class="ident">SparseSet</span> {
             <span class="ident">dense</span>: <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">size</span>),
-            <span class="ident">sparse</span>: <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>; <span class="ident">size</span>].<span class="ident">into_boxed_slice</span>(),
+            <span class="ident">sparse</span>: <span class="macro">vec!</span>[<span class="number">0</span>; <span class="ident">size</span>].<span class="ident">into_boxed_slice</span>(),
         }
     }
 
@@ -134,7 +134,7 @@
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">usize</span>) {
         <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">capacity</span>());
+        <span class="macro">assert!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">capacity</span>());
         <span class="self">self</span>.<span class="ident">dense</span>.<span class="ident">push</span>(<span class="ident">value</span>);
         <span class="self">self</span>.<span class="ident">sparse</span>[<span class="ident">value</span>] <span class="op">=</span> <span class="ident">i</span>;
     }
@@ -151,7 +151,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">SparseSet</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;SparseSet({:?})&quot;</span>, <span class="self">self</span>.<span class="ident">dense</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;SparseSet({:?})&quot;</span>, <span class="self">self</span>.<span class="ident">dense</span>)
     }
 }
 

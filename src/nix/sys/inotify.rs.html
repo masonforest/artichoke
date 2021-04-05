@@ -274,7 +274,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">NixPath</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">errno</span>::<span class="ident">Errno</span>;
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Configuration options for [`inotify_add_watch`](fn.inotify_add_watch.html).</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AddWatchFlags</span>: <span class="ident">u32</span> {
         <span class="ident">IN_ACCESS</span>;
@@ -306,7 +306,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Configuration options for [`inotify_init1`](fn.inotify_init1.html).</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">InitFlags</span>: <span class="ident">c_int</span> {
         <span class="ident">IN_CLOEXEC</span>;

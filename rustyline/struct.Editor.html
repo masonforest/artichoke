@@ -35,10 +35,10 @@ or to show hints to the user at the right of the prompt.</p>
 <span class="kw">for</span> <span class="ident">readline</span> <span class="kw">in</span> <span class="ident">rl</span>.<span class="ident">iter</span>(<span class="string">&quot;&gt; &quot;</span>) {
     <span class="kw">match</span> <span class="ident">readline</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">line</span>) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Line: {}&quot;</span>, <span class="ident">line</span>);
+            <span class="macro">println!</span>(<span class="string">&quot;Line: {}&quot;</span>, <span class="ident">line</span>);
         }
         <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Error: {:?}&quot;</span>, <span class="ident">err</span>);
+            <span class="macro">println!</span>(<span class="string">&quot;Error: {:?}&quot;</span>, <span class="ident">err</span>);
             <span class="kw">break</span>;
         }
     }

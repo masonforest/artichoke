@@ -175,7 +175,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="prelude-ty">Result</span>, <span class="ident">NixPath</span>, <span class="ident">errno</span>::<span class="ident">Errno</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span>
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="doccomment">/// File system mount Flags</span>
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>

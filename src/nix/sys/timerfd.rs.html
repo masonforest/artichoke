@@ -343,7 +343,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span> {
+<span class="macro">libc_enum!</span> {
     <span class="doccomment">/// The type of the clock used to mark the progress of the timer. For more</span>
     <span class="doccomment">/// details on each kind of clock, please refer to [timerfd_create(2)](http://man7.org/linux/man-pages/man2/timerfd_create.2.html).</span>
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">i32</span>)]</span>
@@ -356,7 +356,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Additional flags to change the behaviour of the file descriptor at the</span>
     <span class="doccomment">/// time of creation.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TimerFlags</span>: <span class="ident">c_int</span> {
@@ -365,7 +365,7 @@
     }
 }
 
-<span class="macro">bitflags</span><span class="macro">!</span> {
+<span class="macro">bitflags!</span> {
     <span class="doccomment">/// Flags that are used for arming the timer.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TimerSetTimeFlags</span>: <span class="ident">libc</span>::<span class="ident">c_int</span> {
         <span class="kw">const</span> <span class="ident">TFD_TIMER_ABSTIME</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">TFD_TIMER_ABSTIME</span>;
@@ -567,7 +567,7 @@
                 <span class="ident">libc</span>::<span class="ident">close</span>(<span class="self">self</span>.<span class="ident">fd</span>)
             });
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">Errno</span>::<span class="ident">EBADF</span>)) <span class="op">=</span> <span class="ident">result</span> {
-                <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;close of TimerFd encountered EBADF&quot;</span>);
+                <span class="macro">panic!</span>(<span class="string">&quot;close of TimerFd encountered EBADF&quot;</span>);
             }
         }
     }

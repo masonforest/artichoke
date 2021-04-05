@@ -448,7 +448,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sys</span>::<span class="ident">stat</span>::<span class="ident">Mode</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>;
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>{
+<span class="macro">libc_bitflags!</span>{
     <span class="doccomment">/// Desired memory protection of a memory mapping.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ProtFlags</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// Pages cannot be accessed.</span>
@@ -468,7 +468,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>{
+<span class="macro">libc_bitflags!</span>{
     <span class="doccomment">/// Additional parameters for `mmap()`.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MapFlags</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// Compatibility flag. Ignored.</span>
@@ -579,7 +579,7 @@
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-<span class="macro">libc_bitflags</span><span class="macro">!</span>{
+<span class="macro">libc_bitflags!</span>{
     <span class="doccomment">/// Options for `mremap()`.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MRemapFlags</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// Permit the kernel to relocate the mapping to a new virtual address, if necessary.</span>
@@ -589,7 +589,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span>{
+<span class="macro">libc_enum!</span>{
     <span class="doccomment">/// Usage information for a range of memory to allow for performance optimizations by the kernel.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Used by [`madvise`](./fn.madvise.html).</span>
@@ -682,7 +682,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>{
+<span class="macro">libc_bitflags!</span>{
     <span class="doccomment">/// Configuration flags for `msync`.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MsFlags</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// Schedule an update but return immediately.</span>
@@ -700,7 +700,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>{
+<span class="macro">libc_bitflags!</span>{
     <span class="doccomment">/// Flags for `mlockall`.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MlockAllFlags</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// Lock pages that are currently mapped into the address space of the process.</span>

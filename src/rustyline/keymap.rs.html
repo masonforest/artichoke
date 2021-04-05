@@ -1254,7 +1254,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">is_repeatable_change</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches</span><span class="macro">!</span>(
+        <span class="macro">matches!</span>(
             <span class="kw-2">*</span><span class="self">self</span>,
             <span class="ident">Cmd</span>::<span class="ident">Dedent</span>(..)
                 <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">Indent</span>(..)
@@ -1312,7 +1312,7 @@
             <span class="comment">// Cmd::TransposeChars =&gt; Cmd::TransposeChars,</span>
             <span class="ident">Cmd</span>::<span class="ident">ViYankTo</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd</span>::<span class="ident">ViYankTo</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
             <span class="ident">Cmd</span>::<span class="ident">Yank</span>(<span class="ident">previous</span>, <span class="ident">anchor</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd</span>::<span class="ident">Yank</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">anchor</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
     }
 }
@@ -1605,10 +1605,10 @@
             <span class="string">&#39;-&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">=</span> <span class="op">-</span><span class="number">1</span>;
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
         <span class="kw">loop</span> {
-            <span class="ident">wrt</span>.<span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;(arg: {}) &quot;</span>, <span class="self">self</span>.<span class="ident">num_args</span>))<span class="question-mark">?</span>;
+            <span class="ident">wrt</span>.<span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;(arg: {}) &quot;</span>, <span class="self">self</span>.<span class="ident">num_args</span>))<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>;
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_possible_truncation</span>)]</span>
             <span class="kw">match</span> <span class="ident">key</span> {
@@ -1759,7 +1759,7 @@
             <span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Char</span>(<span class="string">&#39;Y&#39;</span>), <span class="ident">M</span>::<span class="ident">ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Char</span>(<span class="string">&#39;y&#39;</span>), <span class="ident">M</span>::<span class="ident">ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd</span>::<span class="ident">YankPop</span>,
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="ident">n</span>, <span class="ident">positive</span>)<span class="question-mark">?</span>,
         };
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Emacs command: {:?}&quot;</span>, <span class="ident">cmd</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Emacs command: {:?}&quot;</span>, <span class="ident">cmd</span>);
         <span class="prelude-val">Ok</span>(<span class="ident">cmd</span>)
     }
 
@@ -1772,7 +1772,7 @@
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">=</span> <span class="ident">digit</span>.<span class="ident">to_digit</span>(<span class="number">10</span>).<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="ident">i16</span>;
         <span class="kw">loop</span> {
-            <span class="ident">wrt</span>.<span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;(arg: {}) &quot;</span>, <span class="self">self</span>.<span class="ident">num_args</span>))<span class="question-mark">?</span>;
+            <span class="ident">wrt</span>.<span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;(arg: {}) &quot;</span>, <span class="self">self</span>.<span class="ident">num_args</span>))<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
             <span class="kw">if</span> <span class="kw">let</span> <span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Char</span>(<span class="ident">digit</span> @ <span class="string">&#39;0&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span>), <span class="ident">M</span>::<span class="ident">NONE</span>) <span class="op">=</span> <span class="ident">key</span> {
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">num_args</span>.<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="number">1000</span> {
@@ -1962,7 +1962,7 @@
             <span class="ident">E</span>::<span class="ident">ESC</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd</span>::<span class="ident">Noop</span>,
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="ident">n</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>,
         };
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi command: {:?}&quot;</span>, <span class="ident">cmd</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi command: {:?}&quot;</span>, <span class="ident">cmd</span>);
         <span class="kw">if</span> <span class="ident">cmd</span>.<span class="ident">is_repeatable_change</span>() {
             <span class="self">self</span>.<span class="ident">last_cmd</span> <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">clone</span>();
         }
@@ -1997,7 +1997,7 @@
             <span class="comment">// Don&#39;t complete hints when the cursor is not at the end of a line</span>
             <span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Right</span>, <span class="ident">M</span>::<span class="ident">NONE</span>) <span class="kw">if</span> <span class="ident">wrt</span>.<span class="ident">has_hint</span>() <span class="op">&amp;&amp;</span> <span class="ident">wrt</span>.<span class="ident">is_cursor_at_end</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd</span>::<span class="ident">CompleteHint</span>,
             <span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Char</span>(<span class="ident">k</span>), <span class="ident">M</span>::<span class="ident">ALT</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi fast command mode: {}&quot;</span>, <span class="ident">k</span>);
+                <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi fast command mode: {}&quot;</span>, <span class="ident">k</span>);
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode</span>::<span class="ident">Command</span>;
                 <span class="ident">wrt</span>.<span class="ident">done_inserting</span>();
 
@@ -2011,7 +2011,7 @@
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="number">1</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>,
         };
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi insert: {:?}&quot;</span>, <span class="ident">cmd</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi insert: {:?}&quot;</span>, <span class="ident">cmd</span>);
         <span class="kw">if</span> <span class="ident">cmd</span>.<span class="ident">is_repeatable_change</span>() {
             <span class="kw">if</span> <span class="kw">let</span> (<span class="ident">Cmd</span>::<span class="ident">Replace</span>(..), <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(..)) <span class="op">=</span> (<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">last_cmd</span>, <span class="kw-2">&amp;</span><span class="ident">cmd</span>) {
                 <span class="comment">// replacing...</span>
@@ -2098,7 +2098,7 @@
                     <span class="string">&#39;t&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch</span>::<span class="ident">ForwardBefore</span>(<span class="ident">ch</span>),
                     <span class="string">&#39;F&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch</span>::<span class="ident">Backward</span>(<span class="ident">ch</span>),
                     <span class="string">&#39;T&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch</span>::<span class="ident">BackwardAfter</span>(<span class="ident">ch</span>),
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
                 };
                 <span class="self">self</span>.<span class="ident">last_char_search</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cs</span>);
                 <span class="prelude-val">Some</span>(<span class="ident">cs</span>)
@@ -2214,7 +2214,7 @@
     <span class="kw">fn</span> <span class="ident">vi_num_args</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RepeatCount</span> {
         <span class="kw">let</span> <span class="ident">num_args</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">num_args</span>();
         <span class="kw">if</span> <span class="ident">num_args</span> <span class="op">&lt;</span> <span class="number">0</span> {
-            <span class="macro">unreachable</span><span class="macro">!</span>()
+            <span class="macro">unreachable!</span>()
         } <span class="kw">else</span> {
             <span class="ident">num_args</span>.<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">RepeatCount</span>
         }

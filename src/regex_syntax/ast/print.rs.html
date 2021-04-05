@@ -775,9 +775,9 @@ This module provides a regular expression printer for `Ast`.
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="kw">use</span> <span class="ident">ast</span>::<span class="ident">RepetitionRange</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">ast</span> {
-            <span class="ident">Exactly</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}}}&quot;</span>, <span class="ident">x</span>),
-            <span class="ident">AtLeast</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{},}}&quot;</span>, <span class="ident">x</span>),
-            <span class="ident">Bounded</span>(<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{},{}}}&quot;</span>, <span class="ident">x</span>, <span class="ident">y</span>),
+            <span class="ident">Exactly</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}}}&quot;</span>, <span class="ident">x</span>),
+            <span class="ident">AtLeast</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{},}}&quot;</span>, <span class="ident">x</span>),
+            <span class="ident">Bounded</span>(<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{},{}}}&quot;</span>, <span class="ident">x</span>, <span class="ident">y</span>),
         }
     }
 
@@ -786,25 +786,25 @@ This module provides a regular expression printer for `Ast`.
 
         <span class="kw">match</span> <span class="ident">ast</span>.<span class="ident">kind</span> {
             <span class="ident">Verbatim</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">wtr</span>.<span class="ident">write_char</span>(<span class="ident">ast</span>.<span class="ident">c</span>),
-            <span class="ident">Punctuation</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\{}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span>),
-            <span class="ident">Octal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\{:o}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>),
+            <span class="ident">Punctuation</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\{}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span>),
+            <span class="ident">Octal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\{:o}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>),
             <span class="ident">HexFixed</span>(<span class="ident">ast</span>::<span class="ident">HexLiteralKind</span>::<span class="ident">X</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\x{:02X}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\x{:02X}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
             }
             <span class="ident">HexFixed</span>(<span class="ident">ast</span>::<span class="ident">HexLiteralKind</span>::<span class="ident">UnicodeShort</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\u{:04X}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\u{:04X}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
             }
             <span class="ident">HexFixed</span>(<span class="ident">ast</span>::<span class="ident">HexLiteralKind</span>::<span class="ident">UnicodeLong</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\U{:08X}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\U{:08X}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
             }
             <span class="ident">HexBrace</span>(<span class="ident">ast</span>::<span class="ident">HexLiteralKind</span>::<span class="ident">X</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\x{{{:X}}}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\x{{{:X}}}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
             }
             <span class="ident">HexBrace</span>(<span class="ident">ast</span>::<span class="ident">HexLiteralKind</span>::<span class="ident">UnicodeShort</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\u{{{:X}}}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\u{{{:X}}}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
             }
             <span class="ident">HexBrace</span>(<span class="ident">ast</span>::<span class="ident">HexLiteralKind</span>::<span class="ident">UnicodeLong</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\U{{{:X}}}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">r&quot;\U{{{:X}}}&quot;</span>, <span class="ident">ast</span>.<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>)
             }
             <span class="ident">Special</span>(<span class="ident">ast</span>::<span class="ident">SpecialLiteralKind</span>::<span class="ident">Bell</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="self">self</span>.<span class="ident">wtr</span>.<span class="ident">write_str</span>(<span class="string">r&quot;\a&quot;</span>)
@@ -953,15 +953,15 @@ This module provides a regular expression printer for `Ast`.
         }
         <span class="kw">match</span> <span class="ident">ast</span>.<span class="ident">kind</span> {
             <span class="ident">OneLetter</span>(<span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">wtr</span>.<span class="ident">write_char</span>(<span class="ident">c</span>),
-            <span class="ident">Named</span>(<span class="kw-2">ref</span> <span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}}}&quot;</span>, <span class="ident">x</span>),
+            <span class="ident">Named</span>(<span class="kw-2">ref</span> <span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}}}&quot;</span>, <span class="ident">x</span>),
             <span class="ident">NamedValue</span> { <span class="ident">op</span>: <span class="ident">Equal</span>, <span class="kw-2">ref</span> <span class="ident">name</span>, <span class="kw-2">ref</span> <span class="ident">value</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}={}}}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}={}}}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)
             }
             <span class="ident">NamedValue</span> { <span class="ident">op</span>: <span class="ident">Colon</span>, <span class="kw-2">ref</span> <span class="ident">name</span>, <span class="kw-2">ref</span> <span class="ident">value</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}:{}}}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}:{}}}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)
             }
             <span class="ident">NamedValue</span> { <span class="ident">op</span>: <span class="ident">NotEqual</span>, <span class="kw-2">ref</span> <span class="ident">name</span>, <span class="kw-2">ref</span> <span class="ident">value</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}!={}}}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)
+                <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}!={}}}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)
             }
         }
     }
@@ -987,7 +987,7 @@ This module provides a regular expression printer for `Ast`.
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">printer</span> <span class="op">=</span> <span class="ident">Printer</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dst</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">printer</span>.<span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="ident">ast</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dst</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">given</span>, <span class="ident">dst</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">given</span>, <span class="ident">dst</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>

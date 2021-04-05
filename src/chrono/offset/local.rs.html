@@ -393,7 +393,7 @@
 
         <span class="comment">// datetime_to_timespec completely ignores leap seconds, so we need to adjust for them</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tm</span> <span class="op">=</span> <span class="ident">timespec</span>.<span class="ident">local</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">tm</span>.<span class="ident">tm_nsec</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">tm</span>.<span class="ident">tm_nsec</span>, <span class="number">0</span>);
         <span class="ident">tm</span>.<span class="ident">tm_nsec</span> <span class="op">=</span> <span class="ident">local</span>.<span class="ident">nanosecond</span>() <span class="kw">as</span> <span class="ident">i32</span>;
 
         <span class="ident">LocalResult</span>::<span class="ident">Single</span>(<span class="ident">tm_to_datetime</span>(<span class="ident">tm</span>))
@@ -417,7 +417,7 @@
 
         <span class="comment">// datetime_to_timespec completely ignores leap seconds, so we need to adjust for them</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tm</span> <span class="op">=</span> <span class="ident">timespec</span>.<span class="ident">local</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">tm</span>.<span class="ident">tm_nsec</span>, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">tm</span>.<span class="ident">tm_nsec</span>, <span class="number">0</span>);
         <span class="ident">tm</span>.<span class="ident">tm_nsec</span> <span class="op">=</span> <span class="ident">utc</span>.<span class="ident">nanosecond</span>() <span class="kw">as</span> <span class="ident">i32</span>;
 
         <span class="ident">tm_to_datetime</span>(<span class="ident">tm</span>)
@@ -433,7 +433,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_local_date_sanity_check</span>() {
         <span class="comment">// issue #27</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Local</span>.<span class="ident">ymd</span>(<span class="number">2999</span>, <span class="number">12</span>, <span class="number">28</span>).<span class="ident">day</span>(), <span class="number">28</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Local</span>.<span class="ident">ymd</span>(<span class="number">2999</span>, <span class="number">12</span>, <span class="number">28</span>).<span class="ident">day</span>(), <span class="number">28</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -445,11 +445,11 @@
         <span class="kw">let</span> <span class="ident">timestr</span> <span class="op">=</span> <span class="ident">dt</span>.<span class="ident">time</span>().<span class="ident">to_string</span>();
         <span class="comment">// the OS API may or may not support the leap second,</span>
         <span class="comment">// but there are only two sensible options.</span>
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">timestr</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;01:02:60&quot;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">timestr</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;01:03:00&quot;</span>, <span class="string">&quot;unexpected timestr {:?}&quot;</span>, <span class="ident">timestr</span>);
+        <span class="macro">assert!</span>(<span class="ident">timestr</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;01:02:60&quot;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">timestr</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;01:03:00&quot;</span>, <span class="string">&quot;unexpected timestr {:?}&quot;</span>, <span class="ident">timestr</span>);
 
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">today</span>.<span class="ident">and_hms_milli</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1234</span>);
         <span class="kw">let</span> <span class="ident">timestr</span> <span class="op">=</span> <span class="ident">dt</span>.<span class="ident">time</span>().<span class="ident">to_string</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(
             <span class="ident">timestr</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;01:02:03.234&quot;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">timestr</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;01:02:04.234&quot;</span>,
             <span class="string">&quot;unexpected timestr {:?}&quot;</span>,
             <span class="ident">timestr</span>

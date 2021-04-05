@@ -522,7 +522,7 @@ This module provides a regular expression printer for `Hir`.
                     <span class="self">self</span>.<span class="ident">wtr</span>.<span class="ident">write_str</span>(<span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
                 }
                 <span class="ident">hir</span>::<span class="ident">GroupKind</span>::<span class="ident">CaptureName</span> { <span class="kw-2">ref</span> <span class="ident">name</span>, .. } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;(?P&lt;{}&gt;&quot;</span>, <span class="ident">name</span>)<span class="question-mark">?</span>;
+                    <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;(?P&lt;{}&gt;&quot;</span>, <span class="ident">name</span>)<span class="question-mark">?</span>;
                 }
                 <span class="ident">hir</span>::<span class="ident">GroupKind</span>::<span class="ident">NonCapturing</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="self">self</span>.<span class="ident">wtr</span>.<span class="ident">write_str</span>(<span class="string">&quot;(?:&quot;</span>)<span class="question-mark">?</span>;
@@ -555,13 +555,13 @@ This module provides a regular expression printer for `Hir`.
                     }
                     <span class="ident">hir</span>::<span class="ident">RepetitionKind</span>::<span class="ident">Range</span>(<span class="kw-2">ref</span> <span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">x</span> {
                         <span class="ident">hir</span>::<span class="ident">RepetitionRange</span>::<span class="ident">Exactly</span>(<span class="ident">m</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                            <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}}}&quot;</span>, <span class="ident">m</span>)<span class="question-mark">?</span>;
+                            <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{}}}&quot;</span>, <span class="ident">m</span>)<span class="question-mark">?</span>;
                         }
                         <span class="ident">hir</span>::<span class="ident">RepetitionRange</span>::<span class="ident">AtLeast</span>(<span class="ident">m</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                            <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{},}}&quot;</span>, <span class="ident">m</span>)<span class="question-mark">?</span>;
+                            <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{},}}&quot;</span>, <span class="ident">m</span>)<span class="question-mark">?</span>;
                         }
                         <span class="ident">hir</span>::<span class="ident">RepetitionRange</span>::<span class="ident">Bounded</span>(<span class="ident">m</span>, <span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                            <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{},{}}}&quot;</span>, <span class="ident">m</span>, <span class="ident">n</span>)<span class="question-mark">?</span>;
+                            <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;{{{},{}}}&quot;</span>, <span class="ident">m</span>, <span class="ident">n</span>)<span class="question-mark">?</span>;
                         }
                     },
                 }
@@ -594,7 +594,7 @@ This module provides a regular expression printer for `Hir`.
         <span class="kw">if</span> <span class="ident">c</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0x7F</span> <span class="kw">as</span> <span class="ident">char</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">is_control</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">is_whitespace</span>() {
             <span class="self">self</span>.<span class="ident">write_literal_char</span>(<span class="ident">c</span>)
         } <span class="kw">else</span> {
-            <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;(?-u:\\x{:02X})&quot;</span>, <span class="ident">b</span>)
+            <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;(?-u:\\x{:02X})&quot;</span>, <span class="ident">b</span>)
         }
     }
 
@@ -603,7 +603,7 @@ This module provides a regular expression printer for `Hir`.
         <span class="kw">if</span> <span class="ident">c</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0x7F</span> <span class="kw">as</span> <span class="ident">char</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">is_control</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">is_whitespace</span>() {
             <span class="self">self</span>.<span class="ident">write_literal_char</span>(<span class="ident">c</span>)
         } <span class="kw">else</span> {
-            <span class="macro">write</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;\\x{:02X}&quot;</span>, <span class="ident">b</span>)
+            <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">wtr</span>, <span class="string">&quot;\\x{:02X}&quot;</span>, <span class="ident">b</span>)
         }
     }
 }
@@ -636,7 +636,7 @@ This module provides a regular expression printer for `Hir`.
         <span class="comment">// Check that the result is actually valid.</span>
         <span class="ident">builder</span>.<span class="ident">build</span>().<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">dst</span>).<span class="ident">unwrap</span>();
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">expected</span>, <span class="ident">dst</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">expected</span>, <span class="ident">dst</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>

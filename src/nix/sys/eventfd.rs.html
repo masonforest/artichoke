@@ -25,7 +25,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="prelude-ty">Result</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">errno</span>::<span class="ident">Errno</span>;
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EfdFlags</span>: <span class="ident">libc</span>::<span class="ident">c_int</span> {
         <span class="ident">EFD_CLOEXEC</span>; <span class="comment">// Since Linux 2.6.27</span>
         <span class="ident">EFD_NONBLOCK</span>; <span class="comment">// Since Linux 2.6.27</span>

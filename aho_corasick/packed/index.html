@@ -36,7 +36,7 @@ semantics, which apply similarly to packed substring search.)</p>
     .<span class="ident">find_iter</span>(<span class="string">&quot;foobar&quot;</span>)
     .<span class="ident">map</span>(<span class="op">|</span><span class="ident">mat</span><span class="op">|</span> <span class="ident">mat</span>.<span class="ident">pattern</span>())
     .<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0</span>], <span class="ident">matches</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="number">0</span>], <span class="ident">matches</span>);</pre></div>
 <p>This example shows how to use <a href="struct.Config.html"><code>Config</code></a> to change the
 match semantics to leftmost-longest:</p>
 
@@ -53,7 +53,7 @@ match semantics to leftmost-longest:</p>
     .<span class="ident">find_iter</span>(<span class="string">&quot;foobar&quot;</span>)
     .<span class="ident">map</span>(<span class="op">|</span><span class="ident">mat</span><span class="op">|</span> <span class="ident">mat</span>.<span class="ident">pattern</span>())
     .<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>], <span class="ident">matches</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="number">1</span>], <span class="ident">matches</span>);</pre></div>
 <h1 id="packed-substring-searching" class="section-header"><a href="#packed-substring-searching">Packed substring searching</a></h1>
 <p>Packed substring searching refers to the use of SIMD (Single Instruction,
 Multiple Data) to accelerate the detection of matches in a haystack. Unlike

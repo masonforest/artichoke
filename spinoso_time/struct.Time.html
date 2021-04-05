@@ -19,14 +19,14 @@ new <code>Time</code> object.</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="comment">// Create a Time to the current system clock with local offset</span>
 <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">time</span>.<span class="ident">is_utc</span>());
-<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">time</span>.<span class="ident">is_sunday</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">time</span>.<span class="ident">is_utc</span>());
+<span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">time</span>.<span class="ident">is_sunday</span>());</pre></div>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">let</span> <span class="ident">one_hour_ago</span>: <span class="ident">Time</span> <span class="op">=</span> <span class="ident">time</span> <span class="op">-</span> (<span class="number">60</span> <span class="op">*</span> <span class="number">60</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">to_int</span>() <span class="op">-</span> <span class="number">3600</span>, <span class="ident">one_hour_ago</span>.<span class="ident">to_int</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="ident">one_hour_ago</span>.<span class="ident">nanosecond</span>());</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">to_int</span>() <span class="op">-</span> <span class="number">3600</span>, <span class="ident">one_hour_ago</span>.<span class="ident">to_int</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="ident">one_hour_ago</span>.<span class="ident">nanosecond</span>());</pre></div>
 <h1 id="implementation-notes" class="section-header"><a href="#implementation-notes">Implementation notes</a></h1>
 <p>Time stores raw timestamps and only converts to <code>chrono</code> <a href="../chrono/datetime/struct.DateTime.html" title="DateTime"><code>DateTime</code></a> for
 computation. <a href="../chrono/index.html" title="chrono"><code>chrono</code></a> provides an aware datetime view over the raw
@@ -71,15 +71,15 @@ non-zero.</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="ident">now</span>.<span class="ident">succ</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">now</span>.<span class="ident">to_int</span>() <span class="op">+</span> <span class="number">1</span>, <span class="ident">next</span>.<span class="ident">to_int</span>());</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">now</span>.<span class="ident">to_int</span>() <span class="op">+</span> <span class="number">1</span>, <span class="ident">next</span>.<span class="ident">to_int</span>());</pre></div>
 </div></div><h3 id="impl-3" class="impl"><code class="in-band">impl <a class="struct" href="../spinoso_time/struct.Time.html" title="struct spinoso_time::Time">Time</a></code><a href="#impl-3" class="anchor"></a><a class="srclink" href="../src/spinoso_time/time/chrono/ordinal.rs.html#6-50" title="goto source code">[src]</a></h3><div class="impl-items"><h4 id="method.year_day" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.year_day" class="fnname">year_day</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/ordinal.rs.html#22-49" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns an integer representing the day of the year, <code>1..=366</code>.</p>
 <p>This method returns the date’s ordinal day.</p>
 <h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">let</span> <span class="ident">ordinal</span> <span class="op">=</span> <span class="ident">now</span>.<span class="ident">year_day</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="number">0</span>);
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">ordinal</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">366</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="number">0</span>);
+<span class="macro">assert!</span>(<span class="ident">ordinal</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">366</span>);</pre></div>
 </div></div><h3 id="impl-4" class="impl"><code class="in-band">impl <a class="struct" href="../spinoso_time/struct.Time.html" title="struct spinoso_time::Time">Time</a></code><a href="#impl-4" class="anchor"></a><a class="srclink" href="../src/spinoso_time/time/chrono/time.rs.html#7-221" title="goto source code">[src]</a></h3><div class="impl-items"><h4 id="method.hour" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.hour" class="fnname">hour</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/time.rs.html#19-46" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns the hour of the day <code>0..=23</code> for <em>time</em>.</p>
 <h1 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -141,32 +141,32 @@ zone.</p>
 <h1 id="examples-15" class="section-header"><a href="#examples-15">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">local_time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">local_time</span>.<span class="ident">is_utc</span>());
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">local_time</span>.<span class="ident">is_utc</span>());
 <span class="kw">let</span> <span class="ident">utc_time</span> <span class="op">=</span> <span class="ident">local_time</span>.<span class="ident">to_utc</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">utc_time</span>.<span class="ident">is_utc</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">utc_time</span>.<span class="ident">is_utc</span>());</pre></div>
 </div><h4 id="method.to_local" class="method"><code><span class="docblock attributes">#[must_use]</span>pub const fn <a href="#method.to_local" class="fnname">to_local</a>(self) -&gt; Self</code><a class="srclink" href="../src/spinoso_time/time/chrono/timezone.rs.html#55-66" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns a new <code>Time</code> object representing time in local time (using the
 local time zone in effect for this process).</p>
 <h1 id="examples-16" class="section-header"><a href="#examples-16">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">local_time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">local_time</span>.<span class="ident">is_utc</span>());
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">local_time</span>.<span class="ident">is_utc</span>());
 
 <span class="kw">let</span> <span class="ident">local_time2</span> <span class="op">=</span> <span class="ident">local_time</span>.<span class="ident">to_local</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">local_time2</span>.<span class="ident">is_utc</span>());
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">local_time2</span>.<span class="ident">is_utc</span>());
 
 <span class="kw">let</span> <span class="ident">utc_time</span> <span class="op">=</span> <span class="ident">local_time</span>.<span class="ident">to_utc</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">utc_time</span>.<span class="ident">is_utc</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">utc_time</span>.<span class="ident">is_utc</span>());</pre></div>
 </div><h4 id="method.to_utc" class="method"><code><span class="docblock attributes">#[must_use]</span>pub const fn <a href="#method.to_utc" class="fnname">to_utc</a>(self) -&gt; Self</code><a class="srclink" href="../src/spinoso_time/time/chrono/timezone.rs.html#85-96" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns a new <code>Time</code> object representing time in UTC.</p>
 <h1 id="examples-17" class="section-header"><a href="#examples-17">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">local_time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">local_time</span>.<span class="ident">is_utc</span>());
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">local_time</span>.<span class="ident">is_utc</span>());
 
 <span class="kw">let</span> <span class="ident">utc_time</span> <span class="op">=</span> <span class="ident">local_time</span>.<span class="ident">to_utc</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">utc_time</span>.<span class="ident">is_utc</span>());
+<span class="macro">assert!</span>(<span class="ident">utc_time</span>.<span class="ident">is_utc</span>());
 
 <span class="kw">let</span> <span class="ident">utc_time2</span> <span class="op">=</span> <span class="ident">utc_time</span>.<span class="ident">to_utc</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">utc_time2</span>.<span class="ident">is_utc</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">utc_time2</span>.<span class="ident">is_utc</span>());</pre></div>
 </div><h4 id="method.timezone" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.timezone" class="fnname">timezone</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;</code><a class="srclink" href="../src/spinoso_time/time/chrono/timezone.rs.html#102-111" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns the name of the time zone used for <em>time</em>.</p>
 </div></div><h3 id="impl-6" class="impl"><code class="in-band">impl <a class="struct" href="../spinoso_time/struct.Time.html" title="struct spinoso_time::Time">Time</a></code><a href="#impl-6" class="anchor"></a><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#6-366" title="goto source code">[src]</a></h3><div class="impl-items"><h4 id="method.weekday" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.weekday" class="fnname">weekday</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#28-56" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns an integer representing the day of the week, <code>0..=6</code>, with
 Sunday == 0.</p>
@@ -174,13 +174,13 @@ Sunday == 0.</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">match</span> <span class="ident">now</span> {
-    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_sunday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">0</span>),
-    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_monday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">1</span>),
-    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_tuesday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">2</span>),
-    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_wednesday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">3</span>),
-    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_thursday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">4</span>),
-    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_friday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">5</span>),
-    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_saturday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">6</span>),
+    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_sunday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">0</span>),
+    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_monday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">1</span>),
+    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_tuesday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">2</span>),
+    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_wednesday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">3</span>),
+    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_thursday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">4</span>),
+    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_friday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">5</span>),
+    <span class="ident">time</span> <span class="kw">if</span> <span class="ident">time</span>.<span class="ident">is_saturday</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">6</span>),
     <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {}
 }</pre></div>
 </div><h4 id="method.is_sunday" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.is_sunday" class="fnname">is_sunday</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#72-100" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns true if <em>time</em> represents Sunday.</p>
@@ -189,7 +189,7 @@ Sunday == 0.</p>
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">if</span> <span class="ident">now</span>.<span class="ident">is_sunday</span>() {
     <span class="comment">// go grocery shopping</span>
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">0</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">0</span>);
 }</pre></div>
 </div><h4 id="method.is_monday" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.is_monday" class="fnname">is_monday</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#116-144" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns true if <em>time</em> represents Monday.</p>
 <h1 id="examples-20" class="section-header"><a href="#examples-20">Examples</a></h1>
@@ -197,7 +197,7 @@ Sunday == 0.</p>
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">if</span> <span class="ident">now</span>.<span class="ident">is_monday</span>() {
     <span class="comment">// go to work</span>
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">1</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">1</span>);
 }</pre></div>
 </div><h4 id="method.is_tuesday" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.is_tuesday" class="fnname">is_tuesday</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#160-188" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns true if <em>time</em> represents Tuesday.</p>
 <h1 id="examples-21" class="section-header"><a href="#examples-21">Examples</a></h1>
@@ -205,7 +205,7 @@ Sunday == 0.</p>
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">if</span> <span class="ident">now</span>.<span class="ident">is_tuesday</span>() {
     <span class="comment">// go to the gym</span>
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">2</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">2</span>);
 }</pre></div>
 </div><h4 id="method.is_wednesday" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.is_wednesday" class="fnname">is_wednesday</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#204-232" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns true if <em>time</em> represents Wednesday.</p>
 <h1 id="examples-22" class="section-header"><a href="#examples-22">Examples</a></h1>
@@ -213,7 +213,7 @@ Sunday == 0.</p>
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">if</span> <span class="ident">now</span>.<span class="ident">is_wednesday</span>() {
     <span class="comment">// hump day!</span>
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">3</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">3</span>);
 }</pre></div>
 </div><h4 id="method.is_thursday" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.is_thursday" class="fnname">is_thursday</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#248-276" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns true if <em>time</em> represents Thursday.</p>
 <h1 id="examples-23" class="section-header"><a href="#examples-23">Examples</a></h1>
@@ -221,7 +221,7 @@ Sunday == 0.</p>
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">if</span> <span class="ident">now</span>.<span class="ident">is_thursday</span>() {
     <span class="comment">// Chinese food delivery for dinner</span>
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">4</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">4</span>);
 }</pre></div>
 </div><h4 id="method.is_friday" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.is_friday" class="fnname">is_friday</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#293-321" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns true if <em>time</em> represents Friday.</p>
 <h1 id="examples-24" class="section-header"><a href="#examples-24">Examples</a></h1>
@@ -230,7 +230,7 @@ Sunday == 0.</p>
 <span class="kw">if</span> <span class="ident">now</span>.<span class="ident">is_friday</span>() {
     <span class="comment">// TGIF</span>
     <span class="comment">// Friday, Friday, gotta get down</span>
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">5</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">5</span>);
 }</pre></div>
 </div><h4 id="method.is_saturday" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.is_saturday" class="fnname">is_saturday</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/weekday.rs.html#337-365" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns true if <em>time</em> represents Saturday.</p>
 <h1 id="examples-25" class="section-header"><a href="#examples-25">Examples</a></h1>
@@ -238,7 +238,7 @@ Sunday == 0.</p>
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">if</span> <span class="ident">now</span>.<span class="ident">is_saturday</span>() {
     <span class="comment">// hike at the lake</span>
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">6</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">now</span>.<span class="ident">weekday</span>(), <span class="number">6</span>);
 }</pre></div>
 </div></div><h3 id="impl-7" class="impl"><code class="in-band">impl <a class="struct" href="../spinoso_time/struct.Time.html" title="struct spinoso_time::Time">Time</a></code><a href="#impl-7" class="anchor"></a><a class="srclink" href="../src/spinoso_time/time/chrono/mod.rs.html#107-178" title="goto source code">[src]</a></h3><div class="impl-items"><h4 id="method.to_float" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.to_float" class="fnname">to_float</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f64.html">f64</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/mod.rs.html#129-136" title="goto source code">[src]</a></h4><div class="docblock"><p>Returns the value of <em>time</em> as a floating point number of seconds since
 the Unix Epoch.</p>
@@ -247,7 +247,7 @@ the Unix Epoch.</p>
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">let</span> <span class="ident">now_f</span> <span class="op">=</span> <span class="ident">now</span>.<span class="ident">to_float</span>();
 <span class="kw">let</span> <span class="ident">now_i</span> <span class="op">=</span> <span class="ident">now</span>.<span class="ident">to_int</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">now_i</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">now_f</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">now_i</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">now_f</span>);</pre></div>
 <h1 id="implementation-notes-4" class="section-header"><a href="#implementation-notes-4">Implementation notes</a></h1>
 <p>The IEEE 754 double is not accurate enough to represent the exact number
 of subsecond nanoseconds in the <code>Time</code>.</p>
@@ -258,7 +258,7 @@ Unix Epoch.</p>
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">let</span> <span class="ident">now_f</span> <span class="op">=</span> <span class="ident">now</span>.<span class="ident">to_float</span>();
 <span class="kw">let</span> <span class="ident">now_i</span> <span class="op">=</span> <span class="ident">now</span>.<span class="ident">to_int</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">now_i</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">now_f</span>);</pre></div>
+<span class="macro">assert!</span>(<span class="ident">now_i</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">now_f</span>);</pre></div>
 </div><h4 id="method.to_a" class="method"><code><span class="docblock attributes">#[must_use]</span>pub fn <a href="#method.to_a" class="fnname">to_a</a>(self) -&gt; <a class="struct" href="../spinoso_time/struct.ToA.html" title="struct spinoso_time::ToA">ToA</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/mod.rs.html#175-177" title="goto source code">[src]</a></h4><div class="docblock"><p>Serialize a <code>Time</code> into its components as a <a href="../spinoso_time/struct.ToA.html" title="ToA"><code>ToA</code></a>.</p>
 <p><code>ToA</code> stores a <code>Time</code> as a ten-element struct of time components: [sec,
 min, hour, day, month, year, wday, yday, isdst, zone].</p>
@@ -268,8 +268,8 @@ API, and is accessible with the <a href="../spinoso_time/struct.ToA.html#method.
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">now</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">now</span>();
 <span class="kw">let</span> <span class="ident">to_a</span> <span class="op">=</span> <span class="ident">now</span>.<span class="ident">to_a</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">to_a</span>.<span class="ident">sec</span>, <span class="ident">now</span>.<span class="ident">second</span>());
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">to_a</span>.<span class="ident">wday</span>, <span class="ident">now</span>.<span class="ident">weekday</span>());</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">to_a</span>.<span class="ident">sec</span>, <span class="ident">now</span>.<span class="ident">second</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">to_a</span>.<span class="ident">wday</span>, <span class="ident">now</span>.<span class="ident">weekday</span>());</pre></div>
 </div></div><h2 id="trait-implementations" class="small-section-header">Trait Implementations<a href="#trait-implementations" class="anchor"></a></h2><div id="trait-implementations-list"><h3 id="impl-Add%3CDuration%3E" class="impl"><code class="in-band">impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/arith/trait.Add.html" title="trait core::ops::arith::Add">Add</a>&lt;<a class="struct" href="../chrono/oldtime/struct.Duration.html" title="struct chrono::oldtime::Duration">Duration</a>&gt; for <a class="struct" href="../spinoso_time/struct.Time.html" title="struct spinoso_time::Time">Time</a></code><a href="#impl-Add%3CDuration%3E" class="anchor"></a><a class="srclink" href="../src/spinoso_time/time/chrono/ops.rs.html#10-41" title="goto source code">[src]</a></h3><div class="impl-items"><h4 id="associatedtype.Output-13" class="type"><code>type <a href="https://doc.rust-lang.org/nightly/core/ops/arith/trait.Add.html#associatedtype.Output" class="type">Output</a> = Self</code></h4><div class='docblock'><p>The resulting type after applying the <code>+</code> operator.</p>
 </div><h4 id="method.add" class="method hidden"><code>fn <a href="https://doc.rust-lang.org/nightly/core/ops/arith/trait.Add.html#tymethod.add" class="fnname">add</a>(self, duration: <a class="struct" href="../chrono/oldtime/struct.Duration.html" title="struct chrono::oldtime::Duration">Duration</a>) -&gt; Self::<a class="type" href="https://doc.rust-lang.org/nightly/core/ops/arith/trait.Add.html#associatedtype.Output" title="type core::ops::arith::Add::Output">Output</a></code><a class="srclink" href="../src/spinoso_time/time/chrono/ops.rs.html#13-40" title="goto source code">[src]</a></h4><div class='docblock hidden'><p>Performs the <code>+</code> operation. <a href="https://doc.rust-lang.org/nightly/core/ops/arith/trait.Add.html#tymethod.add">Read more</a></p>
 </div></div><h3 id="impl-Add%3CDuration%3E-1" class="impl"><code class="in-band">impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/arith/trait.Add.html" title="trait core::ops::arith::Add">Add</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/core/time/struct.Duration.html" title="struct core::time::Duration">Duration</a>&gt; for <a class="struct" href="../spinoso_time/struct.Time.html" title="struct spinoso_time::Time">Time</a></code><a href="#impl-Add%3CDuration%3E-1" class="anchor"></a><a class="srclink" href="../src/spinoso_time/time/chrono/ops.rs.html#43-50" title="goto source code">[src]</a></h3><div class="impl-items"><h4 id="associatedtype.Output-14" class="type"><code>type <a href="https://doc.rust-lang.org/nightly/core/ops/arith/trait.Add.html#associatedtype.Output" class="type">Output</a> = Self</code></h4><div class='docblock'><p>The resulting type after applying the <code>+</code> operator.</p>

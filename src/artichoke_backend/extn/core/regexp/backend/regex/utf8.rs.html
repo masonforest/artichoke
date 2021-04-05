@@ -628,7 +628,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">capture_indexes_for_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">group</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">regex</span>.<span class="ident">capture_names</span>().<span class="ident">enumerate</span>() {
             <span class="kw">if</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">group</span>.<span class="ident">map</span>(<span class="ident">str</span>::<span class="ident">as_bytes</span>) {
                 <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">index</span>);
@@ -912,7 +912,7 @@
     <span class="kw">fn</span> <span class="ident">named_captures</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">NameToCaptureLocations</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="comment">// Use a Vec of key-value pairs because insertion order matters for spec</span>
         <span class="comment">// compliance.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">for</span> <span class="ident">group</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">regex</span>.<span class="ident">capture_names</span>().<span class="ident">filter_map</span>(<span class="ident">convert</span>::<span class="ident">identity</span>) {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">indexes</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">capture_indexes_for_name</span>(<span class="ident">group</span>.<span class="ident">as_bytes</span>())<span class="question-mark">?</span> {
                 <span class="ident">map</span>.<span class="ident">push</span>((<span class="ident">group</span>.<span class="ident">into</span>(), <span class="ident">indexes</span>));
@@ -946,7 +946,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">names</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">names</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">names</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">capture_names</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">named_captures</span>().<span class="ident">unwrap_or_default</span>();
         <span class="ident">capture_names</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">left</span>, <span class="ident">right</span><span class="op">|</span> {
             <span class="kw">let</span> <span class="ident">left</span> <span class="op">=</span> <span class="ident">left</span>.<span class="number">1</span>.<span class="ident">iter</span>().<span class="ident">min</span>().<span class="ident">copied</span>().<span class="ident">unwrap_or</span>(<span class="ident">usize</span>::<span class="ident">MAX</span>);
@@ -1034,7 +1034,7 @@
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_pos</span> <span class="op">=</span> (<span class="number">0</span>, <span class="number">0</span>);
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">len</span>) <span class="op">=</span> <span class="ident">len</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">collected</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">collected</span> <span class="op">=</span> <span class="macro">vec!</span>[];
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">regex</span>.<span class="ident">captures_iter</span>(<span class="ident">haystack</span>).<span class="ident">peekable</span>();
                 <span class="kw">if</span> <span class="ident">iter</span>.<span class="ident">peek</span>().<span class="ident">is_none</span>() {
                     <span class="ident">interp</span>.<span class="ident">unset_global_variable</span>(<span class="ident">regexp</span>::<span class="ident">LAST_MATCH</span>)<span class="question-mark">?</span>;
@@ -1072,7 +1072,7 @@
                 }
                 <span class="prelude-val">Ok</span>(<span class="ident">Scan</span>::<span class="ident">Collected</span>(<span class="ident">collected</span>))
             } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">collected</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">collected</span> <span class="op">=</span> <span class="macro">vec!</span>[];
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">regex</span>.<span class="ident">find_iter</span>(<span class="ident">haystack</span>).<span class="ident">peekable</span>();
                 <span class="kw">if</span> <span class="ident">iter</span>.<span class="ident">peek</span>().<span class="ident">is_none</span>() {
                     <span class="ident">interp</span>.<span class="ident">unset_global_variable</span>(<span class="ident">regexp</span>::<span class="ident">LAST_MATCH</span>)<span class="question-mark">?</span>;

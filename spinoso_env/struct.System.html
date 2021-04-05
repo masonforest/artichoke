@@ -13,13 +13,13 @@ contexts.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System</span>::<span class="ident">new</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="macro">matches</span><span class="macro">!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;PATH&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw">_</span>))));</pre></div>
+<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;PATH&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw">_</span>))));</pre></div>
 <p>Setting an environment variable:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System</span>::<span class="ident">new</span>();
 <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="string">b&quot;ENV_BACKEND&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">b&quot;spinoso_env::System&quot;</span>))<span class="question-mark">?</span>;
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">std</span>::<span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;ENV_BACKEND&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;spinoso_env::System&quot;</span>)));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">std</span>::<span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;ENV_BACKEND&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;spinoso_env::System&quot;</span>)));</pre></div>
 </div><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><h3 id="impl" class="impl"><code class="in-band">impl <a class="struct" href="../spinoso_env/struct.System.html" title="struct spinoso_env::System">System</a></code><a href="#impl" class="anchor"></a><a class="srclink" href="../src/spinoso_env/env/system.rs.html#50-258" title="goto source code">[src]</a></h3><div class="impl-items"><h4 id="method.new" class="method"><code><span class="docblock attributes">#[must_use]</span>pub const fn <a href="#method.new" class="fnname">new</a>() -&gt; Self</code><a class="srclink" href="../src/spinoso_env/env/system.rs.html#64-66" title="goto source code">[src]</a></h4><div class="docblock"><p>Constructs a new, default ENV <code>System</code> backend.</p>
 <p>The resulting environment variable accessor has access to the underlying
 host operating system.</p>
@@ -36,7 +36,7 @@ to a byte vector, <a href="https://doc.rust-lang.org/nightly/core/option/enum.Op
 <h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System</span>::<span class="ident">new</span>();
-<span class="macro">assert</span><span class="macro">!</span>(<span class="macro">matches</span><span class="macro">!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;PATH&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw">_</span>))));</pre></div>
+<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;PATH&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw">_</span>))));</pre></div>
 <h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
 <p>If <code>name</code> contains a NUL byte, e.g. <code>b'\0'</code>, an error is returned.</p>
 <p>If the environment variable name or value cannot be converted from a
@@ -50,9 +50,9 @@ byte vector to a <a href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struc
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System</span>::<span class="ident">new</span>();
 <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="string">b&quot;RUBY&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">b&quot;Artichoke&quot;</span>))<span class="question-mark">?</span>;
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;RUBY&quot;</span>)<span class="question-mark">?</span>, <span class="prelude-val">Some</span>(<span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;Artichoke&quot;</span>[..])));
+<span class="macro">assert_eq!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;RUBY&quot;</span>)<span class="question-mark">?</span>, <span class="prelude-val">Some</span>(<span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;Artichoke&quot;</span>[..])));
 <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="string">b&quot;RUBY&quot;</span>, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;RUBY&quot;</span>)<span class="question-mark">?</span>, <span class="prelude-val">None</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;RUBY&quot;</span>)<span class="question-mark">?</span>, <span class="prelude-val">None</span>);</pre></div>
 <h1 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h1>
 <p>If <code>name</code> contains a NUL byte, e.g. <code>b'\0'</code>, an argument error is
 returned.</p>
@@ -72,7 +72,7 @@ variable values.</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System</span>::<span class="ident">new</span>();
 <span class="kw">let</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">ENV</span>.<span class="ident">to_map</span>()<span class="question-mark">?</span>;
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">map</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;PATH&quot;</span>[..]));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">map</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;PATH&quot;</span>[..]));</pre></div>
 <h1 id="errors-2" class="section-header"><a href="#errors-2">Errors</a></h1>
 <p>If any environment variable name or value cannot be converted from a
 <a href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsString.html">platform string</a> to a byte vector, an error is returned.</p>

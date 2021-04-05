@@ -705,10 +705,10 @@
     <span class="doccomment">/// Returns the single unique conversion result, or panics accordingly.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unwrap</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">LocalResult</span>::<span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;No such local time&quot;</span>),
+            <span class="ident">LocalResult</span>::<span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;No such local time&quot;</span>),
             <span class="ident">LocalResult</span>::<span class="ident">Single</span>(<span class="ident">t</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">t</span>,
             <span class="ident">LocalResult</span>::<span class="ident">Ambiguous</span>(<span class="ident">t1</span>, <span class="ident">t2</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Ambiguous local time, ranging from {:?} to {:?}&quot;</span>, <span class="ident">t1</span>, <span class="ident">t2</span>)
+                <span class="macro">panic!</span>(<span class="string">&quot;Ambiguous local time, ranging from {:?} to {:?}&quot;</span>, <span class="ident">t1</span>, <span class="ident">t2</span>)
             }
         }
     }
@@ -1013,21 +1013,21 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_negative_millis</span>() {
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="op">-</span><span class="number">1000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="op">-</span><span class="number">7000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:53 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:53 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="op">-</span><span class="number">7001</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:52.999 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:52.999 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="op">-</span><span class="number">7003</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:52.997 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:52.997 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="op">-</span><span class="number">999</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59.001 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59.001 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="op">-</span><span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59.999 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59.999 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="op">-</span><span class="number">60000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:00 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:00 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="op">-</span><span class="number">3600000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:00:00 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:00:00 UTC&quot;</span>);
 
         <span class="kw">for</span> (<span class="ident">millis</span>, <span class="ident">expected</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span>[
             (<span class="op">-</span><span class="number">7000</span>, <span class="string">&quot;1969-12-31 23:59:53 UTC&quot;</span>),
@@ -1036,9 +1036,9 @@
         ] {
             <span class="kw">match</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis_opt</span>(<span class="kw-2">*</span><span class="ident">millis</span>) {
                 <span class="ident">LocalResult</span>::<span class="ident">Single</span>(<span class="ident">dt</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="kw-2">*</span><span class="ident">expected</span>);
+                    <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="kw-2">*</span><span class="ident">expected</span>);
                 }
-                <span class="ident">e</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Got {:?} instead of an okay answer&quot;</span>, <span class="ident">e</span>),
+                <span class="ident">e</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Got {:?} instead of an okay answer&quot;</span>, <span class="ident">e</span>),
             }
         }
     }
@@ -1046,15 +1046,15 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_negative_nanos</span>() {
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_nanos</span>(<span class="op">-</span><span class="number">1_000_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_nanos</span>(<span class="op">-</span><span class="number">999_999_999</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59.000000001 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59.000000001 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_nanos</span>(<span class="op">-</span><span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59.999999999 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:59.999999999 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_nanos</span>(<span class="op">-</span><span class="number">60_000_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:00 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:59:00 UTC&quot;</span>);
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">timestamp_nanos</span>(<span class="op">-</span><span class="number">3_600_000_000_000</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:00:00 UTC&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">to_string</span>(), <span class="string">&quot;1969-12-31 23:00:00 UTC&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>

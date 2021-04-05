@@ -490,7 +490,7 @@
 ))]</span>
 <span class="kw">use</span> <span class="ident">libc</span>::<span class="ident">user_regs_struct</span>;
 
-<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;s390x&quot;</span>),
                  <span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;gnu&quot;</span>)))]</span> {
         <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
@@ -501,7 +501,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span>{
+<span class="macro">libc_enum!</span>{
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">any</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;musl&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>)), <span class="ident">repr</span>(<span class="ident">u32</span>))]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">any</span>(<span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;musl&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>), <span class="ident">repr</span>(<span class="ident">i32</span>))]</span>
     <span class="doccomment">/// Ptrace Request enum defining the action to be taken.</span>
@@ -590,7 +590,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span>{
+<span class="macro">libc_enum!</span>{
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">i32</span>)]</span>
     <span class="doccomment">/// Using the ptrace options the tracer can configure the tracee to stop</span>
     <span class="doccomment">/// at certain events. This enum is used to define those events as defined</span>
@@ -615,7 +615,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Ptrace options used in conjunction with the PTRACE_SETOPTIONS request.</span>
     <span class="doccomment">/// See `man ptrace` for more details.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Options</span>: <span class="ident">libc</span>::<span class="ident">c_int</span> {

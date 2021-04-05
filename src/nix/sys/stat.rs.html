@@ -309,7 +309,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sys</span>::<span class="ident">time</span>::{<span class="ident">TimeSpec</span>, <span class="ident">TimeVal</span>};
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SFlag</span>: <span class="ident">mode_t</span> {
         <span class="ident">S_IFIFO</span>;
         <span class="ident">S_IFCHR</span>;
@@ -322,7 +322,7 @@
     }
 );
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Mode</span>: <span class="ident">mode_t</span> {
         <span class="ident">S_IRWXU</span>;
         <span class="ident">S_IRUSR</span>;

@@ -381,9 +381,9 @@
         <span class="kw">let</span> (<span class="ident">mins</span>, <span class="ident">sec</span>) <span class="op">=</span> <span class="ident">div_mod_floor</span>(<span class="ident">offset</span>, <span class="number">60</span>);
         <span class="kw">let</span> (<span class="ident">hour</span>, <span class="ident">min</span>) <span class="op">=</span> <span class="ident">div_mod_floor</span>(<span class="ident">mins</span>, <span class="number">60</span>);
         <span class="kw">if</span> <span class="ident">sec</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}{:02}:{:02}&quot;</span>, <span class="ident">sign</span>, <span class="ident">hour</span>, <span class="ident">min</span>)
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}{:02}:{:02}&quot;</span>, <span class="ident">sign</span>, <span class="ident">hour</span>, <span class="ident">min</span>)
         } <span class="kw">else</span> {
-            <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}{:02}:{:02}:{:02}&quot;</span>, <span class="ident">sign</span>, <span class="ident">hour</span>, <span class="ident">min</span>, <span class="ident">sec</span>)
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}{:02}:{:02}:{:02}&quot;</span>, <span class="ident">sign</span>, <span class="ident">hour</span>, <span class="ident">min</span>, <span class="ident">sec</span>)
         }
     }
 }
@@ -472,20 +472,20 @@
     <span class="kw">fn</span> <span class="ident">test_date_extreme_offset</span>() {
         <span class="comment">// starting from 0.3 we don&#39;t have an offset exceeding one day.</span>
         <span class="comment">// this makes everything easier!</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
-            <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">FixedOffset</span>::<span class="ident">east</span>(<span class="number">86399</span>).<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">2</span>, <span class="number">29</span>)),
+        <span class="macro">assert_eq!</span>(
+            <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">FixedOffset</span>::<span class="ident">east</span>(<span class="number">86399</span>).<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">2</span>, <span class="number">29</span>)),
             <span class="string">&quot;2012-02-29+23:59:59&quot;</span>.<span class="ident">to_string</span>()
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
-            <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">FixedOffset</span>::<span class="ident">east</span>(<span class="number">86399</span>).<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">2</span>, <span class="number">29</span>).<span class="ident">and_hms</span>(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>)),
+        <span class="macro">assert_eq!</span>(
+            <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">FixedOffset</span>::<span class="ident">east</span>(<span class="number">86399</span>).<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">2</span>, <span class="number">29</span>).<span class="ident">and_hms</span>(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>)),
             <span class="string">&quot;2012-02-29T05:06:07+23:59:59&quot;</span>.<span class="ident">to_string</span>()
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
-            <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">FixedOffset</span>::<span class="ident">west</span>(<span class="number">86399</span>).<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">3</span>, <span class="number">4</span>)),
+        <span class="macro">assert_eq!</span>(
+            <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">FixedOffset</span>::<span class="ident">west</span>(<span class="number">86399</span>).<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">3</span>, <span class="number">4</span>)),
             <span class="string">&quot;2012-03-04-23:59:59&quot;</span>.<span class="ident">to_string</span>()
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
-            <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">FixedOffset</span>::<span class="ident">west</span>(<span class="number">86399</span>).<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">3</span>, <span class="number">4</span>).<span class="ident">and_hms</span>(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>)),
+        <span class="macro">assert_eq!</span>(
+            <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">FixedOffset</span>::<span class="ident">west</span>(<span class="number">86399</span>).<span class="ident">ymd</span>(<span class="number">2012</span>, <span class="number">3</span>, <span class="number">4</span>).<span class="ident">and_hms</span>(<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>)),
             <span class="string">&quot;2012-03-04T05:06:07-23:59:59&quot;</span>.<span class="ident">to_string</span>()
         );
     }

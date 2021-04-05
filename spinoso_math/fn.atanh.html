@@ -7,10 +7,10 @@
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">spinoso_math</span> <span class="kw">as</span> <span class="ident">math</span>;
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">math</span>::<span class="ident">atanh</span>(<span class="number">1.0</span>), <span class="prelude-val">Ok</span>(<span class="ident">f64</span>::<span class="ident">INFINITY</span>));
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">math</span>::<span class="ident">atanh</span>(<span class="number">100.0</span>).<span class="ident">is_err</span>());
+<span class="macro">assert_eq!</span>(<span class="ident">math</span>::<span class="ident">atanh</span>(<span class="number">1.0</span>), <span class="prelude-val">Ok</span>(<span class="ident">f64</span>::<span class="ident">INFINITY</span>));
+<span class="macro">assert!</span>(<span class="ident">math</span>::<span class="ident">atanh</span>(<span class="number">100.0</span>).<span class="ident">is_err</span>());
 
-<span class="macro">assert</span><span class="macro">!</span>(<span class="macro">matches</span><span class="macro">!</span>(<span class="ident">math</span>::<span class="ident">atanh</span>(<span class="ident">f64</span>::<span class="ident">NAN</span>), <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">is_nan</span>()));</pre></div>
+<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">math</span>::<span class="ident">atanh</span>(<span class="ident">f64</span>::<span class="ident">NAN</span>), <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">is_nan</span>()));</pre></div>
 <h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
 <p>If the result of computing the inverse hyperbolic tangent is <a href="https://doc.rust-lang.org/nightly/std/primitive.f64.html#associatedconstant.NAN"><code>NAN</code></a>
 a domain error is returned.</p>

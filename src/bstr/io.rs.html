@@ -813,7 +813,7 @@ More APIs may be added in the future.
         <span class="self">Self</span>: <span class="ident">Sized</span>,
         <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Ok</span>(());
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">consumed</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="lifetime">&#39;outer</span>: <span class="kw">loop</span> {
@@ -896,7 +896,7 @@ More APIs may be added in the future.
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">read_until</span>(<span class="string">b&#39;\n&#39;</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">bytes</span>) {
             <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)),
             <span class="prelude-val">Ok</span>(<span class="number">0</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
@@ -912,7 +912,7 @@ More APIs may be added in the future.
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">read_until</span>(<span class="self">self</span>.<span class="ident">terminator</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">bytes</span>) {
             <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)),
             <span class="prelude-val">Ok</span>(<span class="number">0</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
@@ -962,7 +962,7 @@ More APIs may be added in the future.
     <span class="kw">use</span> <span class="ident">bstring</span>::<span class="ident">BString</span>;
 
     <span class="kw">fn</span> <span class="ident">collect_lines</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="ident">B</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BString</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lines</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lines</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="ident">slice</span>
             .<span class="ident">as_ref</span>()
             .<span class="ident">for_byte_line</span>(<span class="op">|</span><span class="ident">line</span><span class="op">|</span> {
@@ -974,7 +974,7 @@ More APIs may be added in the future.
     }
 
     <span class="kw">fn</span> <span class="ident">collect_lines_term</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="ident">B</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BString</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lines</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lines</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="ident">slice</span>
             .<span class="ident">as_ref</span>()
             .<span class="ident">for_byte_line_with_terminator</span>(<span class="op">|</span><span class="ident">line</span><span class="op">|</span> {
@@ -987,47 +987,47 @@ More APIs may be added in the future.
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">lines_without_terminator</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;&quot;</span>), <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">BString</span><span class="op">&gt;</span>::<span class="ident">new</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;&quot;</span>), <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">BString</span><span class="op">&gt;</span>::<span class="ident">new</span>());
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;\n\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;a\nb\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;a\nb&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\nxyz\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\nxyz&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;\n\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;a\nb\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;a\nb&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\nxyz\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\nxyz&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;\r\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;\r\n\r\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;a\r\nb\r\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;a\r\nb&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\r\nxyz\r\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\r\nxyz&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;\r\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;\r\n\r\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;a\r\nb\r\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;a\r\nb&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\r\nxyz\r\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\r\nxyz&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\rxyz&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc\rxyz&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines</span>(<span class="string">&quot;abc\rxyz&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc\rxyz&quot;</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">lines_with_terminator</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;&quot;</span>), <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">BString</span><span class="op">&gt;</span>::<span class="ident">new</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;&quot;</span>), <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">BString</span><span class="op">&gt;</span>::<span class="ident">new</span>());
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;\n&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;\n\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;\n&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;a\nb\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;a\n&quot;</span>, <span class="string">&quot;b\n&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;a\nb&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;a\n&quot;</span>, <span class="string">&quot;b&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\nxyz\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc\n&quot;</span>, <span class="string">&quot;xyz\n&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\nxyz&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc\n&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;\n&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;\n\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;\n&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;a\nb\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;a\n&quot;</span>, <span class="string">&quot;b\n&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;a\nb&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;a\n&quot;</span>, <span class="string">&quot;b&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\nxyz\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc\n&quot;</span>, <span class="string">&quot;xyz\n&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\nxyz&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc\n&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;\r\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;\r\n&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;\r\n\r\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;\r\n&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;a\r\nb\r\n&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;a\r\n&quot;</span>, <span class="string">&quot;b\r\n&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;a\r\nb&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;a\r\n&quot;</span>, <span class="string">&quot;b&quot;</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;\r\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;\r\n&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;\r\n\r\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;\r\n&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;a\r\nb\r\n&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;a\r\n&quot;</span>, <span class="string">&quot;b\r\n&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;a\r\nb&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;a\r\n&quot;</span>, <span class="string">&quot;b&quot;</span>]);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\r\nxyz\r\n&quot;</span>),
-            <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc\r\n&quot;</span>, <span class="string">&quot;xyz\r\n&quot;</span>]
+            <span class="macro">vec!</span>[<span class="string">&quot;abc\r\n&quot;</span>, <span class="string">&quot;xyz\r\n&quot;</span>]
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\r\nxyz&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc\r\n&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\r\nxyz&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc\r\n&quot;</span>, <span class="string">&quot;xyz&quot;</span>]);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\rxyz&quot;</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;abc\rxyz&quot;</span>]);
+        <span class="macro">assert_eq!</span>(<span class="ident">collect_lines_term</span>(<span class="string">&quot;abc\rxyz&quot;</span>), <span class="macro">vec!</span>[<span class="string">&quot;abc\rxyz&quot;</span>]);
     }
 }
 </pre></div>

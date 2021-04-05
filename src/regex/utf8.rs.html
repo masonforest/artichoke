@@ -488,19 +488,19 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">reject_invalid</span>() {
         <span class="comment">// Invalid start byte</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xFF</span>]), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xFF</span>]), <span class="prelude-val">None</span>);
         <span class="comment">// Surrogate pair</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xED</span>, <span class="number">0xA0</span>, <span class="number">0x81</span>]), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xED</span>, <span class="number">0xA0</span>, <span class="number">0x81</span>]), <span class="prelude-val">None</span>);
         <span class="comment">// Invalid continuation byte.</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xD4</span>, <span class="number">0xC2</span>]), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xD4</span>, <span class="number">0xC2</span>]), <span class="prelude-val">None</span>);
         <span class="comment">// Bad lengths</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xC3</span>]), <span class="prelude-val">None</span>); <span class="comment">// 2 bytes</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xEF</span>, <span class="number">0xBF</span>]), <span class="prelude-val">None</span>); <span class="comment">// 3 bytes</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xF4</span>, <span class="number">0x8F</span>, <span class="number">0xBF</span>]), <span class="prelude-val">None</span>); <span class="comment">// 4 bytes</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xC3</span>]), <span class="prelude-val">None</span>); <span class="comment">// 2 bytes</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xEF</span>, <span class="number">0xBF</span>]), <span class="prelude-val">None</span>); <span class="comment">// 3 bytes</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xF4</span>, <span class="number">0x8F</span>, <span class="number">0xBF</span>]), <span class="prelude-val">None</span>); <span class="comment">// 4 bytes</span>
                                                             <span class="comment">// Not a minimal UTF-8 sequence</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="ident">TAG_TWO</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>]), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="ident">TAG_THREE</span>, <span class="ident">TAG_CONT</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>]), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="ident">TAG_TWO</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>]), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="ident">TAG_THREE</span>, <span class="ident">TAG_CONT</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>]), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">decode_utf8</span>(<span class="kw-2">&amp;</span>[<span class="ident">TAG_FOUR</span>, <span class="ident">TAG_CONT</span>, <span class="ident">TAG_CONT</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>,]),
             <span class="prelude-val">None</span>
         );
@@ -509,20 +509,20 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">reject_invalid_last</span>() {
         <span class="comment">// Invalid start byte</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xFF</span>]), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xFF</span>]), <span class="prelude-val">None</span>);
         <span class="comment">// Surrogate pair</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xED</span>, <span class="number">0xA0</span>, <span class="number">0x81</span>]), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xED</span>, <span class="number">0xA0</span>, <span class="number">0x81</span>]), <span class="prelude-val">None</span>);
         <span class="comment">// Bad lengths</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xC3</span>]), <span class="prelude-val">None</span>); <span class="comment">// 2 bytes</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xEF</span>, <span class="number">0xBF</span>]), <span class="prelude-val">None</span>); <span class="comment">// 3 bytes</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xF4</span>, <span class="number">0x8F</span>, <span class="number">0xBF</span>]), <span class="prelude-val">None</span>); <span class="comment">// 4 bytes</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xC3</span>]), <span class="prelude-val">None</span>); <span class="comment">// 2 bytes</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xEF</span>, <span class="number">0xBF</span>]), <span class="prelude-val">None</span>); <span class="comment">// 3 bytes</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="number">0xF4</span>, <span class="number">0x8F</span>, <span class="number">0xBF</span>]), <span class="prelude-val">None</span>); <span class="comment">// 4 bytes</span>
                                                                  <span class="comment">// Not a minimal UTF-8 sequence</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="ident">TAG_TWO</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>]), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="ident">TAG_TWO</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>]), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span>[<span class="ident">TAG_THREE</span>, <span class="ident">TAG_CONT</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>,]),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">decode_last_utf8</span>(
                 <span class="kw-2">&amp;</span>[<span class="ident">TAG_FOUR</span>, <span class="ident">TAG_CONT</span>, <span class="ident">TAG_CONT</span>, <span class="ident">TAG_CONT</span> <span class="op">|</span> <span class="string">b&#39;a&#39;</span>,]
             ),

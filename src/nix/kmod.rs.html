@@ -183,7 +183,7 @@
     <span class="ident">Errno</span>::<span class="ident">result</span>(<span class="ident">res</span>).<span class="ident">map</span>(<span class="ident">drop</span>)
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="doccomment">/// Flags used by the `finit_module` function.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModuleInitFlags</span>: <span class="ident">libc</span>::<span class="ident">c_uint</span> {
         <span class="doccomment">/// Ignore symbol version hashes.</span>
@@ -220,7 +220,7 @@
     <span class="ident">Errno</span>::<span class="ident">result</span>(<span class="ident">res</span>).<span class="ident">map</span>(<span class="ident">drop</span>)
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="doccomment">/// Flags used by `delete_module`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// See [`man delete_module(2)`](http://man7.org/linux/man-pages/man2/delete_module.2.html)</span>

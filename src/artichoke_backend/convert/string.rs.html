@@ -248,10 +248,10 @@
         <span class="comment">// get a mrb_value that can&#39;t be converted to a primitive type.</span>
         <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;Object.new&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">try_into_mut</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
     }
 
-    <span class="macro">quickcheck</span><span class="macro">!</span> {
+    <span class="macro">quickcheck!</span> {
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">convert_to_string</span>(<span class="ident">s</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();

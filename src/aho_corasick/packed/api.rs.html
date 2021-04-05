@@ -939,7 +939,7 @@
             <span class="kw">return</span> <span class="self">self</span>;
         }
         <span class="comment">// Just in case PATTERN_LIMIT increases beyond u16::MAX.</span>
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">patterns</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">u16</span>::<span class="ident">MAX</span> <span class="kw">as</span> <span class="ident">usize</span>);
+        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">patterns</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">u16</span>::<span class="ident">MAX</span> <span class="kw">as</span> <span class="ident">usize</span>);
 
         <span class="kw">let</span> <span class="ident">pattern</span> <span class="op">=</span> <span class="ident">pattern</span>.<span class="ident">as_ref</span>();
         <span class="kw">if</span> <span class="ident">pattern</span>.<span class="ident">is_empty</span>() {

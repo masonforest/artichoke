@@ -401,7 +401,7 @@
 <span class="doccomment">/// An atomic counter used to allocate thread IDs.</span>
 <span class="kw">static</span> <span class="ident">COUNTER</span>: <span class="ident">AtomicUsize</span> <span class="op">=</span> <span class="ident">AtomicUsize</span>::<span class="ident">new</span>(<span class="number">1</span>);
 
-<span class="macro">thread_local</span><span class="macro">!</span>(
+<span class="macro">thread_local!</span>(
     <span class="doccomment">/// A thread local used to assign an ID to a thread.</span>
     <span class="kw">static</span> <span class="ident">THREAD_ID</span>: <span class="ident">usize</span> <span class="op">=</span> {
         <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="ident">COUNTER</span>.<span class="ident">fetch_add</span>(<span class="number">1</span>, <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>);
@@ -415,7 +415,7 @@
         <span class="comment">// This checks that the counter never wraps around, since atomic</span>
         <span class="comment">// addition wraps around on overflow.</span>
         <span class="kw">if</span> <span class="ident">next</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;regex: thread ID allocation space exhausted&quot;</span>);
+            <span class="macro">panic!</span>(<span class="string">&quot;regex: thread ID allocation space exhausted&quot;</span>);
         }
         <span class="ident">next</span>
     };
@@ -519,7 +519,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">create</span>: <span class="ident">CreateFn</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Pool</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">owner</span> <span class="op">=</span> <span class="ident">AtomicUsize</span>::<span class="ident">new</span>(<span class="number">0</span>);
         <span class="kw">let</span> <span class="ident">owner_val</span> <span class="op">=</span> <span class="ident">create</span>();
-        <span class="ident">Pool</span> { <span class="ident">stack</span>: <span class="ident">Mutex</span>::<span class="ident">new</span>(<span class="macro">vec</span><span class="macro">!</span>[]), <span class="ident">create</span>, <span class="ident">owner</span>, <span class="ident">owner_val</span> }
+        <span class="ident">Pool</span> { <span class="ident">stack</span>: <span class="ident">Mutex</span>::<span class="ident">new</span>(<span class="macro">vec!</span>[]), <span class="ident">create</span>, <span class="ident">owner</span>, <span class="ident">owner_val</span> }
     }
 
     <span class="doccomment">/// Get a value from the pool. The caller is guaranteed to have exclusive</span>
@@ -636,7 +636,7 @@
         <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
 
         <span class="kw">let</span> <span class="ident">pool</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Pool</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">Pool</span>::<span class="ident">new</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&#39;a&#39;</span>]))));
+            <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">Pool</span>::<span class="ident">new</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>]))));
         <span class="ident">pool</span>.<span class="ident">get</span>().<span class="ident">value</span>().<span class="ident">borrow_mut</span>().<span class="ident">push</span>(<span class="string">&#39;x&#39;</span>);
 
         <span class="kw">let</span> <span class="ident">pool1</span> <span class="op">=</span> <span class="ident">pool</span>.<span class="ident">clone</span>();
@@ -665,7 +665,7 @@
         <span class="comment">//</span>
         <span class="comment">// (Technically this is an implementation detail and not a contract of</span>
         <span class="comment">// Pool&#39;s API.)</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;x&#39;</span>], <span class="kw-2">*</span><span class="ident">pool</span>.<span class="ident">get</span>().<span class="ident">value</span>().<span class="ident">borrow</span>());
+        <span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;x&#39;</span>], <span class="kw-2">*</span><span class="ident">pool</span>.<span class="ident">get</span>().<span class="ident">value</span>().<span class="ident">borrow</span>());
     }
 }
 </pre></div>

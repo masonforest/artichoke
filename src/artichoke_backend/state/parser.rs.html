@@ -239,7 +239,7 @@
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">sys</span>::<span class="ident">mrbc_context_new</span>(<span class="ident">mrb</span>) };
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
         <span class="ident">reset_context_filename</span>(<span class="ident">mrb</span>, <span class="kw">unsafe</span> { <span class="ident">context</span>.<span class="ident">as_mut</span>() });
-        <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">context</span>, <span class="ident">stack</span>: <span class="macro">vec</span><span class="macro">!</span>[] })
+        <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">context</span>, <span class="ident">stack</span>: <span class="macro">vec!</span>[] })
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>) {
@@ -425,7 +425,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">top_filename_does_not_contain_nul_byte</span>() {
         <span class="kw">let</span> <span class="ident">contains_nul_byte</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">TOP_FILENAME</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">b</span><span class="op">|</span> <span class="ident">b</span> <span class="op">=</span><span class="op">=</span> <span class="string">b&#39;\0&#39;</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">contains_nul_byte</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">contains_nul_byte</span>);
     }
 }
 </pre></div>

@@ -307,7 +307,7 @@
 }
 
 <span class="comment">// linux quota version &gt;= 2</span>
-<span class="macro">libc_enum</span><span class="macro">!</span>{
+<span class="macro">libc_enum!</span>{
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">i32</span>)]</span>
     <span class="kw">enum</span> <span class="ident">QuotaSubCmd</span> {
         <span class="ident">Q_SYNC</span>,
@@ -318,7 +318,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span>{
+<span class="macro">libc_enum!</span>{
     <span class="doccomment">/// The scope of the quota.</span>
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">i32</span>)]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">QuotaType</span> {
@@ -329,7 +329,7 @@
     }
 }
 
-<span class="macro">libc_enum</span><span class="macro">!</span>{
+<span class="macro">libc_enum!</span>{
     <span class="doccomment">/// The type of quota format to use.</span>
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">i32</span>)]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">QuotaFmt</span> {
@@ -346,7 +346,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="doccomment">/// Indicates the quota fields that are valid to read from.</span>
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">QuotaValidFlags</span>: <span class="ident">u32</span> {

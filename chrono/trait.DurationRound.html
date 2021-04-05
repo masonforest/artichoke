@@ -16,11 +16,11 @@ will also fail if the <code>Duration</code> is bigger than the timestamp.</p>
 <h1 id="example" class="section-header"><a href="#example">Example</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2018</span>, <span class="number">1</span>, <span class="number">11</span>).<span class="ident">and_hms_milli</span>(<span class="number">12</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">154</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(
+<span class="macro">assert_eq!</span>(
     <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">milliseconds</span>(<span class="number">10</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
     <span class="string">&quot;2018-01-11 12:00:00.150 UTC&quot;</span>
 );
-<span class="macro">assert_eq</span><span class="macro">!</span>(
+<span class="macro">assert_eq!</span>(
     <span class="ident">dt</span>.<span class="ident">duration_round</span>(<span class="ident">Duration</span>::<span class="ident">days</span>(<span class="number">1</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
     <span class="string">&quot;2018-01-12 00:00:00 UTC&quot;</span>
 );</pre></div>
@@ -28,11 +28,11 @@ will also fail if the <code>Duration</code> is bigger than the timestamp.</p>
 <h1 id="example-1" class="section-header"><a href="#example-1">Example</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2018</span>, <span class="number">1</span>, <span class="number">11</span>).<span class="ident">and_hms_milli</span>(<span class="number">12</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">154</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(
+<span class="macro">assert_eq!</span>(
     <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">milliseconds</span>(<span class="number">10</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
     <span class="string">&quot;2018-01-11 12:00:00.150 UTC&quot;</span>
 );
-<span class="macro">assert_eq</span><span class="macro">!</span>(
+<span class="macro">assert_eq!</span>(
     <span class="ident">dt</span>.<span class="ident">duration_trunc</span>(<span class="ident">Duration</span>::<span class="ident">days</span>(<span class="number">1</span>)).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(),
     <span class="string">&quot;2018-01-11 00:00:00 UTC&quot;</span>
 );</pre></div>

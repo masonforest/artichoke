@@ -710,7 +710,7 @@
     <span class="doccomment">/// Returns `None` when it will result in overflow.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">checked_add_signed</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">OldDuration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Date</span><span class="op">&lt;</span><span class="ident">Tz</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">date</span> <span class="op">=</span> <span class="macro">try_opt</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">date</span>.<span class="ident">checked_add_signed</span>(<span class="ident">rhs</span>));
+        <span class="kw">let</span> <span class="ident">date</span> <span class="op">=</span> <span class="macro">try_opt!</span>(<span class="self">self</span>.<span class="ident">date</span>.<span class="ident">checked_add_signed</span>(<span class="ident">rhs</span>));
         <span class="prelude-val">Some</span>(<span class="ident">Date</span> { <span class="ident">date</span>: <span class="ident">date</span>, <span class="ident">offset</span>: <span class="self">self</span>.<span class="ident">offset</span> })
     }
 
@@ -719,7 +719,7 @@
     <span class="doccomment">/// Returns `None` when it will result in overflow.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">checked_sub_signed</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">OldDuration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Date</span><span class="op">&lt;</span><span class="ident">Tz</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">date</span> <span class="op">=</span> <span class="macro">try_opt</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">date</span>.<span class="ident">checked_sub_signed</span>(<span class="ident">rhs</span>));
+        <span class="kw">let</span> <span class="ident">date</span> <span class="op">=</span> <span class="macro">try_opt!</span>(<span class="self">self</span>.<span class="ident">date</span>.<span class="ident">checked_sub_signed</span>(<span class="ident">rhs</span>));
         <span class="prelude-val">Some</span>(<span class="ident">Date</span> { <span class="ident">date</span>: <span class="ident">date</span>, <span class="ident">offset</span>: <span class="self">self</span>.<span class="ident">offset</span> })
     }
 
@@ -950,7 +950,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Tz</span>: <span class="ident">TimeZone</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Date</span><span class="op">&lt;</span><span class="ident">Tz</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{:?}{:?}&quot;</span>, <span class="self">self</span>.<span class="ident">naive_local</span>(), <span class="self">self</span>.<span class="ident">offset</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{:?}{:?}&quot;</span>, <span class="self">self</span>.<span class="ident">naive_local</span>(), <span class="self">self</span>.<span class="ident">offset</span>)
     }
 }
 
@@ -959,7 +959,7 @@
     <span class="ident">Tz</span>::<span class="ident">Offset</span>: <span class="ident">fmt</span>::<span class="ident">Display</span>,
 {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}{}&quot;</span>, <span class="self">self</span>.<span class="ident">naive_local</span>(), <span class="self">self</span>.<span class="ident">offset</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}{}&quot;</span>, <span class="self">self</span>.<span class="ident">naive_local</span>(), <span class="self">self</span>.<span class="ident">offset</span>)
     }
 }
 </pre></div>

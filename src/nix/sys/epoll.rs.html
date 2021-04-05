@@ -119,7 +119,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Error</span>;
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EpollFlags</span>: <span class="ident">c_int</span> {
         <span class="ident">EPOLLIN</span>;
         <span class="ident">EPOLLPRI</span>;
@@ -149,7 +149,7 @@
     <span class="ident">EpollCtlMod</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">EPOLL_CTL_MOD</span>,
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>{
+<span class="macro">libc_bitflags!</span>{
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EpollCreateFlags</span>: <span class="ident">c_int</span> {
         <span class="ident">EPOLL_CLOEXEC</span>;
     }

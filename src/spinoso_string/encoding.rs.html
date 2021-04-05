@@ -704,7 +704,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_ascii_compatible</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches</span><span class="macro">!</span>(<span class="self">self</span>, <span class="self">Self</span>::<span class="ident">Utf8</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">Ascii</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">Binary</span>)
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span>::<span class="ident">Utf8</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">Ascii</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">Binary</span>)
     }
 
     <span class="doccomment">/// Returns true for dummy encodings.</span>
@@ -733,7 +733,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_dummy</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="op">!</span><span class="macro">matches</span><span class="macro">!</span>(<span class="self">self</span>, <span class="self">Self</span>::<span class="ident">Utf8</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">Ascii</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">Binary</span>)
+        <span class="op">!</span><span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span>::<span class="ident">Utf8</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">Ascii</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">Binary</span>)
     }
 }
 </pre></div>

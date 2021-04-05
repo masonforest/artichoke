@@ -1497,7 +1497,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">ByteSet</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">for</span> <span class="ident">b</span> <span class="kw">in</span> <span class="number">0</span>..<span class="op">=</span><span class="number">255</span> {
             <span class="kw">if</span> <span class="self">self</span>.<span class="ident">contains</span>(<span class="ident">b</span>) {
                 <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">b</span>);
@@ -1533,7 +1533,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">RareByteOffsets</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offsets</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offsets</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">for</span> <span class="ident">off</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">set</span>.<span class="ident">iter</span>() {
             <span class="kw">if</span> <span class="ident">off</span>.<span class="ident">max</span> <span class="op">&gt;</span> <span class="number">0</span> {
                 <span class="ident">offsets</span>.<span class="ident">push</span>(<span class="ident">off</span>);
@@ -1635,7 +1635,7 @@
                 <span class="ident">byte2</span>: <span class="ident">bytes</span>[<span class="number">1</span>],
                 <span class="ident">byte3</span>: <span class="ident">bytes</span>[<span class="number">2</span>],
             })),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
     }
 
@@ -1886,7 +1886,7 @@
     <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StartBytesBuilder</span> {
         <span class="ident">StartBytesBuilder</span> {
             <span class="ident">ascii_case_insensitive</span>: <span class="bool-val">false</span>,
-            <span class="ident">byteset</span>: <span class="macro">vec</span><span class="macro">!</span>[<span class="bool-val">false</span>; <span class="number">256</span>],
+            <span class="ident">byteset</span>: <span class="macro">vec!</span>[<span class="bool-val">false</span>; <span class="number">256</span>],
             <span class="ident">count</span>: <span class="number">0</span>,
             <span class="ident">rank_sum</span>: <span class="number">0</span>,
         }
@@ -1937,7 +1937,7 @@
                 <span class="ident">byte2</span>: <span class="ident">bytes</span>[<span class="number">1</span>],
                 <span class="ident">byte3</span>: <span class="ident">bytes</span>[<span class="number">2</span>],
             })),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
     }
 
@@ -2113,7 +2113,7 @@
         <span class="comment">// b.add(&quot;Джон Уотсон&quot;.as_bytes());</span>
 
         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">build</span>().<span class="ident">unwrap</span>();
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">s</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">s</span>);
     }
 }
 </pre></div>

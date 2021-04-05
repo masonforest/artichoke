@@ -380,7 +380,7 @@
         }
         <span class="ident">arena</span>.<span class="ident">restore</span>();
         <span class="ident">interp</span>.<span class="ident">full_gc</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">interp</span>.<span class="ident">live_object_count</span>(),
             <span class="comment">// plus 1 because stack keep is enabled in eval which marks the last</span>
             <span class="comment">// returned value as live.</span>
@@ -401,7 +401,7 @@
             }
         }
         <span class="ident">interp</span>.<span class="ident">full_gc</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">interp</span>.<span class="ident">live_object_count</span>(),
             <span class="comment">// plus 1 because stack keep is enabled in eval which marks the last</span>
             <span class="comment">// returned value as live.</span>
@@ -436,7 +436,7 @@
             .<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">live</span> <span class="op">=</span> <span class="ident">arena</span>.<span class="ident">live_object_count</span>();
         <span class="ident">arena</span>.<span class="ident">full_gc</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">arena</span>.<span class="ident">live_object_count</span>(),
             <span class="ident">live</span>,
             <span class="string">&quot;GC is disabled. No objects should be collected&quot;</span>
@@ -444,7 +444,7 @@
         <span class="ident">arena</span>.<span class="ident">restore</span>();
         <span class="ident">interp</span>.<span class="ident">enable_gc</span>();
         <span class="ident">interp</span>.<span class="ident">full_gc</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">interp</span>.<span class="ident">live_object_count</span>(),
             <span class="ident">live</span> <span class="op">-</span> <span class="number">2</span>,
             <span class="string">&quot;Arrays should be collected after enabling GC and running a full GC&quot;</span>
@@ -459,7 +459,7 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">arena</span>.<span class="ident">eval</span>(<span class="string">b&quot;&quot;</span>).<span class="ident">unwrap</span>();
         <span class="ident">arena</span>.<span class="ident">restore</span>();
         <span class="ident">interp</span>.<span class="ident">full_gc</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">interp</span>.<span class="ident">live_object_count</span>(), <span class="ident">baseline_object_count</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">interp</span>.<span class="ident">live_object_count</span>(), <span class="ident">baseline_object_count</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -471,13 +471,13 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">arena</span> <span class="op">=</span> <span class="ident">initial_arena</span>.<span class="ident">create_arena_savepoint</span>().<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">arena</span>.<span class="ident">eval</span>(<span class="string">b&quot;&#39;gc test&#39;&quot;</span>);
             <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">unwrap</span>();
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">value</span>.<span class="ident">is_dead</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">arena</span>));
+            <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">value</span>.<span class="ident">is_dead</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">arena</span>));
             <span class="ident">arena</span>.<span class="ident">restore</span>();
             <span class="ident">initial_arena</span>.<span class="ident">incremental_gc</span>();
         }
         <span class="ident">initial_arena</span>.<span class="ident">restore</span>();
         <span class="ident">interp</span>.<span class="ident">full_gc</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">interp</span>.<span class="ident">live_object_count</span>(),
             <span class="comment">// plus 1 because stack keep is enabled in eval which marks the</span>
             <span class="comment">// last returned value as live.</span>

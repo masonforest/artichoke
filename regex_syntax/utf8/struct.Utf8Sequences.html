@@ -29,17 +29,17 @@ scalar values.</p>
 <span class="kw">let</span> <span class="ident">seqs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Utf8Sequences</span>::<span class="ident">new</span>(<span class="string">&#39;\u{0}&#39;</span>, <span class="string">&#39;\u{FFFF}&#39;</span>).<span class="ident">collect</span>();
 
 <span class="comment">// UTF-8 encoding of &#39;a&#39;.</span>
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0x61</span>]));
+<span class="macro">assert!</span>(<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0x61</span>]));
 <span class="comment">// UTF-8 encoding of &#39;☃&#39; (`\u{2603}`).</span>
-<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0xE2</span>, <span class="number">0x98</span>, <span class="number">0x83</span>]));
+<span class="macro">assert!</span>(<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0xE2</span>, <span class="number">0x98</span>, <span class="number">0x83</span>]));
 <span class="comment">// UTF-8 encoding of `\u{10348}` (outside the BMP).</span>
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0xF0</span>, <span class="number">0x90</span>, <span class="number">0x8D</span>, <span class="number">0x88</span>]));
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0xF0</span>, <span class="number">0x90</span>, <span class="number">0x8D</span>, <span class="number">0x88</span>]));
 <span class="comment">// Tries to match against a UTF-8 encoding of a surrogate codepoint,</span>
 <span class="comment">// which is invalid UTF-8, and therefore fails, despite the fact that</span>
 <span class="comment">// the corresponding codepoint (0xD800) falls in the range given.</span>
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0xED</span>, <span class="number">0xA0</span>, <span class="number">0x80</span>]));
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0xED</span>, <span class="number">0xA0</span>, <span class="number">0x80</span>]));
 <span class="comment">// And fails against plain old invalid UTF-8.</span>
-<span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0xFF</span>, <span class="number">0xFF</span>]));</pre></div>
+<span class="macro">assert!</span>(<span class="op">!</span><span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">seqs</span>, <span class="kw-2">&amp;</span>[<span class="number">0xFF</span>, <span class="number">0xFF</span>]));</pre></div>
 <p>If this example seems circuitous, that’s because it is! It’s meant to be
 illustrative. In practice, you could just try to decode your byte sequence
 and compare it with the scalar value range directly. However, this is not

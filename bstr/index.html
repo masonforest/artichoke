@@ -38,11 +38,11 @@ of occurrences of a subtring:</p>
 
 <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="string">b&quot;foo bar foo foo quux foo&quot;</span>;
 
-<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">matches</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">matches</span> <span class="op">=</span> <span class="macro">vec!</span>[];
 <span class="kw">for</span> <span class="ident">start</span> <span class="kw">in</span> <span class="ident">s</span>.<span class="ident">find_iter</span>(<span class="string">&quot;foo&quot;</span>) {
     <span class="ident">matches</span>.<span class="ident">push</span>(<span class="ident">start</span>);
 }
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">matches</span>, [<span class="number">0</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">21</span>]);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">matches</span>, [<span class="number">0</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">21</span>]);</pre></div>
 <p>Here’s another example showing how to do a search and replace (and also showing
 use of the <code>B</code> function):</p>
 
@@ -51,7 +51,7 @@ use of the <code>B</code> function):</p>
 
 <span class="kw">let</span> <span class="ident">old</span> <span class="op">=</span> <span class="ident">B</span>(<span class="string">&quot;foo ☃☃☃ foo foo quux foo&quot;</span>);
 <span class="kw">let</span> <span class="ident">new</span> <span class="op">=</span> <span class="ident">old</span>.<span class="ident">replace</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;hello&quot;</span>);
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">new</span>, <span class="ident">B</span>(<span class="string">&quot;hello ☃☃☃ hello hello quux hello&quot;</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">new</span>, <span class="ident">B</span>(<span class="string">&quot;hello ☃☃☃ hello hello quux hello&quot;</span>));</pre></div>
 <p>And here’s an example that shows case conversion, even in the presence of
 invalid UTF-8:</p>
 
@@ -61,7 +61,7 @@ invalid UTF-8:</p>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lower</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">from</span>(<span class="string">&quot;hello β&quot;</span>);
 <span class="ident">lower</span>[<span class="number">0</span>] <span class="op">=</span> <span class="string">b&#39;\xFF&#39;</span>;
 <span class="comment">// lowercase β is uppercased to Β</span>
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">lower</span>.<span class="ident">to_uppercase</span>(), <span class="string">b&quot;\xFFELLO \xCE\x92&quot;</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">lower</span>.<span class="ident">to_uppercase</span>(), <span class="string">b&quot;\xFFELLO \xCE\x92&quot;</span>);</pre></div>
 <h1 id="convenient-debug-representation" class="section-header"><a href="#convenient-debug-representation">Convenient debug representation</a></h1>
 <p>When working with byte strings, it is often useful to be able to print them
 as if they were byte strings and not sequences of integers. While this crate
@@ -76,7 +76,7 @@ this crate does provide the <code>BStr</code> and <code>BString</code> types whi
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">from</span>(<span class="string">&quot;hello β&quot;</span>);
 <span class="ident">bytes</span>[<span class="number">0</span>] <span class="op">=</span> <span class="string">b&#39;\xFF&#39;</span>;
 
-<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">bytes</span>.<span class="ident">as_bstr</span>());</pre></div>
+<span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">bytes</span>.<span class="ident">as_bstr</span>());</pre></div>
 <p>will output <code>&quot;\xFFello β&quot;</code>.</p>
 <p>This example works because the
 <a href="trait.ByteSlice.html#method.as_bstr"><code>ByteSlice::as_bstr</code></a>
@@ -196,7 +196,7 @@ replacement codepoint whenever it comes across bytes that are not valid UTF-8:</
 
 <span class="kw">let</span> <span class="ident">bs</span> <span class="op">=</span> <span class="string">b&quot;a\xFF\xFFz&quot;</span>;
 <span class="kw">let</span> <span class="ident">chars</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">bs</span>.<span class="ident">chars</span>().<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;\u{FFFD}&#39;</span>, <span class="string">&#39;\u{FFFD}&#39;</span>, <span class="string">&#39;z&#39;</span>], <span class="ident">chars</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;\u{FFFD}&#39;</span>, <span class="string">&#39;\u{FFFD}&#39;</span>, <span class="string">&#39;z&#39;</span>], <span class="ident">chars</span>);</pre></div>
 <p>There are a few ways in which invalid bytes can be substituted with a Unicode
 replacement codepoint. One way, not used by this crate, is to replace every
 individual invalid byte with a single replacement codepoint. In contrast, the
@@ -217,7 +217,7 @@ replacement codepoint. For example:</p>
 <span class="comment">// The bytes \xF0\x9F\x87 could lead to a valid UTF-8 sequence, but 3 of them</span>
 <span class="comment">// on their own are invalid. Only one replacement codepoint is substituted,</span>
 <span class="comment">// which demonstrates the &quot;substitution of maximal subparts&quot; strategy.</span>
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;\u{FFFD}&#39;</span>, <span class="string">&#39;z&#39;</span>], <span class="ident">chars</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;\u{FFFD}&#39;</span>, <span class="string">&#39;z&#39;</span>], <span class="ident">chars</span>);</pre></div>
 <p>If you do need to access the raw bytes for some reason in an iterator like
 <code>Chars</code>, then you should use the iterator’s “indices” variant, which gives
 the byte offsets containing the invalid UTF-8 bytes that were substituted with
@@ -231,12 +231,12 @@ the replacement codepoint. For example:</p>
 <span class="comment">// Even though the replacement codepoint is encoded as 3 bytes itself, the</span>
 <span class="comment">// byte range given here is only two bytes, corresponding to the original</span>
 <span class="comment">// raw bytes.</span>
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[(<span class="number">0</span>, <span class="number">1</span>, <span class="string">&#39;a&#39;</span>), (<span class="number">1</span>, <span class="number">3</span>, <span class="string">&#39;\u{FFFD}&#39;</span>), (<span class="number">3</span>, <span class="number">4</span>, <span class="string">&#39;z&#39;</span>)], <span class="ident">chars</span>);
+<span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[(<span class="number">0</span>, <span class="number">1</span>, <span class="string">&#39;a&#39;</span>), (<span class="number">1</span>, <span class="number">3</span>, <span class="string">&#39;\u{FFFD}&#39;</span>), (<span class="number">3</span>, <span class="number">4</span>, <span class="string">&#39;z&#39;</span>)], <span class="ident">chars</span>);
 
 <span class="comment">// Thus, getting the original raw bytes is as simple as slicing the original</span>
 <span class="comment">// byte string:</span>
 <span class="kw">let</span> <span class="ident">chars</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">bs</span>.<span class="ident">char_indices</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">s</span>, <span class="ident">e</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">bs</span>[<span class="ident">s</span>..<span class="ident">e</span>]).<span class="ident">collect</span>();
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">B</span>(<span class="string">&quot;a&quot;</span>), <span class="ident">B</span>(<span class="string">b&quot;\xE2\x98&quot;</span>), <span class="ident">B</span>(<span class="string">&quot;z&quot;</span>)], <span class="ident">chars</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="ident">B</span>(<span class="string">&quot;a&quot;</span>), <span class="ident">B</span>(<span class="string">b&quot;\xE2\x98&quot;</span>), <span class="ident">B</span>(<span class="string">&quot;z&quot;</span>)], <span class="ident">chars</span>);</pre></div>
 <h1 id="file-paths-and-os-strings" class="section-header"><a href="#file-paths-and-os-strings">File paths and OS strings</a></h1>
 <p>One of the premiere features of Rust’s standard library is how it handles file
 paths. In particular, it makes it very hard to write incorrect code while

@@ -665,7 +665,7 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">posix_fadvise</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span>
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AtFlags</span>: <span class="ident">c_int</span> {
         <span class="ident">AT_REMOVEDIR</span>;
         <span class="ident">AT_SYMLINK_FOLLOW</span>;
@@ -677,7 +677,7 @@
     }
 }
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="doccomment">/// Configuration options for opened files.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OFlag</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// Mask for the access mode of the file.</span>
@@ -860,7 +860,7 @@
     <span class="ident">path</span>.<span class="ident">with_nix_path</span>(<span class="op">|</span><span class="ident">cstr</span><span class="op">|</span> <span class="kw">unsafe</span> {
         <span class="kw">match</span> <span class="ident">dirfd</span> {
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>)]</span>
-            <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span>
             <span class="prelude-val">Some</span>(<span class="ident">dirfd</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">libc</span>::<span class="ident">readlinkat</span>(
                 <span class="ident">dirfd</span>,
@@ -882,7 +882,7 @@
     <span class="comment">// simple case: result is strictly less than `PATH_MAX`</span>
     <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">readlink_maybe_at</span>(<span class="ident">dirfd</span>, <span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">v</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">Errno</span>::<span class="ident">result</span>(<span class="ident">res</span>)<span class="question-mark">?</span>;
-    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">len</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span>);
+    <span class="macro">debug_assert!</span>(<span class="ident">len</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span>);
     <span class="kw">if</span> (<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">&lt;</span> <span class="ident">v</span>.<span class="ident">capacity</span>() {
         <span class="kw">return</span> <span class="ident">wrap_readlink_result</span>(<span class="ident">v</span>, <span class="ident">res</span>);
     }
@@ -904,7 +904,7 @@
         <span class="ident">v</span>.<span class="ident">reserve_exact</span>(<span class="ident">try_size</span>);
         <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">readlink_maybe_at</span>(<span class="ident">dirfd</span>, <span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">v</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">Errno</span>::<span class="ident">result</span>(<span class="ident">res</span>)<span class="question-mark">?</span>;
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">len</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="macro">debug_assert!</span>(<span class="ident">len</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span>);
         <span class="kw">if</span> (<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">&lt;</span> <span class="ident">v</span>.<span class="ident">capacity</span>() {
             <span class="kw">break</span> <span class="ident">wrap_readlink_result</span>(<span class="ident">v</span>, <span class="ident">res</span>);
         } <span class="kw">else</span> {
@@ -938,7 +938,7 @@
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="doccomment">/// Additional flags for file sealing, which allows for limiting operations on a file.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SealFlag</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// Prevents further calls to `fcntl()` with `F_ADD_SEALS`.</span>
@@ -952,7 +952,7 @@
     }
 );
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="doccomment">/// Additional configuration flags for `fcntl`&#39;s `F_SETFD`.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FdFlag</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// The file descriptor will automatically be closed during a successful `execve(2)`.</span>
@@ -1070,7 +1070,7 @@
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="macro">libc_bitflags</span><span class="macro">!</span> {
+<span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Additional flags to `splice` and friends.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SpliceFFlags</span>: <span class="ident">c_uint</span> {
         <span class="doccomment">/// Request that pages be moved instead of copied.</span>
@@ -1175,7 +1175,7 @@
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="doccomment">/// Mode argument flags for fallocate determining operation performed on a given range.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FallocateFlags</span>: <span class="ident">c_int</span> {
         <span class="doccomment">/// File size is not changed.</span>
@@ -1235,7 +1235,7 @@
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::<span class="prelude-ty">Result</span>;
 
-    <span class="macro">libc_enum</span><span class="macro">!</span> {
+    <span class="macro">libc_enum!</span> {
         <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">i32</span>)]</span>
         <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">PosixFadviseAdvice</span> {
             <span class="ident">POSIX_FADV_NORMAL</span>,

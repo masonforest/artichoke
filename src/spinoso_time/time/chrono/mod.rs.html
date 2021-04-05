@@ -748,10 +748,10 @@
         <span class="kw">let</span> <span class="ident">datetime</span> <span class="op">=</span> <span class="ident">NaiveDateTime</span>::<span class="ident">new</span>(<span class="ident">date</span>, <span class="ident">time</span>);
         <span class="kw">let</span> <span class="ident">datetime</span> <span class="op">=</span> <span class="ident">DateTime</span>::<span class="op">&lt;</span><span class="ident">Utc</span><span class="op">&gt;</span>::<span class="ident">from_utc</span>(<span class="ident">datetime</span>, <span class="ident">Utc</span>);
 
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">datetime</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="ident">NANOS_IN_SECOND</span>);
+        <span class="macro">assert!</span>(<span class="ident">datetime</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="ident">NANOS_IN_SECOND</span>);
         <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">datetime</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">second</span>(), <span class="number">60</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="number">500_000_000</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">second</span>(), <span class="number">60</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="number">500_000_000</span>);
         <span class="kw">let</span> <span class="ident">ToA</span> {
             <span class="ident">sec</span>,
             <span class="ident">min</span>,
@@ -761,12 +761,12 @@
             <span class="ident">year</span>,
             ..
         } <span class="op">=</span> <span class="ident">time</span>.<span class="ident">to_a</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">sec</span>, <span class="number">60</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">min</span>, <span class="number">59</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">hour</span>, <span class="number">23</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">day</span>, <span class="number">31</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">month</span>, <span class="number">12</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">year</span>, <span class="number">2016</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">sec</span>, <span class="number">60</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">min</span>, <span class="number">59</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">hour</span>, <span class="number">23</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">day</span>, <span class="number">31</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">month</span>, <span class="number">12</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">year</span>, <span class="number">2016</span>);
     }
 }
 
@@ -787,33 +787,33 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">properties_utc</span>() {
         <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">DateTime</span>::<span class="op">&lt;</span><span class="ident">Utc</span><span class="op">&gt;</span>::<span class="ident">from_utc</span>(<span class="ident">date</span>(), <span class="ident">Utc</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">year</span>(), <span class="number">2019</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">month</span>(), <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">day</span>(), <span class="number">7</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">hour</span>(), <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">minute</span>(), <span class="number">30</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">second</span>(), <span class="number">21</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">microsecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">year_day</span>(), <span class="number">97</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">is_dst</span>(), <span class="bool-val">false</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">timezone</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;UTC&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">year</span>(), <span class="number">2019</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">month</span>(), <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">day</span>(), <span class="number">7</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">hour</span>(), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">minute</span>(), <span class="number">30</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">second</span>(), <span class="number">21</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">microsecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">year_day</span>(), <span class="number">97</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">is_dst</span>(), <span class="bool-val">false</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">timezone</span>(), <span class="prelude-val">Some</span>(<span class="string">&quot;UTC&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">properties_named_tz</span>() {
         <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">Tz</span>::<span class="ident">US__Pacific</span>.<span class="ident">from_utc_datetime</span>(<span class="kw-2">&amp;</span><span class="ident">date</span>()));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">year</span>(), <span class="number">2019</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">month</span>(), <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">day</span>(), <span class="number">6</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">hour</span>(), <span class="number">18</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">minute</span>(), <span class="number">30</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">second</span>(), <span class="number">21</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">microsecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">6</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">year_day</span>(), <span class="number">96</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">year</span>(), <span class="number">2019</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">month</span>(), <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">day</span>(), <span class="number">6</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">hour</span>(), <span class="number">18</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">minute</span>(), <span class="number">30</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">second</span>(), <span class="number">21</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">microsecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">6</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">year_day</span>(), <span class="number">96</span>);
         <span class="comment">// TODO: Implement DST and timezone detection. This requires a new release of</span>
         <span class="comment">// `chrono-tz`.</span>
         <span class="comment">// assert_eq!(time.is_dst(), true);</span>
@@ -824,27 +824,27 @@
     <span class="kw">fn</span> <span class="ident">properties_fixed</span>() {
         <span class="kw">let</span> <span class="ident">hour</span> <span class="op">=</span> <span class="number">3600</span>;
         <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">DateTime</span>::<span class="op">&lt;</span><span class="ident">FixedOffset</span><span class="op">&gt;</span>::<span class="ident">from_utc</span>(<span class="ident">date</span>(), <span class="ident">FixedOffset</span>::<span class="ident">west</span>(<span class="number">7</span> <span class="op">*</span> <span class="ident">hour</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">year</span>(), <span class="number">2019</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">month</span>(), <span class="number">4</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">day</span>(), <span class="number">6</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">hour</span>(), <span class="number">18</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">minute</span>(), <span class="number">30</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">second</span>(), <span class="number">21</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">microsecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="number">0</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">6</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">year_day</span>(), <span class="number">96</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">year</span>(), <span class="number">2019</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">month</span>(), <span class="number">4</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">day</span>(), <span class="number">6</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">hour</span>(), <span class="number">18</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">minute</span>(), <span class="number">30</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">second</span>(), <span class="number">21</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">microsecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">nanosecond</span>(), <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">weekday</span>(), <span class="number">6</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">year_day</span>(), <span class="number">96</span>);
         <span class="comment">// TODO: Implement DST and timezone detection. This requires a new release of</span>
         <span class="comment">// `chrono-tz`.</span>
         <span class="comment">// assert_eq!(time.is_dst(), true);</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">timezone</span>(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">time</span>.<span class="ident">timezone</span>(), <span class="prelude-val">None</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="attribute">#[<span class="ident">should_panic</span>]</span>
     <span class="kw">fn</span> <span class="ident">local_has_zone</span>() {
         <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">Local</span>.<span class="ident">from_local_datetime</span>(<span class="kw-2">&amp;</span><span class="ident">date</span>()).<span class="ident">unwrap</span>());
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">time</span>.<span class="ident">timezone</span>().<span class="ident">is_some</span>());
+        <span class="macro">assert!</span>(<span class="ident">time</span>.<span class="ident">timezone</span>().<span class="ident">is_some</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -859,7 +859,7 @@
         <span class="ident">zone</span>.<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">hasher</span>);
         <span class="kw">let</span> <span class="ident">zone_hash</span> <span class="op">=</span> <span class="ident">hasher</span>.<span class="ident">finish</span>();
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">utc_hash</span>, <span class="ident">zone_hash</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">utc_hash</span>, <span class="ident">zone_hash</span>);
 
         <span class="kw">let</span> <span class="ident">before_utc</span>: <span class="ident">Time</span> <span class="op">=</span> <span class="ident">utc</span> <span class="op">-</span> <span class="number">1</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hasher</span> <span class="op">=</span> <span class="ident">DefaultHasher</span>::<span class="ident">new</span>();
@@ -871,37 +871,37 @@
         <span class="ident">before_zone</span>.<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">hasher</span>);
         <span class="kw">let</span> <span class="ident">before_zone_hash</span> <span class="op">=</span> <span class="ident">hasher</span>.<span class="ident">finish</span>();
 
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">utc_hash</span>, <span class="ident">before_utc_hash</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">zone_hash</span>, <span class="ident">before_zone_hash</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">before_utc_hash</span>, <span class="ident">before_zone_hash</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">utc_hash</span>, <span class="ident">before_utc_hash</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">zone_hash</span>, <span class="ident">before_zone_hash</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">before_utc_hash</span>, <span class="ident">before_zone_hash</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">eq_based_on_timestamp_and_nanos</span>() {
         <span class="kw">let</span> <span class="ident">utc</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">DateTime</span>::<span class="op">&lt;</span><span class="ident">Utc</span><span class="op">&gt;</span>::<span class="ident">from_utc</span>(<span class="ident">date</span>(), <span class="ident">Utc</span>));
         <span class="kw">let</span> <span class="ident">zone</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">Tz</span>::<span class="ident">US__Pacific</span>.<span class="ident">from_utc_datetime</span>(<span class="kw-2">&amp;</span><span class="ident">date</span>()));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">utc</span>, <span class="ident">zone</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">utc</span>, <span class="ident">zone</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">ord_based_on_timestamp_and_nanos</span>() {
         <span class="kw">let</span> <span class="ident">utc</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">DateTime</span>::<span class="op">&lt;</span><span class="ident">Utc</span><span class="op">&gt;</span>::<span class="ident">from_utc</span>(<span class="ident">date</span>(), <span class="ident">Utc</span>));
         <span class="kw">let</span> <span class="ident">zone</span> <span class="op">=</span> <span class="ident">Time</span>::<span class="ident">from</span>(<span class="ident">Tz</span>::<span class="ident">US__Pacific</span>.<span class="ident">from_utc_datetime</span>(<span class="kw-2">&amp;</span><span class="ident">date</span>()));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">utc</span>), <span class="ident">Ordering</span>::<span class="ident">Equal</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">zone</span>), <span class="ident">Ordering</span>::<span class="ident">Equal</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">zone</span>), <span class="ident">Ordering</span>::<span class="ident">Equal</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">utc</span>), <span class="ident">Ordering</span>::<span class="ident">Equal</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">zone</span>), <span class="ident">Ordering</span>::<span class="ident">Equal</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">zone</span>), <span class="ident">Ordering</span>::<span class="ident">Equal</span>);
 
         <span class="kw">let</span> <span class="ident">before_utc</span>: <span class="ident">Time</span> <span class="op">=</span> <span class="ident">utc</span> <span class="op">-</span> <span class="number">1</span>;
         <span class="kw">let</span> <span class="ident">before_zone</span>: <span class="ident">Time</span> <span class="op">=</span> <span class="ident">zone</span> <span class="op">-</span> <span class="number">1</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">before_utc</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">before_utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">utc</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">before_zone</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">before_zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">zone</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">before_utc</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">before_utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">utc</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">before_zone</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">before_zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">zone</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">before_zone</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">before_zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">utc</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">before_utc</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">before_utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">zone</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">before_zone</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">before_zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">utc</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">zone</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">before_utc</span>), <span class="ident">Ordering</span>::<span class="ident">Greater</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">before_utc</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">zone</span>), <span class="ident">Ordering</span>::<span class="ident">Less</span>);
     }
 }
 </pre></div>

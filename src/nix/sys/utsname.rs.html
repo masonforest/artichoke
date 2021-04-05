@@ -121,19 +121,19 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_uname_linux</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw">super</span>::<span class="ident">uname</span>().<span class="ident">sysname</span>(), <span class="string">&quot;Linux&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="kw">super</span>::<span class="ident">uname</span>().<span class="ident">sysname</span>(), <span class="string">&quot;Linux&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;ios&quot;</span>))]</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_uname_darwin</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw">super</span>::<span class="ident">uname</span>().<span class="ident">sysname</span>(), <span class="string">&quot;Darwin&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="kw">super</span>::<span class="ident">uname</span>().<span class="ident">sysname</span>(), <span class="string">&quot;Darwin&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test_uname_freebsd</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw">super</span>::<span class="ident">uname</span>().<span class="ident">sysname</span>(), <span class="string">&quot;FreeBSD&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="kw">super</span>::<span class="ident">uname</span>().<span class="ident">sysname</span>(), <span class="string">&quot;FreeBSD&quot;</span>);
     }
 }
 </pre></div>

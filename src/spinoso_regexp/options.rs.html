@@ -580,7 +580,7 @@
     <span class="doccomment">/// An option is enabled if it is equal to [`RegexpOption::Enabled`].</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_enabled</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches</span><span class="macro">!</span>(<span class="self">self</span>, <span class="self">Self</span>::<span class="ident">Enabled</span>)
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span>::<span class="ident">Enabled</span>)
     }
 }
 
@@ -612,7 +612,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`is_enabled`]: RegexpOption::is_enabled</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">RegexpOption</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="macro">matches</span><span class="macro">!</span>(<span class="ident">value</span>, <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>)
+        <span class="macro">matches!</span>(<span class="ident">value</span>, <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>)
     }
 }
 
@@ -854,12 +854,12 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">new_is_empty_flags</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">new</span>(), <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">empty</span>()));
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">new</span>(), <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">empty</span>()));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_all_flags_ignores_encoding_and_literal</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">all</span>()), <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">all</span>()), <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>));
     }
 
     <span class="comment">// If options is an `Integer`, it should be one or more of the constants</span>
@@ -868,232 +868,232 @@
     <span class="comment">// be case insensitive.</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">parse_options</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="prelude-val">None</span>), <span class="ident">Options</span>::<span class="ident">new</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="prelude-val">Some</span>(<span class="bool-val">false</span>)), <span class="ident">Options</span>::<span class="ident">new</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="prelude-val">Some</span>(<span class="bool-val">true</span>)), <span class="ident">Options</span>::<span class="ident">with_ignore_case</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="prelude-val">None</span>), <span class="ident">Options</span>::<span class="ident">new</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="prelude-val">Some</span>(<span class="bool-val">false</span>)), <span class="ident">Options</span>::<span class="ident">new</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="prelude-val">Some</span>(<span class="bool-val">true</span>)), <span class="ident">Options</span>::<span class="ident">with_ignore_case</span>());
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opts</span> <span class="op">=</span> <span class="ident">Options</span>::<span class="ident">new</span>();
         <span class="ident">opts</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">with_ignore_case</span>(), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">with_ignore_case</span>(), <span class="ident">opts</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opts</span> <span class="op">=</span> <span class="ident">Options</span>::<span class="ident">new</span>();
         <span class="ident">opts</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">EXTENDED</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opts</span> <span class="op">=</span> <span class="ident">Options</span>::<span class="ident">new</span>();
         <span class="ident">opts</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opts</span> <span class="op">=</span> <span class="ident">Options</span>::<span class="ident">new</span>();
         <span class="ident">opts</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opts</span> <span class="op">=</span> <span class="ident">Options</span>::<span class="ident">new</span>();
         <span class="ident">opts</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>;
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Disabled</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opts</span> <span class="op">=</span> <span class="ident">Options</span>::<span class="ident">new</span>();
         <span class="ident">opts</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>;
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
 
         <span class="comment">// `ALL_REGEXP_OPTS` is equivalent to `EXTENDED | IGNORECASE | MULTILINE` flags.</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opts</span> <span class="op">=</span> <span class="ident">Options</span>::<span class="ident">new</span>();
         <span class="ident">opts</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>;
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
 
         <span class="comment">// Ignore encoding and literal flags.</span>
         <span class="kw">let</span> <span class="ident">opts</span> <span class="op">=</span> <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">all</span>());
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">MAX</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">try_from_int</span>(<span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="ident">i64</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>()) <span class="op">|</span> <span class="number">4096</span>),
             <span class="prelude-val">None</span>
         );
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>() <span class="op">|</span> <span class="number">64</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_ne</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_ne!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">MULTILINE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(
             <span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">EXTENDED</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">IGNORECASE</span> <span class="op">|</span> <span class="ident">Flags</span>::<span class="ident">MULTILINE</span>),
             <span class="ident">opts</span>
         );
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>), <span class="ident">opts</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">Options</span>::<span class="ident">from</span>(<span class="ident">Flags</span>::<span class="ident">ALL_REGEXP_OPTS</span>), <span class="ident">opts</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">ignore_case</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">extended</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">opts</span>.<span class="ident">multiline</span>(), <span class="ident">RegexpOption</span>::<span class="ident">Enabled</span>);
     }
 }
 </pre></div>

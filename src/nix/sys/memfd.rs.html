@@ -28,7 +28,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">errno</span>::<span class="ident">Errno</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>;
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MemFdCreateFlag</span>: <span class="ident">libc</span>::<span class="ident">c_uint</span> {
         <span class="ident">MFD_CLOEXEC</span>;
         <span class="ident">MFD_ALLOW_SEALING</span>;

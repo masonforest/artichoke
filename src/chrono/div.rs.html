@@ -60,28 +60,28 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_mod_floor</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mod_floor</span>(<span class="number">8</span>, <span class="number">3</span>), <span class="number">2</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mod_floor</span>(<span class="number">8</span>, <span class="op">-</span><span class="number">3</span>), <span class="op">-</span><span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mod_floor</span>(<span class="op">-</span><span class="number">8</span>, <span class="number">3</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mod_floor</span>(<span class="op">-</span><span class="number">8</span>, <span class="op">-</span><span class="number">3</span>), <span class="op">-</span><span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mod_floor</span>(<span class="number">8</span>, <span class="number">3</span>), <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mod_floor</span>(<span class="number">8</span>, <span class="op">-</span><span class="number">3</span>), <span class="op">-</span><span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mod_floor</span>(<span class="op">-</span><span class="number">8</span>, <span class="number">3</span>), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mod_floor</span>(<span class="op">-</span><span class="number">8</span>, <span class="op">-</span><span class="number">3</span>), <span class="op">-</span><span class="number">2</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mod_floor</span>(<span class="number">1</span>, <span class="number">2</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mod_floor</span>(<span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), <span class="op">-</span><span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mod_floor</span>(<span class="op">-</span><span class="number">1</span>, <span class="number">2</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mod_floor</span>(<span class="op">-</span><span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), <span class="op">-</span><span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mod_floor</span>(<span class="number">1</span>, <span class="number">2</span>), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mod_floor</span>(<span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), <span class="op">-</span><span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mod_floor</span>(<span class="op">-</span><span class="number">1</span>, <span class="number">2</span>), <span class="number">1</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mod_floor</span>(<span class="op">-</span><span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), <span class="op">-</span><span class="number">1</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_div_mod_floor</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">div_mod_floor</span>(<span class="number">8</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">2</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">div_mod_floor</span>(<span class="number">8</span>, <span class="op">-</span><span class="number">3</span>), (<span class="op">-</span><span class="number">3</span>, <span class="op">-</span><span class="number">1</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">div_mod_floor</span>(<span class="op">-</span><span class="number">8</span>, <span class="number">3</span>), (<span class="op">-</span><span class="number">3</span>, <span class="number">1</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">div_mod_floor</span>(<span class="op">-</span><span class="number">8</span>, <span class="op">-</span><span class="number">3</span>), (<span class="number">2</span>, <span class="op">-</span><span class="number">2</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">div_mod_floor</span>(<span class="number">8</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">2</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">div_mod_floor</span>(<span class="number">8</span>, <span class="op">-</span><span class="number">3</span>), (<span class="op">-</span><span class="number">3</span>, <span class="op">-</span><span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">div_mod_floor</span>(<span class="op">-</span><span class="number">8</span>, <span class="number">3</span>), (<span class="op">-</span><span class="number">3</span>, <span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">div_mod_floor</span>(<span class="op">-</span><span class="number">8</span>, <span class="op">-</span><span class="number">3</span>), (<span class="number">2</span>, <span class="op">-</span><span class="number">2</span>));
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">div_mod_floor</span>(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">0</span>, <span class="number">1</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">div_mod_floor</span>(<span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), (<span class="op">-</span><span class="number">1</span>, <span class="op">-</span><span class="number">1</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">div_mod_floor</span>(<span class="op">-</span><span class="number">1</span>, <span class="number">2</span>), (<span class="op">-</span><span class="number">1</span>, <span class="number">1</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">div_mod_floor</span>(<span class="op">-</span><span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), (<span class="number">0</span>, <span class="op">-</span><span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">div_mod_floor</span>(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">0</span>, <span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">div_mod_floor</span>(<span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), (<span class="op">-</span><span class="number">1</span>, <span class="op">-</span><span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">div_mod_floor</span>(<span class="op">-</span><span class="number">1</span>, <span class="number">2</span>), (<span class="op">-</span><span class="number">1</span>, <span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">div_mod_floor</span>(<span class="op">-</span><span class="number">1</span>, <span class="op">-</span><span class="number">2</span>), (<span class="number">0</span>, <span class="op">-</span><span class="number">1</span>));
     }
 }
 </pre></div>

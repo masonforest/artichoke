@@ -13,13 +13,13 @@ iterator version.</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">textwrap</span>::<span class="ident">wrap</span>;
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">wrap</span>(<span class="string">&quot;Concurrency without data races.&quot;</span>, <span class="number">15</span>),
-           <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;Concurrency&quot;</span>,
+<span class="macro">assert_eq!</span>(<span class="ident">wrap</span>(<span class="string">&quot;Concurrency without data races.&quot;</span>, <span class="number">15</span>),
+           <span class="macro">vec!</span>[<span class="string">&quot;Concurrency&quot;</span>,
                 <span class="string">&quot;without data&quot;</span>,
                 <span class="string">&quot;races.&quot;</span>]);
 
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">wrap</span>(<span class="string">&quot;Concurrency without data races.&quot;</span>, <span class="number">20</span>),
-           <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;Concurrency without&quot;</span>,
+<span class="macro">assert_eq!</span>(<span class="ident">wrap</span>(<span class="string">&quot;Concurrency without data races.&quot;</span>, <span class="number">20</span>),
+           <span class="macro">vec!</span>[<span class="string">&quot;Concurrency without&quot;</span>,
                 <span class="string">&quot;data races.&quot;</span>]);</pre></div>
 </div></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="textwrap" data-search-js="../search-index.js"></div>
     <script src="../main.js"></script></body></html>

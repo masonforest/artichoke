@@ -7,7 +7,7 @@
 <span class="kw">use</span> <span class="ident">spinoso_math</span> <span class="kw">as</span> <span class="ident">math</span>;
 <span class="kw">let</span> (<span class="ident">fraction</span>, <span class="ident">exponent</span>) <span class="op">=</span> <span class="ident">math</span>::<span class="ident">frexp</span>(<span class="number">1234.0</span>)<span class="question-mark">?</span>;
 <span class="kw">let</span> <span class="ident">float</span> <span class="op">=</span> <span class="ident">math</span>::<span class="ident">ldexp</span>(<span class="ident">fraction</span>, <span class="ident">exponent</span>)<span class="question-mark">?</span>;
-<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">float</span>, <span class="number">1234.0</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">float</span>, <span class="number">1234.0</span>);</pre></div>
 <h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
 <p>Because <code>spinoso-math</code> was built with the <code>full</code> feature, this function will
 always succeed and return the float determined by the given fraction and

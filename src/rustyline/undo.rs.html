@@ -523,7 +523,7 @@
     <span class="kw">fn</span> <span class="ident">undo</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LineBuffer</span>) {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">Change</span>::<span class="ident">Begin</span> <span class="op">|</span> <span class="ident">Change</span>::<span class="ident">End</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">unreachable</span><span class="macro">!</span>();
+                <span class="macro">unreachable!</span>();
             }
             <span class="ident">Change</span>::<span class="ident">Insert</span> { <span class="ident">idx</span>, <span class="kw-2">ref</span> <span class="ident">text</span> } <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">line</span>.<span class="ident">delete_range</span>(<span class="ident">idx</span>..<span class="ident">idx</span> <span class="op">+</span> <span class="ident">text</span>.<span class="ident">len</span>());
@@ -546,7 +546,7 @@
     <span class="kw">fn</span> <span class="ident">redo</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LineBuffer</span>) {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">Change</span>::<span class="ident">Begin</span> <span class="op">|</span> <span class="ident">Change</span>::<span class="ident">End</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">unreachable</span><span class="macro">!</span>();
+                <span class="macro">unreachable!</span>();
             }
             <span class="ident">Change</span>::<span class="ident">Insert</span> { <span class="ident">idx</span>, <span class="kw-2">ref</span> <span class="ident">text</span> } <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">line</span>.<span class="ident">insert_str</span>(<span class="ident">idx</span>, <span class="ident">text</span>);
@@ -606,7 +606,7 @@
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">begin</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::begin&quot;</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::begin&quot;</span>);
         <span class="self">self</span>.<span class="ident">redos</span>.<span class="ident">clear</span>();
         <span class="kw">let</span> <span class="ident">mark</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">len</span>();
         <span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">push</span>(<span class="ident">Change</span>::<span class="ident">Begin</span>);
@@ -617,7 +617,7 @@
     <span class="doccomment">/// Returns `true` when changes happen between the last call to `begin` and</span>
     <span class="doccomment">/// this `end`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::end&quot;</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::end&quot;</span>);
         <span class="self">self</span>.<span class="ident">redos</span>.<span class="ident">clear</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">touched</span> <span class="op">=</span> <span class="bool-val">false</span>;
         <span class="kw">while</span> <span class="self">self</span>.<span class="ident">undo_group_level</span> <span class="op">&gt;</span> <span class="number">0</span> {
@@ -640,7 +640,7 @@
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">char</span>) {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::insert({}, {:?})&quot;</span>, <span class="ident">idx</span>, <span class="ident">c</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::insert({}, {:?})&quot;</span>, <span class="ident">idx</span>, <span class="ident">c</span>);
         <span class="self">self</span>.<span class="ident">redos</span>.<span class="ident">clear</span>();
         <span class="kw">if</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">is_alphanumeric</span>() <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">last</span>().<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">lc</span><span class="op">|</span> <span class="ident">lc</span>.<span class="ident">insert_seq</span>(<span class="ident">idx</span>)) {
             <span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">push</span>(<span class="self">Self</span>::<span class="ident">insert_char</span>(<span class="ident">idx</span>, <span class="ident">c</span>));
@@ -651,13 +651,13 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Change</span>::<span class="ident">Insert</span> { <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">text</span>, .. } <span class="op">=</span> <span class="ident">last_change</span> {
             <span class="ident">text</span>.<span class="ident">push</span>(<span class="ident">c</span>);
         } <span class="kw">else</span> {
-            <span class="macro">unreachable</span><span class="macro">!</span>();
+            <span class="macro">unreachable!</span>();
         }
         <span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">push</span>(<span class="ident">last_change</span>);
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_str</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Debug</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>, <span class="ident">string</span>: <span class="ident">S</span>) {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::insert_str({}, {:?})&quot;</span>, <span class="ident">idx</span>, <span class="ident">string</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::insert_str({}, {:?})&quot;</span>, <span class="ident">idx</span>, <span class="ident">string</span>);
         <span class="self">self</span>.<span class="ident">redos</span>.<span class="ident">clear</span>();
         <span class="kw">if</span> <span class="ident">string</span>.<span class="ident">as_ref</span>().<span class="ident">is_empty</span>() {
             <span class="kw">return</span>;
@@ -669,7 +669,7 @@
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">delete</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Debug</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">indx</span>: <span class="ident">usize</span>, <span class="ident">string</span>: <span class="ident">S</span>) {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::delete({}, {:?})&quot;</span>, <span class="ident">indx</span>, <span class="ident">string</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::delete({}, {:?})&quot;</span>, <span class="ident">indx</span>, <span class="ident">string</span>);
         <span class="self">self</span>.<span class="ident">redos</span>.<span class="ident">clear</span>();
         <span class="kw">if</span> <span class="ident">string</span>.<span class="ident">as_ref</span>().<span class="ident">is_empty</span>() {
             <span class="kw">return</span>;
@@ -701,7 +701,7 @@
                 <span class="kw-2">*</span><span class="ident">idx</span> <span class="op">=</span> <span class="ident">indx</span>;
             }
         } <span class="kw">else</span> {
-            <span class="macro">unreachable</span><span class="macro">!</span>();
+            <span class="macro">unreachable!</span>();
         }
         <span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">push</span>(<span class="ident">last_change</span>);
     }
@@ -714,7 +714,7 @@
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">replace</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Debug</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">indx</span>: <span class="ident">usize</span>, <span class="ident">old_</span>: <span class="ident">S</span>, <span class="ident">new_</span>: <span class="ident">S</span>) {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::replace({}, {:?}, {:?})&quot;</span>, <span class="ident">indx</span>, <span class="ident">old_</span>, <span class="ident">new_</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::replace({}, {:?}, {:?})&quot;</span>, <span class="ident">indx</span>, <span class="ident">old_</span>, <span class="ident">new_</span>);
         <span class="self">self</span>.<span class="ident">redos</span>.<span class="ident">clear</span>();
 
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">last</span>().<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">lc</span><span class="op">|</span> <span class="ident">lc</span>.<span class="ident">replace_seq</span>(<span class="ident">indx</span>)) {
@@ -737,13 +737,13 @@
             <span class="ident">old</span>.<span class="ident">push_str</span>(<span class="ident">old_</span>.<span class="ident">as_ref</span>());
             <span class="ident">new</span>.<span class="ident">push_str</span>(<span class="ident">new_</span>.<span class="ident">as_ref</span>());
         } <span class="kw">else</span> {
-            <span class="macro">unreachable</span><span class="macro">!</span>();
+            <span class="macro">unreachable!</span>();
         }
         <span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">push</span>(<span class="ident">last_change</span>);
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">undo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LineBuffer</span>, <span class="ident">n</span>: <span class="ident">RepeatCount</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::undo&quot;</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::undo&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">count</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">waiting_for_begin</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">undone</span> <span class="op">=</span> <span class="bool-val">false</span>;
@@ -776,7 +776,7 @@
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">truncate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">len</span>: <span class="ident">usize</span>) {
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::truncate({})&quot;</span>, <span class="ident">len</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Changeset::truncate({})&quot;</span>, <span class="ident">len</span>);
         <span class="self">self</span>.<span class="ident">undos</span>.<span class="ident">truncate</span>(<span class="ident">len</span>);
     }
 
@@ -859,10 +859,10 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cs</span> <span class="op">=</span> <span class="ident">Changeset</span>::<span class="ident">new</span>();
         <span class="ident">cs</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="string">&#39;H&#39;</span>);
         <span class="ident">cs</span>.<span class="ident">insert</span>(<span class="number">1</span>, <span class="string">&#39;i&#39;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">0</span>, <span class="ident">cs</span>.<span class="ident">redos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">cs</span>.<span class="ident">redos</span>.<span class="ident">len</span>());
         <span class="ident">cs</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="string">&#39; &#39;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">2</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -870,8 +870,8 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cs</span> <span class="op">=</span> <span class="ident">Changeset</span>::<span class="ident">new</span>();
         <span class="ident">cs</span>.<span class="ident">insert_str</span>(<span class="number">0</span>, <span class="string">&quot;Hello&quot;</span>);
         <span class="ident">cs</span>.<span class="ident">insert_str</span>(<span class="number">5</span>, <span class="string">&quot;, &quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">2</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">0</span>, <span class="ident">cs</span>.<span class="ident">redos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">cs</span>.<span class="ident">redos</span>.<span class="ident">len</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -880,19 +880,19 @@
         <span class="ident">buf</span>.<span class="ident">insert_str</span>(<span class="number">0</span>, <span class="string">&quot;Hello&quot;</span>);
         <span class="ident">buf</span>.<span class="ident">insert_str</span>(<span class="number">5</span>, <span class="string">&quot;, world!&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cs</span> <span class="op">=</span> <span class="ident">Changeset</span>::<span class="ident">new</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
 
         <span class="ident">cs</span>.<span class="ident">insert_str</span>(<span class="number">5</span>, <span class="string">&quot;, world!&quot;</span>);
 
         <span class="ident">cs</span>.<span class="ident">undo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">0</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">redos</span>.<span class="ident">len</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">redos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
 
         <span class="ident">cs</span>.<span class="ident">redo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">0</span>, <span class="ident">cs</span>.<span class="ident">redos</span>.<span class="ident">len</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">cs</span>.<span class="ident">redos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -900,15 +900,15 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">LineBuffer</span>::<span class="ident">init</span>(<span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="prelude-val">None</span>);
         <span class="ident">buf</span>.<span class="ident">insert_str</span>(<span class="number">0</span>, <span class="string">&quot;Hello&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cs</span> <span class="op">=</span> <span class="ident">Changeset</span>::<span class="ident">new</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
 
         <span class="ident">cs</span>.<span class="ident">delete</span>(<span class="number">5</span>, <span class="string">&quot;, world!&quot;</span>);
 
         <span class="ident">cs</span>.<span class="ident">undo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
 
         <span class="ident">cs</span>.<span class="ident">redo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -919,10 +919,10 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cs</span> <span class="op">=</span> <span class="ident">Changeset</span>::<span class="ident">new</span>();
         <span class="ident">cs</span>.<span class="ident">delete</span>(<span class="number">1</span>, <span class="string">&quot;e&quot;</span>);
         <span class="ident">cs</span>.<span class="ident">delete</span>(<span class="number">1</span>, <span class="string">&quot;l&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
 
         <span class="ident">cs</span>.<span class="ident">undo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -933,10 +933,10 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cs</span> <span class="op">=</span> <span class="ident">Changeset</span>::<span class="ident">new</span>();
         <span class="ident">cs</span>.<span class="ident">delete</span>(<span class="number">2</span>, <span class="string">&quot;l&quot;</span>);
         <span class="ident">cs</span>.<span class="ident">delete</span>(<span class="number">1</span>, <span class="string">&quot;e&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">cs</span>.<span class="ident">undos</span>.<span class="ident">len</span>());
 
         <span class="ident">cs</span>.<span class="ident">undo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -944,17 +944,17 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">LineBuffer</span>::<span class="ident">init</span>(<span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="prelude-val">None</span>);
         <span class="ident">buf</span>.<span class="ident">insert_str</span>(<span class="number">0</span>, <span class="string">&quot;Hello, world!&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cs</span> <span class="op">=</span> <span class="ident">Changeset</span>::<span class="ident">new</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
 
         <span class="ident">buf</span>.<span class="ident">replace</span>(<span class="number">1</span>..<span class="number">5</span>, <span class="string">&quot;i&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hi, world!&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hi, world!&quot;</span>);
         <span class="ident">cs</span>.<span class="ident">replace</span>(<span class="number">1</span>, <span class="string">&quot;ello&quot;</span>, <span class="string">&quot;i&quot;</span>);
 
         <span class="ident">cs</span>.<span class="ident">undo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hello, world!&quot;</span>);
 
         <span class="ident">cs</span>.<span class="ident">redo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hi, world!&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">buf</span>.<span class="ident">as_str</span>(), <span class="string">&quot;Hi, world!&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -965,17 +965,17 @@
         <span class="ident">cs</span>.<span class="ident">insert_str</span>(<span class="number">0</span>, <span class="string">&quot;Bye&quot;</span>);
         <span class="ident">cs</span>.<span class="ident">end</span>();
         <span class="kw">let</span> <span class="ident">insert</span> <span class="op">=</span> <span class="ident">cs</span>.<span class="ident">last_insert</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;Bye&quot;</span>.<span class="ident">to_owned</span>()), <span class="ident">insert</span>);
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;Bye&quot;</span>.<span class="ident">to_owned</span>()), <span class="ident">insert</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_end</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cs</span> <span class="op">=</span> <span class="ident">Changeset</span>::<span class="ident">new</span>();
         <span class="ident">cs</span>.<span class="ident">begin</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">cs</span>.<span class="ident">end</span>());
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">cs</span>.<span class="ident">end</span>());
         <span class="ident">cs</span>.<span class="ident">begin</span>();
         <span class="ident">cs</span>.<span class="ident">insert_str</span>(<span class="number">0</span>, <span class="string">&quot;Hi&quot;</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">cs</span>.<span class="ident">end</span>());
+        <span class="macro">assert!</span>(<span class="ident">cs</span>.<span class="ident">end</span>());
     }
 }
 </pre></div>

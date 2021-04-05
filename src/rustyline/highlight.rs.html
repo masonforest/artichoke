@@ -402,7 +402,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">bracket</span>, <span class="ident">pos</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">bracket</span>.<span class="ident">get</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">matching</span>, <span class="ident">idx</span>)) <span class="op">=</span> <span class="ident">find_matching_bracket</span>(<span class="ident">line</span>, <span class="ident">pos</span>, <span class="ident">bracket</span>) {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">copy</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">to_owned</span>();
-                <span class="ident">copy</span>.<span class="ident">replace_range</span>(<span class="ident">idx</span>..<span class="op">=</span><span class="ident">idx</span>, <span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;\x1b[1;34m{}\x1b[0m&quot;</span>, <span class="ident">matching</span> <span class="kw">as</span> <span class="ident">char</span>));
+                <span class="ident">copy</span>.<span class="ident">replace_range</span>(<span class="ident">idx</span>..<span class="op">=</span><span class="ident">idx</span>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;\x1b[1;34m{}\x1b[0m&quot;</span>, <span class="ident">matching</span> <span class="kw">as</span> <span class="ident">char</span>));
                 <span class="kw">return</span> <span class="ident">Owned</span>(<span class="ident">copy</span>);
             }
         }
@@ -428,7 +428,7 @@
             <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">b</span> <span class="op">=</span><span class="op">=</span> <span class="ident">matching</span> {
                 <span class="ident">unmatched</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
                 <span class="kw">if</span> <span class="ident">unmatched</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">matching</span>, <span class="ident">line</span>.<span class="ident">as_bytes</span>()[<span class="ident">idx</span>]);
+                    <span class="macro">debug_assert_eq!</span>(<span class="ident">matching</span>, <span class="ident">line</span>.<span class="ident">as_bytes</span>()[<span class="ident">idx</span>]);
                     <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">matching</span>, <span class="ident">idx</span>));
                 }
             } <span class="kw">else</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">b</span> <span class="op">=</span><span class="op">=</span> <span class="ident">bracket</span> {
@@ -436,7 +436,7 @@
             }
             <span class="ident">idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         }
-        <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">idx</span>, <span class="ident">line</span>.<span class="ident">len</span>());
+        <span class="macro">debug_assert_eq!</span>(<span class="ident">idx</span>, <span class="ident">line</span>.<span class="ident">len</span>());
     } <span class="kw">else</span> {
         <span class="comment">// backward search</span>
         <span class="ident">idx</span> <span class="op">=</span> <span class="ident">pos</span>;
@@ -445,7 +445,7 @@
             <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">b</span> <span class="op">=</span><span class="op">=</span> <span class="ident">matching</span> {
                 <span class="ident">unmatched</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
                 <span class="kw">if</span> <span class="ident">unmatched</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">matching</span>, <span class="ident">line</span>.<span class="ident">as_bytes</span>()[<span class="ident">idx</span> <span class="op">-</span> <span class="number">1</span>]);
+                    <span class="macro">debug_assert_eq!</span>(<span class="ident">matching</span>, <span class="ident">line</span>.<span class="ident">as_bytes</span>()[<span class="ident">idx</span> <span class="op">-</span> <span class="number">1</span>]);
                     <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">matching</span>, <span class="ident">idx</span> <span class="op">-</span> <span class="number">1</span>));
                 }
             } <span class="kw">else</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">b</span> <span class="op">=</span><span class="op">=</span> <span class="ident">bracket</span> {
@@ -453,7 +453,7 @@
             }
             <span class="ident">idx</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
         }
-        <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">idx</span>, <span class="number">0</span>);
+        <span class="macro">debug_assert_eq!</span>(<span class="ident">idx</span>, <span class="number">0</span>);
     }
     <span class="prelude-val">None</span>
 }
@@ -521,45 +521,45 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_matching_bracket</span>() {
         <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">find_matching_bracket</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;...)&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;...)&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">None</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;()..&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">1</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(..)&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">3</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;()..&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">1</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(..)&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">3</span>)));
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;..()&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">2</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(..)&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">0</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;..()&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">2</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(..)&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">0</span>)));
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(())&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">3</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(())&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">0</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(())&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">3</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(())&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">0</span>)));
     }
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_bracket</span>() {
         <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">check_bracket</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;)...&quot;</span>, <span class="number">0</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">2</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...(&quot;</span>, <span class="number">3</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...(&quot;</span>, <span class="number">4</span>), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;..).&quot;</span>, <span class="number">4</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;)...&quot;</span>, <span class="number">0</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">2</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...(&quot;</span>, <span class="number">3</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...(&quot;</span>, <span class="number">4</span>), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;..).&quot;</span>, <span class="number">4</span>), <span class="prelude-val">None</span>);
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">0</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">0</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">1</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">0</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...)&quot;</span>, <span class="number">3</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">3</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...)&quot;</span>, <span class="number">4</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">3</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">0</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">0</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">1</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;(&#39;</span>, <span class="number">0</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...)&quot;</span>, <span class="number">3</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">3</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...)&quot;</span>, <span class="number">4</span>), <span class="prelude-val">Some</span>((<span class="string">b&#39;)&#39;</span>, <span class="number">3</span>)));
     }
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">matching_bracket</span>() {
         <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">matching_bracket</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">matching_bracket</span>(<span class="string">b&#39;(&#39;</span>), <span class="string">b&#39;)&#39;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">matching_bracket</span>(<span class="string">b&#39;)&#39;</span>), <span class="string">b&#39;(&#39;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">matching_bracket</span>(<span class="string">b&#39;(&#39;</span>), <span class="string">b&#39;)&#39;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">matching_bracket</span>(<span class="string">b&#39;)&#39;</span>), <span class="string">b&#39;(&#39;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_open_bracket</span>() {
         <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">is_close_bracket</span>;
         <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">is_open_bracket</span>;
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_open_bracket</span>(<span class="string">b&#39;(&#39;</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_close_bracket</span>(<span class="string">b&#39;)&#39;</span>));
+        <span class="macro">assert!</span>(<span class="ident">is_open_bracket</span>(<span class="string">b&#39;(&#39;</span>));
+        <span class="macro">assert!</span>(<span class="ident">is_close_bracket</span>(<span class="string">b&#39;)&#39;</span>));
     }
 }
 </pre></div>

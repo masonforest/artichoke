@@ -149,7 +149,7 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">pedantic</span>)]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">restriction</span>)]</span>
 <span class="kw">mod</span> <span class="ident">ffi</span> {
-    <span class="macro">include</span><span class="macro">!</span>(<span class="macro">concat</span><span class="macro">!</span>(<span class="macro">env</span><span class="macro">!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/ffi.rs&quot;</span>));
+    <span class="macro">include!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/ffi.rs&quot;</span>));
 }
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">protect</span>;
 
@@ -174,9 +174,9 @@
             }
             <span class="ident">Ruby</span>::<span class="ident">Float</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">float</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">mrb_sys_float_to_cdouble</span>(<span class="kw-2">*</span><span class="self">self</span>) };
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">float</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">float</span>)
             }
-            <span class="ident">type_tag</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;&lt;{}&gt;&quot;</span>, <span class="ident">type_tag</span>),
+            <span class="ident">type_tag</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;&lt;{}&gt;&quot;</span>, <span class="ident">type_tag</span>),
         }
     }
 }
@@ -185,7 +185,7 @@
 <span class="attribute">#[<span class="ident">must_use</span>]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mrb_sys_mruby_version</span>(<span class="ident">verbose</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="kw">if</span> <span class="op">!</span><span class="ident">verbose</span> {
-        <span class="kw">return</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="macro">env</span><span class="macro">!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>));
+        <span class="kw">return</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>));
     }
     <span class="kw">let</span> <span class="ident">engine</span> <span class="op">=</span> <span class="ident">CStr</span>::<span class="ident">from_bytes_with_nul</span>(<span class="ident">MRUBY_RUBY_ENGINE</span>);
     <span class="kw">let</span> <span class="ident">engine</span> <span class="op">=</span> <span class="ident">engine</span>.<span class="ident">ok</span>().<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">cstr</span><span class="op">|</span> <span class="ident">cstr</span>.<span class="ident">to_str</span>().<span class="ident">ok</span>()).<span class="ident">unwrap_or</span>(<span class="string">&quot;unknown&quot;</span>);
@@ -196,7 +196,7 @@
     <span class="ident">out</span>.<span class="ident">push</span>(<span class="string">&#39; &#39;</span>);
     <span class="ident">out</span>.<span class="ident">push_str</span>(<span class="ident">version</span>);
     <span class="ident">out</span>.<span class="ident">push_str</span>(<span class="string">&quot; [&quot;</span>);
-    <span class="ident">out</span>.<span class="ident">push_str</span>(<span class="macro">env</span><span class="macro">!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>));
+    <span class="ident">out</span>.<span class="ident">push_str</span>(<span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>));
     <span class="ident">out</span>.<span class="ident">push</span>(<span class="string">&#39;]&#39;</span>);
     <span class="ident">out</span>
 }
@@ -224,7 +224,7 @@
     <span class="comment">// In practice, this call to `write!` will never panic because the `Display`</span>
     <span class="comment">// impls of `str` and `i64` are not buggy and writing to a `String`</span>
     <span class="comment">// `fmt::Write` will never panic on its own.</span>
-    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write</span><span class="macro">!</span>(
+    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">debug</span>,
         <span class="string">&quot;{} {} (v{}.{}.{}) interpreter at {:p}&quot;</span>,
         <span class="ident">engine</span>, <span class="ident">version</span>, <span class="ident">MRUBY_RELEASE_MAJOR</span>, <span class="ident">MRUBY_RELEASE_MINOR</span>, <span class="ident">MRUBY_RELEASE_TEENY</span>, <span class="ident">mrb</span>
@@ -244,7 +244,7 @@
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">mrb</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">mrb</span>.<span class="ident">as_mut</span>();
             <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">sys</span>::<span class="ident">mrb_sys_state_debug</span>(<span class="ident">mrb</span>);
-            <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">debug</span>, <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;mruby 3.0 (v3.0.0) interpreter at {:p}&quot;</span>, <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">mrb</span>));
+            <span class="macro">assert_eq!</span>(<span class="ident">debug</span>, <span class="macro">format!</span>(<span class="string">&quot;mruby 3.0 (v3.0.0) interpreter at {:p}&quot;</span>, <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">mrb</span>));
         };
     }
 }

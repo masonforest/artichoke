@@ -361,7 +361,7 @@
     <span class="ident">Up</span>,
 }
 
-<span class="ident">bitflags</span>::<span class="macro">bitflags</span><span class="macro">!</span> {
+<span class="ident">bitflags</span>::<span class="macro">bitflags!</span> {
     <span class="doccomment">/// The set of modifier keys that were triggered along with a key press.</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Modifiers</span>: <span class="ident">u8</span> {
         <span class="doccomment">/// Control modifier</span>
@@ -390,20 +390,20 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">new</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">E</span>::<span class="ident">ESC</span>, <span class="ident">E</span>::<span class="ident">new</span>(<span class="string">&#39;\x1b&#39;</span>, <span class="ident">M</span>::<span class="ident">NONE</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">E</span>::<span class="ident">ESC</span>, <span class="ident">E</span>::<span class="ident">new</span>(<span class="string">&#39;\x1b&#39;</span>, <span class="ident">M</span>::<span class="ident">NONE</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Tab</span>, <span class="ident">M</span>::<span class="ident">NONE</span>), <span class="ident">E</span>::<span class="ident">from</span>(<span class="string">&#39;\t&#39;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Tab</span>, <span class="ident">M</span>::<span class="ident">NONE</span>), <span class="ident">E</span>::<span class="ident">from</span>(<span class="string">&#39;\t&#39;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">normalize</span>() {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">E</span>::<span class="ident">ctrl</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">E</span>::<span class="ident">normalize</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Char</span>(<span class="string">&#39;\x01&#39;</span>), <span class="ident">M</span>::<span class="ident">NONE</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">E</span>::<span class="ident">ctrl</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">E</span>::<span class="ident">normalize</span>(<span class="ident">E</span>::<span class="ident">ctrl</span>(<span class="string">&#39;a&#39;</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">E</span>::<span class="ident">from</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">E</span>::<span class="ident">normalize</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Char</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">M</span>::<span class="ident">SHIFT</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">BackTab</span>, <span class="ident">M</span>::<span class="ident">NONE</span>), <span class="ident">E</span>::<span class="ident">normalize</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Tab</span>, <span class="ident">M</span>::<span class="ident">SHIFT</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">E</span>::<span class="ident">ctrl</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">E</span>::<span class="ident">normalize</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Char</span>(<span class="string">&#39;\x01&#39;</span>), <span class="ident">M</span>::<span class="ident">NONE</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">E</span>::<span class="ident">ctrl</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">E</span>::<span class="ident">normalize</span>(<span class="ident">E</span>::<span class="ident">ctrl</span>(<span class="string">&#39;a&#39;</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">E</span>::<span class="ident">from</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">E</span>::<span class="ident">normalize</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Char</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">M</span>::<span class="ident">SHIFT</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">BackTab</span>, <span class="ident">M</span>::<span class="ident">NONE</span>), <span class="ident">E</span>::<span class="ident">normalize</span>(<span class="ident">E</span>(<span class="ident">K</span>::<span class="ident">Tab</span>, <span class="ident">M</span>::<span class="ident">SHIFT</span>)));
     }
 }
 </pre></div>

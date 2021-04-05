@@ -420,7 +420,7 @@
     {
         <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TypeId</span>::<span class="ident">of</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">old_spec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">insert</span>(<span class="ident">key</span>, <span class="ident">spec</span>) {
-            <span class="macro">panic</span><span class="macro">!</span>(
+            <span class="macro">panic!</span>(
                 <span class="string">&quot;Attempted duplicate insert of {}. Registry is append-only. Previous spec: {:?}&quot;</span>,
                 <span class="ident">any</span>::<span class="ident">type_name</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>(),
                 <span class="ident">old_spec</span>

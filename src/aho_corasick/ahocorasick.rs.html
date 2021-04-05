@@ -2581,7 +2581,7 @@
     <span class="kw">where</span>
         <span class="ident">B</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>,
     {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">replace_with</span>.<span class="ident">len</span>(),
             <span class="self">self</span>.<span class="ident">pattern_count</span>(),
             <span class="string">&quot;replace_all requires a replacement for every pattern \
@@ -2632,7 +2632,7 @@
     <span class="kw">where</span>
         <span class="ident">B</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
     {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">replace_with</span>.<span class="ident">len</span>(),
             <span class="self">self</span>.<span class="ident">pattern_count</span>(),
             <span class="string">&quot;replace_all_bytes requires a replacement for every pattern \
@@ -2909,7 +2909,7 @@
         <span class="ident">W</span>: <span class="ident">io</span>::<span class="ident">Write</span>,
         <span class="ident">B</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
     {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">replace_with</span>.<span class="ident">len</span>(),
             <span class="self">self</span>.<span class="ident">pattern_count</span>(),
             <span class="string">&quot;stream_replace_all requires a replacement for every pattern \
@@ -3392,7 +3392,7 @@
         <span class="ident">ac</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">AhoCorasick</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>,
         <span class="ident">haystack</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> [<span class="ident">u8</span>],
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FindOverlappingIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-        <span class="macro">assert</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(
             <span class="ident">ac</span>.<span class="ident">supports_overlapping</span>(),
             <span class="string">&quot;automaton does not support overlapping searches&quot;</span>
         );
@@ -3527,7 +3527,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>: <span class="ident">io</span>::<span class="ident">Read</span>, <span class="ident">S</span>: <span class="ident">StateID</span><span class="op">&gt;</span> <span class="ident">StreamChunkIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">S</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ac</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">AhoCorasick</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>, <span class="ident">rdr</span>: <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StreamChunkIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-        <span class="macro">assert</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(
             <span class="ident">ac</span>.<span class="ident">supports_stream</span>(),
             <span class="string">&quot;stream searching is only supported for Standard match semantics&quot;</span>
         );
@@ -4271,7 +4271,7 @@
             <span class="ident">MatchKind</span>::<span class="ident">LeftmostLongest</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="prelude-val">Some</span>(<span class="ident">packed</span>::<span class="ident">MatchKind</span>::<span class="ident">LeftmostLongest</span>)
             }
-            <span class="ident">MatchKind</span>::<span class="ident">__Nonexhaustive</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="ident">MatchKind</span>::<span class="ident">__Nonexhaustive</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
     }
 }

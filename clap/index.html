@@ -67,28 +67,28 @@ more verbose.</p>
 
     <span class="comment">// Gets a value for config if supplied by user, or defaults to &quot;default.conf&quot;</span>
     <span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">matches</span>.<span class="ident">value_of</span>(<span class="string">&quot;config&quot;</span>).<span class="ident">unwrap_or</span>(<span class="string">&quot;default.conf&quot;</span>);
-    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Value for config: {}&quot;</span>, <span class="ident">config</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;Value for config: {}&quot;</span>, <span class="ident">config</span>);
 
     <span class="comment">// Calling .unwrap() is safe here because &quot;INPUT&quot; is required (if &quot;INPUT&quot; wasn&#39;t</span>
     <span class="comment">// required we could have used an &#39;if let&#39; to conditionally get the value)</span>
-    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Using input file: {}&quot;</span>, <span class="ident">matches</span>.<span class="ident">value_of</span>(<span class="string">&quot;INPUT&quot;</span>).<span class="ident">unwrap</span>());
+    <span class="macro">println!</span>(<span class="string">&quot;Using input file: {}&quot;</span>, <span class="ident">matches</span>.<span class="ident">value_of</span>(<span class="string">&quot;INPUT&quot;</span>).<span class="ident">unwrap</span>());
 
     <span class="comment">// Vary the output based on how many times the user used the &quot;verbose&quot; flag</span>
     <span class="comment">// (i.e. &#39;myprog -v -v -v&#39; or &#39;myprog -vvv&#39; vs &#39;myprog -v&#39;</span>
     <span class="kw">match</span> <span class="ident">matches</span>.<span class="ident">occurrences_of</span>(<span class="string">&quot;v&quot;</span>) {
-        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;No verbose info&quot;</span>),
-        <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Some verbose info&quot;</span>),
-        <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Tons of verbose info&quot;</span>),
-        <span class="number">3</span> <span class="op">|</span> <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Don&#39;t be crazy&quot;</span>),
+        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;No verbose info&quot;</span>),
+        <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;Some verbose info&quot;</span>),
+        <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;Tons of verbose info&quot;</span>),
+        <span class="number">3</span> <span class="op">|</span> <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;Don&#39;t be crazy&quot;</span>),
     }
 
     <span class="comment">// You can handle information about subcommands by requesting their matches by name</span>
     <span class="comment">// (as below), requesting just the name used, or both at the same time</span>
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">matches</span>) <span class="op">=</span> <span class="ident">matches</span>.<span class="ident">subcommand_matches</span>(<span class="string">&quot;test&quot;</span>) {
         <span class="kw">if</span> <span class="ident">matches</span>.<span class="ident">is_present</span>(<span class="string">&quot;debug&quot;</span>) {
-            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Printing debug info...&quot;</span>);
+            <span class="macro">println!</span>(<span class="string">&quot;Printing debug info...&quot;</span>);
         } <span class="kw">else</span> {
-            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Printing normally...&quot;</span>);
+            <span class="macro">println!</span>(<span class="string">&quot;Printing normally...&quot;</span>);
         }
     }
 
@@ -174,7 +174,7 @@ compiled in by default and we need to enable a feature flag in Cargo.toml:</p>
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="comment">// The YAML file is found relative to the current file, similar to how modules are found</span>
-    <span class="kw">let</span> <span class="ident">yaml</span> <span class="op">=</span> <span class="macro">load_yaml</span><span class="macro">!</span>(<span class="string">&quot;cli.yml&quot;</span>);
+    <span class="kw">let</span> <span class="ident">yaml</span> <span class="op">=</span> <span class="macro">load_yaml!</span>(<span class="string">&quot;cli.yml&quot;</span>);
     <span class="kw">let</span> <span class="ident">matches</span> <span class="op">=</span> <span class="ident">App</span>::<span class="ident">from_yaml</span>(<span class="ident">yaml</span>).<span class="ident">get_matches</span>();
 
     <span class="comment">// Same as previous examples...</span>
@@ -187,7 +187,7 @@ builder pattern (the first example), but without all the verbosity.</p>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">clap</span>;
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">matches</span> <span class="op">=</span> <span class="macro">clap_app</span><span class="macro">!</span>(<span class="ident">myapp</span> <span class="op">=</span><span class="op">&gt;</span>
+    <span class="kw">let</span> <span class="ident">matches</span> <span class="op">=</span> <span class="macro">clap_app!</span>(<span class="ident">myapp</span> <span class="op">=</span><span class="op">&gt;</span>
         (<span class="ident">version</span>: <span class="string">&quot;1.0&quot;</span>)
         (<span class="ident">author</span>: <span class="string">&quot;Kevin K. &lt;kbknapp@gmail.com&gt;&quot;</span>)
         (<span class="ident">about</span>: <span class="string">&quot;Does awesome things&quot;</span>)

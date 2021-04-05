@@ -645,7 +645,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">time</span>::{<span class="self">self</span>, <span class="ident">trampoline</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
-<span class="kw">const</span> <span class="ident">TIME_CSTR</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span> <span class="op">=</span> <span class="ident">cstr</span>::<span class="macro">cstr</span><span class="macro">!</span>(<span class="string">&quot;Time&quot;</span>);
+<span class="kw">const</span> <span class="ident">TIME_CSTR</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span> <span class="op">=</span> <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Time&quot;</span>);
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">InitializeResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">interp</span>.<span class="ident">is_class_defined</span>::<span class="op">&lt;</span><span class="ident">time</span>::<span class="ident">Time</span><span class="op">&gt;</span>() {
@@ -735,15 +735,15 @@
         .<span class="ident">define</span>()<span class="question-mark">?</span>;
     <span class="ident">interp</span>.<span class="ident">def_class</span>::<span class="op">&lt;</span><span class="ident">time</span>::<span class="ident">Time</span><span class="op">&gt;</span>(<span class="ident">spec</span>)<span class="question-mark">?</span>;
 
-    <span class="macro">trace</span><span class="macro">!</span>(<span class="string">&quot;Patched Time onto interpreter&quot;</span>);
+    <span class="macro">trace!</span>(<span class="string">&quot;Patched Time onto interpreter&quot;</span>);
     <span class="prelude-val">Ok</span>(())
 }
 
 <span class="comment">// Constructor</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_now</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">now</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
@@ -752,8 +752,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_at</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> (<span class="ident">seconds</span>, <span class="ident">microseconds</span>) <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> (<span class="ident">seconds</span>, <span class="ident">microseconds</span>) <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">seconds</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">seconds</span>);
     <span class="kw">let</span> <span class="ident">microseconds</span> <span class="op">=</span> <span class="ident">microseconds</span>.<span class="ident">map</span>(<span class="ident">Value</span>::<span class="ident">from</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">at</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">seconds</span>, <span class="ident">microseconds</span>);
@@ -764,8 +764,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_mkutc</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Value</span>::<span class="ident">from</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">mkutc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">args</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -775,8 +775,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_mktime</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Value</span>::<span class="ident">from</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">mktime</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">args</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -788,8 +788,8 @@
 <span class="comment">// Core</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_int</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">to_int</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -799,8 +799,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_float</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">to_float</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -810,8 +810,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_rational</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">to_rational</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -821,8 +821,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_cmp</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">other</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
@@ -833,8 +833,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_eql</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">other</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">eql</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
@@ -845,8 +845,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_hash</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -856,8 +856,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_initialize</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Value</span>::<span class="ident">from</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">initialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">args</span>);
@@ -868,8 +868,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_initialize_copy</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">other</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">initialize_copy</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
@@ -882,8 +882,8 @@
 <span class="comment">// Mutators and converters</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_mutate_to_local</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="ident">utc_offset</span>.<span class="ident">map</span>(<span class="ident">Value</span>::<span class="ident">from</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">mutate_to_local</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">utc_offset</span>);
@@ -894,8 +894,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_mutate_to_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">mutate_to_utc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -905,8 +905,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_as_local</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="ident">utc_offset</span>.<span class="ident">map</span>(<span class="ident">Value</span>::<span class="ident">from</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">as_local</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">utc_offset</span>);
@@ -917,8 +917,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_as_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">as_utc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -930,8 +930,8 @@
 <span class="comment">// Inspect</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_asctime</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">asctime</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -941,8 +941,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_string</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -952,8 +952,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_array</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">to_array</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -965,8 +965,8 @@
 <span class="comment">// Math</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_plus</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">other</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">plus</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
@@ -977,8 +977,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_minus</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">other</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">minus</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
@@ -991,8 +991,8 @@
 <span class="comment">// Coarse math</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_succ</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">succ</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1002,8 +1002,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_round</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">num_digits</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">num_digits</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">num_digits</span> <span class="op">=</span> <span class="ident">num_digits</span>.<span class="ident">map</span>(<span class="ident">Value</span>::<span class="ident">from</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">round</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">num_digits</span>);
@@ -1016,8 +1016,8 @@
 <span class="comment">// Datetime</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_second</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">second</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1027,8 +1027,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_minute</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">minute</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1038,8 +1038,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_hour</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">hour</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1049,8 +1049,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_day</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">day</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1060,8 +1060,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_month</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">month</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1071,8 +1071,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_year</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">year</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1082,8 +1082,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_weekday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">weekday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1093,8 +1093,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_year_day</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">year_day</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1104,8 +1104,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_dst</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_dst</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1115,8 +1115,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_zone</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">timezone</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1126,8 +1126,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_utc_offset</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">utc_offset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1139,8 +1139,8 @@
 <span class="comment">// Timezone mode</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_utc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1152,8 +1152,8 @@
 <span class="comment">// Day of week</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_sunday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_sunday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1163,8 +1163,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_monday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_monday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1174,8 +1174,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_tuesday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_tuesday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1185,8 +1185,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_wednesday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_wednesday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1196,8 +1196,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_thursday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_thursday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1207,8 +1207,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_friday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_friday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1218,8 +1218,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_saturday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">is_saturday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1231,8 +1231,8 @@
 <span class="comment">// Unix time value</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_microsecond</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">microsecond</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1242,8 +1242,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_nanosecond</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">nanosecond</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1253,8 +1253,8 @@
 }
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_subsec</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">subsec</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
@@ -1266,8 +1266,8 @@
 <span class="comment">// Time format</span>
 
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_strftime</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys</span>::<span class="ident">mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys</span>::<span class="ident">mrb_value</span> {
-    <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="macro">mrb_get_args</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter</span><span class="macro">!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">format</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline</span>::<span class="ident">strftime</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">format</span>);

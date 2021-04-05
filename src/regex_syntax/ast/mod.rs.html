@@ -1720,7 +1720,7 @@ Defines an abstract syntax for regular expressions.
             <span class="ident">UnicodeClassInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;invalid Unicode character class&quot;</span>,
             <span class="ident">UnsupportedBackreference</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;backreferences are not supported&quot;</span>,
             <span class="ident">UnsupportedLookAround</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;look-around is not supported&quot;</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
     }
 }
@@ -1735,88 +1735,88 @@ Defines an abstract syntax for regular expressions.
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ErrorKind</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">CaptureLimitExceeded</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="ident">CaptureLimitExceeded</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(
                 <span class="ident">f</span>,
                 <span class="string">&quot;exceeded the maximum number of \
                  capturing groups ({})&quot;</span>,
                 ::<span class="ident">std</span>::<span class="ident">u32</span>::<span class="ident">MAX</span>
             ),
             <span class="ident">ClassEscapeInvalid</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid escape sequence found in character class&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid escape sequence found in character class&quot;</span>)
             }
-            <span class="ident">ClassRangeInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="ident">ClassRangeInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(
                 <span class="ident">f</span>,
                 <span class="string">&quot;invalid character class range, \
                  the start must be &lt;= the end&quot;</span>
             ),
             <span class="ident">ClassRangeLiteral</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid range boundary, must be a literal&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid range boundary, must be a literal&quot;</span>)
             }
-            <span class="ident">ClassUnclosed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;unclosed character class&quot;</span>),
-            <span class="ident">DecimalEmpty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;decimal literal empty&quot;</span>),
-            <span class="ident">DecimalInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;decimal literal invalid&quot;</span>),
-            <span class="ident">EscapeHexEmpty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;hexadecimal literal empty&quot;</span>),
+            <span class="ident">ClassUnclosed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;unclosed character class&quot;</span>),
+            <span class="ident">DecimalEmpty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;decimal literal empty&quot;</span>),
+            <span class="ident">DecimalInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;decimal literal invalid&quot;</span>),
+            <span class="ident">EscapeHexEmpty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;hexadecimal literal empty&quot;</span>),
             <span class="ident">EscapeHexInvalid</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;hexadecimal literal is not a Unicode scalar value&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;hexadecimal literal is not a Unicode scalar value&quot;</span>)
             }
-            <span class="ident">EscapeHexInvalidDigit</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid hexadecimal digit&quot;</span>),
-            <span class="ident">EscapeUnexpectedEof</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="ident">EscapeHexInvalidDigit</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid hexadecimal digit&quot;</span>),
+            <span class="ident">EscapeUnexpectedEof</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(
                 <span class="ident">f</span>,
                 <span class="string">&quot;incomplete escape sequence, \
                  reached end of pattern prematurely&quot;</span>
             ),
-            <span class="ident">EscapeUnrecognized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;unrecognized escape sequence&quot;</span>),
+            <span class="ident">EscapeUnrecognized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;unrecognized escape sequence&quot;</span>),
             <span class="ident">FlagDanglingNegation</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;dangling flag negation operator&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;dangling flag negation operator&quot;</span>)
             }
-            <span class="ident">FlagDuplicate</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;duplicate flag&quot;</span>),
+            <span class="ident">FlagDuplicate</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;duplicate flag&quot;</span>),
             <span class="ident">FlagRepeatedNegation</span> { .. } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;flag negation operator repeated&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;flag negation operator repeated&quot;</span>)
             }
             <span class="ident">FlagUnexpectedEof</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;expected flag but got end of regex&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;expected flag but got end of regex&quot;</span>)
             }
-            <span class="ident">FlagUnrecognized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;unrecognized flag&quot;</span>),
+            <span class="ident">FlagUnrecognized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;unrecognized flag&quot;</span>),
             <span class="ident">GroupNameDuplicate</span> { .. } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;duplicate capture group name&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;duplicate capture group name&quot;</span>)
             }
-            <span class="ident">GroupNameEmpty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;empty capture group name&quot;</span>),
-            <span class="ident">GroupNameInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid capture group character&quot;</span>),
-            <span class="ident">GroupNameUnexpectedEof</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;unclosed capture group name&quot;</span>),
-            <span class="ident">GroupUnclosed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;unclosed group&quot;</span>),
-            <span class="ident">GroupUnopened</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;unopened group&quot;</span>),
-            <span class="ident">NestLimitExceeded</span>(<span class="ident">limit</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="ident">GroupNameEmpty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;empty capture group name&quot;</span>),
+            <span class="ident">GroupNameInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid capture group character&quot;</span>),
+            <span class="ident">GroupNameUnexpectedEof</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;unclosed capture group name&quot;</span>),
+            <span class="ident">GroupUnclosed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;unclosed group&quot;</span>),
+            <span class="ident">GroupUnopened</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;unopened group&quot;</span>),
+            <span class="ident">NestLimitExceeded</span>(<span class="ident">limit</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(
                 <span class="ident">f</span>,
                 <span class="string">&quot;exceed the maximum number of \
                  nested parentheses/brackets ({})&quot;</span>,
                 <span class="ident">limit</span>
             ),
-            <span class="ident">RepetitionCountInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="ident">RepetitionCountInvalid</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(
                 <span class="ident">f</span>,
                 <span class="string">&quot;invalid repetition count range, \
                  the start must be &lt;= the end&quot;</span>
             ),
             <span class="ident">RepetitionCountDecimalEmpty</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;repetition quantifier expects a valid decimal&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;repetition quantifier expects a valid decimal&quot;</span>)
             }
             <span class="ident">RepetitionCountUnclosed</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;unclosed counted repetition&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;unclosed counted repetition&quot;</span>)
             }
             <span class="ident">RepetitionMissing</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;repetition operator missing expression&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;repetition operator missing expression&quot;</span>)
             }
             <span class="ident">UnicodeClassInvalid</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid Unicode character class&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid Unicode character class&quot;</span>)
             }
             <span class="ident">UnsupportedBackreference</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;backreferences are not supported&quot;</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;backreferences are not supported&quot;</span>)
             }
-            <span class="ident">UnsupportedLookAround</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="ident">UnsupportedLookAround</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(
                 <span class="ident">f</span>,
                 <span class="string">&quot;look-around, including look-ahead and look-behind, \
                  is not supported&quot;</span>
             ),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
         }
     }
 }
@@ -1835,7 +1835,7 @@ Defines an abstract syntax for regular expressions.
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Span</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;Span({:?}, {:?})&quot;</span>, <span class="self">self</span>.<span class="ident">start</span>, <span class="self">self</span>.<span class="ident">end</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Span({:?}, {:?})&quot;</span>, <span class="self">self</span>.<span class="ident">start</span>, <span class="self">self</span>.<span class="ident">end</span>)
     }
 }
 
@@ -1868,7 +1868,7 @@ Defines an abstract syntax for regular expressions.
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Position</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(
+        <span class="macro">write!</span>(
             <span class="ident">f</span>,
             <span class="string">&quot;Position(o: {:?}, l: {:?}, c: {:?})&quot;</span>,
             <span class="self">self</span>.<span class="ident">offset</span>, <span class="self">self</span>.<span class="ident">line</span>, <span class="self">self</span>.<span class="ident">column</span>
@@ -2883,7 +2883,7 @@ Defines an abstract syntax for regular expressions.
 
         <span class="kw">let</span> <span class="ident">empty_span</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="ident">Span</span>::<span class="ident">splat</span>(<span class="ident">Position</span>::<span class="ident">new</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));
         <span class="kw">let</span> <span class="ident">empty_ast</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="ident">Ast</span>::<span class="ident">Empty</span>(<span class="ident">empty_span</span>());
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stack</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">mem</span>::<span class="ident">replace</span>(<span class="self">self</span>, <span class="ident">empty_ast</span>())];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stack</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">mem</span>::<span class="ident">replace</span>(<span class="self">self</span>, <span class="ident">empty_ast</span>())];
         <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">ast</span>) <span class="op">=</span> <span class="ident">stack</span>.<span class="ident">pop</span>() {
             <span class="kw">match</span> <span class="ident">ast</span> {
                 <span class="ident">Ast</span>::<span class="ident">Empty</span>(<span class="kw">_</span>)
@@ -2944,7 +2944,7 @@ Defines an abstract syntax for regular expressions.
 
         <span class="kw">let</span> <span class="ident">empty_span</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="ident">Span</span>::<span class="ident">splat</span>(<span class="ident">Position</span>::<span class="ident">new</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));
         <span class="kw">let</span> <span class="ident">empty_set</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="ident">ClassSet</span>::<span class="ident">Item</span>(<span class="ident">ClassSetItem</span>::<span class="ident">Empty</span>(<span class="ident">empty_span</span>()));
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stack</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">mem</span>::<span class="ident">replace</span>(<span class="self">self</span>, <span class="ident">empty_set</span>())];
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stack</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">mem</span>::<span class="ident">replace</span>(<span class="self">self</span>, <span class="ident">empty_set</span>())];
         <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">set</span>) <span class="op">=</span> <span class="ident">stack</span>.<span class="ident">pop</span>() {
             <span class="kw">match</span> <span class="ident">set</span> {
                 <span class="ident">ClassSet</span>::<span class="ident">Item</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">item</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">item</span> {
@@ -2993,7 +2993,7 @@ Defines an abstract syntax for regular expressions.
                     <span class="ident">ast</span>: <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">ast</span>),
                 });
             }
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">ast</span>.<span class="ident">is_empty</span>());
+            <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ast</span>.<span class="ident">is_empty</span>());
         };
 
         <span class="comment">// We run our test on a thread with a small stack size so we can</span>

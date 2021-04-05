@@ -193,7 +193,7 @@
         <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">Context</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">history</span>);
         <span class="kw">let</span> <span class="ident">hinter</span> <span class="op">=</span> <span class="ident">HistoryHinter</span> {};
         <span class="kw">let</span> <span class="ident">hint</span> <span class="op">=</span> <span class="ident">hinter</span>.<span class="ident">hint</span>(<span class="string">&quot;test&quot;</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span><span class="ident">ctx</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">None</span>, <span class="ident">hint</span>);
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">hint</span>);
     }
 }
 </pre></div>

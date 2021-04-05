@@ -2019,7 +2019,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;__doctest&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;__doctest&quot;</span>, <span class="ident">cfg</span>(<span class="ident">doctest</span>))]</span>
-<span class="macro">doctest</span><span class="macro">!</span>(<span class="string">&quot;../README.md&quot;</span>);
+<span class="macro">doctest!</span>(<span class="string">&quot;../README.md&quot;</span>);
 
 <span class="comment">// this reexport is to aid the transition and should not be in the prelude!</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">oldtime</span>::<span class="ident">Duration</span>;
@@ -2066,7 +2066,7 @@
 }
 
 <span class="comment">// useful throughout the codebase</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">try_opt</span> {
+<span class="macro">macro_rules!</span> <span class="ident">try_opt</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span> {
             <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">v</span>,
@@ -2154,7 +2154,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">V</span>: <span class="ident">fmt</span>::<span class="ident">Display</span>, <span class="ident">D</span>: <span class="ident">fmt</span>::<span class="ident">Display</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">SerdeError</span><span class="op">&lt;</span><span class="ident">V</span>, <span class="ident">D</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;ChronoSerdeError({})&quot;</span>, <span class="self">self</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;ChronoSerdeError({})&quot;</span>, <span class="self">self</span>)
     }
 }
 
@@ -2164,9 +2164,9 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="kw-2">&amp;</span><span class="ident">SerdeError</span>::<span class="ident">NonExistent</span> { <span class="kw-2">ref</span> <span class="ident">timestamp</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;value is not a legal timestamp: {}&quot;</span>, <span class="ident">timestamp</span>)
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;value is not a legal timestamp: {}&quot;</span>, <span class="ident">timestamp</span>)
             }
-            <span class="kw-2">&amp;</span><span class="ident">SerdeError</span>::<span class="ident">Ambiguous</span> { <span class="kw-2">ref</span> <span class="ident">timestamp</span>, <span class="kw-2">ref</span> <span class="ident">min</span>, <span class="kw-2">ref</span> <span class="ident">max</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="kw-2">&amp;</span><span class="ident">SerdeError</span>::<span class="ident">Ambiguous</span> { <span class="kw-2">ref</span> <span class="ident">timestamp</span>, <span class="kw-2">ref</span> <span class="ident">min</span>, <span class="kw-2">ref</span> <span class="ident">max</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(
                 <span class="ident">f</span>,
                 <span class="string">&quot;value is an ambiguous timestamp: {}, could be either of {}, {}&quot;</span>,
                 <span class="ident">timestamp</span>, <span class="ident">min</span>, <span class="ident">max</span>
@@ -2366,7 +2366,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">ParseWeekdayError</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;ParseWeekdayError {{ .. }}&quot;</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;ParseWeekdayError {{ .. }}&quot;</span>)
     }
 }
 
@@ -2393,7 +2393,7 @@
         <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">Weekday</span>;
 
         <span class="kw">fn</span> <span class="ident">expecting</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-            <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;Weekday&quot;</span>)
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Weekday&quot;</span>)
         }
 
         <span class="kw">fn</span> <span class="ident">visit_str</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Value</span>, <span class="ident">E</span><span class="op">&gt;</span>
@@ -2421,7 +2421,7 @@
         <span class="kw">use</span> <span class="self">self</span>::<span class="ident">serde_json</span>::<span class="ident">to_string</span>;
         <span class="kw">use</span> <span class="ident">Weekday</span>::<span class="kw-2">*</span>;
 
-        <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Weekday</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[
+        <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Weekday</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[
             (<span class="ident">Mon</span>, <span class="string">&quot;\&quot;Mon\&quot;&quot;</span>),
             (<span class="ident">Tue</span>, <span class="string">&quot;\&quot;Tue\&quot;&quot;</span>),
             (<span class="ident">Wed</span>, <span class="string">&quot;\&quot;Wed\&quot;&quot;</span>),
@@ -2433,7 +2433,7 @@
 
         <span class="kw">for</span> (<span class="ident">weekday</span>, <span class="ident">expected_str</span>) <span class="kw">in</span> <span class="ident">cases</span> {
             <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="ident">weekday</span>).<span class="ident">unwrap</span>();
-            <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">string</span>, <span class="ident">expected_str</span>);
+            <span class="macro">assert_eq!</span>(<span class="ident">string</span>, <span class="ident">expected_str</span>);
         }
     }
 
@@ -2442,7 +2442,7 @@
         <span class="kw">use</span> <span class="self">self</span>::<span class="ident">serde_json</span>::<span class="ident">from_str</span>;
         <span class="kw">use</span> <span class="ident">Weekday</span>::<span class="kw-2">*</span>;
 
-        <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">Weekday</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[
+        <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">Weekday</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[
             (<span class="string">&quot;\&quot;mon\&quot;&quot;</span>, <span class="ident">Mon</span>),
             (<span class="string">&quot;\&quot;MONDAY\&quot;&quot;</span>, <span class="ident">Mon</span>),
             (<span class="string">&quot;\&quot;MonDay\&quot;&quot;</span>, <span class="ident">Mon</span>),
@@ -2463,11 +2463,11 @@
 
         <span class="kw">for</span> (<span class="ident">str</span>, <span class="ident">expected_weekday</span>) <span class="kw">in</span> <span class="ident">cases</span> {
             <span class="kw">let</span> <span class="ident">weekday</span> <span class="op">=</span> <span class="ident">from_str</span>::<span class="op">&lt;</span><span class="ident">Weekday</span><span class="op">&gt;</span>(<span class="ident">str</span>).<span class="ident">unwrap</span>();
-            <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">weekday</span>, <span class="ident">expected_weekday</span>);
+            <span class="macro">assert_eq!</span>(<span class="ident">weekday</span>, <span class="ident">expected_weekday</span>);
         }
 
         <span class="kw">let</span> <span class="ident">errors</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;\&quot;not a weekday\&quot;&quot;</span>, <span class="string">&quot;\&quot;monDAYs\&quot;&quot;</span>, <span class="string">&quot;\&quot;mond\&quot;&quot;</span>, <span class="string">&quot;mon&quot;</span>, <span class="string">&quot;\&quot;thur\&quot;&quot;</span>, <span class="string">&quot;\&quot;thurs\&quot;&quot;</span>];
+            <span class="macro">vec!</span>[<span class="string">&quot;\&quot;not a weekday\&quot;&quot;</span>, <span class="string">&quot;\&quot;monDAYs\&quot;&quot;</span>, <span class="string">&quot;\&quot;mond\&quot;&quot;</span>, <span class="string">&quot;mon&quot;</span>, <span class="string">&quot;\&quot;thur\&quot;&quot;</span>, <span class="string">&quot;\&quot;thurs\&quot;&quot;</span>];
 
         <span class="kw">for</span> <span class="ident">str</span> <span class="kw">in</span> <span class="ident">errors</span> {
             <span class="ident">from_str</span>::<span class="op">&lt;</span><span class="ident">Weekday</span><span class="op">&gt;</span>(<span class="ident">str</span>).<span class="ident">unwrap_err</span>();
@@ -2669,7 +2669,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">ParseMonthError</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;ParseMonthError {{ .. }}&quot;</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;ParseMonthError {{ .. }}&quot;</span>)
     }
 }
 
@@ -2695,7 +2695,7 @@
         <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">Month</span>;
 
         <span class="kw">fn</span> <span class="ident">expecting</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-            <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;Month&quot;</span>)
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Month&quot;</span>)
         }
 
         <span class="kw">fn</span> <span class="ident">visit_str</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Value</span>, <span class="ident">E</span><span class="op">&gt;</span>
@@ -2723,7 +2723,7 @@
         <span class="kw">use</span> <span class="self">self</span>::<span class="ident">serde_json</span>::<span class="ident">to_string</span>;
         <span class="kw">use</span> <span class="ident">Month</span>::<span class="kw-2">*</span>;
 
-        <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Month</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[
+        <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Month</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[
             (<span class="ident">January</span>, <span class="string">&quot;\&quot;January\&quot;&quot;</span>),
             (<span class="ident">February</span>, <span class="string">&quot;\&quot;February\&quot;&quot;</span>),
             (<span class="ident">March</span>, <span class="string">&quot;\&quot;March\&quot;&quot;</span>),
@@ -2740,7 +2740,7 @@
 
         <span class="kw">for</span> (<span class="ident">month</span>, <span class="ident">expected_str</span>) <span class="kw">in</span> <span class="ident">cases</span> {
             <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="ident">month</span>).<span class="ident">unwrap</span>();
-            <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">string</span>, <span class="ident">expected_str</span>);
+            <span class="macro">assert_eq!</span>(<span class="ident">string</span>, <span class="ident">expected_str</span>);
         }
     }
 
@@ -2749,7 +2749,7 @@
         <span class="kw">use</span> <span class="self">self</span>::<span class="ident">serde_json</span>::<span class="ident">from_str</span>;
         <span class="kw">use</span> <span class="ident">Month</span>::<span class="kw-2">*</span>;
 
-        <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">Month</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[
+        <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">Month</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[
             (<span class="string">&quot;\&quot;january\&quot;&quot;</span>, <span class="ident">January</span>),
             (<span class="string">&quot;\&quot;jan\&quot;&quot;</span>, <span class="ident">January</span>),
             (<span class="string">&quot;\&quot;FeB\&quot;&quot;</span>, <span class="ident">February</span>),
@@ -2768,11 +2768,11 @@
 
         <span class="kw">for</span> (<span class="ident">string</span>, <span class="ident">expected_month</span>) <span class="kw">in</span> <span class="ident">cases</span> {
             <span class="kw">let</span> <span class="ident">month</span> <span class="op">=</span> <span class="ident">from_str</span>::<span class="op">&lt;</span><span class="ident">Month</span><span class="op">&gt;</span>(<span class="ident">string</span>).<span class="ident">unwrap</span>();
-            <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">month</span>, <span class="ident">expected_month</span>);
+            <span class="macro">assert_eq!</span>(<span class="ident">month</span>, <span class="ident">expected_month</span>);
         }
 
         <span class="kw">let</span> <span class="ident">errors</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;\&quot;not a month\&quot;&quot;</span>, <span class="string">&quot;\&quot;ja\&quot;&quot;</span>, <span class="string">&quot;\&quot;Dece\&quot;&quot;</span>, <span class="string">&quot;Dec&quot;</span>, <span class="string">&quot;\&quot;Augustin\&quot;&quot;</span>];
+            <span class="macro">vec!</span>[<span class="string">&quot;\&quot;not a month\&quot;&quot;</span>, <span class="string">&quot;\&quot;ja\&quot;&quot;</span>, <span class="string">&quot;\&quot;Dece\&quot;&quot;</span>, <span class="string">&quot;Dec&quot;</span>, <span class="string">&quot;\&quot;Augustin\&quot;&quot;</span>];
 
         <span class="kw">for</span> <span class="ident">string</span> <span class="kw">in</span> <span class="ident">errors</span> {
             <span class="ident">from_str</span>::<span class="op">&lt;</span><span class="ident">Month</span><span class="op">&gt;</span>(<span class="ident">string</span>).<span class="ident">unwrap_err</span>();
@@ -2987,7 +2987,7 @@
 
             <span class="kw">let</span> <span class="ident">weekday</span> <span class="op">=</span> <span class="ident">d30</span>.<span class="ident">weekday</span>();
             <span class="kw">let</span> <span class="ident">other_dates</span> <span class="op">=</span> [<span class="ident">d4</span>, <span class="ident">d6</span>, <span class="ident">d8</span>, <span class="ident">d10</span>, <span class="ident">d12</span>, <span class="ident">d59</span>, <span class="ident">d95</span>, <span class="ident">d711</span>, <span class="ident">d117</span>];
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">other_dates</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">weekday</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">weekday</span>));
+            <span class="macro">assert!</span>(<span class="ident">other_dates</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">weekday</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">weekday</span>));
         }
     }
 
@@ -2999,17 +2999,17 @@
         <span class="kw">let</span> <span class="ident">feb_opt</span> <span class="op">=</span> <span class="ident">Month</span>::<span class="ident">from_u64</span>(<span class="number">2</span>);
         <span class="kw">let</span> <span class="ident">dec_opt</span> <span class="op">=</span> <span class="ident">Month</span>::<span class="ident">from_i64</span>(<span class="number">12</span>);
         <span class="kw">let</span> <span class="ident">no_month</span> <span class="op">=</span> <span class="ident">Month</span>::<span class="ident">from_u32</span>(<span class="number">13</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">jan_opt</span>, <span class="prelude-val">Some</span>(<span class="ident">Month</span>::<span class="ident">January</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">feb_opt</span>, <span class="prelude-val">Some</span>(<span class="ident">Month</span>::<span class="ident">February</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dec_opt</span>, <span class="prelude-val">Some</span>(<span class="ident">Month</span>::<span class="ident">December</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">no_month</span>, <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">jan_opt</span>, <span class="prelude-val">Some</span>(<span class="ident">Month</span>::<span class="ident">January</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">feb_opt</span>, <span class="prelude-val">Some</span>(<span class="ident">Month</span>::<span class="ident">February</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">dec_opt</span>, <span class="prelude-val">Some</span>(<span class="ident">Month</span>::<span class="ident">December</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">no_month</span>, <span class="prelude-val">None</span>);
 
         <span class="kw">let</span> <span class="ident">date</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2019</span>, <span class="number">10</span>, <span class="number">28</span>).<span class="ident">and_hms</span>(<span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Month</span>::<span class="ident">from_u32</span>(<span class="ident">date</span>.<span class="ident">month</span>()), <span class="prelude-val">Some</span>(<span class="ident">Month</span>::<span class="ident">October</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">Month</span>::<span class="ident">from_u32</span>(<span class="ident">date</span>.<span class="ident">month</span>()), <span class="prelude-val">Some</span>(<span class="ident">Month</span>::<span class="ident">October</span>));
 
         <span class="kw">let</span> <span class="ident">month</span> <span class="op">=</span> <span class="ident">Month</span>::<span class="ident">January</span>;
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2019</span>, <span class="ident">month</span>.<span class="ident">number_from_month</span>(), <span class="number">28</span>).<span class="ident">and_hms</span>(<span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>((<span class="ident">dt</span>.<span class="ident">year</span>(), <span class="ident">dt</span>.<span class="ident">month</span>(), <span class="ident">dt</span>.<span class="ident">day</span>()), (<span class="number">2019</span>, <span class="number">1</span>, <span class="number">28</span>));
+        <span class="macro">assert_eq!</span>((<span class="ident">dt</span>.<span class="ident">year</span>(), <span class="ident">dt</span>.<span class="ident">month</span>(), <span class="ident">dt</span>.<span class="ident">day</span>()), (<span class="number">2019</span>, <span class="number">1</span>, <span class="number">28</span>));
     }
 }
 
@@ -3031,7 +3031,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics if `div` is not positive.</span>
     <span class="kw">fn</span> <span class="ident">in_between</span>(<span class="ident">start</span>: <span class="ident">i32</span>, <span class="ident">end</span>: <span class="ident">i32</span>, <span class="ident">div</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">div</span> <span class="op">&gt;</span> <span class="number">0</span>, <span class="string">&quot;in_between: nonpositive div = {}&quot;</span>, <span class="ident">div</span>);
+        <span class="macro">assert!</span>(<span class="ident">div</span> <span class="op">&gt;</span> <span class="number">0</span>, <span class="string">&quot;in_between: nonpositive div = {}&quot;</span>, <span class="ident">div</span>);
         <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> (<span class="ident">start</span>.<span class="ident">div_euclid</span>(<span class="ident">div</span>), <span class="ident">start</span>.<span class="ident">rem_euclid</span>(<span class="ident">div</span>));
         <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> (<span class="ident">end</span>.<span class="ident">div_euclid</span>(<span class="ident">div</span>), <span class="ident">end</span>.<span class="ident">rem_euclid</span>(<span class="ident">div</span>));
         <span class="comment">// The lowest multiple of `div` greater than or equal to `start`, divided.</span>
@@ -3054,23 +3054,23 @@
 
     <span class="kw">for</span> <span class="ident">year</span> <span class="kw">in</span> <span class="ident">range_inclusive</span>(<span class="ident">naive</span>::<span class="ident">MIN_DATE</span>.<span class="ident">year</span>(), <span class="ident">naive</span>::<span class="ident">MAX_DATE</span>.<span class="ident">year</span>()) {
         <span class="kw">let</span> <span class="ident">jan1_year</span> <span class="op">=</span> <span class="ident">NaiveDate</span>::<span class="ident">from_ymd</span>(<span class="ident">year</span>, <span class="number">1</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert_eq!</span>(
             <span class="ident">jan1_year</span>.<span class="ident">num_days_from_ce</span>(),
             <span class="ident">num_days_from_ce</span>(<span class="kw-2">&amp;</span><span class="ident">jan1_year</span>),
             <span class="string">&quot;on {:?}&quot;</span>,
             <span class="ident">jan1_year</span>
         );
         <span class="kw">let</span> <span class="ident">mid_year</span> <span class="op">=</span> <span class="ident">jan1_year</span> <span class="op">+</span> <span class="ident">Duration</span>::<span class="ident">days</span>(<span class="number">133</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">mid_year</span>.<span class="ident">num_days_from_ce</span>(), <span class="ident">num_days_from_ce</span>(<span class="kw-2">&amp;</span><span class="ident">mid_year</span>), <span class="string">&quot;on {:?}&quot;</span>, <span class="ident">mid_year</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">mid_year</span>.<span class="ident">num_days_from_ce</span>(), <span class="ident">num_days_from_ce</span>(<span class="kw-2">&amp;</span><span class="ident">mid_year</span>), <span class="string">&quot;on {:?}&quot;</span>, <span class="ident">mid_year</span>);
     }
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">test_month_enum_succ_pred</span>() {
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Month</span>::<span class="ident">January</span>.<span class="ident">succ</span>(), <span class="ident">Month</span>::<span class="ident">February</span>);
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Month</span>::<span class="ident">December</span>.<span class="ident">succ</span>(), <span class="ident">Month</span>::<span class="ident">January</span>);
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Month</span>::<span class="ident">January</span>.<span class="ident">pred</span>(), <span class="ident">Month</span>::<span class="ident">December</span>);
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">Month</span>::<span class="ident">February</span>.<span class="ident">pred</span>(), <span class="ident">Month</span>::<span class="ident">January</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">Month</span>::<span class="ident">January</span>.<span class="ident">succ</span>(), <span class="ident">Month</span>::<span class="ident">February</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">Month</span>::<span class="ident">December</span>.<span class="ident">succ</span>(), <span class="ident">Month</span>::<span class="ident">January</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">Month</span>::<span class="ident">January</span>.<span class="ident">pred</span>(), <span class="ident">Month</span>::<span class="ident">December</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">Month</span>::<span class="ident">February</span>.<span class="ident">pred</span>(), <span class="ident">Month</span>::<span class="ident">January</span>);
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="chrono" data-search-js="../../search-index.js"></div>

@@ -815,57 +815,57 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">no_digits_with_base_prefix</span>() {
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0x&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;0x&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0b&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;0b&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0o&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;0o&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;o&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;o&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0X&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;0X&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0B&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;0B&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0O&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;0O&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;O&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;O&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
@@ -874,15 +874,15 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">no_digits_with_invalid_base_prefix</span>() {
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0z&quot;</span>.<span class="ident">into</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;0z&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
 
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0z&quot;</span>.<span class="ident">into</span>(), <span class="ident">Radix</span>::<span class="ident">new</span>(<span class="number">12</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="string">r#&quot;invalid value for Integer(): &quot;0z&quot;&quot;#</span>.<span class="ident">as_bytes</span>().<span class="ident">as_bstr</span>()
         );
@@ -892,8 +892,8 @@
     <span class="attribute">#[<span class="ident">should_panic</span>]</span> <span class="comment">// not implemented</span>
     <span class="kw">fn</span> <span class="ident">invalid_radix_has_precedence_over_parse_failure</span>() {
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">integer</span>(<span class="string">&quot;0z&quot;</span>.<span class="ident">into</span>(), <span class="ident">Radix</span>::<span class="ident">new</span>(<span class="number">12000</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
+        <span class="macro">assert!</span>(<span class="ident">result</span>.<span class="ident">is_err</span>());
+        <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>.<span class="ident">unwrap_err</span>().<span class="ident">message</span>().<span class="ident">as_bstr</span>(),
             <span class="comment">// should be:</span>
             <span class="string">b&quot;invalid radix 12000&quot;</span>.<span class="ident">as_bstr</span>()

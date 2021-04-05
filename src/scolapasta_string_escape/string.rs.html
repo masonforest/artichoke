@@ -194,7 +194,7 @@
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;Spinoso Exception&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dest</span>, <span class="ident">message</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dest</span>, <span class="string">&quot;Spinoso Exception&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dest</span>, <span class="string">&quot;Spinoso Exception&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -202,7 +202,7 @@
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;Spinoso Exception 💎🦀&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dest</span>, <span class="ident">message</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dest</span>, <span class="string">&quot;Spinoso Exception 💎🦀&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dest</span>, <span class="string">&quot;Spinoso Exception 💎🦀&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -210,7 +210,7 @@
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">b&quot;oh no! \xFF&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dest</span>, <span class="ident">message</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dest</span>, <span class="string">r&quot;oh no! \xFF&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dest</span>, <span class="string">r&quot;oh no! \xFF&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -218,7 +218,7 @@
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;yes to symbolic \t\n\x7F&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dest</span>, <span class="ident">message</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dest</span>, <span class="string">r&quot;yes to symbolic \t\n\x7F&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dest</span>, <span class="string">r&quot;yes to symbolic \t\n\x7F&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -226,7 +226,7 @@
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;This is the replacement character: \u{FFFD}&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dest</span>, <span class="ident">message</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dest</span>, <span class="string">&quot;This is the replacement character: \u{FFFD}&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dest</span>, <span class="string">&quot;This is the replacement character: \u{FFFD}&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -234,12 +234,12 @@
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">b&quot;Danger&quot;</span>.<span class="ident">to_vec</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dest</span>, <span class="ident">message</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dest</span>, <span class="string">&quot;Danger&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dest</span>, <span class="string">&quot;Danger&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;Danger&quot;</span>.<span class="ident">to_string</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dest</span>, <span class="ident">message</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">dest</span>, <span class="string">&quot;Danger&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">dest</span>, <span class="string">&quot;Danger&quot;</span>);
     }
 }
 </pre></div>

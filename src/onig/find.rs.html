@@ -1109,20 +1109,20 @@
     <span class="kw">fn</span> <span class="ident">test_regex_captures</span>() {
         <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;e(l+)|(r+)&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">captures</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">captures</span>(<span class="string">&quot;hello&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">captures</span>.<span class="ident">len</span>(), <span class="number">3</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">captures</span>.<span class="ident">is_empty</span>(), <span class="bool-val">false</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">captures</span>.<span class="ident">len</span>(), <span class="number">3</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">captures</span>.<span class="ident">is_empty</span>(), <span class="bool-val">false</span>);
         <span class="kw">let</span> <span class="ident">pos1</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">pos</span>(<span class="number">0</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">pos2</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">pos</span>(<span class="number">1</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">pos3</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">pos</span>(<span class="number">2</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">pos1</span>, (<span class="number">1</span>, <span class="number">4</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">pos2</span>, (<span class="number">2</span>, <span class="number">4</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">pos3</span>, <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">pos1</span>, (<span class="number">1</span>, <span class="number">4</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">pos2</span>, (<span class="number">2</span>, <span class="number">4</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">pos3</span>, <span class="prelude-val">None</span>);
         <span class="kw">let</span> <span class="ident">str1</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">at</span>(<span class="number">0</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">str2</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">at</span>(<span class="number">1</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">str3</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">at</span>(<span class="number">2</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">str1</span>, <span class="string">&quot;ell&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">str2</span>, <span class="string">&quot;ll&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">str3</span>, <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">str1</span>, <span class="string">&quot;ell&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">str2</span>, <span class="string">&quot;ll&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">str3</span>, <span class="prelude-val">None</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1130,9 +1130,9 @@
         <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;e(l+)&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">captures</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">captures</span>(<span class="string">&quot;hello&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">caps</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">caps</span>[<span class="number">0</span>], <span class="prelude-val">Some</span>(<span class="string">&quot;ell&quot;</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">caps</span>[<span class="number">1</span>], <span class="prelude-val">Some</span>(<span class="string">&quot;ll&quot;</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">caps</span>.<span class="ident">len</span>(), <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">caps</span>[<span class="number">0</span>], <span class="prelude-val">Some</span>(<span class="string">&quot;ell&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">caps</span>[<span class="number">1</span>], <span class="prelude-val">Some</span>(<span class="string">&quot;ll&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">caps</span>.<span class="ident">len</span>(), <span class="number">2</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1140,64 +1140,64 @@
         <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;e(l+)&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">captures</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">captures</span>(<span class="string">&quot;hello&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">caps</span> <span class="op">=</span> <span class="ident">captures</span>.<span class="ident">iter_pos</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">caps</span>[<span class="number">0</span>], <span class="prelude-val">Some</span>((<span class="number">1</span>, <span class="number">4</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">caps</span>[<span class="number">1</span>], <span class="prelude-val">Some</span>((<span class="number">2</span>, <span class="number">4</span>)));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">caps</span>.<span class="ident">len</span>(), <span class="number">2</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">caps</span>[<span class="number">0</span>], <span class="prelude-val">Some</span>((<span class="number">1</span>, <span class="number">4</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">caps</span>[<span class="number">1</span>], <span class="prelude-val">Some</span>((<span class="number">2</span>, <span class="number">4</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">caps</span>.<span class="ident">len</span>(), <span class="number">2</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_find_iter</span>() {
         <span class="kw">let</span> <span class="ident">re</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\d+&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">ms</span> <span class="op">=</span> <span class="ident">re</span>.<span class="ident">find_iter</span>(<span class="string">&quot;a12b2&quot;</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ms</span>, <span class="macro">vec</span><span class="macro">!</span>[(<span class="number">1</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>)]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ms</span>, <span class="macro">vec!</span>[(<span class="number">1</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>)]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_find_iter_one_zero_length</span>() {
         <span class="kw">let</span> <span class="ident">re</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\d*&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">ms</span> <span class="op">=</span> <span class="ident">re</span>.<span class="ident">find_iter</span>(<span class="string">&quot;a1b2&quot;</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ms</span>, <span class="macro">vec</span><span class="macro">!</span>[(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>)]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ms</span>, <span class="macro">vec!</span>[(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>)]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_find_iter_many_zero_length</span>() {
         <span class="kw">let</span> <span class="ident">re</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\d*&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">ms</span> <span class="op">=</span> <span class="ident">re</span>.<span class="ident">find_iter</span>(<span class="string">&quot;a1bbb2&quot;</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ms</span>, <span class="macro">vec</span><span class="macro">!</span>[(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ms</span>, <span class="macro">vec!</span>[(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_find_iter_empty_after_match</span>() {
         <span class="kw">let</span> <span class="ident">re</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;b|(?=,)&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">ms</span> <span class="op">=</span> <span class="ident">re</span>.<span class="ident">find_iter</span>(<span class="string">&quot;ba,&quot;</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ms</span>, <span class="macro">vec</span><span class="macro">!</span>[(<span class="number">0</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">2</span>)]);
+        <span class="macro">assert_eq!</span>(<span class="ident">ms</span>, <span class="macro">vec!</span>[(<span class="number">0</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">2</span>)]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_zero_length_matches_jumps_past_match_location</span>() {
         <span class="kw">let</span> <span class="ident">re</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\b&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">matches</span> <span class="op">=</span> <span class="ident">re</span>.<span class="ident">find_iter</span>(<span class="string">&quot;test string&quot;</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">matches</span>, [(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">4</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">5</span>), (<span class="number">11</span>, <span class="number">11</span>)]);
+        <span class="macro">assert_eq!</span>(<span class="ident">matches</span>, [(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">4</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">5</span>), (<span class="number">11</span>, <span class="number">11</span>)]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_captures_iter</span>() {
         <span class="kw">let</span> <span class="ident">re</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\d+&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">ms</span> <span class="op">=</span> <span class="ident">re</span>.<span class="ident">captures_iter</span>(<span class="string">&quot;a12b2&quot;</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ms</span>[<span class="number">0</span>].<span class="ident">pos</span>(<span class="number">0</span>).<span class="ident">unwrap</span>(), (<span class="number">1</span>, <span class="number">3</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">ms</span>[<span class="number">1</span>].<span class="ident">pos</span>(<span class="number">0</span>).<span class="ident">unwrap</span>(), (<span class="number">4</span>, <span class="number">5</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">ms</span>[<span class="number">0</span>].<span class="ident">pos</span>(<span class="number">0</span>).<span class="ident">unwrap</span>(), (<span class="number">1</span>, <span class="number">3</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">ms</span>[<span class="number">1</span>].<span class="ident">pos</span>(<span class="number">0</span>).<span class="ident">unwrap</span>(), (<span class="number">4</span>, <span class="number">5</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_captures_stores_match_offset</span>() {
         <span class="kw">let</span> <span class="ident">reg</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\d+\.(\d+)&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">captures</span> <span class="op">=</span> <span class="ident">reg</span>.<span class="ident">captures</span>(<span class="string">&quot;100 - 3.1415 / 2.0&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">6</span>, <span class="ident">captures</span>.<span class="ident">offset</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">6</span>, <span class="ident">captures</span>.<span class="ident">offset</span>());
         <span class="kw">let</span> <span class="ident">all_caps</span> <span class="op">=</span> <span class="ident">reg</span>
             .<span class="ident">captures_iter</span>(<span class="string">&quot;1 - 3234.3 * 123.2 - 100&quot;</span>)
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">cap</span><span class="op">|</span> <span class="ident">cap</span>.<span class="ident">offset</span>())
             .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">4</span>, <span class="number">13</span>], <span class="ident">all_caps</span>);
+        <span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="number">4</span>, <span class="number">13</span>], <span class="ident">all_caps</span>);
     }
 }
 </pre></div>

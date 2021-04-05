@@ -486,7 +486,7 @@ disabled via
 <span class="comment">// We can never be truly no_std, but we could be alloc-only some day, so</span>
 <span class="comment">// require the std feature for now.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
-<span class="macro">compile_error</span><span class="macro">!</span>(<span class="string">&quot;`std` feature is currently required to build this crate&quot;</span>);
+<span class="macro">compile_error!</span>(<span class="string">&quot;`std` feature is currently required to build this crate&quot;</span>);
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">memchr</span>;
 <span class="comment">// #[cfg(doctest)]</span>

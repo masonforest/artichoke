@@ -779,7 +779,7 @@
                 <span class="kw">if</span> <span class="ident">bytes</span>[<span class="ident">i</span>] <span class="op">=</span><span class="op">=</span> <span class="string">b&#39;\n&#39;</span> {
                     <span class="ident">wtr</span>.<span class="ident">write_all</span>(<span class="string">b&quot;\\n&quot;</span>)<span class="question-mark">?</span>; <span class="comment">// escaped line feed</span>
                 } <span class="kw">else</span> {
-                    <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="ident">bytes</span>[<span class="ident">i</span>], <span class="string">b&#39;\\&#39;</span>);
+                    <span class="macro">debug_assert_eq!</span>(<span class="ident">bytes</span>[<span class="ident">i</span>], <span class="string">b&#39;\\&#39;</span>);
                     <span class="ident">wtr</span>.<span class="ident">write_all</span>(<span class="string">b&quot;\\\\&quot;</span>)<span class="question-mark">?</span>; <span class="comment">// escaped backslash</span>
                 }
                 <span class="ident">bytes</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">bytes</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>..];
@@ -900,7 +900,7 @@
                         }
                         <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
                             <span class="comment">// only line feed and back slash should have been escaped</span>
-                            <span class="macro">warn</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;bad escaped line: {}&quot;</span>, <span class="ident">line</span>);
+                            <span class="macro">warn!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;bad escaped line: {}&quot;</span>, <span class="ident">line</span>);
                             <span class="ident">copy</span> <span class="op">=</span> <span class="prelude-val">None</span>;
                             <span class="kw">break</span>;
                         }
@@ -934,7 +934,7 @@
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">path_info</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">PathInfo</span>(<span class="ident">path</span>.<span class="ident">to_owned</span>(), <span class="ident">modified</span>, <span class="ident">size</span>));
         }
-        <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;PathInfo({:?}, {:?}, {})&quot;</span>, <span class="ident">path</span>, <span class="ident">modified</span>, <span class="ident">size</span>);
+        <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;PathInfo({:?}, {:?}, {})&quot;</span>, <span class="ident">path</span>, <span class="ident">modified</span>, <span class="ident">size</span>);
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -943,7 +943,7 @@
             <span class="self">self</span>.<span class="ident">path_info</span>
         {
             <span class="kw">if</span> <span class="ident">previous_path</span>.<span class="ident">as_path</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">path</span> {
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;cannot append: {:?} &lt;&gt; {:?}&quot;</span>, <span class="ident">previous_path</span>, <span class="ident">path</span>);
+                <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;cannot append: {:?} &lt;&gt; {:?}&quot;</span>, <span class="ident">previous_path</span>, <span class="ident">path</span>);
                 <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>);
             }
             <span class="kw">let</span> <span class="ident">modified</span> <span class="op">=</span> <span class="ident">File</span>::<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>)<span class="question-mark">?</span>.<span class="ident">metadata</span>()<span class="question-mark">?</span>.<span class="ident">modified</span>()<span class="question-mark">?</span>;
@@ -951,7 +951,7 @@
                 <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">max_len</span> <span class="op">&lt;</span><span class="op">=</span> <span class="kw-2">*</span><span class="ident">previous_size</span>
                 <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">max_len</span> <span class="op">&lt;</span> (<span class="kw-2">*</span><span class="ident">previous_size</span>).<span class="ident">saturating_add</span>(<span class="self">self</span>.<span class="ident">new_entries</span>)
             {
-                <span class="macro">debug</span><span class="macro">!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;cannot append: {:?} &lt; {:?} or {} &lt; {} + {}&quot;</span>,
+                <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;cannot append: {:?} &lt; {:?} or {} &lt; {} + {}&quot;</span>,
                        <span class="ident">previous_modified</span>, <span class="ident">modified</span>, <span class="self">self</span>.<span class="ident">max_len</span>, <span class="ident">previous_size</span>, <span class="self">self</span>.<span class="ident">new_entries</span>);
                 <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
             } <span class="kw">else</span> {
@@ -1055,7 +1055,7 @@
     }
 }
 
-<span class="ident">cfg_if</span>::<span class="macro">cfg_if</span><span class="macro">!</span> {
+<span class="ident">cfg_if</span>::<span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">windows</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;wasm32&quot;</span>))]</span> {
         <span class="kw">fn</span> <span class="ident">umask</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u16</span> {
             <span class="number">0</span>
@@ -1092,36 +1092,36 @@
 
     <span class="kw">fn</span> <span class="ident">init</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">History</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">History</span>::<span class="ident">new</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line1&quot;</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line2&quot;</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line3&quot;</span>));
+        <span class="macro">assert!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line1&quot;</span>));
+        <span class="macro">assert!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line2&quot;</span>));
+        <span class="macro">assert!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line3&quot;</span>));
         <span class="ident">history</span>
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">new</span>() {
         <span class="kw">let</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">History</span>::<span class="ident">new</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">0</span>, <span class="ident">history</span>.<span class="ident">entries</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">history</span>.<span class="ident">entries</span>.<span class="ident">len</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">add</span>() {
         <span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">Config</span>::<span class="ident">builder</span>().<span class="ident">history_ignore_space</span>(<span class="bool-val">true</span>).<span class="ident">build</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">History</span>::<span class="ident">with_config</span>(<span class="ident">config</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">config</span>.<span class="ident">max_history_size</span>(), <span class="ident">history</span>.<span class="ident">max_len</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line1&quot;</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line2&quot;</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line2&quot;</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;&quot;</span>));
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot; line3&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">config</span>.<span class="ident">max_history_size</span>(), <span class="ident">history</span>.<span class="ident">max_len</span>);
+        <span class="macro">assert!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line1&quot;</span>));
+        <span class="macro">assert!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line2&quot;</span>));
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line2&quot;</span>));
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;&quot;</span>));
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot; line3&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">set_max_len</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">init</span>();
         <span class="ident">history</span>.<span class="ident">set_max_len</span>(<span class="number">1</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">1</span>, <span class="ident">history</span>.<span class="ident">entries</span>.<span class="ident">len</span>());
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">&quot;line3&quot;</span>.<span class="ident">to_owned</span>()), <span class="ident">history</span>.<span class="ident">last</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">history</span>.<span class="ident">entries</span>.<span class="ident">len</span>());
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">&quot;line3&quot;</span>.<span class="ident">to_owned</span>()), <span class="ident">history</span>.<span class="ident">last</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1139,14 +1139,14 @@
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">miri</span>, <span class="ident">ignore</span>)]</span> <span class="comment">// unsupported operation: `getcwd` not available when isolation is enabled</span>
     <span class="kw">fn</span> <span class="ident">check_save</span>(<span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">init</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="ident">line</span>));
+        <span class="macro">assert!</span>(<span class="ident">history</span>.<span class="ident">add</span>(<span class="ident">line</span>));
         <span class="kw">let</span> <span class="ident">tf</span> <span class="op">=</span> <span class="ident">tempfile</span>::<span class="ident">NamedTempFile</span>::<span class="ident">new</span>()<span class="question-mark">?</span>;
 
         <span class="ident">history</span>.<span class="ident">save</span>(<span class="ident">tf</span>.<span class="ident">path</span>())<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history2</span> <span class="op">=</span> <span class="ident">History</span>::<span class="ident">new</span>();
         <span class="ident">history2</span>.<span class="ident">load</span>(<span class="ident">tf</span>.<span class="ident">path</span>())<span class="question-mark">?</span>;
         <span class="kw">for</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="kw">in</span> <span class="ident">history</span>.<span class="ident">entries</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">history2</span>.<span class="ident">entries</span>.<span class="ident">iter</span>()) {
-            <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">a</span>, <span class="ident">b</span>);
+            <span class="macro">assert_eq!</span>(<span class="ident">a</span>, <span class="ident">b</span>);
         }
         <span class="ident">tf</span>.<span class="ident">close</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
@@ -1170,9 +1170,9 @@
         }
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">History</span>::<span class="ident">new</span>();
         <span class="ident">history</span>.<span class="ident">load</span>(<span class="ident">tf</span>.<span class="ident">path</span>())<span class="question-mark">?</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">entries</span>[<span class="number">0</span>], <span class="string">&quot;test\\n \\abc \\123&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">entries</span>[<span class="number">1</span>], <span class="string">&quot;123\\n\\\\n&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">history</span>.<span class="ident">entries</span>[<span class="number">2</span>], <span class="string">&quot;abcde&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">history</span>.<span class="ident">entries</span>[<span class="number">0</span>], <span class="string">&quot;test\\n \\abc \\123&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">history</span>.<span class="ident">entries</span>[<span class="number">1</span>], <span class="string">&quot;123\\n\\\\n&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">history</span>.<span class="ident">entries</span>[<span class="number">2</span>], <span class="string">&quot;abcde&quot;</span>);
 
         <span class="ident">tf</span>.<span class="ident">close</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
@@ -1196,7 +1196,7 @@
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history3</span> <span class="op">=</span> <span class="ident">History</span>::<span class="ident">new</span>();
         <span class="ident">history3</span>.<span class="ident">load</span>(<span class="ident">tf</span>.<span class="ident">path</span>())<span class="question-mark">?</span>;
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">history3</span>.<span class="ident">len</span>(), <span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">history3</span>.<span class="ident">len</span>(), <span class="number">5</span>);
 
         <span class="ident">tf</span>.<span class="ident">close</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
@@ -1205,25 +1205,25 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">search</span>() {
         <span class="kw">let</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">init</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;none&quot;</span>, <span class="number">0</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">3</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;&quot;</span>, <span class="number">0</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;none&quot;</span>, <span class="number">0</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">3</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">0</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Some</span>(<span class="number">1</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">1</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Some</span>(<span class="number">2</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line3&quot;</span>, <span class="number">1</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">0</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="number">1</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">1</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="number">2</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line3&quot;</span>, <span class="number">1</span>, <span class="ident">Direction</span>::<span class="ident">Forward</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">reverse_search</span>() {
         <span class="kw">let</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">init</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;&quot;</span>, <span class="number">2</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;none&quot;</span>, <span class="number">2</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">3</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;&quot;</span>, <span class="number">2</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;none&quot;</span>, <span class="number">2</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">3</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
 
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Some</span>(<span class="number">2</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">2</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Some</span>(<span class="number">1</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">1</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line1&quot;</span>, <span class="number">1</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="number">2</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">2</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="number">1</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line&quot;</span>, <span class="number">1</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>), <span class="ident">history</span>.<span class="ident">search</span>(<span class="string">&quot;line1&quot;</span>, <span class="number">1</span>, <span class="ident">Direction</span>::<span class="ident">Reverse</span>));
     }
 }
 </pre></div>

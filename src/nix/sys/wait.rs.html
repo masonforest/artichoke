@@ -252,7 +252,7 @@
 <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_int</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">TryFrom</span>;
 
-<span class="macro">libc_bitflags</span><span class="macro">!</span>(
+<span class="macro">libc_bitflags!</span>(
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WaitPidFlag</span>: <span class="ident">c_int</span> {
         <span class="ident">WNOHANG</span>;
         <span class="ident">WUNTRACED</span>;
@@ -432,7 +432,7 @@
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">signaled</span>(<span class="ident">status</span>) {
             <span class="ident">WaitStatus</span>::<span class="ident">Signaled</span>(<span class="ident">pid</span>, <span class="ident">term_signal</span>(<span class="ident">status</span>)<span class="question-mark">?</span>, <span class="ident">dumped_core</span>(<span class="ident">status</span>))
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">stopped</span>(<span class="ident">status</span>) {
-            <span class="macro">cfg_if</span><span class="macro">!</span> {
+            <span class="macro">cfg_if!</span> {
                 <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span> {
                     <span class="kw">fn</span> <span class="ident">decode_stopped</span>(<span class="ident">pid</span>: <span class="ident">Pid</span>, <span class="ident">status</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">WaitStatus</span><span class="op">&gt;</span> {
                         <span class="kw">let</span> <span class="ident">status_additional</span> <span class="op">=</span> <span class="ident">stop_additional</span>(<span class="ident">status</span>);
@@ -453,7 +453,7 @@
             }
             <span class="kw">return</span> <span class="ident">decode_stopped</span>(<span class="ident">pid</span>, <span class="ident">status</span>);
         } <span class="kw">else</span> {
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">continued</span>(<span class="ident">status</span>));
+            <span class="macro">assert!</span>(<span class="ident">continued</span>(<span class="ident">status</span>));
             <span class="ident">WaitStatus</span>::<span class="ident">Continued</span>(<span class="ident">pid</span>)
         })
     }

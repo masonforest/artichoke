@@ -697,7 +697,7 @@
                 <span class="kw">continue</span>;
             }
             <span class="comment">// Otherwise, we have overlapping ranges.</span>
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">ranges</span>[<span class="ident">a</span>].<span class="ident">is_intersection_empty</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">ranges</span>[<span class="ident">b</span>]));
+            <span class="macro">assert!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">ranges</span>[<span class="ident">a</span>].<span class="ident">is_intersection_empty</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">ranges</span>[<span class="ident">b</span>]));
 
             <span class="comment">// This part is tricky and was non-obvious to me without looking</span>
             <span class="comment">// at explicit examples (see the tests). The trickiness stems from</span>
@@ -808,7 +808,7 @@
             <span class="kw">return</span>;
         }
         <span class="self">self</span>.<span class="ident">ranges</span>.<span class="ident">sort</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">ranges</span>.<span class="ident">is_empty</span>());
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">ranges</span>.<span class="ident">is_empty</span>());
 
         <span class="comment">// Is there a way to do this in-place with constant memory? I couldn&#39;t</span>
         <span class="comment">// figure out a way to do it. So just append the canonicalization to</span>
@@ -924,7 +924,7 @@
         <span class="kw">let</span> <span class="ident">add_upper</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">upper</span>() <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">upper</span>();
         <span class="comment">// We know this because !self.is_subset(other) and the ranges have</span>
         <span class="comment">// a non-empty intersection.</span>
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">add_lower</span> <span class="op">|</span><span class="op">|</span> <span class="ident">add_upper</span>);
+        <span class="macro">assert!</span>(<span class="ident">add_lower</span> <span class="op">|</span><span class="op">|</span> <span class="ident">add_upper</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ret</span> <span class="op">=</span> (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
         <span class="kw">if</span> <span class="ident">add_lower</span> {
             <span class="kw">let</span> <span class="ident">upper</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">lower</span>().<span class="ident">decrement</span>();

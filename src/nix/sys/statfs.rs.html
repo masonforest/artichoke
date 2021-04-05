@@ -1083,9 +1083,9 @@
     }
 
     <span class="kw">fn</span> <span class="ident">assert_fs_equals</span>(<span class="ident">fs</span>: <span class="ident">Statfs</span>, <span class="ident">vfs</span>: <span class="ident">Statvfs</span>) {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">files</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">files</span>() <span class="kw">as</span> <span class="ident">u64</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">block_size</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">fragment_size</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">files</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">files</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">block_size</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">fragment_size</span>() <span class="kw">as</span> <span class="ident">u64</span>);
     }
 
     <span class="comment">// This test is ignored because files_free/blocks_free can change after statvfs call and before</span>
@@ -1130,12 +1130,12 @@
     }
 
     <span class="kw">fn</span> <span class="ident">assert_fs_equals_strict</span>(<span class="ident">fs</span>: <span class="ident">Statfs</span>, <span class="ident">vfs</span>: <span class="ident">Statvfs</span>) {
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">files_free</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">files_free</span>() <span class="kw">as</span> <span class="ident">u64</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">blocks_free</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">blocks_free</span>() <span class="kw">as</span> <span class="ident">u64</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">blocks_available</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">blocks_available</span>() <span class="kw">as</span> <span class="ident">u64</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">files</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">files</span>() <span class="kw">as</span> <span class="ident">u64</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">fs</span>.<span class="ident">block_size</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">fragment_size</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">files_free</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">files_free</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">blocks_free</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">blocks_free</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">blocks_available</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">blocks_available</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">files</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">files</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">fs</span>.<span class="ident">block_size</span>() <span class="kw">as</span> <span class="ident">u64</span>, <span class="ident">vfs</span>.<span class="ident">fragment_size</span>() <span class="kw">as</span> <span class="ident">u64</span>);
     }
 }
 </pre></div>

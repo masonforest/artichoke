@@ -439,7 +439,7 @@
     <span class="doccomment">/// Add a child at the given index, given that none exists there already.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_child</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>, <span class="ident">node</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">TrieNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">children</span>[<span class="ident">idx</span>].<span class="ident">is_none</span>());
+        <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">children</span>[<span class="ident">idx</span>].<span class="ident">is_none</span>());
         <span class="self">self</span>.<span class="ident">child_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         <span class="self">self</span>.<span class="ident">children</span>[<span class="ident">idx</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">node</span>);
     }
@@ -456,19 +456,19 @@
     <span class="doccomment">/// Helper function for removing the single child of a node.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">take_only_child</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">TrieNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="macro">debug_assert_eq</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">child_count</span>, <span class="number">1</span>);
+        <span class="macro">debug_assert_eq!</span>(<span class="self">self</span>.<span class="ident">child_count</span>, <span class="number">1</span>);
         <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">BRANCH_FACTOR</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">child</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">take_child</span>(<span class="ident">i</span>) {
                 <span class="kw">return</span> <span class="ident">child</span>;
             }
         }
-        <span class="macro">unreachable</span><span class="macro">!</span>(<span class="string">&quot;node with child_count 1 has no actual children&quot;</span>);
+        <span class="macro">unreachable!</span>(<span class="string">&quot;node with child_count 1 has no actual children&quot;</span>);
     }
 
     <span class="doccomment">/// Set the key and value of a node, given that it currently lacks one.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_key_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="ident">K</span>, <span class="ident">value</span>: <span class="ident">V</span>) {
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">key_value</span>.<span class="ident">is_none</span>());
+        <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">key_value</span>.<span class="ident">is_none</span>());
         <span class="self">self</span>.<span class="ident">key_value</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">KeyValue</span> { <span class="ident">key</span>, <span class="ident">value</span> }));
     }
 
@@ -565,13 +565,13 @@
 
         <span class="comment">// Check that no value-less, non-root nodes have only 1 child.</span>
         <span class="kw">if</span> <span class="op">!</span><span class="ident">is_root</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">child_count</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">key_value</span>.<span class="ident">is_none</span>() {
-            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Value-less node with a single child.&quot;</span>);
+            <span class="macro">println!</span>(<span class="string">&quot;Value-less node with a single child.&quot;</span>);
             <span class="kw">return</span> (<span class="bool-val">false</span>, <span class="ident">sub_tree_size</span>);
         }
 
         <span class="comment">// Check that all non-root key vector&#39;s have length &gt; 1.</span>
         <span class="kw">if</span> <span class="op">!</span><span class="ident">is_root</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">key</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Key length is 0 at non-root node.&quot;</span>);
+            <span class="macro">println!</span>(<span class="string">&quot;Key length is 0 at non-root node.&quot;</span>);
             <span class="kw">return</span> (<span class="bool-val">false</span>, <span class="ident">sub_tree_size</span>);
         }
 
@@ -582,7 +582,7 @@
             .<span class="ident">fold</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">e</span><span class="op">|</span> <span class="ident">acc</span> <span class="op">+</span> (<span class="ident">e</span>.<span class="ident">is_some</span>() <span class="kw">as</span> <span class="ident">usize</span>));
 
         <span class="kw">if</span> <span class="ident">child_count</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">child_count</span> {
-            <span class="macro">println</span><span class="macro">!</span>(
+            <span class="macro">println!</span>(
                 <span class="string">&quot;Child count error, recorded: {}, actual: {}&quot;</span>,
                 <span class="self">self</span>.<span class="ident">child_count</span>, <span class="ident">child_count</span>
             );

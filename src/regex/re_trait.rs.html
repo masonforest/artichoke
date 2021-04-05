@@ -387,7 +387,7 @@
 
     <span class="doccomment">/// Allocates fresh space for all capturing groups in this regex.</span>
     <span class="kw">fn</span> <span class="ident">locations</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Locations</span> {
-        <span class="ident">Locations</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="prelude-val">None</span>; <span class="self">self</span>.<span class="ident">slots_len</span>()])
+        <span class="ident">Locations</span>(<span class="macro">vec!</span>[<span class="prelude-val">None</span>; <span class="self">self</span>.<span class="ident">slots_len</span>()])
     }
 
     <span class="doccomment">/// Returns the position of the next character after `i`.</span>

@@ -379,7 +379,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">UnhandledReadlineError</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;Unhandled REPL Readline error: {}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>)
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Unhandled REPL Readline error: {}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>)
     }
 }
 
@@ -493,7 +493,7 @@
     <span class="ident">Wout</span>: <span class="ident">io</span>::<span class="ident">Write</span>,
     <span class="ident">Werr</span>: <span class="ident">io</span>::<span class="ident">Write</span> <span class="op">+</span> <span class="ident">WriteColor</span>,
 {
-    <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">output</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">preamble</span>(<span class="ident">interp</span>)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
+    <span class="macro">writeln!</span>(<span class="ident">output</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">preamble</span>(<span class="ident">interp</span>)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
 
     <span class="ident">interp</span>.<span class="ident">reset_parser</span>()<span class="question-mark">?</span>;
     <span class="comment">// Safety:</span>
@@ -531,7 +531,7 @@
                     <span class="kw">continue</span>;
                 }
                 <span class="kw">if</span> <span class="ident">parser_state</span>.<span class="ident">is_recoverable_error</span>() {
-                    <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">error</span>, <span class="string">&quot;Could not parse input&quot;</span>)<span class="question-mark">?</span>;
+                    <span class="macro">writeln!</span>(<span class="ident">error</span>, <span class="string">&quot;Could not parse input&quot;</span>)<span class="question-mark">?</span>;
                     <span class="ident">buf</span>.<span class="ident">clear</span>();
                     <span class="kw">continue</span>;
                 }
@@ -559,7 +559,7 @@
                 <span class="ident">buf</span>.<span class="ident">clear</span>();
                 <span class="comment">// clear parser state</span>
                 <span class="ident">parser_state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">new</span>();
-                <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">output</span>, <span class="string">&quot;^C&quot;</span>)<span class="question-mark">?</span>;
+                <span class="macro">writeln!</span>(<span class="ident">output</span>, <span class="string">&quot;^C&quot;</span>)<span class="question-mark">?</span>;
             }
             <span class="comment">// Gracefully exit on CTRL-D EOF</span>
             <span class="prelude-val">Err</span>(<span class="ident">ReadlineError</span>::<span class="ident">Eof</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,

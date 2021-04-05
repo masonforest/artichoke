@@ -88,7 +88,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Creates a new user defined property from the given OnigCodePoint vlaues.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">define_user_property</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ranges</span>: <span class="kw-2">&amp;</span>[<span class="ident">CodePointRange</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">raw_ranges</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">ranges</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">onig_sys</span>::<span class="ident">OnigCodePoint</span>];
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">raw_ranges</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">ranges</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">onig_sys</span>::<span class="ident">OnigCodePoint</span>];
     <span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="ident">start</span>, <span class="ident">end</span>) <span class="kw">in</span> <span class="ident">ranges</span> {
         <span class="ident">raw_ranges</span>.<span class="ident">push</span>(<span class="ident">start</span>);
         <span class="ident">raw_ranges</span>.<span class="ident">push</span>(<span class="ident">end</span>);
@@ -113,7 +113,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">utils_get_copyright_is_not_emtpy</span>() {
         <span class="kw">let</span> <span class="ident">copyright</span> <span class="op">=</span> <span class="ident">copyright</span>();
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">copyright</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0</span>);
+        <span class="macro">assert!</span>(<span class="ident">copyright</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0</span>);
     }
 }
 </pre></div>

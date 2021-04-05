@@ -342,7 +342,7 @@
     }
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">__array_T_from_primitive_array</span> {
+<span class="macro">macro_rules!</span> <span class="ident">__array_T_from_primitive_array</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">len</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">T</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">len</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
             <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -363,38 +363,38 @@
     };
 }
 
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">1</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">2</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">3</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">4</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">5</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">6</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">7</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">8</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">9</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">10</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">11</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">12</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">13</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">14</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">15</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">16</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">17</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">18</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">19</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">20</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">21</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">22</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">23</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">24</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">25</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">26</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">27</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">28</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">29</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">30</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">31</span>);
-<span class="macro">__array_T_from_primitive_array</span><span class="macro">!</span>(<span class="number">32</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">1</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">2</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">3</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">4</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">5</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">6</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">7</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">8</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">9</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">10</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">11</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">12</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">13</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">14</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">15</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">16</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">17</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">18</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">19</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">20</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">21</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">22</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">23</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">24</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">25</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">26</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">27</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">28</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">29</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">30</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">31</span>);
+<span class="macro">__array_T_from_primitive_array!</span>(<span class="number">32</span>);
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;small-array&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">SmallVec</span><span class="op">&lt;</span>[<span class="ident">T</span>; <span class="ident">INLINE_CAPACITY</span>]<span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {

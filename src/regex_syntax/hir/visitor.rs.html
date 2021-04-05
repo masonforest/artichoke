@@ -304,7 +304,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">HeapVisitor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HeapVisitor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="ident">HeapVisitor</span> { <span class="ident">stack</span>: <span class="macro">vec</span><span class="macro">!</span>[] }
+        <span class="ident">HeapVisitor</span> { <span class="ident">stack</span>: <span class="macro">vec!</span>[] }
     }
 
     <span class="kw">fn</span> <span class="ident">visit</span><span class="op">&lt;</span><span class="ident">V</span>: <span class="ident">Visitor</span><span class="op">&gt;</span>(
