@@ -40,41 +40,41 @@
 <span id="39">39</span>
 <span id="40">40</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Write</span>;
+<span class="kw">use</span> <span class="ident">std::fmt::Write</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">core</span>::{<span class="ident">ConvertMut</span>, <span class="ident">Value</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">Warn</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">def</span>::<span class="ident">NotDefinedError</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">exception</span>::<span class="ident">IOError</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">warning</span>::<span class="ident">Warning</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">ffi</span>::<span class="ident">InterpreterExtractError</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">module_registry</span>::<span class="ident">ModuleRegistry</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">state</span>::<span class="ident">output</span>::<span class="ident">Output</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Artichoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::core</span>::{<span class="ident">ConvertMut</span>, <span class="ident">Value</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">Warn</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::def::NotDefinedError</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::Error</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::exception::IOError</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::warning::Warning</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::ffi::InterpreterExtractError</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::module_registry::ModuleRegistry</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::state::output::Output</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Artichoke</span>;
 
 <span class="kw">impl</span> <span class="ident">Warn</span> <span class="kw">for</span> <span class="ident">Artichoke</span> {
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">warn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref_mut</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError</span>::<span class="ident">new</span>)<span class="question-mark">?</span>;
+    <span class="kw">fn</span> <span class="ident">warn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">message</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref_mut</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError::new</span>)<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">state</span>.<span class="ident">output</span>.<span class="ident">write_stderr</span>(<span class="string">b&quot;rb warning: &quot;</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Failed to write warning to $stderr: &quot;</span>);
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;Failed to write warning to $stderr: &quot;</span>);
             <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>);
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IOError</span>::<span class="ident">from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IOError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
         }
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">state</span>.<span class="ident">output</span>.<span class="ident">write_stderr</span>(<span class="ident">message</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Failed to write warning to $stderr: &quot;</span>);
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;Failed to write warning to $stderr: &quot;</span>);
             <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>);
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IOError</span>::<span class="ident">from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IOError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
         }
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">state</span>.<span class="ident">output</span>.<span class="ident">write_stderr</span>(<span class="string">b&quot;\n&quot;</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Failed to write warning to $stderr: &quot;</span>);
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;Failed to write warning to $stderr: &quot;</span>);
             <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>);
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IOError</span>::<span class="ident">from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IOError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
         }
         <span class="kw">let</span> <span class="ident">warning</span> <span class="op">=</span> <span class="self">self</span>
             .<span class="ident">module_of</span>::<span class="op">&lt;</span><span class="ident">Warning</span><span class="op">&gt;</span>()<span class="question-mark">?</span>
-            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">NotDefinedError</span>::<span class="ident">module</span>(<span class="string">&quot;Warning&quot;</span>))<span class="question-mark">?</span>;
+            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">NotDefinedError::module</span>(<span class="string">&quot;Warning&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">convert_mut</span>(<span class="ident">message</span>);
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">warning</span>.<span class="ident">funcall</span>(<span class="self">self</span>, <span class="string">&quot;warn&quot;</span>, <span class="kw-2">&amp;</span>[<span class="ident">message</span>], <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())

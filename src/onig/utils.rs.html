@@ -60,15 +60,15 @@
 <span id="57">57</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">onig_sys</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::{<span class="ident">CStr</span>, <span class="ident">CString</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
+<span class="kw">use</span> <span class="ident">std::ffi</span>::{<span class="ident">CStr</span>, <span class="ident">CString</span>};
+<span class="kw">use</span> <span class="ident">std::mem</span>;
 
 <span class="doccomment">/// Get Version</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Returns the version information for the underlying Oniguruma</span>
 <span class="doccomment">/// API. This is separate from the Rust Onig and onig_sys versions.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">version</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
-    <span class="kw">let</span> <span class="ident">raw_version</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">onig_sys</span>::<span class="ident">onig_version</span>()) };
+    <span class="kw">let</span> <span class="ident">raw_version</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">CStr::from_ptr</span>(<span class="ident">onig_sys::onig_version</span>()) };
     <span class="ident">raw_version</span>.<span class="ident">to_string_lossy</span>().<span class="ident">into_owned</span>()
 }
 
@@ -78,31 +78,31 @@
 <span class="doccomment">/// API. Rust onig is licensed seperately. For more information see</span>
 <span class="doccomment">/// LICENSE.md in the source distribution.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copyright</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
-    <span class="kw">let</span> <span class="ident">raw_copy</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">onig_sys</span>::<span class="ident">onig_copyright</span>()) };
+    <span class="kw">let</span> <span class="ident">raw_copy</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">CStr::from_ptr</span>(<span class="ident">onig_sys::onig_copyright</span>()) };
     <span class="ident">raw_copy</span>.<span class="ident">to_string_lossy</span>().<span class="ident">into_owned</span>()
 }
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">CodePointRange</span> <span class="op">=</span> (<span class="ident">onig_sys</span>::<span class="ident">OnigCodePoint</span>, <span class="ident">onig_sys</span>::<span class="ident">OnigCodePoint</span>);
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">CodePointRange</span> <span class="op">=</span> (<span class="ident">onig_sys::OnigCodePoint</span>, <span class="ident">onig_sys::OnigCodePoint</span>);
 
 <span class="doccomment">/// Create a User Defined Proeprty</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Creates a new user defined property from the given OnigCodePoint vlaues.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">define_user_property</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">ranges</span>: <span class="kw-2">&amp;</span>[<span class="ident">CodePointRange</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">raw_ranges</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">ranges</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">onig_sys</span>::<span class="ident">OnigCodePoint</span>];
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">raw_ranges</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">ranges</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">onig_sys::OnigCodePoint</span>];
     <span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="ident">start</span>, <span class="ident">end</span>) <span class="kw">in</span> <span class="ident">ranges</span> {
         <span class="ident">raw_ranges</span>.<span class="ident">push</span>(<span class="ident">start</span>);
         <span class="ident">raw_ranges</span>.<span class="ident">push</span>(<span class="ident">end</span>);
     }
-    <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">name</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">CString::new</span>(<span class="ident">name</span>).<span class="ident">unwrap</span>();
     <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">unsafe</span> {
-        <span class="ident">onig_sys</span>::<span class="ident">onig_unicode_define_user_property</span>(<span class="ident">name</span>.<span class="ident">as_ptr</span>(), <span class="ident">raw_ranges</span>.<span class="ident">as_mut_ptr</span>())
+        <span class="ident">onig_sys::onig_unicode_define_user_property</span>(<span class="ident">name</span>.<span class="ident">as_ptr</span>(), <span class="ident">raw_ranges</span>.<span class="ident">as_mut_ptr</span>())
     };
 
     <span class="comment">// Deliberately leak the memory here as Onig expects to be able to</span>
     <span class="comment">// hang on to the pointer we just gave it. I&#39;m not happy about it</span>
     <span class="comment">// but this does work and the amounts of memory leaked should be</span>
     <span class="comment">// trivial.</span>
-    <span class="ident">mem</span>::<span class="ident">forget</span>(<span class="ident">raw_ranges</span>);
+    <span class="ident">mem::forget</span>(<span class="ident">raw_ranges</span>);
     <span class="ident">r</span>
 }
 

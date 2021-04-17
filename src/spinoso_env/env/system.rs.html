@@ -574,9 +574,9 @@
 <span id="571">571</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">bstr</span>::{<span class="ident">ByteSlice</span>, <span class="ident">ByteVec</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
+<span class="kw">use</span> <span class="ident">std::env</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ArgumentError</span>, <span class="ident">Error</span>, <span class="ident">InvalidError</span>};
 
@@ -668,7 +668,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [platform string]: std::ffi::OsString</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">unused_self</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::unused_self</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">ArgumentError</span><span class="op">&gt;</span> {
         <span class="comment">// Per Rust docs for `std::env::set_var` and `std::env::remove_var`:</span>
         <span class="comment">// https://doc.rust-lang.org/std/env/fn.set_var.html</span>
@@ -683,7 +683,7 @@
             <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">find_byte</span>(<span class="string">b&#39;\0&#39;</span>).<span class="ident">is_some</span>() {
             <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>;
-            <span class="prelude-val">Err</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="ident">message</span>))
+            <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::with_message</span>(<span class="ident">message</span>))
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">find_byte</span>(<span class="string">b&#39;=&#39;</span>).<span class="ident">is_some</span>() {
             <span class="comment">// MRI accepts names containing &#39;=&#39; on get and should always return</span>
             <span class="comment">// `nil` since these names are invalid at the OS level.</span>
@@ -691,9 +691,9 @@
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>
                 .<span class="ident">to_os_str</span>()
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="string">&quot;name could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">value</span>) <span class="op">=</span> <span class="ident">env</span>::<span class="ident">var_os</span>(<span class="ident">name</span>) {
-                <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">from_os_string</span>(<span class="ident">value</span>).<span class="ident">map</span>(<span class="ident">Cow</span>::<span class="ident">Owned</span>);
+                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError::with_message</span>(<span class="string">&quot;name could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">value</span>) <span class="op">=</span> <span class="ident">env::var_os</span>(<span class="ident">name</span>) {
+                <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">Vec::from_os_string</span>(<span class="ident">value</span>).<span class="ident">map</span>(<span class="ident">Cow::Owned</span>);
                 <span class="prelude-val">Ok</span>(<span class="ident">value</span>.<span class="ident">ok</span>())
             } <span class="kw">else</span> {
                 <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
@@ -742,7 +742,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [platform string]: std::ffi::OsString</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">unused_self</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::unused_self</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">put</span>(<span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="comment">// Per Rust docs for `std::env::set_var` and `std::env::remove_var`:</span>
         <span class="comment">// https://doc.rust-lang.org/std/env/fn.set_var.html</span>
@@ -753,37 +753,37 @@
         <span class="comment">// NUL character.</span>
         <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">find_byte</span>(<span class="string">b&#39;\0&#39;</span>).<span class="ident">is_some</span>() {
             <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>;
-            <span class="prelude-val">Err</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="ident">message</span>).<span class="ident">into</span>())
+            <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::with_message</span>(<span class="ident">message</span>).<span class="ident">into</span>())
         } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">value</span>) <span class="op">=</span> <span class="ident">value</span> {
             <span class="kw">if</span> <span class="ident">value</span>.<span class="ident">find_byte</span>(<span class="string">b&#39;\0&#39;</span>).<span class="ident">is_some</span>() {
                 <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;bad environment variable value: contains null byte&quot;</span>;
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="ident">message</span>).<span class="ident">into</span>());
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::with_message</span>(<span class="ident">message</span>).<span class="ident">into</span>());
             }
             <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">find_byte</span>(<span class="string">b&#39;=&#39;</span>).<span class="ident">is_some</span>() {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">b&quot;Invalid argument - setenv(&quot;</span>.<span class="ident">to_vec</span>();
                 <span class="ident">message</span>.<span class="ident">extend</span>(<span class="ident">name</span>.<span class="ident">to_vec</span>());
                 <span class="ident">message</span>.<span class="ident">push</span>(<span class="string">b&#39;)&#39;</span>);
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InvalidError</span>::<span class="ident">from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InvalidError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
             }
             <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_empty</span>() {
                 <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;Invalid argument - setenv()&quot;</span>;
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(<span class="ident">message</span>).<span class="ident">into</span>());
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InvalidError::with_message</span>(<span class="ident">message</span>).<span class="ident">into</span>());
             }
             <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>
                 .<span class="ident">to_os_str</span>()
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="string">&quot;name could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
+                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError::with_message</span>(<span class="string">&quot;name could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">value</span>
                 .<span class="ident">to_os_str</span>()
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="string">&quot;value could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
-            <span class="ident">env</span>::<span class="ident">set_var</span>(<span class="ident">name</span>, <span class="ident">value</span>);
+                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError::with_message</span>(<span class="string">&quot;value could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
+            <span class="ident">env::set_var</span>(<span class="ident">name</span>, <span class="ident">value</span>);
             <span class="prelude-val">Ok</span>(())
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">find_byte</span>(<span class="string">b&#39;=&#39;</span>).<span class="ident">is_some</span>() {
             <span class="prelude-val">Ok</span>(())
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>
                 .<span class="ident">to_os_str</span>()
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="string">&quot;name could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
-            <span class="ident">env</span>::<span class="ident">remove_var</span>(<span class="ident">name</span>);
+                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError::with_message</span>(<span class="string">&quot;name could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
+            <span class="ident">env::remove_var</span>(<span class="ident">name</span>);
             <span class="prelude-val">Ok</span>(())
         }
     }
@@ -818,14 +818,14 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [platform string]: std::ffi::OsString</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">unused_self</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::unused_self</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_map</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Bytes</span>, <span class="ident">Bytes</span><span class="op">&gt;</span>, <span class="ident">ArgumentError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
-        <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">value</span>) <span class="kw">in</span> <span class="ident">env</span>::<span class="ident">vars_os</span>() {
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">from_os_string</span>(<span class="ident">name</span>)
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="string">&quot;name could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">from_os_string</span>(<span class="ident">value</span>)
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(<span class="string">&quot;value could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
+        <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">value</span>) <span class="kw">in</span> <span class="ident">env::vars_os</span>() {
+            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Vec::from_os_string</span>(<span class="ident">name</span>)
+                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError::with_message</span>(<span class="string">&quot;name could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">Vec::from_os_string</span>(<span class="ident">value</span>)
+                .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError::with_message</span>(<span class="string">&quot;value could not be converted to a platform string&quot;</span>))<span class="question-mark">?</span>;
             <span class="ident">map</span>.<span class="ident">insert</span>(<span class="ident">name</span>, <span class="ident">value</span>);
         }
         <span class="prelude-val">Ok</span>(<span class="ident">map</span>)
@@ -834,10 +834,10 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">System</span>;
+    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::System</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ArgumentError</span>, <span class="ident">Error</span>, <span class="ident">InvalidError</span>};
 
-    <span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System</span>::<span class="ident">new</span>();
+    <span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System::new</span>();
 
     <span class="comment">// ```console</span>
     <span class="comment">// $ ruby -e &#39;puts ENV[&quot;&quot;].inspect&#39;</span>
@@ -860,7 +860,7 @@
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;980b1f2f-a155-4cc6-97f3-cafc3cea2b1a-foo\0bar&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">get</span>(<span class="ident">name</span>),
-            <span class="prelude-val">Err</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
             ))
         );
@@ -888,7 +888,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;3427d141-700f-494f-bfa6-877147333249-baz&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Argument</span>(<span class="ident">ArgumentError::with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
             )))
         );
@@ -905,7 +905,7 @@
         <span class="kw">let</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;1437e58a-b7e3-4c5e-9b1f-a67b78fe1e42-foo\0bar&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">None</span>),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Argument</span>(<span class="ident">ArgumentError::with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
             )))
         );
@@ -923,7 +923,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;a19660e3-304d-45b8-8746-297a2065a076-baz\0quux&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Argument</span>(<span class="ident">ArgumentError::with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
             )))
         );
@@ -941,7 +941,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;52bb4d27-6d8a-4a83-90f8-51940ce1f1a7-baz\0quux&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Argument</span>(<span class="ident">ArgumentError::with_message</span>(
                 <span class="string">&quot;bad environment variable value: contains null byte&quot;</span>
             )))
         );
@@ -968,7 +968,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Invalid</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Invalid</span>(<span class="ident">InvalidError::with_message</span>(
                 <span class="string">&quot;Invalid argument - setenv(=)&quot;</span>
             )))
         );
@@ -986,7 +986,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;4ac79e15-2b8c-4771-8fc8-ff0b095ce7d0-baz-quux&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Invalid</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Invalid</span>(<span class="ident">InvalidError::with_message</span>(
                 <span class="string">&quot;Invalid argument - setenv(=)&quot;</span>
             )))
         );
@@ -1004,7 +1004,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;42db3f11-46f5-4cab-93f4-ee543c1634f9-baz\0quux&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Argument</span>(<span class="ident">ArgumentError::with_message</span>(
                 <span class="string">&quot;bad environment variable value: contains null byte&quot;</span>
             )))
         );
@@ -1022,7 +1022,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;42db3f11-46f5-4cab-93f4-ee543c1634f9-baz\0quux&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Argument</span>(<span class="ident">ArgumentError::with_message</span>(
                 <span class="string">&quot;bad environment variable name: contains null byte&quot;</span>
             )))
         );
@@ -1049,7 +1049,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Invalid</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Invalid</span>(<span class="ident">InvalidError::with_message</span>(
                 <span class="string">&quot;Invalid argument - setenv()&quot;</span>
             )))
         );
@@ -1067,7 +1067,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;157f6920-04e5-4561-8f06-6f00d09c3610-foo&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Invalid</span>(<span class="ident">InvalidError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Invalid</span>(<span class="ident">InvalidError::with_message</span>(
                 <span class="string">&quot;Invalid argument - setenv()&quot;</span>
             )))
         );
@@ -1085,7 +1085,7 @@
         <span class="kw">let</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;1d50869d-e71a-4347-8b28-b274f34e2892-foo\0bar&quot;</span>;
         <span class="macro">assert_eq!</span>(
             <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="ident">name</span>, <span class="prelude-val">Some</span>(<span class="ident">value</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">Argument</span>(<span class="ident">ArgumentError</span>::<span class="ident">with_message</span>(
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Argument</span>(<span class="ident">ArgumentError::with_message</span>(
                 <span class="string">&quot;bad environment variable value: contains null byte&quot;</span>
             )))
         );

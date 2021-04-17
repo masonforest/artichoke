@@ -124,8 +124,8 @@
   <span class="ident">feature</span>(<span class="ident">min_const_generics</span>, <span class="ident">array_map</span>)
 )]</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">docs_rs</span>, <span class="ident">feature</span>(<span class="ident">doc_cfg</span>))]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">missing_inline_in_public_items</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">must_use_candidate</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::missing_inline_in_public_items</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::must_use_candidate</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
 
 <span class="doccomment">//! `tinyvec` provides 100% safe vec-like data structures.</span>
@@ -184,9 +184,9 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="ident">core</span>::{
   <span class="ident">borrow</span>::{<span class="ident">Borrow</span>, <span class="ident">BorrowMut</span>},
-  <span class="ident">cmp</span>::<span class="ident">PartialEq</span>,
-  <span class="ident">convert</span>::<span class="ident">AsMut</span>,
-  <span class="ident">default</span>::<span class="ident">Default</span>,
+  <span class="ident">cmp::PartialEq</span>,
+  <span class="ident">convert::AsMut</span>,
+  <span class="ident">default::Default</span>,
   <span class="ident">fmt</span>::{
     <span class="ident">Binary</span>, <span class="ident">Debug</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>, <span class="ident">LowerExp</span>, <span class="ident">LowerHex</span>, <span class="ident">Octal</span>, <span class="ident">Pointer</span>,
     <span class="ident">UpperExp</span>, <span class="ident">UpperHex</span>,
@@ -195,7 +195,7 @@
   <span class="ident">iter</span>::{<span class="ident">Extend</span>, <span class="ident">FromIterator</span>, <span class="ident">FusedIterator</span>, <span class="ident">IntoIterator</span>, <span class="ident">Iterator</span>},
   <span class="ident">mem</span>::{<span class="ident">needs_drop</span>, <span class="ident">replace</span>},
   <span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">Index</span>, <span class="ident">IndexMut</span>, <span class="ident">RangeBounds</span>},
-  <span class="ident">slice</span>::<span class="ident">SliceIndex</span>,
+  <span class="ident">slice::SliceIndex</span>,
 };
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span>
@@ -217,12 +217,12 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tinyvec</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">tinyvec</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::tinyvec</span>::<span class="kw-2">*</span>;
 
 <span class="comment">// TODO MSRV(1.40.0): Just call the normal `core::mem::take`</span>
 <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
 <span class="kw">fn</span> <span class="ident">take</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Default</span><span class="op">&gt;</span>(<span class="ident">from</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
-  <span class="ident">replace</span>(<span class="ident">from</span>, <span class="ident">T</span>::<span class="ident">default</span>())
+  <span class="ident">replace</span>(<span class="ident">from</span>, <span class="ident">T::default</span>())
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="tinyvec" data-search-js="../../search-index.js"></div>

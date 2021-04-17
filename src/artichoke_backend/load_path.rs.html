@@ -281,12 +281,12 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [extension hooks]: ExtensionHook</span>
 
-<span class="kw">use</span> <span class="ident">bstr</span>::<span class="ident">ByteVec</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">path</span>::{<span class="ident">Component</span>, <span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+<span class="kw">use</span> <span class="ident">bstr::ByteVec</span>;
+<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Component</span>, <span class="ident">Path</span>, <span class="ident">PathBuf</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">platform_string</span>::<span class="ident">ConvertBytesError</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Artichoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::Error</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::platform_string::ConvertBytesError</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Artichoke</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;load-path-native-filesystem-loader&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">hybrid</span>;
@@ -297,12 +297,12 @@
 <span class="kw">mod</span> <span class="ident">rubylib</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;load-path-native-filesystem-loader&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">hybrid</span>::<span class="ident">Hybrid</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">memory</span>::<span class="ident">Memory</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">hybrid::Hybrid</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">memory::Memory</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;load-path-native-filesystem-loader&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">native</span>::<span class="ident">Native</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">native::Native</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;load-path-rubylib-native-filesystem-loader&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rubylib</span>::<span class="ident">Rubylib</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rubylib::Rubylib</span>;
 
 <span class="doccomment">/// Directory at which Ruby sources and extensions are stored in the virtual</span>
 <span class="doccomment">/// filesystem.</span>
@@ -345,23 +345,23 @@
 {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">as_ref</span>().<span class="ident">components</span>().<span class="ident">peekable</span>();
     <span class="kw">let</span> <span class="ident">hint</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">size_hint</span>();
-    <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">components</span>, <span class="ident">cwd_is_relative</span>) <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Component</span>::<span class="ident">RootDir</span>) <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">peek</span>() {
-        (<span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">hint</span>.<span class="number">1</span>.<span class="ident">unwrap_or</span>(<span class="ident">hint</span>.<span class="number">0</span>)), <span class="bool-val">false</span>)
+    <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">components</span>, <span class="ident">cwd_is_relative</span>) <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Component::RootDir</span>) <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">peek</span>() {
+        (<span class="ident">Vec::with_capacity</span>(<span class="ident">hint</span>.<span class="number">1</span>.<span class="ident">unwrap_or</span>(<span class="ident">hint</span>.<span class="number">0</span>)), <span class="bool-val">false</span>)
     } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">components</span> <span class="op">=</span> <span class="ident">cwd</span>.<span class="ident">as_ref</span>().<span class="ident">components</span>().<span class="ident">map</span>(<span class="ident">Component</span>::<span class="ident">as_os_str</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">components</span> <span class="op">=</span> <span class="ident">cwd</span>.<span class="ident">as_ref</span>().<span class="ident">components</span>().<span class="ident">map</span>(<span class="ident">Component::as_os_str</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
         <span class="ident">components</span>.<span class="ident">reserve</span>(<span class="ident">hint</span>.<span class="number">1</span>.<span class="ident">unwrap_or</span>(<span class="ident">hint</span>.<span class="number">0</span>));
         (<span class="ident">components</span>, <span class="ident">cwd</span>.<span class="ident">as_ref</span>().<span class="ident">is_relative</span>())
     };
     <span class="kw">for</span> <span class="ident">component</span> <span class="kw">in</span> <span class="ident">iter</span> {
         <span class="kw">match</span> <span class="ident">component</span> {
-            <span class="ident">Component</span>::<span class="ident">CurDir</span> <span class="op">=</span><span class="op">&gt;</span> {}
-            <span class="ident">Component</span>::<span class="ident">ParentDir</span> <span class="kw">if</span> <span class="ident">cwd_is_relative</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Component::CurDir</span> <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="ident">Component::ParentDir</span> <span class="kw">if</span> <span class="ident">cwd_is_relative</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">components</span>.<span class="ident">pop</span>();
             }
-            <span class="ident">Component</span>::<span class="ident">ParentDir</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Component::ParentDir</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">components</span>.<span class="ident">pop</span>();
                 <span class="kw">if</span> <span class="ident">components</span>.<span class="ident">is_empty</span>() {
-                    <span class="ident">components</span>.<span class="ident">push</span>(<span class="ident">Component</span>::<span class="ident">RootDir</span>.<span class="ident">as_os_str</span>());
+                    <span class="ident">components</span>.<span class="ident">push</span>(<span class="ident">Component::RootDir</span>.<span class="ident">as_os_str</span>());
                 }
             }
             <span class="ident">c</span> <span class="op">=</span><span class="op">&gt;</span> {
@@ -373,7 +373,7 @@
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">normalize_slashes</span>(<span class="ident">path</span>: <span class="ident">PathBuf</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">ConvertBytesError</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">from_path_buf</span>(<span class="ident">path</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ConvertBytesError</span>::<span class="ident">new</span>())<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Vec::from_path_buf</span>(<span class="ident">path</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ConvertBytesError::new</span>())<span class="question-mark">?</span>;
     <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">windows</span>) {
         <span class="kw">for</span> <span class="ident">byte</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">path</span> {
             <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">byte</span> <span class="op">=</span><span class="op">=</span> <span class="string">b&#39;\\&#39;</span> {
@@ -387,151 +387,151 @@
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">shadow_unrelated</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::shadow_unrelated</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">path</span>::<span class="ident">Path</span>;
+    <span class="kw">use</span> <span class="ident">std::path::Path</span>;
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">absolutize_relative_to</span>;
+    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::absolutize_relative_to</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_absolute_path</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/foo/bar&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/foo/bar&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">path</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">path</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_absolute_path_dedot_current_dir</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/././foo/./bar/./././.&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/foo/bar&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/foo/bar&quot;</span>));
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/././foo/./bar/./././.&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/foo/bar&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/foo/bar&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_absolute_path_dedot_parent_dir</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/foo/bar/..&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/foo&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/foo&quot;</span>));
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/foo/bar/..&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/foo&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/foo&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/foo/../../../../bar/../../../&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/&quot;</span>));
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/foo/../../../../bar/../../../&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/foo/../../../../bar/../../../boom/baz&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/foo/../../../../bar/../../../boom/baz&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_relative_path</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo/bar&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke/foo/bar&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path/foo/bar&quot;</span>));
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;foo/bar&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke/foo/bar&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;relative/path/foo/bar&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_relative_path_dedot_current_dir</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;././././foo/./bar/./././.&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke/foo/bar&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path/foo/bar&quot;</span>));
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;././././foo/./bar/./././.&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke/foo/bar&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>), <span class="ident">Path::new</span>(<span class="string">&quot;relative/path/foo/bar&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_relative_path_dedot_parent_dir_unix</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo/bar/..&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;foo/bar/..&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke/foo&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke/foo&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path/foo&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;relative/path/foo&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo/../../../../bar/../../../&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;foo/../../../../bar/../../../&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;/&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo/../../../../bar/../../../boom/baz&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;foo/../../../../bar/../../../boom/baz&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;boom/baz&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;boom/baz&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_relative_path_dedot_parent_dir_windows_forward_slash</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo/bar/..&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;C:/Users/artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;foo/bar/..&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;C:/Users/artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;C:/Users/artichoke/foo&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;C:/Users/artichoke/foo&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path/foo&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;relative/path/foo&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo/../../../../bar/../../../&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;C:/Users/artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;foo/../../../../bar/../../../&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;C:/Users/artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;/&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;foo/../../../../bar/../../../boom/baz&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;C:/Users/artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;foo/../../../../bar/../../../boom/baz&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;C:/Users/artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;relative/path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;boom/baz&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;boom/baz&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_relative_path_dedot_parent_dir_windows_backward_slash</span>() {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;foo\bar\..&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;C:\Users\artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;foo\bar\..&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;C:\Users\artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;C:/Users/artichoke/foo&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;relative\path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;C:/Users/artichoke/foo&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;relative\path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;relative/path/foo&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;relative/path/foo&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;foo\..\..\..\..\bar\..\..\..\&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;C:\Users\artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;foo\..\..\..\..\bar\..\..\..\&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;C:\Users\artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;relative\path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;/&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;relative\path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;foo\..\..\..\..\bar\..\..\..\boom\baz&quot;</span>);
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;C:\Users\artichoke&quot;</span>);
+        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;foo\..\..\..\..\bar\..\..\..\boom\baz&quot;</span>);
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;C:\Users\artichoke&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">r&quot;relative\path&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;/boom/baz&quot;</span>));
+        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">r&quot;relative\path&quot;</span>);
         <span class="kw">let</span> <span class="ident">absolute</span> <span class="op">=</span> <span class="ident">absolutize_relative_to</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">cwd</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path</span>::<span class="ident">new</span>(<span class="string">&quot;boom/baz&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">absolute</span>, <span class="ident">Path::new</span>(<span class="string">&quot;boom/baz&quot;</span>));
     }
 }
 </pre></div>

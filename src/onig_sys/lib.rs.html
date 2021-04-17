@@ -41,17 +41,17 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">all</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="kw">mod</span> <span class="ident">ffi</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;generate&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ffi</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::ffi</span>::<span class="kw-2">*</span>;
 
 <span class="comment">// backfill types from the old hand-written bindings:</span>
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OnigSyntaxBehavior</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OnigSyntaxOp</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OnigSyntaxOp2</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OnigSyntaxBehavior</span> <span class="op">=</span> <span class="ident">::std::os::raw::c_uint</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OnigSyntaxOp</span> <span class="op">=</span> <span class="ident">::std::os::raw::c_uint</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OnigSyntaxOp2</span> <span class="op">=</span> <span class="ident">::std::os::raw::c_uint</span>;
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">test_is_linked</span>() {

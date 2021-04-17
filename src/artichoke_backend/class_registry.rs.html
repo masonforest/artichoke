@@ -118,22 +118,22 @@
 <span id="117">117</span>
 <span id="118">118</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">TryFrom</span>;
+<span class="kw">use</span> <span class="ident">std::any::Any</span>;
+<span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">class</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">ffi</span>::<span class="ident">InterpreterExtractError</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sys</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">value</span>::<span class="ident">Value</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Artichoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::class</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::Error</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::ffi::InterpreterExtractError</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::value::Value</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Artichoke</span>;
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ClassRegistry</span> {
-    <span class="kw">fn</span> <span class="ident">def_class</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">spec</span>: <span class="ident">class</span>::<span class="ident">Spec</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">def_class</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">spec</span>: <span class="ident">class::Spec</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Any</span>;
 
-    <span class="kw">fn</span> <span class="ident">class_spec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">class</span>::<span class="ident">Spec</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">class_spec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">class::Spec</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Any</span>;
 
@@ -159,12 +159,12 @@
     <span class="doccomment">/// Class definitions have the same lifetime as the</span>
     <span class="doccomment">/// [`State`](crate::state::State) because the class def owns the</span>
     <span class="doccomment">/// `mrb_data_type` for the type, which must be long-lived.</span>
-    <span class="kw">fn</span> <span class="ident">def_class</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">spec</span>: <span class="ident">class</span>::<span class="ident">Spec</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">def_class</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">spec</span>: <span class="ident">class::Spec</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Any</span>,
     {
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref_mut</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError</span>::<span class="ident">new</span>)<span class="question-mark">?</span>;
-        <span class="ident">state</span>.<span class="ident">classes</span>.<span class="ident">insert</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">spec</span>));
+        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref_mut</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError::new</span>)<span class="question-mark">?</span>;
+        <span class="ident">state</span>.<span class="ident">classes</span>.<span class="ident">insert</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">Box::new</span>(<span class="ident">spec</span>));
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -172,11 +172,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function returns `None` if type `T` has not had a class spec</span>
     <span class="doccomment">/// registered for it using [`ClassRegistry::def_class`].</span>
-    <span class="kw">fn</span> <span class="ident">class_spec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">class</span>::<span class="ident">Spec</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">class_spec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">class::Spec</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Any</span>,
     {
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError</span>::<span class="ident">new</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError::new</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">classes</span>.<span class="ident">get</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
         <span class="prelude-val">Ok</span>(<span class="ident">spec</span>)
     }
@@ -185,7 +185,7 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Any</span>,
     {
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError</span>::<span class="ident">new</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError::new</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">classes</span>.<span class="ident">get</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
         <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">spec</span>) <span class="op">=</span> <span class="ident">spec</span> {
             <span class="ident">spec</span>.<span class="ident">rclass</span>()
@@ -195,8 +195,8 @@
         <span class="kw">let</span> <span class="ident">value_class</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">rclass</span>) <span class="op">=</span> <span class="ident">rclass</span>.<span class="ident">resolve</span>(<span class="ident">mrb</span>) {
-                    <span class="kw">let</span> <span class="ident">value_class</span> <span class="op">=</span> <span class="ident">sys</span>::<span class="ident">mrb_sys_class_value</span>(<span class="ident">rclass</span>.<span class="ident">as_mut</span>());
-                    <span class="prelude-val">Some</span>(<span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">value_class</span>))
+                    <span class="kw">let</span> <span class="ident">value_class</span> <span class="op">=</span> <span class="ident">sys::mrb_sys_class_value</span>(<span class="ident">rclass</span>.<span class="ident">as_mut</span>());
+                    <span class="prelude-val">Some</span>(<span class="ident">Value::from</span>(<span class="ident">value_class</span>))
                 } <span class="kw">else</span> {
                     <span class="prelude-val">None</span>
                 }
@@ -209,15 +209,15 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Any</span>,
     {
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError</span>::<span class="ident">new</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">as_deref</span>().<span class="ident">ok_or_else</span>(<span class="ident">InterpreterExtractError::new</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">classes</span>.<span class="ident">get</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
         <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">spec</span>) <span class="op">=</span> <span class="ident">spec</span> {
             <span class="ident">spec</span>.<span class="ident">rclass</span>()
         } <span class="kw">else</span> {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
         };
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">Value</span>::<span class="ident">inner</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="kw">let</span> <span class="ident">arglen</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">len</span>) <span class="op">=</span> <span class="ident">sys</span>::<span class="ident">mrb_int</span>::<span class="ident">try_from</span>(<span class="ident">args</span>.<span class="ident">len</span>()) {
+        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">Value::inner</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">arglen</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">len</span>) <span class="op">=</span> <span class="ident">sys::mrb_int::try_from</span>(<span class="ident">args</span>.<span class="ident">len</span>()) {
             <span class="ident">len</span>
         } <span class="kw">else</span> {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
@@ -225,8 +225,8 @@
         <span class="kw">let</span> <span class="ident">instance</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">rclass</span>) <span class="op">=</span> <span class="ident">rclass</span>.<span class="ident">resolve</span>(<span class="ident">mrb</span>) {
-                    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">sys</span>::<span class="ident">mrb_obj_new</span>(<span class="ident">mrb</span>, <span class="ident">rclass</span>.<span class="ident">as_mut</span>(), <span class="ident">arglen</span>, <span class="ident">args</span>.<span class="ident">as_ptr</span>());
-                    <span class="prelude-val">Some</span>(<span class="ident">Value</span>::<span class="ident">from</span>(<span class="ident">value</span>))
+                    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">sys::mrb_obj_new</span>(<span class="ident">mrb</span>, <span class="ident">rclass</span>.<span class="ident">as_mut</span>(), <span class="ident">arglen</span>, <span class="ident">args</span>.<span class="ident">as_ptr</span>());
+                    <span class="prelude-val">Some</span>(<span class="ident">Value::from</span>(<span class="ident">value</span>))
                 } <span class="kw">else</span> {
                     <span class="prelude-val">None</span>
                 }

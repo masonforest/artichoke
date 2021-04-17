@@ -270,7 +270,7 @@
             )<span class="op">+</span>
         }
     ) <span class="op">=</span><span class="op">&gt;</span> {
-        ::<span class="ident">bitflags</span>::<span class="macro">bitflags!</span> {
+        <span class="macro">::bitflags::bitflags!</span> {
             $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span>]</span>)<span class="op">*</span>
             <span class="kw">pub</span> <span class="kw">struct</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">BitFlags</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span> {
                 $(
@@ -434,7 +434,7 @@
         <span class="comment">// Safe because we don&#39;t actually read from the dereferenced pointer</span>
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_unsafe</span>)]</span> <span class="comment">// for when the macro is used in an unsafe block</span>
         <span class="kw">unsafe</span> {
-            <span class="kw-2">&amp;</span>(<span class="kw-2">*</span>(<span class="ident">ptr</span>::<span class="ident">null</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>)).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="ident">usize</span>
+            <span class="kw-2">&amp;</span>(<span class="kw-2">*</span>(<span class="ident">ptr::null</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>)).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="ident">usize</span>
         }
     }}
 }

@@ -10,13 +10,13 @@ notifications through file descriptors.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="comment">// We create a new monotonic timer.</span>
-<span class="kw">let</span> <span class="ident">timer</span> <span class="op">=</span> <span class="ident">TimerFd</span>::<span class="ident">new</span>(<span class="ident">ClockId</span>::<span class="ident">CLOCK_MONOTONIC</span>, <span class="ident">TimerFlags</span>::<span class="ident">empty</span>())
+<span class="kw">let</span> <span class="ident">timer</span> <span class="op">=</span> <span class="ident">TimerFd::new</span>(<span class="ident">ClockId::CLOCK_MONOTONIC</span>, <span class="ident">TimerFlags::empty</span>())
     .<span class="ident">unwrap</span>();
 
 <span class="comment">// We set a new one-shot timer in 1 seconds.</span>
 <span class="ident">timer</span>.<span class="ident">set</span>(
-    <span class="ident">Expiration</span>::<span class="ident">OneShot</span>(<span class="ident">TimeSpec</span>::<span class="ident">seconds</span>(<span class="number">1</span>)),
-    <span class="ident">TimerSetTimeFlags</span>::<span class="ident">empty</span>()
+    <span class="ident">Expiration::OneShot</span>(<span class="ident">TimeSpec::seconds</span>(<span class="number">1</span>)),
+    <span class="ident">TimerSetTimeFlags::empty</span>()
 ).<span class="ident">unwrap</span>();
 
 <span class="comment">// We wait for the timer to expire.</span>

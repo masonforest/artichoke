@@ -201,17 +201,17 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This should point to the first character in the buffer,</span>
     <span class="doccomment">/// encoded as an `onig_sys` character.</span>
-    <span class="kw">fn</span> <span class="ident">start_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys</span>::<span class="ident">OnigUChar</span>;
+    <span class="kw">fn</span> <span class="ident">start_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigUChar</span>;
 
     <span class="doccomment">/// Pointer to the limit of the pattern buffer</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This should point just past the final character in the buffer,</span>
     <span class="doccomment">/// encoded as an `onig_sys` character.</span>
-    <span class="kw">fn</span> <span class="ident">limit_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys</span>::<span class="ident">OnigUChar</span>;
+    <span class="kw">fn</span> <span class="ident">limit_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigUChar</span>;
 
     <span class="doccomment">/// The encoding of the contents of the buffer</span>
-    <span class="kw">fn</span> <span class="ident">encoding</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span> {
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncodingUTF8</span> }
+    <span class="kw">fn</span> <span class="ident">encoding</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">onig_sys::OnigEncoding</span> {
+        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigEncodingUTF8</span> }
     }
 
     <span class="doccomment">/// The length of this buffer</span>
@@ -228,11 +228,11 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">start_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys</span>::<span class="ident">OnigUChar</span> {
+    <span class="kw">fn</span> <span class="ident">start_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigUChar</span> {
         <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">as_bytes</span>().<span class="ident">as_ptr</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">limit_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys</span>::<span class="ident">OnigUChar</span> {
+    <span class="kw">fn</span> <span class="ident">limit_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigUChar</span> {
         <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">as_bytes</span>();
         <span class="ident">bytes</span>[<span class="ident">bytes</span>.<span class="ident">len</span>()..].<span class="ident">as_ptr</span>()
     }
@@ -247,7 +247,7 @@
 <span class="doccomment">/// Represents a buffer of bytes, with an encoding.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EncodedBytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="ident">bytes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">enc</span>: <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span>,
+    <span class="ident">enc</span>: <span class="ident">onig_sys::OnigEncoding</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">EncodedBytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -261,7 +261,7 @@
     <span class="doccomment">/// # Returns</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// A new buffer instance</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_parts</span>(<span class="ident">bytes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">enc</span>: <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EncodedBytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_parts</span>(<span class="ident">bytes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">enc</span>: <span class="ident">onig_sys::OnigEncoding</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EncodedBytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">EncodedBytes</span> { <span class="ident">bytes</span>, <span class="ident">enc</span> }
     }
 
@@ -277,21 +277,21 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ascii</span>(<span class="ident">bytes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EncodedBytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="ident">EncodedBytes</span> {
             <span class="ident">bytes</span>,
-            <span class="ident">enc</span>: <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncodingASCII</span> },
+            <span class="ident">enc</span>: <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigEncodingASCII</span> },
         }
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">EncodedChars</span> <span class="kw">for</span> <span class="ident">EncodedBytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">start_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys</span>::<span class="ident">OnigUChar</span> {
+    <span class="kw">fn</span> <span class="ident">start_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigUChar</span> {
         <span class="self">self</span>.<span class="ident">bytes</span>.<span class="ident">as_ptr</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">limit_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys</span>::<span class="ident">OnigUChar</span> {
+    <span class="kw">fn</span> <span class="ident">limit_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigUChar</span> {
         <span class="self">self</span>.<span class="ident">bytes</span>[<span class="self">self</span>.<span class="ident">bytes</span>.<span class="ident">len</span>()..].<span class="ident">as_ptr</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">encoding</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span> {
+    <span class="kw">fn</span> <span class="ident">encoding</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">onig_sys::OnigEncoding</span> {
         <span class="self">self</span>.<span class="ident">enc</span>
     }
 
@@ -311,13 +311,13 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rust_string_encoding_is_utf8</span>() {
         <span class="kw">let</span> <span class="ident">foo</span> <span class="op">=</span> <span class="string">&quot;foo&quot;</span>;
         <span class="macro">assert_eq!</span>(
-            <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncodingUTF8</span> } <span class="kw">as</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span>,
+            <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigEncodingUTF8</span> } <span class="kw">as</span> <span class="ident">onig_sys::OnigEncoding</span>,
             <span class="ident">foo</span>.<span class="ident">encoding</span>()
         );
 
-        <span class="kw">let</span> <span class="ident">bar</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;.*&quot;</span>);
+        <span class="kw">let</span> <span class="ident">bar</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;.*&quot;</span>);
         <span class="macro">assert_eq!</span>(
-            <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncodingUTF8</span> } <span class="kw">as</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span>,
+            <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigEncodingUTF8</span> } <span class="kw">as</span> <span class="ident">onig_sys::OnigEncoding</span>,
             <span class="ident">bar</span>.<span class="ident">encoding</span>()
         );
     }
@@ -325,9 +325,9 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rust_bytes_encoding_is_ascii</span>() {
         <span class="kw">let</span> <span class="ident">fizz</span> <span class="op">=</span> <span class="string">b&quot;fizz&quot;</span>;
-        <span class="kw">let</span> <span class="ident">buff</span> <span class="op">=</span> <span class="ident">EncodedBytes</span>::<span class="ident">ascii</span>(<span class="ident">fizz</span>);
+        <span class="kw">let</span> <span class="ident">buff</span> <span class="op">=</span> <span class="ident">EncodedBytes::ascii</span>(<span class="ident">fizz</span>);
         <span class="macro">assert_eq!</span>(
-            <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncodingASCII</span> } <span class="kw">as</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span>,
+            <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigEncodingASCII</span> } <span class="kw">as</span> <span class="ident">onig_sys::OnigEncoding</span>,
             <span class="ident">buff</span>.<span class="ident">encoding</span>()
         );
     }
@@ -344,7 +344,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rust_bytes_ptr_offsets_are_valid</span>() {
         <span class="kw">let</span> <span class="ident">fozz</span> <span class="op">=</span> <span class="string">b&quot;foo.*bar&quot;</span>;
-        <span class="kw">let</span> <span class="ident">buff</span> <span class="op">=</span> <span class="ident">EncodedBytes</span>::<span class="ident">ascii</span>(<span class="ident">fozz</span>);
+        <span class="kw">let</span> <span class="ident">buff</span> <span class="op">=</span> <span class="ident">EncodedBytes::ascii</span>(<span class="ident">fozz</span>);
         <span class="macro">assert_eq!</span>(
             <span class="ident">buff</span>.<span class="ident">limit_ptr</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">-</span> <span class="ident">buff</span>.<span class="ident">start_ptr</span>() <span class="kw">as</span> <span class="ident">usize</span>,
             <span class="ident">fozz</span>.<span class="ident">len</span>()
@@ -355,9 +355,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">byte_buffer_create</span>() {
         <span class="kw">let</span> <span class="ident">buff</span> <span class="op">=</span> <span class="string">b&quot;hello world&quot;</span>;
         <span class="kw">let</span> <span class="ident">enc_buffer</span> <span class="op">=</span>
-            <span class="ident">EncodedBytes</span>::<span class="ident">from_parts</span>(<span class="ident">buff</span>, <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncodingASCII</span> });
+            <span class="ident">EncodedBytes::from_parts</span>(<span class="ident">buff</span>, <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigEncodingASCII</span> });
         <span class="macro">assert_eq!</span>(
-            <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncodingASCII</span> } <span class="kw">as</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span>,
+            <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigEncodingASCII</span> } <span class="kw">as</span> <span class="ident">onig_sys::OnigEncoding</span>,
             <span class="ident">enc_buffer</span>.<span class="ident">encoding</span>()
         );
         <span class="macro">assert_eq!</span>(

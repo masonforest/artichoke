@@ -535,7 +535,7 @@
 <span id="532">532</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Customize line editor</span>
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">default</span>::<span class="ident">Default</span>;
+<span class="kw">use</span> <span class="ident">std::default::Default</span>;
 
 <span class="doccomment">/// User preferences</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
@@ -575,7 +575,7 @@
 <span class="kw">impl</span> <span class="ident">Config</span> {
     <span class="doccomment">/// Returns a `Config` builder.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">builder</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Builder</span> {
-        <span class="ident">Builder</span>::<span class="ident">new</span>()
+        <span class="ident">Builder::new</span>()
     }
 
     <span class="doccomment">/// Tell the maximum length (i.e. number of entries) for the history.</span>
@@ -597,9 +597,9 @@
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_history_ignore_dups</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
         <span class="self">self</span>.<span class="ident">history_duplicates</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">yes</span> {
-            <span class="ident">HistoryDuplicates</span>::<span class="ident">IgnoreConsecutive</span>
+            <span class="ident">HistoryDuplicates::IgnoreConsecutive</span>
         } <span class="kw">else</span> {
-            <span class="ident">HistoryDuplicates</span>::<span class="ident">AlwaysAdd</span>
+            <span class="ident">HistoryDuplicates::AlwaysAdd</span>
         };
     }
 
@@ -718,16 +718,16 @@
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">max_history_size</span>: <span class="number">100</span>,
-            <span class="ident">history_duplicates</span>: <span class="ident">HistoryDuplicates</span>::<span class="ident">IgnoreConsecutive</span>,
+            <span class="ident">history_duplicates</span>: <span class="ident">HistoryDuplicates::IgnoreConsecutive</span>,
             <span class="ident">history_ignore_space</span>: <span class="bool-val">false</span>,
-            <span class="ident">completion_type</span>: <span class="ident">CompletionType</span>::<span class="ident">Circular</span>, <span class="comment">// TODO Validate</span>
+            <span class="ident">completion_type</span>: <span class="ident">CompletionType::Circular</span>, <span class="comment">// TODO Validate</span>
             <span class="ident">completion_prompt_limit</span>: <span class="number">100</span>,
             <span class="ident">keyseq_timeout</span>: <span class="op">-</span><span class="number">1</span>,
-            <span class="ident">edit_mode</span>: <span class="ident">EditMode</span>::<span class="ident">Emacs</span>,
+            <span class="ident">edit_mode</span>: <span class="ident">EditMode::Emacs</span>,
             <span class="ident">auto_add_history</span>: <span class="bool-val">false</span>,
-            <span class="ident">bell_style</span>: <span class="ident">BellStyle</span>::<span class="ident">default</span>(),
-            <span class="ident">color_mode</span>: <span class="ident">ColorMode</span>::<span class="ident">Enabled</span>,
-            <span class="ident">output_stream</span>: <span class="ident">OutputStreamType</span>::<span class="ident">Stdout</span>,
+            <span class="ident">bell_style</span>: <span class="ident">BellStyle::default</span>(),
+            <span class="ident">color_mode</span>: <span class="ident">ColorMode::Enabled</span>,
+            <span class="ident">output_stream</span>: <span class="ident">OutputStreamType::Stdout</span>,
             <span class="ident">tab_stop</span>: <span class="number">8</span>,
             <span class="ident">indent_size</span>: <span class="number">2</span>,
             <span class="ident">check_cursor_position</span>: <span class="bool-val">false</span>,
@@ -752,12 +752,12 @@
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">BellStyle</span> {
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">windows</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;wasm32&quot;</span>))]</span>
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">BellStyle</span>::<span class="prelude-val">None</span>
+        <span class="ident">BellStyle::None</span>
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">BellStyle</span>::<span class="ident">Audible</span>
+        <span class="ident">BellStyle::Audible</span>
     }
 }
 
@@ -832,7 +832,7 @@
     <span class="doccomment">/// Returns a `Config` builder.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
-            <span class="ident">p</span>: <span class="ident">Config</span>::<span class="ident">default</span>(),
+            <span class="ident">p</span>: <span class="ident">Config::default</span>(),
         }
     }
 
@@ -1008,8 +1008,8 @@
     <span class="kw">fn</span> <span class="ident">set_edit_mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">edit_mode</span>: <span class="ident">EditMode</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">edit_mode</span> <span class="op">=</span> <span class="ident">edit_mode</span>;
         <span class="kw">match</span> <span class="ident">edit_mode</span> {
-            <span class="ident">EditMode</span>::<span class="ident">Emacs</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">set_keyseq_timeout</span>(<span class="op">-</span><span class="number">1</span>), <span class="comment">// no timeout</span>
-            <span class="ident">EditMode</span>::<span class="ident">Vi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">set_keyseq_timeout</span>(<span class="number">500</span>),
+            <span class="ident">EditMode::Emacs</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">set_keyseq_timeout</span>(<span class="op">-</span><span class="number">1</span>), <span class="comment">// no timeout</span>
+            <span class="ident">EditMode::Vi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">set_keyseq_timeout</span>(<span class="number">500</span>),
         }
     }
 

@@ -919,46 +919,46 @@
 <span class="kw">mod</span> <span class="ident">undo</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">validate</span>;
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::{<span class="self">self</span>, <span class="ident">Write</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">path</span>::<span class="ident">Path</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">result</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>, <span class="ident">RwLock</span>};
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::io</span>::{<span class="self">self</span>, <span class="ident">Write</span>};
+<span class="kw">use</span> <span class="ident">std::path::Path</span>;
+<span class="kw">use</span> <span class="ident">std::result</span>;
+<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>, <span class="ident">RwLock</span>};
 
-<span class="kw">use</span> <span class="ident">log</span>::<span class="ident">debug</span>;
-<span class="kw">use</span> <span class="ident">radix_trie</span>::<span class="ident">Trie</span>;
-<span class="kw">use</span> <span class="ident">unicode_width</span>::<span class="ident">UnicodeWidthStr</span>;
+<span class="kw">use</span> <span class="ident">log::debug</span>;
+<span class="kw">use</span> <span class="ident">radix_trie::Trie</span>;
+<span class="kw">use</span> <span class="ident">unicode_width::UnicodeWidthStr</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">tty</span>::{<span class="ident">RawMode</span>, <span class="ident">Renderer</span>, <span class="ident">Term</span>, <span class="ident">Terminal</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::tty</span>::{<span class="ident">RawMode</span>, <span class="ident">Renderer</span>, <span class="ident">Term</span>, <span class="ident">Terminal</span>};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">binding</span>::{<span class="ident">ConditionalEventHandler</span>, <span class="ident">Event</span>, <span class="ident">EventContext</span>, <span class="ident">EventHandler</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">completion</span>::{<span class="ident">longest_common_prefix</span>, <span class="ident">Candidate</span>, <span class="ident">Completer</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">config</span>::{
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::binding</span>::{<span class="ident">ConditionalEventHandler</span>, <span class="ident">Event</span>, <span class="ident">EventContext</span>, <span class="ident">EventHandler</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::completion</span>::{<span class="ident">longest_common_prefix</span>, <span class="ident">Candidate</span>, <span class="ident">Completer</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::config</span>::{
     <span class="ident">ColorMode</span>, <span class="ident">CompletionType</span>, <span class="ident">Config</span>, <span class="ident">EditMode</span>, <span class="ident">HistoryDuplicates</span>, <span class="ident">OutputStreamType</span>,
 };
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">edit</span>::<span class="ident">State</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">highlight</span>::<span class="ident">Highlighter</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">hint</span>::<span class="ident">Hinter</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">history</span>::{<span class="ident">Direction</span>, <span class="ident">History</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">keymap</span>::{<span class="ident">Anchor</span>, <span class="ident">At</span>, <span class="ident">CharSearch</span>, <span class="ident">Cmd</span>, <span class="ident">InputMode</span>, <span class="ident">Movement</span>, <span class="ident">RepeatCount</span>, <span class="ident">Word</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">keymap</span>::{<span class="ident">InputState</span>, <span class="ident">Refresher</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">keys</span>::{<span class="ident">KeyCode</span>, <span class="ident">KeyEvent</span>, <span class="ident">Modifiers</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">kill_ring</span>::<span class="ident">KillRing</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::edit::State</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::highlight::Highlighter</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::hint::Hinter</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::history</span>::{<span class="ident">Direction</span>, <span class="ident">History</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keymap</span>::{<span class="ident">Anchor</span>, <span class="ident">At</span>, <span class="ident">CharSearch</span>, <span class="ident">Cmd</span>, <span class="ident">InputMode</span>, <span class="ident">Movement</span>, <span class="ident">RepeatCount</span>, <span class="ident">Word</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keymap</span>::{<span class="ident">InputState</span>, <span class="ident">Refresher</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keys</span>::{<span class="ident">KeyCode</span>, <span class="ident">KeyEvent</span>, <span class="ident">Modifiers</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::kill_ring::KillRing</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">validate</span>::<span class="ident">Validator</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::validate::Validator</span>;
 
 <span class="doccomment">/// The error type for I/O and Linux Syscalls (Errno)</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">result</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">error</span>::<span class="ident">ReadlineError</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">result::Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">error::ReadlineError</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// Completes the line/word</span>
 <span class="kw">fn</span> <span class="ident">complete_line</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span>(
-    <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span>::<span class="ident">Reader</span>,
+    <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Reader</span>,
     <span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="lifetime">&#39;_</span>, <span class="ident">H</span><span class="op">&gt;</span>,
     <span class="ident">input_state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">InputState</span>,
     <span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">unix</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-fuzzy&quot;</span>))]</span>
-    <span class="kw">use</span> <span class="ident">skim</span>::<span class="ident">prelude</span>::{
+    <span class="kw">use</span> <span class="ident">skim::prelude</span>::{
         <span class="ident">unbounded</span>, <span class="ident">Skim</span>, <span class="ident">SkimItem</span>, <span class="ident">SkimItemReceiver</span>, <span class="ident">SkimItemSender</span>, <span class="ident">SkimOptionsBuilder</span>,
     };
 
@@ -969,7 +969,7 @@
     <span class="kw">if</span> <span class="ident">candidates</span>.<span class="ident">is_empty</span>() {
         <span class="ident">s</span>.<span class="ident">out</span>.<span class="ident">beep</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">CompletionType</span>::<span class="ident">Circular</span> <span class="op">=</span><span class="op">=</span> <span class="ident">config</span>.<span class="ident">completion_type</span>() {
+    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">CompletionType::Circular</span> <span class="op">=</span><span class="op">=</span> <span class="ident">config</span>.<span class="ident">completion_type</span>() {
         <span class="kw">let</span> <span class="ident">mark</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">changes</span>.<span class="ident">borrow_mut</span>().<span class="ident">begin</span>();
         <span class="comment">// Save the current edited line before overwriting it</span>
         <span class="kw">let</span> <span class="ident">backup</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">as_str</span>().<span class="ident">to_owned</span>();
@@ -996,13 +996,13 @@
 
             <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">next_cmd</span>(<span class="ident">input_state</span>, <span class="ident">rdr</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
             <span class="kw">match</span> <span class="ident">cmd</span> {
-                <span class="ident">Cmd</span>::<span class="ident">Complete</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Cmd::Complete</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">i</span> <span class="op">=</span> (<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>) <span class="op">%</span> (<span class="ident">candidates</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">1</span>); <span class="comment">// Circular</span>
                     <span class="kw">if</span> <span class="ident">i</span> <span class="op">=</span><span class="op">=</span> <span class="ident">candidates</span>.<span class="ident">len</span>() {
                         <span class="ident">s</span>.<span class="ident">out</span>.<span class="ident">beep</span>()<span class="question-mark">?</span>;
                     }
                 }
-                <span class="ident">Cmd</span>::<span class="ident">CompleteBackward</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Cmd::CompleteBackward</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">if</span> <span class="ident">i</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
                         <span class="ident">i</span> <span class="op">=</span> <span class="ident">candidates</span>.<span class="ident">len</span>(); <span class="comment">// Circular</span>
                         <span class="ident">s</span>.<span class="ident">out</span>.<span class="ident">beep</span>()<span class="question-mark">?</span>;
@@ -1010,7 +1010,7 @@
                         <span class="ident">i</span> <span class="op">=</span> (<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">%</span> (<span class="ident">candidates</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">1</span>); <span class="comment">// Circular</span>
                     }
                 }
-                <span class="ident">Cmd</span>::<span class="ident">Abort</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Cmd::Abort</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="comment">// Re-show original buffer</span>
                     <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">candidates</span>.<span class="ident">len</span>() {
                         <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="ident">backup</span>, <span class="ident">backup_pos</span>);
@@ -1026,7 +1026,7 @@
             }
         }
         <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">cmd</span>))
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">CompletionType</span>::<span class="ident">List</span> <span class="op">=</span><span class="op">=</span> <span class="ident">config</span>.<span class="ident">completion_type</span>() {
+    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">CompletionType::List</span> <span class="op">=</span><span class="op">=</span> <span class="ident">config</span>.<span class="ident">completion_type</span>() {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">lcp</span>) <span class="op">=</span> <span class="ident">longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>) {
             <span class="comment">// if we can extend the item, extend it</span>
             <span class="kw">if</span> <span class="ident">lcp</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">pos</span>() <span class="op">-</span> <span class="ident">start</span> {
@@ -1043,7 +1043,7 @@
         <span class="comment">// we can&#39;t complete any further, wait for second tab</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">next_cmd</span>(<span class="ident">input_state</span>, <span class="ident">rdr</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
         <span class="comment">// if any character other than tab, pass it to the main loop</span>
-        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">Complete</span> {
+        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::Complete</span> {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">cmd</span>));
         }
         <span class="comment">// move cursor to EOL to avoid overwriting the command line</span>
@@ -1055,15 +1055,15 @@
             <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;\nDisplay all {} possibilities? (y or n)&quot;</span>, <span class="ident">candidates</span>.<span class="ident">len</span>());
             <span class="ident">s</span>.<span class="ident">out</span>.<span class="ident">write_and_flush</span>(<span class="ident">msg</span>.<span class="ident">as_bytes</span>())<span class="question-mark">?</span>;
             <span class="ident">s</span>.<span class="ident">layout</span>.<span class="ident">end</span>.<span class="ident">row</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">while</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;y&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Y&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;n&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;N&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">Kill</span>(<span class="ident">Movement</span>::<span class="ident">BackwardChar</span>(<span class="number">1</span>))
+            <span class="kw">while</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;y&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Y&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;n&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;N&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="number">1</span>))
             {
                 <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">next_cmd</span>(<span class="ident">input_state</span>, <span class="ident">rdr</span>, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
             }
-            <span class="macro">matches!</span>(<span class="ident">cmd</span>, <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;y&#39;</span>) <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Y&#39;</span>))
+            <span class="macro">matches!</span>(<span class="ident">cmd</span>, <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;y&#39;</span>) <span class="op">|</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Y&#39;</span>))
         } <span class="kw">else</span> {
             <span class="bool-val">true</span>
         };
@@ -1078,15 +1078,15 @@
         <span class="comment">// corresponding completion_type</span>
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">unix</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-fuzzy&quot;</span>))]</span>
         {
-            <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
-            <span class="kw">if</span> <span class="ident">CompletionType</span>::<span class="ident">Fuzzy</span> <span class="op">=</span><span class="op">=</span> <span class="ident">config</span>.<span class="ident">completion_type</span>() {
+            <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+            <span class="kw">if</span> <span class="ident">CompletionType::Fuzzy</span> <span class="op">=</span><span class="op">=</span> <span class="ident">config</span>.<span class="ident">completion_type</span>() {
                 <span class="kw">struct</span> <span class="ident">Candidate</span> {
                     <span class="ident">index</span>: <span class="ident">usize</span>,
                     <span class="ident">text</span>: <span class="ident">String</span>,
                 }
                 <span class="kw">impl</span> <span class="ident">SkimItem</span> <span class="kw">for</span> <span class="ident">Candidate</span> {
                     <span class="kw">fn</span> <span class="ident">text</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> {
-                        <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">text</span>)
+                        <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">text</span>)
                     }
                 }
 
@@ -1100,7 +1100,7 @@
                         <span class="ident">text</span>: <span class="ident">c</span>.<span class="ident">display</span>().<span class="ident">to_owned</span>(),
                     })
                     .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> {
-                        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">tx_item</span>.<span class="ident">send</span>(<span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">c</span>));
+                        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">tx_item</span>.<span class="ident">send</span>(<span class="ident">Arc::new</span>(<span class="ident">c</span>));
                     });
                 <span class="ident">drop</span>(<span class="ident">tx_item</span>); <span class="comment">// so that skim could know when to stop waiting for more items.</span>
 
@@ -1108,16 +1108,16 @@
                 <span class="comment">// will display UI for fuzzy search and return selected results</span>
                 <span class="comment">// by default skim multi select is off so only expect one selection</span>
 
-                <span class="kw">let</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">SkimOptionsBuilder</span>::<span class="ident">default</span>()
+                <span class="kw">let</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">SkimOptionsBuilder::default</span>()
                     .<span class="ident">height</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;20%&quot;</span>))
                     .<span class="ident">prompt</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;? &quot;</span>))
                     .<span class="ident">reverse</span>(<span class="bool-val">true</span>)
                     .<span class="ident">build</span>()
                     .<span class="ident">unwrap</span>();
 
-                <span class="kw">let</span> <span class="ident">selected_items</span> <span class="op">=</span> <span class="ident">Skim</span>::<span class="ident">run_with</span>(<span class="kw-2">&amp;</span><span class="ident">options</span>, <span class="prelude-val">Some</span>(<span class="ident">rx_item</span>))
+                <span class="kw">let</span> <span class="ident">selected_items</span> <span class="op">=</span> <span class="ident">Skim::run_with</span>(<span class="kw-2">&amp;</span><span class="ident">options</span>, <span class="prelude-val">Some</span>(<span class="ident">rx_item</span>))
                     .<span class="ident">map</span>(<span class="op">|</span><span class="ident">out</span><span class="op">|</span> <span class="ident">out</span>.<span class="ident">selected_items</span>)
-                    .<span class="ident">unwrap_or_else</span>(<span class="ident">Vec</span>::<span class="ident">new</span>);
+                    .<span class="ident">unwrap_or_else</span>(<span class="ident">Vec::new</span>);
 
                 <span class="comment">// match the first (and only) returned option with the candidate and update the</span>
                 <span class="comment">// line otherwise only refresh line to clear the skim UI changes</span>
@@ -1155,16 +1155,16 @@
 }
 
 <span class="kw">fn</span> <span class="ident">page_completions</span><span class="op">&lt;</span><span class="ident">C</span>: <span class="ident">Candidate</span>, <span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span>(
-    <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span>::<span class="ident">Reader</span>,
+    <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Reader</span>,
     <span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="lifetime">&#39;_</span>, <span class="ident">H</span><span class="op">&gt;</span>,
     <span class="ident">input_state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">InputState</span>,
     <span class="ident">candidates</span>: <span class="kw-2">&amp;</span>[<span class="ident">C</span>],
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>;
+    <span class="kw">use</span> <span class="ident">std::cmp</span>;
 
     <span class="kw">let</span> <span class="ident">min_col_pad</span> <span class="op">=</span> <span class="number">2</span>;
     <span class="kw">let</span> <span class="ident">cols</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">out</span>.<span class="ident">get_columns</span>();
-    <span class="kw">let</span> <span class="ident">max_width</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(
+    <span class="kw">let</span> <span class="ident">max_width</span> <span class="op">=</span> <span class="ident">cmp::min</span>(
         <span class="ident">cols</span>,
         <span class="ident">candidates</span>
             .<span class="ident">iter</span>()
@@ -1177,30 +1177,30 @@
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pause_row</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">out</span>.<span class="ident">get_rows</span>() <span class="op">-</span> <span class="number">1</span>;
     <span class="kw">let</span> <span class="ident">num_rows</span> <span class="op">=</span> (<span class="ident">candidates</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">num_cols</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">/</span> <span class="ident">num_cols</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ab</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ab</span> <span class="op">=</span> <span class="ident">String::new</span>();
     <span class="kw">for</span> <span class="ident">row</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">num_rows</span> {
         <span class="kw">if</span> <span class="ident">row</span> <span class="op">=</span><span class="op">=</span> <span class="ident">pause_row</span> {
             <span class="ident">s</span>.<span class="ident">out</span>.<span class="ident">write_and_flush</span>(<span class="string">b&quot;\n--More--&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">Noop</span>;
-            <span class="kw">while</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;y&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Y&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;n&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;N&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;q&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Q&#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39; &#39;</span>)
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">Kill</span>(<span class="ident">Movement</span>::<span class="ident">BackwardChar</span>(<span class="number">1</span>))
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">AcceptLine</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">Newline</span>
-                <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="macro">matches!</span>(<span class="ident">cmd</span>, <span class="ident">Cmd</span>::<span class="ident">AcceptOrInsertLine</span> { .. })
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">Cmd::Noop</span>;
+            <span class="kw">while</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;y&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Y&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;n&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;N&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;q&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Q&#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39; &#39;</span>)
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="number">1</span>))
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::AcceptLine</span>
+                <span class="op">&amp;&amp;</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Cmd::Newline</span>
+                <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="macro">matches!</span>(<span class="ident">cmd</span>, <span class="ident">Cmd::AcceptOrInsertLine</span> { .. })
             {
                 <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">next_cmd</span>(<span class="ident">input_state</span>, <span class="ident">rdr</span>, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
             }
             <span class="kw">match</span> <span class="ident">cmd</span> {
-                <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;y&#39;</span>) <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Y&#39;</span>) <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39; &#39;</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;y&#39;</span>) <span class="op">|</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39;Y&#39;</span>) <span class="op">|</span> <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="string">&#39; &#39;</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">pause_row</span> <span class="op">+</span><span class="op">=</span> <span class="ident">s</span>.<span class="ident">out</span>.<span class="ident">get_rows</span>() <span class="op">-</span> <span class="number">1</span>;
                 }
-                <span class="ident">Cmd</span>::<span class="ident">AcceptLine</span> <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">Newline</span> <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">AcceptOrInsertLine</span> { .. } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Cmd::AcceptLine</span> <span class="op">|</span> <span class="ident">Cmd::Newline</span> <span class="op">|</span> <span class="ident">Cmd::AcceptOrInsertLine</span> { .. } <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">pause_row</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                 }
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,
@@ -1216,7 +1216,7 @@
                 <span class="kw">let</span> <span class="ident">candidate</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">candidates</span>[<span class="ident">i</span>].<span class="ident">display</span>();
                 <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">candidate</span>.<span class="ident">width</span>();
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">highlighter</span>) <span class="op">=</span> <span class="ident">s</span>.<span class="ident">highlighter</span>() {
-                    <span class="ident">ab</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">highlighter</span>.<span class="ident">highlight_candidate</span>(<span class="ident">candidate</span>, <span class="ident">CompletionType</span>::<span class="ident">List</span>));
+                    <span class="ident">ab</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">highlighter</span>.<span class="ident">highlight_candidate</span>(<span class="ident">candidate</span>, <span class="ident">CompletionType::List</span>));
                 } <span class="kw">else</span> {
                     <span class="ident">ab</span>.<span class="ident">push_str</span>(<span class="ident">candidate</span>);
                 }
@@ -1238,7 +1238,7 @@
 
 <span class="doccomment">/// Incremental search</span>
 <span class="kw">fn</span> <span class="ident">reverse_incremental_search</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span>(
-    <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span>::<span class="ident">Reader</span>,
+    <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Reader</span>,
     <span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="lifetime">&#39;_</span>, <span class="ident">H</span><span class="op">&gt;</span>,
     <span class="ident">input_state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">InputState</span>,
     <span class="ident">history</span>: <span class="kw-2">&amp;</span><span class="ident">History</span>,
@@ -1251,9 +1251,9 @@
     <span class="kw">let</span> <span class="ident">backup</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">as_str</span>().<span class="ident">to_owned</span>();
     <span class="kw">let</span> <span class="ident">backup_pos</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">pos</span>();
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">search_buf</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">search_buf</span> <span class="op">=</span> <span class="ident">String::new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history_idx</span> <span class="op">=</span> <span class="ident">history</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">direction</span> <span class="op">=</span> <span class="ident">Direction</span>::<span class="ident">Reverse</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">direction</span> <span class="op">=</span> <span class="ident">Direction::Reverse</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">success</span> <span class="op">=</span> <span class="bool-val">true</span>;
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cmd</span>;
@@ -1267,16 +1267,16 @@
         <span class="ident">s</span>.<span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="ident">prompt</span>)<span class="question-mark">?</span>;
 
         <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">next_cmd</span>(<span class="ident">input_state</span>, <span class="ident">rdr</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="kw">_</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="ident">cmd</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Cmd::SelfInsert</span>(<span class="kw">_</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="ident">cmd</span> {
             <span class="ident">search_buf</span>.<span class="ident">push</span>(<span class="ident">c</span>);
         } <span class="kw">else</span> {
             <span class="kw">match</span> <span class="ident">cmd</span> {
-                <span class="ident">Cmd</span>::<span class="ident">Kill</span>(<span class="ident">Movement</span>::<span class="ident">BackwardChar</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">search_buf</span>.<span class="ident">pop</span>();
                     <span class="kw">continue</span>;
                 }
-                <span class="ident">Cmd</span>::<span class="ident">ReverseSearchHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="ident">direction</span> <span class="op">=</span> <span class="ident">Direction</span>::<span class="ident">Reverse</span>;
+                <span class="ident">Cmd::ReverseSearchHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">direction</span> <span class="op">=</span> <span class="ident">Direction::Reverse</span>;
                     <span class="kw">if</span> <span class="ident">history_idx</span> <span class="op">&gt;</span> <span class="number">0</span> {
                         <span class="ident">history_idx</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
                     } <span class="kw">else</span> {
@@ -1284,8 +1284,8 @@
                         <span class="kw">continue</span>;
                     }
                 }
-                <span class="ident">Cmd</span>::<span class="ident">ForwardSearchHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="ident">direction</span> <span class="op">=</span> <span class="ident">Direction</span>::<span class="ident">Forward</span>;
+                <span class="ident">Cmd::ForwardSearchHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">direction</span> <span class="op">=</span> <span class="ident">Direction::Forward</span>;
                     <span class="kw">if</span> <span class="ident">history_idx</span> <span class="op">&lt;</span> <span class="ident">history</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span> {
                         <span class="ident">history_idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                     } <span class="kw">else</span> {
@@ -1293,14 +1293,14 @@
                         <span class="kw">continue</span>;
                     }
                 }
-                <span class="ident">Cmd</span>::<span class="ident">Abort</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Cmd::Abort</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="comment">// Restore current edited line (before search)</span>
                     <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="ident">backup</span>, <span class="ident">backup_pos</span>);
                     <span class="ident">s</span>.<span class="ident">refresh_line</span>()<span class="question-mark">?</span>;
                     <span class="ident">s</span>.<span class="ident">changes</span>.<span class="ident">borrow_mut</span>().<span class="ident">truncate</span>(<span class="ident">mark</span>);
                     <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
                 }
-                <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Cmd::Move</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">s</span>.<span class="ident">refresh_line</span>()<span class="question-mark">?</span>; <span class="comment">// restore prompt</span>
                     <span class="kw">break</span>;
                 }
@@ -1329,15 +1329,15 @@
     <span class="ident">prompt</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     <span class="ident">initial</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)<span class="op">&gt;</span>,
     <span class="ident">editor</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="ident">H</span><span class="op">&gt;</span>,
-    <span class="ident">original_mode</span>: <span class="kw-2">&amp;</span><span class="ident">tty</span>::<span class="ident">Mode</span>,
+    <span class="ident">original_mode</span>: <span class="kw-2">&amp;</span><span class="ident">tty::Mode</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">editor</span>.<span class="ident">term</span>.<span class="ident">create_writer</span>();
 
     <span class="ident">editor</span>.<span class="ident">reset_kill_ring</span>(); <span class="comment">// TODO recreate a new kill ring vs Arc&lt;Mutex&lt;KillRing&gt;&gt;</span>
-    <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">Context</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">history</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">stdout</span>, <span class="ident">prompt</span>, <span class="ident">editor</span>.<span class="ident">helper</span>.<span class="ident">as_ref</span>(), <span class="ident">ctx</span>);
+    <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">Context::new</span>(<span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">history</span>);
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">State::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">stdout</span>, <span class="ident">prompt</span>, <span class="ident">editor</span>.<span class="ident">helper</span>.<span class="ident">as_ref</span>(), <span class="ident">ctx</span>);
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">input_state</span> <span class="op">=</span> <span class="ident">InputState</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">config</span>, <span class="ident">Arc</span>::<span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">custom_bindings</span>));
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">input_state</span> <span class="op">=</span> <span class="ident">InputState::new</span>(<span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">config</span>, <span class="ident">Arc::clone</span>(<span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">custom_bindings</span>));
 
     <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">set_delete_listener</span>(<span class="ident">editor</span>.<span class="ident">kill_ring</span>.<span class="ident">clone</span>());
     <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">set_change_listener</span>(<span class="ident">s</span>.<span class="ident">changes</span>.<span class="ident">clone</span>());
@@ -1368,7 +1368,7 @@
 
         <span class="comment">// First trigger commands that need extra input</span>
 
-        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">Complete</span> <span class="op">&amp;&amp;</span> <span class="ident">s</span>.<span class="ident">helper</span>.<span class="ident">is_some</span>() {
+        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Cmd::Complete</span> <span class="op">&amp;&amp;</span> <span class="ident">s</span>.<span class="ident">helper</span>.<span class="ident">is_some</span>() {
             <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="ident">complete_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rdr</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">s</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">input_state</span>, <span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">config</span>)<span class="question-mark">?</span>;
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">next</span>) <span class="op">=</span> <span class="ident">next</span> {
                 <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">next</span>;
@@ -1377,7 +1377,7 @@
             }
         }
 
-        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">ReverseSearchHistory</span> {
+        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Cmd::ReverseSearchHistory</span> {
             <span class="comment">// Search history backward</span>
             <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span>
                 <span class="ident">reverse_incremental_search</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rdr</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">s</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">input_state</span>, <span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">history</span>)<span class="question-mark">?</span>;
@@ -1389,18 +1389,18 @@
         }
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
-        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">Suspend</span> {
+        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Cmd::Suspend</span> {
             <span class="ident">original_mode</span>.<span class="ident">disable_raw_mode</span>()<span class="question-mark">?</span>;
-            <span class="ident">tty</span>::<span class="ident">suspend</span>()<span class="question-mark">?</span>;
+            <span class="ident">tty::suspend</span>()<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">editor</span>.<span class="ident">term</span>.<span class="ident">enable_raw_mode</span>()<span class="question-mark">?</span>; <span class="comment">// TODO original_mode may have changed</span>
             <span class="ident">s</span>.<span class="ident">refresh_line</span>()<span class="question-mark">?</span>;
             <span class="kw">continue</span>;
         }
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
-        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Cmd</span>::<span class="ident">QuotedInsert</span> {
+        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Cmd::QuotedInsert</span> {
             <span class="comment">// Quoted insert</span>
-            <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">tty</span>::<span class="ident">RawReader</span>;
+            <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::tty::RawReader</span>;
             <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
             <span class="ident">s</span>.<span class="ident">edit_insert</span>(<span class="ident">c</span>, <span class="number">1</span>)<span class="question-mark">?</span>;
             <span class="kw">continue</span>;
@@ -1410,15 +1410,15 @@
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
         <span class="kw">if</span> <span class="macro">matches!</span>(
             <span class="ident">cmd</span>,
-            <span class="ident">Cmd</span>::<span class="ident">AcceptLine</span> <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">Newline</span> <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">AcceptOrInsertLine</span> { .. }
+            <span class="ident">Cmd::AcceptLine</span> <span class="op">|</span> <span class="ident">Cmd::Newline</span> <span class="op">|</span> <span class="ident">Cmd::AcceptOrInsertLine</span> { .. }
         ) {
             <span class="ident">editor</span>.<span class="ident">term</span>.<span class="ident">cursor</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">layout</span>.<span class="ident">cursor</span>.<span class="ident">col</span>;
         }
 
         <span class="comment">// Execute things can be done solely on a state object</span>
-        <span class="kw">match</span> <span class="ident">command</span>::<span class="ident">execute</span>(<span class="ident">cmd</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">s</span>, <span class="kw-2">&amp;</span><span class="ident">input_state</span>, <span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">kill_ring</span>, <span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">config</span>)<span class="question-mark">?</span> {
-            <span class="ident">command</span>::<span class="ident">Status</span>::<span class="ident">Proceed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">continue</span>,
-            <span class="ident">command</span>::<span class="ident">Status</span>::<span class="ident">Submit</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,
+        <span class="kw">match</span> <span class="ident">command::execute</span>(<span class="ident">cmd</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">s</span>, <span class="kw-2">&amp;</span><span class="ident">input_state</span>, <span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">kill_ring</span>, <span class="kw-2">&amp;</span><span class="ident">editor</span>.<span class="ident">config</span>)<span class="question-mark">?</span> {
+            <span class="ident">command::Status::Proceed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">continue</span>,
+            <span class="ident">command::Status::Submit</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,
         }
     }
 
@@ -1432,7 +1432,7 @@
     <span class="prelude-val">Ok</span>(<span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">into_string</span>())
 }
 
-<span class="kw">struct</span> <span class="ident">Guard</span><span class="op">&lt;</span><span class="lifetime">&#39;m</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;m</span> <span class="ident">tty</span>::<span class="ident">Mode</span>);
+<span class="kw">struct</span> <span class="ident">Guard</span><span class="op">&lt;</span><span class="lifetime">&#39;m</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;m</span> <span class="ident">tty::Mode</span>);
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_must_use</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Guard</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
@@ -1459,18 +1459,18 @@
     }
     <span class="ident">drop</span>(<span class="ident">guard</span>); <span class="comment">// disable_raw_mode(original_mode)?;</span>
     <span class="kw">match</span> <span class="ident">editor</span>.<span class="ident">config</span>.<span class="ident">output_stream</span>() {
-        <span class="ident">OutputStreamType</span>::<span class="ident">Stdout</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">writeln!</span>(<span class="ident">io</span>::<span class="ident">stdout</span>())<span class="question-mark">?</span>,
-        <span class="ident">OutputStreamType</span>::<span class="ident">Stderr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">writeln!</span>(<span class="ident">io</span>::<span class="ident">stderr</span>())<span class="question-mark">?</span>,
+        <span class="ident">OutputStreamType::Stdout</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">writeln!</span>(<span class="ident">io::stdout</span>())<span class="question-mark">?</span>,
+        <span class="ident">OutputStreamType::Stderr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">writeln!</span>(<span class="ident">io::stderr</span>())<span class="question-mark">?</span>,
     };
     <span class="ident">user_input</span>
 }
 
 <span class="kw">fn</span> <span class="ident">readline_direct</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">line</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
-    <span class="kw">if</span> <span class="ident">io</span>::<span class="ident">stdin</span>().<span class="ident">read_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">line</span>)<span class="question-mark">?</span> <span class="op">&gt;</span> <span class="number">0</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">line</span> <span class="op">=</span> <span class="ident">String::new</span>();
+    <span class="kw">if</span> <span class="ident">io::stdin</span>().<span class="ident">read_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">line</span>)<span class="question-mark">?</span> <span class="op">&gt;</span> <span class="number">0</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">line</span>)
     } <span class="kw">else</span> {
-        <span class="prelude-val">Err</span>(<span class="ident">error</span>::<span class="ident">ReadlineError</span>::<span class="ident">Eof</span>)
+        <span class="prelude-val">Err</span>(<span class="ident">error::ReadlineError::Eof</span>)
     }
 }
 
@@ -1524,16 +1524,16 @@
     <span class="ident">custom_bindings</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Trie</span><span class="op">&lt;</span><span class="ident">Event</span>, <span class="ident">EventHandler</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">new_without_default</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::new_without_default</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="ident">H</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Create an editor with the default configuration</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">with_config</span>(<span class="ident">Config</span>::<span class="ident">default</span>())
+        <span class="self">Self</span><span class="ident">::with_config</span>(<span class="ident">Config::default</span>())
     }
 
     <span class="doccomment">/// Create an editor with a specific configuration.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_config</span>(<span class="ident">config</span>: <span class="ident">Config</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">term</span> <span class="op">=</span> <span class="ident">Terminal</span>::<span class="ident">new</span>(
+        <span class="kw">let</span> <span class="ident">term</span> <span class="op">=</span> <span class="ident">Terminal::new</span>(
             <span class="ident">config</span>.<span class="ident">color_mode</span>(),
             <span class="ident">config</span>.<span class="ident">output_stream</span>(),
             <span class="ident">config</span>.<span class="ident">tab_stop</span>(),
@@ -1542,11 +1542,11 @@
         );
         <span class="self">Self</span> {
             <span class="ident">term</span>,
-            <span class="ident">history</span>: <span class="ident">History</span>::<span class="ident">with_config</span>(<span class="ident">config</span>),
+            <span class="ident">history</span>: <span class="ident">History::with_config</span>(<span class="ident">config</span>),
             <span class="ident">helper</span>: <span class="prelude-val">None</span>,
-            <span class="ident">kill_ring</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">Mutex</span>::<span class="ident">new</span>(<span class="ident">KillRing</span>::<span class="ident">new</span>(<span class="number">60</span>))),
+            <span class="ident">kill_ring</span>: <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="ident">KillRing::new</span>(<span class="number">60</span>))),
             <span class="ident">config</span>,
-            <span class="ident">custom_bindings</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">RwLock</span>::<span class="ident">new</span>(<span class="ident">Trie</span>::<span class="ident">new</span>())),
+            <span class="ident">custom_bindings</span>: <span class="ident">Arc::new</span>(<span class="ident">RwLock::new</span>(<span class="ident">Trie::new</span>())),
         }
     }
 
@@ -1575,7 +1575,7 @@
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">term</span>.<span class="ident">is_unsupported</span>() {
             <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;unsupported terminal&quot;</span>);
             <span class="comment">// Write prompt and flush it to stdout</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">io</span>::<span class="ident">stdout</span>();
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stdout</span> <span class="op">=</span> <span class="ident">io::stdout</span>();
             <span class="ident">stdout</span>.<span class="ident">write_all</span>(<span class="ident">prompt</span>.<span class="ident">as_bytes</span>())<span class="question-mark">?</span>;
             <span class="ident">stdout</span>.<span class="ident">flush</span>()<span class="question-mark">?</span>;
 
@@ -1647,7 +1647,7 @@
         <span class="ident">handler</span>: <span class="ident">R</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">EventHandler</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">bindings</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">custom_bindings</span>.<span class="ident">write</span>() {
-            <span class="ident">bindings</span>.<span class="ident">insert</span>(<span class="ident">Event</span>::<span class="ident">normalize</span>(<span class="ident">key_seq</span>.<span class="ident">into</span>()), <span class="ident">handler</span>.<span class="ident">into</span>())
+            <span class="ident">bindings</span>.<span class="ident">insert</span>(<span class="ident">Event::normalize</span>(<span class="ident">key_seq</span>.<span class="ident">into</span>()), <span class="ident">handler</span>.<span class="ident">into</span>())
         } <span class="kw">else</span> {
             <span class="prelude-val">None</span>
         }
@@ -1656,7 +1656,7 @@
     <span class="doccomment">/// Remove a binding for the given sequence.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unbind_sequence</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">key_seq</span>: <span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">EventHandler</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">bindings</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">custom_bindings</span>.<span class="ident">write</span>() {
-            <span class="ident">bindings</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">Event</span>::<span class="ident">normalize</span>(<span class="ident">key_seq</span>.<span class="ident">into</span>()))
+            <span class="ident">bindings</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">Event::normalize</span>(<span class="ident">key_seq</span>.<span class="ident">into</span>()))
         } <span class="kw">else</span> {
             <span class="prelude-val">None</span>
         }
@@ -1701,7 +1701,7 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">config</span>::<span class="ident">Configurer</span> <span class="kw">for</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="ident">H</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">config::Configurer</span> <span class="kw">for</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="ident">H</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">config_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Config</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">config</span>
     }
@@ -1727,8 +1727,8 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="ident">H</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="ident">H</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Editor&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;term&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">term</span>)
             .<span class="ident">field</span>(<span class="string">&quot;config&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">config</span>)
@@ -1748,7 +1748,7 @@
         <span class="kw">let</span> <span class="ident">readline</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">editor</span>.<span class="ident">readline</span>(<span class="self">self</span>.<span class="ident">prompt</span>);
         <span class="kw">match</span> <span class="ident">readline</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">l</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">l</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">error</span>::<span class="ident">ReadlineError</span>::<span class="ident">Eof</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="prelude-val">Err</span>(<span class="ident">error::ReadlineError::Eof</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             <span class="ident">e</span> @ <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">e</span>),
         }
     }
@@ -1761,7 +1761,7 @@
 <span class="kw">mod</span> <span class="ident">test</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doctest</span>)]</span>
-<span class="ident">doc_comment</span>::<span class="macro">doctest!</span>(<span class="string">&quot;../README.md&quot;</span>);
+<span class="macro">doc_comment::doctest!</span>(<span class="string">&quot;../README.md&quot;</span>);
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustyline" data-search-js="../../search-index.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

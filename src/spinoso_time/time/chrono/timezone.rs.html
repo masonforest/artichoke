@@ -114,7 +114,7 @@
 <span id="111">111</span>
 <span id="112">112</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">time</span>::<span class="ident">chrono</span>::{<span class="ident">Offset</span>, <span class="ident">Time</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::time::chrono</span>::{<span class="ident">Offset</span>, <span class="ident">Time</span>};
 
 <span class="kw">impl</span> <span class="ident">Time</span> {
     <span class="doccomment">/// Returns `true` if _time_ occurs during Daylight Saving Time in its time</span>
@@ -147,7 +147,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_utc</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="self">Self</span> { <span class="ident">offset</span>, .. } <span class="op">=</span> <span class="self">self</span>;
-        <span class="macro">matches!</span>(<span class="ident">offset</span>, <span class="ident">Offset</span>::<span class="ident">Utc</span>)
+        <span class="macro">matches!</span>(<span class="ident">offset</span>, <span class="ident">Offset::Utc</span>)
     }
 
     <span class="doccomment">/// Returns a new `Time` object representing time in local time (using the</span>
@@ -177,7 +177,7 @@
         <span class="self">Self</span> {
             <span class="ident">timestamp</span>,
             <span class="ident">sub_second_nanos</span>,
-            <span class="ident">offset</span>: <span class="ident">Offset</span>::<span class="ident">Local</span>,
+            <span class="ident">offset</span>: <span class="ident">Offset::Local</span>,
         }
     }
 
@@ -207,22 +207,22 @@
         <span class="self">Self</span> {
             <span class="ident">timestamp</span>,
             <span class="ident">sub_second_nanos</span>,
-            <span class="ident">offset</span>: <span class="ident">Offset</span>::<span class="ident">Utc</span>,
+            <span class="ident">offset</span>: <span class="ident">Offset::Utc</span>,
         }
     }
 
     <span class="doccomment">/// Returns the name of the time zone used for _time_.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">match_same_arms</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::match_same_arms</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">timezone</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">offset</span> {
-            <span class="ident">Offset</span>::<span class="ident">Utc</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="string">&quot;UTC&quot;</span>),
+            <span class="ident">Offset::Utc</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="string">&quot;UTC&quot;</span>),
             <span class="comment">// TODO: Should be a zone string.</span>
-            <span class="ident">Offset</span>::<span class="ident">Local</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">Offset::Local</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             <span class="comment">// TODO: Should be a zone string.</span>
-            <span class="ident">Offset</span>::<span class="ident">Tz</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
-            <span class="ident">Offset</span>::<span class="ident">Fixed</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">Offset::Tz</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">Offset::Fixed</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
         }
     }
 }

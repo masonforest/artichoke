@@ -284,10 +284,10 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Syntax highlighting</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">config</span>::<span class="ident">CompletionType</span>;
-<span class="kw">use</span> <span class="ident">memchr</span>::<span class="ident">memchr</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>::{<span class="self">self</span>, <span class="ident">Borrowed</span>, <span class="ident">Owned</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">Cell</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::config::CompletionType</span>;
+<span class="kw">use</span> <span class="ident">memchr::memchr</span>;
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>::{<span class="self">self</span>, <span class="ident">Borrowed</span>, <span class="ident">Owned</span>};
+<span class="kw">use</span> <span class="ident">std::cell::Cell</span>;
 
 <span class="doccomment">/// Syntax highlighter with [ANSI color](https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters).</span>
 <span class="doccomment">/// Rustyline will try to handle escape sequence for ANSI color on windows</span>
@@ -388,7 +388,7 @@
     <span class="doccomment">/// Constructor</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
-            <span class="ident">bracket</span>: <span class="ident">Cell</span>::<span class="ident">new</span>(<span class="prelude-val">None</span>),
+            <span class="ident">bracket</span>: <span class="ident">Cell::new</span>(<span class="prelude-val">None</span>),
         }
     }
 }
@@ -520,7 +520,7 @@
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_matching_bracket</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">find_matching_bracket</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::find_matching_bracket</span>;
         <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">0</span>, <span class="string">b&#39;(&#39;</span>), <span class="prelude-val">None</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">find_matching_bracket</span>(<span class="string">&quot;...)&quot;</span>, <span class="number">3</span>, <span class="string">b&#39;)&#39;</span>), <span class="prelude-val">None</span>);
 
@@ -535,7 +535,7 @@
     }
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_bracket</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">check_bracket</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::check_bracket</span>;
         <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;)...&quot;</span>, <span class="number">0</span>), <span class="prelude-val">None</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;(...&quot;</span>, <span class="number">2</span>), <span class="prelude-val">None</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">check_bracket</span>(<span class="string">&quot;...(&quot;</span>, <span class="number">3</span>), <span class="prelude-val">None</span>);
@@ -549,15 +549,15 @@
     }
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">matching_bracket</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">matching_bracket</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::matching_bracket</span>;
         <span class="macro">assert_eq!</span>(<span class="ident">matching_bracket</span>(<span class="string">b&#39;(&#39;</span>), <span class="string">b&#39;)&#39;</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">matching_bracket</span>(<span class="string">b&#39;)&#39;</span>), <span class="string">b&#39;(&#39;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_open_bracket</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">is_close_bracket</span>;
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">is_open_bracket</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::is_close_bracket</span>;
+        <span class="kw">use</span> <span class="kw">super</span><span class="ident">::is_open_bracket</span>;
         <span class="macro">assert!</span>(<span class="ident">is_open_bracket</span>(<span class="string">b&#39;(&#39;</span>));
         <span class="macro">assert!</span>(<span class="ident">is_close_bracket</span>(<span class="string">b&#39;)&#39;</span>));
     }

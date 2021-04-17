@@ -1720,14 +1720,14 @@
 
 <span class="doccomment">//! Ruby `Array` based on [`TinyVec`].</span>
 
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">boxed</span>::<span class="ident">Box</span>;
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">vec</span>::<span class="ident">Vec</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">cmp</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">iter</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">slice</span>::{<span class="ident">Iter</span>, <span class="ident">IterMut</span>};
-<span class="kw">use</span> <span class="ident">tinyvec</span>::<span class="ident">TinyVec</span>;
+<span class="kw">use</span> <span class="ident">alloc::boxed::Box</span>;
+<span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
+<span class="kw">use</span> <span class="ident">core::cmp</span>;
+<span class="kw">use</span> <span class="ident">core::iter</span>;
+<span class="kw">use</span> <span class="ident">core::slice</span>::{<span class="ident">Iter</span>, <span class="ident">IterMut</span>};
+<span class="kw">use</span> <span class="ident">tinyvec::TinyVec</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">array</span>::<span class="ident">INLINE_CAPACITY</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::INLINE_CAPACITY</span>;
 
 <span class="kw">mod</span> <span class="ident">convert</span>;
 <span class="kw">mod</span> <span class="ident">eq</span>;
@@ -1803,7 +1803,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">new</span>()
+        <span class="self">Self</span><span class="ident">::new</span>()
     }
 }
 
@@ -1827,7 +1827,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">TinyVec</span>::<span class="ident">new</span>())
+        <span class="self">Self</span>(<span class="ident">TinyVec::new</span>())
     }
 
     <span class="doccomment">/// Construct a new, empty `TinyArray&lt;T&gt;` with the specified capacity.</span>
@@ -1858,7 +1858,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity</span>(<span class="ident">capacity</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">TinyVec</span>::<span class="ident">with_capacity</span>(<span class="ident">capacity</span>))
+        <span class="self">Self</span>(<span class="ident">TinyVec::with_capacity</span>(<span class="ident">capacity</span>))
     }
 
     <span class="doccomment">/// Constuct a new two-element `TinyArray` from the given arguments.</span>
@@ -1879,7 +1879,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assoc</span>(<span class="ident">first</span>: <span class="ident">T</span>, <span class="ident">second</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">pair</span>: [<span class="ident">T</span>; <span class="number">2</span>] <span class="op">=</span> [<span class="ident">first</span>, <span class="ident">second</span>];
-        <span class="self">Self</span>::<span class="ident">from</span>(<span class="ident">pair</span>)
+        <span class="self">Self</span><span class="ident">::from</span>(<span class="ident">pair</span>)
     }
 
     <span class="doccomment">/// Returns an iterator over the slice.</span>
@@ -2431,7 +2431,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pop_n</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">if</span> <span class="ident">n</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="self">Self</span>::<span class="ident">new</span>();
+            <span class="kw">return</span> <span class="self">Self</span><span class="ident">::new</span>();
         }
         <span class="kw">let</span> <span class="ident">begin</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>().<span class="ident">checked_sub</span>(<span class="ident">n</span>).<span class="ident">unwrap_or_default</span>();
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(<span class="ident">begin</span>..).<span class="ident">collect</span>()
@@ -2527,7 +2527,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shift_n</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">match</span> <span class="ident">n</span> {
-            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">new</span>(),
+            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::new</span>(),
             <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(..<span class="ident">n</span>).<span class="ident">collect</span>(),
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(..).<span class="ident">collect</span>(),
         }
@@ -2612,7 +2612,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_len_and_default</span>(<span class="ident">len</span>: <span class="ident">usize</span>, <span class="ident">default</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">iter</span>::<span class="ident">repeat</span>(<span class="ident">default</span>).<span class="ident">take</span>(<span class="ident">len</span>).<span class="ident">collect</span>())
+        <span class="self">Self</span>(<span class="ident">iter::repeat</span>(<span class="ident">default</span>).<span class="ident">take</span>(<span class="ident">len</span>).<span class="ident">collect</span>())
     }
 
     <span class="doccomment">/// Appends the elements of `other` to self.</span>
@@ -2696,7 +2696,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">repeat</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_slice</span>();
         <span class="kw">if</span> <span class="ident">slice</span>.<span class="ident">len</span>().<span class="ident">checked_mul</span>(<span class="ident">n</span>).<span class="ident">is_some</span>() {
-            <span class="prelude-val">Some</span>(<span class="self">Self</span>::<span class="ident">from</span>(<span class="ident">slice</span>.<span class="ident">repeat</span>(<span class="ident">n</span>)))
+            <span class="prelude-val">Some</span>(<span class="self">Self</span><span class="ident">::from</span>(<span class="ident">slice</span>.<span class="ident">repeat</span>(<span class="ident">n</span>)))
         } <span class="kw">else</span> {
             <span class="prelude-val">None</span>
         }
@@ -2730,7 +2730,7 @@
             <span class="comment">// and ensures we allocate an additional slot.</span>
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">index</span> <span class="op">+</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">buflen</span>);
             <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="ident">buflen</span>..<span class="ident">index</span> {
-                <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T</span>::<span class="ident">default</span>());
+                <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T::default</span>());
             }
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">elem</span>);
         }
@@ -2763,7 +2763,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_with_drain</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">start</span>: <span class="ident">usize</span>, <span class="ident">drain</span>: <span class="ident">usize</span>, <span class="ident">elem</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
         <span class="kw">let</span> <span class="ident">buflen</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">buflen</span>.<span class="ident">checked_sub</span>(<span class="ident">start</span>).<span class="ident">unwrap_or_default</span>(), <span class="ident">drain</span>);
+        <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">cmp::min</span>(<span class="ident">buflen</span>.<span class="ident">checked_sub</span>(<span class="ident">start</span>).<span class="ident">unwrap_or_default</span>(), <span class="ident">drain</span>);
 
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">cell</span>) <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get_mut</span>(<span class="ident">start</span>) {
             <span class="kw">match</span> <span class="ident">drain</span> {
@@ -2771,7 +2771,7 @@
                 <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">cell</span> <span class="op">=</span> <span class="ident">elem</span>,
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw-2">*</span><span class="ident">cell</span> <span class="op">=</span> <span class="ident">elem</span>;
-                    <span class="kw">let</span> <span class="ident">drain_end_idx</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">start</span> <span class="op">+</span> <span class="ident">drain</span>, <span class="ident">buflen</span>);
+                    <span class="kw">let</span> <span class="ident">drain_end_idx</span> <span class="op">=</span> <span class="ident">cmp::min</span>(<span class="ident">start</span> <span class="op">+</span> <span class="ident">drain</span>, <span class="ident">buflen</span>);
                     <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">drain_end_idx</span>);
                 }
             }
@@ -2780,7 +2780,7 @@
             <span class="comment">// and ensures we allocate an additional slot.</span>
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">buflen</span>);
             <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="ident">buflen</span>..<span class="ident">start</span> {
-                <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T</span>::<span class="ident">default</span>());
+                <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T::default</span>());
             }
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">elem</span>);
         }
@@ -2815,7 +2815,7 @@
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
 
         <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()..<span class="ident">index</span> {
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T</span>::<span class="ident">default</span>());
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T::default</span>());
         }
         <span class="kw">if</span> <span class="ident">index</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>() {
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">extend_from_slice</span>(<span class="ident">values</span>);
@@ -2857,13 +2857,13 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">drain</span>: <span class="ident">usize</span>, <span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
         <span class="kw">let</span> <span class="ident">buflen</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">buflen</span>.<span class="ident">checked_sub</span>(<span class="ident">index</span>).<span class="ident">unwrap_or_default</span>(), <span class="ident">drain</span>);
+        <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">cmp::min</span>(<span class="ident">buflen</span>.<span class="ident">checked_sub</span>(<span class="ident">index</span>).<span class="ident">unwrap_or_default</span>(), <span class="ident">drain</span>);
 
         <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> <span class="ident">index</span>.<span class="ident">checked_sub</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()).<span class="ident">unwrap_or_default</span>() <span class="op">+</span> <span class="ident">values</span>.<span class="ident">len</span>();
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
 
         <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()..<span class="ident">index</span> {
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T</span>::<span class="ident">default</span>());
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T::default</span>());
         }
         <span class="kw">if</span> <span class="ident">index</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>() {
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">extend_from_slice</span>(<span class="ident">values</span>);
@@ -2877,104 +2877,104 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span> {
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">array</span>::<span class="ident">tinyvec</span>::<span class="ident">TinyArray</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::tinyvec::TinyArray</span>;
 
     <span class="comment">// `insert_slice`</span>
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_end_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">5</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_out_of_bounds_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_interior_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">2</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_begin_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_end_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_out_of_bounds_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_begin_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_end</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">5</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_out_of_bounds</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_interior</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_insert_slice_begin</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_end</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_out_of_bounds</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_insert_slice_begin</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="ident">ary</span>.<span class="ident">insert_slice</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
     }
@@ -2983,7 +2983,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -2991,7 +2991,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -2999,7 +2999,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3007,7 +3007,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">5</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3015,7 +3015,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
@@ -3023,7 +3023,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
@@ -3031,7 +3031,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
@@ -3039,7 +3039,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
@@ -3047,7 +3047,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3055,7 +3055,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3063,7 +3063,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3071,7 +3071,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3079,7 +3079,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_greater_than_insert_length_to_end</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>]);
@@ -3087,7 +3087,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_empty_drain_greater_than_insert_length_overrun_end</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>]);
@@ -3095,7 +3095,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_non_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3103,7 +3103,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_non_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3111,7 +3111,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_non_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3119,7 +3119,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_end_non_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">5</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3127,7 +3127,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_non_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3135,7 +3135,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_non_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3143,7 +3143,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_non_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3151,7 +3151,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_out_of_bounds_non_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">10</span>, <span class="number">5</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3159,7 +3159,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3167,7 +3167,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3175,7 +3175,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>]);
@@ -3183,7 +3183,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">6</span>]);
@@ -3192,7 +3192,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_equal_to_insert_length_to_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3200,7 +3200,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_greater_than_insert_length_to_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3208,7 +3208,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_less_than_insert_length_overrun_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">3</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3216,7 +3216,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_equal_to_insert_length_overrun_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">3</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3224,7 +3224,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_interior_non_empty_drain_greater_than_insert_length_overrun_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">3</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3232,7 +3232,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3240,7 +3240,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">2</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3248,7 +3248,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">3</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">4</span>, <span class="number">5</span>]);
@@ -3256,7 +3256,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">6</span>]);
@@ -3264,7 +3264,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_equal_to_insert_length_to_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
@@ -3272,7 +3272,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_greater_than_insert_length_to_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]);
@@ -3280,7 +3280,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_less_than_insert_length_overrun_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">4</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
@@ -3288,7 +3288,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_equal_to_insert_length_overrun_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">5</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
@@ -3296,7 +3296,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">non_empty_array_set_slice_begin_non_empty_drain_greater_than_insert_length_overrun_tail</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="ident">from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray::from</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]);
@@ -3304,7 +3304,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_non_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3312,7 +3312,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_non_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3320,7 +3320,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_non_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3328,7 +3328,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_begin_non_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3336,7 +3336,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_non_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3344,7 +3344,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_non_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3352,7 +3352,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_non_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3360,7 +3360,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_non_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
@@ -3368,7 +3368,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
@@ -3376,7 +3376,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
@@ -3384,7 +3384,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
@@ -3392,7 +3392,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_begin_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, []);
@@ -3400,7 +3400,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_empty_drain_0</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">0</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
@@ -3408,7 +3408,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_empty_drain_less_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
@@ -3416,7 +3416,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_empty_drain_equal_to_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);
@@ -3424,7 +3424,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">empty_array_set_slice_out_of_bounds_empty_drain_greater_than_insert_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">TinyArray</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="ident">drained</span> <span class="op">=</span> <span class="ident">ary</span>.<span class="ident">set_slice</span>(<span class="number">5</span>, <span class="number">10</span>, <span class="kw-2">&amp;</span>[]);
         <span class="macro">assert_eq!</span>(<span class="ident">drained</span>, <span class="number">0</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">ary</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]);

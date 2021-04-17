@@ -177,11 +177,11 @@
 <span id="174">174</span>
 <span id="175">175</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">iter</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">TrieNode</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::iter</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::TrieNode</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">SubTrie</span>, <span class="ident">SubTrieMut</span>, <span class="ident">Trie</span>, <span class="ident">TrieKey</span>};
 
-<span class="kw">use</span> <span class="ident">nibble_vec</span>::<span class="ident">Nibblet</span>;
+<span class="kw">use</span> <span class="ident">nibble_vec::Nibblet</span>;
 
 <span class="doccomment">/// Common functionality available for tries and subtries.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TrieCommon</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>: <span class="lifetime">&#39;a</span>, <span class="ident">V</span>: <span class="lifetime">&#39;a</span><span class="op">&gt;</span>: <span class="ident">ContainsTrieNode</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>
@@ -219,19 +219,19 @@
     <span class="doccomment">/// Return an iterator over the keys and values of the Trie.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Iter</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">trie_node</span>())
+        <span class="ident">Iter::new</span>(<span class="self">self</span>.<span class="ident">trie_node</span>())
     }
 
     <span class="doccomment">/// Return an iterator over the keys of the Trie.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">keys</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Keys</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Keys</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">iter</span>())
+        <span class="ident">Keys::new</span>(<span class="self">self</span>.<span class="ident">iter</span>())
     }
 
     <span class="doccomment">/// Return an iterator over the values of the Trie.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">values</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Values</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Values</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">iter</span>())
+        <span class="ident">Values::new</span>(<span class="self">self</span>.<span class="ident">iter</span>())
     }
 
     <span class="doccomment">/// Return an iterator over the child subtries of this node.</span>
@@ -273,7 +273,7 @@
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">children</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Children</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Children</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">node</span>.<span class="ident">key</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">node</span>)
+        <span class="ident">Children::new</span>(<span class="self">self</span>.<span class="ident">node</span>.<span class="ident">key</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">node</span>)
     }
 }
 
@@ -298,7 +298,7 @@
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">children</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Children</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Children</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">prefix</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">node</span>)
+        <span class="ident">Children::new</span>(<span class="self">self</span>.<span class="ident">prefix</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">node</span>)
     }
 }
 
@@ -324,7 +324,7 @@
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">children</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Children</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Children</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">prefix</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">node</span>)
+        <span class="ident">Children::new</span>(<span class="self">self</span>.<span class="ident">prefix</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">node</span>)
     }
 }
 
@@ -349,7 +349,7 @@
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">children</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Children</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
-        <span class="ident">Children</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">prefix</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">node</span>)
+        <span class="ident">Children::new</span>(<span class="self">self</span>.<span class="ident">prefix</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">node</span>)
     }
 }
 </pre></div>

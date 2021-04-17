@@ -499,18 +499,18 @@
 <span id="496">496</span>
 <span id="497">497</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">boxed</span>::<span class="ident">Box</span>;
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">rc</span>::<span class="ident">Rc</span>;
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">vec</span>::<span class="ident">Vec</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">iter</span>::<span class="ident">FromIterator</span>;
+<span class="kw">use</span> <span class="ident">alloc::borrow::Cow</span>;
+<span class="kw">use</span> <span class="ident">alloc::boxed::Box</span>;
+<span class="kw">use</span> <span class="ident">alloc::rc::Rc</span>;
+<span class="kw">use</span> <span class="ident">alloc::sync::Arc</span>;
+<span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
+<span class="kw">use</span> <span class="ident">core::iter::FromIterator</span>;
 
-<span class="kw">use</span> <span class="ident">tinyvec</span>::<span class="ident">TinyVec</span>;
+<span class="kw">use</span> <span class="ident">tinyvec::TinyVec</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">array</span>::<span class="ident">tinyvec</span>::<span class="ident">TinyArray</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">array</span>::<span class="ident">vec</span>::<span class="ident">Array</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">array</span>::<span class="ident">INLINE_CAPACITY</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::tinyvec::TinyArray</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::vec::Array</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::INLINE_CAPACITY</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TinyArray</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -538,7 +538,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">TinyVec</span>::<span class="ident">from</span>(<span class="ident">values</span>))
+        <span class="self">Self</span>(<span class="ident">TinyVec::from</span>(<span class="ident">values</span>))
     }
 }
 
@@ -548,7 +548,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">TinyVec</span>::<span class="ident">from</span>(<span class="ident">values</span>))
+        <span class="self">Self</span>(<span class="ident">TinyVec::from</span>(<span class="ident">values</span>))
     }
 }
 
@@ -558,7 +558,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="ident">Box</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">Vec</span>::<span class="ident">from</span>(<span class="ident">values</span>).<span class="ident">into_iter</span>().<span class="ident">collect</span>())
+        <span class="self">Self</span>(<span class="ident">Vec::from</span>(<span class="ident">values</span>).<span class="ident">into_iter</span>().<span class="ident">collect</span>())
     }
 }
 
@@ -579,8 +579,8 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, [<span class="ident">T</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">match</span> <span class="ident">values</span> {
-            <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="ident">slice</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">slice</span>.<span class="ident">into</span>(),
-            <span class="ident">Cow</span>::<span class="ident">Owned</span>(<span class="ident">vec</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">vec</span>.<span class="ident">into</span>(),
+            <span class="ident">Cow::Borrowed</span>(<span class="ident">slice</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">slice</span>.<span class="ident">into</span>(),
+            <span class="ident">Cow::Owned</span>(<span class="ident">vec</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">vec</span>.<span class="ident">into</span>(),
         }
     }
 }
@@ -630,7 +630,7 @@
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">0</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// Values is empty, so it can be ignored.</span>
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">values</span>;
-        <span class="self">Self</span>::<span class="ident">new</span>()
+        <span class="self">Self</span><span class="ident">::new</span>()
     }
 }
 
@@ -642,7 +642,7 @@
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">0</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// Values is empty, so it can be ignored.</span>
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">values</span>;
-        <span class="self">Self</span>::<span class="ident">new</span>()
+        <span class="self">Self</span><span class="ident">::new</span>()
     }
 }
 
@@ -653,7 +653,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">1</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> [<span class="ident">a</span>] <span class="op">=</span> <span class="ident">values</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">a</span>);
         <span class="self">Self</span>(<span class="ident">vec</span>)
     }
@@ -665,7 +665,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">1</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>() {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">value</span>);
         }
@@ -680,7 +680,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">2</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> [<span class="ident">a</span>, <span class="ident">b</span>] <span class="op">=</span> <span class="ident">values</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">a</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">b</span>);
         <span class="self">Self</span>(<span class="ident">vec</span>)
@@ -693,7 +693,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">2</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>() {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">value</span>);
         }
@@ -708,7 +708,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">3</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> [<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>] <span class="op">=</span> <span class="ident">values</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">a</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">b</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">c</span>);
@@ -722,7 +722,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">3</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>() {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">value</span>);
         }
@@ -737,7 +737,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> [<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>, <span class="ident">d</span>] <span class="op">=</span> <span class="ident">values</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">a</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">b</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">c</span>);
@@ -752,7 +752,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>() {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">value</span>);
         }
@@ -765,10 +765,10 @@
     <span class="ident">T</span>: <span class="ident">Default</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">many_single_char_names</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">5</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> [<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>, <span class="ident">d</span>, <span class="ident">e</span>] <span class="op">=</span> <span class="ident">values</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">a</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">b</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">c</span>);
@@ -784,7 +784,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">5</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>() {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">value</span>);
         }
@@ -797,10 +797,10 @@
     <span class="ident">T</span>: <span class="ident">Default</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">many_single_char_names</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">6</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> [<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>, <span class="ident">d</span>, <span class="ident">e</span>, <span class="ident">f</span>] <span class="op">=</span> <span class="ident">values</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">a</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">b</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">c</span>);
@@ -817,7 +817,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">6</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>() {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">value</span>);
         }
@@ -830,10 +830,10 @@
     <span class="ident">T</span>: <span class="ident">Default</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">many_single_char_names</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::many_single_char_names</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">7</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> [<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>, <span class="ident">d</span>, <span class="ident">e</span>, <span class="ident">f</span>, <span class="ident">g</span>] <span class="op">=</span> <span class="ident">values</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">a</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">b</span>);
         <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">c</span>);
@@ -851,7 +851,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">7</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">TinyVec::new</span>();
         <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>() {
             <span class="ident">vec</span>.<span class="ident">push</span>(<span class="ident">value</span>);
         }
@@ -865,7 +865,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="ident">INLINE_CAPACITY</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">TinyVec</span>::<span class="ident">from</span>(<span class="ident">values</span>))
+        <span class="self">Self</span>(<span class="ident">TinyVec::from</span>(<span class="ident">values</span>))
     }
 }
 
@@ -875,7 +875,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="ident">INLINE_CAPACITY</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">TinyVec</span>::<span class="ident">from</span>(<span class="kw-2">&amp;</span><span class="ident">values</span>[..]))
+        <span class="self">Self</span>(<span class="ident">TinyVec::from</span>(<span class="kw-2">&amp;</span><span class="ident">values</span>[..]))
     }
 }
 
@@ -889,7 +889,7 @@
             <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">len</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
                 <span class="comment">// TODO: use a by-value array iter once `min_const_generics`</span>
                 <span class="comment">// stabilizes.</span>
-                <span class="self">Self</span>(<span class="ident">Vec</span>::<span class="ident">from</span>(<span class="ident">values</span>).<span class="ident">into_iter</span>().<span class="ident">collect</span>())
+                <span class="self">Self</span>(<span class="ident">Vec::from</span>(<span class="ident">values</span>).<span class="ident">into_iter</span>().<span class="ident">collect</span>())
             }
         }
 
@@ -899,7 +899,7 @@
         {
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">len</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-                <span class="self">Self</span>(<span class="ident">TinyVec</span>::<span class="ident">from</span>(<span class="kw-2">&amp;</span><span class="ident">values</span>[..]))
+                <span class="self">Self</span>(<span class="ident">TinyVec::from</span>(<span class="kw-2">&amp;</span><span class="ident">values</span>[..]))
             }
         }
     };
@@ -967,7 +967,7 @@
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="ident">Array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">from</span>(<span class="ident">values</span>.<span class="ident">into_vec</span>())
+        <span class="self">Self</span><span class="ident">::from</span>(<span class="ident">values</span>.<span class="ident">into_vec</span>())
     }
 }
 

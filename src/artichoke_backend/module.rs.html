@@ -306,29 +306,29 @@
 <span id="305">305</span>
 <span id="306">306</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashSet</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">AsRef</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::{<span class="ident">c_void</span>, <span class="ident">CStr</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">NonNull</span>;
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+<span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
+<span class="kw">use</span> <span class="ident">std::convert::AsRef</span>;
+<span class="kw">use</span> <span class="ident">std::ffi</span>::{<span class="ident">c_void</span>, <span class="ident">CStr</span>};
+<span class="kw">use</span> <span class="ident">std::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
+<span class="kw">use</span> <span class="ident">std::ptr::NonNull</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">core</span>::<span class="ident">Intern</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">def</span>::{<span class="ident">ConstantNameError</span>, <span class="ident">EnclosingRubyScope</span>, <span class="ident">Method</span>, <span class="ident">NotDefinedError</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">method</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sys</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Artichoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::core::Intern</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::def</span>::{<span class="ident">ConstantNameError</span>, <span class="ident">EnclosingRubyScope</span>, <span class="ident">Method</span>, <span class="ident">NotDefinedError</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::Error</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::method</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Artichoke</span>;
 
 <span class="kw">mod</span> <span class="ident">registry</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">registry</span>::<span class="ident">Registry</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">registry::Registry</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Builder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Artichoke</span>,
     <span class="ident">spec</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Spec</span>,
-    <span class="ident">methods</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">method</span>::<span class="ident">Spec</span><span class="op">&gt;</span>,
+    <span class="ident">methods</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">method::Spec</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Builder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -337,15 +337,15 @@
         <span class="self">Self</span> {
             <span class="ident">interp</span>,
             <span class="ident">spec</span>,
-            <span class="ident">methods</span>: <span class="ident">HashSet</span>::<span class="ident">default</span>(),
+            <span class="ident">methods</span>: <span class="ident">HashSet::default</span>(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_method</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="ident">T</span>, <span class="ident">method</span>: <span class="ident">Method</span>, <span class="ident">args</span>: <span class="ident">sys</span>::<span class="ident">mrb_aspec</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ConstantNameError</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_method</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="ident">T</span>, <span class="ident">method</span>: <span class="ident">Method</span>, <span class="ident">args</span>: <span class="ident">sys::mrb_aspec</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ConstantNameError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
-        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">method</span>::<span class="ident">Spec</span>::<span class="ident">new</span>(<span class="ident">method</span>::<span class="ident">Type</span>::<span class="ident">Instance</span>, <span class="ident">name</span>.<span class="ident">into</span>(), <span class="ident">method</span>, <span class="ident">args</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">method::Spec::new</span>(<span class="ident">method::Type::Instance</span>, <span class="ident">name</span>.<span class="ident">into</span>(), <span class="ident">method</span>, <span class="ident">args</span>)<span class="question-mark">?</span>;
         <span class="self">self</span>.<span class="ident">methods</span>.<span class="ident">insert</span>(<span class="ident">spec</span>);
         <span class="prelude-val">Ok</span>(<span class="self">self</span>)
     }
@@ -354,12 +354,12 @@
         <span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">name</span>: <span class="ident">T</span>,
         <span class="ident">method</span>: <span class="ident">Method</span>,
-        <span class="ident">args</span>: <span class="ident">sys</span>::<span class="ident">mrb_aspec</span>,
+        <span class="ident">args</span>: <span class="ident">sys::mrb_aspec</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ConstantNameError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
-        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">method</span>::<span class="ident">Spec</span>::<span class="ident">new</span>(<span class="ident">method</span>::<span class="ident">Type</span>::<span class="ident">Class</span>, <span class="ident">name</span>.<span class="ident">into</span>(), <span class="ident">method</span>, <span class="ident">args</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">method::Spec::new</span>(<span class="ident">method::Type::Class</span>, <span class="ident">name</span>.<span class="ident">into</span>(), <span class="ident">method</span>, <span class="ident">args</span>)<span class="question-mark">?</span>;
         <span class="self">self</span>.<span class="ident">methods</span>.<span class="ident">insert</span>(<span class="ident">spec</span>);
         <span class="prelude-val">Ok</span>(<span class="self">self</span>)
     }
@@ -368,12 +368,12 @@
         <span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">name</span>: <span class="ident">T</span>,
         <span class="ident">method</span>: <span class="ident">Method</span>,
-        <span class="ident">args</span>: <span class="ident">sys</span>::<span class="ident">mrb_aspec</span>,
+        <span class="ident">args</span>: <span class="ident">sys::mrb_aspec</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ConstantNameError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
-        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">method</span>::<span class="ident">Spec</span>::<span class="ident">new</span>(<span class="ident">method</span>::<span class="ident">Type</span>::<span class="ident">Module</span>, <span class="ident">name</span>.<span class="ident">into</span>(), <span class="ident">method</span>, <span class="ident">args</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">method::Spec::new</span>(<span class="ident">method::Type::Module</span>, <span class="ident">name</span>.<span class="ident">into</span>(), <span class="ident">method</span>, <span class="ident">args</span>)<span class="question-mark">?</span>;
         <span class="self">self</span>.<span class="ident">methods</span>.<span class="ident">insert</span>(<span class="ident">spec</span>);
         <span class="prelude-val">Ok</span>(<span class="self">self</span>)
     }
@@ -391,17 +391,17 @@
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">scope</span>)) <span class="op">=</span> <span class="ident">scope</span> {
                 <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">unsafe</span> {
                     <span class="self">self</span>.<span class="ident">interp</span>
-                        .<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys</span>::<span class="ident">mrb_define_module_under</span>(<span class="ident">mrb</span>, <span class="ident">scope</span>.<span class="ident">as_mut</span>(), <span class="ident">name</span>))
+                        .<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_define_module_under</span>(<span class="ident">mrb</span>, <span class="ident">scope</span>.<span class="ident">as_mut</span>(), <span class="ident">name</span>))
                 };
-                <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="ident">rclass</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">NotDefinedError</span>::<span class="ident">module</span>(<span class="self">self</span>.<span class="ident">spec</span>.<span class="ident">name</span>()))<span class="question-mark">?</span>;
-                <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">rclass</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">NotDefinedError</span>::<span class="ident">module</span>(<span class="self">self</span>.<span class="ident">spec</span>.<span class="ident">name</span>()))<span class="question-mark">?</span>
+                <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="ident">rclass</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">NotDefinedError::module</span>(<span class="self">self</span>.<span class="ident">spec</span>.<span class="ident">name</span>()))<span class="question-mark">?</span>;
+                <span class="ident">NonNull::new</span>(<span class="ident">rclass</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">NotDefinedError::module</span>(<span class="self">self</span>.<span class="ident">spec</span>.<span class="ident">name</span>()))<span class="question-mark">?</span>
             } <span class="kw">else</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">NotDefinedError</span>::<span class="ident">enclosing_scope</span>(<span class="ident">enclosing_scope</span>.<span class="ident">fqname</span>().<span class="ident">into_owned</span>()));
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">NotDefinedError::enclosing_scope</span>(<span class="ident">enclosing_scope</span>.<span class="ident">fqname</span>().<span class="ident">into_owned</span>()));
             }
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys</span>::<span class="ident">mrb_define_module</span>(<span class="ident">mrb</span>, <span class="ident">name</span>)) };
-            <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="ident">rclass</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">NotDefinedError</span>::<span class="ident">module</span>(<span class="self">self</span>.<span class="ident">spec</span>.<span class="ident">name</span>()))<span class="question-mark">?</span>;
-            <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">rclass</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">NotDefinedError</span>::<span class="ident">module</span>(<span class="self">self</span>.<span class="ident">spec</span>.<span class="ident">name</span>()))<span class="question-mark">?</span>
+            <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_define_module</span>(<span class="ident">mrb</span>, <span class="ident">name</span>)) };
+            <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="ident">rclass</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">NotDefinedError::module</span>(<span class="self">self</span>.<span class="ident">spec</span>.<span class="ident">name</span>()))<span class="question-mark">?</span>;
+            <span class="ident">NonNull::new</span>(<span class="ident">rclass</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">NotDefinedError::module</span>(<span class="self">self</span>.<span class="ident">spec</span>.<span class="ident">name</span>()))<span class="question-mark">?</span>
         };
 
         <span class="kw">for</span> <span class="ident">method</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">methods</span> {
@@ -437,13 +437,13 @@
     <span class="doccomment">/// This function must be called within an [`Artichoke::with_ffi_boundary`]</span>
     <span class="doccomment">/// closure because the FFI APIs called in this function may require access</span>
     <span class="doccomment">/// to the Artichoke [`State](crate::state::State).</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">resolve</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">sys</span>::<span class="ident">RClass</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">resolve</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">sys::RClass</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">module_name</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">name</span>.<span class="ident">as_ptr</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">scope</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">enclosing_scope</span> {
             <span class="comment">// Short circuit if enclosing scope does not exist.</span>
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">scope</span>.<span class="ident">rclass</span>(<span class="ident">mrb</span>)<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">is_defined_under</span> <span class="op">=</span>
-                <span class="ident">sys</span>::<span class="ident">mrb_const_defined_at</span>(<span class="ident">mrb</span>, <span class="ident">sys</span>::<span class="ident">mrb_sys_obj_value</span>(<span class="ident">scope</span>.<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">c_void</span><span class="op">&gt;</span>().<span class="ident">as_mut</span>()), <span class="self">self</span>.<span class="ident">sym</span>);
+                <span class="ident">sys::mrb_const_defined_at</span>(<span class="ident">mrb</span>, <span class="ident">sys::mrb_sys_obj_value</span>(<span class="ident">scope</span>.<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">c_void</span><span class="op">&gt;</span>().<span class="ident">as_mut</span>()), <span class="self">self</span>.<span class="ident">sym</span>);
             <span class="kw">if</span> <span class="ident">is_defined_under</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
                 <span class="comment">// Enclosing scope exists.</span>
                 <span class="comment">// Module is not defined under the enclosing scope.</span>
@@ -451,13 +451,13 @@
             } <span class="kw">else</span> {
                 <span class="comment">// Enclosing scope exists.</span>
                 <span class="comment">// Module is defined under the enclosing scope.</span>
-                <span class="kw">let</span> <span class="ident">module</span> <span class="op">=</span> <span class="ident">sys</span>::<span class="ident">mrb_module_get_under</span>(<span class="ident">mrb</span>, <span class="ident">scope</span>.<span class="ident">as_mut</span>(), <span class="ident">module_name</span>);
-                <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">module</span>)
+                <span class="kw">let</span> <span class="ident">module</span> <span class="op">=</span> <span class="ident">sys::mrb_module_get_under</span>(<span class="ident">mrb</span>, <span class="ident">scope</span>.<span class="ident">as_mut</span>(), <span class="ident">module_name</span>);
+                <span class="ident">NonNull::new</span>(<span class="ident">module</span>)
             }
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">is_defined</span> <span class="op">=</span> <span class="ident">sys</span>::<span class="ident">mrb_const_defined_at</span>(
+            <span class="kw">let</span> <span class="ident">is_defined</span> <span class="op">=</span> <span class="ident">sys::mrb_const_defined_at</span>(
                 <span class="ident">mrb</span>,
-                <span class="ident">sys</span>::<span class="ident">mrb_sys_obj_value</span>((<span class="kw-2">*</span><span class="ident">mrb</span>).<span class="ident">object_class</span>.<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">c_void</span><span class="op">&gt;</span>()),
+                <span class="ident">sys::mrb_sys_obj_value</span>((<span class="kw-2">*</span><span class="ident">mrb</span>).<span class="ident">object_class</span>.<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">c_void</span><span class="op">&gt;</span>()),
                 <span class="self">self</span>.<span class="ident">sym</span>,
             );
             <span class="kw">if</span> <span class="ident">is_defined</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
@@ -465,8 +465,8 @@
                 <span class="prelude-val">None</span>
             } <span class="kw">else</span> {
                 <span class="comment">// Module exists in root scope.</span>
-                <span class="kw">let</span> <span class="ident">module</span> <span class="op">=</span> <span class="ident">sys</span>::<span class="ident">mrb_module_get</span>(<span class="ident">mrb</span>, <span class="ident">module_name</span>);
-                <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">module</span>)
+                <span class="kw">let</span> <span class="ident">module</span> <span class="op">=</span> <span class="ident">sys::mrb_module_get</span>(<span class="ident">mrb</span>, <span class="ident">module_name</span>);
+                <span class="ident">NonNull::new</span>(<span class="ident">module</span>)
             }
         }
     }
@@ -492,8 +492,8 @@
     {
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">into</span>();
         <span class="kw">let</span> <span class="ident">sym</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">name</span> {
-            <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">interp</span>.<span class="ident">intern_string</span>(<span class="ident">name</span>)<span class="question-mark">?</span>,
-            <span class="ident">Cow</span>::<span class="ident">Owned</span>(<span class="kw-2">ref</span> <span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">interp</span>.<span class="ident">intern_string</span>(<span class="ident">name</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>,
+            <span class="ident">Cow::Borrowed</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">interp</span>.<span class="ident">intern_string</span>(<span class="ident">name</span>)<span class="question-mark">?</span>,
+            <span class="ident">Cow::Owned</span>(<span class="kw-2">ref</span> <span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">interp</span>.<span class="ident">intern_string</span>(<span class="ident">name</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>,
         };
         <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
             <span class="ident">name</span>,
@@ -506,8 +506,8 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span> {
-            <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="ident">name</span>),
-            <span class="ident">Cow</span>::<span class="ident">Owned</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">name</span>.<span class="ident">clone</span>().<span class="ident">into</span>(),
+            <span class="ident">Cow::Borrowed</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="ident">name</span>),
+            <span class="ident">Cow::Owned</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">name</span>.<span class="ident">clone</span>().<span class="ident">into</span>(),
         }
     }
 
@@ -529,7 +529,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fqname</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">str</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scope</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">enclosing_scope</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fqname</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">scope</span>.<span class="ident">fqname</span>());
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fqname</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="ident">scope</span>.<span class="ident">fqname</span>());
             <span class="ident">fqname</span>.<span class="ident">push_str</span>(<span class="string">&quot;::&quot;</span>);
             <span class="ident">fqname</span>.<span class="ident">push_str</span>(<span class="self">self</span>.<span class="ident">name</span>.<span class="ident">as_ref</span>());
             <span class="ident">fqname</span>.<span class="ident">into</span>()
@@ -540,7 +540,7 @@
 
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rclass</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Rclass</span> {
-        <span class="ident">Rclass</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">sym</span>, <span class="self">self</span>.<span class="ident">name_cstr</span>, <span class="self">self</span>.<span class="ident">enclosing_scope</span>.<span class="ident">clone</span>())
+        <span class="ident">Rclass::new</span>(<span class="self">self</span>.<span class="ident">sym</span>, <span class="self">self</span>.<span class="ident">name_cstr</span>, <span class="self">self</span>.<span class="ident">enclosing_scope</span>.<span class="ident">clone</span>())
     }
 }
 
@@ -561,13 +561,13 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">module</span>::<span class="ident">Spec</span>;
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">test</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::module::Spec</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::test::prelude</span>::<span class="kw-2">*</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">rclass_for_undef_root_module</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Foo&quot;</span>, <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Foo&quot;</span>), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Foo&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Foo&quot;</span>), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">spec</span>.<span class="ident">rclass</span>().<span class="ident">resolve</span>(<span class="ident">mrb</span>)) }.<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">rclass</span>.<span class="ident">is_none</span>());
     }
@@ -575,9 +575,9 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">rclass_for_undef_nested_module</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">Spec</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Kernel&quot;</span>, <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Kernel&quot;</span>), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">EnclosingRubyScope</span>::<span class="ident">module</span>(<span class="kw-2">&amp;</span><span class="ident">scope</span>);
-        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Foo&quot;</span>, <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Foo&quot;</span>), <span class="prelude-val">Some</span>(<span class="ident">scope</span>)).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">Spec::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Kernel&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Kernel&quot;</span>), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">EnclosingRubyScope::module</span>(<span class="kw-2">&amp;</span><span class="ident">scope</span>);
+        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Foo&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Foo&quot;</span>), <span class="prelude-val">Some</span>(<span class="ident">scope</span>)).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">spec</span>.<span class="ident">rclass</span>().<span class="ident">resolve</span>(<span class="ident">mrb</span>)) }.<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">rclass</span>.<span class="ident">is_none</span>());
     }
@@ -585,7 +585,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">rclass_for_root_module</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Kernel&quot;</span>, <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Kernel&quot;</span>), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Kernel&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Kernel&quot;</span>), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">spec</span>.<span class="ident">rclass</span>().<span class="ident">resolve</span>(<span class="ident">mrb</span>)) }.<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">rclass</span>.<span class="ident">is_some</span>());
     }
@@ -594,9 +594,9 @@
     <span class="kw">fn</span> <span class="ident">rclass_for_nested_module</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;module Foo; module Bar; end; end&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">Spec</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Foo&quot;</span>, <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Foo&quot;</span>), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">EnclosingRubyScope</span>::<span class="ident">module</span>(<span class="kw-2">&amp;</span><span class="ident">scope</span>);
-        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Bar&quot;</span>, <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Bar&quot;</span>), <span class="prelude-val">Some</span>(<span class="ident">scope</span>)).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">Spec::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Foo&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Foo&quot;</span>), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">EnclosingRubyScope::module</span>(<span class="kw-2">&amp;</span><span class="ident">scope</span>);
+        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Bar&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Bar&quot;</span>), <span class="prelude-val">Some</span>(<span class="ident">scope</span>)).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">spec</span>.<span class="ident">rclass</span>().<span class="ident">resolve</span>(<span class="ident">mrb</span>)) }.<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">rclass</span>.<span class="ident">is_some</span>());
     }
@@ -605,9 +605,9 @@
     <span class="kw">fn</span> <span class="ident">rclass_for_nested_module_under_class</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;class Foo; module Bar; end; end&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">class</span>::<span class="ident">Spec</span>::<span class="ident">new</span>(<span class="string">&quot;Foo&quot;</span>, <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Foo&quot;</span>), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">EnclosingRubyScope</span>::<span class="ident">class</span>(<span class="kw-2">&amp;</span><span class="ident">scope</span>);
-        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Bar&quot;</span>, <span class="ident">cstr</span>::<span class="macro">cstr!</span>(<span class="string">&quot;Bar&quot;</span>), <span class="prelude-val">Some</span>(<span class="ident">scope</span>)).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">class::Spec::new</span>(<span class="string">&quot;Foo&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Foo&quot;</span>), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">scope</span> <span class="op">=</span> <span class="ident">EnclosingRubyScope::class</span>(<span class="kw-2">&amp;</span><span class="ident">scope</span>);
+        <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Spec::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;Bar&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Bar&quot;</span>), <span class="prelude-val">Some</span>(<span class="ident">scope</span>)).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">rclass</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">spec</span>.<span class="ident">rclass</span>().<span class="ident">resolve</span>(<span class="ident">mrb</span>)) }.<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">rclass</span>.<span class="ident">is_some</span>());
     }

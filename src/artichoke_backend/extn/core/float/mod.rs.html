@@ -239,10 +239,10 @@
 <span id="238">238</span>
 <span id="239">239</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">numeric</span>::{<span class="self">self</span>, <span class="ident">Coercion</span>, <span class="ident">Outcome</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::numeric</span>::{<span class="self">self</span>, <span class="ident">Coercion</span>, <span class="ident">Outcome</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">mruby</span>;
 
@@ -250,14 +250,14 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Float</span>(<span class="ident">f64</span>);
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Float</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Float</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">fmt</span>(<span class="ident">f</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Float</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Float</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">fmt</span>(<span class="ident">f</span>)
     }
 }
@@ -273,7 +273,7 @@
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">try_convert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_convert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">try_convert</span>(<span class="ident">value</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">Float</span>(<span class="ident">num</span>))
     }
@@ -296,14 +296,14 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Outcome</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">flt</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">Float</span>(<span class="ident">flt</span>.<span class="ident">into</span>())
+        <span class="self">Self</span><span class="ident">::Float</span>(<span class="ident">flt</span>.<span class="ident">into</span>())
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Outcome</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">flt</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">Float</span>(<span class="ident">flt</span>)
+        <span class="self">Self</span><span class="ident">::Float</span>(<span class="ident">flt</span>)
     }
 }
 
@@ -312,40 +312,40 @@
     <span class="doccomment">/// floating point.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to 15.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DIG</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">DIGITS</span> <span class="kw">as</span> <span class="ident">i64</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DIG</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64::DIGITS</span> <span class="kw">as</span> <span class="ident">i64</span>;
 
     <span class="doccomment">/// The difference between 1 and the smallest double-precision floating</span>
     <span class="doccomment">/// point number greater than 1.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to 2.2204460492503131e-16.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EPSILON</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">EPSILON</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EPSILON</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64::EPSILON</span>;
 
     <span class="doccomment">/// An expression representing positive infinity.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INFINITY</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">INFINITY</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INFINITY</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64::INFINITY</span>;
 
     <span class="doccomment">/// The minimum number of significant decimal digits in a double-precision</span>
     <span class="doccomment">/// floating point.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to 15.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MANT_DIG</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">MANTISSA_DIGITS</span> <span class="kw">as</span> <span class="ident">i64</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MANT_DIG</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64::MANTISSA_DIGITS</span> <span class="kw">as</span> <span class="ident">i64</span>;
 
     <span class="doccomment">/// The largest possible integer in a double-precision floating point</span>
     <span class="doccomment">/// number.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to 1.7976931348623157e+308.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">MAX</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64::MAX</span>;
 
     <span class="doccomment">/// The largest positive exponent in a double-precision floating point where</span>
     <span class="doccomment">/// 10 raised to this power minus 1.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to 308.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_10_EXP</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">MAX_10_EXP</span> <span class="kw">as</span> <span class="ident">i64</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_10_EXP</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64::MAX_10_EXP</span> <span class="kw">as</span> <span class="ident">i64</span>;
 
     <span class="doccomment">/// The largest possible exponent value in a double-precision floating</span>
     <span class="doccomment">/// point.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to 1024.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_EXP</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">MAX_EXP</span> <span class="kw">as</span> <span class="ident">i64</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_EXP</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64::MAX_EXP</span> <span class="kw">as</span> <span class="ident">i64</span>;
 
     <span class="doccomment">/// The smallest positive normalized number in a double-precision floating</span>
     <span class="doccomment">/// point.</span>
@@ -355,31 +355,31 @@
     <span class="doccomment">/// If the platform supports denormalized numbers, there are numbers between</span>
     <span class="doccomment">/// zero and [`Float::MIN`]. `0.0.next_float` returns the smallest positive</span>
     <span class="doccomment">/// floating point number including denormalized numbers.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MIN</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">MIN</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MIN</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64::MIN</span>;
 
     <span class="doccomment">/// The smallest negative exponent in a double-precision floating point</span>
     <span class="doccomment">/// where 10 raised to this power minus 1.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to -307.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MIN_10_EXP</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">MIN_10_EXP</span> <span class="kw">as</span> <span class="ident">i64</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MIN_10_EXP</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64::MIN_10_EXP</span> <span class="kw">as</span> <span class="ident">i64</span>;
 
     <span class="doccomment">/// The smallest possible exponent value in a double-precision floating</span>
     <span class="doccomment">/// point.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to -1021.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MIN_EXP</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">MIN_EXP</span> <span class="kw">as</span> <span class="ident">i64</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MIN_EXP</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64::MIN_EXP</span> <span class="kw">as</span> <span class="ident">i64</span>;
 
     <span class="doccomment">/// An expression representing a value which is &quot;not a number&quot;.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NAN</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">NAN</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NAN</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64::NAN</span>;
 
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NEG_INFINITY</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">NEG_INFINITY</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NEG_INFINITY</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">f64::NEG_INFINITY</span>;
 
     <span class="doccomment">/// The base of the floating point, or number of unique digits used to</span>
     <span class="doccomment">/// represent the number.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Usually defaults to 2 on most systems, which would represent a base-10</span>
     <span class="doccomment">/// decimal.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RADIX</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64</span>::<span class="ident">RADIX</span> <span class="kw">as</span> <span class="ident">i64</span>;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RADIX</span>: <span class="ident">i64</span> <span class="op">=</span> <span class="ident">f64::RADIX</span> <span class="kw">as</span> <span class="ident">i64</span>;
 
     <span class="doccomment">/// Represents the rounding mode for floating point addition.</span>
     <span class="doccomment">///</span>
@@ -427,7 +427,7 @@
     <span class="doccomment">/// Convert self to an `i64` with a saturating cast.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_possible_truncation</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_possible_truncation</span>)]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">as_i64</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i64</span> {
         <span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">i64</span>
     }
@@ -441,11 +441,11 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_possible_truncation</span>)]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_precision_loss</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_possible_truncation</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_precision_loss</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_into_fixnum</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span> {
-        <span class="kw">const</span> <span class="ident">FIXABLE_MAX</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">2_i64</span>.<span class="ident">pow</span>(<span class="ident">f64</span>::<span class="ident">MANTISSA_DIGITS</span>) <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">const</span> <span class="ident">FIXABLE_MIN</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="op">-</span>(<span class="number">2_i64</span>.<span class="ident">pow</span>(<span class="ident">f64</span>::<span class="ident">MANTISSA_DIGITS</span>)) <span class="kw">as</span> <span class="ident">f64</span>;
+        <span class="kw">const</span> <span class="ident">FIXABLE_MAX</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">2_i64</span>.<span class="ident">pow</span>(<span class="ident">f64::MANTISSA_DIGITS</span>) <span class="kw">as</span> <span class="ident">f64</span>;
+        <span class="kw">const</span> <span class="ident">FIXABLE_MIN</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="op">-</span>(<span class="number">2_i64</span>.<span class="ident">pow</span>(<span class="ident">f64::MANTISSA_DIGITS</span>)) <span class="kw">as</span> <span class="ident">f64</span>;
 
         <span class="kw">match</span> <span class="self">self</span>.<span class="number">0</span> {
             <span class="ident">x</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">x</span>.<span class="ident">is_finite</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
@@ -466,15 +466,15 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">coerced_modulo</span>(<span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">other</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Outcome</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Ruby</span>::<span class="ident">Float</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">ruby_type</span>() {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Ruby::Float</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">ruby_type</span>() {
             <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">try_into</span>::<span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>(<span class="ident">interp</span>)<span class="question-mark">?</span>;
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">modulo</span>(<span class="ident">other</span>).<span class="ident">into</span>());
         }
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="self">self</span>);
-        <span class="kw">let</span> <span class="ident">coerced</span> <span class="op">=</span> <span class="ident">numeric</span>::<span class="ident">coerce</span>(<span class="ident">interp</span>, <span class="ident">x</span>, <span class="ident">other</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">coerced</span> <span class="op">=</span> <span class="ident">numeric::coerce</span>(<span class="ident">interp</span>, <span class="ident">x</span>, <span class="ident">other</span>)<span class="question-mark">?</span>;
         <span class="kw">match</span> <span class="ident">coerced</span> {
-            <span class="ident">Coercion</span>::<span class="ident">Float</span>(<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>((<span class="ident">x</span> <span class="op">%</span> <span class="ident">y</span>).<span class="ident">into</span>()),
-            <span class="ident">Coercion</span>::<span class="ident">Integer</span>(<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>((<span class="ident">x</span> <span class="op">%</span> <span class="ident">y</span>).<span class="ident">into</span>()),
+            <span class="ident">Coercion::Float</span>(<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>((<span class="ident">x</span> <span class="op">%</span> <span class="ident">y</span>).<span class="ident">into</span>()),
+            <span class="ident">Coercion::Integer</span>(<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>((<span class="ident">x</span> <span class="op">%</span> <span class="ident">y</span>).<span class="ident">into</span>()),
         }
     }
 }

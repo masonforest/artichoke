@@ -185,12 +185,12 @@
 <span id="184">184</span>
 <span id="185">185</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">path</span>::<span class="ident">Path</span>;
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+<span class="kw">use</span> <span class="ident">std::io</span>;
+<span class="kw">use</span> <span class="ident">std::path::Path</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;load-path-rubylib-native-filesystem-loader&quot;</span>)]</span>
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">Rubylib</span>;
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::Rubylib</span>;
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">ExtensionHook</span>, <span class="ident">Memory</span>, <span class="ident">Native</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -205,7 +205,7 @@
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Hybrid</span> {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">new</span>()
+        <span class="self">Self</span><span class="ident">::new</span>()
     }
 }
 
@@ -219,11 +219,11 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;load-path-rubylib-native-filesystem-loader&quot;</span>)]</span>
-        <span class="kw">let</span> <span class="ident">rubylib</span> <span class="op">=</span> <span class="ident">Rubylib</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="ident">rubylib</span> <span class="op">=</span> <span class="ident">Rubylib::new</span>();
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;load-path-rubylib-native-filesystem-loader&quot;</span>))]</span>
         <span class="kw">let</span> <span class="ident">rubylib</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="ident">memory</span> <span class="op">=</span> <span class="ident">Memory</span>::<span class="ident">new</span>();
-        <span class="kw">let</span> <span class="ident">native</span> <span class="op">=</span> <span class="ident">Native</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="ident">memory</span> <span class="op">=</span> <span class="ident">Memory::new</span>();
+        <span class="kw">let</span> <span class="ident">native</span> <span class="op">=</span> <span class="ident">Native::new</span>();
         <span class="self">Self</span> {
             <span class="ident">rubylib</span>,
             <span class="ident">memory</span>,
@@ -277,7 +277,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `path` does not exist, an [`io::Error`] with error kind</span>
     <span class="doccomment">/// [`io::ErrorKind::NotFound`] is returned.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_file</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_file</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">rubylib</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rubylib</span> {
             <span class="ident">rubylib</span>
                 .<span class="ident">read_file</span>(<span class="ident">path</span>)
@@ -300,7 +300,7 @@
     <span class="doccomment">/// returned. See [`Memory::write_file`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`RUBY_LOAD_PATH`]: super::RUBY_LOAD_PATH</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">buf</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">buf</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">memory</span>.<span class="ident">write_file</span>(<span class="ident">path</span>, <span class="ident">buf</span>)
     }
 
@@ -325,7 +325,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If the given path does not resolve to the virtual filesystem, an error</span>
     <span class="doccomment">/// is returned.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register_extension</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">extension</span>: <span class="ident">ExtensionHook</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register_extension</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">extension</span>: <span class="ident">ExtensionHook</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">memory</span>.<span class="ident">register_extension</span>(<span class="ident">path</span>, <span class="ident">extension</span>)
     }
 
@@ -356,7 +356,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `path` does not exist, an [`io::Error`] with error kind</span>
     <span class="doccomment">/// [`io::ErrorKind::NotFound`] is returned.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mark_required</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mark_required</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">rubylib</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rubylib</span> {
             <span class="ident">rubylib</span>.<span class="ident">mark_required</span>(<span class="ident">path</span>).<span class="ident">or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
                 <span class="self">self</span>.<span class="ident">memory</span>

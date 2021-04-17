@@ -256,10 +256,10 @@
 <span id="253">253</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">endian_type</span>::{<span class="ident">BigEndian</span>, <span class="ident">LittleEndian</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">OsString</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+<span class="kw">use</span> <span class="ident">std::ffi::OsString</span>;
+<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
 
-<span class="kw">use</span> <span class="ident">nibble_vec</span>::<span class="ident">Nibblet</span>;
+<span class="kw">use</span> <span class="ident">nibble_vec::Nibblet</span>;
 
 <span class="doccomment">/// Trait for types which can be used to key a Radix Trie.</span>
 <span class="doccomment">///</span>
@@ -285,7 +285,7 @@
     <span class="doccomment">/// Encode a value as a NibbleVec.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Nibblet</span> {
-        <span class="ident">Nibblet</span>::<span class="ident">from_byte_vec</span>(<span class="self">self</span>.<span class="ident">encode_bytes</span>())
+        <span class="ident">Nibblet::from_byte_vec</span>(<span class="self">self</span>.<span class="ident">encode_bytes</span>())
     }
 }
 
@@ -308,18 +308,18 @@
 <span class="attribute">#[<span class="ident">inline</span>]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">match_keys</span>(<span class="ident">start_idx</span>: <span class="ident">usize</span>, <span class="ident">first</span>: <span class="kw-2">&amp;</span><span class="ident">Nibblet</span>, <span class="ident">second</span>: <span class="kw-2">&amp;</span><span class="ident">Nibblet</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">KeyMatch</span> {
     <span class="kw">let</span> <span class="ident">first_len</span> <span class="op">=</span> <span class="ident">first</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">start_idx</span>;
-    <span class="kw">let</span> <span class="ident">min_length</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">first_len</span>, <span class="ident">second</span>.<span class="ident">len</span>());
+    <span class="kw">let</span> <span class="ident">min_length</span> <span class="op">=</span> <span class="ident">::std::cmp::min</span>(<span class="ident">first_len</span>, <span class="ident">second</span>.<span class="ident">len</span>());
 
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">min_length</span> {
         <span class="kw">if</span> <span class="ident">first</span>.<span class="ident">get</span>(<span class="ident">start_idx</span> <span class="op">+</span> <span class="ident">i</span>) <span class="op">!</span><span class="op">=</span> <span class="ident">second</span>.<span class="ident">get</span>(<span class="ident">i</span>) {
-            <span class="kw">return</span> <span class="ident">KeyMatch</span>::<span class="ident">Partial</span>(<span class="ident">i</span>);
+            <span class="kw">return</span> <span class="ident">KeyMatch::Partial</span>(<span class="ident">i</span>);
         }
     }
 
     <span class="kw">match</span> (<span class="ident">first_len</span>, <span class="ident">second</span>.<span class="ident">len</span>()) {
-        (<span class="ident">x</span>, <span class="ident">y</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">y</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">KeyMatch</span>::<span class="ident">FirstPrefix</span>,
-        (<span class="ident">x</span>, <span class="ident">y</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="ident">y</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">KeyMatch</span>::<span class="ident">Full</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">KeyMatch</span>::<span class="ident">SecondPrefix</span>,
+        (<span class="ident">x</span>, <span class="ident">y</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">y</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">KeyMatch::FirstPrefix</span>,
+        (<span class="ident">x</span>, <span class="ident">y</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="ident">y</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">KeyMatch::Full</span>,
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">KeyMatch::SecondPrefix</span>,
     }
 }
 
@@ -388,7 +388,7 @@
 <span class="kw">impl</span> <span class="ident">TrieKey</span> <span class="kw">for</span> <span class="ident">i8</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">encode_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="number">1</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">1</span>);
         <span class="ident">v</span>.<span class="ident">push</span>(<span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="ident">u8</span>);
         <span class="ident">v</span>
     }
@@ -397,7 +397,7 @@
 <span class="kw">impl</span> <span class="ident">TrieKey</span> <span class="kw">for</span> <span class="ident">u8</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">encode_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="number">1</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">1</span>);
         <span class="ident">v</span>.<span class="ident">push</span>(<span class="kw-2">*</span><span class="self">self</span>);
         <span class="ident">v</span>
     }
@@ -406,7 +406,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
 <span class="kw">impl</span> <span class="ident">TrieKey</span> <span class="kw">for</span> <span class="ident">PathBuf</span> {
     <span class="kw">fn</span> <span class="ident">encode_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">ffi</span>::<span class="ident">OsStringExt</span>;
+        <span class="kw">use</span> <span class="ident">std::os::unix::ffi::OsStringExt</span>;
         <span class="kw">let</span> <span class="ident">str</span>: <span class="ident">OsString</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
         <span class="ident">str</span>.<span class="ident">into_vec</span>()
     }
@@ -415,7 +415,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
 <span class="kw">impl</span> <span class="ident">TrieKey</span> <span class="kw">for</span> <span class="ident">Path</span> {
     <span class="kw">fn</span> <span class="ident">encode_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">ffi</span>::<span class="ident">OsStrExt</span>;
+        <span class="kw">use</span> <span class="ident">std::os::unix::ffi::OsStrExt</span>;
         <span class="self">self</span>.<span class="ident">as_os_str</span>().<span class="ident">as_bytes</span>().<span class="ident">encode_bytes</span>()
     }
 }
@@ -443,7 +443,7 @@
         $(
         <span class="kw">impl</span> <span class="ident">TrieKey</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> {
             <span class="kw">fn</span> <span class="ident">encode_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">be</span>: <span class="ident">BigEndian</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">From</span>::<span class="ident">from</span>(<span class="kw-2">*</span><span class="self">self</span>);
+                <span class="kw">let</span> <span class="ident">be</span>: <span class="ident">BigEndian</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">From::from</span>(<span class="kw-2">*</span><span class="self">self</span>);
                 <span class="ident">be</span>.<span class="ident">encode_bytes</span>()
             }
         }
@@ -458,7 +458,7 @@
       $(
       <span class="kw">impl</span> <span class="ident">TrieKey</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span> {
           <span class="kw">fn</span> <span class="ident">encode_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-              <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>::<span class="ident">with_capacity</span>(<span class="self">self</span>.<span class="ident">len</span>() <span class="op">*</span> <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span>());
+              <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="ident">::with_capacity</span>(<span class="self">self</span>.<span class="ident">len</span>() <span class="op">*</span> <span class="ident">std::mem::size_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span>());
               <span class="kw">for</span> <span class="ident">u</span> <span class="kw">in</span> <span class="self">self</span> {
                   <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>.<span class="ident">to_be_bytes</span>());
               }

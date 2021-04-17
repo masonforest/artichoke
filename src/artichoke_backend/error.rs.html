@@ -126,12 +126,12 @@
 <span id="125">125</span>
 <span id="126">126</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">error</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">hint</span>;
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+<span class="kw">use</span> <span class="ident">std::error</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::hint</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sys</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Artichoke</span>, <span class="ident">Guard</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -151,18 +151,18 @@
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">vm_backtrace</span>(<span class="ident">interp</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys</span>::<span class="ident">mrb_value</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys::mrb_value</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_mrb_value</span>(<span class="ident">interp</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">for</span> <span class="ident">Error</span> {}
+<span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">Error</span> {}
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RubyException</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">exc</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RubyException</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
@@ -183,31 +183,31 @@
 <span class="doccomment">/// called in the entry point into Rust from mruby.</span>
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">raise</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">guard</span>: <span class="ident">Guard</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">exception</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="op">!</span>
 <span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">RubyException</span> <span class="op">+</span> <span class="ident">fmt</span>::<span class="ident">Debug</span>,
+    <span class="ident">T</span>: <span class="ident">RubyException</span> <span class="op">+</span> <span class="ident">fmt::Debug</span>,
 {
     <span class="kw">let</span> <span class="ident">exc</span> <span class="op">=</span> <span class="ident">exception</span>.<span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>);
-    <span class="kw">let</span> <span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys</span>::<span class="ident">mrb_state</span> <span class="op">=</span> <span class="ident">guard</span>.<span class="ident">mrb</span>.<span class="ident">as_mut</span>();
+    <span class="kw">let</span> <span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span> <span class="op">=</span> <span class="ident">guard</span>.<span class="ident">mrb</span>.<span class="ident">as_mut</span>();
     <span class="ident">drop</span>(<span class="ident">guard</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">exc</span>) <span class="op">=</span> <span class="ident">exc</span> {
         <span class="comment">// Any non-`Copy` objects that we haven&#39;t cleaned up at this point will</span>
         <span class="comment">// leak, so drop everything.</span>
         <span class="ident">drop</span>(<span class="ident">exception</span>);
         <span class="comment">// `mrb_exc_raise` will call longjmp which will unwind the stack.</span>
-        <span class="ident">sys</span>::<span class="ident">mrb_exc_raise</span>(<span class="ident">mrb</span>, <span class="ident">exc</span>);
+        <span class="ident">sys::mrb_exc_raise</span>(<span class="ident">mrb</span>, <span class="ident">exc</span>);
     } <span class="kw">else</span> {
         <span class="macro">error!</span>(<span class="string">&quot;unable to raise {:?}&quot;</span>, <span class="ident">exception</span>);
         <span class="comment">// Any non-`Copy` objects that we haven&#39;t cleaned up at this point will</span>
         <span class="comment">// leak, so drop everything.</span>
         <span class="ident">drop</span>(<span class="ident">exception</span>);
         <span class="comment">// `mrb_sys_raise` will call longjmp which will unwind the stack.</span>
-        <span class="ident">sys</span>::<span class="ident">mrb_sys_raise</span>(
+        <span class="ident">sys::mrb_sys_raise</span>(
             <span class="ident">mrb</span>,
             <span class="string">&quot;RuntimeError\0&quot;</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(),
             <span class="string">&quot;Unable to raise exception&quot;</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(),
         );
     }
     <span class="comment">// unreachable: `raise` will unwind the stack with longjmp.</span>
-    <span class="ident">hint</span>::<span class="ident">unreachable_unchecked</span>()
+    <span class="ident">hint::unreachable_unchecked</span>()
 }
 
 <span class="doccomment">/// Polymorphic exception type that corresponds to Ruby&#39;s `Exception`.</span>
@@ -215,8 +215,8 @@
 <span class="doccomment">/// All types that implement `RubyException` can be raised with</span>
 <span class="doccomment">/// [`error::raise`](raise). Rust code can re-raise a trait object to</span>
 <span class="doccomment">/// propagate exceptions from native code back into the interpreter.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">module_name_repetitions</span>)]</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RubyException</span>: <span class="ident">error</span>::<span class="ident">Error</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::module_name_repetitions</span>)]</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RubyException</span>: <span class="ident">error::Error</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
     <span class="doccomment">/// Message of the `Exception`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This value is a byte slice since Ruby `String`s are equivalent to</span>
@@ -230,7 +230,7 @@
     <span class="kw">fn</span> <span class="ident">vm_backtrace</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Return a raiseable [`sys::mrb_value`].</span>
-    <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys</span>::<span class="ident">mrb_value</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys::mrb_value</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">RubyException</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RubyException</span><span class="op">&gt;</span> {
@@ -246,12 +246,12 @@
         <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">vm_backtrace</span>(<span class="ident">interp</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys</span>::<span class="ident">mrb_value</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys::mrb_value</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">as_mrb_value</span>(<span class="ident">interp</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RubyException</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RubyException</span><span class="op">&gt;</span> {}
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="artichoke_backend" data-search-js="../../search-index.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

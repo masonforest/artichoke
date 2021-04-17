@@ -243,10 +243,10 @@
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">bitflags</span>;
 
-<span class="kw">use</span> <span class="ident">bstr</span>::<span class="ident">ByteSlice</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">num</span>::<span class="ident">NonZeroUsize</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
+<span class="kw">use</span> <span class="ident">bstr::ByteSlice</span>;
+<span class="kw">use</span> <span class="ident">core::fmt</span>;
+<span class="kw">use</span> <span class="ident">core::num::NonZeroUsize</span>;
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
 
 <span class="kw">mod</span> <span class="ident">debug</span>;
 <span class="kw">mod</span> <span class="ident">encoding</span>;
@@ -254,7 +254,7 @@
 <span class="kw">mod</span> <span class="ident">options</span>;
 <span class="kw">mod</span> <span class="ident">regexp</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">debug</span>::<span class="ident">Debug</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">debug::Debug</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">encoding</span>::{<span class="ident">Encoding</span>, <span class="ident">InvalidEncodingError</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">error</span>::{<span class="ident">ArgumentError</span>, <span class="ident">Error</span>, <span class="ident">RegexpError</span>, <span class="ident">SyntaxError</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">options</span>::{<span class="ident">Options</span>, <span class="ident">RegexpOption</span>};
@@ -265,7 +265,7 @@
         <span class="kw">const</span> <span class="ident">IGNORECASE</span>      <span class="op">=</span> <span class="number">0b00000001</span>;
         <span class="kw">const</span> <span class="ident">EXTENDED</span>        <span class="op">=</span> <span class="number">0b00000010</span>;
         <span class="kw">const</span> <span class="ident">MULTILINE</span>       <span class="op">=</span> <span class="number">0b00000100</span>;
-        <span class="kw">const</span> <span class="ident">ALL_REGEXP_OPTS</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">IGNORECASE</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">EXTENDED</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">MULTILINE</span>.<span class="ident">bits</span>;
+        <span class="kw">const</span> <span class="ident">ALL_REGEXP_OPTS</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::IGNORECASE</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::EXTENDED</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::MULTILINE</span>.<span class="ident">bits</span>;
 
         <span class="kw">const</span> <span class="ident">FIXEDENCODING</span>   <span class="op">=</span> <span class="number">0b00010000</span>;
         <span class="kw">const</span> <span class="ident">NOENCODING</span>      <span class="op">=</span> <span class="number">0b00100000</span>;
@@ -296,8 +296,8 @@
     <span class="ident">options</span>: <span class="ident">Options</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Source</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Source</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Source&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;pattern&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pattern</span>.<span class="ident">as_bstr</span>())
             .<span class="ident">field</span>(<span class="string">&quot;options&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">options</span>)
@@ -307,13 +307,13 @@
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Config</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Source</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">config</span>: <span class="ident">Config</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">with_pattern_and_options</span>(<span class="ident">config</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">config</span>.<span class="ident">options</span>)
+        <span class="self">Self</span><span class="ident">::with_pattern_and_options</span>(<span class="ident">config</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">config</span>.<span class="ident">options</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Config</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Source</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">with_pattern_and_options</span>(<span class="ident">config</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">config</span>.<span class="ident">options</span>)
+        <span class="self">Self</span><span class="ident">::with_pattern_and_options</span>(<span class="ident">config</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">config</span>.<span class="ident">options</span>)
     }
 }
 
@@ -321,8 +321,8 @@
     <span class="doccomment">/// Construct a new, empty `Source`.</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
-            <span class="ident">pattern</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
-            <span class="ident">options</span>: <span class="ident">Options</span>::<span class="ident">new</span>(),
+            <span class="ident">pattern</span>: <span class="ident">Vec::new</span>(),
+            <span class="ident">options</span>: <span class="ident">Options::new</span>(),
         }
     }
 
@@ -362,8 +362,8 @@
     <span class="ident">options</span>: <span class="ident">Options</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Config</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Config</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Source&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;pattern&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pattern</span>.<span class="ident">as_bstr</span>())
             .<span class="ident">field</span>(<span class="string">&quot;options&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">options</span>)
@@ -373,13 +373,13 @@
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Source</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Config</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">source</span>: <span class="ident">Source</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">with_pattern_and_options</span>(<span class="ident">source</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">source</span>.<span class="ident">options</span>)
+        <span class="self">Self</span><span class="ident">::with_pattern_and_options</span>(<span class="ident">source</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">source</span>.<span class="ident">options</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Source</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Config</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Source</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">with_pattern_and_options</span>(<span class="ident">source</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">source</span>.<span class="ident">options</span>)
+        <span class="self">Self</span><span class="ident">::with_pattern_and_options</span>(<span class="ident">source</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">source</span>.<span class="ident">options</span>)
     }
 }
 
@@ -387,8 +387,8 @@
     <span class="doccomment">/// Construct a new, empty `Config`.</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
-            <span class="ident">pattern</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
-            <span class="ident">options</span>: <span class="ident">Options</span>::<span class="ident">new</span>(),
+            <span class="ident">pattern</span>: <span class="ident">Vec::new</span>(),
+            <span class="ident">options</span>: <span class="ident">Options::new</span>(),
         }
     }
 
@@ -413,49 +413,49 @@
 <span class="attribute">#[<span class="ident">must_use</span>]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nth_match_group</span>(<span class="ident">group</span>: <span class="ident">NonZeroUsize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">group</span>.<span class="ident">get</span>() {
-        <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$1&quot;</span>),
-        <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$2&quot;</span>),
-        <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$3&quot;</span>),
-        <span class="number">4</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$4&quot;</span>),
-        <span class="number">5</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$5&quot;</span>),
-        <span class="number">6</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$6&quot;</span>),
-        <span class="number">7</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$7&quot;</span>),
-        <span class="number">8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$8&quot;</span>),
-        <span class="number">9</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$9&quot;</span>),
-        <span class="number">10</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$10&quot;</span>),
-        <span class="number">11</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$11&quot;</span>),
-        <span class="number">12</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$12&quot;</span>),
-        <span class="number">13</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$13&quot;</span>),
-        <span class="number">14</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$14&quot;</span>),
-        <span class="number">15</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$15&quot;</span>),
-        <span class="number">16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$16&quot;</span>),
-        <span class="number">17</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$17&quot;</span>),
-        <span class="number">18</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$18&quot;</span>),
-        <span class="number">19</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$19&quot;</span>),
-        <span class="number">20</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="string">b&quot;$20&quot;</span>),
+        <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$1&quot;</span>),
+        <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$2&quot;</span>),
+        <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$3&quot;</span>),
+        <span class="number">4</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$4&quot;</span>),
+        <span class="number">5</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$5&quot;</span>),
+        <span class="number">6</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$6&quot;</span>),
+        <span class="number">7</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$7&quot;</span>),
+        <span class="number">8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$8&quot;</span>),
+        <span class="number">9</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$9&quot;</span>),
+        <span class="number">10</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$10&quot;</span>),
+        <span class="number">11</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$11&quot;</span>),
+        <span class="number">12</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$12&quot;</span>),
+        <span class="number">13</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$13&quot;</span>),
+        <span class="number">14</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$14&quot;</span>),
+        <span class="number">15</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$15&quot;</span>),
+        <span class="number">16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$16&quot;</span>),
+        <span class="number">17</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$17&quot;</span>),
+        <span class="number">18</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$18&quot;</span>),
+        <span class="number">19</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$19&quot;</span>),
+        <span class="number">20</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">b&quot;$20&quot;</span>),
         <span class="ident">num</span> <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;$&quot;</span>);
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;$&quot;</span>);
             <span class="comment">// Suppress fmt errors because this function is infallible.</span>
             <span class="comment">//</span>
             <span class="comment">// In practice `itoa::fmt` will never error because the `fmt::Write`</span>
             <span class="comment">// impl for `String` never panics.</span>
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">itoa</span>::<span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="ident">num</span>);
-            <span class="ident">Cow</span>::<span class="ident">Owned</span>(<span class="ident">buf</span>.<span class="ident">into_bytes</span>())
+            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">itoa::fmt</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="ident">num</span>);
+            <span class="ident">Cow::Owned</span>(<span class="ident">buf</span>.<span class="ident">into_bytes</span>())
         }
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">num</span>::<span class="ident">NonZeroUsize</span>;
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
+    <span class="kw">use</span> <span class="ident">core::num::NonZeroUsize</span>;
+    <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">nth_match_group</span>;
+    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::nth_match_group</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">match_group_symbol</span>() {
         <span class="kw">for</span> <span class="ident">num</span> <span class="kw">in</span> <span class="number">1</span>..<span class="op">=</span><span class="number">1024</span> {
-            <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">NonZeroUsize</span>::<span class="ident">new</span>(<span class="ident">num</span>).<span class="ident">unwrap</span>();
+            <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">NonZeroUsize::new</span>(<span class="ident">num</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">sym</span> <span class="op">=</span> <span class="ident">nth_match_group</span>(<span class="ident">num</span>);
             <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">num</span>);
             <span class="macro">assert!</span>(<span class="ident">sym</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span>);
@@ -467,14 +467,14 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">some_globals_are_static_slices</span>() {
         <span class="kw">for</span> <span class="ident">num</span> <span class="kw">in</span> <span class="number">1</span>..<span class="op">=</span><span class="number">20</span> {
-            <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">NonZeroUsize</span>::<span class="ident">new</span>(<span class="ident">num</span>).<span class="ident">unwrap</span>();
+            <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">NonZeroUsize::new</span>(<span class="ident">num</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">sym</span> <span class="op">=</span> <span class="ident">nth_match_group</span>(<span class="ident">num</span>);
-            <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">sym</span>, <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="kw">_</span>)));
+            <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">sym</span>, <span class="ident">Cow::Borrowed</span>(<span class="kw">_</span>)));
         }
         <span class="kw">for</span> <span class="ident">num</span> <span class="kw">in</span> <span class="number">21</span>..<span class="op">=</span><span class="number">1024</span> {
-            <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">NonZeroUsize</span>::<span class="ident">new</span>(<span class="ident">num</span>).<span class="ident">unwrap</span>();
+            <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">NonZeroUsize::new</span>(<span class="ident">num</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">sym</span> <span class="op">=</span> <span class="ident">nth_match_group</span>(<span class="ident">num</span>);
-            <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">sym</span>, <span class="ident">Cow</span>::<span class="ident">Owned</span>(<span class="kw">_</span>)));
+            <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">sym</span>, <span class="ident">Cow::Owned</span>(<span class="kw">_</span>)));
         }
     }
 }

@@ -151,8 +151,8 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Input validation API (Multi-line editing)</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">keymap</span>::<span class="ident">Invoke</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="prelude-ty">Result</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keymap::Invoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
 
 <span class="doccomment">/// Input validation result</span>
 <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
@@ -168,13 +168,13 @@
 
 <span class="kw">impl</span> <span class="ident">ValidationResult</span> {
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_valid</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident">ValidationResult</span>::<span class="ident">Valid</span>(<span class="kw">_</span>))
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident">ValidationResult::Valid</span>(<span class="kw">_</span>))
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">has_message</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="macro">matches!</span>(
             <span class="self">self</span>,
-            <span class="ident">ValidationResult</span>::<span class="ident">Valid</span>(<span class="prelude-val">Some</span>(<span class="kw">_</span>)) <span class="op">|</span> <span class="ident">ValidationResult</span>::<span class="ident">Invalid</span>(<span class="prelude-val">Some</span>(<span class="kw">_</span>))
+            <span class="ident">ValidationResult::Valid</span>(<span class="prelude-val">Some</span>(<span class="kw">_</span>)) <span class="op">|</span> <span class="ident">ValidationResult::Invalid</span>(<span class="prelude-val">Some</span>(<span class="kw">_</span>))
         )
     }
 }
@@ -221,7 +221,7 @@
     <span class="doccomment">/// char while typing, the input will be mutable (TODO).</span>
     <span class="kw">fn</span> <span class="ident">validate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ValidationContext</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ValidationResult</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">ctx</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">ValidationResult</span>::<span class="ident">Valid</span>(<span class="prelude-val">None</span>))
+        <span class="prelude-val">Ok</span>(<span class="ident">ValidationResult::Valid</span>(<span class="prelude-val">None</span>))
     }
 
     <span class="doccomment">/// Configure whether validation is performed while typing or only</span>
@@ -275,13 +275,13 @@
             <span class="string">&#39;)&#39;</span> <span class="op">|</span> <span class="string">&#39;]&#39;</span> <span class="op">|</span> <span class="string">&#39;}&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> (<span class="ident">stack</span>.<span class="ident">pop</span>(), <span class="ident">c</span>) {
                 (<span class="prelude-val">Some</span>(<span class="string">&#39;(&#39;</span>), <span class="string">&#39;)&#39;</span>) <span class="op">|</span> (<span class="prelude-val">Some</span>(<span class="string">&#39;[&#39;</span>), <span class="string">&#39;]&#39;</span>) <span class="op">|</span> (<span class="prelude-val">Some</span>(<span class="string">&#39;{&#39;</span>), <span class="string">&#39;}&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> {}
                 (<span class="prelude-val">Some</span>(<span class="ident">wanted</span>), <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">return</span> <span class="ident">ValidationResult</span>::<span class="ident">Invalid</span>(<span class="prelude-val">Some</span>(<span class="macro">format!</span>(
+                    <span class="kw">return</span> <span class="ident">ValidationResult::Invalid</span>(<span class="prelude-val">Some</span>(<span class="macro">format!</span>(
                         <span class="string">&quot;Mismatched brackets: {:?} is not properly closed&quot;</span>,
                         <span class="ident">wanted</span>
                     )))
                 }
                 (<span class="prelude-val">None</span>, <span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">return</span> <span class="ident">ValidationResult</span>::<span class="ident">Invalid</span>(<span class="prelude-val">Some</span>(<span class="macro">format!</span>(
+                    <span class="kw">return</span> <span class="ident">ValidationResult::Invalid</span>(<span class="prelude-val">Some</span>(<span class="macro">format!</span>(
                         <span class="string">&quot;Mismatched brackets: {:?} is unpaired&quot;</span>,
                         <span class="ident">c</span>
                     )))
@@ -291,9 +291,9 @@
         }
     }
     <span class="kw">if</span> <span class="ident">stack</span>.<span class="ident">is_empty</span>() {
-        <span class="ident">ValidationResult</span>::<span class="ident">Valid</span>(<span class="prelude-val">None</span>)
+        <span class="ident">ValidationResult::Valid</span>(<span class="prelude-val">None</span>)
     } <span class="kw">else</span> {
-        <span class="ident">ValidationResult</span>::<span class="ident">Incomplete</span>
+        <span class="ident">ValidationResult::Incomplete</span>
     }
 }
 </pre></div>

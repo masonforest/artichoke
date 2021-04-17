@@ -239,17 +239,17 @@
 <span id="236">236</span>
 <span id="237">237</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
+<span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">complete_hint_line</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">config</span>::<span class="ident">Config</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">edit</span>::<span class="ident">State</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">history</span>::<span class="ident">Direction</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">keymap</span>::{<span class="ident">Anchor</span>, <span class="ident">At</span>, <span class="ident">Cmd</span>, <span class="ident">Movement</span>, <span class="ident">Word</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">keymap</span>::{<span class="ident">InputState</span>, <span class="ident">Refresher</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">kill_ring</span>::{<span class="ident">KillRing</span>, <span class="ident">Mode</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">line_buffer</span>::<span class="ident">WordAction</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::complete_hint_line</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::config::Config</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::edit::State</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::history::Direction</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keymap</span>::{<span class="ident">Anchor</span>, <span class="ident">At</span>, <span class="ident">Cmd</span>, <span class="ident">Movement</span>, <span class="ident">Word</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keymap</span>::{<span class="ident">InputState</span>, <span class="ident">Refresher</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::kill_ring</span>::{<span class="ident">KillRing</span>, <span class="ident">Mode</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::line_buffer::WordAction</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Helper</span>, <span class="prelude-ty">Result</span>};
 
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Status</span> {
@@ -267,38 +267,38 @@
     <span class="kw">use</span> <span class="ident">Status</span>::<span class="kw-2">*</span>;
 
     <span class="kw">match</span> <span class="ident">cmd</span> {
-        <span class="ident">Cmd</span>::<span class="ident">CompleteHint</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::CompleteHint</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">complete_hint_line</span>(<span class="ident">s</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">SelfInsert</span>(<span class="ident">n</span>, <span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::SelfInsert</span>(<span class="ident">n</span>, <span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_insert</span>(<span class="ident">c</span>, <span class="ident">n</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">Insert</span>(<span class="ident">n</span>, <span class="ident">text</span>) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="ident">s</span>.<span class="ident">edit_yank</span>(<span class="kw-2">&amp;</span><span class="ident">input_state</span>, <span class="kw-2">&amp;</span><span class="ident">text</span>, <span class="ident">Anchor</span>::<span class="ident">Before</span>, <span class="ident">n</span>)<span class="question-mark">?</span>;
+        <span class="ident">Cmd::Insert</span>(<span class="ident">n</span>, <span class="ident">text</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">s</span>.<span class="ident">edit_yank</span>(<span class="kw-2">&amp;</span><span class="ident">input_state</span>, <span class="kw-2">&amp;</span><span class="ident">text</span>, <span class="ident">Anchor::Before</span>, <span class="ident">n</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">BeginningOfLine</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfLine</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Move to the beginning of line.</span>
             <span class="ident">s</span>.<span class="ident">edit_move_home</span>()<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">ViFirstPrint</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViFirstPrint</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_move_home</span>()<span class="question-mark">?</span>;
-            <span class="ident">s</span>.<span class="ident">edit_move_to_next_word</span>(<span class="ident">At</span>::<span class="ident">Start</span>, <span class="ident">Word</span>::<span class="ident">Big</span>, <span class="number">1</span>)<span class="question-mark">?</span>
+            <span class="ident">s</span>.<span class="ident">edit_move_to_next_word</span>(<span class="ident">At::Start</span>, <span class="ident">Word::Big</span>, <span class="number">1</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">BackwardChar</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Move back a character.</span>
             <span class="ident">s</span>.<span class="ident">edit_move_backward</span>(<span class="ident">n</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">ReplaceChar</span>(<span class="ident">n</span>, <span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">edit_replace_char</span>(<span class="ident">c</span>, <span class="ident">n</span>)<span class="question-mark">?</span>,
-        <span class="ident">Cmd</span>::<span class="ident">Replace</span>(<span class="ident">mvt</span>, <span class="ident">text</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::ReplaceChar</span>(<span class="ident">n</span>, <span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">edit_replace_char</span>(<span class="ident">c</span>, <span class="ident">n</span>)<span class="question-mark">?</span>,
+        <span class="ident">Cmd::Replace</span>(<span class="ident">mvt</span>, <span class="ident">text</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_kill</span>(<span class="kw-2">&amp;</span><span class="ident">mvt</span>)<span class="question-mark">?</span>;
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">text</span>) <span class="op">=</span> <span class="ident">text</span> {
                 <span class="ident">s</span>.<span class="ident">edit_insert_text</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>)<span class="question-mark">?</span>
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">Overwrite</span>(<span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Overwrite</span>(<span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_overwrite_char</span>(<span class="ident">c</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">EndOfFile</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::EndOfFile</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="ident">input_state</span>.<span class="ident">is_emacs_mode</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">is_empty</span>() {
                 <span class="ident">s</span>.<span class="ident">edit_delete</span>(<span class="number">1</span>)<span class="question-mark">?</span>
             } <span class="kw">else</span> {
@@ -308,63 +308,63 @@
                     <span class="ident">s</span>.<span class="ident">refresh_line_with_msg</span>(<span class="prelude-val">None</span>)<span class="question-mark">?</span>;
                 }
                 <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">is_empty</span>() {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error</span>::<span class="ident">ReadlineError</span>::<span class="ident">Eof</span>);
+                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error::ReadlineError::Eof</span>);
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">input_state</span>.<span class="ident">is_emacs_mode</span>() {
                     <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Submit</span>);
                 }
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">EndOfLine</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfLine</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Move to the end of line.</span>
             <span class="ident">s</span>.<span class="ident">edit_move_end</span>()<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">ForwardChar</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Move forward a character.</span>
             <span class="ident">s</span>.<span class="ident">edit_move_forward</span>(<span class="ident">n</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">ClearScreen</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::ClearScreen</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Clear the screen leaving the current line at the top of the screen.</span>
             <span class="ident">s</span>.<span class="ident">clear_screen</span>()<span class="question-mark">?</span>;
             <span class="ident">s</span>.<span class="ident">refresh_line</span>()<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">NextHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::NextHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Fetch the next command from the history list.</span>
             <span class="ident">s</span>.<span class="ident">edit_history_next</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">PreviousHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::PreviousHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Fetch the previous command from the history list.</span>
             <span class="ident">s</span>.<span class="ident">edit_history_next</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">LineUpOrPreviousHistory</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::LineUpOrPreviousHistory</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="op">!</span><span class="ident">s</span>.<span class="ident">edit_move_line_up</span>(<span class="ident">n</span>)<span class="question-mark">?</span> {
                 <span class="ident">s</span>.<span class="ident">edit_history_next</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">LineDownOrNextHistory</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::LineDownOrNextHistory</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="op">!</span><span class="ident">s</span>.<span class="ident">edit_move_line_down</span>(<span class="ident">n</span>)<span class="question-mark">?</span> {
                 <span class="ident">s</span>.<span class="ident">edit_history_next</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">HistorySearchBackward</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">edit_history_search</span>(<span class="ident">Direction</span>::<span class="ident">Reverse</span>)<span class="question-mark">?</span>,
-        <span class="ident">Cmd</span>::<span class="ident">HistorySearchForward</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">edit_history_search</span>(<span class="ident">Direction</span>::<span class="ident">Forward</span>)<span class="question-mark">?</span>,
-        <span class="ident">Cmd</span>::<span class="ident">TransposeChars</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::HistorySearchBackward</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">edit_history_search</span>(<span class="ident">Direction::Reverse</span>)<span class="question-mark">?</span>,
+        <span class="ident">Cmd::HistorySearchForward</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">edit_history_search</span>(<span class="ident">Direction::Forward</span>)<span class="question-mark">?</span>,
+        <span class="ident">Cmd::TransposeChars</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Exchange the char before cursor with the character at cursor.</span>
             <span class="ident">s</span>.<span class="ident">edit_transpose_chars</span>()<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">Yank</span>(<span class="ident">n</span>, <span class="ident">anchor</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Yank</span>(<span class="ident">n</span>, <span class="ident">anchor</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// retrieve (yank) last item killed</span>
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">kill_ring</span> <span class="op">=</span> <span class="ident">kill_ring</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">text</span>) <span class="op">=</span> <span class="ident">kill_ring</span>.<span class="ident">yank</span>() {
                 <span class="ident">s</span>.<span class="ident">edit_yank</span>(<span class="kw-2">&amp;</span><span class="ident">input_state</span>, <span class="ident">text</span>, <span class="ident">anchor</span>, <span class="ident">n</span>)<span class="question-mark">?</span>
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">ViYankTo</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::ViYankTo</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">text</span>) <span class="op">=</span> <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">copy</span>(<span class="ident">mvt</span>) {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">kill_ring</span> <span class="op">=</span> <span class="ident">kill_ring</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-                <span class="ident">kill_ring</span>.<span class="ident">kill</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>, <span class="ident">Mode</span>::<span class="ident">Append</span>)
+                <span class="ident">kill_ring</span>.<span class="ident">kill</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>, <span class="ident">Mode::Append</span>)
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">AcceptLine</span> <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">AcceptOrInsertLine</span> { .. } <span class="op">|</span> <span class="ident">Cmd</span>::<span class="ident">Newline</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::AcceptLine</span> <span class="op">|</span> <span class="ident">Cmd::AcceptOrInsertLine</span> { .. } <span class="op">|</span> <span class="ident">Cmd::Newline</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">has_hint</span>() <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">s</span>.<span class="ident">is_default_prompt</span>() {
                 <span class="comment">// Force a refresh without hints to leave the previous</span>
                 <span class="comment">// line as the user typed it after a newline.</span>
@@ -374,10 +374,10 @@
             <span class="kw">let</span> <span class="ident">valid</span> <span class="op">=</span> <span class="ident">validation_result</span>.<span class="ident">is_valid</span>();
             <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">line</span>.<span class="ident">is_end_of_input</span>();
             <span class="kw">match</span> (<span class="ident">cmd</span>, <span class="ident">valid</span>, <span class="ident">end</span>) {
-                (<span class="ident">Cmd</span>::<span class="ident">AcceptLine</span>, ..)
-                <span class="op">|</span> (<span class="ident">Cmd</span>::<span class="ident">AcceptOrInsertLine</span> { .. }, <span class="bool-val">true</span>, <span class="bool-val">true</span>)
+                (<span class="ident">Cmd::AcceptLine</span>, ..)
+                <span class="op">|</span> (<span class="ident">Cmd::AcceptOrInsertLine</span> { .. }, <span class="bool-val">true</span>, <span class="bool-val">true</span>)
                 <span class="op">|</span> (
-                    <span class="ident">Cmd</span>::<span class="ident">AcceptOrInsertLine</span> {
+                    <span class="ident">Cmd::AcceptOrInsertLine</span> {
                         <span class="ident">accept_in_the_middle</span>: <span class="bool-val">true</span>,
                     },
                     <span class="bool-val">true</span>,
@@ -385,9 +385,9 @@
                 ) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Submit</span>);
                 }
-                (<span class="ident">Cmd</span>::<span class="ident">Newline</span>, ..)
-                <span class="op">|</span> (<span class="ident">Cmd</span>::<span class="ident">AcceptOrInsertLine</span> { .. }, <span class="bool-val">false</span>, <span class="kw">_</span>)
-                <span class="op">|</span> (<span class="ident">Cmd</span>::<span class="ident">AcceptOrInsertLine</span> { .. }, <span class="bool-val">true</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                (<span class="ident">Cmd::Newline</span>, ..)
+                <span class="op">|</span> (<span class="ident">Cmd::AcceptOrInsertLine</span> { .. }, <span class="bool-val">false</span>, <span class="kw">_</span>)
+                <span class="op">|</span> (<span class="ident">Cmd::AcceptOrInsertLine</span> { .. }, <span class="bool-val">true</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">if</span> <span class="ident">valid</span> <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">validation_result</span>.<span class="ident">has_message</span>() {
                         <span class="ident">s</span>.<span class="ident">edit_insert</span>(<span class="string">&#39;\n&#39;</span>, <span class="number">1</span>)<span class="question-mark">?</span>;
                     }
@@ -395,80 +395,80 @@
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">BeginningOfHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::BeginningOfHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// move to first entry in history</span>
             <span class="ident">s</span>.<span class="ident">edit_history</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">EndOfHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::EndOfHistory</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// move to last entry in history</span>
             <span class="ident">s</span>.<span class="ident">edit_history</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">BackwardWord</span>(<span class="ident">n</span>, <span class="ident">word_def</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">word_def</span>)) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// move backwards one word</span>
             <span class="ident">s</span>.<span class="ident">edit_move_to_prev_word</span>(<span class="ident">word_def</span>, <span class="ident">n</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">CapitalizeWord</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::CapitalizeWord</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// capitalize word after point</span>
-            <span class="ident">s</span>.<span class="ident">edit_word</span>(<span class="ident">WordAction</span>::<span class="ident">Capitalize</span>)<span class="question-mark">?</span>
+            <span class="ident">s</span>.<span class="ident">edit_word</span>(<span class="ident">WordAction::Capitalize</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">Kill</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Kill</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_kill</span>(<span class="ident">mvt</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">ForwardWord</span>(<span class="ident">n</span>, <span class="ident">at</span>, <span class="ident">word_def</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">at</span>, <span class="ident">word_def</span>)) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// move forwards one word</span>
             <span class="ident">s</span>.<span class="ident">edit_move_to_next_word</span>(<span class="ident">at</span>, <span class="ident">word_def</span>, <span class="ident">n</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">LineUp</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::LineUp</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_move_line_up</span>(<span class="ident">n</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">LineDown</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::LineDown</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_move_line_down</span>(<span class="ident">n</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">BeginningOfBuffer</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfBuffer</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Move to the start of the buffer.</span>
             <span class="ident">s</span>.<span class="ident">edit_move_buffer_start</span>()<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">EndOfBuffer</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfBuffer</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Move to the end of the buffer.</span>
             <span class="ident">s</span>.<span class="ident">edit_move_buffer_end</span>()<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">DowncaseWord</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::DowncaseWord</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// lowercase word after point</span>
-            <span class="ident">s</span>.<span class="ident">edit_word</span>(<span class="ident">WordAction</span>::<span class="ident">Lowercase</span>)<span class="question-mark">?</span>
+            <span class="ident">s</span>.<span class="ident">edit_word</span>(<span class="ident">WordAction::Lowercase</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">TransposeWords</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::TransposeWords</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// transpose words</span>
             <span class="ident">s</span>.<span class="ident">edit_transpose_words</span>(<span class="ident">n</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">UpcaseWord</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::UpcaseWord</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// uppercase word after point</span>
-            <span class="ident">s</span>.<span class="ident">edit_word</span>(<span class="ident">WordAction</span>::<span class="ident">Uppercase</span>)<span class="question-mark">?</span>
+            <span class="ident">s</span>.<span class="ident">edit_word</span>(<span class="ident">WordAction::Uppercase</span>)<span class="question-mark">?</span>
         }
-        <span class="ident">Cmd</span>::<span class="ident">YankPop</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::YankPop</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// yank-pop</span>
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">kill_ring</span> <span class="op">=</span> <span class="ident">kill_ring</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">yank_size</span>, <span class="ident">text</span>)) <span class="op">=</span> <span class="ident">kill_ring</span>.<span class="ident">yank_pop</span>() {
                 <span class="ident">s</span>.<span class="ident">edit_yank_pop</span>(<span class="ident">yank_size</span>, <span class="ident">text</span>)<span class="question-mark">?</span>
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">Move</span>(<span class="ident">Movement</span>::<span class="ident">ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">edit_move_to</span>(<span class="ident">cs</span>, <span class="ident">n</span>)<span class="question-mark">?</span>,
-        <span class="ident">Cmd</span>::<span class="ident">Undo</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">edit_move_to</span>(<span class="ident">cs</span>, <span class="ident">n</span>)<span class="question-mark">?</span>,
+        <span class="ident">Cmd::Undo</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">changes</span>.<span class="ident">borrow_mut</span>().<span class="ident">undo</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">s</span>.<span class="ident">line</span>, <span class="ident">n</span>) {
                 <span class="ident">s</span>.<span class="ident">refresh_line</span>()<span class="question-mark">?</span>;
             }
         }
-        <span class="ident">Cmd</span>::<span class="ident">Dedent</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Dedent</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_indent</span>(<span class="kw-2">&amp;</span><span class="ident">mvt</span>, <span class="ident">config</span>.<span class="ident">indent_size</span>(), <span class="bool-val">true</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">Indent</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Indent</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">s</span>.<span class="ident">edit_indent</span>(<span class="kw-2">&amp;</span><span class="ident">mvt</span>, <span class="ident">config</span>.<span class="ident">indent_size</span>(), <span class="bool-val">false</span>)<span class="question-mark">?</span>;
         }
-        <span class="ident">Cmd</span>::<span class="ident">Interrupt</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Cmd::Interrupt</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Move to end, in case cursor was in the middle of the</span>
             <span class="comment">// line, so that next thing application prints goes after</span>
             <span class="comment">// the input</span>
             <span class="ident">s</span>.<span class="ident">edit_move_buffer_end</span>()<span class="question-mark">?</span>;
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error</span>::<span class="ident">ReadlineError</span>::<span class="ident">Interrupted</span>);
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error::ReadlineError::Interrupted</span>);
         }
         <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Ignore the character typed.</span>

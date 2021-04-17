@@ -254,63 +254,63 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span>;
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::{<span class="ident">Error</span>, <span class="ident">ErrorKind</span>, <span class="prelude-ty">Result</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">ffi</span>::<span class="ident">OsStrExt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">fs</span>::<span class="ident">MetadataExt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::{<span class="ident">AsRawFd</span>, <span class="ident">FromRawFd</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">path</span>::<span class="ident">Path</span>;
+<span class="kw">use</span> <span class="ident">std::ffi::CString</span>;
+<span class="kw">use</span> <span class="ident">std::fs::File</span>;
+<span class="kw">use</span> <span class="ident">std::io</span>::{<span class="ident">Error</span>, <span class="ident">ErrorKind</span>, <span class="prelude-ty">Result</span>};
+<span class="kw">use</span> <span class="ident">std::mem</span>;
+<span class="kw">use</span> <span class="ident">std::os::unix::ffi::OsStrExt</span>;
+<span class="kw">use</span> <span class="ident">std::os::unix::fs::MetadataExt</span>;
+<span class="kw">use</span> <span class="ident">std::os::unix::io</span>::{<span class="ident">AsRawFd</span>, <span class="ident">FromRawFd</span>};
+<span class="kw">use</span> <span class="ident">std::path::Path</span>;
 
 <span class="kw">use</span> <span class="ident">FsStats</span>;
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">duplicate</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">File</span><span class="op">&gt;</span> {
     <span class="kw">unsafe</span> {
-        <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">dup</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>());
+        <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">libc::dup</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>());
 
         <span class="kw">if</span> <span class="ident">fd</span> <span class="op">&lt;</span> <span class="number">0</span> {
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">last_os_error</span>())
+            <span class="prelude-val">Err</span>(<span class="ident">Error::last_os_error</span>())
         } <span class="kw">else</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">File</span>::<span class="ident">from_raw_fd</span>(<span class="ident">fd</span>))
+            <span class="prelude-val">Ok</span>(<span class="ident">File::from_raw_fd</span>(<span class="ident">fd</span>))
         }
     }
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lock_shared</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc</span>::<span class="ident">LOCK_SH</span>)
+    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc::LOCK_SH</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lock_exclusive</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc</span>::<span class="ident">LOCK_EX</span>)
+    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc::LOCK_EX</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_lock_shared</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc</span>::<span class="ident">LOCK_SH</span> <span class="op">|</span> <span class="ident">libc</span>::<span class="ident">LOCK_NB</span>)
+    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc::LOCK_SH</span> <span class="op">|</span> <span class="ident">libc::LOCK_NB</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_lock_exclusive</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc</span>::<span class="ident">LOCK_EX</span> <span class="op">|</span> <span class="ident">libc</span>::<span class="ident">LOCK_NB</span>)
+    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc::LOCK_EX</span> <span class="op">|</span> <span class="ident">libc::LOCK_NB</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unlock</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc</span>::<span class="ident">LOCK_UN</span>)
+    <span class="ident">flock</span>(<span class="ident">file</span>, <span class="ident">libc::LOCK_UN</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lock_error</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Error</span> {
-    <span class="ident">Error</span>::<span class="ident">from_raw_os_error</span>(<span class="ident">libc</span>::<span class="ident">EWOULDBLOCK</span>)
+    <span class="ident">Error::from_raw_os_error</span>(<span class="ident">libc::EWOULDBLOCK</span>)
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;solaris&quot;</span>))]</span>
-<span class="kw">fn</span> <span class="ident">flock</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>, <span class="ident">flag</span>: <span class="ident">libc</span>::<span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc</span>::<span class="ident">flock</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">flag</span>) };
-    <span class="kw">if</span> <span class="ident">ret</span> <span class="op">&lt;</span> <span class="number">0</span> { <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">last_os_error</span>()) } <span class="kw">else</span> { <span class="prelude-val">Ok</span>(()) }
+<span class="kw">fn</span> <span class="ident">flock</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>, <span class="ident">flag</span>: <span class="ident">libc::c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc::flock</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">flag</span>) };
+    <span class="kw">if</span> <span class="ident">ret</span> <span class="op">&lt;</span> <span class="number">0</span> { <span class="prelude-val">Err</span>(<span class="ident">Error::last_os_error</span>()) } <span class="kw">else</span> { <span class="prelude-val">Ok</span>(()) }
 }
 
 <span class="doccomment">/// Simulate flock() using fcntl(); primarily for Oracle Solaris.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;solaris&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">flock</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>, <span class="ident">flag</span>: <span class="ident">libc</span>::<span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fl</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">flock</span> {
+<span class="kw">fn</span> <span class="ident">flock</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>, <span class="ident">flag</span>: <span class="ident">libc::c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fl</span> <span class="op">=</span> <span class="ident">libc::flock</span> {
         <span class="ident">l_whence</span>: <span class="number">0</span>,
         <span class="ident">l_start</span>: <span class="number">0</span>,
         <span class="ident">l_len</span>: <span class="number">0</span>,
@@ -322,24 +322,24 @@
 
     <span class="comment">// In non-blocking mode, use F_SETLK for cmd, F_SETLKW otherwise, and don&#39;t forget to clear</span>
     <span class="comment">// LOCK_NB.</span>
-    <span class="kw">let</span> (<span class="ident">cmd</span>, <span class="ident">operation</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">flag</span> <span class="op">&amp;</span> <span class="ident">libc</span>::<span class="ident">LOCK_NB</span> {
-        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">libc</span>::<span class="ident">F_SETLKW</span>, <span class="ident">flag</span>),
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">libc</span>::<span class="ident">F_SETLK</span>, <span class="ident">flag</span> <span class="op">&amp;</span> <span class="op">!</span><span class="ident">libc</span>::<span class="ident">LOCK_NB</span>),
+    <span class="kw">let</span> (<span class="ident">cmd</span>, <span class="ident">operation</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">flag</span> <span class="op">&amp;</span> <span class="ident">libc::LOCK_NB</span> {
+        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">libc::F_SETLKW</span>, <span class="ident">flag</span>),
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">libc::F_SETLK</span>, <span class="ident">flag</span> <span class="op">&amp;</span> <span class="op">!</span><span class="ident">libc::LOCK_NB</span>),
     };
 
     <span class="kw">match</span> <span class="ident">operation</span> {
-        <span class="ident">libc</span>::<span class="ident">LOCK_SH</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">fl</span>.<span class="ident">l_type</span> <span class="op">|</span><span class="op">=</span> <span class="ident">libc</span>::<span class="ident">F_RDLCK</span>,
-        <span class="ident">libc</span>::<span class="ident">LOCK_EX</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">fl</span>.<span class="ident">l_type</span> <span class="op">|</span><span class="op">=</span> <span class="ident">libc</span>::<span class="ident">F_WRLCK</span>,
-        <span class="ident">libc</span>::<span class="ident">LOCK_UN</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">fl</span>.<span class="ident">l_type</span> <span class="op">|</span><span class="op">=</span> <span class="ident">libc</span>::<span class="ident">F_UNLCK</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">from_raw_os_error</span>(<span class="ident">libc</span>::<span class="ident">EINVAL</span>)),
+        <span class="ident">libc::LOCK_SH</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">fl</span>.<span class="ident">l_type</span> <span class="op">|</span><span class="op">=</span> <span class="ident">libc::F_RDLCK</span>,
+        <span class="ident">libc::LOCK_EX</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">fl</span>.<span class="ident">l_type</span> <span class="op">|</span><span class="op">=</span> <span class="ident">libc::F_WRLCK</span>,
+        <span class="ident">libc::LOCK_UN</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">fl</span>.<span class="ident">l_type</span> <span class="op">|</span><span class="op">=</span> <span class="ident">libc::F_UNLCK</span>,
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::from_raw_os_error</span>(<span class="ident">libc::EINVAL</span>)),
     }
 
-    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">cmd</span>, <span class="kw-2">&amp;</span><span class="ident">fl</span>) };
+    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc::fcntl</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">cmd</span>, <span class="kw-2">&amp;</span><span class="ident">fl</span>) };
     <span class="kw">match</span> <span class="ident">ret</span> {
         <span class="comment">// Translate EACCES to EWOULDBLOCK</span>
-        <span class="op">-</span><span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">Error</span>::<span class="ident">last_os_error</span>().<span class="ident">raw_os_error</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">libc</span>::<span class="ident">EACCES</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">lock_error</span>()),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">last_os_error</span>())
+        <span class="op">-</span><span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">Error::last_os_error</span>().<span class="ident">raw_os_error</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">libc::EACCES</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">lock_error</span>()),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::last_os_error</span>())
         },
         <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(())
     }
@@ -354,8 +354,8 @@
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>,
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;nacl&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allocate</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>, <span class="ident">len</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc</span>::<span class="ident">posix_fallocate</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="number">0</span>, <span class="ident">len</span> <span class="kw">as</span> <span class="ident">libc</span>::<span class="ident">off_t</span>) };
-    <span class="kw">if</span> <span class="ident">ret</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> { <span class="prelude-val">Ok</span>(()) } <span class="kw">else</span> { <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">last_os_error</span>()) }
+    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc::posix_fallocate</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="number">0</span>, <span class="ident">len</span> <span class="kw">as</span> <span class="ident">libc::off_t</span>) };
+    <span class="kw">if</span> <span class="ident">ret</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> { <span class="prelude-val">Ok</span>(()) } <span class="kw">else</span> { <span class="prelude-val">Err</span>(<span class="ident">Error::last_os_error</span>()) }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;ios&quot;</span>))]</span>
@@ -363,21 +363,21 @@
     <span class="kw">let</span> <span class="ident">stat</span> <span class="op">=</span> <span class="macro">try!</span>(<span class="ident">file</span>.<span class="ident">metadata</span>());
 
     <span class="kw">if</span> <span class="ident">len</span> <span class="op">&gt;</span> <span class="ident">stat</span>.<span class="ident">blocks</span>() <span class="kw">as</span> <span class="ident">u64</span> <span class="op">*</span> <span class="number">512</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fstore</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">fstore_t</span> {
-            <span class="ident">fst_flags</span>: <span class="ident">libc</span>::<span class="ident">F_ALLOCATECONTIG</span>,
-            <span class="ident">fst_posmode</span>: <span class="ident">libc</span>::<span class="ident">F_PEOFPOSMODE</span>,
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fstore</span> <span class="op">=</span> <span class="ident">libc::fstore_t</span> {
+            <span class="ident">fst_flags</span>: <span class="ident">libc::F_ALLOCATECONTIG</span>,
+            <span class="ident">fst_posmode</span>: <span class="ident">libc::F_PEOFPOSMODE</span>,
             <span class="ident">fst_offset</span>: <span class="number">0</span>,
-            <span class="ident">fst_length</span>: <span class="ident">len</span> <span class="kw">as</span> <span class="ident">libc</span>::<span class="ident">off_t</span>,
+            <span class="ident">fst_length</span>: <span class="ident">len</span> <span class="kw">as</span> <span class="ident">libc::off_t</span>,
             <span class="ident">fst_bytesalloc</span>: <span class="number">0</span>,
         };
 
-        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">libc</span>::<span class="ident">F_PREALLOCATE</span>, <span class="kw-2">&amp;</span><span class="ident">fstore</span>) };
+        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc::fcntl</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">libc::F_PREALLOCATE</span>, <span class="kw-2">&amp;</span><span class="ident">fstore</span>) };
         <span class="kw">if</span> <span class="ident">ret</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
             <span class="comment">// Unable to allocate contiguous disk space; attempt to allocate non-contiguously.</span>
-            <span class="ident">fstore</span>.<span class="ident">fst_flags</span> <span class="op">=</span> <span class="ident">libc</span>::<span class="ident">F_ALLOCATEALL</span>;
-            <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">libc</span>::<span class="ident">F_PREALLOCATE</span>, <span class="kw-2">&amp;</span><span class="ident">fstore</span>) };
+            <span class="ident">fstore</span>.<span class="ident">fst_flags</span> <span class="op">=</span> <span class="ident">libc::F_ALLOCATEALL</span>;
+            <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">libc::fcntl</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">libc::F_PREALLOCATE</span>, <span class="kw-2">&amp;</span><span class="ident">fstore</span>) };
             <span class="kw">if</span> <span class="ident">ret</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">last_os_error</span>());
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::last_os_error</span>());
             }
         }
     }
@@ -404,16 +404,16 @@
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statvfs</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FsStats</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">cstr</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">path</span>.<span class="ident">as_os_str</span>().<span class="ident">as_bytes</span>()) {
+    <span class="kw">let</span> <span class="ident">cstr</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">CString::new</span>(<span class="ident">path</span>.<span class="ident">as_os_str</span>().<span class="ident">as_bytes</span>()) {
         <span class="prelude-val">Ok</span>(<span class="ident">cstr</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cstr</span>,
-        <span class="prelude-val">Err</span>(..) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">new</span>(<span class="ident">ErrorKind</span>::<span class="ident">InvalidInput</span>, <span class="string">&quot;path contained a null&quot;</span>)),
+        <span class="prelude-val">Err</span>(..) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">ErrorKind::InvalidInput</span>, <span class="string">&quot;path contained a null&quot;</span>)),
     };
 
     <span class="kw">unsafe</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stat</span>: <span class="ident">libc</span>::<span class="ident">statvfs</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">zeroed</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stat</span>: <span class="ident">libc::statvfs</span> <span class="op">=</span> <span class="ident">mem::zeroed</span>();
         <span class="comment">// danburkert/fs2-rs#1: cast is necessary for platforms where c_char != u8.</span>
-        <span class="kw">if</span> <span class="ident">libc</span>::<span class="ident">statvfs</span>(<span class="ident">cstr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">stat</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">last_os_error</span>())
+        <span class="kw">if</span> <span class="ident">libc::statvfs</span>(<span class="ident">cstr</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">stat</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="prelude-val">Err</span>(<span class="ident">Error::last_os_error</span>())
         } <span class="kw">else</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">FsStats</span> {
                 <span class="ident">free_space</span>: <span class="ident">stat</span>.<span class="ident">f_frsize</span> <span class="kw">as</span> <span class="ident">u64</span> <span class="op">*</span> <span class="ident">stat</span>.<span class="ident">f_bfree</span> <span class="kw">as</span> <span class="ident">u64</span>,
@@ -430,17 +430,17 @@
     <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">tempdir</span>;
     <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">libc</span>;
 
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::{<span class="self">self</span>, <span class="ident">File</span>};
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">AsRawFd</span>;
+    <span class="kw">use</span> <span class="ident">std::fs</span>::{<span class="self">self</span>, <span class="ident">File</span>};
+    <span class="kw">use</span> <span class="ident">std::os::unix::io::AsRawFd</span>;
 
     <span class="kw">use</span> {<span class="ident">FileExt</span>, <span class="ident">lock_contended_error</span>};
 
     <span class="doccomment">/// The duplicate method returns a file with a new file descriptor.</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">duplicate_new_fd</span>() {
-        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">tempdir</span>::<span class="ident">TempDir</span>::<span class="ident">new</span>(<span class="string">&quot;fs2&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;fs2&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tempdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;fs2&quot;</span>);
-        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">fs::OpenOptions::new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">file2</span> <span class="op">=</span> <span class="ident">file1</span>.<span class="ident">duplicate</span>().<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">file1</span>.<span class="ident">as_raw_fd</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">file2</span>.<span class="ident">as_raw_fd</span>());
     }
@@ -449,13 +449,13 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">duplicate_cloexec</span>() {
 
-        <span class="kw">fn</span> <span class="ident">flags</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">libc</span>::<span class="ident">c_int</span> {
-            <span class="kw">unsafe</span> { <span class="ident">libc</span>::<span class="ident">fcntl</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">libc</span>::<span class="ident">F_GETFL</span>, <span class="number">0</span>) }
+        <span class="kw">fn</span> <span class="ident">flags</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">File</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">libc::c_int</span> {
+            <span class="kw">unsafe</span> { <span class="ident">libc::fcntl</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">libc::F_GETFL</span>, <span class="number">0</span>) }
         }
 
-        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">tempdir</span>::<span class="ident">TempDir</span>::<span class="ident">new</span>(<span class="string">&quot;fs2&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;fs2&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tempdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;fs2&quot;</span>);
-        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">fs::OpenOptions::new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">file2</span> <span class="op">=</span> <span class="ident">file1</span>.<span class="ident">duplicate</span>().<span class="ident">unwrap</span>();
 
         <span class="macro">assert_eq!</span>(<span class="ident">flags</span>(<span class="kw-2">&amp;</span><span class="ident">file1</span>), <span class="ident">flags</span>(<span class="kw-2">&amp;</span><span class="ident">file2</span>));
@@ -465,10 +465,10 @@
     <span class="doccomment">/// held on the file descriptor.</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">lock_replace</span>() {
-        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">tempdir</span>::<span class="ident">TempDir</span>::<span class="ident">new</span>(<span class="string">&quot;fs2&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;fs2&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tempdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;fs2&quot;</span>);
-        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">file2</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">fs::OpenOptions::new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">file2</span> <span class="op">=</span> <span class="ident">fs::OpenOptions::new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
 
         <span class="comment">// Creating a shared lock will drop an exclusive lock.</span>
         <span class="ident">file1</span>.<span class="ident">lock_exclusive</span>().<span class="ident">unwrap</span>();
@@ -485,11 +485,11 @@
     <span class="doccomment">/// Tests that locks are shared among duplicated file descriptors.</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">lock_duplicate</span>() {
-        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">tempdir</span>::<span class="ident">TempDir</span>::<span class="ident">new</span>(<span class="string">&quot;fs2&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">tempdir</span> <span class="op">=</span> <span class="ident">tempdir::TempDir::new</span>(<span class="string">&quot;fs2&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">tempdir</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="string">&quot;fs2&quot;</span>);
-        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">file1</span> <span class="op">=</span> <span class="ident">fs::OpenOptions::new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">file2</span> <span class="op">=</span> <span class="ident">file1</span>.<span class="ident">duplicate</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">file3</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">file3</span> <span class="op">=</span> <span class="ident">fs::OpenOptions::new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">unwrap</span>();
 
         <span class="comment">// Create a lock through fd1, then replace it through fd2.</span>
         <span class="ident">file1</span>.<span class="ident">lock_shared</span>().<span class="ident">unwrap</span>();

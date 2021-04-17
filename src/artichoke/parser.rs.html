@@ -205,12 +205,12 @@
 <span class="doccomment">//! The REPL needs to check if code is valid to determine whether it should</span>
 <span class="doccomment">//! enter multiline editing mode.</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">TryFrom</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">NonNull</span>;
+<span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
+<span class="kw">use</span> <span class="ident">std::ffi::CStr</span>;
+<span class="kw">use</span> <span class="ident">std::ptr::NonNull</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">sys</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Artichoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::backend::sys</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::backend::Artichoke</span>;
 
 <span class="doccomment">/// State shows whether artichoke can parse some code or why it cannot.</span>
 <span class="doccomment">///</span>
@@ -242,7 +242,7 @@
     <span class="doccomment">/// Construct a new, default `State`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">Valid</span>
+        <span class="self">Self</span><span class="ident">::Valid</span>
     }
 
     <span class="doccomment">/// Whether this variant indicates a code block is open.</span>
@@ -254,7 +254,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_code_block_open</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="op">!</span><span class="macro">matches!</span>(
             <span class="self">self</span>,
-            <span class="self">Self</span>::<span class="ident">Valid</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">UnexpectedEnd</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">UnexpectedRegexpBegin</span> <span class="op">|</span> <span class="self">Self</span>::<span class="ident">CodeTooLong</span>
+            <span class="self">Self</span><span class="ident">::Valid</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::UnexpectedEnd</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::UnexpectedRegexpBegin</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::CodeTooLong</span>
         )
     }
 
@@ -264,7 +264,7 @@
     <span class="doccomment">/// buffer.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_recoverable_error</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span>::<span class="ident">CodeTooLong</span>)
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span><span class="ident">::CodeTooLong</span>)
     }
 
     <span class="doccomment">/// Whether this variant is a fatal parse error.</span>
@@ -273,21 +273,21 @@
     <span class="doccomment">/// again.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_fatal</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span>::<span class="ident">ParseError</span>)
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span><span class="ident">::ParseError</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">State</span> {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">new</span>()
+        <span class="self">Self</span><span class="ident">::new</span>()
     }
 }
 
 <span class="doccomment">/// Wraps a [`artichoke_backend`] mruby parser.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Parser</span> {
-    <span class="ident">parser</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">sys</span>::<span class="ident">mrb_parser_state</span><span class="op">&gt;</span>,
-    <span class="ident">context</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">sys</span>::<span class="ident">mrbc_context</span><span class="op">&gt;</span>,
+    <span class="ident">parser</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">sys::mrb_parser_state</span><span class="op">&gt;</span>,
+    <span class="ident">context</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">sys::mrbc_context</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Parser</span> {
@@ -296,9 +296,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">state</span>.<span class="ident">as_deref_mut</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">parser</span>.<span class="ident">as_mut</span>()<span class="question-mark">?</span>.<span class="ident">context_mut</span>();
-        <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">parser</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys</span>::<span class="ident">mrb_parser_new</span>(<span class="ident">mrb</span>)).<span class="ident">ok</span>()<span class="question-mark">?</span> };
-        <span class="kw">let</span> <span class="ident">parser</span> <span class="op">=</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">parser</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">NonNull::new</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">parser</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_parser_new</span>(<span class="ident">mrb</span>)).<span class="ident">ok</span>()<span class="question-mark">?</span> };
+        <span class="kw">let</span> <span class="ident">parser</span> <span class="op">=</span> <span class="ident">NonNull::new</span>(<span class="ident">parser</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">parser</span>, <span class="ident">context</span> })
     }
 
@@ -313,14 +313,14 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If the underlying parser returns a UTF-8 invalid error message, an error</span>
     <span class="doccomment">/// is returned.</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">enum_glob_use</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::enum_glob_use</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">code</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span> {
-        <span class="kw">use</span> <span class="ident">sys</span>::<span class="ident">mrb_lex_state_enum</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident">sys::mrb_lex_state_enum</span>::<span class="kw-2">*</span>;
 
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">len</span>) <span class="op">=</span> <span class="ident">isize</span>::<span class="ident">try_from</span>(<span class="ident">code</span>.<span class="ident">len</span>()) {
+        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">len</span>) <span class="op">=</span> <span class="ident">isize::try_from</span>(<span class="ident">code</span>.<span class="ident">len</span>()) {
             <span class="ident">len</span>
         } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="ident">State</span>::<span class="ident">CodeTooLong</span>;
+            <span class="kw">return</span> <span class="ident">State::CodeTooLong</span>;
         };
         <span class="kw">let</span> <span class="ident">parser</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">parser</span>.<span class="ident">as_mut</span>() };
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_mut</span>() };
@@ -330,33 +330,33 @@
         <span class="ident">parser</span>.<span class="ident">send</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ptr</span>.<span class="ident">offset</span>(<span class="ident">len</span>) };
         <span class="ident">parser</span>.<span class="ident">lineno</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">lineno</span>;
         <span class="kw">unsafe</span> {
-            <span class="ident">sys</span>::<span class="ident">mrb_parser_parse</span>(<span class="ident">parser</span>, <span class="ident">context</span>);
+            <span class="ident">sys::mrb_parser_parse</span>(<span class="ident">parser</span>, <span class="ident">context</span>);
         }
 
         <span class="kw">if</span> <span class="op">!</span><span class="ident">parser</span>.<span class="ident">parsing_heredoc</span>.<span class="ident">is_null</span>() {
-            <span class="kw">return</span> <span class="ident">State</span>::<span class="ident">UnterminatedHeredoc</span>;
+            <span class="kw">return</span> <span class="ident">State::UnterminatedHeredoc</span>;
         }
         <span class="kw">if</span> <span class="op">!</span><span class="ident">parser</span>.<span class="ident">lex_strterm</span>.<span class="ident">is_null</span>() {
-            <span class="kw">return</span> <span class="ident">State</span>::<span class="ident">UnterminatedString</span>;
+            <span class="kw">return</span> <span class="ident">State::UnterminatedString</span>;
         }
         <span class="kw">if</span> <span class="ident">parser</span>.<span class="ident">nerr</span> <span class="op">&gt;</span> <span class="number">0</span> {
             <span class="kw">let</span> <span class="ident">errmsg</span> <span class="op">=</span> <span class="ident">parser</span>.<span class="ident">error_buffer</span>[<span class="number">0</span>].<span class="ident">message</span>;
             <span class="kw">if</span> <span class="ident">errmsg</span>.<span class="ident">is_null</span>() {
-                <span class="kw">return</span> <span class="ident">State</span>::<span class="ident">ParseError</span>;
+                <span class="kw">return</span> <span class="ident">State::ParseError</span>;
             }
-            <span class="kw">let</span> <span class="ident">cstring</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">errmsg</span>) };
+            <span class="kw">let</span> <span class="ident">cstring</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">CStr::from_ptr</span>(<span class="ident">errmsg</span>) };
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">message</span>) <span class="op">=</span> <span class="ident">cstring</span>.<span class="ident">to_str</span>() {
                 <span class="kw">match</span> <span class="ident">message</span> {
-                    <span class="string">&quot;syntax error, unexpected $end&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">State</span>::<span class="ident">UnexpectedProgramEnd</span>,
-                    <span class="string">&quot;syntax error, unexpected keyword_end&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">State</span>::<span class="ident">UnexpectedEnd</span>,
-                    <span class="string">&quot;syntax error, unexpected tREGEXP_BEG&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">State</span>::<span class="ident">UnexpectedRegexpBegin</span>,
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">State</span>::<span class="ident">ParseError</span>,
+                    <span class="string">&quot;syntax error, unexpected $end&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">State::UnexpectedProgramEnd</span>,
+                    <span class="string">&quot;syntax error, unexpected keyword_end&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">State::UnexpectedEnd</span>,
+                    <span class="string">&quot;syntax error, unexpected tREGEXP_BEG&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">State::UnexpectedRegexpBegin</span>,
+                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">State::ParseError</span>,
                 }
             } <span class="kw">else</span> {
-                <span class="ident">State</span>::<span class="ident">ParseError</span>
+                <span class="ident">State::ParseError</span>
             }
         } <span class="kw">else</span> {
-            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">match_same_arms</span>)]</span>
+            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::match_same_arms</span>)]</span>
             <span class="kw">let</span> <span class="ident">code_has_unterminated_expression</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">parser</span>.<span class="ident">lstate</span> {
                 <span class="comment">// beginning of a statement, that means previous line ended</span>
                 <span class="ident">EXPR_BEG</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
@@ -385,9 +385,9 @@
                 <span class="ident">EXPR_MAX_STATE</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
             };
             <span class="kw">if</span> <span class="ident">code_has_unterminated_expression</span> {
-                <span class="ident">State</span>::<span class="ident">UnterminatedBlock</span>
+                <span class="ident">State::UnterminatedBlock</span>
             } <span class="kw">else</span> {
-                <span class="ident">State</span>::<span class="ident">Valid</span>
+                <span class="ident">State::Valid</span>
             }
         }
     }
@@ -396,7 +396,7 @@
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Parser</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">unsafe</span> {
-            <span class="ident">sys</span>::<span class="ident">mrb_parser_free</span>(<span class="self">self</span>.<span class="ident">parser</span>.<span class="ident">as_mut</span>());
+            <span class="ident">sys::mrb_parser_free</span>(<span class="self">self</span>.<span class="ident">parser</span>.<span class="ident">as_mut</span>());
         }
     }
 }

@@ -96,9 +96,9 @@
 <span id="95">95</span>
 <span id="96">96</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">kernel</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">core</span>::<span class="ident">kernel</span>::<span class="ident">require</span>::<span class="ident">RelativePath</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">extn</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::kernel</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::kernel::require::RelativePath</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">integer</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="kw-2">mut</span> <span class="ident">arg</span>: <span class="ident">Value</span>, <span class="ident">base</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">base</span>.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">base</span><span class="op">|</span> <span class="ident">interp</span>.<span class="ident">convert</span>(<span class="ident">base</span>));
@@ -108,12 +108,12 @@
     <span class="comment">// trigger garbage collections.</span>
     <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="ident">base</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">arg</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">arg</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">integer</span> <span class="op">=</span> <span class="ident">kernel</span>::<span class="ident">integer</span>::<span class="ident">method</span>(<span class="ident">arg</span>, <span class="ident">base</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">integer</span> <span class="op">=</span> <span class="ident">kernel::integer::method</span>(<span class="ident">arg</span>, <span class="ident">base</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert</span>(<span class="ident">integer</span>))
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">path</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">success</span> <span class="op">=</span> <span class="ident">kernel</span>::<span class="ident">require</span>::<span class="ident">load</span>(<span class="ident">interp</span>, <span class="ident">path</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">success</span> <span class="op">=</span> <span class="ident">kernel::require::load</span>(<span class="ident">interp</span>, <span class="ident">path</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert</span>(<span class="ident">success</span>))
 }
 
@@ -125,7 +125,7 @@
         <span class="kw">let</span> <span class="ident">display</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">to_s</span>(<span class="ident">interp</span>);
         <span class="ident">interp</span>.<span class="ident">print</span>(<span class="ident">display</span>)<span class="question-mark">?</span>;
     }
-    <span class="prelude-val">Ok</span>(<span class="ident">Value</span>::<span class="ident">nil</span>())
+    <span class="prelude-val">Ok</span>(<span class="ident">Value::nil</span>())
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">puts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">args</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span>
@@ -156,7 +156,7 @@
     } <span class="kw">else</span> {
         <span class="ident">interp</span>.<span class="ident">print</span>(<span class="string">b&quot;\n&quot;</span>)<span class="question-mark">?</span>;
     }
-    <span class="prelude-val">Ok</span>(<span class="ident">Value</span>::<span class="ident">nil</span>())
+    <span class="prelude-val">Ok</span>(<span class="ident">Value::nil</span>())
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">p</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">args</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span>
@@ -178,18 +178,18 @@
         }
         <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="ident">result</span>)
     } <span class="kw">else</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">Value</span>::<span class="ident">nil</span>())
+        <span class="prelude-val">Ok</span>(<span class="ident">Value::nil</span>())
     }
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">require</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">path</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">success</span> <span class="op">=</span> <span class="ident">kernel</span>::<span class="ident">require</span>::<span class="ident">require</span>(<span class="ident">interp</span>, <span class="ident">path</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">success</span> <span class="op">=</span> <span class="ident">kernel::require::require</span>(<span class="ident">interp</span>, <span class="ident">path</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert</span>(<span class="ident">success</span>))
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">require_relative</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">path</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">relative_base</span> <span class="op">=</span> <span class="ident">RelativePath</span>::<span class="ident">try_from_interp</span>(<span class="ident">interp</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">success</span> <span class="op">=</span> <span class="ident">kernel</span>::<span class="ident">require</span>::<span class="ident">require_relative</span>(<span class="ident">interp</span>, <span class="ident">path</span>, <span class="ident">relative_base</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">relative_base</span> <span class="op">=</span> <span class="ident">RelativePath::try_from_interp</span>(<span class="ident">interp</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">success</span> <span class="op">=</span> <span class="ident">kernel::require::require_relative</span>(<span class="ident">interp</span>, <span class="ident">path</span>, <span class="ident">relative_base</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert</span>(<span class="ident">success</span>))
 }
 </pre></div>

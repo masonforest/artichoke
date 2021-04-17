@@ -250,13 +250,13 @@
 <span class="doccomment">//! to the interior of the spec, like the [`CString`](std::ffi::CString) class</span>
 <span class="doccomment">//! name, are not invalidated as the underlying storage reallocates.</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">any</span>::{<span class="self">self</span>, <span class="ident">Any</span>, <span class="ident">TypeId</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">hash_map</span>::{<span class="ident">RandomState</span>, <span class="ident">Values</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">hash</span>::<span class="ident">BuildHasher</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">FusedIterator</span>;
+<span class="kw">use</span> <span class="ident">std::any</span>::{<span class="self">self</span>, <span class="ident">Any</span>, <span class="ident">TypeId</span>};
+<span class="kw">use</span> <span class="ident">std::collections::hash_map</span>::{<span class="ident">RandomState</span>, <span class="ident">Values</span>};
+<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
+<span class="kw">use</span> <span class="ident">std::hash::BuildHasher</span>;
+<span class="kw">use</span> <span class="ident">std::iter::FusedIterator</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">class</span>::<span class="ident">Spec</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::class::Spec</span>;
 
 <span class="doccomment">/// An iterator of all [class specs](Spec) stored in the [`Registry`].</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
@@ -269,7 +269,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">ClassSpecs</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Spec</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">value</span>.<span class="ident">as_ref</span>())
     }
@@ -322,7 +322,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Spec</span>;
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">ClassSpecs</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::IntoIter</span> {
         <span class="self">self</span>.<span class="ident">class_specs</span>()
     }
 }
@@ -331,13 +331,13 @@
     <span class="doccomment">/// Construct a new, empty `Registry`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">HashMap</span>::<span class="ident">new</span>())
+        <span class="self">Self</span>(<span class="ident">HashMap::new</span>())
     }
 
     <span class="doccomment">/// Construct a new `Registry` with the given `capacity`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity</span>(<span class="ident">capacity</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">HashMap</span>::<span class="ident">with_capacity</span>(<span class="ident">capacity</span>))
+        <span class="self">Self</span>(<span class="ident">HashMap::with_capacity</span>(<span class="ident">capacity</span>))
     }
 }
 
@@ -345,13 +345,13 @@
     <span class="doccomment">/// Construct a new `Registry` with the given `hash_builder`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_hasher</span>(<span class="ident">hash_builder</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">HashMap</span>::<span class="ident">with_hasher</span>(<span class="ident">hash_builder</span>))
+        <span class="self">Self</span>(<span class="ident">HashMap::with_hasher</span>(<span class="ident">hash_builder</span>))
     }
 
     <span class="doccomment">/// Construct a new `Registry` with the given `capacity` and `hash_builder`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity_and_hasher</span>(<span class="ident">capacity</span>: <span class="ident">usize</span>, <span class="ident">hash_builder</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">HashMap</span>::<span class="ident">with_capacity_and_hasher</span>(<span class="ident">capacity</span>, <span class="ident">hash_builder</span>))
+        <span class="self">Self</span>(<span class="ident">HashMap::with_capacity_and_hasher</span>(<span class="ident">capacity</span>, <span class="ident">hash_builder</span>))
     }
 
     <span class="doccomment">/// Returns the number of [class specs](Spec) the registry can hold without</span>
@@ -401,7 +401,7 @@
     <span class="kw">where</span>
         <span class="ident">K</span>: <span class="ident">Any</span>,
     {
-        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TypeId</span>::<span class="ident">of</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>();
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>)
     }
 
@@ -418,11 +418,11 @@
     <span class="kw">where</span>
         <span class="ident">K</span>: <span class="ident">Any</span>,
     {
-        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TypeId</span>::<span class="ident">of</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">old_spec</span>) <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">insert</span>(<span class="ident">key</span>, <span class="ident">spec</span>) {
             <span class="macro">panic!</span>(
                 <span class="string">&quot;Attempted duplicate insert of {}. Registry is append-only. Previous spec: {:?}&quot;</span>,
-                <span class="ident">any</span>::<span class="ident">type_name</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>(),
+                <span class="ident">any::type_name</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>(),
                 <span class="ident">old_spec</span>
             );
         }
@@ -437,7 +437,7 @@
     <span class="kw">where</span>
         <span class="ident">K</span>: <span class="ident">Any</span>,
     {
-        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TypeId</span>::<span class="ident">of</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>();
         <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">value</span>.<span class="ident">as_ref</span>())
     }

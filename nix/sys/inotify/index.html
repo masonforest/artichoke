@@ -9,10 +9,10 @@
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="comment">// We create a new inotify instance.</span>
-<span class="kw">let</span> <span class="ident">instance</span> <span class="op">=</span> <span class="ident">Inotify</span>::<span class="ident">init</span>(<span class="ident">InitFlags</span>::<span class="ident">empty</span>()).<span class="ident">unwrap</span>();
+<span class="kw">let</span> <span class="ident">instance</span> <span class="op">=</span> <span class="ident">Inotify::init</span>(<span class="ident">InitFlags::empty</span>()).<span class="ident">unwrap</span>();
 
 <span class="comment">// We add a new watch on directory &quot;test&quot; for all events.</span>
-<span class="kw">let</span> <span class="ident">wd</span> <span class="op">=</span> <span class="ident">instance</span>.<span class="ident">add_watch</span>(<span class="string">&quot;test&quot;</span>, <span class="ident">AddWatchFlags</span>::<span class="ident">IN_ALL_EVENTS</span>).<span class="ident">unwrap</span>();
+<span class="kw">let</span> <span class="ident">wd</span> <span class="op">=</span> <span class="ident">instance</span>.<span class="ident">add_watch</span>(<span class="string">&quot;test&quot;</span>, <span class="ident">AddWatchFlags::IN_ALL_EVENTS</span>).<span class="ident">unwrap</span>();
 
 <span class="kw">loop</span> {
     <span class="comment">// We read from our inotify instance for events.</span>

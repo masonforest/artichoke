@@ -135,11 +135,11 @@
 <span id="132">132</span>
 <span id="133">133</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">rand_core</span>::<span class="ident">impls</span>::<span class="ident">next_u64_via_u32</span>;
+<span class="kw">use</span> <span class="ident">rand_core::impls::next_u64_via_u32</span>;
 <span class="kw">use</span> <span class="ident">rand_core</span>::{<span class="ident">Error</span>, <span class="ident">RngCore</span>, <span class="ident">SeedableRng</span>};
 
-<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">Mt</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">random</span>::{<span class="ident">seed_to_key</span>, <span class="ident">DEFAULT_SEED_BYTES</span>};
+<span class="kw">use</span> <span class="kw">super</span><span class="ident">::Mt</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::random</span>::{<span class="ident">seed_to_key</span>, <span class="ident">DEFAULT_SEED_BYTES</span>};
 
 <span class="kw">impl</span> <span class="ident">SeedableRng</span> <span class="kw">for</span> <span class="ident">Mt</span> {
     <span class="kw">type</span> <span class="ident">Seed</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="ident">DEFAULT_SEED_BYTES</span>];
@@ -157,9 +157,9 @@
     <span class="doccomment">/// assert_ne!(mt.next_u32(), mt.next_u32());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">from_seed</span>(<span class="ident">seed</span>: <span class="self">Self</span>::<span class="ident">Seed</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from_seed</span>(<span class="ident">seed</span>: <span class="self">Self</span><span class="ident">::Seed</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="ident">seed_to_key</span>(<span class="ident">seed</span>);
-        <span class="self">Self</span>::<span class="ident">new_with_key</span>(<span class="ident">seed</span>.<span class="ident">iter</span>().<span class="ident">copied</span>())
+        <span class="self">Self</span><span class="ident">::new_with_key</span>(<span class="ident">seed</span>.<span class="ident">iter</span>().<span class="ident">copied</span>())
     }
 }
 
@@ -225,7 +225,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) {
-        <span class="self">Self</span>::<span class="ident">fill_bytes</span>(<span class="self">self</span>, <span class="ident">dest</span>)
+        <span class="self">Self</span><span class="ident">::fill_bytes</span>(<span class="self">self</span>, <span class="ident">dest</span>)
     }
 
     <span class="doccomment">/// Fill a buffer with bytes generated from the RNG.</span>
@@ -264,7 +264,7 @@
     <span class="doccomment">/// [`fill_bytes`]: Mt::fill_bytes</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="self">Self</span>::<span class="ident">fill_bytes</span>(<span class="self">self</span>, <span class="ident">dest</span>);
+        <span class="self">Self</span><span class="ident">::fill_bytes</span>(<span class="self">self</span>, <span class="ident">dest</span>);
         <span class="prelude-val">Ok</span>(())
     }
 }

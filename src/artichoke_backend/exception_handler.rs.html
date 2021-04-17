@@ -231,18 +231,18 @@
 <span id="230">230</span>
 <span id="231">231</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">bstr</span>::<span class="ident">BString</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">error</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
+<span class="kw">use</span> <span class="ident">bstr::BString</span>;
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+<span class="kw">use</span> <span class="ident">std::error</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">core</span>::{<span class="ident">TryConvertMut</span>, <span class="ident">Value</span> <span class="kw">as</span> <span class="kw">_</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::{<span class="ident">Error</span>, <span class="ident">RubyException</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">gc</span>::<span class="ident">MrbGarbageCollection</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">string</span>::{<span class="ident">format_unicode_debug_into</span>, <span class="ident">WriteError</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sys</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">value</span>::<span class="ident">Value</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Artichoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::core</span>::{<span class="ident">TryConvertMut</span>, <span class="ident">Value</span> <span class="kw">as</span> <span class="kw">_</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error</span>::{<span class="ident">Error</span>, <span class="ident">RubyException</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::gc::MrbGarbageCollection</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::string</span>::{<span class="ident">format_unicode_debug_into</span>, <span class="ident">WriteError</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::value::Value</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Artichoke</span>;
 
 <span class="doccomment">/// Incrementally construct a [`CaughtException`].</span>
 <span class="doccomment">///</span>
@@ -254,7 +254,7 @@
     <span class="doccomment">/// Construct a new, empty `Builder`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">default</span>()
+        <span class="self">Self</span><span class="ident">::default</span>()
     }
 
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
@@ -284,7 +284,7 @@
 <span class="doccomment">/// An `Exception` rescued with [`sys::mrb_protect`].</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `CaughtException` is re-raiseable because it implements [`RubyException`].</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">module_name_repetitions</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::module_name_repetitions</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CaughtException</span> {
     <span class="ident">value</span>: <span class="ident">Value</span>,
@@ -296,7 +296,7 @@
     <span class="doccomment">/// Incrementally construct a [`CaughtException`].</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">builder</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Builder</span> {
-        <span class="ident">Builder</span>::<span class="ident">new</span>()
+        <span class="ident">Builder::new</span>()
     }
 
     <span class="doccomment">/// Construct a new `CaughtException`.</span>
@@ -307,17 +307,17 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">CaughtException</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">CaughtException</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>())<span class="question-mark">?</span>;
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot; (&quot;</span>)<span class="question-mark">?</span>;
-        <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">f</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">message</span>()).<span class="ident">map_err</span>(<span class="ident">WriteError</span>::<span class="ident">into_inner</span>)<span class="question-mark">?</span>;
+        <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">f</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">message</span>()).<span class="ident">map_err</span>(<span class="ident">WriteError::into_inner</span>)<span class="question-mark">?</span>;
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;)&quot;</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">for</span> <span class="ident">CaughtException</span> {}
+<span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">CaughtException</span> {}
 
 <span class="kw">impl</span> <span class="ident">RubyException</span> <span class="kw">for</span> <span class="ident">CaughtException</span> {
     <span class="kw">fn</span> <span class="ident">message</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span> {
@@ -334,7 +334,7 @@
         <span class="prelude-val">Some</span>(<span class="ident">backtrace</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys</span>::<span class="ident">mrb_value</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys::mrb_value</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
         <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">value</span>.<span class="ident">inner</span>())
     }
@@ -342,13 +342,13 @@
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">CaughtException</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RubyException</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">exc</span>: <span class="ident">CaughtException</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">exc</span>)
+        <span class="ident">Box::new</span>(<span class="ident">exc</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">CaughtException</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">exc</span>: <span class="ident">CaughtException</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">from</span>(<span class="ident">Box</span>::<span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RubyException</span><span class="op">&gt;</span>::<span class="ident">from</span>(<span class="ident">exc</span>))
+        <span class="self">Self</span><span class="ident">::from</span>(<span class="ident">Box</span>::<span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RubyException</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">exc</span>))
     }
 }
 
@@ -394,20 +394,20 @@
     <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">exception</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">arena</span>, <span class="string">&quot;message&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">message</span>.<span class="ident">try_into_mut</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">arena</span>)<span class="question-mark">?</span>;
 
-    <span class="kw">let</span> <span class="ident">exc</span> <span class="op">=</span> <span class="ident">CaughtException</span>::<span class="ident">builder</span>()
+    <span class="kw">let</span> <span class="ident">exc</span> <span class="op">=</span> <span class="ident">CaughtException::builder</span>()
         .<span class="ident">with_value</span>(<span class="ident">exception</span>)
         .<span class="ident">with_name</span>(<span class="ident">classname</span>.<span class="ident">into</span>())
         .<span class="ident">with_message</span>(<span class="ident">message</span>.<span class="ident">to_vec</span>())
         .<span class="ident">finish</span>();
     <span class="macro">debug!</span>(<span class="string">&quot;Extracted exception from interpreter: {}&quot;</span>, <span class="ident">exc</span>);
-    <span class="prelude-val">Ok</span>(<span class="ident">Error</span>::<span class="ident">from</span>(<span class="ident">exc</span>))
+    <span class="prelude-val">Ok</span>(<span class="ident">Error::from</span>(<span class="ident">exc</span>))
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">bstr</span>::<span class="ident">ByteSlice</span>;
+    <span class="kw">use</span> <span class="ident">bstr::ByteSlice</span>;
 
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">test</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::test::prelude</span>::<span class="kw-2">*</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">return_exception</span>() {
@@ -416,7 +416,7 @@
         <span class="macro">assert_eq!</span>(<span class="string">&quot;ArgumentError&quot;</span>, <span class="ident">err</span>.<span class="ident">name</span>().<span class="ident">as_ref</span>());
         <span class="macro">assert_eq!</span>(<span class="string">b&quot;waffles&quot;</span>.<span class="ident">as_bstr</span>(), <span class="ident">err</span>.<span class="ident">message</span>().<span class="ident">as_ref</span>().<span class="ident">as_bstr</span>());
         <span class="kw">let</span> <span class="ident">expected_backtrace</span> <span class="op">=</span> <span class="string">b&quot;(eval):1&quot;</span>.<span class="ident">to_vec</span>();
-        <span class="kw">let</span> <span class="ident">backtrace</span> <span class="op">=</span> <span class="ident">bstr</span>::<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>, <span class="ident">err</span>.<span class="ident">vm_backtrace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>).<span class="ident">unwrap</span>());
+        <span class="kw">let</span> <span class="ident">backtrace</span> <span class="op">=</span> <span class="ident">bstr::join</span>(<span class="string">&quot;\n&quot;</span>, <span class="ident">err</span>.<span class="ident">vm_backtrace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>).<span class="ident">unwrap</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">backtrace</span>.<span class="ident">as_bstr</span>(), <span class="ident">expected_backtrace</span>.<span class="ident">as_bstr</span>());
     }
 

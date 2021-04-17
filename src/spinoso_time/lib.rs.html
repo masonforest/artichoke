@@ -147,13 +147,13 @@
 <span id="144">144</span>
 <span id="145">145</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">all</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">pedantic</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">cargo</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">needless_borrow</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::needless_borrow</span>)]</span>
 <span class="comment">// https://github.com/rust-lang/rust-clippy/pull/5998#issuecomment-731855891</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">map_err_ignore</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">option_if_let_else</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::map_err_ignore</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::option_if_let_else</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unknown_lints</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_debug_implementations</span>)]</span>
@@ -209,21 +209,21 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doctest</span>)]</span>
 <span class="macro">readme!</span>();
 
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">time</span>::<span class="ident">Duration</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
+<span class="kw">use</span> <span class="ident">core::fmt</span>;
+<span class="kw">use</span> <span class="ident">core::time::Duration</span>;
+<span class="kw">use</span> <span class="ident">std::error::Error</span>;
 
 <span class="kw">mod</span> <span class="ident">time</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">time</span>::<span class="ident">chrono</span>::{<span class="ident">Offset</span>, <span class="ident">Time</span>, <span class="ident">ToA</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">time::chrono</span>::{<span class="ident">Offset</span>, <span class="ident">Time</span>, <span class="ident">ToA</span>};
 
 <span class="doccomment">/// Number of nanoseconds in one second.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_possible_truncation</span>)]</span> <span class="comment">// 1e9 &lt; u32::MAX</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NANOS_IN_SECOND</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">Duration</span>::<span class="ident">from_secs</span>(<span class="number">1</span>).<span class="ident">as_nanos</span>() <span class="kw">as</span> <span class="ident">u32</span>;
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_possible_truncation</span>)]</span> <span class="comment">// 1e9 &lt; u32::MAX</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NANOS_IN_SECOND</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">Duration::from_secs</span>(<span class="number">1</span>).<span class="ident">as_nanos</span>() <span class="kw">as</span> <span class="ident">u32</span>;
 
 <span class="doccomment">/// Number of microseconds in one nanosecond.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_possible_truncation</span>)]</span> <span class="comment">// 1000 &lt; u32::MAX</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MICROS_IN_NANO</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">Duration</span>::<span class="ident">from_micros</span>(<span class="number">1</span>).<span class="ident">as_nanos</span>() <span class="kw">as</span> <span class="ident">u32</span>;
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_possible_truncation</span>)]</span> <span class="comment">// 1000 &lt; u32::MAX</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MICROS_IN_NANO</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">Duration::from_micros</span>(<span class="number">1</span>).<span class="ident">as_nanos</span>() <span class="kw">as</span> <span class="ident">u32</span>;
 
 <span class="doccomment">/// Error returned when constructing a [`Time`] from a [`ToA`].</span>
 <span class="doccomment">///</span>
@@ -282,11 +282,11 @@
     <span class="ident">Time</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">ComponentOutOfRangeError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">ComponentOutOfRangeError</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span>::<span class="ident">Date</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;Date component (year, month, day) out of range&quot;</span>),
-            <span class="self">Self</span>::<span class="ident">Time</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;Time component (hour, minute, second) out of range&quot;</span>),
+            <span class="self">Self</span><span class="ident">::Date</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;Date component (year, month, day) out of range&quot;</span>),
+            <span class="self">Self</span><span class="ident">::Time</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;Time component (hour, minute, second) out of range&quot;</span>),
         }
     }
 }

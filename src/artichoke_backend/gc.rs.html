@@ -244,9 +244,9 @@
 <span id="243">243</span>
 <span id="244">244</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sys</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">value</span>::<span class="ident">Value</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Artichoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::value::Value</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Artichoke</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">arena</span>;
 
@@ -304,57 +304,57 @@
 
 <span class="kw">impl</span> <span class="ident">MrbGarbageCollection</span> <span class="kw">for</span> <span class="ident">Artichoke</span> {
     <span class="kw">fn</span> <span class="ident">create_arena_savepoint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ArenaIndex</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">ArenaSavepointError</span><span class="op">&gt;</span> {
-        <span class="ident">ArenaIndex</span>::<span class="ident">new</span>(<span class="self">self</span>)
+        <span class="ident">ArenaIndex::new</span>(<span class="self">self</span>)
     }
 
     <span class="kw">fn</span> <span class="ident">live_object_count</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
         <span class="kw">unsafe</span> {
-            <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys</span>::<span class="ident">mrb_sys_gc_live_objects</span>(<span class="ident">mrb</span>))
+            <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_sys_gc_live_objects</span>(<span class="ident">mrb</span>))
                 .<span class="ident">unwrap_or_default</span>()
         }
     }
 
     <span class="kw">fn</span> <span class="ident">mark_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Value</span>) {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys</span>::<span class="ident">mrb_sys_safe_gc_mark</span>(<span class="ident">mrb</span>, <span class="ident">value</span>.<span class="ident">inner</span>()));
+            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_sys_safe_gc_mark</span>(<span class="ident">mrb</span>, <span class="ident">value</span>.<span class="ident">inner</span>()));
         }
     }
 
     <span class="kw">fn</span> <span class="ident">incremental_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys</span>::<span class="ident">mrb_incremental_gc</span>(<span class="ident">mrb</span>));
+            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_incremental_gc</span>(<span class="ident">mrb</span>));
         }
     }
 
     <span class="kw">fn</span> <span class="ident">full_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys</span>::<span class="ident">mrb_full_gc</span>(<span class="ident">mrb</span>));
+            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_full_gc</span>(<span class="ident">mrb</span>));
         }
     }
 
     <span class="kw">fn</span> <span class="ident">enable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span> {
         <span class="kw">unsafe</span> {
             <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="ident">sys</span>::<span class="ident">mrb_sys_gc_enable</span>(<span class="ident">mrb</span>) {
-                    <span class="ident">State</span>::<span class="ident">Enabled</span>
+                <span class="kw">if</span> <span class="ident">sys::mrb_sys_gc_enable</span>(<span class="ident">mrb</span>) {
+                    <span class="ident">State::Enabled</span>
                 } <span class="kw">else</span> {
-                    <span class="ident">State</span>::<span class="ident">Disabled</span>
+                    <span class="ident">State::Disabled</span>
                 }
             })
-            .<span class="ident">unwrap_or</span>(<span class="ident">State</span>::<span class="ident">Disabled</span>)
+            .<span class="ident">unwrap_or</span>(<span class="ident">State::Disabled</span>)
         }
     }
 
     <span class="kw">fn</span> <span class="ident">disable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span> {
         <span class="kw">unsafe</span> {
             <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="ident">sys</span>::<span class="ident">mrb_sys_gc_disable</span>(<span class="ident">mrb</span>) {
-                    <span class="ident">State</span>::<span class="ident">Enabled</span>
+                <span class="kw">if</span> <span class="ident">sys::mrb_sys_gc_disable</span>(<span class="ident">mrb</span>) {
+                    <span class="ident">State::Enabled</span>
                 } <span class="kw">else</span> {
-                    <span class="ident">State</span>::<span class="ident">Disabled</span>
+                    <span class="ident">State::Disabled</span>
                 }
             })
-            .<span class="ident">unwrap_or</span>(<span class="ident">State</span>::<span class="ident">Disabled</span>)
+            .<span class="ident">unwrap_or</span>(<span class="ident">State::Disabled</span>)
         }
     }
 }
@@ -367,7 +367,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">test</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::test::prelude</span>::<span class="kw-2">*</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">arena_restore_on_explicit_restore</span>() {

@@ -2388,12 +2388,12 @@
 <span id="2385">2385</span>
 <span id="2386">2386</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">all</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">pedantic</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">cargo</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy</span>::<span class="ident">needless_borrow</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">option_if_let_else</span>)]</span>
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">test</span>, <span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">non_ascii_literal</span>))]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::needless_borrow</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::option_if_let_else</span>)]</span>
+<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">test</span>, <span class="ident">allow</span>(<span class="ident">clippy::non_ascii_literal</span>))]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unknown_lints</span>)]</span>
 <span class="comment">// TODO: warn on missing docs once crate is API-complete.</span>
 <span class="comment">// #![warn(missing_docs)]</span>
@@ -2419,28 +2419,28 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">std</span>;
 
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">boxed</span>::<span class="ident">Box</span>;
-<span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">vec</span>::{<span class="self">self</span>, <span class="ident">Vec</span>};
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">cmp</span>::<span class="ident">Ordering</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">convert</span>::<span class="ident">TryFrom</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>::{<span class="self">self</span>, <span class="ident">Write</span>};
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">iter</span>::{<span class="ident">Cycle</span>, <span class="ident">Take</span>};
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">mem</span>;
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">slice</span>::{<span class="self">self</span>, <span class="ident">SliceIndex</span>};
-<span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span>;
+<span class="kw">use</span> <span class="ident">alloc::boxed::Box</span>;
+<span class="kw">use</span> <span class="ident">alloc::vec</span>::{<span class="self">self</span>, <span class="ident">Vec</span>};
+<span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>;
+<span class="kw">use</span> <span class="ident">core::convert::TryFrom</span>;
+<span class="kw">use</span> <span class="ident">core::fmt</span>::{<span class="self">self</span>, <span class="ident">Write</span>};
+<span class="kw">use</span> <span class="ident">core::iter</span>::{<span class="ident">Cycle</span>, <span class="ident">Take</span>};
+<span class="kw">use</span> <span class="ident">core::mem</span>;
+<span class="kw">use</span> <span class="ident">core::slice</span>::{<span class="self">self</span>, <span class="ident">SliceIndex</span>};
+<span class="kw">use</span> <span class="ident">core::str</span>;
 
 <span class="kw">use</span> <span class="ident">bstr</span>::{<span class="ident">ByteSlice</span>, <span class="ident">ByteVec</span>};
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;casecmp&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;docsrs&quot;</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;casecmp&quot;</span>)))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">focaccia</span>::<span class="ident">CaseFold</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">focaccia::CaseFold</span>;
 
 <span class="kw">mod</span> <span class="ident">chars</span>;
 <span class="kw">mod</span> <span class="ident">encoding</span>;
 <span class="kw">mod</span> <span class="ident">eq</span>;
 <span class="kw">mod</span> <span class="ident">impls</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">chars</span>::<span class="ident">Chars</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">chars::Chars</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">encoding</span>::{<span class="ident">Encoding</span>, <span class="ident">InvalidEncodingError</span>};
 
 <span class="doccomment">/// Immutable [`String`] byte slice iterator.</span>
@@ -2464,7 +2464,7 @@
 <span class="doccomment">/// [`String`]: crate::String</span>
 <span class="doccomment">/// [`iter`]: crate::String::iter</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">slice</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">u8</span><span class="op">&gt;</span>);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">slice::Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">u8</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Views the underlying data as a subslice of the original data.</span>
@@ -2514,7 +2514,7 @@
 <span class="doccomment">/// [`String`]: crate::String</span>
 <span class="doccomment">/// [`iter_mut`]: crate::String::iter_mut</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">slice</span>::<span class="ident">IterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">u8</span><span class="op">&gt;</span>);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">slice::IterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">u8</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">IterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Views the underlying data as a subslice of the original data.</span>
@@ -2560,7 +2560,7 @@
 <span class="doccomment">/// let iter: spinoso_string::IntoIter = s.into_iter();</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IntoIter</span>(<span class="ident">vec</span>::<span class="ident">IntoIter</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IntoIter</span>(<span class="ident">vec::IntoIter</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span> <span class="ident">IntoIter</span> {
     <span class="doccomment">/// Returns the remaining bytes of this iterator as a slice.</span>
@@ -2626,7 +2626,7 @@
 <span class="doccomment">/// [`String`]: crate::String</span>
 <span class="doccomment">/// [`bytes`]: crate::String::bytes</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">slice</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">u8</span><span class="op">&gt;</span>);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">slice::Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">u8</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2696,16 +2696,16 @@
 <span class="doccomment">/// [Conventionally UTF-8]: crate::Encoding::Utf8</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Center</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
-    <span class="ident">left</span>: <span class="ident">Take</span><span class="op">&lt;</span><span class="ident">Cycle</span><span class="op">&lt;</span><span class="ident">slice</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">left</span>: <span class="ident">Take</span><span class="op">&lt;</span><span class="ident">Cycle</span><span class="op">&lt;</span><span class="ident">slice::Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">next</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]<span class="op">&gt;</span>,
     <span class="ident">s</span>: <span class="ident">Chars</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">right</span>: <span class="ident">Take</span><span class="op">&lt;</span><span class="ident">Cycle</span><span class="op">&lt;</span><span class="ident">slice</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">right</span>: <span class="ident">Take</span><span class="op">&lt;</span><span class="ident">Cycle</span><span class="op">&lt;</span><span class="ident">slice::Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Center</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">with_chars_width_and_padding</span>(<span class="ident">Chars</span>::<span class="ident">new</span>(), <span class="number">0</span>, <span class="kw-2">&amp;</span>[])
+        <span class="self">Self</span><span class="ident">::with_chars_width_and_padding</span>(<span class="ident">Chars::new</span>(), <span class="number">0</span>, <span class="kw-2">&amp;</span>[])
     }
 }
 
@@ -2741,34 +2741,34 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">invalid_utf8_codepoint</span>(<span class="ident">codepoint</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">CodePointRangeError</span>::<span class="ident">InvalidUtf8Codepoint</span>(<span class="ident">codepoint</span>))
+        <span class="self">Self</span>(<span class="ident">CodePointRangeError::InvalidUtf8Codepoint</span>(<span class="ident">codepoint</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">codepoint_out_of_range</span>(<span class="ident">codepoint</span>: <span class="ident">i64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">CodePointRangeError</span>::<span class="ident">OutOfRange</span>(<span class="ident">codepoint</span>))
+        <span class="self">Self</span>(<span class="ident">CodePointRangeError::OutOfRange</span>(<span class="ident">codepoint</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_invalid_utf8</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">CodePointRangeError</span>::<span class="ident">InvalidUtf8Codepoint</span>(<span class="kw">_</span>))
+        <span class="macro">matches!</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">CodePointRangeError::InvalidUtf8Codepoint</span>(<span class="kw">_</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_out_of_range</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">CodePointRangeError</span>::<span class="ident">OutOfRange</span>(<span class="kw">_</span>))
+        <span class="macro">matches!</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">CodePointRangeError::OutOfRange</span>(<span class="kw">_</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">message</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">message</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">alloc::string::String</span> {
         <span class="comment">// The longest error message is 27 bytes + a hex-encoded codepoint</span>
         <span class="comment">// formatted as `0x...`.</span>
-        <span class="kw">const</span> <span class="ident">MESSAGE_MAX_LENGTH</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">27</span> <span class="op">+</span> <span class="number">2</span> <span class="op">+</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="number">2</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>::<span class="ident">with_capacity</span>(<span class="ident">MESSAGE_MAX_LENGTH</span>);
+        <span class="kw">const</span> <span class="ident">MESSAGE_MAX_LENGTH</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">27</span> <span class="op">+</span> <span class="number">2</span> <span class="op">+</span> <span class="ident">mem::size_of</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="number">2</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">alloc::string::String::with_capacity</span>(<span class="ident">MESSAGE_MAX_LENGTH</span>);
         <span class="comment">// In practice, the errors from `write!` below are safe to ignore</span>
         <span class="comment">// because the `core::fmt::Write` impl for `String` will never panic</span>
         <span class="comment">// and these `String`s will never approach `isize::MAX` bytes.</span>
@@ -2779,19 +2779,19 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">InvalidCodepointError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">InvalidCodepointError</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="number">0</span> {
-            <span class="ident">CodePointRangeError</span>::<span class="ident">InvalidUtf8Codepoint</span>(<span class="ident">codepoint</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">CodePointRangeError::InvalidUtf8Codepoint</span>(<span class="ident">codepoint</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;invalid codepoint {:X} in UTF-8&quot;</span>, <span class="ident">codepoint</span>)
             }
-            <span class="ident">CodePointRangeError</span>::<span class="ident">OutOfRange</span>(<span class="ident">codepoint</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{} out of char range&quot;</span>, <span class="ident">codepoint</span>),
+            <span class="ident">CodePointRangeError::OutOfRange</span>(<span class="ident">codepoint</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{} out of char range&quot;</span>, <span class="ident">codepoint</span>),
         }
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">std</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">for</span> <span class="ident">InvalidCodepointError</span> {}
+<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">InvalidCodepointError</span> {}
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OrdError</span> {
@@ -2830,7 +2830,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">invalid_utf8_byte_sequence</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">InvalidUtf8ByteSequence</span>
+        <span class="self">Self</span><span class="ident">::InvalidUtf8ByteSequence</span>
     }
 
     <span class="doccomment">/// Construct a new `OrdError` for an empty `String`.</span>
@@ -2849,7 +2849,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">empty_string</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span>::<span class="ident">EmptyString</span>
+        <span class="self">Self</span><span class="ident">::EmptyString</span>
     }
 
     <span class="doccomment">/// Error message for this `OrdError`.</span>
@@ -2871,20 +2871,20 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">message</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span>::<span class="ident">InvalidUtf8ByteSequence</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;invalid byte sequence in UTF-8&quot;</span>,
-            <span class="self">Self</span>::<span class="ident">EmptyString</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;empty string&quot;</span>,
+            <span class="self">Self</span><span class="ident">::InvalidUtf8ByteSequence</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;invalid byte sequence in UTF-8&quot;</span>,
+            <span class="self">Self</span><span class="ident">::EmptyString</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;empty string&quot;</span>,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">OrdError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">OrdError</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="self">self</span>.<span class="ident">message</span>())
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">std</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">for</span> <span class="ident">OrdError</span> {}
+<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">OrdError</span> {}
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">String</span> {
@@ -2892,8 +2892,8 @@
     <span class="ident">encoding</span>: <span class="ident">Encoding</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">String</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">String</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;String&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;buf&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_bstr</span>())
             .<span class="ident">field</span>(<span class="string">&quot;encoding&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">encoding</span>)
@@ -2922,8 +2922,8 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
-        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding</span>::<span class="ident">Utf8</span>;
+        <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding::Utf8</span>;
         <span class="self">Self</span> { <span class="ident">buf</span>, <span class="ident">encoding</span> }
     }
 
@@ -2971,36 +2971,36 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity</span>(<span class="ident">capacity</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">capacity</span>);
-        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding</span>::<span class="ident">Utf8</span>;
+        <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">capacity</span>);
+        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding::Utf8</span>;
         <span class="self">Self</span> { <span class="ident">buf</span>, <span class="ident">encoding</span> }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_capacity_and_encoding</span>(<span class="ident">capacity</span>: <span class="ident">usize</span>, <span class="ident">encoding</span>: <span class="ident">Encoding</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">capacity</span>);
+        <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">capacity</span>);
         <span class="self">Self</span> { <span class="ident">buf</span>, <span class="ident">encoding</span> }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">utf8</span>(<span class="ident">buf</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding</span>::<span class="ident">Utf8</span>;
+        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding::Utf8</span>;
         <span class="self">Self</span> { <span class="ident">buf</span>, <span class="ident">encoding</span> }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ascii</span>(<span class="ident">buf</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding</span>::<span class="ident">Ascii</span>;
+        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding::Ascii</span>;
         <span class="self">Self</span> { <span class="ident">buf</span>, <span class="ident">encoding</span> }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">binary</span>(<span class="ident">buf</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding</span>::<span class="ident">Binary</span>;
+        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding::Binary</span>;
         <span class="self">Self</span> { <span class="ident">buf</span>, <span class="ident">encoding</span> }
     }
 }
@@ -3327,7 +3327,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">I</span>::<span class="ident">Output</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">I::Output</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">SliceIndex</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
     {
@@ -3353,7 +3353,7 @@
     <span class="doccomment">/// [`get`]: Self::get</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">I</span>::<span class="ident">Output</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">I::Output</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">SliceIndex</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
     {
@@ -3386,7 +3386,7 @@
     <span class="doccomment">/// [undefined behavior]: https://doc.rust-lang.org/reference/behavior-considered-undefined.html</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">I</span>::<span class="ident">Output</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">I::Output</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">SliceIndex</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
     {
@@ -3421,7 +3421,7 @@
     <span class="doccomment">/// [undefined behavior]: https://doc.rust-lang.org/reference/behavior-considered-undefined.html</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked_mut</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">I</span>::<span class="ident">Output</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked_mut</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">I::Output</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">SliceIndex</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
     {
@@ -3518,25 +3518,25 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_push_codepoint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">codepoint</span>: <span class="ident">i64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">InvalidCodepointError</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">encoding</span> {
-            <span class="ident">Encoding</span>::<span class="ident">Utf8</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">codepoint</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">codepoint</span>) <span class="op">=</span> <span class="ident">u32</span>::<span class="ident">try_from</span>(<span class="ident">codepoint</span>) {
+            <span class="ident">Encoding::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="ident">codepoint</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">codepoint</span>) <span class="op">=</span> <span class="ident">u32::try_from</span>(<span class="ident">codepoint</span>) {
                     <span class="ident">codepoint</span>
                 } <span class="kw">else</span> {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InvalidCodepointError</span>::<span class="ident">codepoint_out_of_range</span>(<span class="ident">codepoint</span>));
+                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InvalidCodepointError::codepoint_out_of_range</span>(<span class="ident">codepoint</span>));
                 };
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="ident">char</span>::<span class="ident">try_from</span>(<span class="ident">codepoint</span>) {
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="ident">char::try_from</span>(<span class="ident">codepoint</span>) {
                     <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">push_char</span>(<span class="ident">ch</span>);
                     <span class="prelude-val">Ok</span>(())
                 } <span class="kw">else</span> {
-                    <span class="prelude-val">Err</span>(<span class="ident">InvalidCodepointError</span>::<span class="ident">invalid_utf8_codepoint</span>(<span class="ident">codepoint</span>))
+                    <span class="prelude-val">Err</span>(<span class="ident">InvalidCodepointError::invalid_utf8_codepoint</span>(<span class="ident">codepoint</span>))
                 }
             }
-            <span class="ident">Encoding</span>::<span class="ident">Ascii</span> <span class="op">|</span> <span class="ident">Encoding</span>::<span class="ident">Binary</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">byte</span>) <span class="op">=</span> <span class="ident">u8</span>::<span class="ident">try_from</span>(<span class="ident">codepoint</span>) {
+            <span class="ident">Encoding::Ascii</span> <span class="op">|</span> <span class="ident">Encoding::Binary</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">byte</span>) <span class="op">=</span> <span class="ident">u8::try_from</span>(<span class="ident">codepoint</span>) {
                     <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">push_byte</span>(<span class="ident">byte</span>);
                     <span class="prelude-val">Ok</span>(())
                 } <span class="kw">else</span> {
-                    <span class="prelude-val">Err</span>(<span class="ident">InvalidCodepointError</span>::<span class="ident">codepoint_out_of_range</span>(<span class="ident">codepoint</span>))
+                    <span class="prelude-val">Err</span>(<span class="ident">InvalidCodepointError::codepoint_out_of_range</span>(<span class="ident">codepoint</span>))
                 }
             }
         }
@@ -3668,7 +3668,7 @@
     <span class="doccomment">/// [`String#b`]: https://ruby-doc.org/core-2.6.3/String.html#method-i-b</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">make_binary</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding</span>::<span class="ident">Binary</span>;
+        <span class="self">self</span>.<span class="ident">encoding</span> <span class="op">=</span> <span class="ident">Encoding::Binary</span>;
     }
 
     <span class="doccomment">/// Returns the length of this `String` in bytes.</span>
@@ -3699,22 +3699,22 @@
     <span class="doccomment">/// Modify this `String` to have the first character converted to uppercase</span>
     <span class="doccomment">/// and the remainder to lowercase.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">match_same_arms</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::match_same_arms</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">make_capitalized</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">encoding</span> {
-            <span class="ident">Encoding</span>::<span class="ident">Ascii</span> <span class="op">|</span> <span class="ident">Encoding</span>::<span class="ident">Binary</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Encoding::Ascii</span> <span class="op">|</span> <span class="ident">Encoding::Binary</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">head</span>, <span class="ident">tail</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">split_first_mut</span>() {
                     <span class="ident">head</span>.<span class="ident">make_ascii_uppercase</span>();
                     <span class="ident">tail</span>.<span class="ident">make_ascii_lowercase</span>();
                 }
             }
-            <span class="ident">Encoding</span>::<span class="ident">Utf8</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Encoding::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="comment">// This allocation assumes that in the common case, capitalizing</span>
                 <span class="comment">// and lowercasing `char`s do not change the length of the</span>
                 <span class="comment">// `String`.</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">replacement</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">len</span>());
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">replacement</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">len</span>());
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>();
-                <span class="kw">match</span> <span class="ident">bstr</span>::<span class="ident">decode_utf8</span>(<span class="ident">bytes</span>) {
+                <span class="kw">match</span> <span class="ident">bstr::decode_utf8</span>(<span class="ident">bytes</span>) {
                     (<span class="prelude-val">Some</span>(<span class="ident">ch</span>), <span class="ident">size</span>) <span class="op">=</span><span class="op">&gt;</span> {
                         <span class="comment">// Converting a UTF-8 character to uppercase may yield</span>
                         <span class="comment">// multiple codepoints.</span>
@@ -3731,7 +3731,7 @@
                     }
                 }
                 <span class="kw">while</span> <span class="op">!</span><span class="ident">bytes</span>.<span class="ident">is_empty</span>() {
-                    <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr</span>::<span class="ident">decode_utf8</span>(<span class="ident">bytes</span>);
+                    <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr::decode_utf8</span>(<span class="ident">bytes</span>);
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="ident">ch</span> {
                         <span class="comment">// Converting a UTF-8 character to lowercase may yield</span>
                         <span class="comment">// multiple codepoints.</span>
@@ -3755,7 +3755,7 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;casecmp&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;docsrs&quot;</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;casecmp&quot;</span>)))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ascii_casecmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ordering</span> {
-        <span class="ident">focaccia</span>::<span class="ident">ascii_casecmp</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>(), <span class="ident">other</span>)
+        <span class="ident">focaccia::ascii_casecmp</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>(), <span class="ident">other</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -3768,8 +3768,8 @@
         <span class="comment">// If both `String`s are conventionally UTF-8, they must be case</span>
         <span class="comment">// compared using the given case folding strategy. This requires the</span>
         <span class="comment">// `String`s be well-formed UTF-8.</span>
-        <span class="kw">if</span> <span class="kw">let</span> (<span class="ident">Encoding</span>::<span class="ident">Utf8</span>, <span class="ident">Encoding</span>::<span class="ident">Utf8</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">encoding</span>, <span class="ident">other</span>.<span class="ident">encoding</span>) {
-            <span class="kw">if</span> <span class="kw">let</span> (<span class="prelude-val">Ok</span>(<span class="ident">left</span>), <span class="prelude-val">Ok</span>(<span class="ident">right</span>)) <span class="op">=</span> (<span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="ident">left</span>), <span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="ident">right</span>)) {
+        <span class="kw">if</span> <span class="kw">let</span> (<span class="ident">Encoding::Utf8</span>, <span class="ident">Encoding::Utf8</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">encoding</span>, <span class="ident">other</span>.<span class="ident">encoding</span>) {
+            <span class="kw">if</span> <span class="kw">let</span> (<span class="prelude-val">Ok</span>(<span class="ident">left</span>), <span class="prelude-val">Ok</span>(<span class="ident">right</span>)) <span class="op">=</span> (<span class="ident">str::from_utf8</span>(<span class="ident">left</span>), <span class="ident">str::from_utf8</span>(<span class="ident">right</span>)) {
                 <span class="comment">// Both slices are UTF-8, compare with the given Unicode case</span>
                 <span class="comment">// folding scheme.</span>
                 <span class="prelude-val">Some</span>(<span class="ident">options</span>.<span class="ident">case_eq</span>(<span class="ident">left</span>, <span class="ident">right</span>))
@@ -3780,7 +3780,7 @@
         } <span class="kw">else</span> {
             <span class="comment">// At least one slice is not conventionally UTF-8, so fallback to</span>
             <span class="comment">// ASCII comparator.</span>
-            <span class="prelude-val">Some</span>(<span class="ident">focaccia</span>::<span class="ident">ascii_case_eq</span>(<span class="ident">left</span>, <span class="ident">right</span>))
+            <span class="prelude-val">Some</span>(<span class="ident">focaccia::ascii_case_eq</span>(<span class="ident">left</span>, <span class="ident">right</span>))
         }
     }
 
@@ -3826,7 +3826,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">center</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">usize</span>, <span class="ident">padding</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> [<span class="ident">u8</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Center</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">padding_width</span> <span class="op">=</span> <span class="ident">width</span>.<span class="ident">saturating_sub</span>(<span class="self">self</span>.<span class="ident">char_len</span>());
-        <span class="ident">Center</span>::<span class="ident">with_chars_width_and_padding</span>(<span class="self">self</span>.<span class="ident">chars</span>(), <span class="ident">padding_width</span>, <span class="ident">padding</span>.<span class="ident">unwrap_or</span>(<span class="string">b&quot; &quot;</span>))
+        <span class="ident">Center::with_chars_width_and_padding</span>(<span class="self">self</span>.<span class="ident">chars</span>(), <span class="ident">padding_width</span>, <span class="ident">padding</span>.<span class="ident">unwrap_or</span>(<span class="string">b&quot; &quot;</span>))
     }
 
     <span class="doccomment">/// Modifies this `String` in-place with the given record separator removed</span>
@@ -3865,12 +3865,12 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::needless_pass_by_value</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chomp</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">separator</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_empty</span>() {
             <span class="kw">return</span> <span class="bool-val">false</span>;
         }
-        <span class="kw">match</span> <span class="ident">separator</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="ident">AsRef</span>::<span class="ident">as_ref</span>) {
+        <span class="kw">match</span> <span class="ident">separator</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="ident">AsRef::as_ref</span>) {
             <span class="prelude-val">Some</span>(<span class="ident">separator</span>) <span class="kw">if</span> <span class="ident">separator</span>.<span class="ident">is_empty</span>() <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">original_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
                 <span class="kw">let</span> <span class="ident">substr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">trim_end_with</span>(<span class="op">|</span><span class="ident">ch</span><span class="op">|</span> <span class="macro">matches!</span>(<span class="ident">ch</span>, <span class="string">&#39;\n&#39;</span>));
@@ -3942,8 +3942,8 @@
         }
         <span class="kw">let</span> <span class="ident">bytes_to_remove</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">ends_with</span>(<span class="string">b&quot;\r\n&quot;</span>) {
             <span class="number">2</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Encoding</span>::<span class="ident">Utf8</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span> {
-            <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr</span>::<span class="ident">decode_last_utf8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buf</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Encoding::Utf8</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span> {
+            <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr::decode_last_utf8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buf</span>);
             <span class="kw">if</span> <span class="ident">ch</span>.<span class="ident">is_some</span>() {
                 <span class="ident">size</span>
             } <span class="kw">else</span> {
@@ -4007,8 +4007,8 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Encoding</span>::<span class="ident">Utf8</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span> {
-            <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr</span>::<span class="ident">decode_utf8</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>());
+        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Encoding::Utf8</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span> {
+            <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr::decode_utf8</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>());
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buf</span>[..<span class="ident">size</span>]
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">get</span>(<span class="number">0</span>..<span class="number">1</span>).<span class="ident">unwrap_or_default</span>()
@@ -4077,18 +4077,18 @@
     <span class="doccomment">/// [conventionally UTF-8]: crate::Encoding::Utf8</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ord</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">OrdError</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Encoding</span>::<span class="ident">Utf8</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span> {
-            <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr</span>::<span class="ident">decode_utf8</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>());
+        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Encoding::Utf8</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span> {
+            <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr::decode_utf8</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>());
             <span class="kw">match</span> <span class="ident">ch</span> {
                 <span class="comment">// All `char`s are valid `u32`s</span>
                 <span class="comment">// https://github.com/rust-lang/rust/blob/1.48.0/library/core/src/char/convert.rs#L12-L20</span>
-                <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">u32</span>::<span class="ident">from</span>(<span class="ident">ch</span>)),
-                <span class="prelude-val">None</span> <span class="kw">if</span> <span class="ident">size</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OrdError</span>::<span class="ident">empty_string</span>()),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OrdError</span>::<span class="ident">invalid_utf8_byte_sequence</span>()),
+                <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">u32::from</span>(<span class="ident">ch</span>)),
+                <span class="prelude-val">None</span> <span class="kw">if</span> <span class="ident">size</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OrdError::empty_string</span>()),
+                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">OrdError::invalid_utf8_byte_sequence</span>()),
             }
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">byte</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">get</span>(<span class="number">0</span>).<span class="ident">copied</span>().<span class="ident">ok_or_else</span>(<span class="ident">OrdError</span>::<span class="ident">empty_string</span>)<span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">u32</span>::<span class="ident">from</span>(<span class="ident">byte</span>))
+            <span class="kw">let</span> <span class="ident">byte</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">get</span>(<span class="number">0</span>).<span class="ident">copied</span>().<span class="ident">ok_or_else</span>(<span class="ident">OrdError::empty_string</span>)<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(<span class="ident">u32::from</span>(<span class="ident">byte</span>))
         }
     }
 }
@@ -4145,7 +4145,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chars</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Chars</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-        <span class="ident">Chars</span>::<span class="ident">from</span>(<span class="self">self</span>)
+        <span class="ident">Chars::from</span>(<span class="self">self</span>)
     }
 
     <span class="doccomment">/// Returns the character length of this `String`.</span>
@@ -4176,8 +4176,8 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">char_len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">encoding</span> {
-            <span class="ident">Encoding</span>::<span class="ident">Ascii</span> <span class="op">|</span> <span class="ident">Encoding</span>::<span class="ident">Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">len</span>(),
-            <span class="ident">Encoding</span>::<span class="ident">Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">conventionally_utf8_bytestring_len</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>()),
+            <span class="ident">Encoding::Ascii</span> <span class="op">|</span> <span class="ident">Encoding::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">len</span>(),
+            <span class="ident">Encoding::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">conventionally_utf8_bytestring_len</span>(<span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_slice</span>()),
         }
     }
 
@@ -4226,9 +4226,9 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_encoding</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">encoding</span> {
-            <span class="ident">Encoding</span>::<span class="ident">Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">is_utf8</span>(),
-            <span class="ident">Encoding</span>::<span class="ident">Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">is_ascii</span>(),
-            <span class="ident">Encoding</span>::<span class="ident">Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="ident">Encoding::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">is_utf8</span>(),
+            <span class="ident">Encoding::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">is_ascii</span>(),
+            <span class="ident">Encoding::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
         }
     }
 }
@@ -4239,7 +4239,7 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">as_ref</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">char_len</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">while</span> <span class="op">!</span><span class="ident">bytes</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr</span>::<span class="ident">decode_utf8</span>(<span class="ident">bytes</span>);
+        <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr::decode_utf8</span>(<span class="ident">bytes</span>);
         <span class="ident">char_len</span> <span class="op">+</span><span class="op">=</span> <span class="kw">if</span> <span class="ident">ch</span>.<span class="ident">is_some</span>() { <span class="number">1</span> } <span class="kw">else</span> { <span class="ident">size</span> };
         <span class="ident">bytes</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">bytes</span>[<span class="ident">size</span>..];
     }
@@ -4247,13 +4247,13 @@
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">shadow_unrelated</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">invisible_characters</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::shadow_unrelated</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::invisible_characters</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">ToString</span>;
-    <span class="kw">use</span> <span class="ident">alloc</span>::<span class="ident">vec</span>::<span class="ident">Vec</span>;
-    <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">str</span>;
-    <span class="kw">use</span> <span class="ident">quickcheck</span>::<span class="ident">quickcheck</span>;
+    <span class="kw">use</span> <span class="ident">alloc::string::ToString</span>;
+    <span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
+    <span class="kw">use</span> <span class="ident">core::str</span>;
+    <span class="kw">use</span> <span class="ident">quickcheck::quickcheck</span>;
 
     <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">conventionally_utf8_bytestring_len</span>, <span class="ident">String</span>};
 
@@ -4422,168 +4422,168 @@
     }
 
     <span class="macro">quickcheck!</span> {
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_char_len_utf8_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_char_len_utf8_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">chars</span>().<span class="ident">count</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">char_len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_len_utf8_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_len_utf8_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_bytesize_utf8_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_bytesize_utf8_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">bytesize</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_char_len_binary_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">utf8_contents</span>) <span class="op">=</span> <span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="kw-2">&amp;</span><span class="ident">contents</span>) {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">utf8_contents</span>) <span class="op">=</span> <span class="ident">str::from_utf8</span>(<span class="kw-2">&amp;</span><span class="ident">contents</span>) {
                 <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">utf8_contents</span>.<span class="ident">chars</span>().<span class="ident">count</span>();
-                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="ident">contents</span>);
+                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="ident">contents</span>);
                 <span class="ident">s</span>.<span class="ident">char_len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
             } <span class="kw">else</span> {
                 <span class="kw">let</span> <span class="ident">expected_at_most</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="ident">contents</span>);
+                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="ident">contents</span>);
                 <span class="ident">s</span>.<span class="ident">char_len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">expected_at_most</span>
             }
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_len_binary_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="ident">contents</span>);
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="ident">contents</span>);
             <span class="ident">s</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_bytesize_binary_contents_utf8_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="ident">contents</span>);
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="ident">contents</span>);
             <span class="ident">s</span>.<span class="ident">bytesize</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_char_len_utf8_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_char_len_utf8_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">char_len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_len_utf8_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_len_utf8_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_bytesize_utf8_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_bytesize_utf8_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">bytesize</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_char_len_binary_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="ident">contents</span>);
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="ident">contents</span>);
             <span class="ident">s</span>.<span class="ident">char_len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_len_binary_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="ident">contents</span>);
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="ident">contents</span>);
             <span class="ident">s</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_bytesize_binary_contents_ascii_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="ident">contents</span>);
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="ident">contents</span>);
             <span class="ident">s</span>.<span class="ident">bytesize</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_char_len_utf8_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_char_len_utf8_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">char_len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_len_utf8_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_len_utf8_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">fuzz_bytesize_utf8_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">alloc</span>::<span class="ident">string</span>::<span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
+        <span class="kw">fn</span> <span class="ident">fuzz_bytesize_utf8_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">alloc::string::String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="ident">contents</span>.<span class="ident">into_bytes</span>());
             <span class="ident">s</span>.<span class="ident">bytesize</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_char_len_binary_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="ident">contents</span>);
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="ident">contents</span>);
             <span class="ident">s</span>.<span class="ident">char_len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_len_binary_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="ident">contents</span>);
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="ident">contents</span>);
             <span class="ident">s</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">needless_pass_by_value</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::needless_pass_by_value</span>)]</span>
         <span class="kw">fn</span> <span class="ident">fuzz_bytesize_binary_contents_binary_string</span>(<span class="ident">contents</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">contents</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="ident">contents</span>);
+            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="ident">contents</span>);
             <span class="ident">s</span>.<span class="ident">bytesize</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">expected</span>
         }
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_utf8_string_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">b&quot;&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">b&quot;&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_utf8_string_ascii</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">b&quot;abc&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">b&quot;abc&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">b&quot;aBC&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">b&quot;aBC&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">b&quot;ABC&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">b&quot;ABC&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">b&quot;aBC, 123, ABC, baby you and me girl&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">b&quot;aBC, 123, ABC, baby you and me girl&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc, 123, abc, baby you and me girl&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_utf8_string_utf8</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">&quot;ß&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">&quot;ß&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="comment">// This differs from MRI:</span>
         <span class="comment">//</span>
@@ -4593,17 +4593,17 @@
         <span class="comment">// ```</span>
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;SS&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">&quot;αύριο&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">&quot;αύριο&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Αύριο&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">&quot;έτος&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">&quot;έτος&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Έτος&quot;</span>);
 
         <span class="comment">// two-byte characters</span>
         <span class="comment">// https://github.com/minimaxir/big-list-of-naughty-strings/blob/894882e7/blns.txt#L198-L200</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(
             <span class="string">&quot;𐐜 𐐔𐐇𐐝𐐀𐐡𐐇𐐓 𐐙𐐊𐐡𐐝𐐓/𐐝𐐇𐐗𐐊𐐤𐐔 𐐒𐐋𐐗 𐐒𐐌 𐐜 𐐡𐐀𐐖𐐇𐐤𐐓𐐝 𐐱𐑂 𐑄 𐐔𐐇𐐝𐐀𐐡𐐇𐐓 𐐏𐐆𐐅𐐤𐐆𐐚𐐊𐐡𐐝𐐆𐐓𐐆&quot;</span>
                 .<span class="ident">to_string</span>()
                 .<span class="ident">into_bytes</span>(),
@@ -4613,68 +4613,68 @@
 
         <span class="comment">// Change length when lowercased</span>
         <span class="comment">// https://github.com/minimaxir/big-list-of-naughty-strings/blob/894882e7/blns.txt#L226-L232</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">&quot;zȺȾ&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">&quot;zȺȾ&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Zⱥⱦ&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_utf8_string_invalid_utf8</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">b&quot;\xFF\xFE&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">b&quot;\xFF\xFE&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="kw-2">&amp;</span><span class="string">b&quot;\xFF\xFE&quot;</span>[..]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_utf8_string_unicode_replacement_character</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">utf8</span>(<span class="string">&quot;�&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">&quot;�&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;�&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_ascii_string_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_ascii_string_ascii</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;abc&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;abc&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;aBC&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;aBC&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;ABC&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;ABC&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;aBC, 123, ABC, baby you and me girl&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;aBC, 123, ABC, baby you and me girl&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc, 123, abc, baby you and me girl&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_ascii_string_utf8</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">&quot;ß&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">&quot;ß&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;ß&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">&quot;αύριο&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">&quot;αύριο&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;αύριο&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">&quot;έτος&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">&quot;έτος&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;έτος&quot;</span>);
 
         <span class="comment">// two-byte characters</span>
         <span class="comment">// https://github.com/minimaxir/big-list-of-naughty-strings/blob/894882e7/blns.txt#L198-L200</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(
             <span class="string">&quot;𐐜 𐐔𐐇𐐝𐐀𐐡𐐇𐐓 𐐙𐐊𐐡𐐝𐐓/𐐝𐐇𐐗𐐊𐐤𐐔 𐐒𐐋𐐗 𐐒𐐌 𐐜 𐐡𐐀𐐖𐐇𐐤𐐓𐐝 𐐱𐑂 𐑄 𐐔𐐇𐐝𐐀𐐡𐐇𐐓 𐐏𐐆𐐅𐐤𐐆𐐚𐐊𐐡𐐝𐐆𐐓𐐆&quot;</span>
                 .<span class="ident">to_string</span>()
                 .<span class="ident">into_bytes</span>(),
@@ -4684,68 +4684,68 @@
 
         <span class="comment">// Change length when lowercased</span>
         <span class="comment">// https://github.com/minimaxir/big-list-of-naughty-strings/blob/894882e7/blns.txt#L226-L232</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">&quot;zȺȾ&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">&quot;zȺȾ&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;ZȺȾ&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_ascii_string_invalid_utf8</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;\xFF\xFE&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;\xFF\xFE&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="kw-2">&amp;</span><span class="string">b&quot;\xFF\xFE&quot;</span>[..]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_ascii_string_unicode_replacement_character</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">&quot;�&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">&quot;�&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;�&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_binary_string_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="string">b&quot;&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">b&quot;&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_binary_string_ascii</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="string">b&quot;abc&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">b&quot;abc&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;aBC&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;aBC&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;ABC&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;ABC&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">ascii</span>(<span class="string">b&quot;aBC, 123, ABC, baby you and me girl&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::ascii</span>(<span class="string">b&quot;aBC, 123, ABC, baby you and me girl&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;Abc, 123, abc, baby you and me girl&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_binary_string_utf8</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="string">&quot;ß&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">&quot;ß&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;ß&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="string">&quot;αύριο&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">&quot;αύριο&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;αύριο&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="string">&quot;έτος&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">&quot;έτος&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;έτος&quot;</span>);
 
         <span class="comment">// two-byte characters</span>
         <span class="comment">// https://github.com/minimaxir/big-list-of-naughty-strings/blob/894882e7/blns.txt#L198-L200</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(
             <span class="string">&quot;𐐜 𐐔𐐇𐐝𐐀𐐡𐐇𐐓 𐐙𐐊𐐡𐐝𐐓/𐐝𐐇𐐗𐐊𐐤𐐔 𐐒𐐋𐐗 𐐒𐐌 𐐜 𐐡𐐀𐐖𐐇𐐤𐐓𐐝 𐐱𐑂 𐑄 𐐔𐐇𐐝𐐀𐐡𐐇𐐓 𐐏𐐆𐐅𐐤𐐆𐐚𐐊𐐡𐐝𐐆𐐓𐐆&quot;</span>
                 .<span class="ident">to_string</span>()
                 .<span class="ident">into_bytes</span>(),
@@ -4755,21 +4755,21 @@
 
         <span class="comment">// Change length when lowercased</span>
         <span class="comment">// https://github.com/minimaxir/big-list-of-naughty-strings/blob/894882e7/blns.txt#L226-L232</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="string">&quot;zȺȾ&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">&quot;zȺȾ&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;ZȺȾ&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_binary_string_invalid_utf8</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="string">b&quot;\xFF\xFE&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">b&quot;\xFF\xFE&quot;</span>.<span class="ident">to_vec</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="kw-2">&amp;</span><span class="string">b&quot;\xFF\xFE&quot;</span>[..]);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">make_capitalized_binary_string_unicode_replacement_character</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">binary</span>(<span class="string">&quot;�&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">&quot;�&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;�&quot;</span>);
     }

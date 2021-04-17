@@ -745,29 +745,29 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Command processor</span>
 
-<span class="kw">use</span> <span class="ident">log</span>::<span class="ident">debug</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">rc</span>::<span class="ident">Rc</span>;
-<span class="kw">use</span> <span class="ident">unicode_segmentation</span>::<span class="ident">UnicodeSegmentation</span>;
-<span class="kw">use</span> <span class="ident">unicode_width</span>::<span class="ident">UnicodeWidthChar</span>;
+<span class="kw">use</span> <span class="ident">log::debug</span>;
+<span class="kw">use</span> <span class="ident">std::cell::RefCell</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::rc::Rc</span>;
+<span class="kw">use</span> <span class="ident">unicode_segmentation::UnicodeSegmentation</span>;
+<span class="kw">use</span> <span class="ident">unicode_width::UnicodeWidthChar</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Context</span>, <span class="ident">Helper</span>, <span class="prelude-ty">Result</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">highlight</span>::<span class="ident">Highlighter</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">hint</span>::<span class="ident">Hint</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">history</span>::<span class="ident">Direction</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">keymap</span>::{<span class="ident">Anchor</span>, <span class="ident">At</span>, <span class="ident">CharSearch</span>, <span class="ident">Cmd</span>, <span class="ident">Movement</span>, <span class="ident">RepeatCount</span>, <span class="ident">Word</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">keymap</span>::{<span class="ident">InputState</span>, <span class="ident">Invoke</span>, <span class="ident">Refresher</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">layout</span>::{<span class="ident">Layout</span>, <span class="ident">Position</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">line_buffer</span>::{<span class="ident">LineBuffer</span>, <span class="ident">WordAction</span>, <span class="ident">MAX_LINE</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">tty</span>::{<span class="ident">Renderer</span>, <span class="ident">Term</span>, <span class="ident">Terminal</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">undo</span>::<span class="ident">Changeset</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">validate</span>::{<span class="ident">ValidationContext</span>, <span class="ident">ValidationResult</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::highlight::Highlighter</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::hint::Hint</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::history::Direction</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keymap</span>::{<span class="ident">Anchor</span>, <span class="ident">At</span>, <span class="ident">CharSearch</span>, <span class="ident">Cmd</span>, <span class="ident">Movement</span>, <span class="ident">RepeatCount</span>, <span class="ident">Word</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keymap</span>::{<span class="ident">InputState</span>, <span class="ident">Invoke</span>, <span class="ident">Refresher</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::layout</span>::{<span class="ident">Layout</span>, <span class="ident">Position</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::line_buffer</span>::{<span class="ident">LineBuffer</span>, <span class="ident">WordAction</span>, <span class="ident">MAX_LINE</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::tty</span>::{<span class="ident">Renderer</span>, <span class="ident">Term</span>, <span class="ident">Terminal</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::undo::Changeset</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::validate</span>::{<span class="ident">ValidationContext</span>, <span class="ident">ValidationResult</span>};
 
 <span class="doccomment">/// Represent the state during line editing.</span>
 <span class="doccomment">/// Implement rendering.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span>::<span class="ident">Writer</span>,
+    <span class="kw">pub</span> <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Writer</span>,
     <span class="ident">prompt</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;prompt</span> <span class="ident">str</span>,  <span class="comment">// Prompt to display (rl_prompt)</span>
     <span class="ident">prompt_size</span>: <span class="ident">Position</span>, <span class="comment">// Prompt Unicode/visible width and height</span>
     <span class="kw">pub</span> <span class="ident">line</span>: <span class="ident">LineBuffer</span>,  <span class="comment">// Edited line buffer</span>
@@ -789,21 +789,21 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span>::<span class="ident">Writer</span>,
+        <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Writer</span>,
         <span class="ident">prompt</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;prompt</span> <span class="ident">str</span>,
         <span class="ident">helper</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="ident">H</span><span class="op">&gt;</span>,
         <span class="ident">ctx</span>: <span class="ident">Context</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span><span class="op">&gt;</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">prompt_size</span> <span class="op">=</span> <span class="ident">out</span>.<span class="ident">calculate_position</span>(<span class="ident">prompt</span>, <span class="ident">Position</span>::<span class="ident">default</span>());
+        <span class="kw">let</span> <span class="ident">prompt_size</span> <span class="op">=</span> <span class="ident">out</span>.<span class="ident">calculate_position</span>(<span class="ident">prompt</span>, <span class="ident">Position::default</span>());
         <span class="ident">State</span> {
             <span class="ident">out</span>,
             <span class="ident">prompt</span>,
             <span class="ident">prompt_size</span>,
-            <span class="ident">line</span>: <span class="ident">LineBuffer</span>::<span class="ident">with_capacity</span>(<span class="ident">MAX_LINE</span>).<span class="ident">can_growth</span>(<span class="bool-val">true</span>),
-            <span class="ident">layout</span>: <span class="ident">Layout</span>::<span class="ident">default</span>(),
-            <span class="ident">saved_line_for_history</span>: <span class="ident">LineBuffer</span>::<span class="ident">with_capacity</span>(<span class="ident">MAX_LINE</span>).<span class="ident">can_growth</span>(<span class="bool-val">true</span>),
+            <span class="ident">line</span>: <span class="ident">LineBuffer::with_capacity</span>(<span class="ident">MAX_LINE</span>).<span class="ident">can_growth</span>(<span class="bool-val">true</span>),
+            <span class="ident">layout</span>: <span class="ident">Layout::default</span>(),
+            <span class="ident">saved_line_for_history</span>: <span class="ident">LineBuffer::with_capacity</span>(<span class="ident">MAX_LINE</span>).<span class="ident">can_growth</span>(<span class="bool-val">true</span>),
             <span class="ident">byte_buffer</span>: [<span class="number">0</span>; <span class="number">4</span>],
-            <span class="ident">changes</span>: <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">Changeset</span>::<span class="ident">new</span>())),
+            <span class="ident">changes</span>: <span class="ident">Rc::new</span>(<span class="ident">RefCell::new</span>(<span class="ident">Changeset::new</span>())),
             <span class="ident">helper</span>,
             <span class="ident">ctx</span>,
             <span class="ident">hint</span>: <span class="prelude-val">None</span>,
@@ -822,7 +822,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_cmd</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">input_state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">InputState</span>,
-        <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span>::<span class="ident">Reader</span>,
+        <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Reader</span>,
         <span class="ident">single_esc_abort</span>: <span class="ident">bool</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
@@ -831,11 +831,11 @@
                 <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">update_size</span>();
                 <span class="self">self</span>.<span class="ident">prompt_size</span> <span class="op">=</span> <span class="self">self</span>
                     .<span class="ident">out</span>
-                    .<span class="ident">calculate_position</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">Position</span>::<span class="ident">default</span>());
+                    .<span class="ident">calculate_position</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">Position::default</span>());
                 <span class="self">self</span>.<span class="ident">refresh_line</span>()<span class="question-mark">?</span>;
                 <span class="kw">continue</span>;
             }
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">Cmd</span>::<span class="ident">Replace</span>(..)) <span class="op">=</span> <span class="ident">rc</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">Cmd::Replace</span>(..)) <span class="op">=</span> <span class="ident">rc</span> {
                 <span class="self">self</span>.<span class="ident">changes</span>.<span class="ident">borrow_mut</span>().<span class="ident">begin</span>();
             }
             <span class="kw">return</span> <span class="ident">rc</span>;
@@ -864,7 +864,7 @@
         }
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">highlight_char</span>() {
             <span class="kw">let</span> <span class="ident">prompt_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">prompt_size</span>;
-            <span class="self">self</span>.<span class="ident">refresh</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">true</span>, <span class="ident">Info</span>::<span class="ident">NoHint</span>)<span class="question-mark">?</span>;
+            <span class="self">self</span>.<span class="ident">refresh</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">true</span>, <span class="ident">Info::NoHint</span>)<span class="question-mark">?</span>;
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">move_cursor</span>(<span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">cursor</span>, <span class="ident">cursor</span>)<span class="question-mark">?</span>;
             <span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">prompt_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">prompt_size</span>;
@@ -875,7 +875,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">move_cursor_at_leftmost</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span>::<span class="ident">Reader</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">move_cursor_at_leftmost</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Reader</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">move_cursor_at_leftmost</span>(<span class="ident">rdr</span>)
     }
 
@@ -887,9 +887,9 @@
         <span class="ident">info</span>: <span class="ident">Info</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">info</span> {
-            <span class="ident">Info</span>::<span class="ident">NoHint</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
-            <span class="ident">Info</span>::<span class="ident">Hint</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">hint</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> <span class="ident">h</span>.<span class="ident">display</span>()),
-            <span class="ident">Info</span>::<span class="ident">Msg</span>(<span class="ident">msg</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">msg</span>,
+            <span class="ident">Info::NoHint</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">Info::Hint</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">hint</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> <span class="ident">h</span>.<span class="ident">display</span>()),
+            <span class="ident">Info::Msg</span>(<span class="ident">msg</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">msg</span>,
         };
         <span class="kw">let</span> <span class="ident">highlighter</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">colors_enabled</span>() {
             <span class="self">self</span>.<span class="ident">helper</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> <span class="ident">h</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">Highlighter</span>)
@@ -919,7 +919,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">hinter</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">helper</span> {
             <span class="kw">let</span> <span class="ident">hint</span> <span class="op">=</span> <span class="ident">hinter</span>.<span class="ident">hint</span>(<span class="self">self</span>.<span class="ident">line</span>.<span class="ident">as_str</span>(), <span class="self">self</span>.<span class="ident">line</span>.<span class="ident">pos</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">ctx</span>);
-            <span class="self">self</span>.<span class="ident">hint</span> <span class="op">=</span> <span class="ident">hint</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">val</span><span class="op">|</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">val</span>) <span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Hint</span><span class="op">&gt;</span>)
+            <span class="self">self</span>.<span class="ident">hint</span> <span class="op">=</span> <span class="ident">hint</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">val</span><span class="op">|</span> <span class="ident">Box::new</span>(<span class="ident">val</span>) <span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Hint</span><span class="op">&gt;</span>)
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">hint</span> <span class="op">=</span> <span class="prelude-val">None</span>
         }
@@ -950,11 +950,11 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">validate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ValidationResult</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">validator</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">helper</span> {
             <span class="self">self</span>.<span class="ident">changes</span>.<span class="ident">borrow_mut</span>().<span class="ident">begin</span>();
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">validator</span>.<span class="ident">validate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ValidationContext</span>::<span class="ident">new</span>(<span class="self">self</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">validator</span>.<span class="ident">validate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ValidationContext::new</span>(<span class="self">self</span>))<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">corrected</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">changes</span>.<span class="ident">borrow_mut</span>().<span class="ident">end</span>();
             <span class="kw">match</span> <span class="ident">result</span> {
-                <span class="ident">ValidationResult</span>::<span class="ident">Incomplete</span> <span class="op">=</span><span class="op">&gt;</span> {}
-                <span class="ident">ValidationResult</span>::<span class="ident">Valid</span>(<span class="kw-2">ref</span> <span class="ident">msg</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">ValidationResult::Incomplete</span> <span class="op">=</span><span class="op">&gt;</span> {}
+                <span class="ident">ValidationResult::Valid</span>(<span class="kw-2">ref</span> <span class="ident">msg</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="comment">// Accept the line regardless of where the cursor is.</span>
                     <span class="kw">if</span> <span class="ident">corrected</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">has_hint</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">is_some</span>() {
                         <span class="comment">// Force a refresh without hints to leave the previous</span>
@@ -962,7 +962,7 @@
                         <span class="self">self</span>.<span class="ident">refresh_line_with_msg</span>(<span class="ident">msg</span>.<span class="ident">as_deref</span>())<span class="question-mark">?</span>;
                     }
                 }
-                <span class="ident">ValidationResult</span>::<span class="ident">Invalid</span>(<span class="kw-2">ref</span> <span class="ident">msg</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">ValidationResult::Invalid</span>(<span class="kw-2">ref</span> <span class="ident">msg</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">if</span> <span class="ident">corrected</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">has_hint</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">is_some</span>() {
                         <span class="self">self</span>.<span class="ident">refresh_line_with_msg</span>(<span class="ident">msg</span>.<span class="ident">as_deref</span>())<span class="question-mark">?</span>;
                     }
@@ -970,7 +970,7 @@
             }
             <span class="prelude-val">Ok</span>(<span class="ident">result</span>)
         } <span class="kw">else</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">ValidationResult</span>::<span class="ident">Valid</span>(<span class="prelude-val">None</span>))
+            <span class="prelude-val">Ok</span>(<span class="ident">ValidationResult::Valid</span>(<span class="prelude-val">None</span>))
         }
     }
 }
@@ -986,21 +986,21 @@
         <span class="kw">let</span> <span class="ident">prompt_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">prompt_size</span>;
         <span class="self">self</span>.<span class="ident">hint</span>();
         <span class="self">self</span>.<span class="ident">highlight_char</span>();
-        <span class="self">self</span>.<span class="ident">refresh</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">true</span>, <span class="ident">Info</span>::<span class="ident">Hint</span>)
+        <span class="self">self</span>.<span class="ident">refresh</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">true</span>, <span class="ident">Info::Hint</span>)
     }
 
     <span class="kw">fn</span> <span class="ident">refresh_line_with_msg</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">prompt_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">prompt_size</span>;
         <span class="self">self</span>.<span class="ident">hint</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         <span class="self">self</span>.<span class="ident">highlight_char</span>();
-        <span class="self">self</span>.<span class="ident">refresh</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">true</span>, <span class="ident">Info</span>::<span class="ident">Msg</span>(<span class="ident">msg</span>))
+        <span class="self">self</span>.<span class="ident">refresh</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">true</span>, <span class="ident">Info::Msg</span>(<span class="ident">msg</span>))
     }
 
     <span class="kw">fn</span> <span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">prompt</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">prompt_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">calculate_position</span>(<span class="ident">prompt</span>, <span class="ident">Position</span>::<span class="ident">default</span>());
+        <span class="kw">let</span> <span class="ident">prompt_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">calculate_position</span>(<span class="ident">prompt</span>, <span class="ident">Position::default</span>());
         <span class="self">self</span>.<span class="ident">hint</span>();
         <span class="self">self</span>.<span class="ident">highlight_char</span>();
-        <span class="self">self</span>.<span class="ident">refresh</span>(<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">false</span>, <span class="ident">Info</span>::<span class="ident">Hint</span>)
+        <span class="self">self</span>.<span class="ident">refresh</span>(<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">false</span>, <span class="ident">Info::Hint</span>)
     }
 
     <span class="kw">fn</span> <span class="ident">doing_insert</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
@@ -1032,8 +1032,8 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;State&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;prompt&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">prompt</span>)
             .<span class="ident">field</span>(<span class="string">&quot;prompt_size&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">prompt_size</span>)
@@ -1048,8 +1048,8 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;prompt</span>, <span class="ident">H</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear_screen</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">clear_screen</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">cursor</span> <span class="op">=</span> <span class="ident">Position</span>::<span class="ident">default</span>();
-        <span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">Position</span>::<span class="ident">default</span>();
+        <span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">cursor</span> <span class="op">=</span> <span class="ident">Position::default</span>();
+        <span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">Position::default</span>();
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -1076,7 +1076,7 @@
                     <span class="kw">let</span> <span class="ident">bits</span> <span class="op">=</span> <span class="ident">bits</span>.<span class="ident">as_bytes</span>();
                     <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">write_and_flush</span>(<span class="ident">bits</span>)
                 } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">refresh</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">true</span>, <span class="ident">Info</span>::<span class="ident">Hint</span>)
+                    <span class="self">self</span>.<span class="ident">refresh</span>(<span class="self">self</span>.<span class="ident">prompt</span>, <span class="ident">prompt_size</span>, <span class="bool-val">true</span>, <span class="ident">Info::Hint</span>)
                 }
             } <span class="kw">else</span> {
                 <span class="self">self</span>.<span class="ident">refresh_line</span>()
@@ -1127,7 +1127,7 @@
         <span class="ident">anchor</span>: <span class="ident">Anchor</span>,
         <span class="ident">n</span>: <span class="ident">RepeatCount</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Anchor</span>::<span class="ident">After</span> <span class="op">=</span> <span class="ident">anchor</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Anchor::After</span> <span class="op">=</span> <span class="ident">anchor</span> {
             <span class="self">self</span>.<span class="ident">line</span>.<span class="ident">move_forward</span>(<span class="number">1</span>);
         }
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">line</span>.<span class="ident">yank</span>(<span class="ident">text</span>, <span class="ident">n</span>).<span class="ident">is_some</span>() {
@@ -1349,12 +1349,12 @@
         <span class="kw">if</span> <span class="ident">history</span>.<span class="ident">is_empty</span>() {
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">beep</span>();
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">history_index</span> <span class="op">=</span><span class="op">=</span> <span class="ident">history</span>.<span class="ident">len</span>() <span class="op">&amp;&amp;</span> <span class="ident">dir</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Direction</span>::<span class="ident">Forward</span>
-            <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">history_index</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">dir</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Direction</span>::<span class="ident">Reverse</span>
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">history_index</span> <span class="op">=</span><span class="op">=</span> <span class="ident">history</span>.<span class="ident">len</span>() <span class="op">&amp;&amp;</span> <span class="ident">dir</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Direction::Forward</span>
+            <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">history_index</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">dir</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Direction::Reverse</span>
         {
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">out</span>.<span class="ident">beep</span>();
         }
-        <span class="kw">if</span> <span class="ident">dir</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Direction</span>::<span class="ident">Reverse</span> {
+        <span class="kw">if</span> <span class="ident">dir</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Direction::Reverse</span> {
             <span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">history_index</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">history_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
@@ -1417,38 +1417,38 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init_state</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="ident">H</span>: <span class="ident">Helper</span><span class="op">&gt;</span>(
-    <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span>::<span class="ident">Writer</span>,
+    <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Writer</span>,
     <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     <span class="ident">pos</span>: <span class="ident">usize</span>,
     <span class="ident">helper</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="ident">H</span><span class="op">&gt;</span>,
-    <span class="ident">history</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="kw">crate</span>::<span class="ident">history</span>::<span class="ident">History</span>,
+    <span class="ident">history</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;out</span> <span class="kw">crate</span><span class="ident">::history::History</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;out</span>, <span class="lifetime">&#39;static</span>, <span class="ident">H</span><span class="op">&gt;</span> {
     <span class="ident">State</span> {
         <span class="ident">out</span>,
         <span class="ident">prompt</span>: <span class="string">&quot;&quot;</span>,
-        <span class="ident">prompt_size</span>: <span class="ident">Position</span>::<span class="ident">default</span>(),
-        <span class="ident">line</span>: <span class="ident">LineBuffer</span>::<span class="ident">init</span>(<span class="ident">line</span>, <span class="ident">pos</span>, <span class="prelude-val">None</span>),
-        <span class="ident">layout</span>: <span class="ident">Layout</span>::<span class="ident">default</span>(),
-        <span class="ident">saved_line_for_history</span>: <span class="ident">LineBuffer</span>::<span class="ident">with_capacity</span>(<span class="number">100</span>),
+        <span class="ident">prompt_size</span>: <span class="ident">Position::default</span>(),
+        <span class="ident">line</span>: <span class="ident">LineBuffer::init</span>(<span class="ident">line</span>, <span class="ident">pos</span>, <span class="prelude-val">None</span>),
+        <span class="ident">layout</span>: <span class="ident">Layout::default</span>(),
+        <span class="ident">saved_line_for_history</span>: <span class="ident">LineBuffer::with_capacity</span>(<span class="number">100</span>),
         <span class="ident">byte_buffer</span>: [<span class="number">0</span>; <span class="number">4</span>],
-        <span class="ident">changes</span>: <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">Changeset</span>::<span class="ident">new</span>())),
+        <span class="ident">changes</span>: <span class="ident">Rc::new</span>(<span class="ident">RefCell::new</span>(<span class="ident">Changeset::new</span>())),
         <span class="ident">helper</span>,
-        <span class="ident">ctx</span>: <span class="ident">Context</span>::<span class="ident">new</span>(<span class="ident">history</span>),
-        <span class="ident">hint</span>: <span class="prelude-val">Some</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="string">&quot;hint&quot;</span>.<span class="ident">to_owned</span>())),
+        <span class="ident">ctx</span>: <span class="ident">Context::new</span>(<span class="ident">history</span>),
+        <span class="ident">hint</span>: <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="string">&quot;hint&quot;</span>.<span class="ident">to_owned</span>())),
         <span class="ident">highlight_char</span>: <span class="bool-val">false</span>,
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">init_state</span>;
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">history</span>::<span class="ident">History</span>;
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">tty</span>::<span class="ident">Sink</span>;
+    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::init_state</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::history::History</span>;
+    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::tty::Sink</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">edit_history_next</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">Sink</span>::<span class="ident">new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">History</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">Sink::new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">history</span> <span class="op">=</span> <span class="ident">History::new</span>();
         <span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line0&quot;</span>);
         <span class="ident">history</span>.<span class="ident">add</span>(<span class="string">&quot;line1&quot;</span>);
         <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="string">&quot;current edited line&quot;</span>;

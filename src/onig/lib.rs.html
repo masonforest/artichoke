@@ -1189,16 +1189,16 @@
     <span class="ident">Captures</span>, <span class="ident">FindCaptures</span>, <span class="ident">FindMatches</span>, <span class="ident">RegexSplits</span>, <span class="ident">RegexSplitsN</span>, <span class="ident">SubCaptures</span>, <span class="ident">SubCapturesPos</span>,
 };
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">flags</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">match_param</span>::<span class="ident">MatchParam</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">region</span>::<span class="ident">Region</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">replace</span>::<span class="ident">Replacer</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">match_param::MatchParam</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">region::Region</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">replace::Replacer</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">syntax</span>::{<span class="ident">MetaChar</span>, <span class="ident">Syntax</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">tree</span>::{<span class="ident">CaptureTreeNode</span>, <span class="ident">CaptureTreeNodeIter</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">utils</span>::{<span class="ident">copyright</span>, <span class="ident">define_user_property</span>, <span class="ident">version</span>};
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ptr</span>::{<span class="ident">null</span>, <span class="ident">null_mut</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Mutex</span>;
+<span class="kw">use</span> <span class="ident">std::os::raw::c_int</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::{<span class="ident">null</span>, <span class="ident">null_mut</span>};
+<span class="kw">use</span> <span class="ident">std::sync::Mutex</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">error</span>, <span class="ident">fmt</span>, <span class="ident">str</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -1218,38 +1218,38 @@
 <span class="doccomment">/// search and match operations.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Regex</span> {
-    <span class="ident">raw</span>: <span class="ident">onig_sys</span>::<span class="ident">OnigRegex</span>,
+    <span class="ident">raw</span>: <span class="ident">onig_sys::OnigRegex</span>,
 }
 
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">Regex</span> {}
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">Regex</span> {}
 
 <span class="kw">impl</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">from_code_and_info</span>(<span class="ident">code</span>: <span class="ident">c_int</span>, <span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">onig_sys</span>::<span class="ident">OnigErrorInfo</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">Error</span>::<span class="ident">new</span>(<span class="ident">code</span>, <span class="ident">info</span>)
+    <span class="kw">fn</span> <span class="ident">from_code_and_info</span>(<span class="ident">code</span>: <span class="ident">c_int</span>, <span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">onig_sys::OnigErrorInfo</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">Error::new</span>(<span class="ident">code</span>, <span class="ident">info</span>)
     }
 
     <span class="kw">fn</span> <span class="ident">from_code</span>(<span class="ident">code</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">Error</span>::<span class="ident">new</span>(<span class="ident">code</span>, <span class="ident">null</span>())
+        <span class="ident">Error::new</span>(<span class="ident">code</span>, <span class="ident">null</span>())
     }
 
     <span class="kw">fn</span> <span class="ident">custom</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">message</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">Error</span> {
-            <span class="ident">data</span>: <span class="ident">ErrorData</span>::<span class="ident">Custom</span>,
+            <span class="ident">data</span>: <span class="ident">ErrorData::Custom</span>,
             <span class="ident">description</span>: <span class="ident">message</span>.<span class="ident">into</span>(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">code</span>: <span class="ident">c_int</span>, <span class="ident">info</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys</span>::<span class="ident">OnigErrorInfo</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">buff</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="number">0</span>; <span class="ident">onig_sys</span>::<span class="ident">ONIG_MAX_ERROR_MESSAGE_LEN</span> <span class="kw">as</span> <span class="ident">usize</span>];
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">onig_sys</span>::<span class="ident">onig_error_code_to_str</span>(<span class="ident">buff</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">code</span>, <span class="ident">info</span>) };
-        <span class="kw">let</span> <span class="ident">description</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">description</span>) <span class="op">=</span> <span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="kw-2">&amp;</span><span class="ident">buff</span>[..<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>]) {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">code</span>: <span class="ident">c_int</span>, <span class="ident">info</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigErrorInfo</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">buff</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="number">0</span>; <span class="ident">onig_sys::ONIG_MAX_ERROR_MESSAGE_LEN</span> <span class="kw">as</span> <span class="ident">usize</span>];
+        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">onig_sys::onig_error_code_to_str</span>(<span class="ident">buff</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">code</span>, <span class="ident">info</span>) };
+        <span class="kw">let</span> <span class="ident">description</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">description</span>) <span class="op">=</span> <span class="ident">str::from_utf8</span>(<span class="kw-2">&amp;</span><span class="ident">buff</span>[..<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>]) {
             <span class="ident">description</span>
         } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="self">Self</span>::<span class="ident">custom</span>(<span class="string">&quot;Onig error string was invalid UTF-8&quot;</span>);
+            <span class="kw">return</span> <span class="self">Self</span><span class="ident">::custom</span>(<span class="string">&quot;Onig error string was invalid UTF-8&quot;</span>);
         };
         <span class="ident">Error</span> {
-            <span class="ident">data</span>: <span class="ident">ErrorData</span>::<span class="ident">OnigError</span>(<span class="ident">code</span>),
+            <span class="ident">data</span>: <span class="ident">ErrorData::OnigError</span>(<span class="ident">code</span>),
             <span class="ident">description</span>: <span class="ident">description</span>.<span class="ident">to_owned</span>(),
         }
     }
@@ -1257,7 +1257,7 @@
     <span class="doccomment">/// Return Oniguruma engine error code.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">data</span> {
-            <span class="ident">ErrorData</span>::<span class="ident">OnigError</span>(<span class="ident">code</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">code</span>,
+            <span class="ident">ErrorData::OnigError</span>(<span class="ident">code</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">code</span>,
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="op">-</span><span class="number">1</span>,
         }
     }
@@ -1268,26 +1268,26 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">for</span> <span class="ident">Error</span> {
+<span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">description</span>
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Oniguruma error: {}&quot;</span>, <span class="self">self</span>.<span class="ident">description</span>())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Error</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Error({:?}, {})&quot;</span>, <span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">description</span>())
     }
 }
 
 <span class="macro">lazy_static!</span> {
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">REGEX_NEW_MUTEX</span>: <span class="ident">Mutex</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Mutex</span>::<span class="ident">new</span>(());
+    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">REGEX_NEW_MUTEX</span>: <span class="ident">Mutex</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Mutex::new</span>(());
 }
 
 <span class="kw">impl</span> <span class="ident">Regex</span> {
@@ -1310,7 +1310,7 @@
     <span class="doccomment">/// assert!(r.is_ok());</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">pattern</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="ident">Regex</span>::<span class="ident">with_encoding</span>(<span class="ident">pattern</span>)
+        <span class="ident">Regex::with_encoding</span>(<span class="ident">pattern</span>)
     }
 
     <span class="doccomment">/// Create a Regex, Specifying an Encoding</span>
@@ -1336,10 +1336,10 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">EncodedChars</span>,
     {
-        <span class="ident">Regex</span>::<span class="ident">with_options_and_encoding</span>(
+        <span class="ident">Regex::with_options_and_encoding</span>(
             <span class="ident">pattern</span>,
-            <span class="ident">RegexOptions</span>::<span class="ident">REGEX_OPTION_NONE</span>,
-            <span class="ident">Syntax</span>::<span class="ident">default</span>(),
+            <span class="ident">RegexOptions::REGEX_OPTION_NONE</span>,
+            <span class="ident">Syntax::default</span>(),
         )
     }
 
@@ -1372,7 +1372,7 @@
         <span class="ident">option</span>: <span class="ident">RegexOptions</span>,
         <span class="ident">syntax</span>: <span class="kw-2">&amp;</span><span class="ident">Syntax</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Regex</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="ident">Regex</span>::<span class="ident">with_options_and_encoding</span>(<span class="ident">pattern</span>, <span class="ident">option</span>, <span class="ident">syntax</span>)
+        <span class="ident">Regex::with_options_and_encoding</span>(<span class="ident">pattern</span>, <span class="ident">option</span>, <span class="ident">syntax</span>)
     }
 
     <span class="doccomment">/// Create a new Regex, Specifying Options and Ecoding</span>
@@ -1410,12 +1410,12 @@
     {
         <span class="comment">// Convert the rust types to those required for the call to</span>
         <span class="comment">// `onig_new`.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reg</span>: <span class="ident">onig_sys</span>::<span class="ident">OnigRegex</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">reg_ptr</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">reg</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigRegex</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reg</span>: <span class="ident">onig_sys::OnigRegex</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="kw">let</span> <span class="ident">reg_ptr</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">reg</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigRegex</span>;
 
         <span class="comment">// We can use this later to get an error message to pass back</span>
         <span class="comment">// if regex creation fails.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">error</span> <span class="op">=</span> <span class="ident">onig_sys</span>::<span class="ident">OnigErrorInfo</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">error</span> <span class="op">=</span> <span class="ident">onig_sys::OnigErrorInfo</span> {
             <span class="ident">enc</span>: <span class="ident">null_mut</span>(),
             <span class="ident">par</span>: <span class="ident">null_mut</span>(),
             <span class="ident">par_end</span>: <span class="ident">null_mut</span>(),
@@ -1425,21 +1425,21 @@
             <span class="comment">// Grab a lock to make sure that `onig_new` isn&#39;t called by</span>
             <span class="comment">// more than one thread at a time.</span>
             <span class="kw">let</span> <span class="ident">_guard</span> <span class="op">=</span> <span class="ident">REGEX_NEW_MUTEX</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
-            <span class="ident">onig_sys</span>::<span class="ident">onig_new</span>(
+            <span class="ident">onig_sys::onig_new</span>(
                 <span class="ident">reg_ptr</span>,
                 <span class="ident">pattern</span>.<span class="ident">start_ptr</span>(),
                 <span class="ident">pattern</span>.<span class="ident">limit_ptr</span>(),
                 <span class="ident">option</span>.<span class="ident">bits</span>(),
                 <span class="ident">pattern</span>.<span class="ident">encoding</span>(),
-                <span class="ident">syntax</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Syntax</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Syntax</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigSyntaxType</span>,
+                <span class="ident">syntax</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Syntax</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Syntax</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigSyntaxType</span>,
                 <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">error</span>,
             )
         };
 
-        <span class="kw">if</span> <span class="ident">err</span> <span class="op">=</span><span class="op">=</span> <span class="ident">onig_sys</span>::<span class="ident">ONIG_NORMAL</span> <span class="kw">as</span> <span class="ident">i32</span> {
+        <span class="kw">if</span> <span class="ident">err</span> <span class="op">=</span><span class="op">=</span> <span class="ident">onig_sys::ONIG_NORMAL</span> <span class="kw">as</span> <span class="ident">i32</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">Regex</span> { <span class="ident">raw</span>: <span class="ident">reg</span> })
         } <span class="kw">else</span> {
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">from_code_and_info</span>(<span class="ident">err</span>, <span class="kw-2">&amp;</span><span class="ident">error</span>))
+            <span class="prelude-val">Err</span>(<span class="ident">Error::from_code_and_info</span>(<span class="ident">err</span>, <span class="kw-2">&amp;</span><span class="ident">error</span>))
         }
     }
 
@@ -1531,7 +1531,7 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">EncodedChars</span>,
     {
-        <span class="kw">let</span> <span class="ident">match_param</span> <span class="op">=</span> <span class="ident">MatchParam</span>::<span class="ident">default</span>();
+        <span class="kw">let</span> <span class="ident">match_param</span> <span class="op">=</span> <span class="ident">MatchParam::default</span>();
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">match_with_param</span>(<span class="ident">chars</span>, <span class="ident">at</span>, <span class="ident">options</span>, <span class="ident">region</span>, <span class="ident">match_param</span>);
 
         <span class="kw">match</span> <span class="ident">result</span> {
@@ -1592,21 +1592,21 @@
         <span class="ident">T</span>: <span class="ident">EncodedChars</span>,
     {
         <span class="kw">if</span> <span class="ident">chars</span>.<span class="ident">encoding</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">custom</span>(<span class="macro">format!</span>(<span class="string">&quot;Regex encoding does not match haystack encoding ({0:?}, {1:?})&quot;</span>, <span class="ident">chars</span>.<span class="ident">encoding</span>(), <span class="self">self</span>.<span class="ident">encoding</span>())));
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::custom</span>(<span class="macro">format!</span>(<span class="string">&quot;Regex encoding does not match haystack encoding ({0:?}, {1:?})&quot;</span>, <span class="ident">chars</span>.<span class="ident">encoding</span>(), <span class="self">self</span>.<span class="ident">encoding</span>())));
         }
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">chars</span>.<span class="ident">start_ptr</span>().<span class="ident">add</span>(<span class="ident">at</span>);
             <span class="kw">if</span> <span class="ident">offset</span> <span class="op">&gt;</span> <span class="ident">chars</span>.<span class="ident">limit_ptr</span>() {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">custom</span>(<span class="macro">format!</span>(<span class="string">&quot;Offset {} is too large&quot;</span>, <span class="ident">at</span>)));
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::custom</span>(<span class="macro">format!</span>(<span class="string">&quot;Offset {} is too large&quot;</span>, <span class="ident">at</span>)));
             }
-            <span class="ident">onig_sys</span>::<span class="ident">onig_match_with_param</span>(
+            <span class="ident">onig_sys::onig_match_with_param</span>(
                 <span class="self">self</span>.<span class="ident">raw</span>,
                 <span class="ident">chars</span>.<span class="ident">start_ptr</span>(),
                 <span class="ident">chars</span>.<span class="ident">limit_ptr</span>(),
                 <span class="ident">offset</span>,
                 <span class="kw">match</span> <span class="ident">region</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">region</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigRegion</span>,
-                    <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
+                    <span class="prelude-val">Some</span>(<span class="ident">region</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigRegion</span>,
+                    <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">std::ptr::null_mut</span>(),
                 },
                 <span class="ident">options</span>.<span class="ident">bits</span>(),
                 <span class="ident">match_param</span>.<span class="ident">as_raw</span>(),
@@ -1615,10 +1615,10 @@
 
         <span class="kw">if</span> <span class="ident">r</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">r</span> <span class="kw">as</span> <span class="ident">usize</span>))
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">r</span> <span class="op">=</span><span class="op">=</span> <span class="ident">onig_sys</span>::<span class="ident">ONIG_MISMATCH</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">r</span> <span class="op">=</span><span class="op">=</span> <span class="ident">onig_sys::ONIG_MISMATCH</span> {
             <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
         } <span class="kw">else</span> {
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">from_code</span>(<span class="ident">r</span>))
+            <span class="prelude-val">Err</span>(<span class="ident">Error::from_code</span>(<span class="ident">r</span>))
         }
     }
 
@@ -1717,7 +1717,7 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">EncodedChars</span>,
     {
-        <span class="kw">let</span> <span class="ident">match_param</span> <span class="op">=</span> <span class="ident">MatchParam</span>::<span class="ident">default</span>();
+        <span class="kw">let</span> <span class="ident">match_param</span> <span class="op">=</span> <span class="ident">MatchParam::default</span>();
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">search_with_param</span>(<span class="ident">chars</span>, <span class="ident">from</span>, <span class="ident">to</span>, <span class="ident">options</span>, <span class="ident">region</span>, <span class="ident">match_param</span>);
 
         <span class="kw">match</span> <span class="ident">result</span> {
@@ -1782,26 +1782,26 @@
     {
         <span class="kw">let</span> (<span class="ident">beg</span>, <span class="ident">end</span>) <span class="op">=</span> (<span class="ident">chars</span>.<span class="ident">start_ptr</span>(), <span class="ident">chars</span>.<span class="ident">limit_ptr</span>());
         <span class="kw">if</span> <span class="ident">chars</span>.<span class="ident">encoding</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">custom</span>(<span class="macro">format!</span>(<span class="string">&quot;Regex encoding does not match haystack encoding ({0:?}, {1:?})&quot;</span>, <span class="ident">chars</span>.<span class="ident">encoding</span>(), <span class="self">self</span>.<span class="ident">encoding</span>())));
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::custom</span>(<span class="macro">format!</span>(<span class="string">&quot;Regex encoding does not match haystack encoding ({0:?}, {1:?})&quot;</span>, <span class="ident">chars</span>.<span class="ident">encoding</span>(), <span class="self">self</span>.<span class="ident">encoding</span>())));
         }
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">beg</span>.<span class="ident">add</span>(<span class="ident">from</span>);
             <span class="kw">let</span> <span class="ident">range</span> <span class="op">=</span> <span class="ident">beg</span>.<span class="ident">add</span>(<span class="ident">to</span>);
             <span class="kw">if</span> <span class="ident">start</span> <span class="op">&gt;</span> <span class="ident">end</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">custom</span>(<span class="string">&quot;Start of match should be before end&quot;</span>));
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::custom</span>(<span class="string">&quot;Start of match should be before end&quot;</span>));
             }
             <span class="kw">if</span> <span class="ident">range</span> <span class="op">&gt;</span> <span class="ident">end</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">custom</span>(<span class="string">&quot;Limit of match should be before end&quot;</span>));
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::custom</span>(<span class="string">&quot;Limit of match should be before end&quot;</span>));
             }
-            <span class="ident">onig_sys</span>::<span class="ident">onig_search_with_param</span>(
+            <span class="ident">onig_sys::onig_search_with_param</span>(
                 <span class="self">self</span>.<span class="ident">raw</span>,
                 <span class="ident">beg</span>,
                 <span class="ident">end</span>,
                 <span class="ident">start</span>,
                 <span class="ident">range</span>,
                 <span class="kw">match</span> <span class="ident">region</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">region</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys</span>::<span class="ident">OnigRegion</span>,
-                    <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
+                    <span class="prelude-val">Some</span>(<span class="ident">region</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Region</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigRegion</span>,
+                    <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">std::ptr::null_mut</span>(),
                 },
                 <span class="ident">options</span>.<span class="ident">bits</span>(),
                 <span class="ident">match_param</span>.<span class="ident">as_raw</span>(),
@@ -1810,10 +1810,10 @@
 
         <span class="kw">if</span> <span class="ident">r</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">r</span> <span class="kw">as</span> <span class="ident">usize</span>))
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">r</span> <span class="op">=</span><span class="op">=</span> <span class="ident">onig_sys</span>::<span class="ident">ONIG_MISMATCH</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">r</span> <span class="op">=</span><span class="op">=</span> <span class="ident">onig_sys::ONIG_MISMATCH</span> {
             <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
         } <span class="kw">else</span> {
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">from_code</span>(<span class="ident">r</span>))
+            <span class="prelude-val">Err</span>(<span class="ident">Error::from_code</span>(<span class="ident">r</span>))
         }
     }
 
@@ -1829,7 +1829,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// `true` if the pattern matches the whole of `text`, `false` otherwise.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_match</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">match_with_options</span>(<span class="ident">text</span>, <span class="number">0</span>, <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>, <span class="prelude-val">None</span>)
+        <span class="self">self</span>.<span class="ident">match_with_options</span>(<span class="ident">text</span>, <span class="number">0</span>, <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>, <span class="prelude-val">None</span>)
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span> <span class="op">=</span><span class="op">=</span> <span class="ident">text</span>.<span class="ident">len</span>())
             .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
     }
@@ -1875,13 +1875,13 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">EncodedChars</span>,
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident">Region</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident">Region::new</span>();
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">len</span>();
         <span class="self">self</span>.<span class="ident">search_with_encoding</span>(
             <span class="ident">text</span>,
             <span class="number">0</span>,
             <span class="ident">len</span>,
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">region</span>),
         )
         .<span class="ident">and_then</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">region</span>.<span class="ident">pos</span>(<span class="number">0</span>))
@@ -1893,25 +1893,25 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns a reference to an oniguruma encoding which was used</span>
     <span class="doccomment">/// when this regex was created.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encoding</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">onig_sys</span>::<span class="ident">OnigEncoding</span> {
-        <span class="kw">unsafe</span> { <span class="ident">onig_sys</span>::<span class="ident">onig_get_encoding</span>(<span class="self">self</span>.<span class="ident">raw</span>) }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encoding</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">onig_sys::OnigEncoding</span> {
+        <span class="kw">unsafe</span> { <span class="ident">onig_sys::onig_get_encoding</span>(<span class="self">self</span>.<span class="ident">raw</span>) }
     }
 
     <span class="doccomment">/// Get the Number of Capture Groups in this Pattern</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">captures_len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
-        <span class="kw">unsafe</span> { <span class="ident">onig_sys</span>::<span class="ident">onig_number_of_captures</span>(<span class="self">self</span>.<span class="ident">raw</span>) <span class="kw">as</span> <span class="ident">usize</span> }
+        <span class="kw">unsafe</span> { <span class="ident">onig_sys::onig_number_of_captures</span>(<span class="self">self</span>.<span class="ident">raw</span>) <span class="kw">as</span> <span class="ident">usize</span> }
     }
 
     <span class="doccomment">/// Get the Size of the Capture Histories for this Pattern</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capture_histories_len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
-        <span class="kw">unsafe</span> { <span class="ident">onig_sys</span>::<span class="ident">onig_number_of_capture_histories</span>(<span class="self">self</span>.<span class="ident">raw</span>) <span class="kw">as</span> <span class="ident">usize</span> }
+        <span class="kw">unsafe</span> { <span class="ident">onig_sys::onig_number_of_capture_histories</span>(<span class="self">self</span>.<span class="ident">raw</span>) <span class="kw">as</span> <span class="ident">usize</span> }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Regex</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">unsafe</span> {
-            <span class="ident">onig_sys</span>::<span class="ident">onig_free</span>(<span class="self">self</span>.<span class="ident">raw</span>);
+            <span class="ident">onig_sys::onig_free</span>(<span class="self">self</span>.<span class="ident">raw</span>);
         }
     }
 }
@@ -1919,39 +1919,39 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">panic</span>;
+    <span class="kw">use</span> <span class="ident">std::panic</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_create</span>() {
-        <span class="ident">Regex</span>::<span class="ident">with_options</span>(<span class="string">&quot;.*&quot;</span>, <span class="ident">RegexOptions</span>::<span class="ident">REGEX_OPTION_NONE</span>, <span class="ident">Syntax</span>::<span class="ident">default</span>()).<span class="ident">unwrap</span>();
+        <span class="ident">Regex::with_options</span>(<span class="string">&quot;.*&quot;</span>, <span class="ident">RegexOptions::REGEX_OPTION_NONE</span>, <span class="ident">Syntax::default</span>()).<span class="ident">unwrap</span>();
 
-        <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r#&quot;a \w+ word&quot;#</span>).<span class="ident">unwrap</span>();
+        <span class="ident">Regex::new</span>(<span class="string">r#&quot;a \w+ word&quot;#</span>).<span class="ident">unwrap</span>();
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_invalid</span>() {
-        <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;\\p{foo}&quot;</span>).<span class="ident">unwrap_err</span>();
+        <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;\\p{foo}&quot;</span>).<span class="ident">unwrap_err</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">e</span>.<span class="ident">code</span>(), <span class="op">-</span><span class="number">223</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">e</span>.<span class="ident">description</span>(), <span class="string">&quot;invalid character property name {foo}&quot;</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_failed_match</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;foo&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">match_with_options</span>(<span class="string">&quot;bar&quot;</span>, <span class="number">0</span>, <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>, <span class="prelude-val">None</span>);
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;foo&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">match_with_options</span>(<span class="string">&quot;bar&quot;</span>, <span class="number">0</span>, <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>, <span class="prelude-val">None</span>);
         <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_none</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_search_with_options</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident">Region</span>::<span class="ident">new</span>();
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;e(l+)&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident">Region::new</span>();
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;e(l+)&quot;</span>).<span class="ident">unwrap</span>();
 
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">search_with_options</span>(
             <span class="string">&quot;hello&quot;</span>,
             <span class="number">0</span>,
             <span class="number">5</span>,
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">region</span>),
         );
 
@@ -1971,13 +1971,13 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_match_with_options</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident">Region</span>::<span class="ident">new</span>();
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;he(l+)&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident">Region::new</span>();
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;he(l+)&quot;</span>).<span class="ident">unwrap</span>();
 
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">match_with_options</span>(
             <span class="string">&quot;hello&quot;</span>,
             <span class="number">0</span>,
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">region</span>),
         );
 
@@ -1992,33 +1992,33 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_is_match</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;he(l+)o&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;he(l+)o&quot;</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">regex</span>.<span class="ident">is_match</span>(<span class="string">&quot;hello&quot;</span>));
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">regex</span>.<span class="ident">is_match</span>(<span class="string">&quot;hello 2.0&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_find</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;he(l+)o&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;he(l+)o&quot;</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">regex</span>.<span class="ident">find</span>(<span class="string">&quot;hey, hello!&quot;</span>), <span class="prelude-val">Some</span>((<span class="number">5</span>, <span class="number">10</span>)));
         <span class="macro">assert_eq!</span>(<span class="ident">regex</span>.<span class="ident">find</span>(<span class="string">&quot;hey, honey!&quot;</span>), <span class="prelude-val">None</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_captures_len</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;(he)(l+)(o)&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;(he)(l+)(o)&quot;</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">regex</span>.<span class="ident">captures_len</span>(), <span class="number">3</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_error_is_match</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;(a|b|ab)*bc&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;(a|b|ab)*bc&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">match_with_param</span>(
             <span class="string">&quot;ababababababababababababababababababababababababababababacbc&quot;</span>,
             <span class="number">0</span>,
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">None</span>,
-            <span class="ident">MatchParam</span>::<span class="ident">default</span>(),
+            <span class="ident">MatchParam::default</span>(),
         );
 
         <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">err</span>().<span class="ident">unwrap</span>();
@@ -2027,8 +2027,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_panic_is_match</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;(a|b|ab)*bc&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="op">|</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;(a|b|ab)*bc&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">panic::catch_unwind</span>(<span class="op">|</span><span class="op">|</span> {
             <span class="ident">regex</span>.<span class="ident">is_match</span>(<span class="string">&quot;ababababababababababababababababababababababababababababacbc&quot;</span>)
         });
         <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">err</span>().<span class="ident">unwrap</span>();
@@ -2041,15 +2041,15 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_error_find</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;(a|b|ab)*bc&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;(a|b|ab)*bc&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="string">&quot;ababababababababababababababababababababababababababababacbc&quot;</span>;
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">search_with_param</span>(
             <span class="ident">s</span>,
             <span class="number">0</span>,
             <span class="ident">s</span>.<span class="ident">len</span>(),
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">None</span>,
-            <span class="ident">MatchParam</span>::<span class="ident">default</span>(),
+            <span class="ident">MatchParam::default</span>(),
         );
 
         <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">err</span>().<span class="ident">unwrap</span>();
@@ -2058,8 +2058,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_regex_panic_find</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;(a|b|ab)*bc&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="op">|</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::new</span>(<span class="string">&quot;(a|b|ab)*bc&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">panic::catch_unwind</span>(<span class="op">|</span><span class="op">|</span> {
             <span class="ident">regex</span>.<span class="ident">find</span>(<span class="string">&quot;ababababababababababababababababababababababababababababacbc&quot;</span>)
         });
         <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">err</span>().<span class="ident">unwrap</span>();
@@ -2072,16 +2072,16 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_search_with_invalid_range</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">with_options</span>(<span class="string">&quot;R...&quot;</span>, <span class="ident">RegexOptions</span>::<span class="ident">REGEX_OPTION_NONE</span>, <span class="ident">Syntax</span>::<span class="ident">default</span>())
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::with_options</span>(<span class="string">&quot;R...&quot;</span>, <span class="ident">RegexOptions::REGEX_OPTION_NONE</span>, <span class="ident">Syntax::default</span>())
             .<span class="ident">expect</span>(<span class="string">&quot;regex&quot;</span>);
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="string">&quot;Ruby&quot;</span>;
         <span class="kw">let</span> <span class="ident">is_match</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">search_with_param</span>(
             <span class="ident">string</span>,
             <span class="number">5</span>,
             <span class="ident">string</span>.<span class="ident">len</span>(),
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">None</span>,
-            <span class="ident">MatchParam</span>::<span class="ident">default</span>(),
+            <span class="ident">MatchParam::default</span>(),
         );
         <span class="macro">assert!</span>(<span class="ident">is_match</span>.<span class="ident">is_err</span>());
 
@@ -2089,23 +2089,23 @@
             <span class="ident">string</span>,
             <span class="number">2</span>,
             <span class="ident">string</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">1</span>,
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">None</span>,
-            <span class="ident">MatchParam</span>::<span class="ident">default</span>(),
+            <span class="ident">MatchParam::default</span>(),
         );
         <span class="macro">assert!</span>(<span class="ident">is_match</span>.<span class="ident">is_err</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_search_with_invalid_range_panic</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">with_options</span>(<span class="string">&quot;R...&quot;</span>, <span class="ident">RegexOptions</span>::<span class="ident">REGEX_OPTION_NONE</span>, <span class="ident">Syntax</span>::<span class="ident">default</span>())
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::with_options</span>(<span class="string">&quot;R...&quot;</span>, <span class="ident">RegexOptions::REGEX_OPTION_NONE</span>, <span class="ident">Syntax::default</span>())
             .<span class="ident">expect</span>(<span class="string">&quot;regex&quot;</span>);
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="string">&quot;Ruby&quot;</span>;
-        <span class="kw">let</span> <span class="ident">is_match</span> <span class="op">=</span> <span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">regex</span>.<span class="ident">search_with_encoding</span>(
+        <span class="kw">let</span> <span class="ident">is_match</span> <span class="op">=</span> <span class="ident">panic::catch_unwind</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">regex</span>.<span class="ident">search_with_encoding</span>(
             <span class="ident">string</span>,
             <span class="number">5</span>,
             <span class="ident">string</span>.<span class="ident">len</span>(),
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">None</span>,
         ));
         <span class="macro">assert!</span>(<span class="ident">is_match</span>.<span class="ident">is_err</span>());
@@ -2113,28 +2113,28 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_match_with_invalid_range</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">with_options</span>(<span class="string">&quot;R...&quot;</span>, <span class="ident">RegexOptions</span>::<span class="ident">REGEX_OPTION_NONE</span>, <span class="ident">Syntax</span>::<span class="ident">default</span>())
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::with_options</span>(<span class="string">&quot;R...&quot;</span>, <span class="ident">RegexOptions::REGEX_OPTION_NONE</span>, <span class="ident">Syntax::default</span>())
             .<span class="ident">expect</span>(<span class="string">&quot;regex&quot;</span>);
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="string">&quot;Ruby&quot;</span>;
         <span class="kw">let</span> <span class="ident">is_match</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">match_with_param</span>(
             <span class="ident">string</span>,
             <span class="number">5</span>,
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">None</span>,
-            <span class="ident">MatchParam</span>::<span class="ident">default</span>(),
+            <span class="ident">MatchParam::default</span>(),
         );
         <span class="macro">assert!</span>(<span class="ident">is_match</span>.<span class="ident">is_err</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_match_with_invalid_range_panic</span>() {
-        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">with_options</span>(<span class="string">&quot;R...&quot;</span>, <span class="ident">RegexOptions</span>::<span class="ident">REGEX_OPTION_NONE</span>, <span class="ident">Syntax</span>::<span class="ident">default</span>())
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Regex::with_options</span>(<span class="string">&quot;R...&quot;</span>, <span class="ident">RegexOptions::REGEX_OPTION_NONE</span>, <span class="ident">Syntax::default</span>())
             .<span class="ident">expect</span>(<span class="string">&quot;regex&quot;</span>);
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="string">&quot;Ruby&quot;</span>;
-        <span class="kw">let</span> <span class="ident">is_match</span> <span class="op">=</span> <span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">regex</span>.<span class="ident">match_with_encoding</span>(
+        <span class="kw">let</span> <span class="ident">is_match</span> <span class="op">=</span> <span class="ident">panic::catch_unwind</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">regex</span>.<span class="ident">match_with_encoding</span>(
             <span class="ident">string</span>,
             <span class="number">5</span>,
-            <span class="ident">SearchOptions</span>::<span class="ident">SEARCH_OPTION_NONE</span>,
+            <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
             <span class="prelude-val">None</span>,
         ));
         <span class="macro">assert!</span>(<span class="ident">is_match</span>.<span class="ident">is_err</span>());

@@ -55,13 +55,13 @@
 <span class="doccomment">//! [`chrono`]: https://crates.io/crates/chrono</span>
 <span class="doccomment">//! [`chrono-tz`]: https://crates.io/crates/chrono-tz</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">convert</span>::<span class="ident">HeapAllocatedData</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::convert::HeapAllocatedData</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">mruby</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">trampoline</span>;
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">spinoso_time</span>::<span class="ident">Time</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">spinoso_time::Time</span>;
 
 <span class="kw">impl</span> <span class="ident">HeapAllocatedData</span> <span class="kw">for</span> <span class="ident">Time</span> {
     <span class="kw">const</span> <span class="ident">RUBY_TYPE</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;Time&quot;</span>;
