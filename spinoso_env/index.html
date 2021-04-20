@@ -15,10 +15,10 @@ ENV['PS1'] = 'artichoke&gt; '
 </code></pre>
 <p>There are two <code>ENV</code> implementations in this crate:</p>
 <ul>
-<li><a href="../spinoso_env/struct.Memory.html" title="Memory"><code>Memory</code></a>, enabled by default, implements an <code>ENV</code> store and accessor on
+<li><a href="struct.Memory.html" title="Memory"><code>Memory</code></a>, enabled by default, implements an <code>ENV</code> store and accessor on
 top of a Rust <a href="https://doc.rust-lang.org/nightly/std/collections/hash/map/struct.HashMap.html"><code>HashMap</code></a>. This backend does not query or modify the host
 system.</li>
-<li><a href="../spinoso_env/struct.System.html" title="System"><code>System</code></a>, enabled when the <strong>system-env</strong> feature is activated, is a
+<li><a href="struct.System.html" title="System"><code>System</code></a>, enabled when the <strong>system-env</strong> feature is activated, is a
 proxy for the system environment and uses platform-specific APIs defined
 in the <a href="https://doc.rust-lang.org/nightly/std/index.html">Rust Standard Library</a>.</li>
 </ul>
@@ -51,9 +51,9 @@ environment variables via the <a href="https://doc.rust-lang.org/nightly/std/env
 </td></tr><tr class="module-item"><td><a class="struct" href="struct.Memory.html" title="spinoso_env::Memory struct">Memory</a></td><td class="docblock-short"><p>A hash-like accessor for environment variables using a fake in-memory store.</p>
 </td></tr><tr class="module-item"><td><a class="struct" href="struct.System.html" title="spinoso_env::System struct">System</a></td><td class="docblock-short"><span class="stab portability" title="This is supported on crate feature `system-env` only"><code>system-env</code></span><p>A hash-like accessor for environment variables using platform APIs.</p>
 </td></tr></table><h2 id="enums" class="section-header"><a href="#enums">Enums</a></h2>
-<table><tr class="module-item"><td><a class="enum" href="enum.Error.html" title="spinoso_env::Error enum">Error</a></td><td class="docblock-short"><p>Sum type of all errors possibly returned from <a href="../spinoso_env/struct.Memory.html#method.get"><code>get</code></a>, <a href="../spinoso_env/struct.Memory.html#method.put"><code>put</code></a>, and
-<a href="../spinoso_env/struct.Memory.html#method.to_map"><code>to_map</code></a>.</p>
+<table><tr class="module-item"><td><a class="enum" href="enum.Error.html" title="spinoso_env::Error enum">Error</a></td><td class="docblock-short"><p>Sum type of all errors possibly returned from <a href="struct.Memory.html#method.get"><code>get</code></a>, <a href="struct.Memory.html#method.put"><code>put</code></a>, and
+<a href="struct.Memory.html#method.to_map"><code>to_map</code></a>.</p>
 </td></tr></table><h2 id="constants" class="section-header"><a href="#constants">Constants</a></h2>
 <table><tr class="module-item"><td><a class="constant" href="constant.RUBY_API_POLYFILLS.html" title="spinoso_env::RUBY_API_POLYFILLS constant">RUBY_API_POLYFILLS</a></td><td class="docblock-short"><p>Ruby implementations of the full <a href="https://ruby-doc.org/core-2.6.3/ENV.html"><code>ENV</code></a> API.</p>
-</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="spinoso_env" data-search-js="../search-index.js"></div>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="spinoso_env" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
     <script src="../main.js"></script></body></html>

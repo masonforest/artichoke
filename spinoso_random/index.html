@@ -33,11 +33,11 @@ crate does not depend on <a href="https://doc.rust-lang.org/alloc/"><code>alloc<
 <h1 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h1>
 <p>All features are enabled by default.</p>
 <ul>
-<li><strong>random-rand</strong> - Enables range sampling methods for the <a href="../spinoso_random/fn.rand.html" title="rand()"><code>rand()</code></a>
+<li><strong>random-rand</strong> - Enables range sampling methods for the <a href="fn.rand.html" title="rand()"><code>rand()</code></a>
 function.  Activating this feature also activates the <strong>rand-traits</strong>
 feature. Dropping this feature removes the <a href="../rand/index.html"><code>rand</code></a> dependency.</li>
-<li><strong>rand-traits</strong> - Enables implementations of <a href="../rand_core/trait.RngCore.html"><code>RngCore</code></a> on <a href="../spinoso_random/struct.Random.html" title="Random"><code>Random</code></a> and
-<a href="../spinoso_random/struct.Mt.html" title="Mt"><code>Mt</code></a> types. Dropping this feature removes the <a href="../rand_core/index.html" title="rand_core"><code>rand_core</code></a> dependency.</li>
+<li><strong>rand-traits</strong> - Enables implementations of <a href="../rand_core/trait.RngCore.html"><code>RngCore</code></a> on <a href="struct.Random.html" title="Random"><code>Random</code></a> and
+<a href="struct.Mt.html" title="Mt"><code>Mt</code></a> types. Dropping this feature removes the <a href="../rand_core/index.html" title="rand_core"><code>rand_core</code></a> dependency.</li>
 <li><strong>std</strong> - Enables a dependency on the Rust Standard Library. Activating
 this feature enables <a href="https://doc.rust-lang.org/nightly/std/error/trait.Error.html" title="std::error::Error"><code>std::error::Error</code></a> impls on error types in this
 crate.</li>
@@ -60,9 +60,9 @@ randomness failed to read the requested bytes.</p>
 </td></tr><tr class="module-item"><td><a class="enum" href="enum.Max.html" title="spinoso_random::Max enum">Max</a></td><td class="docblock-short"><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span><p>A range constraint for generating random numbers.</p>
 </td></tr><tr class="module-item"><td><a class="enum" href="enum.Rand.html" title="spinoso_random::Rand enum">Rand</a></td><td class="docblock-short"><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span><p>A generated random number.</p>
 </td></tr></table><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
-<table><tr class="module-item"><td><a class="fn" href="fn.new_seed.html" title="spinoso_random::new_seed fn">new_seed</a></td><td class="docblock-short"><p>Read a new <a href="../spinoso_random/struct.Random.html" title="Random"><code>Random</code></a> seed, using platform-provided randomness.</p>
+<table><tr class="module-item"><td><a class="fn" href="fn.new_seed.html" title="spinoso_random::new_seed fn">new_seed</a></td><td class="docblock-short"><p>Read a new <a href="struct.Random.html" title="Random"><code>Random</code></a> seed, using platform-provided randomness.</p>
 </td></tr><tr class="module-item"><td><a class="fn" href="fn.rand.html" title="spinoso_random::rand fn">rand</a></td><td class="docblock-short"><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span><p>Generate random numbers bounded from below by 0 and above by the given max.</p>
 </td></tr><tr class="module-item"><td><a class="fn" href="fn.seed_to_key.html" title="spinoso_random::seed_to_key fn">seed_to_key</a></td><td class="docblock-short"><p>Convert a byte array into a reseeding key of <code>u32</code>s.</p>
 </td></tr><tr class="module-item"><td><a class="fn" href="fn.urandom.html" title="spinoso_random::urandom fn">urandom</a></td><td class="docblock-short"><p>Read random bytes, using platform-provided randomness.</p>
-</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="spinoso_random" data-search-js="../search-index.js"></div>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="spinoso_random" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
     <script src="../main.js"></script></body></html>
