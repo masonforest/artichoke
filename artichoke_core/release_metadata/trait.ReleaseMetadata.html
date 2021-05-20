@@ -13,66 +13,66 @@
 }</pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Information about an Artichoke build.</p>
 <p>Implementations of this trait are used to set global Ruby constants that
 describe the current build.</p>
-</div></details><h2 id="required-methods" class="small-section-header">Required methods<a href="#required-methods" class="anchor"></a></h2><div class="methods"><h3 id="tymethod.ruby_copyright" class="method"><code>fn <a href="#tymethod.ruby_copyright" class="fnname">ruby_copyright</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#19" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Copyright information.</p>
+</div></details><h2 id="required-methods" class="small-section-header">Required methods<a href="#required-methods" class="anchor"></a></h2><div class="methods"><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_copyright" class="method"><code>fn <a href="#tymethod.ruby_copyright" class="fnname">ruby_copyright</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#19" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>Copyright information.</p>
 <p>This value will populate the <code>RUBY_COPYRIGHT</code> constant.</p>
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <blockquote>
 <p>artichoke - Copyright (c) 2019-2020 Ryan Lopopolo &lt;rjl@hyperbo.la&gt;</p>
 </blockquote>
-</div></details><h3 id="tymethod.ruby_description" class="method"><code>fn <a href="#tymethod.ruby_description" class="fnname">ruby_description</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#28" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>A description of the current build.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_description" class="method"><code>fn <a href="#tymethod.ruby_description" class="fnname">ruby_description</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#28" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>A description of the current build.</p>
 <p>This value will populate the <code>RUBY_DESCRIPTION</code> constant.</p>
 <h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
 <blockquote>
 <p>artichoke 0.1.0-pre.0 (2021-01-12 revision 4009) [x86_64-apple-darwin]</p>
 </blockquote>
-</div></details><h3 id="tymethod.ruby_engine" class="method"><code>fn <a href="#tymethod.ruby_engine" class="fnname">ruby_engine</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#37" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The engine, or VM, used in the current build.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_engine" class="method"><code>fn <a href="#tymethod.ruby_engine" class="fnname">ruby_engine</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#37" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>The engine, or VM, used in the current build.</p>
 <p>This value will populate the <code>RUBY_ENGINE</code> constant.</p>
 <h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
 <blockquote>
 <p>artichoke-mruby</p>
 </blockquote>
-</div></details><h3 id="tymethod.ruby_engine_version" class="method"><code>fn <a href="#tymethod.ruby_engine_version" class="fnname">ruby_engine_version</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#46" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The version of the engine, or VM, used in the current build.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_engine_version" class="method"><code>fn <a href="#tymethod.ruby_engine_version" class="fnname">ruby_engine_version</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#46" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>The version of the engine, or VM, used in the current build.</p>
 <p>This value will populate the <code>RUBY_ENGINE_VERSION</code> constant.</p>
 <h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
 <blockquote>
 <p>0.1.0-pre.0</p>
 </blockquote>
-</div></details><h3 id="tymethod.ruby_patchlevel" class="method"><code>fn <a href="#tymethod.ruby_patchlevel" class="fnname">ruby_patchlevel</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#55" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The patch level the current build.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_patchlevel" class="method"><code>fn <a href="#tymethod.ruby_patchlevel" class="fnname">ruby_patchlevel</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#55" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>The patch level the current build.</p>
 <p>This value will populate the <code>RUBY_PATCHLEVEL</code> constant.</p>
 <h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
 <blockquote>
 <p>0</p>
 </blockquote>
-</div></details><h3 id="tymethod.ruby_platform" class="method"><code>fn <a href="#tymethod.ruby_platform" class="fnname">ruby_platform</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#68" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The target triple of the platform this build targets.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_platform" class="method"><code>fn <a href="#tymethod.ruby_platform" class="fnname">ruby_platform</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#68" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>The target triple of the platform this build targets.</p>
 <p>The platform will be a <a href="https://forge.rust-lang.org/release/platform-support.html">Rust or LLVM target triple</a>.</p>
 <p>This value will populate the <code>RUBY_PLATFORM</code> constant.</p>
 <h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
 <blockquote>
 <p>x86_64-apple-darwin</p>
 </blockquote>
-</div></details><h3 id="tymethod.ruby_release_date" class="method"><code>fn <a href="#tymethod.ruby_release_date" class="fnname">ruby_release_date</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#77" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The build date of this release.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_release_date" class="method"><code>fn <a href="#tymethod.ruby_release_date" class="fnname">ruby_release_date</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#77" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>The build date of this release.</p>
 <p>This value will populate the <code>RUBY_RELEASE_DATE</code> constant.</p>
 <h1 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h1>
 <blockquote>
 <p>2021-01-12</p>
 </blockquote>
-</div></details><h3 id="tymethod.ruby_revision" class="method"><code>fn <a href="#tymethod.ruby_revision" class="fnname">ruby_revision</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#86" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The revision count of the Artichoke git repo used for this build.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_revision" class="method"><code>fn <a href="#tymethod.ruby_revision" class="fnname">ruby_revision</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#86" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>The revision count of the Artichoke git repo used for this build.</p>
 <p>This value will populate the <code>RUBY_REVISION</code> constant.</p>
 <h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
 <blockquote>
 <p>4009</p>
 </blockquote>
-</div></details><h3 id="tymethod.ruby_version" class="method"><code>fn <a href="#tymethod.ruby_version" class="fnname">ruby_version</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#95" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The target MRI Ruby version for this build.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.ruby_version" class="method"><code>fn <a href="#tymethod.ruby_version" class="fnname">ruby_version</a>(&amp;self) -&gt; &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#95" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>The target MRI Ruby version for this build.</p>
 <p>This value will populate the <code>RUBY_VERSION</code> constant.</p>
 <h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
 <blockquote>
 <p>2.6.3</p>
 </blockquote>
-</div></details><h3 id="tymethod.artichoke_compiler_version" class="method"><code>fn <a href="#tymethod.artichoke_compiler_version" class="fnname">artichoke_compiler_version</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;</code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#104" title="goto source code">[src]</a></h3><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>A description of the compiler used to build Artichoke.</p>
+</div><details class="rustdoc-toggle" open><summary><h3 id="tymethod.artichoke_compiler_version" class="method"><code>fn <a href="#tymethod.artichoke_compiler_version" class="fnname">artichoke_compiler_version</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;</code><a class="srclink" href="../../src/artichoke_core/release_metadata.rs.html#104" title="goto source code">[src]</a></h3></summary><div class="docblock"><p>A description of the compiler used to build Artichoke.</p>
 <p>This value will populate the <code>ARTICHOKE_COMPILER_VERSION</code> constant.</p>
 <h1 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h1>
 <blockquote>
 <p>rustc 1.49.0 (e1884a8e3 2020-12-29) on x86_64-apple-darwin</p>
 </blockquote>
-</div></details></div><h2 id="implementors" class="small-section-header">Implementors<a href="#implementors" class="anchor"></a></h2><div class="item-list" id="implementors-list"></div><script type="text/javascript" src="../../implementors/artichoke_core/release_metadata/trait.ReleaseMetadata.js" async></script></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="artichoke_core" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
+</div></div><h2 id="implementors" class="small-section-header">Implementors<a href="#implementors" class="anchor"></a></h2><div class="item-list" id="implementors-list"></div><script type="text/javascript" src="../../implementors/artichoke_core/release_metadata/trait.ReleaseMetadata.js" async></script></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="artichoke_core" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script></body></html>
