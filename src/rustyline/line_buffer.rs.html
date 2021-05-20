@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustyline-8.0.0/src/line_buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>line_buffer.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustyline-8.1.0/src/line_buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>line_buffer.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
 <link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../rustyline/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button">?</button>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
@@ -3097,18 +3097,18 @@
         <span class="kw">let</span> <span class="ident">push</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">insert</span>(<span class="string">&#39;α&#39;</span>, <span class="number">1</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;α&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">push</span>);
+        <span class="macro">assert!</span>(<span class="ident">push</span>);
 
         <span class="kw">let</span> <span class="ident">push</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">insert</span>(<span class="string">&#39;ß&#39;</span>, <span class="number">1</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">push</span>);
+        <span class="macro">assert!</span>(<span class="ident">push</span>);
 
         <span class="ident">s</span>.<span class="ident">pos</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">let</span> <span class="ident">push</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">insert</span>(<span class="string">&#39;γ&#39;</span>, <span class="number">1</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;γαß&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>, <span class="ident">push</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">push</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3136,22 +3136,22 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_backward</span>(<span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_forward</span>(<span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_home</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_end</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3161,22 +3161,22 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_home</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_home</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_end</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">11</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_end</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">11</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ok</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3186,22 +3186,22 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_buffer_start</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_buffer_start</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_buffer_end</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>.<span class="ident">len</span>(), <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_buffer_end</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">text</span>.<span class="ident">len</span>(), <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ok</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3209,11 +3209,11 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;ag̈&quot;</span>, <span class="number">4</span>, <span class="prelude-val">None</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">len</span>());
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_backward</span>(<span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_forward</span>(<span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
     }
 
@@ -3229,7 +3229,7 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">backspace</span>(<span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;α&quot;</span>);
     }
 
@@ -3240,14 +3240,14 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">kill_line</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αßγ&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">6</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;δε&quot;</span>);
 
         <span class="ident">s</span>.<span class="ident">pos</span> <span class="op">=</span> <span class="number">4</span>;
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">discard_line</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;γ&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;αß&quot;</span>);
     }
 
@@ -3259,24 +3259,24 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">kill_line</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß\nγ\nε f4&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">7</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;δ 12&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">kill_line</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß\nγε f4&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">7</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;\n&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">kill_line</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß\nγ&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">7</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;ε f4&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">kill_line</span>();
         <span class="macro">assert_eq!</span>(<span class="number">7</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ok</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3287,24 +3287,24 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">discard_line</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αß\nδε&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">5</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;c γ&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">discard_line</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αßδε&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;\n&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">discard_line</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;δε&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;αß&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">discard_line</span>();
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">false</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ok</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3313,21 +3313,21 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">transpose_chars</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;ßac&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">3</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="ident">s</span>.<span class="ident">buf</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;aßc&quot;</span>);
         <span class="ident">s</span>.<span class="ident">pos</span> <span class="op">=</span> <span class="number">3</span>;
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">transpose_chars</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;acß&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
 
         <span class="ident">s</span>.<span class="ident">buf</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;aßc&quot;</span>);
         <span class="ident">s</span>.<span class="ident">pos</span> <span class="op">=</span> <span class="number">4</span>;
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">transpose_chars</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;acß&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3397,17 +3397,17 @@
     <span class="kw">fn</span> <span class="ident">move_to_forward</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">2</span>, <span class="prelude-val">None</span>);
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to</span>(<span class="ident">CharSearch::ForwardBefore</span>(<span class="string">&#39;ε&#39;</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">6</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">2</span>, <span class="prelude-val">None</span>);
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to</span>(<span class="ident">CharSearch::Forward</span>(<span class="string">&#39;ε&#39;</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">8</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">2</span>, <span class="prelude-val">None</span>);
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to</span>(<span class="ident">CharSearch::Forward</span>(<span class="string">&#39;ε&#39;</span>), <span class="number">10</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">8</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
     }
 
@@ -3415,12 +3415,12 @@
     <span class="kw">fn</span> <span class="ident">move_to_backward</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">8</span>, <span class="prelude-val">None</span>);
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to</span>(<span class="ident">CharSearch::BackwardAfter</span>(<span class="string">&#39;ß&#39;</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">8</span>, <span class="prelude-val">None</span>);
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to</span>(<span class="ident">CharSearch::Backward</span>(<span class="string">&#39;ß&#39;</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
     }
 
@@ -3431,7 +3431,7 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">delete_prev_word</span>(<span class="ident">Word::Big</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;a c&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;ß  &quot;</span>);
     }
 
@@ -3440,20 +3440,20 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;a ß  c&quot;</span>, <span class="number">1</span>, <span class="prelude-val">None</span>); <span class="comment">// after &#39;a&#39;</span>
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to_next_word</span>(<span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;a ß  c&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">4</span>, <span class="ident">s</span>.<span class="ident">pos</span>); <span class="comment">// after &#39;ß&#39;</span>
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to_next_word</span>(<span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">7</span>, <span class="ident">s</span>.<span class="ident">pos</span>); <span class="comment">// after &#39;c&#39;</span>
 
         <span class="ident">s</span>.<span class="ident">move_home</span>();
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to_next_word</span>(<span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>, <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">s</span>.<span class="ident">pos</span>); <span class="comment">// after &#39;a&#39;</span>
 
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to_next_word</span>(<span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>, <span class="number">2</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="macro">assert_eq!</span>(<span class="number">7</span>, <span class="ident">s</span>.<span class="ident">pos</span>); <span class="comment">// after &#39;c&#39;</span>
     }
 
@@ -3463,7 +3463,7 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to_next_word</span>(<span class="ident">At::BeforeEnd</span>, <span class="ident">Word::Vi</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;a ßeta  c&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">6</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3516,7 +3516,7 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">move_to_next_word</span>(<span class="ident">At::Start</span>, <span class="ident">Word::Emacs</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;a ß  c&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">6</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -3570,14 +3570,14 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">delete_word</span>(<span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;a  c&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot; ß&quot;</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;test&quot;</span>, <span class="number">0</span>, <span class="prelude-val">Some</span>(<span class="ident">cl</span>.<span class="ident">clone</span>()));
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">delete_word</span>(<span class="ident">At::AfterEnd</span>, <span class="ident">Word::Vi</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;test&quot;</span>);
     }
 
@@ -3588,7 +3588,7 @@
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">delete_word</span>(<span class="ident">At::Start</span>, <span class="ident">Word::Emacs</span>, <span class="number">1</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;a c&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;ß  &quot;</span>);
     }
 
@@ -3597,14 +3597,14 @@
         <span class="kw">let</span> <span class="ident">cl</span> <span class="op">=</span> <span class="ident">Listener::new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">2</span>, <span class="prelude-val">Some</span>(<span class="ident">cl</span>.<span class="ident">clone</span>()));
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">delete_to</span>(<span class="ident">CharSearch::ForwardBefore</span>(<span class="string">&#39;ε&#39;</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;ßγδ&quot;</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αε&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">2</span>, <span class="prelude-val">Some</span>(<span class="ident">cl</span>.<span class="ident">clone</span>()));
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">delete_to</span>(<span class="ident">CharSearch::Forward</span>(<span class="string">&#39;ε&#39;</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;ßγδε&quot;</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;α&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
@@ -3615,14 +3615,14 @@
         <span class="kw">let</span> <span class="ident">cl</span> <span class="op">=</span> <span class="ident">Listener::new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">8</span>, <span class="prelude-val">Some</span>(<span class="ident">cl</span>.<span class="ident">clone</span>()));
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">delete_to</span>(<span class="ident">CharSearch::BackwardAfter</span>(<span class="string">&#39;α&#39;</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;ßγδ&quot;</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αε&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">LineBuffer::init</span>(<span class="string">&quot;αßγδε&quot;</span>, <span class="number">8</span>, <span class="prelude-val">Some</span>(<span class="ident">cl</span>.<span class="ident">clone</span>()));
         <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">delete_to</span>(<span class="ident">CharSearch::Backward</span>(<span class="string">&#39;ß&#39;</span>), <span class="number">1</span>);
-        <span class="macro">assert_eq!</span>(<span class="bool-val">true</span>, <span class="ident">ok</span>);
+        <span class="macro">assert!</span>(<span class="ident">ok</span>);
         <span class="ident">cl</span>.<span class="ident">borrow</span>().<span class="ident">assert_deleted_str_eq</span>(<span class="string">&quot;ßγδ&quot;</span>);
         <span class="macro">assert_eq!</span>(<span class="string">&quot;αε&quot;</span>, <span class="ident">s</span>.<span class="ident">buf</span>);
         <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">s</span>.<span class="ident">pos</span>);
