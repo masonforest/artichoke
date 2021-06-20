@@ -710,19 +710,19 @@
             }
         };
         <span class="kw">let</span> <span class="ident">radix</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">digits</span>.<span class="ident">as_bytes</span>() {
-            [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;b&#39;</span>, ..] <span class="op">|</span> [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;B&#39;</span>, ..] <span class="op">=</span><span class="op">&gt;</span> {
+            [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;b&#39;</span> <span class="op">|</span> <span class="string">b&#39;B&#39;</span>, ..] <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">digits</span>.<span class="ident">drain</span>(..<span class="number">2</span>);
                 <span class="ident">Radix::new</span>(<span class="number">2</span>)
             }
-            [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;o&#39;</span>, ..] <span class="op">|</span> [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;O&#39;</span>, ..] <span class="op">=</span><span class="op">&gt;</span> {
+            [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;o&#39;</span> <span class="op">|</span> <span class="string">b&#39;O&#39;</span>, ..] <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">digits</span>.<span class="ident">drain</span>(..<span class="number">2</span>);
                 <span class="ident">Radix::new</span>(<span class="number">8</span>)
             }
-            [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;d&#39;</span>, ..] <span class="op">|</span> [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;D&#39;</span>, ..] <span class="op">=</span><span class="op">&gt;</span> {
+            [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;d&#39;</span> <span class="op">|</span> <span class="string">b&#39;D&#39;</span>, ..] <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">digits</span>.<span class="ident">drain</span>(..<span class="number">2</span>);
                 <span class="ident">Radix::new</span>(<span class="number">10</span>)
             }
-            [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;x&#39;</span>, ..] <span class="op">|</span> [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;X&#39;</span>, ..] <span class="op">=</span><span class="op">&gt;</span> {
+            [<span class="string">b&#39;0&#39;</span>, <span class="string">b&#39;x&#39;</span> <span class="op">|</span> <span class="string">b&#39;X&#39;</span>, ..] <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">digits</span>.<span class="ident">drain</span>(..<span class="number">2</span>);
                 <span class="ident">Radix::new</span>(<span class="number">16</span>)
             }
@@ -766,7 +766,7 @@
             }
         }
         <span class="kw">if</span> <span class="ident">current</span>.<span class="ident">is_whitespace</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="string">&#39;+&#39;</span>) <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&#39;-&#39;</span>) <span class="op">=</span> <span class="ident">prev</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="string">&#39;+&#39;</span> <span class="op">|</span> <span class="string">&#39;-&#39;</span>) <span class="op">=</span> <span class="ident">prev</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">r#&quot;invalid value for Integer(): &quot;&quot;#</span>);
                 <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
                 <span class="ident">message</span>.<span class="ident">push</span>(<span class="string">&#39;&quot;&#39;</span>);

@@ -184,9 +184,6 @@
 <span id="184">184</span>
 <span id="185">185</span>
 <span id="186">186</span>
-<span id="187">187</span>
-<span id="188">188</span>
-<span id="189">189</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::convert::UnboxRubyError</span>;
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::core</span>::{<span class="ident">Convert</span>, <span class="ident">TryConvert</span>, <span class="ident">Value</span> <span class="kw">as</span> <span class="kw">_</span>};
@@ -296,9 +293,6 @@
                 <span class="kw">if</span> <span class="op">!</span><span class="kw">unsafe</span> { <span class="ident">sys::mrb_sys_value_is_true</span>(<span class="ident">value</span>) } {
                     <span class="kw">return</span> <span class="bool-val">false</span>;
                 }
-                <span class="kw">if</span> <span class="kw">unsafe</span> { <span class="ident">sys::mrb_sys_value_is_nil</span>(<span class="ident">value</span>) } {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
-                }
             } <span class="kw">else</span> {
                 <span class="kw">if</span> <span class="op">!</span><span class="kw">unsafe</span> { <span class="ident">sys::mrb_sys_value_is_false</span>(<span class="ident">value</span>) } {
                     <span class="kw">return</span> <span class="bool-val">false</span>;
@@ -306,9 +300,9 @@
                 <span class="kw">if</span> <span class="kw">unsafe</span> { <span class="ident">sys::mrb_sys_value_is_true</span>(<span class="ident">value</span>) } {
                     <span class="kw">return</span> <span class="bool-val">false</span>;
                 }
-                <span class="kw">if</span> <span class="kw">unsafe</span> { <span class="ident">sys::mrb_sys_value_is_nil</span>(<span class="ident">value</span>) } {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
-                }
+            }
+            <span class="kw">if</span> <span class="kw">unsafe</span> { <span class="ident">sys::mrb_sys_value_is_nil</span>(<span class="ident">value</span>) } {
+                <span class="kw">return</span> <span class="bool-val">false</span>;
             }
             <span class="bool-val">true</span>
         }

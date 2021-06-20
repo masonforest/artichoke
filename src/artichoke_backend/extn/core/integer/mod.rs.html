@@ -324,6 +324,7 @@
 <span id="324">324</span>
 <span id="325">325</span>
 <span id="326">326</span>
+<span id="327">327</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">std::fmt</span>;
@@ -458,6 +459,7 @@
             <span class="comment">//         1: from (irb):9:in `chr&#39;</span>
             <span class="comment">// RangeError (256 out of char range)</span>
             <span class="comment">// ```</span>
+            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::unnested_or_patterns</span>)]</span>
             <span class="kw">match</span> <span class="ident">u8::try_from</span>(<span class="self">self</span>.<span class="ident">as_i64</span>()) {
                 <span class="comment">// ASCII encoding | Binary/ASCII-8BIT encoding</span>
                 <span class="comment">// Without `Encoding` support, these two arms are the same</span>
