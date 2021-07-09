@@ -1750,6 +1750,12 @@
 <span id="1750">1750</span>
 <span id="1751">1751</span>
 <span id="1752">1752</span>
+<span id="1753">1753</span>
+<span id="1754">1754</span>
+<span id="1755">1755</span>
+<span id="1756">1756</span>
+<span id="1757">1757</span>
+<span id="1758">1758</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Ruby `Array` based on [`SmallVec`].</span>
 
@@ -2625,10 +2631,14 @@
         <span class="kw">if</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">len</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="kw">return</span> <span class="kw-2">&amp;</span>[];
         }
-        <span class="self">self</span>.<span class="number">0</span>
-            .<span class="ident">get</span>(<span class="ident">start</span>..<span class="ident">start</span> <span class="op">+</span> <span class="ident">len</span>)
-            .<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get</span>(<span class="ident">start</span>..))
-            .<span class="ident">unwrap_or_default</span>()
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">end</span>) <span class="op">=</span> <span class="ident">start</span>.<span class="ident">checked_add</span>(<span class="ident">len</span>) {
+            <span class="self">self</span>.<span class="number">0</span>
+                .<span class="ident">get</span>(<span class="ident">start</span>..<span class="ident">end</span>)
+                .<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get</span>(<span class="ident">start</span>..))
+                .<span class="ident">unwrap_or_default</span>()
+        } <span class="kw">else</span> {
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get</span>(<span class="ident">start</span>..).<span class="ident">unwrap_or_default</span>()
+        }
     }
 }
 
@@ -2751,6 +2761,10 @@
     <span class="doccomment">/// assert_eq!(ary, &amp;[1, 11, 4]);</span>
     <span class="doccomment">/// ary.set(5, 263);</span>
     <span class="doccomment">/// assert_eq!(ary, &amp;[1, 11, 4, 0, 0, 263]);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut ary: SmallArray&lt;i32&gt; = SmallArray::from(&amp;[]);</span>
+    <span class="doccomment">/// ary.set(5, 11);</span>
+    <span class="doccomment">/// assert_eq!(ary, &amp;[0, 0, 0, 0, 0, 11]);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">elem</span>: <span class="ident">T</span>) {
@@ -2760,10 +2774,9 @@
             <span class="kw">let</span> <span class="ident">buflen</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
             <span class="comment">// index is *at least* buflen, so this calculation never underflows</span>
             <span class="comment">// and ensures we allocate an additional slot.</span>
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">index</span> <span class="op">+</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">buflen</span>);
-            <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="ident">buflen</span>..<span class="ident">index</span> {
-                <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T::default</span>());
-            }
+            <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> (<span class="ident">index</span> <span class="op">-</span> <span class="ident">buflen</span>).<span class="ident">checked_add</span>(<span class="number">1</span>).<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">resize_with</span>(<span class="ident">index</span>, <span class="ident">T::default</span>);
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">elem</span>);
         }
     }
@@ -2803,17 +2816,16 @@
                 <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">cell</span> <span class="op">=</span> <span class="ident">elem</span>,
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw-2">*</span><span class="ident">cell</span> <span class="op">=</span> <span class="ident">elem</span>;
-                    <span class="kw">let</span> <span class="ident">drain_end_idx</span> <span class="op">=</span> <span class="ident">cmp::min</span>(<span class="ident">start</span> <span class="op">+</span> <span class="ident">drain</span>, <span class="ident">buflen</span>);
-                    <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">drain_end_idx</span>);
+                    <span class="kw">let</span> <span class="ident">drain_end_idx</span> <span class="op">=</span> <span class="ident">cmp::min</span>(<span class="ident">start</span>.<span class="ident">saturating_add</span>(<span class="ident">drain</span>), <span class="ident">buflen</span>);
+                    <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(<span class="ident">start</span>.<span class="ident">saturating_add</span>(<span class="number">1</span>)..<span class="ident">drain_end_idx</span>);
                 }
             }
         } <span class="kw">else</span> {
             <span class="comment">// start is *at least* buflen, so this calculation never underflows</span>
             <span class="comment">// and ensures we allocate an additional slot.</span>
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">buflen</span>);
-            <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="ident">buflen</span>..<span class="ident">start</span> {
-                <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T::default</span>());
-            }
+            <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> (<span class="ident">start</span> <span class="op">-</span> <span class="ident">buflen</span>).<span class="ident">checked_add</span>(<span class="number">1</span>).<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">resize_with</span>(<span class="ident">start</span>, <span class="ident">T::default</span>);
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">elem</span>);
         }
 
@@ -2843,12 +2855,14 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) {
-        <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> <span class="ident">index</span>.<span class="ident">checked_sub</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()).<span class="ident">unwrap_or_default</span>() <span class="op">+</span> <span class="ident">values</span>.<span class="ident">len</span>();
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
-
-        <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()..<span class="ident">index</span> {
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T::default</span>());
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">overflow</span>) <span class="op">=</span> <span class="ident">index</span>.<span class="ident">checked_sub</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()) {
+            <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> <span class="ident">overflow</span>.<span class="ident">checked_add</span>(<span class="ident">values</span>.<span class="ident">len</span>()).<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">resize</span>(<span class="ident">index</span>, <span class="ident">T::default</span>());
+        } <span class="kw">else</span> {
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">values</span>.<span class="ident">len</span>());
         }
+
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">insert_from_slice</span>(<span class="ident">index</span>, <span class="ident">values</span>);
     }
 
@@ -2882,12 +2896,10 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">drain</span>: <span class="ident">usize</span>, <span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
-        <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> <span class="ident">index</span>.<span class="ident">checked_sub</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()).<span class="ident">unwrap_or_default</span>() <span class="op">+</span> <span class="ident">values</span>.<span class="ident">len</span>();
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
-
-        <span class="comment">// Extend the vector to account for out of bounds `index`.</span>
-        <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()..<span class="ident">index</span> {
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">push</span>(<span class="ident">T::default</span>());
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">overflow</span>) <span class="op">=</span> <span class="ident">index</span>.<span class="ident">checked_sub</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()) {
+            <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> <span class="ident">overflow</span>.<span class="ident">saturating_add</span>(<span class="ident">values</span>.<span class="ident">len</span>());
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">resize</span>(<span class="ident">index</span>, <span class="ident">T::default</span>());
         }
         <span class="comment">// `self.len()` is at least `index` so the below sub can never overflow.</span>
         <span class="kw">let</span> <span class="ident">tail</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">index</span>;
