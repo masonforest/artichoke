@@ -7,10 +7,8 @@ APIs. For this reason, all APIs exposed by ENV backends in this crate are
 fallible.</p>
 <p>You can use this object in your application by accessing it directly. As a
 Core API, it is globally available:</p>
-<pre><code class="language-ruby">ENV['PATH']
-ENV['PS1'] = 'artichoke&gt; '
-</code></pre>
-</div></details><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
+<div class="example-wrap"><pre class="language-ruby">ENV[&#39;PATH&#39;]
+ENV[&#39;PS1&#39;] = &#39;artichoke&gt; &#39;</pre></div></div></details><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
 <div class="item-table"><div class="item-left module-item"><a class="mod" href="mruby/index.html" title="artichoke_backend::extn::core::env::mruby mod">mruby</a></div><div class="item-right docblock-short"><p>FFI glue between the Rust trampolines and the mruby C interpreter.</p>
 </div><div class="item-left module-item"><a class="mod" href="trampoline/index.html" title="artichoke_backend::extn::core::env::trampoline mod">trampoline</a></div><div class="item-right docblock-short"><p>Glue between mruby FFI and <code>ENV</code> Rust implementation.</p>
 </div></div><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>

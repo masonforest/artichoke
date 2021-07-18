@@ -85,13 +85,13 @@ This is not allowed for other specifiers and will result in the <code>BAD_FORMAT
 </tbody></table>
 <p>Notes:</p>
 <div class="footnotes"><hr><ol><li id="fn1"><p><code>%Y</code>:
-Negative years are allowed in formatting but not in parsing.&nbsp;<a href="#fnref1" rev="footnote">↩</a></p></li><li id="fn2"><p><code>%C</code>, <code>%y</code>:
-This is floor division, so 100 BCE (year number -99) will print <code>-1</code> and <code>99</code> respectively.&nbsp;<a href="#fnref2" rev="footnote">↩</a></p></li><li id="fn3"><p><code>%U</code>:
+Negative years are allowed in formatting but not in parsing.&nbsp;<a href="#fnref1">↩</a></p></li><li id="fn2"><p><code>%C</code>, <code>%y</code>:
+This is floor division, so 100 BCE (year number -99) will print <code>-1</code> and <code>99</code> respectively.&nbsp;<a href="#fnref2">↩</a></p></li><li id="fn3"><p><code>%U</code>:
 Week 1 starts with the first Sunday in that year.
-It is possible to have week 0 for days before the first Sunday.&nbsp;<a href="#fnref3" rev="footnote">↩</a></p></li><li id="fn4"><p><code>%G</code>, <code>%g</code>, <code>%V</code>:
+It is possible to have week 0 for days before the first Sunday.&nbsp;<a href="#fnref3">↩</a></p></li><li id="fn4"><p><code>%G</code>, <code>%g</code>, <code>%V</code>:
 Week 1 is the first week with at least 4 days in that year.
-Week 0 does not exist, so this should be used with <code>%G</code> or <code>%g</code>.&nbsp;<a href="#fnref4" rev="footnote">↩</a></p></li><li id="fn5"><p><code>%S</code>:
-It accounts for leap seconds, so <code>60</code> is possible.&nbsp;<a href="#fnref5" rev="footnote">↩</a></p></li><li id="fn6"><p><code>%f</code>, <code>%.f</code>, <code>%.3f</code>, <code>%.6f</code>, <code>%.9f</code>, <code>%3f</code>, <code>%6f</code>, <code>%9f</code>:
+Week 0 does not exist, so this should be used with <code>%G</code> or <code>%g</code>.&nbsp;<a href="#fnref4">↩</a></p></li><li id="fn5"><p><code>%S</code>:
+It accounts for leap seconds, so <code>60</code> is possible.&nbsp;<a href="#fnref5">↩</a></p></li><li id="fn6"><p><code>%f</code>, <code>%.f</code>, <code>%.3f</code>, <code>%.6f</code>, <code>%.9f</code>, <code>%3f</code>, <code>%6f</code>, <code>%9f</code>:
 <br>
 The default <code>%f</code> is right-aligned and always zero-padded to 9 digits
 for the compatibility with glibc and others,
@@ -120,7 +120,7 @@ The variant <code>%3f</code>, <code>%6f</code> and <code>%9f</code> are left-ali
 according to the number preceding <code>f</code>, but without the leading dot.
 E.g. 70ms after the last second under <code>%3f</code> will print <code>070</code> (note: not <code>07</code>),
 and parsing <code>07</code>, <code>070000</code> etc. will yield the same.
-Note that they can read nothing if the fractional part is zero.&nbsp;<a href="#fnref6" rev="footnote">↩</a></p></li><li id="fn7"><p><code>%Z</code>:
+Note that they can read nothing if the fractional part is zero.&nbsp;<a href="#fnref6">↩</a></p></li><li id="fn7"><p><code>%Z</code>:
 Offset will not be populated from the parsed data, nor will it be validated.
 Timezone is completely ignored. Similar to the glibc <code>strptime</code> treatment of
 this format code.
@@ -128,17 +128,17 @@ this format code.
 <br>
 It is not possible to reliably convert from an abbreviation to an offset,
 for example CDT can mean either Central Daylight Time (North America) or
-China Daylight Time.&nbsp;<a href="#fnref7" rev="footnote">↩</a></p></li><li id="fn8"><p><code>%+</code>: Same as <code>%Y-%m-%dT%H:%M:%S%.f%:z</code>, i.e. 0, 3, 6 or 9 fractional
+China Daylight Time.&nbsp;<a href="#fnref7">↩</a></p></li><li id="fn8"><p><code>%+</code>: Same as <code>%Y-%m-%dT%H:%M:%S%.f%:z</code>, i.e. 0, 3, 6 or 9 fractional
 digits for seconds and colons in the time zone offset.
 <br>
 <br>
 The typical <code>strftime</code> implementations have different (and locale-dependent)
 formats for this specifier. While Chrono’s format for <code>%+</code> is far more
 stable, it is best to avoid this specifier if you want to control the exact
-output.&nbsp;<a href="#fnref8" rev="footnote">↩</a></p></li><li id="fn9"><p><code>%s</code>:
+output.&nbsp;<a href="#fnref8">↩</a></p></li><li id="fn9"><p><code>%s</code>:
 This is not padded and can be negative.
 For the purpose of Chrono, it only accounts for non-leap seconds
-so it slightly differs from ISO C <code>strftime</code> behavior.&nbsp;<a href="#fnref9" rev="footnote">↩</a></p></li></ol></div></div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
+so it slightly differs from ISO C <code>strftime</code> behavior.&nbsp;<a href="#fnref9">↩</a></p></li></ol></div></div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
 <div class="item-table"><div class="item-left module-item"><a class="struct" href="struct.StrftimeItems.html" title="chrono::format::strftime::StrftimeItems struct">StrftimeItems</a></div><div class="item-right docblock-short"><p>Parsing iterator for <code>strftime</code>-like format strings.</p>
 </div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="chrono" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script>

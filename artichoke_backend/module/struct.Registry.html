@@ -6,8 +6,7 @@ type which can be used to ensure the lifetime of the associated metadata.</p>
 contains the custom data type’s module name and free function. The C API
 requires that this struct live at least as long as the <code>mrb_state</code>.
 Typically, the <code>mrb_data_type</code> is <code>static</code>.</p>
-<pre><code class="language-c">static const struct mrb_data_type mrb_time_type = { &quot;Time&quot;, mrb_free };
-</code></pre>
+<div class="example-wrap"><pre class="language-c">static const struct mrb_data_type mrb_time_type = { &quot;Time&quot;, mrb_free };</pre></div>
 <p>The registry resembles an append-only <a href="https://doc.rust-lang.org/nightly/std/collections/hash/map/struct.HashMap.html" title="HashMap"><code>HashMap</code></a>.</p>
 <p>The registry stores Module specs behind a <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="Box"><code>Box</code></a> pointer to ensure pointers
 to the interior of the spec, like the <a href="https://doc.rust-lang.org/nightly/std/ffi/c_str/struct.CString.html"><code>CString</code></a> module

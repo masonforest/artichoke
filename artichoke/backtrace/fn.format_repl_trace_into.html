@@ -4,16 +4,13 @@ displaying in a Ruby REPL.</p>
 <code>irb</code> command in MRI.</p>
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Executing the following Ruby code:</p>
-<pre><code class="language-ruby">def fail; raise RuntimeError, &quot;bang!&quot;; end
-fail
-</code></pre>
+<div class="example-wrap"><pre class="language-ruby">def fail; raise RuntimeError, &quot;bang!&quot;; end
+fail</pre></div>
 <p>Results in this stacktrace:</p>
-<pre><code class="language-txt">Traceback (most recent call last):
+<div class="example-wrap"><pre class="language-txt">Traceback (most recent call last):
     2: from (airb):2
     1: from (airb):1:in fail
-RuntimeError (bang!)
-</code></pre>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+RuntimeError (bang!)</pre></div><h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
 <p>If writing into the provided <code>out</code> writer fails, an error is returned.</p>
 </div></details></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="artichoke" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script>

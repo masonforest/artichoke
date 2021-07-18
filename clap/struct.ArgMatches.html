@@ -391,7 +391,7 @@ but only a single subcommand from any group of sibling commands may used at once
 the demo subject. Imagine the following are all subcommands of <code>git</code> (note, the author is
 aware these aren’t actually all subcommands in the real <code>git</code> interface, but it makes
 explanation easier)</p>
-<pre><code class="language-notrust">             Top Level App (git)                         TOP
+<div class="example-wrap"><pre class="language-notrust">             Top Level App (git)                         TOP
                              |
       -----------------------------------------
      /             |                \          \
@@ -399,15 +399,13 @@ explanation easier)</p>
     |           /    \            /    \       |
    url      origin   remote    ref    name   message     LEVEL 2
             /                  /\
-         path            remote  local                   LEVEL 3
-</code></pre>
+         path            remote  local                   LEVEL 3</pre></div>
 <p>Given the above fictional subcommand hierarchy, valid runtime uses would be (not an all
 inclusive list, and not including argument options per command for brevity and clarity):</p>
-<pre><code class="language-sh">$ git clone url
+<div class="example-wrap"><pre class="language-sh">$ git clone url
 $ git push origin path
 $ git add ref local
-$ git commit message
-</code></pre>
+$ git commit message</pre></div>
 <p>Notice only one command per “level” may be used. You could not, for example, do <code>$ git clone url push origin path</code></p>
 <h1 id="examples-12" class="section-header"><a href="#examples-12">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">

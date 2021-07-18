@@ -32,14 +32,13 @@ closure because the FFI APIs called in this function may require access
 to the Artichoke <a href="../state/struct.State.html">`State</a>.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.fqname" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke_backend/def.rs.html#193-206" title="goto source code">[src]</a></div><a href="#method.fqname" class="anchor"></a><code>pub fn <a href="#method.fqname" class="fnname">fqname</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'_, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;</code></div></summary><div class="docblock"><p>Get the fully qualified name of the wrapped class or module.</p>
 <p>For example, in the following Ruby code, <code>C</code> has an fqname of <code>A::B::C</code>.</p>
-<pre><code class="language-ruby">module A
+<div class="example-wrap"><pre class="language-ruby">module A
   class B
     module C
       CONST = 1
     end
   end
-end
-</code></pre>
+end</pre></div>
 <p>The current implemention results in recursive calls to this function
 for each enclosing scope.</p>
 </div></details></div></details><h2 id="trait-implementations" class="small-section-header">Trait Implementations<a href="#trait-implementations" class="anchor"></a></h2><div id="trait-implementations-list"><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl-Clone" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke_backend/def.rs.html#112" title="goto source code">[src]</a></div><a href="#impl-Clone" class="anchor"></a><code class="in-band">impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="enum.EnclosingRubyScope.html" title="enum artichoke_backend::def::EnclosingRubyScope">EnclosingRubyScope</a></code></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.clone" class="method trait-impl has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke_backend/def.rs.html#112" title="goto source code">[src]</a></div><a href="#method.clone" class="anchor"></a><code>fn <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone" class="fnname">clone</a>(&amp;self) -&gt; <a class="enum" href="enum.EnclosingRubyScope.html" title="enum artichoke_backend::def::EnclosingRubyScope">EnclosingRubyScope</a></code></div></summary><div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>

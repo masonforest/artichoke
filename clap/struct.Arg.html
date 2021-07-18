@@ -31,8 +31,7 @@ only available via the builder pattern.</p>
 UTF-8 codepoints may work just fine, but this is not guaranteed.</p>
 <h1 id="syntax" class="section-header"><a href="#syntax">Syntax</a></h1>
 <p>Usage strings typically following the form:</p>
-<pre><code class="language-notrust">[explicit name] [short] [long] [value names] [help string]
-</code></pre>
+<div class="example-wrap"><pre class="language-notrust">[explicit name] [short] [long] [value names] [help string]</pre></div>
 <p>This is not a hard rule as the attributes can appear in other orders. There are also
 several additional sigils which denote additional settings. Below are the details of each
 portion of the string.</p>
@@ -54,10 +53,8 @@ the argument is required.</p>
 </ul>
 <p>Example explicit names as follows (<code>ename</code> for an optional argument, and <code>rname</code> for a
 required argument):</p>
-<pre><code class="language-notrust">[ename] -s, --long 'some flag'
-&lt;rname&gt; -r, --longer 'some other flag'
-</code></pre>
-<h3 id="short" class="section-header"><a href="#short">Short</a></h3>
+<div class="example-wrap"><pre class="language-notrust">[ename] -s, --long &#39;some flag&#39;
+&lt;rname&gt; -r, --longer &#39;some other flag&#39;</pre></div><h3 id="short" class="section-header"><a href="#short">Short</a></h3>
 <p>This is set by placing a single character after a leading <code>-</code>.</p>
 <p>Shorts may be followed by</p>
 <ul>
@@ -66,10 +63,8 @@ required argument):</p>
 <li>Value notation</li>
 </ul>
 <p>Example shorts are as follows (<code>-s</code>, and <code>-r</code>):</p>
-<pre><code class="language-notrust">-s, --long 'some flag'
-&lt;rname&gt; -r [val], --longer 'some option'
-</code></pre>
-<h3 id="long" class="section-header"><a href="#long">Long</a></h3>
+<div class="example-wrap"><pre class="language-notrust">-s, --long &#39;some flag&#39;
+&lt;rname&gt; -r [val], --longer &#39;some option&#39;</pre></div><h3 id="long" class="section-header"><a href="#long">Long</a></h3>
 <p>This is set by placing a word (no spaces) after a leading <code>--</code>.</p>
 <p>Shorts may be followed by</p>
 <ul>
@@ -77,10 +72,8 @@ required argument):</p>
 <li>Value notation</li>
 </ul>
 <p>Example longs are as follows (<code>--some</code>, and <code>--rapid</code>):</p>
-<pre><code class="language-notrust">-s, --some 'some flag'
---rapid=[FILE] 'some option'
-</code></pre>
-<h3 id="values-value-notation" class="section-header"><a href="#values-value-notation">Values (Value Notation)</a></h3>
+<div class="example-wrap"><pre class="language-notrust">-s, --some &#39;some flag&#39;
+--rapid=[FILE] &#39;some option&#39;</pre></div><h3 id="values-value-notation" class="section-header"><a href="#values-value-notation">Values (Value Notation)</a></h3>
 <p>This is set by placing a word(s) between <code>[]</code> or <code>&lt;&gt;</code> optionally after <code>=</code> (although this
 is cosmetic only and does not affect functionality). If an explicit name has <strong>not</strong> been
 set, using <code>&lt;&gt;</code> will denote a required argument, and <code>[]</code> will denote an optional argument</p>
@@ -93,17 +86,13 @@ set, using <code>&lt;&gt;</code> will denote a required argument, and <code>[]</
 two values, <code>--option [val1] [val2]</code> specifies that in order for option to be satisified it
 must receive exactly two values</p>
 <p>Example values are as follows (<code>FILE</code>, and <code>SPEED</code>):</p>
-<pre><code class="language-notrust">-s, --some [FILE] 'some option'
---rapid=&lt;SPEED&gt;... 'some required multiple option'
-</code></pre>
-<h3 id="help-string" class="section-header"><a href="#help-string">Help String</a></h3>
+<div class="example-wrap"><pre class="language-notrust">-s, --some [FILE] &#39;some option&#39;
+--rapid=&lt;SPEED&gt;... &#39;some required multiple option&#39;</pre></div><h3 id="help-string" class="section-header"><a href="#help-string">Help String</a></h3>
 <p>The help string is denoted between a pair of single quotes <code>''</code> and may contain any
 characters.</p>
 <p>Example help strings are as follows:</p>
-<pre><code class="language-notrust">-s, --some [FILE] 'some option'
---rapid=&lt;SPEED&gt;... 'some required multiple option'
-</code></pre>
-<h3 id="additional-sigils" class="section-header"><a href="#additional-sigils">Additional Sigils</a></h3>
+<div class="example-wrap"><pre class="language-notrust">-s, --some [FILE] &#39;some option&#39;
+--rapid=&lt;SPEED&gt;... &#39;some required multiple option&#39;</pre></div><h3 id="additional-sigils" class="section-header"><a href="#additional-sigils">Additional Sigils</a></h3>
 <p>Multiple notation <code>...</code> (three consecutive dots/periods) specifies that this argument may
 be used multiple times. Do not confuse multiple occurrences (<code>...</code>) with multiple values.
 <code>--option val1 val2</code> is a single occurrence with multiple values. <code>--flag --flag</code> is
@@ -250,7 +239,7 @@ the other help text.</p>
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
-<pre><code class="language-notrust">helptest
+<div class="example-wrap"><pre class="language-notrust">helptest
 
 USAGE:
    helptest [FLAGS]
@@ -258,9 +247,7 @@ USAGE:
 FLAGS:
     --config     Some help text describing the --config arg
 -h, --help       Prints help information
--V, --version    Prints version information
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.long_help" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#622-625" title="goto source code">[src]</a></div><a href="#method.long_help" class="anchor"></a><code>pub fn <a href="#method.long_help" class="fnname">long_help</a>(self, h: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Sets the long help text of the argument that will be displayed to the user when they print
+-V, --version    Prints version information</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.long_help" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#622-625" title="goto source code">[src]</a></div><a href="#method.long_help" class="anchor"></a><code>pub fn <a href="#method.long_help" class="fnname">long_help</a>(self, h: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Sets the long help text of the argument that will be displayed to the user when they print
 the help information with <code>--help</code>. Typically this a more detailed (multi-line) message
 that describes the arg.</p>
 <p><strong>NOTE:</strong> If only <code>long_help</code> is provided, and not <a href="./struct.Arg.html#method.help"><code>Arg::help</code></a> but the user requests <code>-h</code>
@@ -294,7 +281,7 @@ and on, so I&#39;ll stop now.&quot;</span>))
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
-<pre><code class="language-notrust">helptest
+<div class="example-wrap"><pre class="language-notrust">helptest
 
 USAGE:
    helptest [FLAGS]
@@ -303,16 +290,14 @@ FLAGS:
    --config
         The config file used by the myprog must be in JSON format
         with only valid keys and may not contain other nonsense
-        that cannot be read by this program. Obviously I'm going on
-        and on, so I'll stop now.
+        that cannot be read by this program. Obviously I&#39;m going on
+        and on, so I&#39;ll stop now.
 
 -h, --help
         Prints help information
 
 -V, --version
-        Prints version information
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.last" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#699-705" title="goto source code">[src]</a></div><a href="#method.last" class="anchor"></a><code>pub fn <a href="#method.last" class="fnname">last</a>(self, l: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Specifies that this arg is the last, or final, positional argument (i.e. has the highest
+        Prints version information</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.last" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#699-705" title="goto source code">[src]</a></div><a href="#method.last" class="anchor"></a><code>pub fn <a href="#method.last" class="fnname">last</a>(self, l: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Specifies that this arg is the last, or final, positional argument (i.e. has the highest
 index) and is <em>only</em> able to be accessed via the <code>--</code> syntax (i.e. <code>$ prog args -- last_arg</code>). Even, if no other arguments are left to parse, if the user omits the <code>--</code> syntax
 they will receive an <a href="./enum.ErrorKind.html#variant.UnknownArgument"><code>UnknownArgument</code></a> error. Setting an argument to <code>.last(true)</code> also
 allows one to access this arg early using the <code>--</code> syntax. Accessing an arg early, even with
@@ -819,10 +804,8 @@ required</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.requires_if" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#1475-1482" title="goto source code">[src]</a></div><a href="#method.requires_if" class="anchor"></a><code>pub fn <a href="#method.requires_if" class="fnname">requires_if</a>(self, val: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, arg: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Allows a conditional requirement. The requirement will only become valid if this arg’s value
 equals <code>val</code>.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows</p>
-<pre><code class="language-yaml">requires_if:
-    - [val, arg]
-</code></pre>
-<h1 id="examples-23" class="section-header"><a href="#examples-23">Examples</a></h1>
+<div class="example-wrap"><pre class="language-yaml">requires_if:
+    - [val, arg]</pre></div><h1 id="examples-23" class="section-header"><a href="#examples-23">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="ident">Arg::with_name</span>(<span class="string">&quot;config&quot;</span>)
     .<span class="ident">requires_if</span>(<span class="string">&quot;val&quot;</span>, <span class="string">&quot;arg&quot;</span>)</pre></div>
@@ -861,11 +844,9 @@ defining argument’s value is equal to <code>val</code>. If the defining argume
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.requires_ifs" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#1535-1548" title="goto source code">[src]</a></div><a href="#method.requires_ifs" class="anchor"></a><code>pub fn <a href="#method.requires_ifs" class="fnname">requires_ifs</a>(self, ifs: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a>&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Allows multiple conditional requirements. The requirement will only become valid if this arg’s value
 equals <code>val</code>.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows</p>
-<pre><code class="language-yaml">requires_if:
+<div class="example-wrap"><pre class="language-yaml">requires_if:
     - [val, arg]
-    - [val2, arg2]
-</code></pre>
-<h1 id="examples-24" class="section-header"><a href="#examples-24">Examples</a></h1>
+    - [val2, arg2]</pre></div><h1 id="examples-24" class="section-header"><a href="#examples-24">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="ident">Arg::with_name</span>(<span class="string">&quot;config&quot;</span>)
     .<span class="ident">requires_ifs</span>(<span class="kw-2">&amp;</span>[
@@ -898,10 +879,8 @@ than <code>val</code>, <code>arg</code> isn’t required.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.required_if" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#1613-1620" title="goto source code">[src]</a></div><a href="#method.required_if" class="anchor"></a><code>pub fn <a href="#method.required_if" class="fnname">required_if</a>(self, arg: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, val: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Allows specifying that an argument is <a href="./struct.Arg.html#method.required">required</a> conditionally. The requirement will only
 become valid if the specified <code>arg</code>’s value equals <code>val</code>.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows</p>
-<pre><code class="language-yaml">required_if:
-    - [arg, val]
-</code></pre>
-<h1 id="examples-25" class="section-header"><a href="#examples-25">Examples</a></h1>
+<div class="example-wrap"><pre class="language-yaml">required_if:
+    - [arg, val]</pre></div><h1 id="examples-25" class="section-header"><a href="#examples-25">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="ident">Arg::with_name</span>(<span class="string">&quot;config&quot;</span>)
     .<span class="ident">required_if</span>(<span class="string">&quot;other_arg&quot;</span>, <span class="string">&quot;value&quot;</span>)</pre></div>
@@ -945,11 +924,9 @@ using this arg is an error.</p>
 conditions are set up in a <code>(arg, val)</code> style tuple. The requirement will only become valid
 if one of the specified <code>arg</code>’s value equals it’s corresponding <code>val</code>.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows</p>
-<pre><code class="language-yaml">required_if:
+<div class="example-wrap"><pre class="language-yaml">required_if:
     - [arg, val]
-    - [arg2, val2]
-</code></pre>
-<h1 id="examples-26" class="section-header"><a href="#examples-26">Examples</a></h1>
+    - [arg2, val2]</pre></div><h1 id="examples-26" class="section-header"><a href="#examples-26">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="ident">Arg::with_name</span>(<span class="string">&quot;config&quot;</span>)
     .<span class="ident">required_ifs</span>(<span class="kw-2">&amp;</span>[
@@ -1172,17 +1149,14 @@ a possible value that coincides with a subcommand name, the subcommand cannot be
 unless another argument is passed first.</p>
 <p>As an example, consider a CLI with an option <code>--ui-paths=&lt;paths&gt;...</code> and subcommand <code>signer</code></p>
 <p>The following would be parsed as values to <code>--ui-paths</code>.</p>
-<pre><code class="language-notrust">$ program --ui-paths path1 path2 signer
-</code></pre>
+<div class="example-wrap"><pre class="language-notrust">$ program --ui-paths path1 path2 signer</pre></div>
 <p>This is because <code>--ui-paths</code> accepts multiple values. <code>clap</code> will continue parsing values
 until another argument is reached and it knows <code>--ui-paths</code> is done.</p>
 <p>By adding additional parameters to <code>--ui-paths</code> we can solve this issue. Consider adding
 <a href="./struct.Arg.html#method.number_of_values"><code>Arg::number_of_values(1)</code></a> as discussed above. The following are all valid, and <code>signer</code>
 is parsed as both a subcommand and a value in the second case.</p>
-<pre><code class="language-notrust">$ program --ui-paths path1 signer
-$ program --ui-paths path1 --ui-paths signer signer
-</code></pre>
-<h1 id="examples-32" class="section-header"><a href="#examples-32">Examples</a></h1>
+<div class="example-wrap"><pre class="language-notrust">$ program --ui-paths path1 signer
+$ program --ui-paths path1 --ui-paths signer signer</pre></div><h1 id="examples-32" class="section-header"><a href="#examples-32">Examples</a></h1>
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="ident">Arg::with_name</span>(<span class="string">&quot;debug&quot;</span>)
     .<span class="ident">short</span>(<span class="string">&quot;d&quot;</span>)
@@ -1398,16 +1372,14 @@ when set to true</p>
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
-<pre><code class="language-notrust">helptest
+<div class="example-wrap"><pre class="language-notrust">helptest
 
 USAGE:
    helptest [FLAGS]
 
 FLAGS:
 -h, --help       Prints help information
--V, --version    Prints version information
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.possible_values" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#2404-2413" title="goto source code">[src]</a></div><a href="#method.possible_values" class="anchor"></a><code>pub fn <a href="#method.possible_values" class="fnname">possible_values</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Specifies a list of possible values for this argument. At runtime, <code>clap</code> verifies that
+-V, --version    Prints version information</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.possible_values" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#2404-2413" title="goto source code">[src]</a></div><a href="#method.possible_values" class="anchor"></a><code>pub fn <a href="#method.possible_values" class="fnname">possible_values</a>(self, names: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a>&amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Specifies a list of possible values for this argument. At runtime, <code>clap</code> verifies that
 only one of the specified values was used, or fails with an error message.</p>
 <p><strong>NOTE:</strong> This setting only applies to <a href="./struct.Arg.html#method.takes_value">options</a> and <a href="./struct.Arg.html#method.index">positional arguments</a></p>
 <h1 id="examples-37" class="section-header"><a href="#examples-37">Examples</a></h1>
@@ -1855,7 +1827,7 @@ the <em>exact</em> number of values required to satisfy this argument</p>
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>Running the above program produces the following output</p>
-<pre><code class="language-notrust">valnames
+<div class="example-wrap"><pre class="language-notrust">valnames
 
 USAGE:
    valnames [FLAGS] [OPTIONS]
@@ -1865,9 +1837,7 @@ FLAGS:
     -V, --version    Prints version information
 
 OPTIONS:
-    --io-files &lt;INFILE&gt; &lt;OUTFILE&gt;    Some help text
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.value_name" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3167-3178" title="goto source code">[src]</a></div><a href="#method.value_name" class="anchor"></a><code>pub fn <a href="#method.value_name" class="fnname">value_name</a>(self, name: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Specifies the name for value of <a href="./struct.Arg.html#method.takes_value">option</a> or <a href="./struct.Arg.html#method.index">positional</a> arguments inside of help
+    --io-files &lt;INFILE&gt; &lt;OUTFILE&gt;    Some help text</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.value_name" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3167-3178" title="goto source code">[src]</a></div><a href="#method.value_name" class="anchor"></a><code>pub fn <a href="#method.value_name" class="fnname">value_name</a>(self, name: &amp;'b <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Specifies the name for value of <a href="./struct.Arg.html#method.takes_value">option</a> or <a href="./struct.Arg.html#method.index">positional</a> arguments inside of help
 documentation. This name is cosmetic only, the name is <strong>not</strong> used to access arguments.
 This setting can be very helpful when describing the type of input the user should be
 using, such as <code>FILE</code>, <code>INTERFACE</code>, etc. Although not required, it’s somewhat convention to
@@ -1888,7 +1858,7 @@ use all capital letters for the value name.</p>
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>Running the above program produces the following output</p>
-<pre><code class="language-notrust">valnames
+<div class="example-wrap"><pre class="language-notrust">valnames
 
 USAGE:
    valnames [FLAGS] [OPTIONS]
@@ -1898,9 +1868,7 @@ FLAGS:
     -V, --version    Prints version information
 
 OPTIONS:
-    --config &lt;FILE&gt;     Some help text
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.default_value" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3243-3245" title="goto source code">[src]</a></div><a href="#method.default_value" class="anchor"></a><code>pub fn <a href="#method.default_value" class="fnname">default_value</a>(self, val: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Specifies the value of the argument when <em>not</em> specified at runtime.</p>
+    --config &lt;FILE&gt;     Some help text</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.default_value" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3243-3245" title="goto source code">[src]</a></div><a href="#method.default_value" class="anchor"></a><code>pub fn <a href="#method.default_value" class="fnname">default_value</a>(self, val: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Specifies the value of the argument when <em>not</em> specified at runtime.</p>
 <p><strong>NOTE:</strong> If the user <em>does not</em> use this argument at runtime, <a href="./struct.ArgMatches.html#method.occurrences_of"><code>ArgMatches::occurrences_of</code></a>
 will return <code>0</code> even though the <a href="./struct.ArgMatches.html#method.value_of"><code>ArgMatches::value_of</code></a> will return the default specified.</p>
 <p><strong>NOTE:</strong> If the user <em>does not</em> use this argument at runtime <a href="./struct.ArgMatches.html#method.is_present"><code>ArgMatches::is_present</code></a> will
@@ -1963,10 +1931,8 @@ applied.</p>
 <p><strong>NOTE:</strong> This implicitly sets <a href="./struct.Arg.html#method.takes_value"><code>Arg::takes_value(true)</code></a>.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows (<code>None</code> can be represented
 as <code>null</code> in YAML)</p>
-<pre><code class="language-yaml">default_value_if:
-    - [arg, val, default]
-</code></pre>
-<h1 id="examples-53" class="section-header"><a href="#examples-53">Examples</a></h1>
+<div class="example-wrap"><pre class="language-yaml">default_value_if:
+    - [arg, val, default]</pre></div><h1 id="examples-53" class="section-header"><a href="#examples-53">Examples</a></h1>
 <p>First we use the default value only if another arg is present at runtime.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -2035,11 +2001,9 @@ The method takes a slice of tuples in the <code>(arg, Option&lt;val&gt;, default
 <p><strong>NOTE</strong>: The conditions are stored in order and evaluated in the same order. I.e. the first
 if multiple conditions are true, the first one found will be applied and the ultimate value.</p>
 <p><strong>NOTE:</strong> If using YAML the values should be laid out as follows</p>
-<pre><code class="language-yaml">default_value_if:
+<div class="example-wrap"><pre class="language-yaml">default_value_if:
     - [arg, val, default]
-    - [arg2, null, default2]
-</code></pre>
-<h1 id="examples-54" class="section-header"><a href="#examples-54">Examples</a></h1>
+    - [arg2, null, default2]</pre></div><h1 id="examples-54" class="section-header"><a href="#examples-54">Examples</a></h1>
 <p>First we use the default value only if another arg is present at runtime.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -2205,7 +2169,7 @@ This can also be helpful for arguments with very long flag names, or many/long v
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays the following help message</p>
-<pre><code class="language-notrust">nlh
+<div class="example-wrap"><pre class="language-notrust">nlh
 
 USAGE:
     nlh [FLAGS] [OPTIONS]
@@ -2218,9 +2182,7 @@ OPTIONS:
     -o, --long-option-flag &lt;value1&gt; &lt;value2&gt;
         Some really long help and complex
         help that makes more sense to be
-        on a line after the option
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.display_order" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3727-3730" title="goto source code">[src]</a></div><a href="#method.display_order" class="anchor"></a><code>pub fn <a href="#method.display_order" class="fnname">display_order</a>(self, ord: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Allows custom ordering of args within the help message. Args with a lower value will be
+        on a line after the option</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.display_order" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3727-3730" title="goto source code">[src]</a></div><a href="#method.display_order" class="anchor"></a><code>pub fn <a href="#method.display_order" class="fnname">display_order</a>(self, ord: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Allows custom ordering of args within the help message. Args with a lower value will be
 displayed first in the help message. This is helpful when one would like to emphasise
 frequently used args, or prioritize those towards the top of the list. Duplicate values
 <strong>are</strong> allowed. Args with duplicate display orders will be displayed in alphabetical
@@ -2251,7 +2213,7 @@ order.</p>
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays the following help message</p>
-<pre><code class="language-notrust">cust-ord
+<div class="example-wrap"><pre class="language-notrust">cust-ord
 
 USAGE:
     cust-ord [FLAGS] [OPTIONS]
@@ -2262,14 +2224,11 @@ FLAGS:
 
 OPTIONS:
     -O, --other-option &lt;b&gt;    I should be first!
-    -o, --long-option &lt;a&gt;     Some help and text
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.raw" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3751-3753" title="goto source code">[src]</a></div><a href="#method.raw" class="anchor"></a><code>pub fn <a href="#method.raw" class="fnname">raw</a>(self, raw: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Indicates that all parameters passed after this should not be parsed
+    -o, --long-option &lt;a&gt;     Some help and text</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.raw" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3751-3753" title="goto source code">[src]</a></div><a href="#method.raw" class="anchor"></a><code>pub fn <a href="#method.raw" class="fnname">raw</a>(self, raw: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Indicates that all parameters passed after this should not be parsed
 individually, but rather passed in their entirety. It is worth noting
 that setting this requires all values to come after a <code>--</code> to indicate they
 should all be captured. For example:</p>
-<pre><code class="language-notrust">--foo something -- -v -v -v -b -b -b --baz -q -u -x
-</code></pre>
+<div class="example-wrap"><pre class="language-notrust">--foo something -- -v -v -v -b -b -b --baz -q -u -x</pre></div>
 <p>Will result in everything after <code>--</code> to be considered one raw argument. This behavior
 may not be exactly what you are expecting and using <a href="./enum.AppSettings.html#variant.TrailingVarArg"><code>AppSettings::TrailingVarArg</code></a>
 may be more appropriate.</p>
@@ -2295,15 +2254,14 @@ when long help (<code>--help</code>) is called.</p>
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-h&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
-<pre><code class="language-notrust">helptest
+<div class="example-wrap"><pre class="language-notrust">helptest
 
 USAGE:
    helptest [FLAGS]
 
 FLAGS:
 -h, --help       Prints help information
--V, --version    Prints version information
-</code></pre>
+-V, --version    Prints version information</pre></div>
 <p>However, when –help is called</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -2316,7 +2274,7 @@ FLAGS:
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>Then the following would be displayed</p>
-<pre><code class="language-notrust">helptest
+<div class="example-wrap"><pre class="language-notrust">helptest
 
 USAGE:
    helptest [FLAGS]
@@ -2324,9 +2282,7 @@ USAGE:
 FLAGS:
     --config     Some help text describing the --config arg
 -h, --help       Prints help information
--V, --version    Prints version information
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.hidden_long_help" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3901-3907" title="goto source code">[src]</a></div><a href="#method.hidden_long_help" class="anchor"></a><code>pub fn <a href="#method.hidden_long_help" class="fnname">hidden_long_help</a>(self, hide: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Hides an argument from long help message output.</p>
+-V, --version    Prints version information</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.hidden_long_help" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3901-3907" title="goto source code">[src]</a></div><a href="#method.hidden_long_help" class="anchor"></a><code>pub fn <a href="#method.hidden_long_help" class="fnname">hidden_long_help</a>(self, hide: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Hides an argument from long help message output.</p>
 <p><strong>NOTE:</strong> This does <strong>not</strong> hide the argument from usage strings on error</p>
 <p><strong>NOTE:</strong> Setting this option will cause next-line-help output style to be used
 when long help (<code>--help</code>) is called.</p>
@@ -2346,15 +2302,14 @@ when long help (<code>--help</code>) is called.</p>
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays</p>
-<pre><code class="language-notrust">helptest
+<div class="example-wrap"><pre class="language-notrust">helptest
 
 USAGE:
    helptest [FLAGS]
 
 FLAGS:
 -h, --help       Prints help information
--V, --version    Prints version information
-</code></pre>
+-V, --version    Prints version information</pre></div>
 <p>However, when -h is called</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
@@ -2367,7 +2322,7 @@ FLAGS:
         <span class="string">&quot;prog&quot;</span>, <span class="string">&quot;-h&quot;</span>
     ]);</pre></div>
 <p>Then the following would be displayed</p>
-<pre><code class="language-notrust">helptest
+<div class="example-wrap"><pre class="language-notrust">helptest
 
 USAGE:
    helptest [FLAGS]
@@ -2375,9 +2330,7 @@ USAGE:
 FLAGS:
     --config     Some help text describing the --config arg
 -h, --help       Prints help information
--V, --version    Prints version information
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.is_set" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3912-3914" title="goto source code">[src]</a></div><a href="#method.is_set" class="anchor"></a><code>pub fn <a href="#method.is_set" class="fnname">is_set</a>(&amp;self, s: <a class="enum" href="enum.ArgSettings.html" title="enum clap::ArgSettings">ArgSettings</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></div></summary><div class="docblock"><p>Checks if one of the <a href="./enum.ArgSettings.html"><code>ArgSettings</code></a> settings is set for the argument.</p>
+-V, --version    Prints version information</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.is_set" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3912-3914" title="goto source code">[src]</a></div><a href="#method.is_set" class="anchor"></a><code>pub fn <a href="#method.is_set" class="fnname">is_set</a>(&amp;self, s: <a class="enum" href="enum.ArgSettings.html" title="enum clap::ArgSettings">ArgSettings</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></div></summary><div class="docblock"><p>Checks if one of the <a href="./enum.ArgSettings.html"><code>ArgSettings</code></a> settings is set for the argument.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.set" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3919-3922" title="goto source code">[src]</a></div><a href="#method.set" class="anchor"></a><code>pub fn <a href="#method.set" class="fnname">set</a>(self, s: <a class="enum" href="enum.ArgSettings.html" title="enum clap::ArgSettings">ArgSettings</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Sets one of the <a href="./enum.ArgSettings.html"><code>ArgSettings</code></a> settings for the argument.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.unset" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#3927-3930" title="goto source code">[src]</a></div><a href="#method.unset" class="anchor"></a><code>pub fn <a href="#method.unset" class="fnname">unset</a>(self, s: <a class="enum" href="enum.ArgSettings.html" title="enum clap::ArgSettings">ArgSettings</a>) -&gt; Self</code></div></summary><div class="docblock"><p>Unsets one of the <a href="./enum.ArgSettings.html"><code>ArgSettings</code></a> settings for the argument.</p>
 </div></details></div></details><h2 id="trait-implementations" class="small-section-header">Trait Implementations<a href="#trait-implementations" class="anchor"></a></h2><div id="trait-implementations-list"><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl-Clone" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#42" title="goto source code">[src]</a></div><a href="#impl-Clone" class="anchor"></a><code class="in-band">impl&lt;'a, 'b&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="struct.Arg.html" title="struct clap::Arg">Arg</a>&lt;'a, 'b&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;'a: 'b,&nbsp;</span></code></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.clone" class="method trait-impl has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/arg.rs.html#42" title="goto source code">[src]</a></div><a href="#method.clone" class="anchor"></a><code>fn <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone" class="fnname">clone</a>(&amp;self) -&gt; <a class="struct" href="struct.Arg.html" title="struct clap::Arg">Arg</a>&lt;'a, 'b&gt;</code></div></summary><div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>

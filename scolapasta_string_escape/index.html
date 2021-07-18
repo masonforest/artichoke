@@ -6,13 +6,12 @@ escaped to have a valid and printable UTF-8 representation.</p>
 slices as valid, printable UTF-8.</p>
 <h1 id="ruby-debug-escapes" class="section-header"><a href="#ruby-debug-escapes">Ruby debug escapes</a></h1>
 <p>Ruby produces debug escapes that look like:</p>
-<pre><code class="language-console">[2.6.3] &gt; &quot;Artichoke Ruby is made with Rust.
+<div class="example-wrap"><pre class="language-console">[2.6.3] &gt; &quot;Artichoke Ruby is made with Rust.
 
 Invalid UTF-8: \xFF.
 
 Slash \\ and quote \&quot; are escaped.&quot;
-=&gt; &quot;Artichoke Ruby is made with Rust.\n\nInvalid UTF-8: \xFF.\n\nSlash \\ and quote \&quot; are escaped.&quot;
-</code></pre>
+=&gt; &quot;Artichoke Ruby is made with Rust.\n\nInvalid UTF-8: \xFF.\n\nSlash \\ and quote \&quot; are escaped.&quot;</pre></div>
 <p>Ruby escape sequences differ than Rust escape sequences for some characters.
 For example <code>0x0C</code>:</p>
 

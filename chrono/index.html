@@ -19,10 +19,8 @@ the wiki</a></li>
 the <a href="https://github.com/chronotope/chrono/blob/main/CHANGELOG.md"><code>CHANGELOG.md</code></a> file.</p>
 <h2 id="usage" class="section-header"><a href="#usage">Usage</a></h2>
 <p>Put this in your <code>Cargo.toml</code>:</p>
-<pre><code class="language-toml">[dependencies]
-chrono = &quot;0.4&quot;
-</code></pre>
-<h3 id="features" class="section-header"><a href="#features">Features</a></h3>
+<div class="example-wrap"><pre class="language-toml">[dependencies]
+chrono = &quot;0.4&quot;</pre></div><h3 id="features" class="section-header"><a href="#features">Features</a></h3>
 <p>Chrono supports various runtime environments and operating systems, and has
 several features that may be enabled or disabled.</p>
 <p>Default features:</p>
@@ -190,8 +188,7 @@ for well-known formats.</p>
 <p>Chrono now also provides date formatting in almost any language without the
 help of an additional C library. This functionality is under the feature
 <code>unstable-locales</code>:</p>
-<pre><code class="language-text">chrono { version = &quot;0.4&quot;, features = [&quot;unstable-locales&quot;]
-</code></pre>
+<div class="example-wrap"><pre class="language-text">chrono { version = &quot;0.4&quot;, features = [&quot;unstable-locales&quot;]</pre></div>
 <p>The <code>unstable-locales</code> feature requires and implies at least the <code>alloc</code> feature.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">

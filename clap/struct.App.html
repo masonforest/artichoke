@@ -481,7 +481,7 @@ displayed in alphabetical order.</p>
         <span class="string">&quot;cust-ord&quot;</span>, <span class="string">&quot;--help&quot;</span>
     ]);</pre></div>
 <p>The above example displays the following help message</p>
-<pre><code class="language-text">cust-ord
+<div class="example-wrap"><pre class="language-text">cust-ord
 
 USAGE:
     cust-ord [FLAGS] [OPTIONS]
@@ -492,9 +492,7 @@ FLAGS:
 
 SUBCOMMANDS:
     beta    I should be first!
-    alpha   Some help and text
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.print_help" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/app/mod.rs.html#1168-1179" title="goto source code">[src]</a></div><a href="#method.print_help" class="anchor"></a><code>pub fn <a href="#method.print_help" class="fnname">print_help</a>(&amp;mut self) -&gt; <a class="type" href="type.Result.html" title="type clap::Result">ClapResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt;</code></div></summary><div class="docblock"><p>Prints the full help message to <a href="https://doc.rust-lang.org/std/io/fn.stdout.html"><code>io::stdout()</code></a> using a <a href="https://doc.rust-lang.org/std/io/struct.BufWriter.html"><code>BufWriter</code></a> using the same
+    alpha   Some help and text</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.print_help" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/app/mod.rs.html#1168-1179" title="goto source code">[src]</a></div><a href="#method.print_help" class="anchor"></a><code>pub fn <a href="#method.print_help" class="fnname">print_help</a>(&amp;mut self) -&gt; <a class="type" href="type.Result.html" title="type clap::Result">ClapResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt;</code></div></summary><div class="docblock"><p>Prints the full help message to <a href="https://doc.rust-lang.org/std/io/fn.stdout.html"><code>io::stdout()</code></a> using a <a href="https://doc.rust-lang.org/std/io/struct.BufWriter.html"><code>BufWriter</code></a> using the same
 method as if someone ran <code>-h</code> to request the help message</p>
 <p><strong>NOTE:</strong> clap has the ability to distinguish between “short” and “long” help messages
 depending on if the user ran <a href="./struct.Arg.html#method.help"><code>-h</code> (short)</a> or <a href="./struct.Arg.html#method.long_help"><code>--help</code> (long)</a></p>
@@ -592,12 +590,10 @@ do this as a function, or bare App definition is a matter of personal preference
     <span class="comment">// normal logic continues...</span>
 }</pre></div>
 <p>Next, we set up our <code>Cargo.toml</code> to use a <code>build.rs</code> build script.</p>
-<pre><code class="language-toml"># Cargo.toml
-build = &quot;build.rs&quot;
+<div class="example-wrap"><pre class="language-toml">build = &quot;build.rs&quot;
 
 [build-dependencies]
-clap = &quot;2.23&quot;
-</code></pre>
+clap = &quot;2.23&quot;</pre></div>
 <p>Next, we place a <code>build.rs</code> in our project root.</p>
 
 <div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
@@ -645,9 +641,7 @@ we can let users generate a completion script using a command:</p>
 }
 </pre></div>
 <p>Usage:</p>
-<pre><code class="language-shell">$ myapp generate-bash-completions &gt; /usr/share/bash-completion/completions/myapp.bash
-</code></pre>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.get_matches" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/app/mod.rs.html#1459-1461" title="goto source code">[src]</a></div><a href="#method.get_matches" class="anchor"></a><code>pub fn <a href="#method.get_matches" class="fnname">get_matches</a>(self) -&gt; <a class="struct" href="struct.ArgMatches.html" title="struct clap::ArgMatches">ArgMatches</a>&lt;'a&gt;</code></div></summary><div class="docblock"><p>Starts the parsing process, upon a failed parse an error will be displayed to the user and
+<div class="example-wrap"><pre class="language-shell">$ myapp generate-bash-completions &gt; /usr/share/bash-completion/completions/myapp.bash</pre></div></div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.get_matches" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/app/mod.rs.html#1459-1461" title="goto source code">[src]</a></div><a href="#method.get_matches" class="anchor"></a><code>pub fn <a href="#method.get_matches" class="fnname">get_matches</a>(self) -&gt; <a class="struct" href="struct.ArgMatches.html" title="struct clap::ArgMatches">ArgMatches</a>&lt;'a&gt;</code></div></summary><div class="docblock"><p>Starts the parsing process, upon a failed parse an error will be displayed to the user and
 the process will exit with the appropriate error code. By default this method gets all user
 provided arguments from <a href="https://doc.rust-lang.org/std/env/fn.args_os.html"><code>env::args_os</code></a> in order to allow for invalid UTF-8 code points,
 which are legal on many platforms.</p>

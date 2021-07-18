@@ -12,11 +12,9 @@ terminal. A quick example:</p>
     <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">fill</span>(<span class="ident">text</span>, <span class="number">18</span>));
 }</pre></div>
 <p>This will display the following output:</p>
-<pre><code class="language-text">textwrap: a small
+<div class="example-wrap"><pre class="language-text">textwrap: a small
 library for
-wrapping text.
-</code></pre>
-<h1 id="displayed-width-vs-byte-size" class="section-header"><a href="#displayed-width-vs-byte-size">Displayed Width vs Byte Size</a></h1>
+wrapping text.</pre></div><h1 id="displayed-width-vs-byte-size" class="section-header"><a href="#displayed-width-vs-byte-size">Displayed Width vs Byte Size</a></h1>
 <p>To word wrap text, one must know the width of each word so one can
 know when to break lines. This library measures the width of text
 using the <a href="https://docs.rs/unicode-width/">displayed width</a>, not the size in bytes.</p>
