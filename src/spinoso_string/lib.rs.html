@@ -2385,6 +2385,113 @@
 <span id="2385">2385</span>
 <span id="2386">2386</span>
 <span id="2387">2387</span>
+<span id="2388">2388</span>
+<span id="2389">2389</span>
+<span id="2390">2390</span>
+<span id="2391">2391</span>
+<span id="2392">2392</span>
+<span id="2393">2393</span>
+<span id="2394">2394</span>
+<span id="2395">2395</span>
+<span id="2396">2396</span>
+<span id="2397">2397</span>
+<span id="2398">2398</span>
+<span id="2399">2399</span>
+<span id="2400">2400</span>
+<span id="2401">2401</span>
+<span id="2402">2402</span>
+<span id="2403">2403</span>
+<span id="2404">2404</span>
+<span id="2405">2405</span>
+<span id="2406">2406</span>
+<span id="2407">2407</span>
+<span id="2408">2408</span>
+<span id="2409">2409</span>
+<span id="2410">2410</span>
+<span id="2411">2411</span>
+<span id="2412">2412</span>
+<span id="2413">2413</span>
+<span id="2414">2414</span>
+<span id="2415">2415</span>
+<span id="2416">2416</span>
+<span id="2417">2417</span>
+<span id="2418">2418</span>
+<span id="2419">2419</span>
+<span id="2420">2420</span>
+<span id="2421">2421</span>
+<span id="2422">2422</span>
+<span id="2423">2423</span>
+<span id="2424">2424</span>
+<span id="2425">2425</span>
+<span id="2426">2426</span>
+<span id="2427">2427</span>
+<span id="2428">2428</span>
+<span id="2429">2429</span>
+<span id="2430">2430</span>
+<span id="2431">2431</span>
+<span id="2432">2432</span>
+<span id="2433">2433</span>
+<span id="2434">2434</span>
+<span id="2435">2435</span>
+<span id="2436">2436</span>
+<span id="2437">2437</span>
+<span id="2438">2438</span>
+<span id="2439">2439</span>
+<span id="2440">2440</span>
+<span id="2441">2441</span>
+<span id="2442">2442</span>
+<span id="2443">2443</span>
+<span id="2444">2444</span>
+<span id="2445">2445</span>
+<span id="2446">2446</span>
+<span id="2447">2447</span>
+<span id="2448">2448</span>
+<span id="2449">2449</span>
+<span id="2450">2450</span>
+<span id="2451">2451</span>
+<span id="2452">2452</span>
+<span id="2453">2453</span>
+<span id="2454">2454</span>
+<span id="2455">2455</span>
+<span id="2456">2456</span>
+<span id="2457">2457</span>
+<span id="2458">2458</span>
+<span id="2459">2459</span>
+<span id="2460">2460</span>
+<span id="2461">2461</span>
+<span id="2462">2462</span>
+<span id="2463">2463</span>
+<span id="2464">2464</span>
+<span id="2465">2465</span>
+<span id="2466">2466</span>
+<span id="2467">2467</span>
+<span id="2468">2468</span>
+<span id="2469">2469</span>
+<span id="2470">2470</span>
+<span id="2471">2471</span>
+<span id="2472">2472</span>
+<span id="2473">2473</span>
+<span id="2474">2474</span>
+<span id="2475">2475</span>
+<span id="2476">2476</span>
+<span id="2477">2477</span>
+<span id="2478">2478</span>
+<span id="2479">2479</span>
+<span id="2480">2480</span>
+<span id="2481">2481</span>
+<span id="2482">2482</span>
+<span id="2483">2483</span>
+<span id="2484">2484</span>
+<span id="2485">2485</span>
+<span id="2486">2486</span>
+<span id="2487">2487</span>
+<span id="2488">2488</span>
+<span id="2489">2489</span>
+<span id="2490">2490</span>
+<span id="2491">2491</span>
+<span id="2492">2492</span>
+<span id="2493">2493</span>
+<span id="2494">2494</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
@@ -2662,6 +2769,71 @@
     }
 }
 
+<span class="doccomment">/// Error returned when failing to construct a [`Center`] iterator.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This error is returned from [`String::center`]. See its documentation for</span>
+<span class="doccomment">/// more detail.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This error corresponds to the [Ruby `ArgumentError` Exception class].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// When the **std** feature of `spinoso-string` is enabled, this struct</span>
+<span class="doccomment">/// implements [`std::error::Error`].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [Ruby `ArgumentError` Exception class]: https://ruby-doc.org/core-2.6.3/ArgumentError.html</span>
+<span class="doccomment">/// [`std::error::Error`]: https://doc.rust-lang.org/std/error/trait.Error.html</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CenterError</span> {
+    <span class="doccomment">/// Error returned when calling [`String::center`] with an empty padding</span>
+    <span class="doccomment">/// bytestring.</span>
+    <span class="ident">ZeroWidthPadding</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">CenterError</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EXCEPTION_TYPE</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;ArgumentError&quot;</span>;
+
+    <span class="doccomment">/// Create a new zero width padding `CenterError`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use spinoso_string::CenterError;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// const ERR: CenterError = CenterError::zero_width_padding();</span>
+    <span class="doccomment">/// assert_eq!(ERR.message(), &quot;zero width padding&quot;);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">zero_width_padding</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">Self</span><span class="ident">::ZeroWidthPadding</span>
+    }
+
+    <span class="doccomment">/// Retrieve the exception message associated with this center error.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// # use spinoso_string::CenterError;</span>
+    <span class="doccomment">/// let err = CenterError::zero_width_padding();</span>
+    <span class="doccomment">/// assert_eq!(err.message(), &quot;zero width padding&quot;);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::unused_self</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">message</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+        <span class="string">&quot;zero width padding&quot;</span>
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">CenterError</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+        <span class="kw">let</span> <span class="ident">CenterError::ZeroWidthPadding</span> <span class="op">=</span> <span class="self">self</span>;
+        <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="self">self</span>.<span class="ident">message</span>())
+    }
+}
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
+<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">CenterError</span> {}
+
 <span class="doccomment">/// An iterator that yields a byte string centered within a padding byte string.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This struct is created by the [`center`] method on a Spinoso [`String`]. See</span>
@@ -2671,12 +2843,15 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use spinoso_string::String;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// # fn example() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {</span>
 <span class="doccomment">/// let s = String::from(&quot;hello&quot;);</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// assert_eq!(s.center(4, None).collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;hello&quot;);</span>
-<span class="doccomment">/// assert_eq!(s.center(20, None).collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;       hello        &quot;);</span>
-<span class="doccomment">/// assert_eq!(s.center(20, Some(&amp;b&quot;123&quot;[..])).collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;1231231hello12312312&quot;);</span>
+<span class="doccomment">/// assert_eq!(s.center(4, None)?.collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;hello&quot;);</span>
+<span class="doccomment">/// assert_eq!(s.center(20, None)?.collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;       hello        &quot;);</span>
+<span class="doccomment">/// assert_eq!(s.center(20, Some(&amp;b&quot;123&quot;[..]))?.collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;1231231hello12312312&quot;);</span>
+<span class="doccomment">/// # Ok(())</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// # example().unwrap();</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This iterator is [encoding-aware]. [Conventionally UTF-8] strings are</span>
@@ -2684,10 +2859,13 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use spinoso_string::String;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// # fn example() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {</span>
 <span class="doccomment">/// let s = String::from(&quot;💎&quot;);</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// assert_eq!(s.center(3, None).collect::&lt;Vec&lt;_&gt;&gt;(), &quot; 💎 &quot;.as_bytes());</span>
+<span class="doccomment">/// assert_eq!(s.center(3, None)?.collect::&lt;Vec&lt;_&gt;&gt;(), &quot; 💎 &quot;.as_bytes());</span>
+<span class="doccomment">/// # Ok(())</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// # example().unwrap();</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`center`]: crate::String::center</span>
@@ -3795,16 +3973,25 @@
     <span class="doccomment">/// If the given padding is [`None`], the `String` is padded with an ASCII</span>
     <span class="doccomment">/// space.</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// # Errors</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If given an empty padding bytestring, this function returns an error.</span>
+    <span class="doccomment">/// This error is returned regardless of whether the `String` would be</span>
+    <span class="doccomment">/// centered with the given</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use spinoso_string::String;</span>
-    <span class="doccomment">///</span>
+    <span class="doccomment">/// # fn example() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {</span>
     <span class="doccomment">/// let s = String::from(&quot;hello&quot;);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(s.center(4, None).collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;hello&quot;);</span>
-    <span class="doccomment">/// assert_eq!(s.center(20, None).collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;       hello        &quot;);</span>
-    <span class="doccomment">/// assert_eq!(s.center(20, Some(&amp;b&quot;123&quot;[..])).collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;1231231hello12312312&quot;);</span>
+    <span class="doccomment">/// assert_eq!(s.center(4, None)?.collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;hello&quot;);</span>
+    <span class="doccomment">/// assert_eq!(s.center(20, None)?.collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;       hello        &quot;);</span>
+    <span class="doccomment">/// assert_eq!(s.center(20, Some(&amp;b&quot;123&quot;[..]))?.collect::&lt;Vec&lt;_&gt;&gt;(), b&quot;1231231hello12312312&quot;);</span>
+    <span class="doccomment">/// # Ok(())</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// # example().unwrap();</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This iterator is [encoding-aware]. [Conventionally UTF-8] strings are</span>
@@ -3812,20 +3999,31 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use spinoso_string::String;</span>
-    <span class="doccomment">///</span>
+    <span class="doccomment">/// # fn example() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {</span>
     <span class="doccomment">/// let s = String::from(&quot;💎&quot;);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(s.center(3, None).collect::&lt;Vec&lt;_&gt;&gt;(), &quot; 💎 &quot;.as_bytes());</span>
+    <span class="doccomment">/// assert_eq!(s.center(3, None)?.collect::&lt;Vec&lt;_&gt;&gt;(), &quot; 💎 &quot;.as_bytes());</span>
+    <span class="doccomment">/// # Ok(())</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// # example().unwrap();</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`center`]: crate::String::center</span>
     <span class="doccomment">/// [encoding-aware]: crate::Encoding</span>
     <span class="doccomment">/// [Conventionally UTF-8]: crate::Encoding::Utf8</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">center</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">usize</span>, <span class="ident">padding</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> [<span class="ident">u8</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Center</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">center</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">usize</span>, <span class="ident">padding</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> [<span class="ident">u8</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Center</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>, <span class="ident">CenterError</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">padding</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">padding</span> {
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">b&quot; &quot;</span>,
+            <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">is_empty</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CenterError::ZeroWidthPadding</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">p</span>,
+        };
         <span class="kw">let</span> <span class="ident">padding_width</span> <span class="op">=</span> <span class="ident">width</span>.<span class="ident">saturating_sub</span>(<span class="self">self</span>.<span class="ident">char_len</span>());
-        <span class="ident">Center::with_chars_width_and_padding</span>(<span class="self">self</span>.<span class="ident">chars</span>(), <span class="ident">padding_width</span>, <span class="ident">padding</span>.<span class="ident">unwrap_or</span>(<span class="string">b&quot; &quot;</span>))
+        <span class="prelude-val">Ok</span>(<span class="ident">Center::with_chars_width_and_padding</span>(
+            <span class="self">self</span>.<span class="ident">chars</span>(),
+            <span class="ident">padding_width</span>,
+            <span class="ident">padding</span>,
+        ))
     }
 
     <span class="doccomment">/// Modifies this `String` in-place with the given record separator removed</span>
@@ -4254,7 +4452,7 @@
     <span class="kw">use</span> <span class="ident">core::str</span>;
     <span class="kw">use</span> <span class="ident">quickcheck::quickcheck</span>;
 
-    <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">conventionally_utf8_bytestring_len</span>, <span class="ident">String</span>};
+    <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">conventionally_utf8_bytestring_len</span>, <span class="ident">CenterError</span>, <span class="ident">String</span>};
 
     <span class="kw">const</span> <span class="ident">REPLACEMENT_CHARACTER_BYTES</span>: [<span class="ident">u8</span>; <span class="number">3</span>] <span class="op">=</span> [<span class="number">239</span>, <span class="number">191</span>, <span class="number">189</span>];
 
@@ -4771,6 +4969,22 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::binary</span>(<span class="string">&quot;�&quot;</span>.<span class="ident">to_string</span>().<span class="ident">into_bytes</span>());
         <span class="ident">s</span>.<span class="ident">make_capitalized</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s</span>, <span class="string">&quot;�&quot;</span>);
+    }
+
+    <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="kw">fn</span> <span class="ident">center_returns_error_with_empty_padding</span>() {
+        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::utf8</span>(<span class="string">b&quot;jumbo&quot;</span>.<span class="ident">to_vec</span>());
+        <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">center</span>(<span class="number">10</span>, <span class="prelude-val">Some</span>(<span class="string">b&quot;&quot;</span>));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">center</span>, <span class="prelude-val">Err</span>(<span class="ident">CenterError::ZeroWidthPadding</span>)));
+
+        <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">center</span>(<span class="number">9</span>, <span class="prelude-val">Some</span>(<span class="string">b&quot;&quot;</span>));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">center</span>, <span class="prelude-val">Err</span>(<span class="ident">CenterError::ZeroWidthPadding</span>)));
+
+        <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">center</span>(<span class="number">1</span>, <span class="prelude-val">Some</span>(<span class="string">b&quot;&quot;</span>));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">center</span>, <span class="prelude-val">Err</span>(<span class="ident">CenterError::ZeroWidthPadding</span>)));
+
+        <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">center</span>(<span class="number">5</span>, <span class="prelude-val">Some</span>(<span class="string">b&quot;&quot;</span>));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">center</span>, <span class="prelude-val">Err</span>(<span class="ident">CenterError::ZeroWidthPadding</span>)));
     }
 }
 </pre></div>
