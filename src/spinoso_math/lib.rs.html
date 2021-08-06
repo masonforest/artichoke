@@ -393,18 +393,6 @@
 <span id="393">393</span>
 <span id="394">394</span>
 <span id="395">395</span>
-<span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
-<span id="401">401</span>
-<span id="402">402</span>
-<span id="403">403</span>
-<span id="404">404</span>
-<span id="405">405</span>
-<span id="406">406</span>
-<span id="407">407</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
@@ -466,11 +454,6 @@
 <span class="doccomment">//! assert!(matches!(math::log10(f64::NAN), Ok(result) if result.is_nan()));</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! # `no_std`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This crate is `no_std` compatible when built without the `std` feature. This</span>
-<span class="doccomment">//! crate does not depend on [`alloc`].</span>
-<span class="doccomment">//!</span>
 <span class="doccomment">//! # Crate features</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! All features are enabled by default.</span>
@@ -478,9 +461,6 @@
 <span class="doccomment">//! - **full** - Enables implementations of math functions that do not have</span>
 <span class="doccomment">//!   implementations in Rust [`core`]. Dropping this feature removes the</span>
 <span class="doccomment">//!   [`libm`] dependency.</span>
-<span class="doccomment">//! - **std** - Enables a dependency on the Rust Standard Library. Activating</span>
-<span class="doccomment">//!   this feature enables [`std::error::Error`] impls on error types in this</span>
-<span class="doccomment">//!   crate.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [`Float`]: https://ruby-doc.org/core-2.6.3/Float.html</span>
 <span class="doccomment">//! [`NaN`]: f64::NAN</span>
@@ -492,7 +472,6 @@
 <span class="kw">mod</span> <span class="ident">readme</span> {}
 
 <span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">std::error</span>;
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
@@ -605,7 +584,6 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">error::Error</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
@@ -710,7 +688,6 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">DomainError</span> {}
 
 <span class="doccomment">/// Error that indicates a `Math` module function is not implemented.</span>
@@ -811,7 +788,6 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">NotImplementedError</span> {}
 </pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="spinoso_math" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
