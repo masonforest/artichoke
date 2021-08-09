@@ -276,12 +276,12 @@
 
     <span class="doccomment">/// Constructor from `char` with Ctrl modifier</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ctrl</span>(<span class="ident">c</span>: <span class="ident">char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">c</span>, <span class="ident">Modifiers::CTRL</span>)
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">c</span>, <span class="ident">Modifiers::CTRL</span>)
     }
 
     <span class="doccomment">/// Constructor from `char` with Alt modifier</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">alt</span>(<span class="ident">c</span>: <span class="ident">char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">c</span>, <span class="ident">Modifiers::ALT</span>)
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">c</span>, <span class="ident">Modifiers::ALT</span>)
     }
 
     <span class="doccomment">/// ctrl-a =&gt; ctrl-A (uppercase)</span>
@@ -291,7 +291,7 @@
         <span class="kw">use</span> {<span class="ident">KeyCode</span> <span class="kw">as</span> <span class="ident">K</span>, <span class="ident">KeyEvent</span> <span class="kw">as</span> <span class="ident">E</span>, <span class="ident">Modifiers</span> <span class="kw">as</span> <span class="ident">M</span>};
 
         <span class="kw">match</span> <span class="ident">e</span> {
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">m</span>) <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">is_ascii_control</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">c</span>, <span class="ident">m</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">m</span>) <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">is_ascii_control</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">c</span>, <span class="ident">m</span>),
             <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">m</span>) <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">is_ascii_lowercase</span>() <span class="op">&amp;&amp;</span> <span class="ident">m</span>.<span class="ident">contains</span>(<span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>.<span class="ident">to_ascii_uppercase</span>()), <span class="ident">m</span>)
             }
@@ -306,7 +306,7 @@
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">KeyEvent</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">c</span>: <span class="ident">char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">c</span>, <span class="ident">Modifiers::NONE</span>)
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">c</span>, <span class="ident">Modifiers::NONE</span>)
     }
 }
 
@@ -371,13 +371,13 @@
         <span class="doccomment">/// No modifier</span>
         <span class="kw">const</span> <span class="ident">NONE</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="doccomment">/// Ctrl + Shift</span>
-        <span class="kw">const</span> <span class="ident">CTRL_SHIFT</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::CTRL</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::SHIFT</span>.<span class="ident">bits</span>;
+        <span class="kw">const</span> <span class="ident">CTRL_SHIFT</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::CTRL</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::SHIFT</span>.<span class="ident">bits</span>;
         <span class="doccomment">/// Alt + Shift</span>
-        <span class="kw">const</span> <span class="ident">ALT_SHIFT</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::ALT</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::SHIFT</span>.<span class="ident">bits</span>;
+        <span class="kw">const</span> <span class="ident">ALT_SHIFT</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::ALT</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::SHIFT</span>.<span class="ident">bits</span>;
         <span class="doccomment">/// Ctrl + Alt</span>
-        <span class="kw">const</span> <span class="ident">CTRL_ALT</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::CTRL</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::ALT</span>.<span class="ident">bits</span>;
+        <span class="kw">const</span> <span class="ident">CTRL_ALT</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::CTRL</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::ALT</span>.<span class="ident">bits</span>;
         <span class="doccomment">/// Ctrl + Alt + Shift</span>
-        <span class="kw">const</span> <span class="ident">CTRL_ALT_SHIFT</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::CTRL</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::ALT</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::SHIFT</span>.<span class="ident">bits</span>;
+        <span class="kw">const</span> <span class="ident">CTRL_ALT_SHIFT</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::CTRL</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::ALT</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::SHIFT</span>.<span class="ident">bits</span>;
     }
 }
 

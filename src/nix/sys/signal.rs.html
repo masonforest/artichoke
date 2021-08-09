@@ -1097,8 +1097,8 @@
 <span class="doccomment">///! Operating system signals.</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd::Pid</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd::Pid</span>;
 <span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">std::mem</span>;
 <span class="kw">use</span> <span class="ident">std::fmt</span>;
@@ -1108,7 +1108,7 @@
 <span class="kw">use</span> <span class="ident">std::ptr</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;openbsd&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>)))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::sigevent</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::sigevent</span>::<span class="kw-2">*</span>;
 
 <span class="macro">libc_enum!</span>{
     <span class="comment">// Currently there is only one definition of c_int in libc, as well as only one</span>
@@ -1287,7 +1287,7 @@
     }
 }
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::Signal</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Signal</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>)]</span>
 <span class="kw">const</span> <span class="ident">SIGNALS</span>: [<span class="ident">Signal</span>; <span class="number">29</span>] <span class="op">=</span> [
@@ -1917,9 +1917,9 @@
 <span class="kw">mod</span> <span class="ident">sigevent</span> {
     <span class="kw">use</span> <span class="ident">std::mem</span>;
     <span class="kw">use</span> <span class="ident">std::ptr</span>;
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::SigevNotify</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::SigevNotify</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::type_of_thread_id</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::type_of_thread_id</span>;
 
     <span class="doccomment">/// Used to request asynchronous notification of the completion of certain</span>
     <span class="doccomment">/// events, such as POSIX AIO and timers.</span>

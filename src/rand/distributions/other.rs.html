@@ -375,10 +375,10 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">alloc::string::String</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::distributions</span>::{<span class="ident">Distribution</span>, <span class="ident">Standard</span>, <span class="ident">Uniform</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::distributions</span>::{<span class="ident">Distribution</span>, <span class="ident">Standard</span>, <span class="ident">Uniform</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::distributions::DistString</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Rng</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::distributions::DistString</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Rng</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>};
@@ -615,12 +615,12 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::RngCore</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::RngCore</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span> <span class="kw">use</span> <span class="ident">alloc::string::String</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_misc</span>() {
-        <span class="kw">let</span> <span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">RngCore</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">crate</span><span class="ident">::test::rng</span>(<span class="number">820</span>);
+        <span class="kw">let</span> <span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">RngCore</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="kw">crate</span>::test::rng</span>(<span class="number">820</span>);
 
         <span class="ident">rng</span>.<span class="ident">sample</span>::<span class="op">&lt;</span><span class="ident">char</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">Standard</span>);
         <span class="ident">rng</span>.<span class="ident">sample</span>::<span class="op">&lt;</span><span class="ident">bool</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">Standard</span>);
@@ -630,7 +630,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_chars</span>() {
         <span class="kw">use</span> <span class="ident">core::iter</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="kw">crate</span><span class="ident">::test::rng</span>(<span class="number">805</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::test::rng</span>(<span class="number">805</span>);
 
         <span class="comment">// Test by generating a relatively large number of chars, so we also</span>
         <span class="comment">// take the rejection sampling path.</span>
@@ -643,7 +643,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_alphanumeric</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="kw">crate</span><span class="ident">::test::rng</span>(<span class="number">806</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::test::rng</span>(<span class="number">806</span>);
 
         <span class="comment">// Test by generating a relatively large number of chars, so we also</span>
         <span class="comment">// take the rejection sampling path.</span>
@@ -662,7 +662,7 @@
         <span class="kw">fn</span> <span class="ident">test_samples</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">core::fmt::Debug</span> <span class="op">+</span> <span class="ident">PartialEq</span>, <span class="ident">D</span>: <span class="ident">Distribution</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(
             <span class="ident">distr</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="ident">zero</span>: <span class="ident">T</span>, <span class="ident">expected</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>],
         ) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="kw">crate</span><span class="ident">::test::rng</span>(<span class="number">807</span>);
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::test::rng</span>(<span class="number">807</span>);
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="ident">zero</span>; <span class="number">5</span>];
             <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span> {
                 <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="ident">distr</span>);

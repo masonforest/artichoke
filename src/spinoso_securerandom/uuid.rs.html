@@ -109,7 +109,7 @@
 <span class="kw">use</span> <span class="ident">rand::RngCore</span>;
 <span class="kw">use</span> <span class="ident">scolapasta_hex</span> <span class="kw">as</span> <span class="ident">hex</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::RandomBytesError</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::RandomBytesError</span>;
 
 <span class="doccomment">/// The UUID format is 16 octets.</span>
 <span class="doccomment">///</span>
@@ -166,7 +166,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::v4</span> <span class="kw">as</span> <span class="ident">uuid</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::v4</span> <span class="kw">as</span> <span class="ident">uuid</span>;
 
     <span class="kw">const</span> <span class="ident">ITERATIONS</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">12</span>;
     <span class="kw">const</span> <span class="ident">PATTERN</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx&quot;</span>;

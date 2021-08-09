@@ -436,13 +436,13 @@
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::NixPath</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::NixPath</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::fcntl::OFlag</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::fcntl::OFlag</span>;
 <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_int</span>, <span class="ident">c_void</span>, <span class="ident">size_t</span>, <span class="ident">off_t</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::stat::Mode</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::stat::Mode</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
 
 <span class="macro">libc_bitflags!</span>{

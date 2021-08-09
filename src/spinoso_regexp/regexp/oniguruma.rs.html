@@ -16,7 +16,7 @@
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">onig::RegexOptions</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Options</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Options</span>;
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Options</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RegexOptions</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">opts</span>: <span class="ident">Options</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {

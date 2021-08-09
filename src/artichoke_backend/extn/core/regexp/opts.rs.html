@@ -24,9 +24,9 @@
 </pre><pre class="rust">
 <span class="doccomment">//! Parse options parameter to `Regexp#initialize` and `Regexp::compile`.</span>
 
-<span class="kw">use</span> <span class="kw">super</span><span class="ident">::Options</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::convert::implicitly_convert_to_int</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Options</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::convert::implicitly_convert_to_int</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">impl</span> <span class="ident">ConvertMut</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Options</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Artichoke</span> {
     <span class="kw">fn</span> <span class="ident">convert_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Options</span> {

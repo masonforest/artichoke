@@ -4123,7 +4123,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rustc-serialize&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">rustc_serialize</span> {
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::NaiveDateTime</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::NaiveDateTime</span>;
     <span class="kw">use</span> <span class="ident">rustc_serialize</span>::{<span class="ident">Decodable</span>, <span class="ident">Decoder</span>, <span class="ident">Encodable</span>, <span class="ident">Encoder</span>};
     <span class="kw">use</span> <span class="ident">std::ops::Deref</span>;
 
@@ -4161,7 +4161,7 @@
         <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">NaiveDateTime</span>;
 
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Target</span> {
+        <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
@@ -4182,24 +4182,24 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_encodable</span>() {
-        <span class="kw">super</span><span class="ident">::test_encodable_json</span>(<span class="ident">json::encode</span>);
+        <span class="ident"><span class="kw">super</span>::test_encodable_json</span>(<span class="ident">json::encode</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_decodable</span>() {
-        <span class="kw">super</span><span class="ident">::test_decodable_json</span>(<span class="ident">json::decode</span>);
+        <span class="ident"><span class="kw">super</span>::test_decodable_json</span>(<span class="ident">json::decode</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_decodable_timestamps</span>() {
-        <span class="kw">super</span><span class="ident">::test_decodable_json_timestamp</span>(<span class="ident">json::decode</span>);
+        <span class="ident"><span class="kw">super</span>::test_decodable_json_timestamp</span>(<span class="ident">json::decode</span>);
     }
 }
 
 <span class="doccomment">/// Tools to help serializing/deserializing `NaiveDateTime`s</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">serde</span> {
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::NaiveDateTime</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::NaiveDateTime</span>;
     <span class="kw">use</span> <span class="ident">core::fmt</span>;
     <span class="kw">use</span> <span class="ident">serdelib</span>::{<span class="ident">de</span>, <span class="ident">ser</span>};
 
@@ -4708,19 +4708,19 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_serde_serialize</span>() {
-        <span class="kw">super</span><span class="ident">::test_encodable_json</span>(<span class="self">self</span><span class="ident">::serde_json::to_string</span>);
+        <span class="ident"><span class="kw">super</span>::test_encodable_json</span>(<span class="ident"><span class="self">self</span>::serde_json::to_string</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_serde_deserialize</span>() {
-        <span class="kw">super</span><span class="ident">::test_decodable_json</span>(<span class="op">|</span><span class="ident">input</span><span class="op">|</span> <span class="self">self</span><span class="ident">::serde_json::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>));
+        <span class="ident"><span class="kw">super</span>::test_decodable_json</span>(<span class="op">|</span><span class="ident">input</span><span class="op">|</span> <span class="ident"><span class="self">self</span>::serde_json::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>));
     }
 
     <span class="comment">// Bincode is relevant to test separately from JSON because</span>
     <span class="comment">// it is not self-describing.</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_serde_bincode</span>() {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::bincode</span>::{<span class="ident">deserialize</span>, <span class="ident">serialize</span>, <span class="ident">Infinite</span>};
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::bincode</span>::{<span class="ident">deserialize</span>, <span class="ident">serialize</span>, <span class="ident">Infinite</span>};
         <span class="kw">use</span> <span class="ident">naive::NaiveDate</span>;
 
         <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">NaiveDate::from_ymd</span>(<span class="number">2016</span>, <span class="number">7</span>, <span class="number">8</span>).<span class="ident">and_hms_milli</span>(<span class="number">9</span>, <span class="number">10</span>, <span class="number">48</span>, <span class="number">90</span>);
@@ -4731,8 +4731,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_serde_bincode_optional</span>() {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::bincode</span>::{<span class="ident">deserialize</span>, <span class="ident">serialize</span>, <span class="ident">Infinite</span>};
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::serde_derive</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::bincode</span>::{<span class="ident">deserialize</span>, <span class="ident">serialize</span>, <span class="ident">Infinite</span>};
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::serde_derive</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
         <span class="kw">use</span> <span class="ident">prelude</span>::<span class="kw-2">*</span>;
         <span class="kw">use</span> <span class="ident">serde::ts_nanoseconds_option</span>;
 
@@ -4753,7 +4753,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::NaiveDateTime</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::NaiveDateTime</span>;
     <span class="kw">use</span> <span class="ident">naive</span>::{<span class="ident">NaiveDate</span>, <span class="ident">MAX_DATE</span>, <span class="ident">MIN_DATE</span>};
     <span class="kw">use</span> <span class="ident">oldtime::Duration</span>;
     <span class="kw">use</span> <span class="ident">std::i64</span>;

@@ -312,12 +312,12 @@
 <span class="kw">use</span> <span class="ident">std::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
 <span class="kw">use</span> <span class="ident">std::ptr::NonNull</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::core::Intern</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::def</span>::{<span class="ident">ConstantNameError</span>, <span class="ident">EnclosingRubyScope</span>, <span class="ident">Method</span>, <span class="ident">NotDefinedError</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::Error</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::method</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Artichoke</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::core::Intern</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::def</span>::{<span class="ident">ConstantNameError</span>, <span class="ident">EnclosingRubyScope</span>, <span class="ident">Method</span>, <span class="ident">NotDefinedError</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::error::Error</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::method</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Artichoke</span>;
 
 <span class="kw">mod</span> <span class="ident">registry</span>;
 
@@ -560,8 +560,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::module::Spec</span>;
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::test::prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::module::Spec</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::test::prelude</span>::<span class="kw-2">*</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">rclass_for_undef_root_module</span>() {

@@ -2087,17 +2087,17 @@
     <span class="kw">mod</span> <span class="ident">isoweek</span>;
     <span class="kw">mod</span> <span class="ident">time</span>;
 
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::date</span>::{<span class="ident">NaiveDate</span>, <span class="ident">MAX_DATE</span>, <span class="ident">MIN_DATE</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::date</span>::{<span class="ident">NaiveDate</span>, <span class="ident">MAX_DATE</span>, <span class="ident">MIN_DATE</span>};
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rustc-serialize&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::datetime::rustc_serialize::TsSeconds</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::datetime</span>::{<span class="ident">NaiveDateTime</span>, <span class="ident">MAX_DATETIME</span>, <span class="ident">MIN_DATETIME</span>};
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::isoweek::IsoWeek</span>;
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::time::NaiveTime</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::datetime::rustc_serialize::TsSeconds</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::datetime</span>::{<span class="ident">NaiveDateTime</span>, <span class="ident">MAX_DATETIME</span>, <span class="ident">MIN_DATETIME</span>};
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::isoweek::IsoWeek</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::time::NaiveTime</span>;
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;__internal_bench&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::internals::YearFlags</span> <span class="kw">as</span> <span class="ident">__BenchYearFlags</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::internals::YearFlags</span> <span class="kw">as</span> <span class="ident">__BenchYearFlags</span>;
 
     <span class="doccomment">/// Serialization/Deserialization of naive types in alternate formats</span>
     <span class="doccomment">///</span>
@@ -2109,7 +2109,7 @@
     <span class="doccomment">/// [2]: https://tools.ietf.org/html/rfc3339</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">serde</span> {
-        <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span><span class="ident">::datetime::serde</span>::<span class="kw-2">*</span>;
+        <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::datetime::serde</span>::<span class="kw-2">*</span>;
     }
 }
 <span class="kw">mod</span> <span class="ident">date</span>;
@@ -2131,7 +2131,7 @@
 <span class="doccomment">/// [2]: https://tools.ietf.org/html/rfc3339</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">serde</span> {
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span><span class="ident">::datetime::serde</span>::<span class="kw-2">*</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::datetime::serde</span>::<span class="kw-2">*</span>;
 }
 
 <span class="comment">// Until rust 1.18 there  is no &quot;pub(crate)&quot; so to share this we need it in the root</span>
@@ -2371,7 +2371,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">weekday_serde</span> {
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::Weekday</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Weekday</span>;
     <span class="kw">use</span> <span class="ident">core::fmt</span>;
     <span class="kw">use</span> <span class="ident">serdelib</span>::{<span class="ident">de</span>, <span class="ident">ser</span>};
 
@@ -2393,7 +2393,7 @@
             <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Weekday&quot;</span>)
         }
 
-        <span class="kw">fn</span> <span class="ident">visit_str</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Value</span>, <span class="ident">E</span><span class="op">&gt;</span>
+        <span class="kw">fn</span> <span class="ident">visit_str</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident">E</span><span class="op">&gt;</span>
         <span class="kw">where</span>
             <span class="ident">E</span>: <span class="ident">de::Error</span>,
         {
@@ -2415,7 +2415,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_serde_serialize</span>() {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::serde_json::to_string</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::serde_json::to_string</span>;
         <span class="kw">use</span> <span class="ident">Weekday</span>::<span class="kw-2">*</span>;
 
         <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Weekday</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[
@@ -2436,7 +2436,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_serde_deserialize</span>() {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::serde_json::from_str</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::serde_json::from_str</span>;
         <span class="kw">use</span> <span class="ident">Weekday</span>::<span class="kw-2">*</span>;
 
         <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">Weekday</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[
@@ -2630,12 +2630,12 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_u64</span>(<span class="ident">n</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Month</span><span class="op">&gt;</span> {
-        <span class="self">Self</span><span class="ident">::from_u32</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">u32</span>)
+        <span class="ident"><span class="self">Self</span>::from_u32</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">u32</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_i64</span>(<span class="ident">n</span>: <span class="ident">i64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Month</span><span class="op">&gt;</span> {
-        <span class="self">Self</span><span class="ident">::from_u32</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">u32</span>)
+        <span class="ident"><span class="self">Self</span>::from_u32</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">u32</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -2672,7 +2672,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">month_serde</span> {
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::Month</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Month</span>;
     <span class="kw">use</span> <span class="ident">serdelib</span>::{<span class="ident">de</span>, <span class="ident">ser</span>};
 
     <span class="kw">use</span> <span class="ident">core::fmt</span>;
@@ -2695,7 +2695,7 @@
             <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Month&quot;</span>)
         }
 
-        <span class="kw">fn</span> <span class="ident">visit_str</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Value</span>, <span class="ident">E</span><span class="op">&gt;</span>
+        <span class="kw">fn</span> <span class="ident">visit_str</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident">E</span><span class="op">&gt;</span>
         <span class="kw">where</span>
             <span class="ident">E</span>: <span class="ident">de::Error</span>,
         {
@@ -2717,7 +2717,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_serde_serialize</span>() {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::serde_json::to_string</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::serde_json::to_string</span>;
         <span class="kw">use</span> <span class="ident">Month</span>::<span class="kw-2">*</span>;
 
         <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Month</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[
@@ -2743,7 +2743,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_serde_deserialize</span>() {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::serde_json::from_str</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::serde_json::from_str</span>;
         <span class="kw">use</span> <span class="ident">Month</span>::<span class="kw-2">*</span>;
 
         <span class="kw">let</span> <span class="ident">cases</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">Month</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[

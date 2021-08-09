@@ -351,10 +351,10 @@
 <span class="kw">use</span> <span class="ident">std::mem</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::prelude</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::termios::Termios</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd</span>::{<span class="self">self</span>, <span class="ident">ForkResult</span>, <span class="ident">Pid</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::termios::Termios</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd</span>::{<span class="self">self</span>, <span class="ident">ForkResult</span>, <span class="ident">Pid</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="prelude-ty">Result</span>, <span class="ident">Error</span>, <span class="ident">fcntl</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 
 <span class="doccomment">/// Representation of a master/slave pty pair</span>
 <span class="doccomment">///</span>

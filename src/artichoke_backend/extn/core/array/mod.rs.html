@@ -628,8 +628,8 @@
 <span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
 <span class="kw">use</span> <span class="ident">std::slice</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::convert</span>::{<span class="ident">implicitly_convert_to_int</span>, <span class="ident">implicitly_convert_to_string</span>, <span class="ident">UnboxedValueGuard</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::convert</span>::{<span class="ident">implicitly_convert_to_int</span>, <span class="ident">implicitly_convert_to_string</span>, <span class="ident">UnboxedValueGuard</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">args</span>;
 <span class="kw">mod</span> <span class="ident">ffi</span>;
@@ -730,7 +730,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Value</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Value::from</span>)
     }
 }
@@ -739,7 +739,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Value</span>;
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::IntoIter</span> {
         <span class="ident">Iter</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">iter</span>())
     }
 }
@@ -820,12 +820,12 @@
                     <span class="kw">let</span> <span class="ident">default</span> <span class="op">=</span> <span class="ident">default</span>.<span class="ident">unwrap_or_else</span>(<span class="ident">Value::nil</span>);
                     <span class="ident">SpinosoArray::with_len_and_default</span>(<span class="ident">len</span>, <span class="ident">default</span>.<span class="ident">inner</span>())
                 } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">unboxed</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">Self</span><span class="ident">::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array_or_len</span>, <span class="ident">interp</span>) };
+                    <span class="kw">let</span> <span class="ident">unboxed</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident"><span class="self">Self</span>::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array_or_len</span>, <span class="ident">interp</span>) };
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">ary</span>) <span class="op">=</span> <span class="ident">unboxed</span> {
                         <span class="ident">ary</span>.<span class="number">0</span>.<span class="ident">clone</span>()
                     } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">array_or_len</span>.<span class="ident">respond_to</span>(<span class="ident">interp</span>, <span class="string">&quot;to_ary&quot;</span>)<span class="question-mark">?</span> {
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">array_or_len</span>.<span class="ident">funcall</span>(<span class="ident">interp</span>, <span class="string">&quot;to_ary&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
-                        <span class="kw">let</span> <span class="ident">unboxed</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">Self</span><span class="ident">::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">other</span>, <span class="ident">interp</span>) };
+                        <span class="kw">let</span> <span class="ident">unboxed</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident"><span class="self">Self</span>::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">other</span>, <span class="ident">interp</span>) };
                         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">other</span>) <span class="op">=</span> <span class="ident">unboxed</span> {
                             <span class="ident">other</span>.<span class="number">0</span>.<span class="ident">clone</span>()
                         } <span class="kw">else</span> {
@@ -863,12 +863,12 @@
                     }
                     <span class="ident">buffer</span>
                 } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">unboxed</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">Self</span><span class="ident">::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array_or_len</span>, <span class="ident">interp</span>) };
+                    <span class="kw">let</span> <span class="ident">unboxed</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident"><span class="self">Self</span>::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array_or_len</span>, <span class="ident">interp</span>) };
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">ary</span>) <span class="op">=</span> <span class="ident">unboxed</span> {
                         <span class="ident">ary</span>.<span class="number">0</span>.<span class="ident">clone</span>()
                     } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">array_or_len</span>.<span class="ident">respond_to</span>(<span class="ident">interp</span>, <span class="string">&quot;to_ary&quot;</span>)<span class="question-mark">?</span> {
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">array_or_len</span>.<span class="ident">funcall</span>(<span class="ident">interp</span>, <span class="string">&quot;to_ary&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
-                        <span class="kw">let</span> <span class="ident">unboxed</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">Self</span><span class="ident">::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">other</span>, <span class="ident">interp</span>) };
+                        <span class="kw">let</span> <span class="ident">unboxed</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident"><span class="self">Self</span>::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">other</span>, <span class="ident">interp</span>) };
                         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">other</span>) <span class="op">=</span> <span class="ident">unboxed</span> {
                             <span class="ident">other</span>.<span class="number">0</span>.<span class="ident">clone</span>()
                         } <span class="kw">else</span> {
@@ -992,7 +992,7 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">len</span>) <span class="op">=</span> <span class="ident">len</span> {
             <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">slice</span>(<span class="ident">start</span>, <span class="ident">len</span>);
             <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">Self</span>(<span class="ident">result</span>.<span class="ident">into</span>());
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::alloc_value</span>(<span class="ident">result</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::alloc_value</span>(<span class="ident">result</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">result</span>))
         } <span class="kw">else</span> {
             <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">get</span>(<span class="ident">start</span>).<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Value::from</span>))
@@ -1009,11 +1009,11 @@
         <span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">drain</span>, <span class="kw-2">mut</span> <span class="ident">elem</span>) <span class="op">=</span> <span class="ident">args::element_assignment</span>(<span class="ident">interp</span>, <span class="ident">first</span>, <span class="ident">second</span>, <span class="ident">third</span>, <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>())<span class="question-mark">?</span>;
 
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">drain</span>) <span class="op">=</span> <span class="ident">drain</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">other</span>) <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">Self</span><span class="ident">::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">elem</span>, <span class="ident">interp</span>) } {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">other</span>) <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident"><span class="self">Self</span>::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">elem</span>, <span class="ident">interp</span>) } {
                 <span class="self">self</span>.<span class="number">0</span>.<span class="ident">set_slice</span>(<span class="ident">start</span>, <span class="ident">drain</span>, <span class="ident">other</span>.<span class="number">0</span>.<span class="ident">as_slice</span>());
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">elem</span>.<span class="ident">respond_to</span>(<span class="ident">interp</span>, <span class="string">&quot;to_ary&quot;</span>)<span class="question-mark">?</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">elem</span>.<span class="ident">funcall</span>(<span class="ident">interp</span>, <span class="string">&quot;to_ary&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">other</span>) <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">Self</span><span class="ident">::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">other</span>, <span class="ident">interp</span>) } {
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">other</span>) <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident"><span class="self">Self</span>::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">other</span>, <span class="ident">interp</span>) } {
                     <span class="self">self</span>.<span class="number">0</span>.<span class="ident">set_slice</span>(<span class="ident">start</span>, <span class="ident">drain</span>, <span class="ident">other</span>.<span class="number">0</span>.<span class="ident">as_slice</span>());
                 } <span class="kw">else</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;can&#39;t convert &quot;</span>);
@@ -1125,14 +1125,14 @@
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unbox_from_value</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
         <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Value</span>,
         <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">UnboxedValueGuard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="self">Self</span><span class="ident">::Guarded</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">UnboxedValueGuard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident"><span class="self">Self</span>::Guarded</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
 
         <span class="comment">// Make sure we have an Array otherwise extraction will fail.</span>
         <span class="comment">// This check is critical to the safety of accessing the `value` union.</span>
         <span class="kw">if</span> <span class="ident">value</span>.<span class="ident">ruby_type</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">Ruby::Array</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;uninitialized &quot;</span>);
-            <span class="ident">message</span>.<span class="ident">push_str</span>(<span class="self">Self</span><span class="ident">::RUBY_TYPE</span>);
+            <span class="ident">message</span>.<span class="ident">push_str</span>(<span class="ident"><span class="self">Self</span>::RUBY_TYPE</span>);
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">TypeError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
         }
 
@@ -1151,7 +1151,7 @@
         <span class="prelude-val">Ok</span>(<span class="ident">UnboxedValueGuard::new</span>(<span class="ident">array</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">alloc_value</span>(<span class="ident">value</span>: <span class="self">Self</span><span class="ident">::Unboxed</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">alloc_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
 
         <span class="kw">let</span> (<span class="ident">ptr</span>, <span class="ident">len</span>, <span class="ident">capacity</span>) <span class="op">=</span> <span class="ident">Array::into_raw_parts</span>(<span class="ident">value</span>);
@@ -1163,7 +1163,7 @@
         <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">protect</span>(<span class="ident">value</span>.<span class="ident">into</span>()))
     }
 
-    <span class="kw">fn</span> <span class="ident">box_into_value</span>(<span class="ident">value</span>: <span class="self">Self</span><span class="ident">::Unboxed</span>, <span class="ident">into</span>: <span class="ident">Value</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">box_into_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">into</span>: <span class="ident">Value</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
 
         <span class="comment">// Make sure we have an Array otherwise boxing will produce undefined</span>
@@ -1207,20 +1207,20 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">UnboxedValueGuard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Array</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">Array</span>;
 
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
         <span class="self">self</span>.<span class="ident">as_inner_ref</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">UnboxedValueGuard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Array</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Target</span> {
         <span class="self">self</span>.<span class="ident">as_inner_mut</span>()
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::test::prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::test::prelude</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="ident">bstr::ByteSlice</span>;
 
     <span class="kw">const</span> <span class="ident">SUBJECT</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;Array&quot;</span>;

@@ -147,13 +147,13 @@
 </pre><pre class="rust">
 <span class="doccomment">//! Wait for events to trigger on specific file descriptors</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;dragonfly&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::time::TimeSpec</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::time::TimeSpec</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;dragonfly&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::signal::SigSet</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::signal::SigSet</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 
 <span class="doccomment">/// This is a wrapper around `libc::pollfd`.</span>
 <span class="doccomment">///</span>

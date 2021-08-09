@@ -204,8 +204,8 @@
 <span class="comment">// Silence invalid warnings due to rust-lang/rust#16719</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">improper_ctypes</span>)]</span>
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_int</span>, <span class="ident">c_void</span>, <span class="ident">size_t</span>, <span class="ident">off_t</span>};
 <span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
@@ -321,7 +321,7 @@
 <span class="doccomment">/// [`RemoteIoVec`]: struct.RemoteIoVec.html</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">process_vm_writev</span>(
-    <span class="ident">pid</span>: <span class="kw">crate</span><span class="ident">::unistd::Pid</span>,
+    <span class="ident">pid</span>: <span class="ident"><span class="kw">crate</span>::unistd::Pid</span>,
     <span class="ident">local_iov</span>: <span class="kw-2">&amp;</span>[<span class="ident">IoVec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>],
     <span class="ident">remote_iov</span>: <span class="kw-2">&amp;</span>[<span class="ident">RemoteIoVec</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
 {
@@ -356,7 +356,7 @@
 <span class="doccomment">/// [`RemoteIoVec`]: struct.RemoteIoVec.html</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">process_vm_readv</span>(
-    <span class="ident">pid</span>: <span class="kw">crate</span><span class="ident">::unistd::Pid</span>,
+    <span class="ident">pid</span>: <span class="ident"><span class="kw">crate</span>::unistd::Pid</span>,
     <span class="ident">local_iov</span>: <span class="kw-2">&amp;</span>[<span class="ident">IoVec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]<span class="op">&gt;</span>],
     <span class="ident">remote_iov</span>: <span class="kw-2">&amp;</span>[<span class="ident">RemoteIoVec</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
 {

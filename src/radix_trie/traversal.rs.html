@@ -391,14 +391,14 @@
 </pre><pre class="rust">
 <span class="doccomment">//! This module contains the core algorithms.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::keys</span>::{<span class="ident">match_keys</span>, <span class="ident">KeyMatch</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::TrieKey</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::TrieNode</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::keys</span>::{<span class="ident">match_keys</span>, <span class="ident">KeyMatch</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::TrieKey</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::TrieNode</span>;
 <span class="kw">use</span> <span class="ident">std::borrow::Borrow</span>;
 
 <span class="kw">use</span> <span class="ident">nibble_vec::Nibblet</span>;
 
-<span class="kw">use</span> <span class="self">self</span><span class="ident">::DescendantResult</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="self">self</span>::DescendantResult</span>::<span class="kw-2">*</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> <span class="ident">TrieNode</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>
 <span class="kw">where</span>

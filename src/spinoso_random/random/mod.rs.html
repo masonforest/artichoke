@@ -447,21 +447,21 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Random</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">seed</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::with_seed</span>(<span class="ident">seed</span>)
+        <span class="ident"><span class="self">Self</span>::with_seed</span>(<span class="ident">seed</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">u32</span>; <span class="ident">DEFAULT_SEED_CNT</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Random</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">seed</span>: [<span class="ident">u32</span>; <span class="ident">DEFAULT_SEED_CNT</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::with_array_seed</span>(<span class="ident">seed</span>)
+        <span class="ident"><span class="self">Self</span>::with_array_seed</span>(<span class="ident">seed</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="ident">DEFAULT_SEED_BYTES</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Random</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">seed</span>: [<span class="ident">u8</span>; <span class="ident">DEFAULT_SEED_BYTES</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::with_byte_array_seed</span>(<span class="ident">seed</span>)
+        <span class="ident"><span class="self">Self</span>::with_byte_array_seed</span>(<span class="ident">seed</span>)
     }
 }
 
@@ -712,7 +712,7 @@
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="ident">std::format</span>;
 
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::Random</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Random</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">fmt_debug_does_not_leak_seed</span>() {

@@ -70,9 +70,9 @@
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">spinoso_symbol</span>::{<span class="ident">CaseFold</span>, <span class="ident">InternerAllSymbols</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::array::Array</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::symbol::Symbol</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::core::array::Array</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::core::symbol::Symbol</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">all_symbols</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">interp</span>

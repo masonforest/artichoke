@@ -180,12 +180,12 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [Further reading and details on the C API](http://man7.org/linux/man-pages/man7/mq_overview.7.html)</span>
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 
 <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_char</span>, <span class="ident">mqd_t</span>, <span class="ident">size_t</span>};
 <span class="kw">use</span> <span class="ident">std::ffi::CString</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::stat::Mode</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::stat::Mode</span>;
 <span class="kw">use</span> <span class="ident">std::mem</span>;
 
 <span class="macro">libc_bitflags!</span>{

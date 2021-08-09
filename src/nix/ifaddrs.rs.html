@@ -158,8 +158,8 @@
 <span class="kw">use</span> <span class="ident">std::option::Option</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="prelude-ty">Result</span>, <span class="ident">Errno</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::socket::SockAddr</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::net::if_</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::socket::SockAddr</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::net::if_</span>::<span class="kw-2">*</span>;
 
 <span class="doccomment">/// Describes a single address for an interface as returned by `getifaddrs`.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>)]</span>

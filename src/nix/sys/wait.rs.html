@@ -241,10 +241,10 @@
 <span id="241">241</span>
 <span id="242">242</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::signal::Signal</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd::Pid</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::signal::Signal</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd::Pid</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
 <span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
 <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_int</span>};
 <span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
@@ -349,7 +349,7 @@
 <span class="kw">impl</span> <span class="ident">WaitStatus</span> {
     <span class="doccomment">/// Extracts the PID from the WaitStatus unless it equals StillAlive.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pid</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pid</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::WaitStatus</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::WaitStatus</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">Exited</span>(<span class="ident">p</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Signaled</span>(<span class="ident">p</span>, <span class="kw">_</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Stopped</span>(<span class="ident">p</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Continued</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="ident">StillAlive</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
@@ -457,7 +457,7 @@
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">waitpid</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pid</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">pid</span>: <span class="ident">P</span>, <span class="ident">options</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">WaitPidFlag</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">WaitStatus</span><span class="op">&gt;</span> {
-    <span class="kw">use</span> <span class="self">self</span><span class="ident">::WaitStatus</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident"><span class="self">self</span>::WaitStatus</span>::<span class="kw-2">*</span>;
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">status</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">0</span>;
 

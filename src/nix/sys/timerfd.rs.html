@@ -314,8 +314,8 @@
 <span class="doccomment">//! // We wait for the timer to expire.</span>
 <span class="doccomment">//! timer.wait().unwrap();</span>
 <span class="doccomment">//! ```</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::time::TimeSpec</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd::read</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::time::TimeSpec</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd::read</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">errno::Errno</span>, <span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
 <span class="kw">use</span> <span class="ident">bitflags::bitflags</span>;
 <span class="kw">use</span> <span class="ident">libc::c_int</span>;

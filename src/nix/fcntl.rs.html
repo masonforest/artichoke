@@ -635,20 +635,20 @@
 <span id="635">635</span>
 <span id="636">636</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_char</span>, <span class="ident">c_int</span>, <span class="ident">c_uint</span>, <span class="ident">size_t</span>, <span class="ident">ssize_t</span>};
 <span class="kw">use</span> <span class="ident">std::ffi::OsString</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span>
 <span class="kw">use</span> <span class="ident">std::os::raw</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::ffi::OsStringExt</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::stat::Mode</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::stat::Mode</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">NixPath</span>, <span class="prelude-ty">Result</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
 <span class="kw">use</span> <span class="ident">std::ptr</span>; <span class="comment">// For splice and copy_file_range</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::uio::IoVec</span>; <span class="comment">// For vmsplice</span>
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::uio::IoVec</span>; <span class="comment">// For vmsplice</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(
     <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>,
@@ -659,7 +659,7 @@
     <span class="ident">target_env</span> <span class="op">=</span> <span class="string">&quot;uclibc&quot;</span>,
     <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>
 ))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::posix_fadvise</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::posix_fadvise</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span>
 <span class="macro">libc_bitflags!</span> {
@@ -885,7 +885,7 @@
     }
     <span class="comment">// Uh oh, the result is too long...</span>
     <span class="comment">// Let&#39;s try to ask lstat how many bytes to allocate.</span>
-    <span class="kw">let</span> <span class="ident">reported_size</span> <span class="op">=</span> <span class="kw">super</span><span class="ident">::sys::stat::lstat</span>(<span class="ident">path</span>)
+    <span class="kw">let</span> <span class="ident">reported_size</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::sys::stat::lstat</span>(<span class="ident">path</span>)
         .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="ident">x</span>.<span class="ident">st_size</span>))
         .<span class="ident">unwrap_or</span>(<span class="number">0</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">try_size</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">reported_size</span> <span class="op">&gt;</span> <span class="number">0</span> {
@@ -910,7 +910,7 @@
                 <span class="prelude-val">Some</span>(<span class="ident">next_size</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">try_size</span> <span class="op">=</span> <span class="ident">next_size</span>,
                 <span class="comment">// It&#39;s absurd that this would happen, but handle it sanely</span>
                 <span class="comment">// anyway.</span>
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span> <span class="prelude-val">Err</span>(<span class="kw">super</span><span class="ident">::Error::Sys</span>(<span class="ident">Errno::ENAMETOOLONG</span>)),
+                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span> <span class="prelude-val">Err</span>(<span class="ident"><span class="kw">super</span>::Error::Sys</span>(<span class="ident">Errno::ENAMETOOLONG</span>)),
             }
         }
     }
@@ -998,7 +998,7 @@
     <span class="ident">F_GETFL</span>,
     <span class="ident">F_SETFL</span>(<span class="ident">OFlag</span>), <span class="comment">// O_NONBLOCK</span>
 }
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::FcntlArg</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::FcntlArg</span>::<span class="kw-2">*</span>;
 
 <span class="comment">// TODO: Figure out how to handle value fcntl returns</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fcntl</span>(<span class="ident">fd</span>: <span class="ident">RawFd</span>, <span class="ident">arg</span>: <span class="ident">FcntlArg</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">c_int</span><span class="op">&gt;</span> {
@@ -1050,7 +1050,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flock</span>(<span class="ident">fd</span>: <span class="ident">RawFd</span>, <span class="ident">arg</span>: <span class="ident">FlockArg</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="kw">use</span> <span class="self">self</span><span class="ident">::FlockArg</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident"><span class="self">self</span>::FlockArg</span>::<span class="kw-2">*</span>;
 
     <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">unsafe</span> {
         <span class="kw">match</span> <span class="ident">arg</span> {
@@ -1227,10 +1227,10 @@
     <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>
 ))]</span>
 <span class="kw">mod</span> <span class="ident">posix_fadvise</span> {
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
     <span class="kw">use</span> <span class="ident">libc</span>;
     <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
 
     <span class="macro">libc_enum!</span> {
         <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">i32</span>)]</span>
@@ -1268,7 +1268,7 @@
     <span class="kw">match</span> <span class="ident">Errno::result</span>(<span class="ident">res</span>) {
         <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>),
         <span class="prelude-val">Ok</span>(<span class="number">0</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(()),
-        <span class="prelude-val">Ok</span>(<span class="ident">errno</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="kw">crate</span><span class="ident">::Error::Sys</span>(<span class="ident">Errno::from_i32</span>(<span class="ident">errno</span>))),
+        <span class="prelude-val">Ok</span>(<span class="ident">errno</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident"><span class="kw">crate</span>::Error::Sys</span>(<span class="ident">Errno::from_i32</span>(<span class="ident">errno</span>))),
     }
 }
 </pre></div>

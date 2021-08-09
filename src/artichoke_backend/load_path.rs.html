@@ -277,9 +277,9 @@
 <span class="kw">use</span> <span class="ident">bstr::ByteVec</span>;
 <span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Component</span>, <span class="ident">Path</span>, <span class="ident">PathBuf</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::Error</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::platform_string::ConvertBytesError</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Artichoke</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::error::Error</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::platform_string::ConvertBytesError</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Artichoke</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;load-path-native-filesystem-loader&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">hybrid</span>;
@@ -378,7 +378,7 @@
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="ident">std::path::Path</span>;
 
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::absolutize_relative_to</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::absolutize_relative_to</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">absolutize_absolute_path</span>() {

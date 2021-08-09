@@ -19,8 +19,8 @@
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">libc</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 
 <span class="macro">libc_bitflags!</span> {
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EfdFlags</span>: <span class="ident">libc::c_int</span> {

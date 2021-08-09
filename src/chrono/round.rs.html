@@ -580,7 +580,7 @@
     <span class="doccomment">///     &quot;2018-01-12 00:00:00 UTC&quot;</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">duration_round</span>(<span class="self">self</span>, <span class="ident">duration</span>: <span class="ident">Duration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="self">Self</span><span class="ident">::Err</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">duration_round</span>(<span class="self">self</span>, <span class="ident">duration</span>: <span class="ident">Duration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Return a copy truncated by Duration.</span>
     <span class="doccomment">///</span>
@@ -597,7 +597,7 @@
     <span class="doccomment">///     &quot;2018-01-11 00:00:00 UTC&quot;</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">duration_trunc</span>(<span class="self">self</span>, <span class="ident">duration</span>: <span class="ident">Duration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="self">Self</span><span class="ident">::Err</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">duration_trunc</span>(<span class="self">self</span>, <span class="ident">duration</span>: <span class="ident">Duration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span>;
 }
 
 <span class="doccomment">/// The maximum number of seconds a DateTime can be to be represented as nanoseconds</span>
@@ -606,7 +606,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Tz</span>: <span class="ident">TimeZone</span><span class="op">&gt;</span> <span class="ident">DurationRound</span> <span class="kw">for</span> <span class="ident">DateTime</span><span class="op">&lt;</span><span class="ident">Tz</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> <span class="ident">RoundingError</span>;
 
-    <span class="kw">fn</span> <span class="ident">duration_round</span>(<span class="self">self</span>, <span class="ident">duration</span>: <span class="ident">Duration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="self">Self</span><span class="ident">::Err</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">duration_round</span>(<span class="self">self</span>, <span class="ident">duration</span>: <span class="ident">Duration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">span</span>) <span class="op">=</span> <span class="ident">duration</span>.<span class="ident">num_nanoseconds</span>() {
             <span class="kw">if</span> <span class="self">self</span>.<span class="ident">timestamp</span>().<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">MAX_SECONDS_TIMESTAMP_FOR_NANOS</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RoundingError::TimestampExceedsLimit</span>);
@@ -635,7 +635,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">duration_trunc</span>(<span class="self">self</span>, <span class="ident">duration</span>: <span class="ident">Duration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="self">Self</span><span class="ident">::Err</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">duration_trunc</span>(<span class="self">self</span>, <span class="ident">duration</span>: <span class="ident">Duration</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">span</span>) <span class="op">=</span> <span class="ident">duration</span>.<span class="ident">num_nanoseconds</span>() {
             <span class="kw">if</span> <span class="self">self</span>.<span class="ident">timestamp</span>().<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">MAX_SECONDS_TIMESTAMP_FOR_NANOS</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RoundingError::TimestampExceedsLimit</span>);

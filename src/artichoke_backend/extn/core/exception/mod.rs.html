@@ -195,7 +195,7 @@
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">spinoso_exception::core</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">mruby</span>;
 
@@ -236,11 +236,11 @@
 
         <span class="kw">impl</span> <span class="ident">RubyException</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">exc</span> {
             <span class="kw">fn</span> <span class="ident">message</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span> {
-                <span class="ident">Cow::Borrowed</span>(<span class="self">Self</span><span class="ident">::message</span>(<span class="self">self</span>))
+                <span class="ident">Cow::Borrowed</span>(<span class="ident"><span class="self">Self</span>::message</span>(<span class="self">self</span>))
             }
 
             <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">str</span><span class="op">&gt;</span> {
-                <span class="ident">Cow::Borrowed</span>(<span class="self">Self</span><span class="ident">::name</span>(<span class="self">self</span>))
+                <span class="ident">Cow::Borrowed</span>(<span class="ident"><span class="self">Self</span>::name</span>(<span class="self">self</span>))
             }
 
             <span class="kw">fn</span> <span class="ident">vm_backtrace</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
@@ -300,7 +300,7 @@
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="ident">bstr::ByteSlice</span>;
 
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::test::prelude</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::test::prelude</span>::<span class="kw-2">*</span>;
 
     <span class="kw">struct</span> <span class="ident">Run</span>;
 
@@ -315,7 +315,7 @@
 
         <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
-        <span class="kw">fn</span> <span class="ident">require</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="self">Self</span><span class="ident">::Error</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">require</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">class::Spec::new</span>(<span class="string">&quot;Run&quot;</span>, <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Run&quot;</span>), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
             <span class="ident">class::Builder::for_spec</span>(<span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="ident">spec</span>)
                 .<span class="ident">add_self_method</span>(<span class="string">&quot;run&quot;</span>, <span class="ident">run_run</span>, <span class="ident">sys::mrb_args_none</span>())<span class="question-mark">?</span>

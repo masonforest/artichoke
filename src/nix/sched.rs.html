@@ -229,16 +229,16 @@
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Errno</span>, <span class="prelude-ty">Result</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::sched_linux_like</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::sched_linux_like</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
 <span class="kw">mod</span> <span class="ident">sched_linux_like</span> {
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
     <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_int</span>, <span class="ident">c_void</span>};
     <span class="kw">use</span> <span class="ident">std::mem</span>;
     <span class="kw">use</span> <span class="ident">std::option::Option</span>;
     <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd::Pid</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd::Pid</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
 
     <span class="comment">// For some functions taking with a parameter of type CloneFlags,</span>
@@ -332,7 +332,7 @@
 
     <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">CpuSet</span> {
         <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-            <span class="self">Self</span><span class="ident">::new</span>()
+            <span class="ident"><span class="self">Self</span>::new</span>()
         }
     }
 

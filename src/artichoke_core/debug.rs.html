@@ -27,7 +27,7 @@
 </pre><pre class="rust">
 <span class="doccomment">//! Routines for debugging and printing exception messages.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::value::Value</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::value::Value</span>;
 
 <span class="doccomment">/// Debugging and `Exception` message support.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Debug</span> {
@@ -41,7 +41,7 @@
     <span class="doccomment">/// rather than by class.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function suppresses all errors and returns an empty string on error.</span>
-    <span class="kw">fn</span> <span class="ident">inspect_type_name_for_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="self">Self</span><span class="ident">::Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">inspect_type_name_for_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// Return the class name for the given value&#39;s type.</span>
     <span class="doccomment">///</span>
@@ -49,7 +49,7 @@
     <span class="doccomment">/// example, calling this function with `nil` will return `&quot;NilClass&quot;`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function suppresses all errors and returns an empty string on error.</span>
-    <span class="kw">fn</span> <span class="ident">class_name_for_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="self">Self</span><span class="ident">::Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">class_name_for_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="artichoke_core" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>

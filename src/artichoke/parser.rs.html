@@ -208,8 +208,8 @@
 <span class="kw">use</span> <span class="ident">std::ffi::CStr</span>;
 <span class="kw">use</span> <span class="ident">std::ptr::NonNull</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::backend::sys</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::backend::Artichoke</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::backend::sys</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::backend::Artichoke</span>;
 
 <span class="doccomment">/// State shows whether artichoke can parse some code or why it cannot.</span>
 <span class="doccomment">///</span>
@@ -241,7 +241,7 @@
     <span class="doccomment">/// Construct a new, default `State`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::Valid</span>
+        <span class="ident"><span class="self">Self</span>::Valid</span>
     }
 
     <span class="doccomment">/// Whether this variant indicates a code block is open.</span>
@@ -253,7 +253,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_code_block_open</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="op">!</span><span class="macro">matches!</span>(
             <span class="self">self</span>,
-            <span class="self">Self</span><span class="ident">::Valid</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::UnexpectedEnd</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::UnexpectedRegexpBegin</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::CodeTooLong</span>
+            <span class="ident"><span class="self">Self</span>::Valid</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::UnexpectedEnd</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::UnexpectedRegexpBegin</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::CodeTooLong</span>
         )
     }
 
@@ -263,7 +263,7 @@
     <span class="doccomment">/// buffer.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_recoverable_error</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span><span class="ident">::CodeTooLong</span>)
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident"><span class="self">Self</span>::CodeTooLong</span>)
     }
 
     <span class="doccomment">/// Whether this variant is a fatal parse error.</span>
@@ -272,13 +272,13 @@
     <span class="doccomment">/// again.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_fatal</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span><span class="ident">::ParseError</span>)
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident"><span class="self">Self</span>::ParseError</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">State</span> {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>()
+        <span class="ident"><span class="self">Self</span>::new</span>()
     }
 }
 

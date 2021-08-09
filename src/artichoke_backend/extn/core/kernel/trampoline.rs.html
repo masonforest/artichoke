@@ -95,9 +95,9 @@
 <span id="95">95</span>
 <span id="96">96</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::kernel</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::core::kernel::require::RelativePath</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::core::kernel</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::core::kernel::require::RelativePath</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">integer</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="kw-2">mut</span> <span class="ident">arg</span>: <span class="ident">Value</span>, <span class="ident">base</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">base</span>.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">base</span><span class="op">|</span> <span class="ident">interp</span>.<span class="ident">convert</span>(<span class="ident">base</span>));

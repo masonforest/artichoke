@@ -696,9 +696,9 @@
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">GetSockOpt</span>, <span class="ident">SetSockOpt</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::time::TimeVal</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::time::TimeVal</span>;
 <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_int</span>, <span class="ident">c_void</span>, <span class="ident">socklen_t</span>};
 <span class="kw">use</span> <span class="ident">std::mem</span>::{
     <span class="self">self</span>,
@@ -913,20 +913,20 @@
 <span class="macro">sockopt_impl!</span>(<span class="ident">Both</span>, <span class="ident">ReusePort</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_REUSEPORT</span>, <span class="ident">bool</span>);
 <span class="macro">sockopt_impl!</span>(<span class="ident">Both</span>, <span class="ident">TcpNoDelay</span>, <span class="ident">libc::IPPROTO_TCP</span>, <span class="ident">libc::TCP_NODELAY</span>, <span class="ident">bool</span>);
 <span class="macro">sockopt_impl!</span>(<span class="ident">Both</span>, <span class="ident">Linger</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_LINGER</span>, <span class="ident">libc::linger</span>);
-<span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">IpAddMembership</span>, <span class="ident">libc::IPPROTO_IP</span>, <span class="ident">libc::IP_ADD_MEMBERSHIP</span>, <span class="kw">super</span><span class="ident">::IpMembershipRequest</span>);
-<span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">IpDropMembership</span>, <span class="ident">libc::IPPROTO_IP</span>, <span class="ident">libc::IP_DROP_MEMBERSHIP</span>, <span class="kw">super</span><span class="ident">::IpMembershipRequest</span>);
+<span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">IpAddMembership</span>, <span class="ident">libc::IPPROTO_IP</span>, <span class="ident">libc::IP_ADD_MEMBERSHIP</span>, <span class="ident"><span class="kw">super</span>::IpMembershipRequest</span>);
+<span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">IpDropMembership</span>, <span class="ident">libc::IPPROTO_IP</span>, <span class="ident">libc::IP_DROP_MEMBERSHIP</span>, <span class="ident"><span class="kw">super</span>::IpMembershipRequest</span>);
 <span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span> {
-        <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">Ipv6AddMembership</span>, <span class="ident">libc::IPPROTO_IPV6</span>, <span class="ident">libc::IPV6_ADD_MEMBERSHIP</span>, <span class="kw">super</span><span class="ident">::Ipv6MembershipRequest</span>);
-        <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">Ipv6DropMembership</span>, <span class="ident">libc::IPPROTO_IPV6</span>, <span class="ident">libc::IPV6_DROP_MEMBERSHIP</span>, <span class="kw">super</span><span class="ident">::Ipv6MembershipRequest</span>);
+        <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">Ipv6AddMembership</span>, <span class="ident">libc::IPPROTO_IPV6</span>, <span class="ident">libc::IPV6_ADD_MEMBERSHIP</span>, <span class="ident"><span class="kw">super</span>::Ipv6MembershipRequest</span>);
+        <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">Ipv6DropMembership</span>, <span class="ident">libc::IPPROTO_IPV6</span>, <span class="ident">libc::IPV6_DROP_MEMBERSHIP</span>, <span class="ident"><span class="kw">super</span>::Ipv6MembershipRequest</span>);
     } <span class="kw">else</span> <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;dragonfly&quot;</span>,
                         <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>,
                         <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;ios&quot;</span>,
                         <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>,
                         <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;netbsd&quot;</span>,
                         <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;openbsd&quot;</span>))]</span> {
-        <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">Ipv6AddMembership</span>, <span class="ident">libc::IPPROTO_IPV6</span>, <span class="ident">libc::IPV6_JOIN_GROUP</span>, <span class="kw">super</span><span class="ident">::Ipv6MembershipRequest</span>);
-        <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">Ipv6DropMembership</span>, <span class="ident">libc::IPPROTO_IPV6</span>, <span class="ident">libc::IPV6_LEAVE_GROUP</span>, <span class="kw">super</span><span class="ident">::Ipv6MembershipRequest</span>);
+        <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">Ipv6AddMembership</span>, <span class="ident">libc::IPPROTO_IPV6</span>, <span class="ident">libc::IPV6_JOIN_GROUP</span>, <span class="ident"><span class="kw">super</span>::Ipv6MembershipRequest</span>);
+        <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">Ipv6DropMembership</span>, <span class="ident">libc::IPPROTO_IPV6</span>, <span class="ident">libc::IPV6_LEAVE_GROUP</span>, <span class="ident"><span class="kw">super</span>::Ipv6MembershipRequest</span>);
     }
 }
 <span class="macro">sockopt_impl!</span>(<span class="ident">Both</span>, <span class="ident">IpMulticastTtl</span>, <span class="ident">libc::IPPROTO_IP</span>, <span class="ident">libc::IP_MULTICAST_TTL</span>, <span class="ident">u8</span>);
@@ -938,7 +938,7 @@
 <span class="macro">sockopt_impl!</span>(<span class="ident">GetOnly</span>, <span class="ident">SocketError</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_ERROR</span>, <span class="ident">i32</span>);
 <span class="macro">sockopt_impl!</span>(<span class="ident">Both</span>, <span class="ident">KeepAlive</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_KEEPALIVE</span>, <span class="ident">bool</span>);
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="macro">sockopt_impl!</span>(<span class="ident">GetOnly</span>, <span class="ident">PeerCredentials</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_PEERCRED</span>, <span class="kw">super</span><span class="ident">::UnixCredentials</span>);
+<span class="macro">sockopt_impl!</span>(<span class="ident">GetOnly</span>, <span class="ident">PeerCredentials</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_PEERCRED</span>, <span class="ident"><span class="kw">super</span>::UnixCredentials</span>);
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;ios&quot;</span>,
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
 <span class="macro">sockopt_impl!</span>(<span class="ident">Both</span>, <span class="ident">TcpKeepAlive</span>, <span class="ident">libc::IPPROTO_TCP</span>, <span class="ident">libc::TCP_KEEPALIVE</span>, <span class="ident">u32</span>);
@@ -958,7 +958,7 @@
 <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">RcvBufForce</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_RCVBUFFORCE</span>, <span class="ident">usize</span>);
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
 <span class="macro">sockopt_impl!</span>(<span class="ident">SetOnly</span>, <span class="ident">SndBufForce</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_SNDBUFFORCE</span>, <span class="ident">usize</span>);
-<span class="macro">sockopt_impl!</span>(<span class="ident">GetOnly</span>, <span class="ident">SockType</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_TYPE</span>, <span class="kw">super</span><span class="ident">::SockType</span>);
+<span class="macro">sockopt_impl!</span>(<span class="ident">GetOnly</span>, <span class="ident">SockType</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_TYPE</span>, <span class="ident"><span class="kw">super</span>::SockType</span>);
 <span class="macro">sockopt_impl!</span>(<span class="ident">GetOnly</span>, <span class="ident">AcceptConn</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_ACCEPTCONN</span>, <span class="ident">bool</span>);
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
 <span class="macro">sockopt_impl!</span>(<span class="ident">Both</span>, <span class="ident">BindToDevice</span>, <span class="ident">libc::SOL_SOCKET</span>, <span class="ident">libc::SO_BINDTODEVICE</span>, <span class="ident">OsString</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="ident">libc::IFNAMSIZ</span>]<span class="op">&gt;</span>);
@@ -1339,22 +1339,22 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">can_get_peercred_on_unix_socket</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="kw">super</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::<span class="kw">super</span></span>::<span class="kw-2">*</span>;
 
         <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="ident">socketpair</span>(<span class="ident">AddressFamily::Unix</span>, <span class="ident">SockType::Stream</span>, <span class="prelude-val">None</span>, <span class="ident">SockFlag::empty</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">a_cred</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">a</span>, <span class="kw">super</span><span class="ident">::PeerCredentials</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">b_cred</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">b</span>, <span class="kw">super</span><span class="ident">::PeerCredentials</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">a_cred</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">a</span>, <span class="ident"><span class="kw">super</span>::PeerCredentials</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">b_cred</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">b</span>, <span class="ident"><span class="kw">super</span>::PeerCredentials</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">a_cred</span>, <span class="ident">b_cred</span>);
         <span class="macro">assert!</span>(<span class="ident">a_cred</span>.<span class="ident">pid</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">is_socket_type_unix</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="kw">super</span>::<span class="kw-2">*</span>;
-        <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd::close</span>;
+        <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::<span class="kw">super</span></span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd::close</span>;
 
         <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="ident">socketpair</span>(<span class="ident">AddressFamily::Unix</span>, <span class="ident">SockType::Stream</span>, <span class="prelude-val">None</span>, <span class="ident">SockFlag::empty</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">a_type</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">a</span>, <span class="kw">super</span><span class="ident">::SockType</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">a_type</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">a</span>, <span class="ident"><span class="kw">super</span>::SockType</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">a_type</span>, <span class="ident">SockType::Stream</span>);
         <span class="ident">close</span>(<span class="ident">a</span>).<span class="ident">unwrap</span>();
         <span class="ident">close</span>(<span class="ident">b</span>).<span class="ident">unwrap</span>();
@@ -1362,11 +1362,11 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">is_socket_type_dgram</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="kw">super</span>::<span class="kw-2">*</span>;
-        <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd::close</span>;
+        <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::<span class="kw">super</span></span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd::close</span>;
 
         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">socket</span>(<span class="ident">AddressFamily::Inet</span>, <span class="ident">SockType::Datagram</span>, <span class="ident">SockFlag::empty</span>(), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">s_type</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">s</span>, <span class="kw">super</span><span class="ident">::SockType</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">s_type</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">s</span>, <span class="ident"><span class="kw">super</span>::SockType</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">s_type</span>, <span class="ident">SockType::Datagram</span>);
         <span class="ident">close</span>(<span class="ident">s</span>).<span class="ident">unwrap</span>();
     }
@@ -1376,14 +1376,14 @@
               <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;nacl&quot;</span>))]</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">can_get_listen_on_tcp_socket</span>() {
-        <span class="kw">use</span> <span class="kw">super</span>::<span class="kw">super</span>::<span class="kw-2">*</span>;
-        <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd::close</span>;
+        <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::<span class="kw">super</span></span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd::close</span>;
 
         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">socket</span>(<span class="ident">AddressFamily::Inet</span>, <span class="ident">SockType::Stream</span>, <span class="ident">SockFlag::empty</span>(), <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">s_listening</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">s</span>, <span class="kw">super</span><span class="ident">::AcceptConn</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">s_listening</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">s</span>, <span class="ident"><span class="kw">super</span>::AcceptConn</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">s_listening</span>);
         <span class="ident">listen</span>(<span class="ident">s</span>, <span class="number">10</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">s_listening2</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">s</span>, <span class="kw">super</span><span class="ident">::AcceptConn</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">s_listening2</span> <span class="op">=</span> <span class="ident">getsockopt</span>(<span class="ident">s</span>, <span class="ident"><span class="kw">super</span>::AcceptConn</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">s_listening2</span>);
         <span class="ident">close</span>(<span class="ident">s</span>).<span class="ident">unwrap</span>();
     }

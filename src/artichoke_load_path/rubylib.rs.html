@@ -419,7 +419,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">rubylib</span> <span class="op">=</span> <span class="ident">env::var_os</span>(<span class="string">&quot;RUBYLIB&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">env::current_dir</span>().<span class="ident">ok</span>()<span class="question-mark">?</span>;
-        <span class="self">Self</span><span class="ident">::with_rubylib_and_cwd</span>(<span class="kw-2">&amp;</span><span class="ident">rubylib</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>)
+        <span class="ident"><span class="self">Self</span>::with_rubylib_and_cwd</span>(<span class="kw-2">&amp;</span><span class="ident">rubylib</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>)
     }
 
     <span class="doccomment">/// Create a new native filesystem loader that searches the filesystem for</span>
@@ -447,7 +447,7 @@
         <span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span>,
     {
         <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">env::current_dir</span>().<span class="ident">ok</span>()<span class="question-mark">?</span>;
-        <span class="self">Self</span><span class="ident">::with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>)
+        <span class="ident"><span class="self">Self</span>::with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>)
     }
 
     <span class="doccomment">/// Create a new native filesystem loader that searches the filesystem for</span>

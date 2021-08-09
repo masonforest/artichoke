@@ -29,8 +29,8 @@
 <span id="29">29</span>
 <span id="30">30</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">super</span><span class="ident">::expm1f</span>;
-<span class="kw">use</span> <span class="kw">super</span><span class="ident">::k_expo2f</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::expm1f</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::k_expo2f</span>;
 
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">all</span>(<span class="ident">test</span>, <span class="ident">assert_no_panic</span>), <span class="ident">no_panic::no_panic</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sinhf</span>(<span class="ident">x</span>: <span class="ident">f32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span> {

@@ -196,9 +196,9 @@
 <span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
 <span class="kw">use</span> <span class="ident">tinyvec::TinyVec</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::tinyvec::TinyArray</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::vec::Array</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::INLINE_CAPACITY</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::array::tinyvec::TinyArray</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::array::vec::Array</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::array::INLINE_CAPACITY</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">TinyVec</span><span class="op">&lt;</span>[<span class="ident">U</span>; <span class="ident">INLINE_CAPACITY</span>]<span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TinyArray</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>

@@ -1872,8 +1872,8 @@
 
             <span class="prelude-val">Ok</span>(<span class="ident">datetime</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">timestamp</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">timestamp</span> {
-            <span class="kw">use</span> <span class="kw">super</span><span class="ident">::ParseError</span> <span class="kw">as</span> <span class="ident">PE</span>;
-            <span class="kw">use</span> <span class="kw">super</span><span class="ident">::ParseErrorKind</span>::{<span class="ident">Impossible</span>, <span class="ident">OutOfRange</span>};
+            <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::ParseError</span> <span class="kw">as</span> <span class="ident">PE</span>;
+            <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::ParseErrorKind</span>::{<span class="ident">Impossible</span>, <span class="ident">OutOfRange</span>};
 
             <span class="comment">// if date and time is problematic already, there is no point proceeding.</span>
             <span class="comment">// we at least try to give a correct error though.</span>
@@ -2003,8 +2003,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw">super</span>::{<span class="ident">IMPOSSIBLE</span>, <span class="ident">NOT_ENOUGH</span>, <span class="ident">OUT_OF_RANGE</span>};
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::Parsed</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::<span class="kw">super</span></span>::{<span class="ident">IMPOSSIBLE</span>, <span class="ident">NOT_ENOUGH</span>, <span class="ident">OUT_OF_RANGE</span>};
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Parsed</span>;
     <span class="kw">use</span> <span class="ident">naive</span>::{<span class="ident">NaiveDate</span>, <span class="ident">NaiveTime</span>, <span class="ident">MAX_DATE</span>, <span class="ident">MIN_DATE</span>};
     <span class="kw">use</span> <span class="ident">offset</span>::{<span class="ident">FixedOffset</span>, <span class="ident">TimeZone</span>, <span class="ident">Utc</span>};
     <span class="kw">use</span> <span class="ident">Datelike</span>;

@@ -1269,7 +1269,7 @@
 <span class="doccomment">//! not support this for all filesystems and devices.</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
 <span class="kw">use</span> <span class="ident">libc</span>::{<span class="ident">c_void</span>, <span class="ident">off_t</span>, <span class="ident">size_t</span>};
 <span class="kw">use</span> <span class="ident">std::borrow</span>::{<span class="ident">Borrow</span>, <span class="ident">BorrowMut</span>};
@@ -1278,9 +1278,9 @@
 <span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
 <span class="kw">use</span> <span class="ident">std::mem</span>;
 <span class="kw">use</span> <span class="ident">std::ptr</span>::{<span class="ident">null</span>, <span class="ident">null_mut</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::signal</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::signal</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">std::thread</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::time::TimeSpec</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::time::TimeSpec</span>;
 
 <span class="macro">libc_enum!</span> {
     <span class="doccomment">/// Mode for `AioCb::fsync`.  Controls whether only data or both data and</span>

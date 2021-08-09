@@ -524,8 +524,8 @@ More APIs may be added in the future.
 
 <span class="kw">use</span> <span class="ident">std::io</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::ext_slice::ByteSlice</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::ext_vec::ByteVec</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ext_slice::ByteSlice</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ext_vec::ByteVec</span>;
 
 <span class="doccomment">/// An extention trait for</span>
 <span class="doccomment">/// [`std::io::BufRead`](https://doc.rust-lang.org/std/io/trait.BufRead.html)</span>
@@ -955,8 +955,8 @@ More APIs may be added in the future.
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::BufReadExt</span>;
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::bstring::BString</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::BufReadExt</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::bstring::BString</span>;
 
     <span class="kw">fn</span> <span class="ident">collect_lines</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="ident">B</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BString</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lines</span> <span class="op">=</span> <span class="macro">vec!</span>[];

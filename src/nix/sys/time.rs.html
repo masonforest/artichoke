@@ -610,21 +610,21 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TimeValLike</span>: <span class="ident">Sized</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">zero</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::seconds</span>(<span class="number">0</span>)
+        <span class="ident"><span class="self">Self</span>::seconds</span>(<span class="number">0</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">hours</span>(<span class="ident">hours</span>: <span class="ident">i64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">secs</span> <span class="op">=</span> <span class="ident">hours</span>.<span class="ident">checked_mul</span>(<span class="ident">SECS_PER_HOUR</span>)
             .<span class="ident">expect</span>(<span class="string">&quot;TimeValLike::hours ouf of bounds&quot;</span>);
-        <span class="self">Self</span><span class="ident">::seconds</span>(<span class="ident">secs</span>)
+        <span class="ident"><span class="self">Self</span>::seconds</span>(<span class="ident">secs</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">minutes</span>(<span class="ident">minutes</span>: <span class="ident">i64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">secs</span> <span class="op">=</span> <span class="ident">minutes</span>.<span class="ident">checked_mul</span>(<span class="ident">SECS_PER_MINUTE</span>)
             .<span class="ident">expect</span>(<span class="string">&quot;TimeValLike::minutes out of bounds&quot;</span>);
-        <span class="self">Self</span><span class="ident">::seconds</span>(<span class="ident">secs</span>)
+        <span class="ident"><span class="self">Self</span>::seconds</span>(<span class="ident">secs</span>)
     }
 
     <span class="kw">fn</span> <span class="ident">seconds</span>(<span class="ident">seconds</span>: <span class="ident">i64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;

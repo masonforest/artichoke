@@ -365,7 +365,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">test</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;color&quot;</span>, <span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)))]</span>
 <span class="kw">mod</span> <span class="ident">test</span> {
-    <span class="kw">use</span> <span class="kw">super</span><span class="ident">::Format</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Format</span>;
     <span class="kw">use</span> <span class="ident">ansi_term::ANSIString</span>;
     <span class="kw">use</span> <span class="ident">ansi_term::Colour</span>::{<span class="ident">Green</span>, <span class="ident">Red</span>, <span class="ident">Yellow</span>};
 

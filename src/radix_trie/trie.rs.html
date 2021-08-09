@@ -244,8 +244,8 @@
 <span id="244">244</span>
 <span id="245">245</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::traversal::DescendantResult</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::TrieNode</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traversal::DescendantResult</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::TrieNode</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">SubTrie</span>, <span class="ident">SubTrieMut</span>, <span class="ident">Trie</span>, <span class="ident">TrieCommon</span>, <span class="ident">TrieKey</span>};
 <span class="kw">use</span> <span class="ident">std::borrow::Borrow</span>;
 
@@ -486,7 +486,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">K</span>: <span class="ident">TrieKey</span>, <span class="ident">V</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Trie</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>()
+        <span class="ident"><span class="self">Self</span>::new</span>()
     }
 }
 </pre></div>

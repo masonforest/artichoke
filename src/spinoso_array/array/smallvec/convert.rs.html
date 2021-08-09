@@ -440,9 +440,9 @@
 
 <span class="kw">use</span> <span class="ident">smallvec::SmallVec</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::smallvec::SmallArray</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::vec::Array</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::INLINE_CAPACITY</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::array::smallvec::SmallArray</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::array::vec::Array</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::array::INLINE_CAPACITY</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SmallArray</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -541,7 +541,7 @@
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: [<span class="ident">T</span>; <span class="number">0</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// Values is empty, so it can be ignored.</span>
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">values</span>;
-        <span class="self">Self</span><span class="ident">::new</span>()
+        <span class="ident"><span class="self">Self</span>::new</span>()
     }
 }
 
@@ -550,7 +550,7 @@
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">0</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// Values is empty, so it can be ignored.</span>
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">values</span>;
-        <span class="self">Self</span><span class="ident">::new</span>()
+        <span class="ident"><span class="self">Self</span>::new</span>()
     }
 }
 
@@ -837,7 +837,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SmallArray</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">values</span>: <span class="ident">Array</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from</span>(<span class="ident">values</span>.<span class="ident">into_vec</span>())
+        <span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">values</span>.<span class="ident">into_vec</span>())
     }
 }
 

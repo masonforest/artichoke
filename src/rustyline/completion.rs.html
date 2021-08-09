@@ -641,7 +641,7 @@
 <span class="kw">use</span> <span class="ident">std::fs</span>;
 <span class="kw">use</span> <span class="ident">std::path</span>::{<span class="self">self</span>, <span class="ident">Path</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::line_buffer::LineBuffer</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::line_buffer::LineBuffer</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Context</span>, <span class="prelude-ty">Result</span>};
 <span class="kw">use</span> <span class="ident">memchr::memchr</span>;
 
@@ -722,7 +722,7 @@
         <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">pos</span>: <span class="ident">usize</span>,
         <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">Context</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Candidate</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Candidate</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> (<span class="ident">line</span>, <span class="ident">pos</span>, <span class="ident">ctx</span>);
         <span class="prelude-val">Ok</span>((<span class="number">0</span>, <span class="ident">Vec::with_capacity</span>(<span class="number">0</span>)))
     }
@@ -749,7 +749,7 @@
         <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">pos</span>: <span class="ident">usize</span>,
         <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">Context</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Candidate</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Candidate</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
         (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">complete</span>(<span class="ident">line</span>, <span class="ident">pos</span>, <span class="ident">ctx</span>)
     }
 
@@ -763,7 +763,7 @@
             <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">C</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Completer</span><span class="op">&gt;</span> <span class="ident">Completer</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span> {
                 <span class="kw">type</span> <span class="ident">Candidate</span> <span class="op">=</span> <span class="ident">C::Candidate</span>;
 
-                <span class="kw">fn</span> <span class="ident">complete</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">pos</span>: <span class="ident">usize</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">Context</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Candidate</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
+                <span class="kw">fn</span> <span class="ident">complete</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">pos</span>: <span class="ident">usize</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">Context</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Candidate</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
                     (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">complete</span>(<span class="ident">line</span>, <span class="ident">pos</span>, <span class="ident">ctx</span>)
                 }
                 <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LineBuffer</span>, <span class="ident">start</span>: <span class="ident">usize</span>, <span class="ident">elected</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
@@ -870,7 +870,7 @@
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">FilenameCompleter</span> {
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>()
+        <span class="ident"><span class="self">Self</span>::new</span>()
     }
 }
 
@@ -1170,16 +1170,16 @@
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extract_word</span>() {
-        <span class="kw">let</span> <span class="ident">break_chars</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw">super</span><span class="ident">::DEFAULT_BREAK_CHARS</span>;
+        <span class="kw">let</span> <span class="ident">break_chars</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident"><span class="kw">super</span>::DEFAULT_BREAK_CHARS</span>;
         <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="string">&quot;ls &#39;/usr/local/b&quot;</span>;
         <span class="macro">assert_eq!</span>(
             (<span class="number">4</span>, <span class="string">&quot;/usr/local/b&quot;</span>),
-            <span class="kw">super</span><span class="ident">::extract_word</span>(<span class="ident">line</span>, <span class="ident">line</span>.<span class="ident">len</span>(), <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>), <span class="kw-2">&amp;</span><span class="ident">break_chars</span>)
+            <span class="ident"><span class="kw">super</span>::extract_word</span>(<span class="ident">line</span>, <span class="ident">line</span>.<span class="ident">len</span>(), <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>), <span class="kw-2">&amp;</span><span class="ident">break_chars</span>)
         );
         <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="string">&quot;ls /User\\ Information&quot;</span>;
         <span class="macro">assert_eq!</span>(
             (<span class="number">3</span>, <span class="string">&quot;/User\\ Information&quot;</span>),
-            <span class="kw">super</span><span class="ident">::extract_word</span>(<span class="ident">line</span>, <span class="ident">line</span>.<span class="ident">len</span>(), <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>), <span class="kw-2">&amp;</span><span class="ident">break_chars</span>)
+            <span class="ident"><span class="kw">super</span>::extract_word</span>(<span class="ident">line</span>, <span class="ident">line</span>.<span class="ident">len</span>(), <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>), <span class="kw-2">&amp;</span><span class="ident">break_chars</span>)
         );
     }
 
@@ -1187,31 +1187,31 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unescape</span>() {
         <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>::{<span class="self">self</span>, <span class="ident">Borrowed</span>, <span class="ident">Owned</span>};
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">&quot;/usr/local/b&quot;</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">Borrowed</span>(<span class="ident">input</span>), <span class="kw">super</span><span class="ident">::unescape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">Borrowed</span>(<span class="ident">input</span>), <span class="ident"><span class="kw">super</span>::unescape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>)));
         <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">windows</span>) {
             <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">&quot;c:\\users\\All Users\\&quot;</span>;
             <span class="kw">let</span> <span class="ident">result</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Borrowed</span>(<span class="ident">input</span>);
-            <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="kw">super</span><span class="ident">::unescape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>)));
+            <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident"><span class="kw">super</span>::unescape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>)));
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">&quot;/User\\ Information&quot;</span>;
             <span class="kw">let</span> <span class="ident">result</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Owned</span>(<span class="ident">String::from</span>(<span class="string">&quot;/User Information&quot;</span>));
-            <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="kw">super</span><span class="ident">::unescape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>)));
+            <span class="macro">assert_eq!</span>(<span class="ident">result</span>, <span class="ident"><span class="kw">super</span>::unescape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>)));
         }
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">escape</span>() {
-        <span class="kw">let</span> <span class="ident">break_chars</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw">super</span><span class="ident">::DEFAULT_BREAK_CHARS</span>;
+        <span class="kw">let</span> <span class="ident">break_chars</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident"><span class="kw">super</span>::DEFAULT_BREAK_CHARS</span>;
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;/usr/local/b&quot;</span>);
         <span class="macro">assert_eq!</span>(
             <span class="ident">input</span>.<span class="ident">clone</span>(),
-            <span class="kw">super</span><span class="ident">::escape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>), <span class="kw-2">&amp;</span><span class="ident">break_chars</span>, <span class="kw">super</span><span class="ident">::Quote::None</span>)
+            <span class="ident"><span class="kw">super</span>::escape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>), <span class="kw-2">&amp;</span><span class="ident">break_chars</span>, <span class="ident"><span class="kw">super</span>::Quote::None</span>)
         );
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;/User Information&quot;</span>);
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;/User\\ Information&quot;</span>);
         <span class="macro">assert_eq!</span>(
             <span class="ident">result</span>,
-            <span class="kw">super</span><span class="ident">::escape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>), <span class="kw-2">&amp;</span><span class="ident">break_chars</span>, <span class="kw">super</span><span class="ident">::Quote::None</span>)
+            <span class="ident"><span class="kw">super</span>::escape</span>(<span class="ident">input</span>, <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>), <span class="kw-2">&amp;</span><span class="ident">break_chars</span>, <span class="ident"><span class="kw">super</span>::Quote::None</span>)
         );
     }
 
@@ -1219,7 +1219,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">longest_common_prefix</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">candidates</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         {
-            <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="kw">super</span><span class="ident">::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
+            <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
             <span class="macro">assert!</span>(<span class="ident">lcp</span>.<span class="ident">is_none</span>());
         }
 
@@ -1227,50 +1227,50 @@
         <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="ident">s</span>);
         <span class="ident">candidates</span>.<span class="ident">push</span>(<span class="ident">c1</span>);
         {
-            <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="kw">super</span><span class="ident">::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
+            <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
             <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="ident">s</span>), <span class="ident">lcp</span>);
         }
 
         <span class="kw">let</span> <span class="ident">c2</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;Users&quot;</span>);
         <span class="ident">candidates</span>.<span class="ident">push</span>(<span class="ident">c2</span>);
         {
-            <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="kw">super</span><span class="ident">::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
+            <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
             <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="ident">s</span>), <span class="ident">lcp</span>);
         }
 
         <span class="kw">let</span> <span class="ident">c3</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;&quot;</span>);
         <span class="ident">candidates</span>.<span class="ident">push</span>(<span class="ident">c3</span>);
         {
-            <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="kw">super</span><span class="ident">::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
+            <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
             <span class="macro">assert!</span>(<span class="ident">lcp</span>.<span class="ident">is_none</span>());
         }
 
         <span class="kw">let</span> <span class="ident">candidates</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">String::from</span>(<span class="string">&quot;fée&quot;</span>), <span class="ident">String::from</span>(<span class="string">&quot;fête&quot;</span>)];
-        <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="kw">super</span><span class="ident">::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
+        <span class="kw">let</span> <span class="ident">lcp</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::longest_common_prefix</span>(<span class="kw-2">&amp;</span><span class="ident">candidates</span>);
         <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;f&quot;</span>), <span class="ident">lcp</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_unclosed_quote</span>() {
-        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="kw">super</span><span class="ident">::find_unclosed_quote</span>(<span class="string">&quot;ls /etc&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident"><span class="kw">super</span>::find_unclosed_quote</span>(<span class="string">&quot;ls /etc&quot;</span>));
         <span class="macro">assert_eq!</span>(
-            <span class="prelude-val">Some</span>((<span class="number">3</span>, <span class="kw">super</span><span class="ident">::Quote::Double</span>)),
-            <span class="kw">super</span><span class="ident">::find_unclosed_quote</span>(<span class="string">&quot;ls \&quot;User Information&quot;</span>)
+            <span class="prelude-val">Some</span>((<span class="number">3</span>, <span class="ident"><span class="kw">super</span>::Quote::Double</span>)),
+            <span class="ident"><span class="kw">super</span>::find_unclosed_quote</span>(<span class="string">&quot;ls \&quot;User Information&quot;</span>)
         );
         <span class="macro">assert_eq!</span>(
             <span class="prelude-val">None</span>,
-            <span class="kw">super</span><span class="ident">::find_unclosed_quote</span>(<span class="string">&quot;ls \&quot;/User Information\&quot; /etc&quot;</span>)
+            <span class="ident"><span class="kw">super</span>::find_unclosed_quote</span>(<span class="string">&quot;ls \&quot;/User Information\&quot; /etc&quot;</span>)
         );
         <span class="macro">assert_eq!</span>(
-            <span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="kw">super</span><span class="ident">::Quote::Double</span>)),
-            <span class="kw">super</span><span class="ident">::find_unclosed_quote</span>(<span class="string">&quot;\&quot;c:\\users\\All Users\\&quot;</span>)
+            <span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="ident"><span class="kw">super</span>::Quote::Double</span>)),
+            <span class="ident"><span class="kw">super</span>::find_unclosed_quote</span>(<span class="string">&quot;\&quot;c:\\users\\All Users\\&quot;</span>)
         )
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">normalize</span>() {
-        <span class="macro">assert_eq!</span>(<span class="kw">super</span><span class="ident">::normalize</span>(<span class="string">&quot;Windows&quot;</span>), <span class="string">&quot;windows&quot;</span>)
+        <span class="macro">assert_eq!</span>(<span class="ident"><span class="kw">super</span>::normalize</span>(<span class="string">&quot;Windows&quot;</span>), <span class="string">&quot;windows&quot;</span>)
     }
 }
 </pre></div>

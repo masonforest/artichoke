@@ -146,7 +146,7 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">AsRawFd</span> <span class="kw">for</span> <span class="kw">crate</span><span class="ident">::Handle</span> {
+<span class="kw">impl</span> <span class="ident">AsRawFd</span> <span class="kw">for</span> <span class="ident"><span class="kw">crate</span>::Handle</span> {
     <span class="kw">fn</span> <span class="ident">as_raw_fd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawFd</span> {
         <span class="comment">// unwrap() will not panic. Since we were able to open the</span>
         <span class="comment">// file successfully, then `file` is guaranteed to be Some()</span>
@@ -154,7 +154,7 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">IntoRawFd</span> <span class="kw">for</span> <span class="kw">crate</span><span class="ident">::Handle</span> {
+<span class="kw">impl</span> <span class="ident">IntoRawFd</span> <span class="kw">for</span> <span class="ident"><span class="kw">crate</span>::Handle</span> {
     <span class="kw">fn</span> <span class="ident">into_raw_fd</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawFd</span> {
         <span class="comment">// unwrap() will not panic. Since we were able to open the</span>
         <span class="comment">// file successfully, then `file` is guaranteed to be Some()</span>

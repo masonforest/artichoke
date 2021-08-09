@@ -462,7 +462,7 @@
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Encoding</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::Utf8</span>
+        <span class="ident"><span class="self">Self</span>::Utf8</span>
     }
 }
 
@@ -495,7 +495,7 @@
     <span class="doccomment">/// See [`Encoding::try_from_flag`].</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">try_from</span>(<span class="ident">flag</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">InvalidEncodingError</span><span class="op">&gt;</span> {
-        <span class="self">Self</span><span class="ident">::try_from_flag</span>(<span class="ident">flag</span>)
+        <span class="ident"><span class="self">Self</span>::try_from_flag</span>(<span class="ident">flag</span>)
     }
 }
 
@@ -540,9 +540,9 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_flag</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span><span class="ident">::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">1</span>,
-            <span class="self">Self</span><span class="ident">::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">2</span>,
-            <span class="self">Self</span><span class="ident">::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">3</span>,
+            <span class="ident"><span class="self">Self</span>::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">1</span>,
+            <span class="ident"><span class="self">Self</span>::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">2</span>,
+            <span class="ident"><span class="self">Self</span>::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">3</span>,
         }
     }
 
@@ -573,9 +573,9 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">try_from_flag</span>(<span class="ident">flag</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">InvalidEncodingError</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">flag</span> {
-            <span class="ident">x</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="self">Self</span><span class="ident">::Utf8</span>.<span class="ident">to_flag</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="self">Self</span><span class="ident">::Utf8</span>),
-            <span class="ident">x</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="self">Self</span><span class="ident">::Ascii</span>.<span class="ident">to_flag</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="self">Self</span><span class="ident">::Ascii</span>),
-            <span class="ident">x</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="self">Self</span><span class="ident">::Binary</span>.<span class="ident">to_flag</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="self">Self</span><span class="ident">::Binary</span>),
+            <span class="ident">x</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="ident"><span class="self">Self</span>::Utf8</span>.<span class="ident">to_flag</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Utf8</span>),
+            <span class="ident">x</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="ident"><span class="self">Self</span>::Ascii</span>.<span class="ident">to_flag</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Ascii</span>),
+            <span class="ident">x</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="ident"><span class="self">Self</span>::Binary</span>.<span class="ident">to_flag</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Binary</span>),
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">InvalidEncodingError::new</span>()),
         }
     }
@@ -602,13 +602,13 @@
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="comment">// [2.6.3] &gt; Encoding::UTF_8.inspect</span>
             <span class="comment">// =&gt; &quot;#&lt;Encoding:UTF-8&gt;&quot;</span>
-            <span class="self">Self</span><span class="ident">::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;#&lt;Encoding:UTF-8&gt;&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;#&lt;Encoding:UTF-8&gt;&quot;</span>,
             <span class="comment">// [2.6.3] &gt; Encoding::ASCII.inspect</span>
             <span class="comment">// =&gt; &quot;#&lt;Encoding:US-ASCII&gt;&quot;</span>
-            <span class="self">Self</span><span class="ident">::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;#&lt;Encoding:US-ASCII&gt;&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;#&lt;Encoding:US-ASCII&gt;&quot;</span>,
             <span class="comment">// [2.6.3] &gt; Encoding::BINARY.inspect</span>
             <span class="comment">// =&gt; &quot;#&lt;Encoding:ASCII-8BIT&gt;&quot;</span>
-            <span class="self">Self</span><span class="ident">::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;#&lt;Encoding:ASCII-8BIT&gt;&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;#&lt;Encoding:ASCII-8BIT&gt;&quot;</span>,
         }
     }
 
@@ -639,13 +639,13 @@
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="comment">// [2.6.3] &gt; Encoding::UTF_8.name</span>
             <span class="comment">// =&gt; &quot;UTF-8&quot;</span>
-            <span class="self">Self</span><span class="ident">::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;UTF-8&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;UTF-8&quot;</span>,
             <span class="comment">// [2.6.3] &gt; Encoding::ASCII.name</span>
             <span class="comment">// =&gt; &quot;US-ASCII&quot;</span>
-            <span class="self">Self</span><span class="ident">::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;US-ASCII&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;US-ASCII&quot;</span>,
             <span class="comment">// [2.6.3] &gt; Encoding::BINARY.name</span>
             <span class="comment">// =&gt; &quot;ASCII-8BIT&quot;</span>
-            <span class="self">Self</span><span class="ident">::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;ASCII-8BIT&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;ASCII-8BIT&quot;</span>,
         }
     }
 
@@ -672,9 +672,9 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">names</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span><span class="ident">::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UTF8_NAMES</span>,
-            <span class="self">Self</span><span class="ident">::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ASCII_NAMES</span>,
-            <span class="self">Self</span><span class="ident">::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">BINARY_NAMES</span>,
+            <span class="ident"><span class="self">Self</span>::Utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UTF8_NAMES</span>,
+            <span class="ident"><span class="self">Self</span>::Ascii</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ASCII_NAMES</span>,
+            <span class="ident"><span class="self">Self</span>::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">BINARY_NAMES</span>,
         }
     }
 
@@ -701,7 +701,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_ascii_compatible</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span><span class="ident">::Utf8</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::Ascii</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::Binary</span>)
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident"><span class="self">Self</span>::Utf8</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::Ascii</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::Binary</span>)
     }
 
     <span class="doccomment">/// Returns true for dummy encodings.</span>
@@ -730,7 +730,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_dummy</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="op">!</span><span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span><span class="ident">::Utf8</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::Ascii</span> <span class="op">|</span> <span class="self">Self</span><span class="ident">::Binary</span>)
+        <span class="op">!</span><span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident"><span class="self">Self</span>::Utf8</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::Ascii</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::Binary</span>)
     }
 }
 </pre></div>

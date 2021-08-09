@@ -2205,7 +2205,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt</span>, <span class="ident">io</span>, <span class="ident">error</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::consts</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::consts</span>::<span class="kw-2">*</span>;
 
 <span class="macro">cfg_if!</span> {
     <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>,
@@ -2266,7 +2266,7 @@
     <span class="doccomment">/// should not be used when `-1` is not the errno sentinel value.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">result</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">ErrnoSentinel</span> <span class="op">+</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">value</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="ident">S::sentinel</span>() {
-            <span class="prelude-val">Err</span>(<span class="ident">Error::Sys</span>(<span class="self">Self</span><span class="ident">::last</span>()))
+            <span class="prelude-val">Err</span>(<span class="ident">Error::Sys</span>(<span class="ident"><span class="self">Self</span>::last</span>()))
         } <span class="kw">else</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">value</span>)
         }
@@ -2318,7 +2318,7 @@
 }
 
 <span class="kw">fn</span> <span class="ident">desc</span>(<span class="ident">errno</span>: <span class="ident">Errno</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-    <span class="kw">use</span> <span class="self">self</span><span class="ident">::Errno</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Errno</span>::<span class="kw-2">*</span>;
     <span class="kw">match</span> <span class="ident">errno</span> {
         <span class="ident">UnknownErrno</span>    <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Unknown errno&quot;</span>,
         <span class="ident">EPERM</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Operation not permitted&quot;</span>,
@@ -2979,7 +2979,7 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ENOTSUP</span>:     <span class="ident">Errno</span> <span class="op">=</span> <span class="ident">Errno::EOPNOTSUPP</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_i32</span>(<span class="ident">e</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Errno</span> {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::Errno</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Errno</span>::<span class="kw-2">*</span>;
 
         <span class="kw">match</span> <span class="ident">e</span> {
             <span class="ident">libc::EPERM</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">EPERM</span>,
@@ -3241,7 +3241,7 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EL2NSYNC</span>: <span class="ident">Errno</span> <span class="op">=</span> <span class="ident">Errno::UnknownErrno</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_i32</span>(<span class="ident">e</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Errno</span> {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::Errno</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Errno</span>::<span class="kw-2">*</span>;
 
         <span class="kw">match</span> <span class="ident">e</span> {
             <span class="ident">libc::EPERM</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">EPERM</span>,
@@ -3466,7 +3466,7 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EL2NSYNC</span>: <span class="ident">Errno</span> <span class="op">=</span> <span class="ident">Errno::UnknownErrno</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_i32</span>(<span class="ident">e</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Errno</span> {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::Errno</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Errno</span>::<span class="kw-2">*</span>;
 
         <span class="kw">match</span> <span class="ident">e</span> {
             <span class="ident">libc::EPERM</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">EPERM</span>,
@@ -3681,7 +3681,7 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EL2NSYNC</span>: <span class="ident">Errno</span> <span class="op">=</span> <span class="ident">Errno::UnknownErrno</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_i32</span>(<span class="ident">e</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Errno</span> {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::Errno</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Errno</span>::<span class="kw-2">*</span>;
 
         <span class="kw">match</span> <span class="ident">e</span> {
             <span class="ident">libc::EPERM</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">EPERM</span>,
@@ -3893,7 +3893,7 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EL2NSYNC</span>: <span class="ident">Errno</span> <span class="op">=</span> <span class="ident">Errno::UnknownErrno</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_i32</span>(<span class="ident">e</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Errno</span> {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::Errno</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Errno</span>::<span class="kw-2">*</span>;
 
         <span class="kw">match</span> <span class="ident">e</span> {
             <span class="ident">libc::EPERM</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">EPERM</span>,
@@ -4106,7 +4106,7 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EL2NSYNC</span>: <span class="ident">Errno</span> <span class="op">=</span> <span class="ident">Errno::UnknownErrno</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_i32</span>(<span class="ident">e</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Errno</span> {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::Errno</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Errno</span>::<span class="kw-2">*</span>;
 
         <span class="kw">match</span> <span class="ident">e</span> {
             <span class="ident">libc::EPERM</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">EPERM</span>,
@@ -4309,7 +4309,7 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EL2NSYNC</span>: <span class="ident">Errno</span> <span class="op">=</span> <span class="ident">Errno::UnknownErrno</span>;
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_i32</span>(<span class="ident">e</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Errno</span> {
-        <span class="kw">use</span> <span class="self">self</span><span class="ident">::Errno</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Errno</span>::<span class="kw-2">*</span>;
 
         <span class="kw">match</span> <span class="ident">e</span> {
             <span class="ident">libc::EPERM</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">EPERM</span>,

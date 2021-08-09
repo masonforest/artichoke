@@ -90,7 +90,7 @@
 <span class="comment">// this correctly. So it&#39;s added as a precaution.</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">proc_macro</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::parse::parse_input</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::parse::parse_input</span>;
 <span class="kw">use</span> <span class="ident">proc_macro::TokenStream</span> <span class="kw">as</span> <span class="ident">RawTokenStream</span>;
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Literal</span>, <span class="ident">Span</span>, <span class="ident">TokenStream</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote</span>, <span class="ident">quote_spanned</span>};

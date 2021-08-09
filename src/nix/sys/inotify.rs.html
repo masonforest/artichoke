@@ -266,10 +266,10 @@
 <span class="kw">use</span> <span class="ident">std::mem</span>::{<span class="ident">MaybeUninit</span>, <span class="ident">size_of</span>};
 <span class="kw">use</span> <span class="ident">std::os::unix::io</span>::{<span class="ident">RawFd</span>,<span class="ident">AsRawFd</span>,<span class="ident">FromRawFd</span>};
 <span class="kw">use</span> <span class="ident">std::ptr</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::unistd::read</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Result</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::NixPath</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unistd::read</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::NixPath</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 
 <span class="macro">libc_bitflags!</span> {
     <span class="doccomment">/// Configuration options for [`inotify_add_watch`](fn.inotify_add_watch.html).</span>

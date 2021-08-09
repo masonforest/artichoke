@@ -63,8 +63,8 @@
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std::ffi::c_void</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::convert</span>::{<span class="ident">Immediate</span>, <span class="ident">UnboxedValueGuard</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::extn::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::convert</span>::{<span class="ident">Immediate</span>, <span class="ident">UnboxedValueGuard</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">ffi</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">mruby</span>;
@@ -75,21 +75,21 @@
 
 <span class="kw">impl</span> <span class="ident">BoxUnboxVmValue</span> <span class="kw">for</span> <span class="ident">Symbol</span> {
     <span class="kw">type</span> <span class="ident">Unboxed</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">type</span> <span class="ident">Guarded</span> <span class="op">=</span> <span class="ident">Immediate</span><span class="op">&lt;</span><span class="self">Self</span><span class="ident">::Unboxed</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Guarded</span> <span class="op">=</span> <span class="ident">Immediate</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Unboxed</span><span class="op">&gt;</span>;
 
     <span class="kw">const</span> <span class="ident">RUBY_TYPE</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;Symbol&quot;</span>;
 
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unbox_from_value</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
         <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Value</span>,
         <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">UnboxedValueGuard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="self">Self</span><span class="ident">::Guarded</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">UnboxedValueGuard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident"><span class="self">Self</span>::Guarded</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
 
         <span class="comment">// Make sure we have a Symbol otherwise extraction will fail.</span>
         <span class="comment">// This check is critical to the safety of accessing the `value` union.</span>
         <span class="kw">if</span> <span class="ident">value</span>.<span class="ident">ruby_type</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">Ruby::Symbol</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;uninitialized &quot;</span>);
-            <span class="ident">message</span>.<span class="ident">push_str</span>(<span class="self">Self</span><span class="ident">::RUBY_TYPE</span>);
+            <span class="ident">message</span>.<span class="ident">push_str</span>(<span class="ident"><span class="self">Self</span>::RUBY_TYPE</span>);
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">TypeError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
         }
 
@@ -102,7 +102,7 @@
         <span class="prelude-val">Ok</span>(<span class="ident">UnboxedValueGuard::new</span>(<span class="ident">Immediate::new</span>(<span class="ident">symbol_id</span>.<span class="ident">into</span>())))
     }
 
-    <span class="kw">fn</span> <span class="ident">alloc_value</span>(<span class="ident">value</span>: <span class="self">Self</span><span class="ident">::Unboxed</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">alloc_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
 
         <span class="kw">let</span> <span class="ident">symbol_id</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">value</span>);
@@ -110,7 +110,7 @@
         <span class="prelude-val">Ok</span>(<span class="ident">Value::from</span>(<span class="ident">obj</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">box_into_value</span>(<span class="ident">value</span>: <span class="self">Self</span><span class="ident">::Unboxed</span>, <span class="ident">into</span>: <span class="ident">Value</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">box_into_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">into</span>: <span class="ident">Value</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">value</span>;
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">into</span>;
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;

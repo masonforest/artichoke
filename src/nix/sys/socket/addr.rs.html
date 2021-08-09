@@ -1339,22 +1339,22 @@
 <span id="1339">1339</span>
 <span id="1340">1340</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">super</span><span class="ident">::sa_family_t</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::sa_family_t</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>, <span class="ident">NixPath</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt</span>, <span class="ident">mem</span>, <span class="ident">net</span>, <span class="ident">ptr</span>, <span class="ident">slice</span>};
 <span class="kw">use</span> <span class="ident">std::ffi::OsStr</span>;
 <span class="kw">use</span> <span class="ident">std::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
 <span class="kw">use</span> <span class="ident">std::path::Path</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::ffi::OsStrExt</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::socket::addr::netlink::NetlinkAddr</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::socket::addr::netlink::NetlinkAddr</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::socket::addr::alg::AlgAddr</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::socket::addr::alg::AlgAddr</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;ios&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
 <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;ios&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::socket::addr::sys_control::SysControlAddr</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::socket::addr::sys_control::SysControlAddr</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>,
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;dragonfly&quot;</span>,
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;freebsd&quot;</span>,
@@ -1364,9 +1364,9 @@
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;netbsd&quot;</span>,
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;openbsd&quot;</span>,
           <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;fuchsia&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::datalink::LinkAddr</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::datalink::LinkAddr</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::vsock::VsockAddr</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::vsock::VsockAddr</span>;
 
 <span class="doccomment">/// These constants specify the protocol family to be used</span>
 <span class="doccomment">/// in [`socket`](fn.socket.html) and [`socketpair`](fn.socketpair.html)</span>
@@ -2220,7 +2220,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">netlink</span> {
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::socket::addr::AddressFamily</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::socket::addr::AddressFamily</span>;
     <span class="kw">use</span> <span class="ident">libc</span>::{<span class="ident">sa_family_t</span>, <span class="ident">sockaddr_nl</span>};
     <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt</span>, <span class="ident">mem</span>};
 
@@ -2318,7 +2318,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;ios&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">sys_control</span> {
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::socket::addr::AddressFamily</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::socket::addr::AddressFamily</span>;
     <span class="kw">use</span> <span class="ident">libc</span>::{<span class="self">self</span>, <span class="ident">c_uchar</span>};
     <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt</span>, <span class="ident">mem</span>};
     <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
@@ -2549,7 +2549,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">vsock</span> {
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::sys::socket::addr::AddressFamily</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys::socket::addr::AddressFamily</span>;
     <span class="kw">use</span> <span class="ident">libc</span>::{<span class="ident">sa_family_t</span>, <span class="ident">sockaddr_vm</span>};
     <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt</span>, <span class="ident">mem</span>};
     <span class="kw">use</span> <span class="ident">std::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};

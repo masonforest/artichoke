@@ -1765,7 +1765,7 @@
 <span class="kw">use</span> <span class="ident">core::slice</span>::{<span class="ident">Iter</span>, <span class="ident">IterMut</span>};
 <span class="kw">use</span> <span class="ident">smallvec::SmallVec</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::INLINE_CAPACITY</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::array::INLINE_CAPACITY</span>;
 
 <span class="kw">mod</span> <span class="ident">convert</span>;
 <span class="kw">mod</span> <span class="ident">eq</span>;
@@ -1838,7 +1838,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SmallArray</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>()
+        <span class="ident"><span class="self">Self</span>::new</span>()
     }
 }
 
@@ -1911,7 +1911,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assoc</span>(<span class="ident">first</span>: <span class="ident">T</span>, <span class="ident">second</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">pair</span>: [<span class="ident">T</span>; <span class="number">2</span>] <span class="op">=</span> [<span class="ident">first</span>, <span class="ident">second</span>];
-        <span class="self">Self</span><span class="ident">::from</span>(<span class="ident">pair</span>)
+        <span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">pair</span>)
     }
 
     <span class="doccomment">/// Returns an iterator over the slice.</span>
@@ -2476,7 +2476,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pop_n</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">if</span> <span class="ident">n</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="self">Self</span><span class="ident">::new</span>();
+            <span class="kw">return</span> <span class="ident"><span class="self">Self</span>::new</span>();
         }
         <span class="kw">let</span> <span class="ident">begin</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>().<span class="ident">checked_sub</span>(<span class="ident">n</span>).<span class="ident">unwrap_or_default</span>();
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(<span class="ident">begin</span>..).<span class="ident">collect</span>()
@@ -2572,7 +2572,7 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shift_n</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">match</span> <span class="ident">n</span> {
-            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::new</span>(),
+            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::new</span>(),
             <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(..<span class="ident">n</span>).<span class="ident">collect</span>(),
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">drain</span>(..).<span class="ident">collect</span>(),
         }
@@ -2713,7 +2713,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">repeat</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_slice</span>();
         <span class="kw">if</span> <span class="ident">slice</span>.<span class="ident">len</span>().<span class="ident">checked_mul</span>(<span class="ident">n</span>).<span class="ident">is_some</span>() {
-            <span class="prelude-val">Some</span>(<span class="self">Self</span><span class="ident">::from</span>(<span class="ident">slice</span>.<span class="ident">repeat</span>(<span class="ident">n</span>)))
+            <span class="prelude-val">Some</span>(<span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">slice</span>.<span class="ident">repeat</span>(<span class="ident">n</span>)))
         } <span class="kw">else</span> {
             <span class="prelude-val">None</span>
         }
@@ -2962,7 +2962,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span> {
-    <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::array::smallvec::SmallArray</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::array::smallvec::SmallArray</span>;
 
     <span class="comment">// `insert_slice`</span>
 

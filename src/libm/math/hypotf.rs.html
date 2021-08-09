@@ -44,7 +44,7 @@
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">core::f32</span>;
 
-<span class="kw">use</span> <span class="kw">super</span><span class="ident">::sqrtf</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::sqrtf</span>;
 
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">all</span>(<span class="ident">test</span>, <span class="ident">assert_no_panic</span>), <span class="ident">no_panic::no_panic</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hypotf</span>(<span class="kw-2">mut</span> <span class="ident">x</span>: <span class="ident">f32</span>, <span class="kw-2">mut</span> <span class="ident">y</span>: <span class="ident">f32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span> {
