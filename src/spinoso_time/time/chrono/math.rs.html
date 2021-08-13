@@ -29,8 +29,22 @@
 <span id="29">29</span>
 <span id="30">30</span>
 <span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::time::chrono::Time</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::NANOS_IN_SECOND</span>;
 
 <span class="kw">impl</span> <span class="ident">Time</span> {
     <span class="doccomment">/// Returns a new Time object, one second later than time.</span>
@@ -58,6 +72,18 @@
             <span class="ident">timestamp</span>: <span class="ident">timestamp</span> <span class="op">+</span> <span class="number">1</span>,
             <span class="ident">sub_second_nanos</span>,
             <span class="ident">offset</span>,
+        }
+    }
+
+    <span class="doccomment">/// Returns the difference between two `Time` objects as an `f64` of seconds.</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_precision_loss</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">difference</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sub_second_nanos</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sub_second_nanos</span>.<span class="ident">checked_sub</span>(<span class="ident">other</span>.<span class="ident">sub_second_nanos</span>) {
+            (<span class="self">self</span>.<span class="ident">timestamp</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">timestamp</span>) <span class="kw">as</span> <span class="ident">f64</span> <span class="op">+</span> <span class="ident">f64::from</span>(<span class="ident">sub_second_nanos</span>) <span class="op">/</span> <span class="ident">f64::from</span>(<span class="ident">NANOS_IN_SECOND</span>)
+        } <span class="kw">else</span> {
+            <span class="kw">let</span> <span class="ident">sub_second_nanos</span> <span class="op">=</span> <span class="ident">NANOS_IN_SECOND</span> <span class="op">-</span> (<span class="ident">other</span>.<span class="ident">sub_second_nanos</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">sub_second_nanos</span>);
+            (<span class="self">self</span>.<span class="ident">timestamp</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">timestamp</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">f64</span> <span class="op">+</span> <span class="ident">f64::from</span>(<span class="ident">sub_second_nanos</span>) <span class="op">/</span> <span class="ident">f64::from</span>(<span class="ident">NANOS_IN_SECOND</span>)
         }
     }
 }
