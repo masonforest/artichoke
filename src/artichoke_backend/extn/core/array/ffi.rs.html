@@ -305,6 +305,13 @@
 <span id="305">305</span>
 <span id="306">306</span>
 <span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">std::slice</span>;
@@ -392,7 +399,11 @@
         <span class="ident">Array::alloc_value</span>(<span class="ident">result</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>)
     };
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">let</span> <span class="ident">basic</span> <span class="op">=</span> <span class="ident">sys::mrb_sys_basic_ptr</span>(<span class="ident">value</span>.<span class="ident">inner</span>());
+            <span class="ident">sys::mrb_write_barrier</span>(<span class="ident">mrb</span>, <span class="ident">basic</span>);
+            <span class="ident">value</span>.<span class="ident">inner</span>()
+        }
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
@@ -417,6 +428,9 @@
 
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);
+
+        <span class="kw">let</span> <span class="ident">basic</span> <span class="op">=</span> <span class="ident">sys::mrb_sys_basic_ptr</span>(<span class="ident">ary</span>);
+        <span class="ident">sys::mrb_write_barrier</span>(<span class="ident">mrb</span>, <span class="ident">basic</span>);
     }
 }
 
