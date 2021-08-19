@@ -41,6 +41,10 @@
 <span id="41">41</span>
 <span id="42">42</span>
 <span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
@@ -71,15 +75,19 @@
 <span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_favicon_url</span> <span class="op">=</span> <span class="string">&quot;https://www.artichokeruby.org/favicon-32x32.png&quot;</span>)]</span>
 <span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_logo_url</span> <span class="op">=</span> <span class="string">&quot;https://www.artichokeruby.org/artichoke-logo.svg&quot;</span>)]</span>
 
-<span class="kw">use</span> <span class="ident">artichoke::repl</span>;
 <span class="kw">use</span> <span class="ident">std::io</span>::{<span class="self">self</span>, <span class="ident">Write</span>};
 <span class="kw">use</span> <span class="ident">std::process</span>;
+
+<span class="kw">use</span> <span class="ident">artichoke::repl</span>;
 <span class="kw">use</span> <span class="ident">termcolor</span>::{<span class="ident">ColorChoice</span>, <span class="ident">StandardStream</span>, <span class="ident">WriteColor</span>};
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">StandardStream::stderr</span>(<span class="ident">ColorChoice::Auto</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">repl::run</span>(<span class="ident">io::stdout</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">stderr</span>, <span class="prelude-val">None</span>) {
-        <span class="comment">// reset colors</span>
+        <span class="comment">// Reset colors and write the error message to stderr.</span>
+        <span class="comment">//</span>
+        <span class="comment">// Suppress all errors at this point (e.g. from a broken pipe) since</span>
+        <span class="comment">// we&#39;re exiting with an error code anyway.</span>
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">stderr</span>.<span class="ident">reset</span>();
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">writeln!</span>(<span class="ident">stderr</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>);
         <span class="ident">process::exit</span>(<span class="number">1</span>);
