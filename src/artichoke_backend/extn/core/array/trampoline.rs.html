@@ -433,7 +433,7 @@
     }
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
 
-    <span class="kw">let</span> <span class="ident">prior_gc_state</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">disable_gc</span>();
+    <span class="kw">let</span> <span class="ident">prior_gc_state</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">disable_gc</span>()<span class="question-mark">?</span>;
 
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">element_assignment</span>(<span class="ident">interp</span>, <span class="ident">first</span>, <span class="ident">second</span>, <span class="ident">third</span>);
 
@@ -443,7 +443,7 @@
     }
 
     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">GcState::Enabled</span> <span class="op">=</span> <span class="ident">prior_gc_state</span> {
-        <span class="ident">interp</span>.<span class="ident">enable_gc</span>();
+        <span class="ident">interp</span>.<span class="ident">enable_gc</span>()<span class="question-mark">?</span>;
     }
     <span class="ident">result</span>
 }

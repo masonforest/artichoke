@@ -549,7 +549,7 @@
                 }
                 <span class="comment">// Eval successful, so reset the REPL state for the next</span>
                 <span class="comment">// expression.</span>
-                <span class="ident">interp</span>.<span class="ident">incremental_gc</span>();
+                <span class="ident">interp</span>.<span class="ident">incremental_gc</span>()<span class="question-mark">?</span>;
                 <span class="ident">buf</span>.<span class="ident">clear</span>();
             }
             <span class="comment">// Reset the buf and present the user with a fresh prompt</span>

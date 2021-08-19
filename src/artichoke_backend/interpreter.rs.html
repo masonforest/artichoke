@@ -213,7 +213,7 @@
     <span class="comment">// mruby garbage collection relies on a fully initialized Array, which we</span>
     <span class="comment">// won&#39;t have until after `extn::core` is initialized. Disable GC before</span>
     <span class="comment">// init and clean up afterward.</span>
-    <span class="kw">let</span> <span class="ident">prior_gc_state</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">disable_gc</span>();
+    <span class="kw">let</span> <span class="ident">prior_gc_state</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">disable_gc</span>()<span class="question-mark">?</span>;
 
     <span class="comment">// Initialize Artichoke Core and Standard Library runtime</span>
     <span class="macro">debug!</span>(<span class="string">&quot;Begin initializing Artichoke Core and Standard Library&quot;</span>);
@@ -239,8 +239,8 @@
     <span class="ident">interp</span>.<span class="ident">create_arena_savepoint</span>()<span class="question-mark">?</span>.<span class="ident">interp</span>().<span class="ident">eval</span>(<span class="kw-2">&amp;</span>[])<span class="question-mark">?</span>;
 
     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">GcState::Enabled</span> <span class="op">=</span> <span class="ident">prior_gc_state</span> {
-        <span class="ident">interp</span>.<span class="ident">enable_gc</span>();
-        <span class="ident">interp</span>.<span class="ident">full_gc</span>();
+        <span class="ident">interp</span>.<span class="ident">enable_gc</span>()<span class="question-mark">?</span>;
+        <span class="ident">interp</span>.<span class="ident">full_gc</span>()<span class="question-mark">?</span>;
     }
 
     <span class="prelude-val">Ok</span>(<span class="ident">interp</span>)

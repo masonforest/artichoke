@@ -242,10 +242,14 @@
 <span id="242">242</span>
 <span id="243">243</span>
 <span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::sys</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::value::Value</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Artichoke</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Artichoke</span>, <span class="ident">Error</span>};
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">arena</span>;
 
@@ -272,7 +276,7 @@
     <span class="kw">fn</span> <span class="ident">live_object_count</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span>;
 
     <span class="doccomment">/// Mark a [`Value`] as reachable in the mruby garbage collector.</span>
-    <span class="kw">fn</span> <span class="ident">mark_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Value</span>);
+    <span class="kw">fn</span> <span class="ident">mark_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Perform an incremental garbage collection.</span>
     <span class="doccomment">///</span>
@@ -280,7 +284,7 @@
     <span class="doccomment">/// [full GC](MrbGarbageCollection::full_gc), but does not guarantee that</span>
     <span class="doccomment">/// all dead objects will be reaped. You may wish to use an incremental GC</span>
     <span class="doccomment">/// if you are operating with an interpreter in a loop.</span>
-    <span class="kw">fn</span> <span class="ident">incremental_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
+    <span class="kw">fn</span> <span class="ident">incremental_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Perform a full garbage collection.</span>
     <span class="doccomment">///</span>
@@ -288,17 +292,17 @@
     <span class="doccomment">/// expensive than an</span>
     <span class="doccomment">/// [incremental GC](MrbGarbageCollection::incremental_gc). You may wish to</span>
     <span class="doccomment">/// use a full GC if you are memory constrained.</span>
-    <span class="kw">fn</span> <span class="ident">full_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
+    <span class="kw">fn</span> <span class="ident">full_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Enable garbage collection.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns the prior GC enabled state.</span>
-    <span class="kw">fn</span> <span class="ident">enable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span>;
+    <span class="kw">fn</span> <span class="ident">enable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Error</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Disable garbage collection.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns the prior GC enabled state.</span>
-    <span class="kw">fn</span> <span class="ident">disable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span>;
+    <span class="kw">fn</span> <span class="ident">disable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Error</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">MrbGarbageCollection</span> <span class="kw">for</span> <span class="ident">Artichoke</span> {
@@ -313,47 +317,51 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">mark_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Value</span>) {
+    <span class="kw">fn</span> <span class="ident">mark_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_sys_safe_gc_mark</span>(<span class="ident">mrb</span>, <span class="ident">value</span>.<span class="ident">inner</span>()));
+            <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_sys_safe_gc_mark</span>(<span class="ident">mrb</span>, <span class="ident">value</span>.<span class="ident">inner</span>()))<span class="question-mark">?</span>;
         }
+        <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">incremental_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">fn</span> <span class="ident">incremental_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_incremental_gc</span>(<span class="ident">mrb</span>));
+            <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_incremental_gc</span>(<span class="ident">mrb</span>))<span class="question-mark">?</span>;
         }
+        <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">full_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="comment">// TODO: propagate errors.</span>
+    <span class="kw">fn</span> <span class="ident">full_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_full_gc</span>(<span class="ident">mrb</span>));
+            <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_full_gc</span>(<span class="ident">mrb</span>))<span class="question-mark">?</span>;
         }
+        <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">enable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span> {
+    <span class="kw">fn</span> <span class="ident">enable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
+            <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
                 <span class="kw">if</span> <span class="ident">sys::mrb_sys_gc_enable</span>(<span class="ident">mrb</span>) {
                     <span class="ident">State::Enabled</span>
                 } <span class="kw">else</span> {
                     <span class="ident">State::Disabled</span>
                 }
-            })
-            .<span class="ident">unwrap_or</span>(<span class="ident">State::Disabled</span>)
+            })<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(<span class="ident">state</span>)
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">disable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span> {
+    <span class="kw">fn</span> <span class="ident">disable_gc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
+            <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
                 <span class="kw">if</span> <span class="ident">sys::mrb_sys_gc_disable</span>(<span class="ident">mrb</span>) {
                     <span class="ident">State::Enabled</span>
                 } <span class="kw">else</span> {
                     <span class="ident">State::Disabled</span>
                 }
-            })
-            .<span class="ident">unwrap_or</span>(<span class="ident">State::Disabled</span>)
+            })<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(<span class="ident">state</span>)
         }
     }
 }
@@ -378,7 +386,7 @@
             <span class="kw">let</span> <span class="ident">_display</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">to_s</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">arena</span>);
         }
         <span class="ident">arena</span>.<span class="ident">restore</span>();
-        <span class="ident">interp</span>.<span class="ident">full_gc</span>();
+        <span class="ident">interp</span>.<span class="ident">full_gc</span>().<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(
             <span class="ident">interp</span>.<span class="ident">live_object_count</span>(),
             <span class="comment">// plus 1 because stack keep is enabled in eval which marks the last</span>
@@ -399,7 +407,7 @@
                 <span class="kw">let</span> <span class="ident">_display</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">to_s</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">arena</span>);
             }
         }
-        <span class="ident">interp</span>.<span class="ident">full_gc</span>();
+        <span class="ident">interp</span>.<span class="ident">full_gc</span>().<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(
             <span class="ident">interp</span>.<span class="ident">live_object_count</span>(),
             <span class="comment">// plus 1 because stack keep is enabled in eval which marks the last</span>
@@ -412,7 +420,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">enable_disable_gc</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
-        <span class="ident">interp</span>.<span class="ident">disable_gc</span>();
+        <span class="ident">interp</span>.<span class="ident">disable_gc</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">arena</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">create_arena_savepoint</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">arena</span>
             .<span class="ident">interp</span>()
@@ -434,15 +442,15 @@
             )
             .<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">live</span> <span class="op">=</span> <span class="ident">arena</span>.<span class="ident">live_object_count</span>();
-        <span class="ident">arena</span>.<span class="ident">full_gc</span>();
+        <span class="ident">arena</span>.<span class="ident">full_gc</span>().<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(
             <span class="ident">arena</span>.<span class="ident">live_object_count</span>(),
             <span class="ident">live</span>,
             <span class="string">&quot;GC is disabled. No objects should be collected&quot;</span>
         );
         <span class="ident">arena</span>.<span class="ident">restore</span>();
-        <span class="ident">interp</span>.<span class="ident">enable_gc</span>();
-        <span class="ident">interp</span>.<span class="ident">full_gc</span>();
+        <span class="ident">interp</span>.<span class="ident">enable_gc</span>().<span class="ident">unwrap</span>();
+        <span class="ident">interp</span>.<span class="ident">full_gc</span>().<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(
             <span class="ident">interp</span>.<span class="ident">live_object_count</span>(),
             <span class="ident">live</span> <span class="op">-</span> <span class="number">2</span>,
@@ -457,7 +465,7 @@
         <span class="kw">let</span> <span class="ident">baseline_object_count</span> <span class="op">=</span> <span class="ident">arena</span>.<span class="ident">live_object_count</span>();
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">arena</span>.<span class="ident">eval</span>(<span class="string">b&quot;&quot;</span>).<span class="ident">unwrap</span>();
         <span class="ident">arena</span>.<span class="ident">restore</span>();
-        <span class="ident">interp</span>.<span class="ident">full_gc</span>();
+        <span class="ident">interp</span>.<span class="ident">full_gc</span>().<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">interp</span>.<span class="ident">live_object_count</span>(), <span class="ident">baseline_object_count</span>);
     }
 
@@ -472,10 +480,10 @@
             <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">unwrap</span>();
             <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">value</span>.<span class="ident">is_dead</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">arena</span>));
             <span class="ident">arena</span>.<span class="ident">restore</span>();
-            <span class="ident">initial_arena</span>.<span class="ident">incremental_gc</span>();
+            <span class="ident">initial_arena</span>.<span class="ident">incremental_gc</span>().<span class="ident">unwrap</span>();
         }
         <span class="ident">initial_arena</span>.<span class="ident">restore</span>();
-        <span class="ident">interp</span>.<span class="ident">full_gc</span>();
+        <span class="ident">interp</span>.<span class="ident">full_gc</span>().<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(
             <span class="ident">interp</span>.<span class="ident">live_object_count</span>(),
             <span class="comment">// plus 1 because stack keep is enabled in eval which marks the</span>
