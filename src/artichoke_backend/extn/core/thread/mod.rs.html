@@ -56,6 +56,8 @@
 <span id="56">56</span>
 <span id="57">57</span>
 <span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std::ffi::CStr</span>;
 
@@ -75,6 +77,8 @@
     <span class="ident">interp</span>.<span class="ident">def_class</span>::<span class="op">&lt;</span><span class="ident">Thread</span><span class="op">&gt;</span>(<span class="ident">spec</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">class::Spec::new</span>(<span class="string">&quot;Mutex&quot;</span>, <span class="ident">MUTEX_CSTR</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
     <span class="ident">interp</span>.<span class="ident">def_class</span>::<span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&gt;</span>(<span class="ident">spec</span>)<span class="question-mark">?</span>;
+    <span class="comment">// TODO: Don&#39;t add a source file and don&#39;t add an explicit require below.</span>
+    <span class="comment">// Instead, have thread be a default loaded feature in `mezzaluna-feature-loader`.</span>
     <span class="ident">interp</span>.<span class="ident">def_rb_source_file</span>(<span class="string">&quot;thread.rb&quot;</span>, <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;thread.rb&quot;</span>)[..])<span class="question-mark">?</span>;
     <span class="comment">// Thread is loaded by default, so eval it on interpreter initialization</span>
     <span class="comment">// https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Lint/UnneededRequireStatement</span>
