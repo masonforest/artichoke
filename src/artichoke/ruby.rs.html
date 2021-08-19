@@ -410,7 +410,7 @@
     <span class="ident">W</span>: <span class="ident">io::Write</span> <span class="op">+</span> <span class="ident">WriteColor</span>,
 {
     <span class="kw">if</span> <span class="ident">args</span>.<span class="ident">copyright</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;puts RUBY_COPYRIGHT&quot;</span>)<span class="question-mark">?</span>;
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;puts RUBY_COPYRIGHT&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(()));
     }
 

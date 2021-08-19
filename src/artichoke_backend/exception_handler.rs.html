@@ -229,6 +229,7 @@
 <span id="229">229</span>
 <span id="230">230</span>
 <span id="231">231</span>
+<span id="232">232</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">bstr::BString</span>;
 <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
@@ -431,20 +432,21 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">raise_does_not_panic_or_segfault</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;raise &#39;foo&#39;&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;raise &#39;foo&#39;&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;raise &#39;foo&#39;&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;raise &#39;foo&#39;&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;require &#39;foo&#39;&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;require &#39;foo&#39;&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;require &#39;foo&#39;&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;require &#39;foo&#39;&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;Regexp.compile(2)&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;Regexp.compile(2)&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;Regexp.compile(2)&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;Regexp.compile(2)&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(
-            <span class="string">br#&quot;
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;raise &#39;foo&#39;&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;raise &#39;foo&#39;&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;raise &#39;foo&#39;&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;raise &#39;foo&#39;&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;require &#39;foo&#39;&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;require &#39;foo&#39;&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;require &#39;foo&#39;&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;require &#39;foo&#39;&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;Regexp.compile(2)&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;Regexp.compile(2)&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;Regexp.compile(2)&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;eval(&quot;Regexp.compile(2)&quot;)&quot;#</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">interp</span>
+            .<span class="ident">eval</span>(
+                <span class="string">br#&quot;\
 def fail
   begin
     require &#39;foo&#39;
@@ -453,12 +455,12 @@ def fail
   end
 end
 
-fail
-            &quot;#</span>,
-        );
+fail&quot;#</span>,
+            )
+            .<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">kernel</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">br#&quot;Kernel&quot;#</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">kernel</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;raise&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>).<span class="ident">unwrap_err</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">kernel</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;raise&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">kernel</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;raise&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>).<span class="ident">unwrap_err</span>();
+        <span class="ident">kernel</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;raise&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>).<span class="ident">unwrap_err</span>();
     }
 }
 </pre></div>

@@ -1219,10 +1219,10 @@
                 .<span class="ident">unwrap</span>();
             <span class="ident">interp</span>.<span class="ident">def_module</span>::<span class="op">&lt;</span><span class="ident">Module</span><span class="op">&gt;</span>(<span class="ident">module</span>).<span class="ident">unwrap</span>();
 
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>
+            <span class="ident">interp</span>
                 .<span class="ident">eval</span>(<span class="string">b&quot;class DynamicTestClass; include DefineMethodTestModule; extend DefineMethodTestModule; end&quot;</span>)
                 .<span class="ident">unwrap</span>();
-            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>
+            <span class="ident">interp</span>
                 .<span class="ident">eval</span>(<span class="string">b&quot;module DynamicTestModule; extend DefineMethodTestModule; end&quot;</span>)
                 .<span class="ident">unwrap</span>();
 

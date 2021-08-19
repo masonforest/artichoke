@@ -620,10 +620,6 @@
 <span id="620">620</span>
 <span id="621">621</span>
 <span id="622">622</span>
-<span id="623">623</span>
-<span id="624">624</span>
-<span id="625">625</span>
-<span id="626">626</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">std::ffi::c_void</span>;
@@ -1160,8 +1156,6 @@
     }
 
     <span class="kw">fn</span> <span class="ident">alloc_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
-
         <span class="kw">let</span> (<span class="ident">ptr</span>, <span class="ident">len</span>, <span class="ident">capacity</span>) <span class="op">=</span> <span class="ident">Array::into_raw_parts</span>(<span class="ident">value</span>);
         <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="ident">interp</span>.<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> {
@@ -1172,8 +1166,6 @@
     }
 
     <span class="kw">fn</span> <span class="ident">box_into_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">into</span>: <span class="ident">Value</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
-
         <span class="comment">// Make sure we have an Array otherwise boxing will produce undefined</span>
         <span class="comment">// behavior.</span>
         <span class="comment">//</span>
@@ -1237,7 +1229,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">functional</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="ident">FUNCTIONAL_TEST</span>).<span class="ident">unwrap</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="ident">FUNCTIONAL_TEST</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;spec&quot;</span>);
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">exc</span>) <span class="op">=</span> <span class="ident">result</span> {
             <span class="kw">let</span> <span class="ident">backtrace</span> <span class="op">=</span> <span class="ident">exc</span>.<span class="ident">vm_backtrace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>);

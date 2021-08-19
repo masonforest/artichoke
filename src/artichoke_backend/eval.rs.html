@@ -292,7 +292,7 @@
         <span class="self">self</span>.<span class="ident">push_context</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">read_source_file_contents</span>(<span class="ident">file</span>)<span class="question-mark">?</span>.<span class="ident">into_owned</span>();
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">eval</span>(<span class="ident">code</span>.<span class="ident">as_slice</span>());
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pop_context</span>()<span class="question-mark">?</span>;
+        <span class="self">self</span>.<span class="ident">pop_context</span>()<span class="question-mark">?</span>;
         <span class="ident">result</span>
     }
 }
@@ -316,7 +316,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">Context::new</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;context.rb&quot;</span>[..]).<span class="ident">unwrap</span>();
         <span class="ident">interp</span>.<span class="ident">push_context</span>(<span class="ident">context</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;15&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;15&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">peek_context</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">unwrap</span>().<span class="ident">filename</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">filename</span>.<span class="ident">as_bstr</span>(), <span class="string">b&quot;context.rb&quot;</span>.<span class="ident">as_bstr</span>());
@@ -325,7 +325,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">root_context_is_not_pushed_after_eval</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;15&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;15&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">peek_context</span>().<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">context</span>.<span class="ident">is_none</span>());
     }

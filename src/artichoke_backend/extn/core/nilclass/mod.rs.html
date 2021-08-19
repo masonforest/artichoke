@@ -30,7 +30,7 @@
     }
     <span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">class::Spec::new</span>(<span class="string">&quot;NilClass&quot;</span>, <span class="ident">NIL_CLASS_CSTR</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
     <span class="ident">interp</span>.<span class="ident">def_class</span>::<span class="op">&lt;</span><span class="ident">NilClass</span><span class="op">&gt;</span>(<span class="ident">spec</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;nilclass.rb&quot;</span>)[..])<span class="question-mark">?</span>;
+    <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;nilclass.rb&quot;</span>)[..])<span class="question-mark">?</span>;
     <span class="macro">trace!</span>(<span class="string">&quot;Patched NilClass onto interpreter&quot;</span>);
     <span class="prelude-val">Ok</span>(())
 }

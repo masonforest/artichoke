@@ -944,7 +944,7 @@
                     }
                     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">MatchData::alloc_value</span>(<span class="ident">matchdata</span>.<span class="ident">clone</span>(), <span class="ident">interp</span>)<span class="question-mark">?</span>;
                     <span class="ident">interp</span>.<span class="ident">set_global_variable</span>(<span class="ident">regexp::LAST_MATCH</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>)<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">yield_arg</span>(<span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="ident">matched</span>)<span class="question-mark">?</span>;
+                    <span class="ident">block</span>.<span class="ident">yield_arg</span>(<span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="ident">matched</span>)<span class="question-mark">?</span>;
                     <span class="ident">interp</span>.<span class="ident">set_global_variable</span>(<span class="ident">regexp::LAST_MATCH</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>)<span class="question-mark">?</span>;
                 }
             } <span class="kw">else</span> {
@@ -959,7 +959,7 @@
                     <span class="ident">matchdata</span>.<span class="ident">set_region</span>(<span class="ident">pos</span>.<span class="number">0</span>..<span class="ident">pos</span>.<span class="number">1</span>);
                     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">MatchData::alloc_value</span>(<span class="ident">matchdata</span>.<span class="ident">clone</span>(), <span class="ident">interp</span>)<span class="question-mark">?</span>;
                     <span class="ident">interp</span>.<span class="ident">set_global_variable</span>(<span class="ident">regexp::LAST_MATCH</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>)<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">yield_arg</span>(<span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="ident">matched</span>)<span class="question-mark">?</span>;
+                    <span class="ident">block</span>.<span class="ident">yield_arg</span>(<span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="ident">matched</span>)<span class="question-mark">?</span>;
                     <span class="ident">interp</span>.<span class="ident">set_global_variable</span>(<span class="ident">regexp::LAST_MATCH</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>)<span class="question-mark">?</span>;
                 }
             }

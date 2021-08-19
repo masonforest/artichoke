@@ -171,6 +171,8 @@
 <span id="171">171</span>
 <span id="172">172</span>
 <span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Garbage collection arenas for native code.</span>
 
@@ -339,7 +341,9 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">ArenaIndex</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">index</span>;
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="kw">unsafe</span> {
+        <span class="comment">// We can&#39;t panic in a drop impl, so ignore errors when crossing the</span>
+        <span class="comment">// FFI boundary.</span>
+        <span class="kw">let</span> <span class="ident">_ignored</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="self">self</span>.<span class="ident">interp</span>
                 .<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="ident">sys::mrb_sys_gc_arena_restore</span>(<span class="ident">mrb</span>, <span class="ident">idx</span>))
         };

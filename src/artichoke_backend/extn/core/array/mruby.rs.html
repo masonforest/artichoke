@@ -337,7 +337,7 @@
         .<span class="ident">add_method</span>(<span class="string">&quot;size&quot;</span>, <span class="ident">ary_len</span>, <span class="ident">sys::mrb_args_none</span>())<span class="question-mark">?</span>
         .<span class="ident">define</span>()<span class="question-mark">?</span>;
     <span class="ident">interp</span>.<span class="ident">def_class</span>::<span class="op">&lt;</span><span class="ident">Array</span><span class="op">&gt;</span>(<span class="ident">spec</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;array.rb&quot;</span>)[..])<span class="question-mark">?</span>;
+    <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;array.rb&quot;</span>)[..])<span class="question-mark">?</span>;
     <span class="macro">trace!</span>(<span class="string">&quot;Patched Array onto interpreter&quot;</span>);
     <span class="prelude-val">Ok</span>(())
 }
