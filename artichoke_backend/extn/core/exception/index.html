@@ -4,9 +4,9 @@ collection of error types that the interpreter uses to unwind the stack in
 the event of an error with <a href="https://ruby-doc.org/core-2.6.3/Kernel.html#method-i-raise"><code>Kernel#raise</code></a>.</p>
 <p>You can use these types by accessing them in the interpreter. The types are
 globally available in the root namespace.</p>
-<div class="example-wrap"><pre class="language-ruby">RuntimeError.new
+<div class="example-wrap"><pre class="language-ruby"><code>RuntimeError.new
 
-raise ArgumentError, &quot;missing semicolon&quot;</pre></div>
+raise ArgumentError, &quot;missing semicolon&quot;</code></pre></div>
 <p>This module implements the core exception types with <a href="../../../../spinoso_exception/index.html"><code>spinoso-exception</code></a>
 and re-exports these types.</p>
 </div></details><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>

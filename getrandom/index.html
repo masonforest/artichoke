@@ -63,8 +63,8 @@ implementations even if a function is registered.</p>
 <p>If <code>getrandom</code> is not a direct dependency of your crate, you can still
 enable any of the above fallback behaviors by enabling the relevant
 feature in your root crate’s <code>Cargo.toml</code>:</p>
-<div class="example-wrap"><pre class="language-toml">[dependencies]
-getrandom = { version = &quot;0.2&quot;, features = [&quot;js&quot;] }</pre></div><h2 id="early-boot" class="section-header"><a href="#early-boot">Early boot</a></h2>
+<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
+getrandom = { version = &quot;0.2&quot;, features = [&quot;js&quot;] }</code></pre></div><h2 id="early-boot" class="section-header"><a href="#early-boot">Early boot</a></h2>
 <p>Sometimes, early in the boot process, the OS has not collected enough
 entropy to securely seed its RNG. This is especially common on virtual
 machines, where standard “random” events are hard to come by.</p>

@@ -2827,8 +2827,7 @@
 <span id="2827">2827</span>
 <span id="2828">2828</span>
 <span id="2829">2829</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Safe wrappers around functions found in libc &quot;unistd.h&quot; header</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Safe wrappers around functions found in libc &quot;unistd.h&quot; header</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;redox&quot;</span>))]</span>
 <span class="kw">use</span> <span class="ident">cfg_if::cfg_if</span>;
@@ -5657,7 +5656,7 @@
 
     <span class="ident">Errno::result</span>(<span class="ident">ret</span>).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> (<span class="ident">Uid</span>(<span class="ident">uid</span>), <span class="ident">Gid</span>(<span class="ident">gid</span>)))
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="nix" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

@@ -13,17 +13,15 @@ when returning elements confined to a distribution.</p>
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Generate integers:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> [<span class="number">627457_u32</span>, <span class="number">697550</span>, <span class="number">16438</span>, <span class="number">41926</span>];
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> [<span class="number">627457_u32</span>, <span class="number">697550</span>, <span class="number">16438</span>, <span class="number">41926</span>];
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_array_seed</span>(<span class="ident">seed</span>);
-<span class="kw">let</span> <span class="ident">rand</span> <span class="op">=</span> <span class="ident">random</span>.<span class="ident">next_int32</span>();</pre></div>
+<span class="kw">let</span> <span class="ident">rand</span> <span class="op">=</span> <span class="ident">random</span>.<span class="ident">next_int32</span>();</code></pre></div>
 <p>Generate random numbers in a range:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::new</span>()<span class="question-mark">?</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::new</span>()<span class="question-mark">?</span>;
 <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">Max::Integer</span>(<span class="number">10</span>);
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rand</span> <span class="op">=</span> <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">max</span>)<span class="question-mark">?</span>;
-<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>, <span class="ident">Rand::Integer</span>(<span class="ident">x</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="number">10</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>, <span class="ident">Rand::Integer</span>(<span class="ident">x</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="number">10</span>));</code></pre></div>
 <h1 id="no_std" class="section-header"><a href="#no_std"><code>no_std</code></a></h1>
 <p>This crate is <code>no_std</code> compatible when built without the <code>std</code> feature. This
 crate does not depend on <a href="https://doc.rust-lang.org/alloc/"><code>alloc</code></a>.</p>

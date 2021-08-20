@@ -273,8 +273,7 @@
 <span id="273">273</span>
 <span id="274">274</span>
 <span id="275">275</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Set and configure disk quotas for users, groups, or projects.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Set and configure disk quotas for users, groups, or projects.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Examples</span>
 <span class="doccomment">//!</span>
@@ -549,7 +548,7 @@
     <span class="ident">dqblk_copy</span>.<span class="number">0</span>.<span class="ident">dqb_valid</span> <span class="op">=</span> <span class="ident">fields</span>.<span class="ident">bits</span>();
     <span class="ident">quotactl</span>(<span class="ident">QuotaCmd</span>(<span class="ident">QuotaSubCmd::Q_SETQUOTA</span>, <span class="ident">which</span>), <span class="prelude-val">Some</span>(<span class="ident">special</span>), <span class="ident">id</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">dqblk_copy</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_char</span>)
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nix" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script>
 </body></html>

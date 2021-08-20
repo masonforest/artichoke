@@ -3,18 +3,17 @@
 want to format dynamic output nicely so it looks good in a
 terminal. A quick example:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">textwrap</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">textwrap</span>;
 <span class="kw">use</span> <span class="ident">textwrap::fill</span>;
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="string">&quot;textwrap: a small library for wrapping text.&quot;</span>;
     <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">fill</span>(<span class="ident">text</span>, <span class="number">18</span>));
-}</pre></div>
+}</code></pre></div>
 <p>This will display the following output:</p>
-<div class="example-wrap"><pre class="language-text">textwrap: a small
+<div class="example-wrap"><pre class="language-text"><code>textwrap: a small
 library for
-wrapping text.</pre></div><h1 id="displayed-width-vs-byte-size" class="section-header"><a href="#displayed-width-vs-byte-size">Displayed Width vs Byte Size</a></h1>
+wrapping text.</code></pre></div><h1 id="displayed-width-vs-byte-size" class="section-header"><a href="#displayed-width-vs-byte-size">Displayed Width vs Byte Size</a></h1>
 <p>To word wrap text, one must know the width of each word so one can
 know when to break lines. This library measures the width of text
 using the <a href="https://docs.rs/unicode-width/">displayed width</a>, not the size in bytes.</p>

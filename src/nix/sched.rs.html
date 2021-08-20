@@ -225,8 +225,7 @@
 <span id="225">225</span>
 <span id="226">226</span>
 <span id="227">227</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Errno</span>, <span class="prelude-ty">Result</span>};
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Errno</span>, <span class="prelude-ty">Result</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;android&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::sched_linux_like</span>::<span class="kw-2">*</span>;
@@ -453,7 +452,7 @@
 
     <span class="ident">Errno::result</span>(<span class="ident">res</span>).<span class="ident">map</span>(<span class="ident">drop</span>)
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="nix" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

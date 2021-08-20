@@ -7,8 +7,8 @@ APIs. For this reason, all APIs exposed by ENV backends in this crate are
 fallible.</p>
 <p>You can use this object in your application by accessing it directly. As a
 Core API, it is globally available:</p>
-<div class="example-wrap"><pre class="language-ruby">ENV[&#39;PATH&#39;]
-ENV[&#39;PS1&#39;] = &#39;artichoke&gt; &#39;</pre></div>
+<div class="example-wrap"><pre class="language-ruby"><code>ENV[&#39;PATH&#39;]
+ENV[&#39;PS1&#39;] = &#39;artichoke&gt; &#39;</code></pre></div>
 <p>There are two <code>ENV</code> implementations in this crate:</p>
 <ul>
 <li><a href="struct.Memory.html" title="Memory"><code>Memory</code></a>, enabled by default, implements an <code>ENV</code> store and accessor on
@@ -21,19 +21,17 @@ in the <a href="https://doc.rust-lang.org/nightly/std/index.html">Rust Standard 
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Using the in-memory backend allows safely manipulating an emulated environment:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">Memory::new</span>();
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">Memory::new</span>();
 <span class="comment">// This does not alter the behavior of the host Rust process.</span>
 <span class="ident">env</span>.<span class="ident">put</span>(<span class="string">b&quot;PATH&quot;</span>, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
 <span class="comment">// `Memory` backends start out empty.</span>
-<span class="macro">assert_eq!</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="string">b&quot;HOME&quot;</span>)<span class="question-mark">?</span>, <span class="prelude-val">None</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="string">b&quot;HOME&quot;</span>)<span class="question-mark">?</span>, <span class="prelude-val">None</span>);</code></pre></div>
 <p>System backends inherit and mutate the environment from the current Rust
 process:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System::new</span>();
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">const</span> <span class="ident">ENV</span>: <span class="ident">System</span> <span class="op">=</span> <span class="ident">System::new</span>();
 <span class="ident">ENV</span>.<span class="ident">put</span>(<span class="string">b&quot;RUBY&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">b&quot;Artichoke&quot;</span>))<span class="question-mark">?</span>;
-<span class="macro">assert!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;PATH&quot;</span>)<span class="question-mark">?</span>.<span class="ident">is_some</span>());</pre></div>
+<span class="macro">assert!</span>(<span class="ident">ENV</span>.<span class="ident">get</span>(<span class="string">b&quot;PATH&quot;</span>)<span class="question-mark">?</span>.<span class="ident">is_some</span>());</code></pre></div>
 <h1 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h1>
 <p>This crate requires <a href="https://doc.rust-lang.org/nightly/std/index.html" title="std"><code>std</code></a>, the Rust Standard Library.</p>
 <p>All features are enabled by default:</p>

@@ -7,9 +7,9 @@ binary strings.</p>
 reproduces the same byte and float sequences as the MRI implementation.</p>
 <p>You can use this class in your application by accessing it directly. As a
 Core API, it is globally available:</p>
-<div class="example-wrap"><pre class="language-ruby">Random::DEFAULT.bytes(16)
+<div class="example-wrap"><pre class="language-ruby"><code>Random::DEFAULT.bytes(16)
 r = Random.new(33)
-r.rand</pre></div></div></details><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
+r.rand</code></pre></div></div></details><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
 <div class="item-table"><div class="item-left module-item"><a class="mod" href="mruby/index.html" title="artichoke_backend::extn::core::random::mruby mod">mruby</a></div><div class="item-right docblock-short"><p>FFI glue between the Rust trampolines and the mruby C interpreter.</p>
 </div><div class="item-left module-item"><a class="mod" href="trampoline/index.html" title="artichoke_backend::extn::core::random::trampoline mod">trampoline</a></div><div class="item-right docblock-short"><p>Glue between mruby FFI and <code>ENV</code> Rust implementation.</p>
 </div></div><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>

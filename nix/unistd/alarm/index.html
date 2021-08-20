@@ -7,19 +7,17 @@ second example below.</p>
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Canceling an alarm:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">use</span> <span class="ident">nix::unistd::alarm</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">nix::unistd::alarm</span>;
 
 <span class="comment">// Set an alarm for 60 seconds from now.</span>
 <span class="ident">alarm::set</span>(<span class="number">60</span>);
 
 <span class="comment">// Cancel the above set alarm, which returns the number of seconds left</span>
 <span class="comment">// of the previously set alarm.</span>
-<span class="macro">assert_eq!</span>(<span class="ident">alarm::cancel</span>(), <span class="prelude-val">Some</span>(<span class="number">60</span>));</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">alarm::cancel</span>(), <span class="prelude-val">Some</span>(<span class="number">60</span>));</code></pre></div>
 <p>Scheduling an alarm and waiting for the signal:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">use</span> <span class="ident">std::time</span>::{<span class="ident">Duration</span>, <span class="ident">Instant</span>};
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::time</span>::{<span class="ident">Duration</span>, <span class="ident">Instant</span>};
 
 <span class="kw">use</span> <span class="ident">nix::unistd</span>::{<span class="ident">alarm</span>, <span class="ident">pause</span>};
 <span class="kw">use</span> <span class="ident">nix::sys::signal</span>::<span class="kw-2">*</span>;
@@ -45,7 +43,7 @@ second example below.</p>
 <span class="ident">sigset</span>.<span class="ident">add</span>(<span class="ident">Signal::SIGALRM</span>);
 <span class="ident">sigset</span>.<span class="ident">wait</span>();
 
-<span class="macro">assert!</span>(<span class="ident">start</span>.<span class="ident">elapsed</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">Duration::from_secs</span>(<span class="number">1</span>));</pre></div>
+<span class="macro">assert!</span>(<span class="ident">start</span>.<span class="ident">elapsed</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">Duration::from_secs</span>(<span class="number">1</span>));</code></pre></div>
 <h1 id="references" class="section-header"><a href="#references">References</a></h1>
 <p>See also <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/alarm.html">alarm(2)</a>.</p>
 </div></details><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>

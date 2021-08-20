@@ -18,8 +18,7 @@
 <span id="18">18</span>
 <span id="19">19</span>
 <span id="20">20</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">libc</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">libc</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::io::RawFd</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Result</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errno::Errno</span>;
@@ -39,7 +38,7 @@
 
     <span class="ident">Errno::result</span>(<span class="ident">res</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span> <span class="kw">as</span> <span class="ident">RawFd</span>)
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nix" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script>
 </body></html>

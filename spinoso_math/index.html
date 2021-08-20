@@ -9,13 +9,11 @@ input is outside of the domain of the function and results in <a href="https://d
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Compute the hypotenuse:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">use</span> <span class="ident">spinoso_math</span> <span class="kw">as</span> <span class="ident">math</span>;
-<span class="macro">assert_eq!</span>(<span class="ident">math::hypot</span>(<span class="number">3.0</span>, <span class="number">4.0</span>), <span class="number">5.0</span>);</pre></div>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">spinoso_math</span> <span class="kw">as</span> <span class="ident">math</span>;
+<span class="macro">assert_eq!</span>(<span class="ident">math::hypot</span>(<span class="number">3.0</span>, <span class="number">4.0</span>), <span class="number">5.0</span>);</code></pre></div>
 <p>Compute log with respect to the base 10 and handle domain errors:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">use</span> <span class="ident">spinoso_math</span> <span class="kw">as</span> <span class="ident">math</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">spinoso_math</span> <span class="kw">as</span> <span class="ident">math</span>;
 <span class="macro">assert_eq!</span>(<span class="ident">math::log10</span>(<span class="number">1.0</span>), <span class="prelude-val">Ok</span>(<span class="number">0.0</span>));
 <span class="macro">assert_eq!</span>(<span class="ident">math::log10</span>(<span class="number">10.0</span>), <span class="prelude-val">Ok</span>(<span class="number">1.0</span>));
 <span class="macro">assert_eq!</span>(<span class="ident">math::log10</span>(<span class="number">1e100</span>), <span class="prelude-val">Ok</span>(<span class="number">100.0</span>));
@@ -24,7 +22,7 @@ input is outside of the domain of the function and results in <a href="https://d
 <span class="macro">assert!</span>(<span class="ident">math::log10</span>(<span class="op">-</span><span class="number">0.1</span>).<span class="ident">is_err</span>());
 
 <span class="comment">// A NaN return value is distinct from a `DomainError`.</span>
-<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">math::log10</span>(<span class="ident">f64::NAN</span>), <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">is_nan</span>()));</pre></div>
+<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">math::log10</span>(<span class="ident">f64::NAN</span>), <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">is_nan</span>()));</code></pre></div>
 <h1 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h1>
 <p>All features are enabled by default.</p>
 <ul>

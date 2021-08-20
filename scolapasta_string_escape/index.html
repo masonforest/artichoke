@@ -6,23 +6,21 @@ escaped to have a valid and printable UTF-8 representation.</p>
 slices as valid, printable UTF-8.</p>
 <h1 id="ruby-debug-escapes" class="section-header"><a href="#ruby-debug-escapes">Ruby debug escapes</a></h1>
 <p>Ruby produces debug escapes that look like:</p>
-<div class="example-wrap"><pre class="language-console">[2.6.3] &gt; &quot;Artichoke Ruby is made with Rust.
+<div class="example-wrap"><pre class="language-console"><code>[2.6.3] &gt; &quot;Artichoke Ruby is made with Rust.
 
 Invalid UTF-8: \xFF.
 
 Slash \\ and quote \&quot; are escaped.&quot;
-=&gt; &quot;Artichoke Ruby is made with Rust.\n\nInvalid UTF-8: \xFF.\n\nSlash \\ and quote \&quot; are escaped.&quot;</pre></div>
+=&gt; &quot;Artichoke Ruby is made with Rust.\n\nInvalid UTF-8: \xFF.\n\nSlash \\ and quote \&quot; are escaped.&quot;</code></pre></div>
 <p>Ruby escape sequences differ than Rust escape sequences for some characters.
 For example <code>0x0C</code>:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="comment">// Rust</span>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Rust</span>
 <span class="macro">assert_eq!</span>(<span class="string">&#39;\x0C&#39;</span>.<span class="ident">escape_debug</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>(), <span class="string">r&quot;\u{c}&quot;</span>);
 <span class="comment">// Ruby</span>
-<span class="macro">assert_eq!</span>(<span class="ident">Literal::from</span>(<span class="number">0x0C</span>).<span class="ident">as_str</span>(), <span class="string">r&quot;\f&quot;</span>);</pre></div>
+<span class="macro">assert_eq!</span>(<span class="ident">Literal::from</span>(<span class="number">0x0C</span>).<span class="ident">as_str</span>(), <span class="string">r&quot;\f&quot;</span>);</code></pre></div>
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">const</span> <span class="ident">EXAMPLE</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;Artichoke Ruby is made with Rust.
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">const</span> <span class="ident">EXAMPLE</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;Artichoke Ruby is made with Rust.
 
 Invalid UTF-8: \xFF.
 
@@ -33,7 +31,7 @@ Slash \\ and quote \&quot; are escaped.&quot;</span>;
 <span class="macro">assert_eq!</span>(
     <span class="ident">escaped</span>,
     <span class="string">r#&quot;Artichoke Ruby is made with Rust.\n\nInvalid UTF-8: \xFF.\n\nSlash \\ and quote \&quot; are escaped.&quot;#</span>,
-);</pre></div>
+);</code></pre></div>
 <h1 id="no_std" class="section-header"><a href="#no_std"><code>no_std</code></a></h1>
 <p>This crate is <code>no_std</code> compatible. This crate does not depend on <a href="https://doc.rust-lang.org/alloc/"><code>alloc</code></a>.</p>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>

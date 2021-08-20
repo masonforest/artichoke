@@ -5,8 +5,7 @@ notifications through file descriptors.</p>
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>Create a new one-shot timer that expires after 1 second.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="comment">// We create a new monotonic timer.</span>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// We create a new monotonic timer.</span>
 <span class="kw">let</span> <span class="ident">timer</span> <span class="op">=</span> <span class="ident">TimerFd::new</span>(<span class="ident">ClockId::CLOCK_MONOTONIC</span>, <span class="ident">TimerFlags::empty</span>())
     .<span class="ident">unwrap</span>();
 
@@ -17,7 +16,7 @@ notifications through file descriptors.</p>
 ).<span class="ident">unwrap</span>();
 
 <span class="comment">// We wait for the timer to expire.</span>
-<span class="ident">timer</span>.<span class="ident">wait</span>().<span class="ident">unwrap</span>();</pre></div>
+<span class="ident">timer</span>.<span class="ident">wait</span>().<span class="ident">unwrap</span>();</code></pre></div>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
 <div class="item-table"><div class="item-left module-item"><a class="struct" href="struct.TimerFd.html" title="nix::sys::timerfd::TimerFd struct">TimerFd</a></div><div class="item-right docblock-short"><p>A timerfd instance. This is also a file descriptor, you can feed it to
 other interfaces consuming file descriptors, epoll for example.</p>
