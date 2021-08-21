@@ -412,6 +412,21 @@
 <span id="412">412</span>
 <span id="413">413</span>
 <span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::ffi::c_void</span>;
 <span class="kw">use</span> <span class="ident">std::fmt</span>;
 <span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
@@ -468,9 +483,15 @@
     }
 
     <span class="doccomment">/// Get a unique reference to the inner `T`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Safety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Callers must ensure the raw parts stored in the source `mrb_value` are</span>
+    <span class="doccomment">/// not invalidated OR that the raw parts are repacked before an mruby</span>
+    <span class="doccomment">/// allocation occurs.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">guarded</span>
     }
 
@@ -524,7 +545,16 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">UnboxedValueGuard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">HeapAllocated</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Target</span> {
-        <span class="self">self</span>.<span class="ident">guarded</span>.<span class="ident">deref_mut</span>().<span class="number">0</span>.<span class="ident">as_mut</span>()
+        <span class="comment">// Safety:</span>
+        <span class="comment">//</span>
+        <span class="comment">// `HeapAllocated` data objects are boxed and the raw box pointer is</span>
+        <span class="comment">// stored in the `mrb_value`.</span>
+        <span class="comment">//</span>
+        <span class="comment">// `Deref::Target` is `T`, not `Box&lt;T&gt;`.</span>
+        <span class="comment">//</span>
+        <span class="comment">// Giving out a `&amp;mut T` means the box pointer cannot be invalidated.</span>
+        <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">as_inner_mut</span>() };
+        <span class="ident">inner</span>.<span class="number">0</span>.<span class="ident">as_mut</span>()
     }
 }
 

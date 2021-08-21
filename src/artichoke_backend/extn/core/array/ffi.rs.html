@@ -312,6 +312,36 @@
 <span id="312">312</span>
 <span id="313">313</span>
 <span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">std::slice</span>;
 
@@ -417,16 +447,21 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">other</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">other</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">other</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
-            <span class="ident">array</span>.<span class="ident">extend</span>(<span class="ident">other</span>.<span class="ident">iter</span>());
+            <span class="comment">// Safety:</span>
+            <span class="comment">//</span>
+            <span class="comment">// The array is repacked before any intervening uses of `interp`.</span>
+            <span class="comment">// The array is repacked before any intervening mruby allocations.</span>
+            <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+            <span class="ident">array_mut</span>.<span class="ident">extend</span>(<span class="ident">other</span>.<span class="ident">iter</span>());
+
+            <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
+            <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);
         } <span class="kw">else</span> {
             <span class="macro">warn!</span>(
                 <span class="string">&quot;Attempted to call mrb_ary_concat with a {:?} argument&quot;</span>,
                 <span class="ident">other</span>.<span class="ident">ruby_type</span>()
             );
         }
-
-        <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
-        <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">basic</span> <span class="op">=</span> <span class="ident">sys::mrb_sys_basic_ptr</span>(<span class="ident">ary</span>);
         <span class="ident">sys::mrb_write_barrier</span>(<span class="ident">mrb</span>, <span class="ident">basic</span>);
@@ -439,12 +474,17 @@
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">array</span>.<span class="ident">pop</span>());
+        <span class="comment">// Safety:</span>
+        <span class="comment">//</span>
+        <span class="comment">// The array is repacked before any intervening uses of `interp`.</span>
+        <span class="comment">// The array is repacked before any intervening mruby allocations.</span>
+        <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+        <span class="kw">let</span> <span class="ident">popped</span> <span class="op">=</span> <span class="ident">array_mut</span>.<span class="ident">pop</span>();
 
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);
 
-        <span class="ident">result</span>
+        <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">popped</span>)
     } <span class="kw">else</span> {
         <span class="ident">Value::nil</span>()
     };
@@ -460,7 +500,12 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">value</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
-        <span class="ident">array</span>.<span class="ident">push</span>(<span class="ident">value</span>);
+        <span class="comment">// Safety:</span>
+        <span class="comment">//</span>
+        <span class="comment">// The array is repacked before any intervening uses of `interp`.</span>
+        <span class="comment">// The array is repacked before any intervening mruby allocations.</span>
+        <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+        <span class="ident">array_mut</span>.<span class="ident">push</span>(<span class="ident">value</span>);
 
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);
@@ -515,11 +560,16 @@
         };
         <span class="comment">// TODO: properly handle self-referential sets.</span>
         <span class="kw">if</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>) <span class="op">!</span><span class="op">=</span> <span class="ident">value</span> {
-            <span class="ident">array</span>.<span class="ident">set</span>(<span class="ident">offset</span>, <span class="ident">value</span>);
-        }
+            <span class="comment">// Safety:</span>
+            <span class="comment">//</span>
+            <span class="comment">// The array is repacked before any intervening uses of `interp`.</span>
+            <span class="comment">// The array is repacked before any intervening mruby allocations.</span>
+            <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+            <span class="ident">array_mut</span>.<span class="ident">set</span>(<span class="ident">offset</span>, <span class="ident">value</span>);
 
-        <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
-        <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);
+            <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
+            <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);
+        }
     }
     <span class="kw">let</span> <span class="ident">basic</span> <span class="op">=</span> <span class="ident">sys::mrb_sys_basic_ptr</span>(<span class="ident">ary</span>);
     <span class="ident">sys::mrb_write_barrier</span>(<span class="ident">mrb</span>, <span class="ident">basic</span>);
@@ -531,7 +581,12 @@
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">shift</span>();
+        <span class="comment">// Safety:</span>
+        <span class="comment">//</span>
+        <span class="comment">// The array is repacked before any intervening uses of `interp`.</span>
+        <span class="comment">// The array is repacked before any intervening mruby allocations.</span>
+        <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">array_mut</span>.<span class="ident">shift</span>();
 
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);
@@ -555,7 +610,12 @@
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
-        <span class="ident">array</span>.<span class="number">0</span>.<span class="ident">unshift</span>(<span class="ident">value</span>);
+        <span class="comment">// Safety:</span>
+        <span class="comment">//</span>
+        <span class="comment">// The array is repacked before any intervening uses of `interp`.</span>
+        <span class="comment">// The array is repacked before any intervening mruby allocations.</span>
+        <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+        <span class="ident">array_mut</span>.<span class="number">0</span>.<span class="ident">unshift</span>(<span class="ident">value</span>);
 
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">expect</span>(<span class="string">&quot;Array reboxing should not fail&quot;</span>);

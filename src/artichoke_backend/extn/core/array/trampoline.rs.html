@@ -336,12 +336,74 @@
 <span id="336">336</span>
 <span id="337">337</span>
 <span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::convert</span>::{<span class="ident">implicitly_convert_to_int</span>, <span class="ident">implicitly_convert_to_string</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::core::array::Array</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::prelude</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::gc</span>::{<span class="ident">MrbGarbageCollection</span>, <span class="ident">State</span> <span class="kw">as</span> <span class="ident">GcState</span>};
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">plus</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="kw-2">mut</span> <span class="ident">ary</span>: <span class="ident">Value</span>, <span class="kw-2">mut</span> <span class="ident">other</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">array</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
@@ -432,18 +494,16 @@
     }
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
 
-    <span class="kw">let</span> <span class="ident">prior_gc_state</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">disable_gc</span>()<span class="question-mark">?</span>;
-
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">element_assignment</span>(<span class="ident">interp</span>, <span class="ident">first</span>, <span class="ident">second</span>, <span class="ident">third</span>);
+    <span class="comment">// XXX: Ensure that `array_mut` does not allocate in between mruby</span>
+    <span class="comment">// allocations.</span>
+    <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">array</span>.<span class="ident">as_inner_mut</span>() };
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">array_mut</span>.<span class="ident">element_assignment</span>(<span class="ident">interp</span>, <span class="ident">first</span>, <span class="ident">second</span>, <span class="ident">third</span>);
 
     <span class="kw">unsafe</span> {
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
     }
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">GcState::Enabled</span> <span class="op">=</span> <span class="ident">prior_gc_state</span> {
-        <span class="ident">interp</span>.<span class="ident">enable_gc</span>()<span class="question-mark">?</span>;
-    }
     <span class="ident">result</span>
 }
 
@@ -452,9 +512,16 @@
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FrozenError::with_message</span>(<span class="string">&quot;can&#39;t modify frozen Array&quot;</span>).<span class="ident">into</span>());
     }
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
-    <span class="ident">array</span>.<span class="ident">clear</span>();
 
+    <span class="comment">// Safety:</span>
+    <span class="comment">//</span>
+    <span class="comment">// Clearing a `Vec` does not reallocate it, but it does change it&#39;s length.</span>
+    <span class="comment">// The array is repacked before any intervening interpreter heap allocations</span>
+    <span class="comment">// occur.</span>
     <span class="kw">unsafe</span> {
+        <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+        <span class="ident">array_mut</span>.<span class="ident">clear</span>();
+
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
     }
@@ -548,11 +615,27 @@
     <span class="ident">second</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span>,
     <span class="ident">block</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="comment">// Pack an empty `Array` into the given uninitialized `RArray *` so it can</span>
+    <span class="comment">// be safely marked if an mruby allocation occurs and a GC is triggered in</span>
+    <span class="comment">// `Array::initialize`.</span>
+    <span class="comment">//</span>
+    <span class="comment">// Allocations are likely in the case where a block is passed to</span>
+    <span class="comment">// `Array#initialize` or when the first and second args must be coerced with</span>
+    <span class="comment">// the `#to_*` family of methods.</span>
+    <span class="ident">Array::box_into_value</span>(<span class="ident">Array::new</span>(), <span class="ident">into</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Array::initialize</span>(<span class="ident">interp</span>, <span class="ident">first</span>, <span class="ident">second</span>, <span class="ident">block</span>)<span class="question-mark">?</span>;
     <span class="ident">Array::box_into_value</span>(<span class="ident">array</span>, <span class="ident">into</span>, <span class="ident">interp</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">initialize_copy</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">ary</span>: <span class="ident">Value</span>, <span class="kw-2">mut</span> <span class="ident">from</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="comment">// Pack an empty `Array` into the given uninitialized `RArray *` so it can</span>
+    <span class="comment">// be safely marked if an mruby allocation occurs and a GC is triggered in</span>
+    <span class="comment">// `Array::initialize`.</span>
+    <span class="comment">//</span>
+    <span class="comment">// This ensures the given `RArry *` is initalized even if a non-`Array`</span>
+    <span class="comment">// object is called with `Array#initialize_copy` and the</span>
+    <span class="comment">// `Array::unbox_from_value` call below short circuits with an error.</span>
+    <span class="ident">Array::box_into_value</span>(<span class="ident">Array::new</span>(), <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">from</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">from</span>.<span class="ident">clone</span>();
     <span class="ident">Array::box_into_value</span>(<span class="ident">result</span>, <span class="ident">ary</span>, <span class="ident">interp</span>)
@@ -589,12 +672,20 @@
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FrozenError::with_message</span>(<span class="string">&quot;can&#39;t modify frozen Array&quot;</span>).<span class="ident">into</span>());
     }
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">pop</span>();
 
-    <span class="kw">unsafe</span> {
+    <span class="comment">// Safety:</span>
+    <span class="comment">//</span>
+    <span class="comment">// The array is repacked before any intervening interpreter heap allocations</span>
+    <span class="comment">// occur.</span>
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">unsafe</span> {
+        <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">array_mut</span>.<span class="ident">pop</span>();
+
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
-    }
+
+        <span class="ident">result</span>
+    };
 
     <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert</span>(<span class="ident">result</span>))
 }
@@ -604,7 +695,13 @@
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FrozenError::with_message</span>(<span class="string">&quot;can&#39;t modify frozen Array&quot;</span>).<span class="ident">into</span>());
     }
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
-    <span class="ident">array</span>.<span class="ident">push</span>(<span class="ident">value</span>);
+
+    <span class="comment">// Safety:</span>
+    <span class="comment">//</span>
+    <span class="comment">// The array is repacked without any intervening interpreter heap</span>
+    <span class="comment">// allocations.</span>
+    <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">array</span>.<span class="ident">as_inner_mut</span>() };
+    <span class="ident">array_mut</span>.<span class="ident">push</span>(<span class="ident">value</span>);
 
     <span class="kw">unsafe</span> {
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
@@ -626,9 +723,17 @@
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FrozenError::with_message</span>(<span class="string">&quot;can&#39;t modify frozen Array&quot;</span>).<span class="ident">into</span>());
     }
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
-    <span class="ident">array</span>.<span class="ident">reverse</span>();
 
+    <span class="comment">// Safety:</span>
+    <span class="comment">//</span>
+    <span class="comment">// Reversing an `Array` in place does not reallocate it.</span>
+    <span class="comment">//</span>
+    <span class="comment">// The array is repacked before any intervening interpreter heap allocations</span>
+    <span class="comment">// occur.</span>
     <span class="kw">unsafe</span> {
+        <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+        <span class="ident">array_mut</span>.<span class="ident">reverse</span>();
+
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
         <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
     }
@@ -644,32 +749,53 @@
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">count</span>) <span class="op">=</span> <span class="ident">count</span> {
         <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">implicitly_convert_to_int</span>(<span class="ident">interp</span>, <span class="ident">count</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">usize::try_from</span>(<span class="ident">count</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ArgumentError::with_message</span>(<span class="string">&quot;negative array size&quot;</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">shifted</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">shift_n</span>(<span class="ident">count</span>);
 
         <span class="comment">// Safety:</span>
         <span class="comment">//</span>
-        <span class="comment">// The call to `Array::shift_n` above has potentially invalidated the</span>
-        <span class="comment">// raw parts of `array` stored in `ary`&#39;s `RArray *`.</span>
+        <span class="comment">// The call to `Array::shift_n` has potentially invalidated the raw</span>
+        <span class="comment">// parts of `array` stored in `ary`&#39;s `RArray *`.</span>
         <span class="comment">//</span>
         <span class="comment">// The below call to `Array::alloc_value` will trigger an mruby heap</span>
         <span class="comment">// allocation which may trigger a garbage collection.</span>
         <span class="comment">//</span>
-        <span class="comment">// The raw parts in `ary`&#39;s `RArray *` must be fixed up before a</span>
+        <span class="comment">// The raw parts in `ary`&#39;s `RArray *` must be repacked before a</span>
         <span class="comment">// potential garbage collection, otherwise marking the children in `ary`</span>
         <span class="comment">// will have undefined behavior.</span>
-        <span class="kw">unsafe</span> {
+        <span class="comment">//</span>
+        <span class="comment">// The call to `Array::alloc_value` happens outside of this block after</span>
+        <span class="comment">// the `Array` has been repacked.</span>
+        <span class="kw">let</span> <span class="ident">shifted</span> <span class="op">=</span> <span class="kw">unsafe</span> {
+            <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+            <span class="kw">let</span> <span class="ident">shifted</span> <span class="op">=</span> <span class="ident">array_mut</span>.<span class="ident">shift_n</span>(<span class="ident">count</span>);
+
             <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
             <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
-        }
+
+            <span class="ident">shifted</span>
+        };
 
         <span class="ident">Array::alloc_value</span>(<span class="ident">shifted</span>, <span class="ident">interp</span>)
     } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="ident">shifted</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">shift</span>();
+        <span class="comment">// Safety:</span>
+        <span class="comment">//</span>
+        <span class="comment">// The call to `Array::shift` above has potentially invalidated the raw</span>
+        <span class="comment">// parts of `array` stored in `ary`&#39;s `RArray *`.</span>
+        <span class="comment">//</span>
+        <span class="comment">// The raw parts in `ary`&#39;s `RArray *` must be repacked before a</span>
+        <span class="comment">// potential garbage collection, otherwise marking the children in `ary`</span>
+        <span class="comment">// will have undefined behavior.</span>
+        <span class="comment">//</span>
+        <span class="comment">// The call to `interp.convert` happens outside of this block after the</span>
+        <span class="comment">// `Array` has been repacked.</span>
+        <span class="kw">let</span> <span class="ident">shifted</span> <span class="op">=</span> <span class="kw">unsafe</span> {
+            <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
+            <span class="kw">let</span> <span class="ident">shifted</span> <span class="op">=</span> <span class="ident">array_mut</span>.<span class="ident">shift</span>();
 
-        <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">take</span>();
             <span class="ident">Array::box_into_value</span>(<span class="ident">inner</span>, <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
-        }
+
+            <span class="ident">shifted</span>
+        };
 
         <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert</span>(<span class="ident">shifted</span>))
     }
