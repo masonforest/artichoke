@@ -2497,6 +2497,39 @@
 <span id="2497">2497</span>
 <span id="2498">2498</span>
 <span id="2499">2499</span>
+<span id="2500">2500</span>
+<span id="2501">2501</span>
+<span id="2502">2502</span>
+<span id="2503">2503</span>
+<span id="2504">2504</span>
+<span id="2505">2505</span>
+<span id="2506">2506</span>
+<span id="2507">2507</span>
+<span id="2508">2508</span>
+<span id="2509">2509</span>
+<span id="2510">2510</span>
+<span id="2511">2511</span>
+<span id="2512">2512</span>
+<span id="2513">2513</span>
+<span id="2514">2514</span>
+<span id="2515">2515</span>
+<span id="2516">2516</span>
+<span id="2517">2517</span>
+<span id="2518">2518</span>
+<span id="2519">2519</span>
+<span id="2520">2520</span>
+<span id="2521">2521</span>
+<span id="2522">2522</span>
+<span id="2523">2523</span>
+<span id="2524">2524</span>
+<span id="2525">2525</span>
+<span id="2526">2526</span>
+<span id="2527">2527</span>
+<span id="2528">2528</span>
+<span id="2529">2529</span>
+<span id="2530">2530</span>
+<span id="2531">2531</span>
+<span id="2532">2532</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
@@ -4044,6 +4077,11 @@
     <span class="doccomment">/// `separator` is an empty string, it will remove all trailing newlines</span>
     <span class="doccomment">/// from the string.</span>
     <span class="doccomment">///</span>
+    <span class="doccomment">/// A [`None`] separator does not mean that `chomp` is passed a `nil`</span>
+    <span class="doccomment">/// separator. For `str.chomp nil`, MRI returns `str.dup`. For</span>
+    <span class="doccomment">/// `str.chomp! nil`, MRI makes no changes to the receiver and returns</span>
+    <span class="doccomment">/// `nil`.</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```</span>
@@ -4052,12 +4090,22 @@
     <span class="doccomment">/// let mut s = String::utf8(b&quot;This is a paragraph.\r\n\n\n&quot;.to_vec());</span>
     <span class="doccomment">/// let modified = s.chomp(None::&lt;&amp;[u8]&gt;);</span>
     <span class="doccomment">/// assert!(modified);</span>
-    <span class="doccomment">/// assert_eq!(s, &quot;This is a paragraph.&quot;);</span>
+    <span class="doccomment">/// assert_eq!(s, &quot;This is a paragraph.\r\n\n&quot;);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let mut s = String::utf8(b&quot;This is a paragraph.\r\n\n\n&quot;.to_vec());</span>
     <span class="doccomment">/// let modified = s.chomp(Some(&quot;&quot;));</span>
     <span class="doccomment">/// assert!(modified);</span>
-    <span class="doccomment">/// assert_eq!(s, &quot;This is a paragraph.\r&quot;);</span>
+    <span class="doccomment">/// assert_eq!(s, &quot;This is a paragraph.&quot;);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut s = String::utf8(b&quot;hello\r\n\r\r\n&quot;.to_vec());</span>
+    <span class="doccomment">/// let modified = s.chomp(None::&lt;&amp;[u8]&gt;);</span>
+    <span class="doccomment">/// assert!(modified);</span>
+    <span class="doccomment">/// assert_eq!(s, &quot;hello\r\n\r&quot;);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut s = String::utf8(b&quot;hello\r\n\r\r\n&quot;.to_vec());</span>
+    <span class="doccomment">/// let modified = s.chomp(Some(&quot;&quot;));</span>
+    <span class="doccomment">/// assert!(modified);</span>
+    <span class="doccomment">/// assert_eq!(s, &quot;hello\r\n\r&quot;);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let mut s = String::utf8(b&quot;This is a paragraph.&quot;.to_vec());</span>
     <span class="doccomment">/// let modified = s.chomp(Some(&quot;.&quot;));</span>
@@ -4079,10 +4127,16 @@
         <span class="kw">match</span> <span class="ident">separator</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="ident">AsRef::as_ref</span>) {
             <span class="prelude-val">Some</span>(<span class="ident">separator</span>) <span class="kw">if</span> <span class="ident">separator</span>.<span class="ident">is_empty</span>() <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">original_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
-                <span class="kw">let</span> <span class="ident">substr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">trim_end_with</span>(<span class="op">|</span><span class="ident">ch</span><span class="op">|</span> <span class="macro">matches!</span>(<span class="ident">ch</span>, <span class="string">&#39;\n&#39;</span>));
-                <span class="kw">let</span> <span class="ident">truncate_to_len</span> <span class="op">=</span> <span class="ident">substr</span>.<span class="ident">len</span>();
-                <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">truncate</span>(<span class="ident">truncate_to_len</span>);
-                <span class="ident">truncate_to_len</span> <span class="op">!</span><span class="op">=</span> <span class="ident">original_len</span>
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">bytes</span>().<span class="ident">rev</span>().<span class="ident">peekable</span>();
+                <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">b&#39;\n&#39;</span>) <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">peek</span>() {
+                    <span class="ident">iter</span>.<span class="ident">next</span>();
+                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">b&#39;\r&#39;</span>) <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">peek</span>() {
+                        <span class="ident">iter</span>.<span class="ident">next</span>();
+                    }
+                }
+                <span class="kw">let</span> <span class="ident">truncate_to</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">count</span>();
+                <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">truncate</span>(<span class="ident">truncate_to</span>);
+                <span class="ident">truncate_to</span> <span class="op">!</span><span class="op">=</span> <span class="ident">original_len</span>
             }
             <span class="prelude-val">Some</span>(<span class="ident">separator</span>) <span class="kw">if</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">ends_with</span>(<span class="ident">separator</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">original_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
@@ -4097,8 +4151,20 @@
             <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
             <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">original_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
-                <span class="kw">let</span> <span class="ident">substr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">trim_end_with</span>(<span class="op">|</span><span class="ident">ch</span><span class="op">|</span> <span class="macro">matches!</span>(<span class="ident">ch</span>, <span class="string">&#39;\r&#39;</span> <span class="op">|</span> <span class="string">&#39;\n&#39;</span>));
-                <span class="kw">let</span> <span class="ident">truncate_to_len</span> <span class="op">=</span> <span class="ident">substr</span>.<span class="ident">len</span>();
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">bytes</span>().<span class="ident">rev</span>().<span class="ident">peekable</span>();
+                <span class="kw">match</span> <span class="ident">iter</span>.<span class="ident">peek</span>() {
+                    <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">b&#39;\n&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="ident">iter</span>.<span class="ident">next</span>();
+                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">b&#39;\r&#39;</span>) <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">peek</span>() {
+                            <span class="ident">iter</span>.<span class="ident">next</span>();
+                        }
+                    }
+                    <span class="prelude-val">Some</span>(<span class="string">b&#39;\r&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="ident">iter</span>.<span class="ident">next</span>();
+                    }
+                    <span class="prelude-val">Some</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {}
+                };
+                <span class="kw">let</span> <span class="ident">truncate_to_len</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">count</span>();
                 <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">truncate</span>(<span class="ident">truncate_to_len</span>);
                 <span class="ident">truncate_to_len</span> <span class="op">!</span><span class="op">=</span> <span class="ident">original_len</span>
             }
