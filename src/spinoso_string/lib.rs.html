@@ -2530,6 +2530,22 @@
 <span id="2530">2530</span>
 <span id="2531">2531</span>
 <span id="2532">2532</span>
+<span id="2533">2533</span>
+<span id="2534">2534</span>
+<span id="2535">2535</span>
+<span id="2536">2536</span>
+<span id="2537">2537</span>
+<span id="2538">2538</span>
+<span id="2539">2539</span>
+<span id="2540">2540</span>
+<span id="2541">2541</span>
+<span id="2542">2542</span>
+<span id="2543">2543</span>
+<span id="2544">2544</span>
+<span id="2545">2545</span>
+<span id="2546">2546</span>
+<span id="2547">2547</span>
+<span id="2548">2548</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
@@ -2587,9 +2603,11 @@
 <span class="kw">mod</span> <span class="ident">encoding</span>;
 <span class="kw">mod</span> <span class="ident">eq</span>;
 <span class="kw">mod</span> <span class="ident">impls</span>;
+<span class="kw">mod</span> <span class="ident">inspect</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">chars::Chars</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">encoding</span>::{<span class="ident">Encoding</span>, <span class="ident">InvalidEncodingError</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">inspect::Inspect</span>;
 
 <span class="doccomment">/// Immutable [`String`] byte slice iterator.</span>
 <span class="doccomment">///</span>
@@ -4335,6 +4353,20 @@
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">rfind</span>(<span class="ident">needle</span>.<span class="ident">as_ref</span>())
         }
+    }
+
+    <span class="doccomment">/// Returns an iterator that yields a debug representation of the `String`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This iterator produces [`char`] sequences like `&quot;spinoso&quot;` and</span>
+    <span class="doccomment">/// `&quot;invalid-\xFF-utf8&quot;`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This function can be used to implement the Ruby method</span>
+    <span class="doccomment">/// [`String#inspect`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`String#inspect`]: https://ruby-doc.org/core-2.6.3/String.html#method-i-inspect:</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inspect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Inspect</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
+        <span class="ident">Inspect::from</span>(<span class="self">self</span>.<span class="ident">as_slice</span>())
     }
 
     <span class="doccomment">/// Returns the Integer ordinal of a one-character string.</span>

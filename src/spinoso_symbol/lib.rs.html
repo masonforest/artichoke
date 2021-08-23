@@ -314,6 +314,11 @@
 <span id="314">314</span>
 <span id="315">315</span>
 <span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
@@ -612,9 +617,14 @@
     <span class="doccomment">/// This iterator produces [`char`] sequences like `:spinoso` and</span>
     <span class="doccomment">/// `:&quot;invalid-\xFF-utf8&quot;`.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If there symbol does not exist in the underlying interner or there is an</span>
+    <span class="doccomment">/// This function can be used to implement the Ruby method</span>
+    <span class="doccomment">/// [`Symbol#inspect`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If the symbol does not exist in the underlying interner or there is an</span>
     <span class="doccomment">/// error looking up the symbol in the underlying interner, a default</span>
     <span class="doccomment">/// iterator is returned.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`Symbol#inspect`]: https://ruby-doc.org/core-2.6.3/Symbol.html#method-i-inspect</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;artichoke&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;artichoke&quot;</span>)))]</span>
