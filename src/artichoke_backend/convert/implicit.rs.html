@@ -705,7 +705,7 @@
 <span class="doccomment">/// # fn example() -&gt; Result&lt;(), Error&gt; {</span>
 <span class="doccomment">/// let mut interp = artichoke_backend::interpreter()?;</span>
 <span class="doccomment">/// // successful conversions</span>
-<span class="doccomment">/// let mut string = interp.convert_mut(&quot;artichoke&quot;);</span>
+<span class="doccomment">/// let mut string = interp.try_convert_mut(&quot;artichoke&quot;)?;</span>
 <span class="doccomment">/// let mut a = interp.eval(b&quot;class A; def to_str; &#39;spinoso&#39;; end; end; A.new&quot;)?;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # unsafe {</span>
@@ -912,7 +912,7 @@
 <span class="doccomment">/// # fn example() -&gt; Result&lt;(), Error&gt; {</span>
 <span class="doccomment">/// let mut interp = artichoke_backend::interpreter()?;</span>
 <span class="doccomment">/// // successful conversions</span>
-<span class="doccomment">/// let mut string = interp.convert_mut(&quot;artichoke&quot;);</span>
+<span class="doccomment">/// let mut string = interp.try_convert_mut(&quot;artichoke&quot;)?;</span>
 <span class="doccomment">/// let mut nil = Value::nil();</span>
 <span class="doccomment">/// let mut a = interp.eval(b&quot;class A; def to_str; &#39;spinoso&#39;; end; end; A.new&quot;)?;</span>
 <span class="doccomment">///</span>

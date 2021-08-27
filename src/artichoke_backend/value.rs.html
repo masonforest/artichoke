@@ -619,7 +619,7 @@
 <span id="619">619</span>
 <span id="620">620</span>
 <span id="621">621</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">artichoke_core::convert</span>::{<span class="ident">Convert</span>, <span class="ident">ConvertMut</span>, <span class="ident">TryConvert</span>};
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">artichoke_core::convert</span>::{<span class="ident">Convert</span>, <span class="ident">ConvertMut</span>, <span class="ident">TryConvert</span>, <span class="ident">TryConvertMut</span>};
 <span class="kw">use</span> <span class="ident">artichoke_core::intern::Intern</span>;
 <span class="kw">use</span> <span class="ident">artichoke_core::value::Value</span> <span class="kw">as</span> <span class="ident">ValueCore</span>;
 <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
@@ -976,7 +976,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">as_mrb_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sys::mrb_value</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="self">self</span>.<span class="ident">to_string</span>());
+        <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="self">self</span>.<span class="ident">to_string</span>()).<span class="ident">ok</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">new_instance</span>::<span class="op">&lt;</span><span class="ident">ArgumentError</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span>[<span class="ident">message</span>]).<span class="ident">ok</span>().<span class="ident">flatten</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">value</span>.<span class="ident">inner</span>())
     }
@@ -1089,7 +1089,7 @@
     <span class="kw">fn</span> <span class="ident">to_s_string</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
 
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;interstate&quot;</span>);
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;interstate&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">to_s</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">string</span>.<span class="ident">as_bstr</span>(), <span class="string">b&quot;interstate&quot;</span>.<span class="ident">as_bstr</span>());
     }
@@ -1098,7 +1098,7 @@
     <span class="kw">fn</span> <span class="ident">inspect_string</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
 
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;interstate&quot;</span>);
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;interstate&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">inspect</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">debug</span>.<span class="ident">as_bstr</span>(), <span class="string">br#&quot;&quot;interstate&quot;&quot;#</span>.<span class="ident">as_bstr</span>());
     }
@@ -1107,7 +1107,7 @@
     <span class="kw">fn</span> <span class="ident">to_s_empty_string</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
 
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;&quot;</span>);
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">to_s</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">string</span>.<span class="ident">as_bstr</span>(), <span class="string">b&quot;&quot;</span>.<span class="ident">as_bstr</span>());
     }
@@ -1116,7 +1116,7 @@
     <span class="kw">fn</span> <span class="ident">inspect_empty_string</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
 
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;&quot;</span>);
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">inspect</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">debug</span>.<span class="ident">as_bstr</span>(), <span class="string">br#&quot;&quot;&quot;&quot;#</span>.<span class="ident">as_bstr</span>());
     }
@@ -1184,7 +1184,7 @@
             .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="ident">value</span>.<span class="ident">try_into</span>::<span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">interp</span>))
             .<span class="ident">unwrap</span>();
         <span class="macro">assert!</span>(<span class="ident">nil_is_nil</span>);
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;foo&quot;</span>);
+        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;foo&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">string_is_nil</span> <span class="op">=</span> <span class="ident">s</span>
             .<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;nil?&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>)
             .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="ident">value</span>.<span class="ident">try_into</span>::<span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">interp</span>))
@@ -1192,7 +1192,7 @@
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">string_is_nil</span>);
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;core-regexp&quot;</span>)]</span>
         {
-            <span class="kw">let</span> <span class="ident">delim</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;&quot;</span>);
+            <span class="kw">let</span> <span class="ident">delim</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">split</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;split&quot;</span>, <span class="kw-2">&amp;</span>[<span class="ident">delim</span>], <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">split</span> <span class="op">=</span> <span class="ident">split</span>.<span class="ident">try_into_mut</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>).<span class="ident">unwrap</span>();
             <span class="macro">assert_eq!</span>(<span class="ident">split</span>, <span class="macro">vec!</span>[<span class="string">&quot;f&quot;</span>, <span class="string">&quot;o&quot;</span>, <span class="string">&quot;o&quot;</span>]);
@@ -1203,7 +1203,7 @@
     <span class="kw">fn</span> <span class="ident">funcall_different_types</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">nil</span> <span class="op">=</span> <span class="ident">Value::nil</span>();
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;foo&quot;</span>);
+        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;foo&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">eql</span> <span class="op">=</span> <span class="ident">nil</span>
             .<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;==&quot;</span>, <span class="kw-2">&amp;</span>[<span class="ident">s</span>], <span class="prelude-val">None</span>)
             .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="ident">value</span>.<span class="ident">try_into</span>::<span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">interp</span>))
@@ -1215,7 +1215,7 @@
     <span class="kw">fn</span> <span class="ident">funcall_type_error</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">nil</span> <span class="op">=</span> <span class="ident">Value::nil</span>();
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;foo&quot;</span>);
+        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;foo&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">s</span>
             .<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;+&quot;</span>, <span class="kw-2">&amp;</span>[<span class="ident">nil</span>], <span class="prelude-val">None</span>)
             .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="ident">value</span>.<span class="ident">try_into_mut</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>))
@@ -1231,7 +1231,7 @@
     <span class="kw">fn</span> <span class="ident">funcall_method_not_exists</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">nil</span> <span class="op">=</span> <span class="ident">Value::nil</span>();
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="string">&quot;foo&quot;</span>);
+        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;foo&quot;</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">nil</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="string">&quot;garbage_method_name&quot;</span>, <span class="kw-2">&amp;</span>[<span class="ident">s</span>], <span class="prelude-val">None</span>).<span class="ident">unwrap_err</span>();
         <span class="macro">assert_eq!</span>(<span class="string">&quot;NoMethodError&quot;</span>, <span class="ident">err</span>.<span class="ident">name</span>().<span class="ident">as_ref</span>());
         <span class="macro">assert_eq!</span>(

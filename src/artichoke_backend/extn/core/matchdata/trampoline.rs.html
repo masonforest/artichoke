@@ -296,13 +296,13 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">post_match</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">MatchData::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">value</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
     <span class="kw">let</span> <span class="ident">post</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">post</span>();
-    <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="ident">post</span>))
+    <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="ident">post</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pre_match</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">MatchData::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">value</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
     <span class="kw">let</span> <span class="ident">pre</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">pre</span>();
-    <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="ident">pre</span>))
+    <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="ident">pre</span>)
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">regexp</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
@@ -321,7 +321,7 @@
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">string</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">MatchData::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">value</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="ident">data</span>.<span class="ident">string</span>());
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="ident">data</span>.<span class="ident">string</span>())<span class="question-mark">?</span>;
     <span class="ident">string</span>.<span class="ident">freeze</span>(<span class="ident">interp</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">string</span>)
 }
@@ -338,7 +338,7 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_s</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">MatchData::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">value</span>, <span class="ident">interp</span>)<span class="question-mark">?</span> };
     <span class="kw">let</span> <span class="ident">display</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">to_s</span>()<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="ident">display</span>))
+    <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="ident">display</span>)
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="artichoke_backend" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
