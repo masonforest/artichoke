@@ -2546,6 +2546,72 @@
 <span id="2546">2546</span>
 <span id="2547">2547</span>
 <span id="2548">2548</span>
+<span id="2549">2549</span>
+<span id="2550">2550</span>
+<span id="2551">2551</span>
+<span id="2552">2552</span>
+<span id="2553">2553</span>
+<span id="2554">2554</span>
+<span id="2555">2555</span>
+<span id="2556">2556</span>
+<span id="2557">2557</span>
+<span id="2558">2558</span>
+<span id="2559">2559</span>
+<span id="2560">2560</span>
+<span id="2561">2561</span>
+<span id="2562">2562</span>
+<span id="2563">2563</span>
+<span id="2564">2564</span>
+<span id="2565">2565</span>
+<span id="2566">2566</span>
+<span id="2567">2567</span>
+<span id="2568">2568</span>
+<span id="2569">2569</span>
+<span id="2570">2570</span>
+<span id="2571">2571</span>
+<span id="2572">2572</span>
+<span id="2573">2573</span>
+<span id="2574">2574</span>
+<span id="2575">2575</span>
+<span id="2576">2576</span>
+<span id="2577">2577</span>
+<span id="2578">2578</span>
+<span id="2579">2579</span>
+<span id="2580">2580</span>
+<span id="2581">2581</span>
+<span id="2582">2582</span>
+<span id="2583">2583</span>
+<span id="2584">2584</span>
+<span id="2585">2585</span>
+<span id="2586">2586</span>
+<span id="2587">2587</span>
+<span id="2588">2588</span>
+<span id="2589">2589</span>
+<span id="2590">2590</span>
+<span id="2591">2591</span>
+<span id="2592">2592</span>
+<span id="2593">2593</span>
+<span id="2594">2594</span>
+<span id="2595">2595</span>
+<span id="2596">2596</span>
+<span id="2597">2597</span>
+<span id="2598">2598</span>
+<span id="2599">2599</span>
+<span id="2600">2600</span>
+<span id="2601">2601</span>
+<span id="2602">2602</span>
+<span id="2603">2603</span>
+<span id="2604">2604</span>
+<span id="2605">2605</span>
+<span id="2606">2606</span>
+<span id="2607">2607</span>
+<span id="2608">2608</span>
+<span id="2609">2609</span>
+<span id="2610">2610</span>
+<span id="2611">2611</span>
+<span id="2612">2612</span>
+<span id="2613">2613</span>
+<span id="2614">2614</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
@@ -2589,7 +2655,7 @@
 <span class="kw">use</span> <span class="ident">core::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">core::fmt</span>::{<span class="self">self</span>, <span class="ident">Write</span>};
 <span class="kw">use</span> <span class="ident">core::iter</span>::{<span class="ident">Cycle</span>, <span class="ident">Take</span>};
-<span class="kw">use</span> <span class="ident">core::mem</span>;
+<span class="kw">use</span> <span class="ident">core::mem</span>::{<span class="self">self</span>, <span class="ident">ManuallyDrop</span>};
 <span class="kw">use</span> <span class="ident">core::slice</span>::{<span class="self">self</span>, <span class="ident">SliceIndex</span>};
 <span class="kw">use</span> <span class="ident">core::str</span>;
 
@@ -3260,6 +3326,23 @@
         <span class="self">self</span>.<span class="ident">encoding</span>
     }
 
+    <span class="doccomment">/// Set the [`Encoding`] of this `String`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// use spinoso_string::{Encoding, String};</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut s = String::utf8(b&quot;xyz&quot;.to_vec());</span>
+    <span class="doccomment">/// assert_eq!(s.encoding(), Encoding::Utf8);</span>
+    <span class="doccomment">/// s.set_encoding(Encoding::Binary);</span>
+    <span class="doccomment">/// assert_eq!(s.encoding(), Encoding::Binary);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_encoding</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">encoding</span>: <span class="ident">Encoding</span>) {
+        <span class="self">self</span>.<span class="ident">encoding</span> <span class="op">=</span> <span class="ident">encoding</span>;
+    }
+
     <span class="doccomment">/// Extracts a slice containing the entire byte string.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Equivalent to `&amp;s[..]`.</span>
@@ -3288,6 +3371,55 @@
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_ptr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">as_mut_ptr</span>()
+    }
+
+    <span class="doccomment">/// Creates a `String` directly from the raw components of another string.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Safety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This is highly unsafe, due to the number of invariants that aren&#39;t</span>
+    <span class="doccomment">/// checked:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// - `ptr` needs to have been previously allocated via `String` (at least,</span>
+    <span class="doccomment">///   it&#39;s highly likely to be incorrect if it wasn&#39;t).</span>
+    <span class="doccomment">/// - `length` needs to be less than or equal to `capacity`.</span>
+    <span class="doccomment">/// - `capacity` needs to be the `capacity` that the pointer was allocated</span>
+    <span class="doccomment">///   with.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Violating these may cause problems like corrupting the allocator&#39;s</span>
+    <span class="doccomment">/// internal data structures.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The ownership of `ptr` is effectively transferred to the `String` which</span>
+    <span class="doccomment">/// may then deallocate, reallocate or change the contents of memory pointed</span>
+    <span class="doccomment">/// to by the pointer at will. Ensure that nothing else uses the pointer</span>
+    <span class="doccomment">/// after calling this function.</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_parts</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">length</span>: <span class="ident">usize</span>, <span class="ident">capacity</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident"><span class="self">Self</span>::utf8</span>(<span class="ident">Vec::from_raw_parts</span>(<span class="ident">ptr</span>, <span class="ident">length</span>, <span class="ident">capacity</span>))
+    }
+
+    <span class="doccomment">/// Decomposes a `String` into its raw components.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Returns the raw pointer to the underlying data, the length of the string</span>
+    <span class="doccomment">/// (in bytes), and the allocated capacity of the data (in bytes).  These</span>
+    <span class="doccomment">/// are the same arguments in the same order as the arguments to</span>
+    <span class="doccomment">/// [`from_raw_parts`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// After calling this function, the caller is responsible for the memory</span>
+    <span class="doccomment">/// previously managed by the `String`. The only way to do this is to</span>
+    <span class="doccomment">/// convert the raw pointer, length, and capacity back into a `String` with</span>
+    <span class="doccomment">/// the [`from_raw_parts`] function, allowing the destructor to perform the</span>
+    <span class="doccomment">/// cleanup.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`from_raw_parts`]: String::from_raw_parts</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_raw_parts</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">usize</span>, <span class="ident">usize</span>) {
+        <span class="comment">// TODO: convert to `Vec::into_raw_parts` once it is stabilized.</span>
+        <span class="comment">// See: https://doc.rust-lang.org/1.48.0/src/alloc/vec.rs.html#399-402</span>
+        <span class="comment">//</span>
+        <span class="comment">// https://github.com/rust-lang/rust/issues/65816</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">ManuallyDrop::new</span>(<span class="self">self</span>.<span class="ident">buf</span>);
+        (<span class="ident">me</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">me</span>.<span class="ident">len</span>(), <span class="ident">me</span>.<span class="ident">capacity</span>())
     }
 
     <span class="doccomment">/// Converts self into a vector without clones or allocation.</span>
