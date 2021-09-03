@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;rustyline-8.2.0&#x2F;src&#x2F;keys.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>keys.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../rustyline/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;rustyline-9.0.0&#x2F;src&#x2F;keys.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>keys.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../rustyline/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -200,6 +200,22 @@
 <span id="200">200</span>
 <span id="201">201</span>
 <span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Key constants</span>
 
 <span class="doccomment">/// Input key pressed and modifiers</span>
@@ -227,15 +243,19 @@
         }
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::match_same_arms</span>)]</span>
         <span class="kw">match</span> <span class="ident">c</span> {
-            <span class="string">&#39;\x00&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39; &#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
+            <span class="string">&#39;\x00&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;@&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>), <span class="comment">// &#39;\0&#39;</span>
             <span class="string">&#39;\x01&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x02&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;B&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x03&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;C&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x04&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;D&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x05&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;E&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x06&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;F&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
-            <span class="string">&#39;\x07&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
+            <span class="string">&#39;\x07&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>), <span class="comment">// &#39;\a&#39;</span>
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
             <span class="string">&#39;\x08&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Backspace</span>, <span class="ident">mods</span>), <span class="comment">// &#39;\b&#39;</span>
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
+            <span class="string">&#39;\x08&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
             <span class="string">&#39;\x09&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="comment">// &#39;\t&#39;</span>
                 <span class="kw">if</span> <span class="ident">mods</span>.<span class="ident">contains</span>(<span class="ident">M::SHIFT</span>) {
@@ -245,10 +265,15 @@
                     <span class="ident">E</span>(<span class="ident">K::Tab</span>, <span class="ident">mods</span>)
                 }
             }
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
+            <span class="string">&#39;\x09&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;I&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x0a&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;J&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>), <span class="comment">// &#39;\n&#39; (10)</span>
             <span class="string">&#39;\x0b&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;K&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x0c&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;L&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
             <span class="string">&#39;\x0d&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Enter</span>, <span class="ident">mods</span>), <span class="comment">// &#39;\r&#39; (13)</span>
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
+            <span class="string">&#39;\x0d&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;M&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x0e&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;N&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x0f&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;O&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x10&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;P&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
@@ -262,12 +287,12 @@
             <span class="string">&#39;\x18&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;X&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x19&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Y&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x1a&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Z&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
-            <span class="string">&#39;\x1b&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Esc</span>, <span class="ident">mods</span>), <span class="comment">// Ctrl-[</span>
+            <span class="string">&#39;\x1b&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Esc</span>, <span class="ident">mods</span>), <span class="comment">// Ctrl-[, &#39;\e&#39;</span>
             <span class="string">&#39;\x1c&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;\\&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x1d&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;]&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x1e&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;^&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
             <span class="string">&#39;\x1f&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;_&#39;</span>), <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::CTRL</span>),
-            <span class="string">&#39;\x7f&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Backspace</span>, <span class="ident">mods</span>), <span class="comment">// Rubout</span>
+            <span class="string">&#39;\x7f&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Backspace</span>, <span class="ident">mods</span>), <span class="comment">// Rubout, Ctrl-?</span>
             <span class="string">&#39;\u{9b}&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Esc</span>, <span class="ident">mods</span> <span class="op">|</span> <span class="ident">M::SHIFT</span>),
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Null</span>, <span class="ident">mods</span>),
         }
@@ -390,8 +415,15 @@
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from</span>() {
         <span class="macro">assert_eq!</span>(<span class="ident">E</span>(<span class="ident">K::Tab</span>, <span class="ident">M::NONE</span>), <span class="ident">E::from</span>(<span class="string">&#39;\t&#39;</span>));
+    }
+
+    <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">from</span>() {
+        <span class="macro">assert_eq!</span>(<span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;I&#39;</span>), <span class="ident">M::CTRL</span>), <span class="ident">E::from</span>(<span class="string">&#39;\t&#39;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>

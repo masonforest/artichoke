@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Direction","Search direction"]],"struct":[["History","Current state of the history."],["Iter","History iterator."]]});
+initSidebarItems({"enum":[["SearchDirection","Search direction"]],"struct":[["History","Current state of the history."],["Iter","History iterator."],["SearchResult","History search result"]]});
