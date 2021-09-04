@@ -44,10 +44,8 @@
 <span id="44">44</span>
 <span id="45">45</span>
 <span id="46">46</span>
-<span id="47">47</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::let_underscore_drop</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unknown_lints</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
@@ -87,8 +85,8 @@
         <span class="comment">//</span>
         <span class="comment">// Suppress all errors at this point (e.g. from a broken pipe) since</span>
         <span class="comment">// we&#39;re exiting with an error code anyway.</span>
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">stderr</span>.<span class="ident">reset</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">writeln!</span>(<span class="ident">stderr</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>);
+        <span class="kw">let</span> <span class="ident">_ignored</span> <span class="op">=</span> <span class="ident">stderr</span>.<span class="ident">reset</span>();
+        <span class="kw">let</span> <span class="ident">_ignored</span> <span class="op">=</span> <span class="macro">writeln!</span>(<span class="ident">stderr</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>);
         <span class="ident">process::exit</span>(<span class="number">1</span>);
     }
 }

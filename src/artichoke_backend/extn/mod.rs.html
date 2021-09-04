@@ -61,7 +61,11 @@
 <span id="61">61</span>
 <span id="62">62</span>
 <span id="63">63</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::needless_pass_by_value</span>)]</span>
+<span id="64">64</span>
+<span id="65">65</span>
+</pre><pre class="rust"><code><span class="comment">// This pragma is needed to allow passing `Value` by value in all of the mruby</span>
+<span class="comment">// and Rust trampolines.</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::needless_pass_by_value</span>)]</span>
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::release_metadata::ReleaseMetadata</span>;
 
