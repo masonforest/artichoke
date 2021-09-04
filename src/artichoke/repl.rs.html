@@ -283,6 +283,7 @@
 <span id="283">283</span>
 <span id="284">284</span>
 <span id="285">285</span>
+<span id="286">286</span>
 </pre><pre class="rust"><code><span class="doccomment">//! A REPL (read–eval–print–loop) for an Artichoke interpreter.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! The REPL is readline enabled, but does not save history. The REPL supports</span>
@@ -523,12 +524,13 @@
             <span class="prelude-val">Ok</span>(<span class="ident">line</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">buf</span>.<span class="ident">push_str</span>(<span class="ident">line</span>.<span class="ident">as_str</span>());
                 <span class="ident">parser_state</span> <span class="op">=</span> <span class="ident">parser</span>.<span class="ident">parse</span>(<span class="ident">buf</span>.<span class="ident">as_bytes</span>());
-                <span class="kw">if</span> <span class="ident">parser_state</span>.<span class="ident">is_fatal</span>() {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Box::new</span>(<span class="ident">ParserInternalError::new</span>()));
-                }
+
                 <span class="kw">if</span> <span class="ident">parser_state</span>.<span class="ident">is_code_block_open</span>() {
                     <span class="ident">buf</span>.<span class="ident">push</span>(<span class="string">&#39;\n&#39;</span>);
                     <span class="kw">continue</span>;
+                }
+                <span class="kw">if</span> <span class="ident">parser_state</span>.<span class="ident">is_fatal</span>() {
+                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Box::new</span>(<span class="ident">ParserInternalError::new</span>()));
                 }
                 <span class="kw">if</span> <span class="ident">parser_state</span>.<span class="ident">is_recoverable_error</span>() {
                     <span class="macro">writeln!</span>(<span class="ident">error</span>, <span class="string">&quot;Could not parse input&quot;</span>)<span class="question-mark">?</span>;
