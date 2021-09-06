@@ -179,12 +179,6 @@
 <span id="179">179</span>
 <span id="180">180</span>
 <span id="181">181</span>
-<span id="182">182</span>
-<span id="183">183</span>
-<span id="184">184</span>
-<span id="185">185</span>
-<span id="186">186</span>
-<span id="187">187</span>
 </pre><pre class="rust"><code><span class="doccomment">//! A Ruby source loader that resolves sources relative to paths given in a</span>
 <span class="doccomment">//! `RUBYLIB` environment variable.</span>
 
@@ -217,6 +211,8 @@
 <span class="doccomment">/// have higher priority.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```no_run</span>
+<span class="doccomment">/// # use std::ffi::OsStr;</span>
+<span class="doccomment">/// # use std::path::Path;</span>
 <span class="doccomment">/// # use mezzaluna_feature_loader::Rubylib;</span>
 <span class="doccomment">/// # fn example() -&gt; Option&lt;()&gt; {</span>
 <span class="doccomment">/// // Grab the load paths from the `RUBYLIB` environment variable. If the</span>
@@ -232,8 +228,8 @@
 <span class="doccomment">/// // The relative path `./_lib` is resolved relative to the given working</span>
 <span class="doccomment">/// // directory.</span>
 <span class="doccomment">/// let fixed_loader = Rubylib::with_rubylib_and_cwd(</span>
-<span class="doccomment">///     &quot;/home/artichoke/src:/usr/share/artichoke:./_lib&quot;,</span>
-<span class="doccomment">///     &quot;/home/artichoke&quot;</span>
+<span class="doccomment">///     OsStr::new(&quot;/home/artichoke/src:/usr/share/artichoke:./_lib&quot;),</span>
+<span class="doccomment">///     Path::new(&quot;/home/artichoke&quot;)</span>
 <span class="doccomment">/// )?;</span>
 <span class="doccomment">/// # Some(())</span>
 <span class="doccomment">/// # }</span>
@@ -275,7 +271,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">rubylib</span> <span class="op">=</span> <span class="ident">env::var_os</span>(<span class="string">&quot;RUBYLIB&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">env::current_dir</span>().<span class="ident">ok</span>()<span class="question-mark">?</span>;
-        <span class="ident"><span class="self">Self</span>::with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>, <span class="ident">cwd</span>)
+        <span class="ident"><span class="self">Self</span>::with_rubylib_and_cwd</span>(<span class="kw-2">&amp;</span><span class="ident">rubylib</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>)
     }
 
     <span class="doccomment">/// Create a new native filesystem loader that searches the filesystem for</span>
@@ -298,12 +294,9 @@
     <span class="doccomment">/// [current working directory]: env::current_dir</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_rubylib</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">rubylib</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span>,
-    {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_rubylib</span>(<span class="ident">rubylib</span>: <span class="kw-2">&amp;</span><span class="ident">OsStr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">env::current_dir</span>().<span class="ident">ok</span>()<span class="question-mark">?</span>;
-        <span class="ident"><span class="self">Self</span>::with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>, <span class="ident">cwd</span>)
+        <span class="ident"><span class="self">Self</span>::with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>)
     }
 
     <span class="doccomment">/// Create a new native filesystem loader that searches the filesystem for</span>
@@ -324,12 +317,7 @@
     <span class="doccomment">/// paths.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_rubylib_and_cwd</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">rubylib</span>: <span class="ident">T</span>, <span class="ident">cwd</span>: <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span>,
-        <span class="ident">U</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span>,
-    {
-        <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">cwd</span>);
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>: <span class="kw-2">&amp;</span><span class="ident">OsStr</span>, <span class="ident">cwd</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">load_paths</span> <span class="op">=</span> <span class="ident">env::split_paths</span>(<span class="kw-2">&amp;</span><span class="ident">rubylib</span>)
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">load_path</span><span class="op">|</span> <span class="ident">cwd</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">load_path</span>))
             .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
