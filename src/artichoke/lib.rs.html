@@ -192,7 +192,7 @@
 <span class="doccomment">//! let mut interp = artichoke::interpreter()?;</span>
 <span class="doccomment">//! let s = interp.try_convert_mut(&quot;💎&quot;)?;</span>
 <span class="doccomment">//! let codepoint = s.funcall(&amp;mut interp, &quot;ord&quot;, &amp;[] /* args */, None /* block */)?;</span>
-<span class="doccomment">//! let codepoint = codepoint.try_into::&lt;u32&gt;(&amp;interp)?;</span>
+<span class="doccomment">//! let codepoint = codepoint.try_convert_into::&lt;u32&gt;(&amp;interp)?;</span>
 <span class="doccomment">//! assert_eq!(128142, codepoint);</span>
 <span class="doccomment">//! # interp.close();</span>
 <span class="doccomment">//! # Ok(())</span>

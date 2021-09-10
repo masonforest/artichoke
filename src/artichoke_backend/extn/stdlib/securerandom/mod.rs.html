@@ -178,11 +178,11 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">max</span>) <span class="op">=</span> <span class="ident">max</span> {
             <span class="kw">match</span> <span class="ident">max</span>.<span class="ident">ruby_type</span>() {
                 <span class="ident">Ruby::Fixnum</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>.<span class="ident">try_into</span>(<span class="self">self</span>)<span class="question-mark">?</span>;
+                    <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>.<span class="ident">try_convert_into</span>(<span class="self">self</span>)<span class="question-mark">?</span>;
                     <span class="prelude-val">Ok</span>(<span class="ident">Max::Integer</span>(<span class="ident">max</span>))
                 }
                 <span class="ident">Ruby::Float</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>.<span class="ident">try_into</span>(<span class="self">self</span>)<span class="question-mark">?</span>;
+                    <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>.<span class="ident">try_convert_into</span>(<span class="self">self</span>)<span class="question-mark">?</span>;
                     <span class="prelude-val">Ok</span>(<span class="ident">Max::Float</span>(<span class="ident">max</span>))
                 }
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {

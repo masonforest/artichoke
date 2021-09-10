@@ -216,7 +216,7 @@
 <span class="doccomment">//! # fn example() -&gt; Result&lt;(), Error&gt; {</span>
 <span class="doccomment">//! let mut interp = artichoke_backend::interpreter()?;</span>
 <span class="doccomment">//! let result = interp.eval(b&quot;10 * 10&quot;)?;</span>
-<span class="doccomment">//! let result = result.try_into::&lt;i64&gt;(&amp;interp)?;</span>
+<span class="doccomment">//! let result = result.try_convert_into::&lt;i64&gt;(&amp;interp)?;</span>
 <span class="doccomment">//! assert_eq!(result, 100);</span>
 <span class="doccomment">//! # interp.close();</span>
 <span class="doccomment">//! # Ok(())</span>
@@ -237,7 +237,7 @@
 <span class="doccomment">//! let mut interp = artichoke_backend::interpreter()?;</span>
 <span class="doccomment">//! let result = interp.eval(b&quot;&#39;ruby funcall&#39;&quot;)?;</span>
 <span class="doccomment">//! let result = result.funcall(&amp;mut interp, &quot;length&quot;, &amp;[], None)?;</span>
-<span class="doccomment">//! let result = result.try_into::&lt;i64&gt;(&amp;mut interp)?;</span>
+<span class="doccomment">//! let result = result.try_convert_into::&lt;i64&gt;(&amp;mut interp)?;</span>
 <span class="doccomment">//! assert_eq!(result, 12);</span>
 <span class="doccomment">//! # interp.close();</span>
 <span class="doccomment">//! # Ok(())</span>

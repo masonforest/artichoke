@@ -58,7 +58,7 @@
     <span class="kw">fn</span> <span class="ident">regression_github_1099</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">interpreter</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;{ a: &#39;GH-1099&#39; }.inspect&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">inspect</span>.<span class="ident">try_into_mut</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">inspect</span>.<span class="ident">try_convert_into_mut</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_eq!</span>(<span class="ident">inspect</span>, <span class="string">r#&quot;{:a=&gt;&quot;GH-1099&quot;}&quot;#</span>);
     }
 }
