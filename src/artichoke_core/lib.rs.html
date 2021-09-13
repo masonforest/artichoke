@@ -142,6 +142,10 @@
 <span id="142">142</span>
 <span id="143">143</span>
 <span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
@@ -236,6 +240,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">std</span>;
 
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">class_registry</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">coerce_to_numeric</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">constant</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">convert</span>;
@@ -246,6 +251,7 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">intern</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">io</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">load</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">module_registry</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">parser</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">prng</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">regexp</span>;
@@ -267,6 +273,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// The prelude may grow over time as additional items see ubiquitous use.</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">prelude</span> {
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::class_registry::ClassRegistry</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::coerce_to_numeric::CoerceToNumeric</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::constant::DefineConstant</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::convert</span>::{<span class="ident">Convert</span>, <span class="ident">ConvertMut</span>, <span class="ident">TryConvert</span>, <span class="ident">TryConvertMut</span>};
@@ -277,6 +284,7 @@
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::intern::Intern</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::io::Io</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::load::LoadSources</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::module_registry::ModuleRegistry</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::parser</span>::{<span class="ident">IncrementLinenoError</span>, <span class="ident">Parser</span>};
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prng::Prng</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::regexp::Regexp</span>;

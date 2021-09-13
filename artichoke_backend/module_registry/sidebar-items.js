@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["ModuleRegistry",""]]});
+initSidebarItems({});

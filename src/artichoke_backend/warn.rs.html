@@ -38,16 +38,14 @@
 <span id="38">38</span>
 <span id="39">39</span>
 <span id="40">40</span>
-<span id="41">41</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::fmt::Write</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::core</span>::{<span class="ident">TryConvertMut</span>, <span class="ident">Value</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">Warn</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::core</span>::{<span class="ident">ModuleRegistry</span>, <span class="ident">TryConvertMut</span>, <span class="ident">Value</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">Warn</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::def::NotDefinedError</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::error::Error</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::core::exception::IOError</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::core::warning::Warning</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ffi::InterpreterExtractError</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::module_registry::ModuleRegistry</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::state::output::Output</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::string::WriteError</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Artichoke</span>;
