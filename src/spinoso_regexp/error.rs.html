@@ -351,13 +351,11 @@
 <span id="351">351</span>
 <span id="352">352</span>
 <span id="353">353</span>
-<span id="354">354</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::fmt</span>;
 <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
 <span class="kw">use</span> <span class="ident">std::error</span>;
 
 <span class="doccomment">/// Sum type of all errors possibly returned from `Regexp` APIs.</span>
-<span class="doccomment">///</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Error</span> {
     <span class="doccomment">/// Error that indicates an argument parsing or value logic error occurred.</span>

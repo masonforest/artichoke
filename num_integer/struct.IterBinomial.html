@@ -3,7 +3,7 @@
 <p>Note that this might overflow, depending on <code>T</code>. For the primitive
 integer types, the following n are the largest ones for which there will
 be no overflow:</p>
-<table><thead><tr><th>type</th><th>n</th></tr></thead><tbody>
+<div><table><thead><tr><th>type</th><th>n</th></tr></thead><tbody>
 <tr><td>u8</td><td>10</td></tr>
 <tr><td>i8</td><td>9</td></tr>
 <tr><td>u16</td><td>18</td></tr>
@@ -13,6 +13,7 @@ be no overflow:</p>
 <tr><td>u64</td><td>67</td></tr>
 <tr><td>i64</td><td>66</td></tr>
 </tbody></table>
+</div>
 <p>For larger n, <code>T</code> should be a bigint type.</p>
 </div></details></div></details><h2 id="trait-implementations" class="small-section-header">Trait Implementations<a href="#trait-implementations" class="anchor"></a></h2><div id="trait-implementations-list"><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl-Iterator" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/num_integer/lib.rs.html#1054-1076" title="goto source code">[src]</a></div><a href="#impl-Iterator" class="anchor"></a><h3 class="code-header in-band">impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a> for <a class="struct" href="struct.IterBinomial.html" title="struct num_integer::IterBinomial">IterBinomial</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="trait.Integer.html" title="trait num_integer::Integer">Integer</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>,&nbsp;</span></h3></div></summary><div class="impl-items"><details class="rustdoc-toggle" open><summary><div id="associatedtype.Item" class="type trait-impl has-srclink"><a href="#associatedtype.Item" class="anchor"></a><h4 class="code-header">type <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#associatedtype.Item" class="type">Item</a> = T</h4></div></summary><div class='docblock'><p>The type of the elements being iterated over.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.next" class="method trait-impl has-srclink"><div class="rightside"><a class="srclink" href="../src/num_integer/lib.rs.html#1060-1075" title="goto source code">[src]</a></div><a href="#method.next" class="anchor"></a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#tymethod.next" class="fnname">next</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;</h4></div></summary><div class='docblock'><p>Advances the iterator and returns the next value. <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#tymethod.next">Read more</a></p>

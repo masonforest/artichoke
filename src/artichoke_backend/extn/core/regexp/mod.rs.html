@@ -365,6 +365,7 @@
 <span id="365">365</span>
 <span id="366">366</span>
 <span id="367">367</span>
+<span id="368">368</span>
 </pre><pre class="rust"><code><span class="doccomment">//! [ruby/spec](https://github.com/ruby/spec) compliant implementation of</span>
 <span class="doccomment">//! [`Regexp`](https://ruby-doc.org/core-2.6.3/Regexp.html).</span>
 <span class="doccomment">//!</span>
@@ -386,8 +387,9 @@
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">spinoso_regexp</span>::{
-    <span class="ident">nth_match_group</span>, <span class="ident">Config</span>, <span class="ident">Encoding</span>, <span class="ident">Flags</span>, <span class="ident">InvalidEncodingError</span>, <span class="ident">Options</span>, <span class="ident">RegexpError</span>, <span class="ident">RegexpOption</span>, <span class="ident">Source</span>,
-    <span class="ident">HIGHEST_MATCH_GROUP</span>, <span class="ident">LAST_MATCH</span>, <span class="ident">LAST_MATCHED_STRING</span>, <span class="ident">STRING_LEFT_OF_MATCH</span>, <span class="ident">STRING_RIGHT_OF_MATCH</span>,
+    <span class="ident">nth_match_group_bytes</span> <span class="kw">as</span> <span class="ident">nth_match_group</span>, <span class="ident">Config</span>, <span class="ident">Encoding</span>, <span class="ident">Flags</span>, <span class="ident">InvalidEncodingError</span>, <span class="ident">Options</span>, <span class="ident">RegexpError</span>,
+    <span class="ident">RegexpOption</span>, <span class="ident">Source</span>, <span class="ident">HIGHEST_MATCH_GROUP</span>, <span class="ident">LAST_MATCH</span>, <span class="ident">LAST_MATCHED_STRING</span>, <span class="ident">STRING_LEFT_OF_MATCH</span>,
+    <span class="ident">STRING_RIGHT_OF_MATCH</span>,
 };
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">backend</span>;
