@@ -293,55 +293,6 @@
 <span id="293">293</span>
 <span id="294">294</span>
 <span id="295">295</span>
-<span id="296">296</span>
-<span id="297">297</span>
-<span id="298">298</span>
-<span id="299">299</span>
-<span id="300">300</span>
-<span id="301">301</span>
-<span id="302">302</span>
-<span id="303">303</span>
-<span id="304">304</span>
-<span id="305">305</span>
-<span id="306">306</span>
-<span id="307">307</span>
-<span id="308">308</span>
-<span id="309">309</span>
-<span id="310">310</span>
-<span id="311">311</span>
-<span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
-<span id="315">315</span>
-<span id="316">316</span>
-<span id="317">317</span>
-<span id="318">318</span>
-<span id="319">319</span>
-<span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">std::slice</span>;
 
@@ -635,56 +586,7 @@
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">ary</span>).<span class="ident">as_</span>.<span class="ident">heap</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>;
     <span class="kw">let</span> <span class="ident">capacity</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">ary</span>).<span class="ident">as_</span>.<span class="ident">heap</span>.<span class="ident">aux</span>.<span class="ident">capa</span> <span class="kw">as</span> <span class="ident">usize</span>;
 
-    <span class="comment">// Zero capacity `Vec`s are created with a dangling `ptr`.</span>
-    <span class="kw">if</span> <span class="ident">len</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">capacity</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-        <span class="ident">drop</span>(<span class="ident">Array::from_raw_parts</span>(<span class="ident">ptr</span>, <span class="ident">len</span>, <span class="ident">capacity</span>));
-        <span class="kw">return</span>;
-    }
-
-    <span class="comment">// Non-empty `Vec&lt;sys::mrb_value&gt;`s always allocate 0x10 aligned pointers.</span>
-    <span class="comment">//</span>
-    <span class="comment">// Sample alignments from experimentation:</span>
-    <span class="comment">//</span>
-    <span class="comment">// ```</span>
-    <span class="comment">// ptr = 0x7ffa23438b20, len = 2, capa = 2</span>
-    <span class="comment">// ptr = 0x7ffa23439c70, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23439c90, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23439c60, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23438c10, len = 2, capa = 2</span>
-    <span class="comment">// ptr = 0x7ffa23439a60, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa2343d000, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23441070, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa2343be30, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23440900, len = 3, capa = 3</span>
-    <span class="comment">// ptr = 0x7ffa23441400, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23441ac0, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23441ad0, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x8, len = 0, capa = 0</span>
-    <span class="comment">// ptr = 0x7ffa23445b00, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23445800, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa234525d0, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa234525c0, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa234535c0, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa234543a0, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa23454180, len = 1, capa = 1</span>
-    <span class="comment">// ptr = 0x7ffa2344b2d0, len = 1, capa = 1</span>
-    <span class="comment">// ```</span>
-    <span class="kw">if</span> <span class="ident">ptr</span>.<span class="ident">align_offset</span>(<span class="number">0x10</span>) <span class="op">=</span><span class="op">=</span> <span class="number">0x00</span> {
-        <span class="ident">drop</span>(<span class="ident">Array::from_raw_parts</span>(<span class="ident">ptr</span>, <span class="ident">len</span>, <span class="ident">capacity</span>));
-        <span class="kw">return</span>;
-    }
-
-    <span class="comment">// XXX: HACK.</span>
-    <span class="comment">//</span>
-    <span class="comment">// If the pointer we get is unaligned, there is no way we can safely free</span>
-    <span class="comment">// it. Prefer to leak the `Vec` if this happens so we don&#39;t segfault.</span>
-    <span class="macro">warn!</span>(
-        <span class="string">&quot;Attempted to free Array with unaligned pointer: ptr = {:p}, offset = {:x}, len = {}, capa = {}&quot;</span>,
-        <span class="ident">ptr</span>,
-        <span class="ident">ptr</span>.<span class="ident">align_offset</span>(<span class="number">0x10</span>),
-        <span class="ident">len</span>,
-        <span class="ident">capacity</span>
-    );
+    <span class="ident">drop</span>(<span class="ident">Array::from_raw_parts</span>(<span class="ident">ptr</span>, <span class="ident">len</span>, <span class="ident">capacity</span>));
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="artichoke_backend" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
