@@ -5,12 +5,12 @@ top-level of this crate. There is one important difference:</p>
 <li>Interned contents are <code>&amp;[u8]</code> instead of <code>&amp;str</code>. Additionally, <code>Vec&lt;u8&gt;</code>
 is used where <code>String</code> would have been used.</li>
 </ol>
-<h1 id="example-intern-bytestring" class="section-header"><a href="#example-intern-bytestring">Example: intern bytestring</a></h1>
+<h2 id="example-intern-bytestring" class="section-header"><a href="#example-intern-bytestring">Example: intern bytestring</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="kw">let</span> <span class="ident">sym</span> <span class="op">=</span> <span class="ident">table</span>.<span class="ident">intern</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;abc&quot;</span>[..])<span class="question-mark">?</span>;
 <span class="macro">assert_eq!</span>(<span class="ident">sym</span>, <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">b&quot;abc&quot;</span>.<span class="ident">to_vec</span>())<span class="question-mark">?</span>);
 <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;abc&quot;</span>[..]), <span class="ident">table</span>.<span class="ident">get</span>(<span class="ident">sym</span>));</code></pre></div>
-<h1 id="example-symbol-iterators" class="section-header"><a href="#example-symbol-iterators">Example: symbol iterators</a></h1>
+<h2 id="example-symbol-iterators" class="section-header"><a href="#example-symbol-iterators">Example: symbol iterators</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="kw">let</span> <span class="ident">sym</span> <span class="op">=</span> <span class="ident">table</span>.<span class="ident">intern</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;abc&quot;</span>[..])<span class="question-mark">?</span>;
 <span class="comment">// Retrieve set of `Symbol`s.</span>
@@ -24,14 +24,14 @@ is used where <code>String</code> would have been used.</li>
 <span class="comment">// Retrieve symbol to byte content mappings.</span>
 <span class="kw">let</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">table</span>.<span class="ident">iter</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">map</span>, <span class="ident">iter</span>.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>());</code></pre></div>
-<h1 id="performance" class="section-header"><a href="#performance">Performance</a></h1>
+<h2 id="performance" class="section-header"><a href="#performance">Performance</a></h2>
 <p>In general, one should expect this crate’s performance on <code>&amp;[u8]</code> to be
 roughly similar to performance on <code>&amp;str</code>.</p>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="struct" href="struct.AllSymbols.html" title="intaglio::bytes::AllSymbols struct">AllSymbols</a></div><div class="item-right docblock-short"><p>An iterator over all <a href="../struct.Symbol.html" title="Symbol"><code>Symbol</code></a>s in a <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.Bytestrings.html" title="intaglio::bytes::Bytestrings struct">Bytestrings</a></div><div class="item-right docblock-short"><p>An iterator over all interned bytestrings in a <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.Iter.html" title="intaglio::bytes::Iter struct">Iter</a></div><div class="item-right docblock-short"><p>An iterator over all symbols and interned bytestrings in a <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.SymbolTable.html" title="intaglio::bytes::SymbolTable struct">SymbolTable</a></div><div class="item-right docblock-short"><p>Byte string interner.</p>
-</div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="intaglio" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.AllSymbols.html" title="intaglio::bytes::AllSymbols struct">AllSymbols</a></div><div class="item-right docblock-short"><p>An iterator over all <a href="../struct.Symbol.html" title="Symbol"><code>Symbol</code></a>s in a <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Bytestrings.html" title="intaglio::bytes::Bytestrings struct">Bytestrings</a></div><div class="item-right docblock-short"><p>An iterator over all interned bytestrings in a <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Iter.html" title="intaglio::bytes::Iter struct">Iter</a></div><div class="item-right docblock-short"><p>An iterator over all symbols and interned bytestrings in a <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SymbolTable.html" title="intaglio::bytes::SymbolTable struct">SymbolTable</a></div><div class="item-right docblock-short"><p>Byte string interner.</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="intaglio" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script>
 </body></html>

@@ -17,10 +17,10 @@ is ASCII case-insensitive.</p>
 <span class="macro">assert_eq!</span>(<span class="ident">x_sub</span>, <span class="ident">y_sub</span>);
 <span class="macro">assert_eq!</span>(<span class="ident">x_sub</span>.<span class="ident">as_str</span>(), <span class="string">&quot;hell&quot;</span>);
 <span class="macro">assert_eq!</span>(<span class="ident">y_sub</span>.<span class="ident">as_str</span>(), <span class="string">&quot;HelL&quot;</span>);</code></pre></div>
-<h2 id="unicode" class="section-header"><a href="#unicode">Unicode</a></h2>
+<h3 id="unicode" class="section-header"><a href="#unicode">Unicode</a></h3>
 <p>This crate <em>does not</em> perform Unicode case-folding. For Unicode
 case-folding, see <a href="https://crates.io/crates/unicase"><code>unicase</code></a>.</p>
-<h2 id="features-and-no_std" class="section-header"><a href="#features-and-no_std">Features and <code>no_std</code></a></h2>
+<h3 id="features-and-no_std" class="section-header"><a href="#features-and-no_std">Features and <code>no_std</code></a></h3>
 <p>Crate features:</p>
 <ul>
 <li><code>alloc</code> (<em>default</em>) - enables the [<code>Uncased</code>] type</li>
@@ -38,12 +38,12 @@ with <code>serde</code> can be enabled via the <code>with-serde</code> feature. 
 (de)serserializing both <code>UncasedStr</code> and <code>Uncased</code> can be enabled via the
 <code>with-serde-alloc</code> feature, which implicitly enables the <code>alloc</code> feature.</p>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="struct" href="struct.UncasedStr.html" title="uncased::UncasedStr struct">UncasedStr</a></div><div class="item-right docblock-short"><p>A cost-free reference to an uncased (case-insensitive, case-preserving)
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.UncasedStr.html" title="uncased::UncasedStr struct">UncasedStr</a></div><div class="item-right docblock-short"><p>A cost-free reference to an uncased (case-insensitive, case-preserving)
 ASCII string.</p>
-</div></div><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="trait" href="trait.AsUncased.html" title="uncased::AsUncased trait">AsUncased</a></div><div class="item-right docblock-short"><p>Helper trait to convert string-like references to <code>&amp;UncasedStr</code>.</p>
-</div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="fn" href="fn.eq.html" title="uncased::eq fn">eq</a></div><div class="item-right docblock-short"><p>Returns true if <code>s1</code> and <code>s2</code> are equal without considering case.</p>
-</div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="uncased" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+</div></div></div><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.AsUncased.html" title="uncased::AsUncased trait">AsUncased</a></div><div class="item-right docblock-short"><p>Helper trait to convert string-like references to <code>&amp;UncasedStr</code>.</p>
+</div></div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.eq.html" title="uncased::eq fn">eq</a></div><div class="item-right docblock-short"><p>Returns true if <code>s1</code> and <code>s2</code> are equal without considering case.</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="uncased" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
     <script src="../main.js"></script>
 </body></html>

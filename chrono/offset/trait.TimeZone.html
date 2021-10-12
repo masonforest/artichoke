@@ -38,7 +38,7 @@ This assumes the proleptic Gregorian calendar, with the year 0 being 1 BCE.</p>
 <p>The time zone normally does not affect the date (unless it is between UTC-24 and UTC+24),
 but it will propagate to the <code>DateTime</code> values constructed via this date.</p>
 <p>Panics on the out-of-range date, invalid month and/or day.</p>
-<h1 id="example" class="section-header"><a href="#example">Example</a></h1>
+<h5 id="example" class="section-header"><a href="#example">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Utc</span>, <span class="ident">TimeZone</span>};
 
 <span class="macro">assert_eq!</span>(<span class="ident">Utc</span>.<span class="ident">ymd</span>(<span class="number">2015</span>, <span class="number">5</span>, <span class="number">15</span>).<span class="ident">to_string</span>(), <span class="string">&quot;2015-05-15UTC&quot;</span>);</code></pre></div>
@@ -47,7 +47,7 @@ This assumes the proleptic Gregorian calendar, with the year 0 being 1 BCE.</p>
 <p>The time zone normally does not affect the date (unless it is between UTC-24 and UTC+24),
 but it will propagate to the <code>DateTime</code> values constructed via this date.</p>
 <p>Returns <code>None</code> on the out-of-range date, invalid month and/or day.</p>
-<h1 id="example-1" class="section-header"><a href="#example-1">Example</a></h1>
+<h5 id="example-1" class="section-header"><a href="#example-1">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Utc</span>, <span class="ident">LocalResult</span>, <span class="ident">TimeZone</span>};
 
 <span class="macro">assert_eq!</span>(<span class="ident">Utc</span>.<span class="ident">ymd_opt</span>(<span class="number">2015</span>, <span class="number">5</span>, <span class="number">15</span>).<span class="ident">unwrap</span>().<span class="ident">to_string</span>(), <span class="string">&quot;2015-05-15UTC&quot;</span>);
@@ -57,7 +57,7 @@ This assumes the proleptic Gregorian calendar, with the year 0 being 1 BCE.</p>
 <p>The time zone normally does not affect the date (unless it is between UTC-24 and UTC+24),
 but it will propagate to the <code>DateTime</code> values constructed via this date.</p>
 <p>Panics on the out-of-range date and/or invalid DOY.</p>
-<h1 id="example-2" class="section-header"><a href="#example-2">Example</a></h1>
+<h5 id="example-2" class="section-header"><a href="#example-2">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Utc</span>, <span class="ident">TimeZone</span>};
 
 <span class="macro">assert_eq!</span>(<span class="ident">Utc</span>.<span class="ident">yo</span>(<span class="number">2015</span>, <span class="number">135</span>).<span class="ident">to_string</span>(), <span class="string">&quot;2015-05-15UTC&quot;</span>);</code></pre></div>
@@ -73,7 +73,7 @@ The resulting <code>Date</code> may have a different year from the input year.</
 <p>The time zone normally does not affect the date (unless it is between UTC-24 and UTC+24),
 but it will propagate to the <code>DateTime</code> values constructed via this date.</p>
 <p>Panics on the out-of-range date and/or invalid week number.</p>
-<h1 id="example-3" class="section-header"><a href="#example-3">Example</a></h1>
+<h5 id="example-3" class="section-header"><a href="#example-3">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Utc</span>, <span class="ident">Weekday</span>, <span class="ident">TimeZone</span>};
 
 <span class="macro">assert_eq!</span>(<span class="ident">Utc</span>.<span class="ident">isoywd</span>(<span class="number">2015</span>, <span class="number">20</span>, <span class="ident">Weekday::Fri</span>).<span class="ident">to_string</span>(), <span class="string">&quot;2015-05-15UTC&quot;</span>);</code></pre></div>
@@ -89,7 +89,7 @@ since January 1, 1970 0:00:00 UTC (aka “UNIX timestamp”)
 and the number of nanoseconds since the last whole non-leap second.</p>
 <p>Panics on the out-of-range number of seconds and/or invalid nanosecond,
 for a non-panicking version see <a href="#method.timestamp_opt"><code>timestamp_opt</code></a>.</p>
-<h1 id="example-4" class="section-header"><a href="#example-4">Example</a></h1>
+<h5 id="example-4" class="section-header"><a href="#example-4">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Utc</span>, <span class="ident">TimeZone</span>};
 
 <span class="macro">assert_eq!</span>(<span class="ident">Utc</span>.<span class="ident">timestamp</span>(<span class="number">1431648000</span>, <span class="number">0</span>).<span class="ident">to_string</span>(), <span class="string">&quot;2015-05-15 00:00:00 UTC&quot;</span>);</code></pre></div>
@@ -102,7 +102,7 @@ invalid nanosecond, otherwise always returns <code>LocalResult::Single</code>.</
 since January 1, 1970 0:00:00 UTC (aka “UNIX timestamp”).</p>
 <p>Panics on out-of-range number of milliseconds for a non-panicking
 version see <a href="#method.timestamp_millis_opt"><code>timestamp_millis_opt</code></a>.</p>
-<h1 id="example-5" class="section-header"><a href="#example-5">Example</a></h1>
+<h5 id="example-5" class="section-header"><a href="#example-5">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Utc</span>, <span class="ident">TimeZone</span>};
 
 <span class="macro">assert_eq!</span>(<span class="ident">Utc</span>.<span class="ident">timestamp_millis</span>(<span class="number">1431648000</span>).<span class="ident">timestamp</span>(), <span class="number">1431648</span>);</code></pre></div>
@@ -111,17 +111,17 @@ since January 1, 1970 0:00:00 UTC (aka “UNIX timestamp”).</p>
 <p>Returns <code>LocalResult::None</code> on out-of-range number of milliseconds
 and/or invalid nanosecond, otherwise always returns
 <code>LocalResult::Single</code>.</p>
-<h1 id="example-6" class="section-header"><a href="#example-6">Example</a></h1>
+<h5 id="example-6" class="section-header"><a href="#example-6">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Utc</span>, <span class="ident">TimeZone</span>, <span class="ident">LocalResult</span>};
 <span class="kw">match</span> <span class="ident">Utc</span>.<span class="ident">timestamp_millis_opt</span>(<span class="number">1431648000</span>) {
-    <span class="ident">LocalResult::Single</span>(<span class="ident">dt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">timestamp</span>(), <span class="number">1431648</span>),
-    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Incorrect timestamp_millis&quot;</span>),
+    <span class="ident">LocalResult::Single</span>(<span class="ident">dt</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">timestamp</span>(), <span class="number">1431648</span>),
+    <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Incorrect timestamp_millis&quot;</span>),
 };</code></pre></div>
 </div></details><details class="rustdoc-toggle" open><summary><div id="method.timestamp_nanos" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/chrono/offset/mod.rs.html#397-404" title="goto source code">[src]</a></div><h4 class="code-header">fn <a href="#method.timestamp_nanos" class="fnname">timestamp_nanos</a>(&amp;self, nanos: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>) -&gt; <a class="struct" href="../struct.DateTime.html" title="struct chrono::DateTime">DateTime</a>&lt;Self&gt;</h4></div></summary><div class="docblock"><p>Makes a new <code>DateTime</code> from the number of non-leap nanoseconds
 since January 1, 1970 0:00:00 UTC (aka “UNIX timestamp”).</p>
 <p>Unlike <a href="#method.timestamp_millis"><code>timestamp_millis</code></a>, this never
 panics.</p>
-<h1 id="example-7" class="section-header"><a href="#example-7">Example</a></h1>
+<h5 id="example-7" class="section-header"><a href="#example-7">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">Utc</span>, <span class="ident">TimeZone</span>};
 
 <span class="macro">assert_eq!</span>(<span class="ident">Utc</span>.<span class="ident">timestamp_nanos</span>(<span class="number">1431648000000000</span>).<span class="ident">timestamp</span>(), <span class="number">1431648</span>);</code></pre></div>

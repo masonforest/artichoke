@@ -147,7 +147,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This method only returns an error when the given writer returns an</span>
 <span class="doccomment">/// error.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">format_debug_escape_into</span><span class="op">&lt;</span><span class="ident">W</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">dest</span>: <span class="ident">W</span>, <span class="ident">message</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">format_debug_escape_into</span><span class="op">&lt;</span><span class="ident">W</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">dest</span>: <span class="ident">W</span>, <span class="ident">message</span>: <span class="ident">T</span>) -&gt; <span class="ident">fmt::Result</span>
 <span class="kw">where</span>
     <span class="ident">W</span>: <span class="ident">Write</span>,
     <span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
@@ -157,18 +157,18 @@
     <span class="kw">while</span> <span class="op">!</span><span class="ident">message</span>.<span class="ident">is_empty</span>() {
         <span class="kw">let</span> (<span class="ident">ch</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">bstr::decode_utf8</span>(<span class="ident">message</span>);
         <span class="kw">match</span> <span class="ident">ch</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="kw">if</span> <span class="ident">is_ascii_char_with_escape</span>(<span class="ident">ch</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="kw">if</span> <span class="ident">is_ascii_char_with_escape</span>(<span class="ident">ch</span>) =&gt; {
                 <span class="kw">let</span> [<span class="ident">ascii_byte</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>] <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">ch</span>).<span class="ident">to_le_bytes</span>();
                 <span class="kw">let</span> <span class="ident">escaped</span> <span class="op">=</span> <span class="ident">Literal::debug_escape</span>(<span class="ident">ascii_byte</span>);
                 <span class="ident">dest</span>.<span class="ident">write_str</span>(<span class="ident">escaped</span>)<span class="question-mark">?</span>;
             }
-            <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">ch</span>) =&gt; {
                 <span class="kw">let</span> <span class="ident">enc</span> <span class="op">=</span> <span class="ident">ch</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
                 <span class="ident">dest</span>.<span class="ident">write_str</span>(<span class="ident">enc</span>)<span class="question-mark">?</span>;
             }
             <span class="comment">// Otherwise, we&#39;ve gotten invalid UTF-8, which means this is not an</span>
             <span class="comment">// printable char.</span>
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">None</span> =&gt; {
                 <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">byte</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">message</span>[..<span class="ident">size</span>] {
                     <span class="kw">let</span> <span class="ident">escaped</span> <span class="op">=</span> <span class="ident">Literal::debug_escape</span>(<span class="ident">byte</span>);
                     <span class="ident">dest</span>.<span class="ident">write_str</span>(<span class="ident">escaped</span>)<span class="question-mark">?</span>;

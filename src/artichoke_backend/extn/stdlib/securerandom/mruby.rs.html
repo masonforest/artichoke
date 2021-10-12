@@ -128,7 +128,7 @@
 
 <span class="kw">const</span> <span class="ident">SECURE_RANDOM_CSTR</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span> <span class="op">=</span> <span class="macro">cstr::cstr!</span>(<span class="string">&quot;SecureRandom&quot;</span>);
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">InitializeResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="ident">InitializeResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="ident">interp</span>.<span class="ident">def_file_for_type</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">SecureRandomFile</span><span class="op">&gt;</span>(<span class="string">&quot;securerandom.rb&quot;</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
 }
@@ -143,7 +143,7 @@
     <span class="kw">type</span> <span class="ident">Artichoke</span> <span class="op">=</span> <span class="ident">Artichoke</span>;
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">require</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Artichoke</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">require</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Artichoke</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">interp</span>.<span class="ident">is_module_defined</span>::<span class="op">&lt;</span><span class="ident">securerandom::SecureRandom</span><span class="op">&gt;</span>() {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
         }
@@ -164,80 +164,80 @@
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_alphanumeric</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_alphanumeric</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">len</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">len</span><span class="op">|</span> <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">len</span>));
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::alphanumeric</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">len</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_base64</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_base64</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">len</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">len</span><span class="op">|</span> <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">len</span>));
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::base64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">len</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_urlsafe_base64</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_urlsafe_base64</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> (<span class="ident">len</span>, <span class="ident">padding</span>) <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">2</span>);
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">len</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">len</span><span class="op">|</span> <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">len</span>));
     <span class="kw">let</span> <span class="ident">padding</span> <span class="op">=</span> <span class="ident">padding</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">padding</span><span class="op">|</span> <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">padding</span>));
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::urlsafe_base64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">len</span>, <span class="ident">padding</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_hex</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_hex</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">len</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">len</span><span class="op">|</span> <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">len</span>));
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::hex</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">len</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_random_bytes</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_random_bytes</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">len</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">len</span><span class="op">|</span> <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">len</span>));
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::random_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">len</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_random_number</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_random_number</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">max</span><span class="op">|</span> <span class="ident">guard</span>.<span class="ident">convert</span>(<span class="ident">max</span>));
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::random_number</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">max</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_uuid</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">securerandom_uuid</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::uuid</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 </code></pre></div>

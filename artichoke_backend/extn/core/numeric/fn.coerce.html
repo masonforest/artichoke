@@ -4,10 +4,10 @@ returns an array with both <code>y</code> and <code>x</code> represented as <cod
 operations: it is intended to find a compatible common type between the two
 operands of the operator.</p>
 <p>See <a href="https://ruby-doc.org/core-2.6.3/Numeric.html#method-i-coerce"><code>Numeric#coerce</code></a>.</p>
-<h1 id="coercion-enum" class="section-header"><a href="#coercion-enum">Coercion enum</a></h1>
+<h2 id="coercion-enum" class="section-header"><a href="#coercion-enum">Coercion enum</a></h2>
 <p>Artichoke represents the <code>[y, x]</code> tuple Array as the <a href="enum.Coercion.html" title="Coercion"><code>Coercion</code></a> enum, which
 orders its values <code>Coercion::Integer(x, y)</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert</span>(<span class="number">1_i64</span>);
 <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert_mut</span>(<span class="number">2.5_f64</span>);
 <span class="macro">assert_eq!</span>(<span class="ident">Coercion::Float</span>(<span class="number">1.0</span>, <span class="number">2.5</span>), <span class="ident">numeric::coerce</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="ident">x</span>, <span class="ident">y</span>)<span class="question-mark">?</span>);

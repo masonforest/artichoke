@@ -6,7 +6,7 @@ program name).</p>
 <p>This function may return either a <code>&amp;'static [u8]</code> or an owned <a href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html"><code>Vec&lt;u8&gt;</code></a>
 for a given capture group name.  This function differs from
 <a href="../../../../spinoso_regexp/fn.nth_match_group.html" title="nth_match_group"><code>nth_match_group</code></a> by returning <code>Cow&lt;'static, [u8]&gt;</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">core::num::NonZeroUsize</span>;
 <span class="kw">use</span> <span class="ident">spinoso_regexp::nth_match_group_bytes</span>;
 

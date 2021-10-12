@@ -121,7 +121,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; artichoke - Copyright (c) 2019-2020 Ryan Lopopolo \&lt;rjl@hyperbo.la\&gt;</span>
-    <span class="kw">fn</span> <span class="ident">ruby_copyright</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_copyright</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// A description of the current build.</span>
     <span class="doccomment">///</span>
@@ -130,7 +130,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; artichoke 0.1.0-pre.0 (2021-01-12 revision 4009) [x86_64-apple-darwin]</span>
-    <span class="kw">fn</span> <span class="ident">ruby_description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// The engine, or VM, used in the current build.</span>
     <span class="doccomment">///</span>
@@ -139,7 +139,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; artichoke-mruby</span>
-    <span class="kw">fn</span> <span class="ident">ruby_engine</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_engine</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// The version of the engine, or VM, used in the current build.</span>
     <span class="doccomment">///</span>
@@ -148,7 +148,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; 0.1.0-pre.0</span>
-    <span class="kw">fn</span> <span class="ident">ruby_engine_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_engine_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// The patch level the current build.</span>
     <span class="doccomment">///</span>
@@ -157,7 +157,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; 0</span>
-    <span class="kw">fn</span> <span class="ident">ruby_patchlevel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_patchlevel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// The target triple of the platform this build targets.</span>
     <span class="doccomment">///</span>
@@ -170,7 +170,7 @@
     <span class="doccomment">/// &gt; x86_64-apple-darwin</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [triple]: https://forge.rust-lang.org/release/platform-support.html</span>
-    <span class="kw">fn</span> <span class="ident">ruby_platform</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_platform</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// The build date of this release.</span>
     <span class="doccomment">///</span>
@@ -179,7 +179,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; 2021-01-12</span>
-    <span class="kw">fn</span> <span class="ident">ruby_release_date</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_release_date</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// The revision count of the Artichoke git repo used for this build.</span>
     <span class="doccomment">///</span>
@@ -188,7 +188,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; 4009</span>
-    <span class="kw">fn</span> <span class="ident">ruby_revision</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_revision</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// The target MRI Ruby version for this build.</span>
     <span class="doccomment">///</span>
@@ -197,7 +197,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; 2.6.3</span>
-    <span class="kw">fn</span> <span class="ident">ruby_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">ruby_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
 
     <span class="doccomment">/// A description of the compiler used to build Artichoke.</span>
     <span class="doccomment">///</span>
@@ -206,7 +206,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// &gt; rustc 1.49.0 (e1884a8e3 2020-12-29) on x86_64-apple-darwin</span>
-    <span class="kw">fn</span> <span class="ident">artichoke_compiler_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">artichoke_compiler_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>;
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="artichoke_core" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>

@@ -3,7 +3,7 @@
 writing invalid sequences as hex escape codes (e.g. <code>\x00</code>) or C escape
 sequences (e.g. <code>\a</code>).</p>
 <p>This method also escapes UTF-8 valid characters like <code>\n</code> and <code>\t</code>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <p>Basic usage:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code>
@@ -11,7 +11,7 @@ sequences (e.g. <code>\a</code>).</p>
 <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="string">b&quot;utf8-invalid-name-\xFF&quot;</span>;
 <span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">filename</span>);
 <span class="macro">assert_eq!</span>(<span class="string">r&quot;cannot load such file -- utf8-invalid-name-\xFF&quot;</span>, <span class="ident">message</span>);</code></pre></div>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
 <p>This method only returns an error when the given writer returns an
 error.</p>
 </div></details></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="scolapasta_string_escape" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>

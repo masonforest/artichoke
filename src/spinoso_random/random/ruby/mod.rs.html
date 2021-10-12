@@ -374,7 +374,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Mt</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;Mt {}&quot;</span>)
     }
 }
@@ -393,7 +393,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_seed</span>(<span class="ident">seed</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_seed</span>(<span class="ident">seed</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mt</span> <span class="op">=</span> <span class="self">Self</span> {
             <span class="ident">idx</span>: <span class="number">0</span>,
             <span class="ident">state</span>: [<span class="ident">Wrapping</span>(<span class="number">0</span>); <span class="ident">N</span>],
@@ -413,7 +413,7 @@
     <span class="doccomment">/// MRI initializes the global SipHash seed with 4 `u32`s of entropy.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_with_key</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">key</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_with_key</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">key</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">u32</span><span class="op">&gt;</span>,
         <span class="ident">I::IntoIter</span>: <span class="ident">Clone</span>,
@@ -442,7 +442,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_int32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_int32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="comment">// Failing this check indicates that, somehow, the structure</span>
         <span class="comment">// was not initialized.</span>
         <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">idx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
@@ -467,7 +467,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_real</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_real</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">f64</span> {
         <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_int32</span>();
         <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_int32</span>();
         <span class="ident">int_pair_to_real_exclusive</span>(<span class="ident">a</span>, <span class="ident">b</span>)
@@ -587,19 +587,19 @@
 }
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">mixbits</span>(<span class="ident">u</span>: <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>, <span class="ident">v</span>: <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">mixbits</span>(<span class="ident">u</span>: <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>, <span class="ident">v</span>: <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) -&gt; <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
     (<span class="ident">u</span> <span class="op">&amp;</span> <span class="ident">UPPER_MASK</span>) <span class="op">|</span> (<span class="ident">v</span> <span class="op">&amp;</span> <span class="ident">LOWER_MASK</span>)
 }
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">twist</span>(<span class="ident">u</span>: <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>, <span class="ident">v</span>: <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">twist</span>(<span class="ident">u</span>: <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>, <span class="ident">v</span>: <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) -&gt; <span class="ident">Wrapping</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">left</span> <span class="op">=</span> <span class="ident">mixbits</span>(<span class="ident">u</span>, <span class="ident">v</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
-    <span class="kw">let</span> <span class="ident">right</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">v</span> <span class="op">&amp;</span> <span class="ident">ONE</span> <span class="op">=</span><span class="op">=</span> <span class="ident">ONE</span> { <span class="ident">MATRIX_A</span> } <span class="kw">else</span> { <span class="ident">Wrapping</span>(<span class="number">0</span>) };
+    <span class="kw">let</span> <span class="ident">right</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">v</span> <span class="op">&amp;</span> <span class="ident">ONE</span> <span class="op">==</span> <span class="ident">ONE</span> { <span class="ident">MATRIX_A</span> } <span class="kw">else</span> { <span class="ident">Wrapping</span>(<span class="number">0</span>) };
     <span class="ident">left</span> <span class="op">^</span> <span class="ident">right</span>
 }
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">int_pair_to_real_exclusive</span>(<span class="kw-2">mut</span> <span class="ident">a</span>: <span class="ident">u32</span>, <span class="kw-2">mut</span> <span class="ident">b</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+<span class="kw">fn</span> <span class="ident">int_pair_to_real_exclusive</span>(<span class="kw-2">mut</span> <span class="ident">a</span>: <span class="ident">u32</span>, <span class="kw-2">mut</span> <span class="ident">b</span>: <span class="ident">u32</span>) -&gt; <span class="ident">f64</span> {
     <span class="ident">a</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">5</span>;
     <span class="ident">b</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">6</span>;
     <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">f64::from</span>(<span class="ident">a</span>);
@@ -608,7 +608,7 @@
 }
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">const</span> <span class="kw">fn</span> <span class="ident">temper</span>(<span class="kw-2">mut</span> <span class="ident">x</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+<span class="kw">const</span> <span class="kw">fn</span> <span class="ident">temper</span>(<span class="kw-2">mut</span> <span class="ident">x</span>: <span class="ident">u32</span>) -&gt; <span class="ident">u32</span> {
     <span class="ident">x</span> <span class="op">^</span><span class="op">=</span> <span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">11</span>;
     <span class="ident">x</span> <span class="op">^</span><span class="op">=</span> (<span class="ident">x</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">7</span>) <span class="op">&amp;</span> <span class="number">0x9d2c_5680</span>;
     <span class="ident">x</span> <span class="op">^</span><span class="op">=</span> (<span class="ident">x</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">15</span>) <span class="op">&amp;</span> <span class="number">0xefc6_0000</span>;

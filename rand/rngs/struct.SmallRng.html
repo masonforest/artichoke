@@ -22,7 +22,7 @@ platform, without consideration for cryptography or security. The size of
 its state is much smaller than <a href="struct.StdRng.html"><code>StdRng</code></a>. The current algorithm is
 <code>Xoshiro256PlusPlus</code> on 64-bit platforms and <code>Xoshiro128PlusPlus</code> on 32-bit
 platforms. Both are also implemented by the <a href="https://crates.io/crates/rand_xoshiro">rand_xoshiro</a> crate.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <p>Initializing <code>SmallRng</code> with a random seed can be done using <a href="../trait.SeedableRng.html#method.from_entropy" title="SeedableRng::from_entropy"><code>SeedableRng::from_entropy</code></a>:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">rand</span>::{<span class="ident">Rng</span>, <span class="ident">SeedableRng</span>};

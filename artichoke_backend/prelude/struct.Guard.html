@@ -23,7 +23,7 @@ restores the arena to an index before this call to protect.</p>
 <p>This method prepares this interpreter to cross an FFI boundary. When the
 Artichoke implementation calls mruby FFI functions, the <code>State</code> must be
 moved into the <a href="../sys/struct.mrb_state.html" title="sys::mrb_state"><code>sys::mrb_state</code></a> userdata pointer.</p>
-<h1 id="safety" class="section-header"><a href="#safety">Safety</a></h1>
+<h5 id="safety" class="section-header"><a href="#safety">Safety</a></h5>
 <p>This method moves the <code>State</code> out of this instance into the <code>mrb</code>
 instance. During this function’s execution, this instance may be
 partially initialized.</p>

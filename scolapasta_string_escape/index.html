@@ -4,7 +4,7 @@
 escaped to have a valid and printable UTF-8 representation.</p>
 <p>This crate exposes functions and iterators for encoding arbitrary byte
 slices as valid, printable UTF-8.</p>
-<h1 id="ruby-debug-escapes" class="section-header"><a href="#ruby-debug-escapes">Ruby debug escapes</a></h1>
+<h2 id="ruby-debug-escapes" class="section-header"><a href="#ruby-debug-escapes">Ruby debug escapes</a></h2>
 <p>Ruby produces debug escapes that look like:</p>
 <div class="example-wrap"><pre class="language-console"><code>[2.6.3] &gt; &quot;Artichoke Ruby is made with Rust.
 
@@ -19,7 +19,7 @@ For example <code>0x0C</code>:</p>
 <span class="macro">assert_eq!</span>(<span class="string">&#39;\x0C&#39;</span>.<span class="ident">escape_debug</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>(), <span class="string">r&quot;\u{c}&quot;</span>);
 <span class="comment">// Ruby</span>
 <span class="macro">assert_eq!</span>(<span class="ident">Literal::from</span>(<span class="number">0x0C</span>).<span class="ident">as_str</span>(), <span class="string">r&quot;\f&quot;</span>);</code></pre></div>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">const</span> <span class="ident">EXAMPLE</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;Artichoke Ruby is made with Rust.
 
 Invalid UTF-8: \xFF.
@@ -32,17 +32,17 @@ Slash \\ and quote \&quot; are escaped.&quot;</span>;
     <span class="ident">escaped</span>,
     <span class="string">r#&quot;Artichoke Ruby is made with Rust.\n\nInvalid UTF-8: \xFF.\n\nSlash \\ and quote \&quot; are escaped.&quot;#</span>,
 );</code></pre></div>
-<h1 id="no_std" class="section-header"><a href="#no_std"><code>no_std</code></a></h1>
+<h2 id="no_std" class="section-header"><a href="#no_std"><code>no_std</code></a></h2>
 <p>This crate is <code>no_std</code> compatible. This crate does not depend on <a href="https://doc.rust-lang.org/alloc/"><code>alloc</code></a>.</p>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="struct" href="struct.ByteSequenceTooLongError.html" title="scolapasta_string_escape::ByteSequenceTooLongError struct">ByteSequenceTooLongError</a></div><div class="item-right docblock-short"><p>Error that indicates a <a href="struct.InvalidUtf8ByteSequence.html" title="InvalidUtf8ByteSequence"><code>InvalidUtf8ByteSequence</code></a> could not be constructed
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ByteSequenceTooLongError.html" title="scolapasta_string_escape::ByteSequenceTooLongError struct">ByteSequenceTooLongError</a></div><div class="item-right docblock-short"><p>Error that indicates a <a href="struct.InvalidUtf8ByteSequence.html" title="InvalidUtf8ByteSequence"><code>InvalidUtf8ByteSequence</code></a> could not be constructed
 because the byte sequence contained more than three bytes.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.InvalidUtf8ByteSequence.html" title="scolapasta_string_escape::InvalidUtf8ByteSequence struct">InvalidUtf8ByteSequence</a></div><div class="item-right docblock-short"><p>Iterator of Ruby debug escape sequences for a contiguous invalid UTF-8 byte
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.InvalidUtf8ByteSequence.html" title="scolapasta_string_escape::InvalidUtf8ByteSequence struct">InvalidUtf8ByteSequence</a></div><div class="item-right docblock-short"><p>Iterator of Ruby debug escape sequences for a contiguous invalid UTF-8 byte
 sequence.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.Literal.html" title="scolapasta_string_escape::Literal struct">Literal</a></div><div class="item-right docblock-short"><p>Iterator of Ruby debug escape sequences for a byte.</p>
-</div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="fn" href="fn.format_debug_escape_into.html" title="scolapasta_string_escape::format_debug_escape_into fn">format_debug_escape_into</a></div><div class="item-right docblock-short"><p>Write a UTF-8 debug representation of a byte slice into the given writer.</p>
-</div><div class="item-left module-item"><a class="fn" href="fn.is_ascii_char_with_escape.html" title="scolapasta_string_escape::is_ascii_char_with_escape fn">is_ascii_char_with_escape</a></div><div class="item-right docblock-short"><p>Returns whether a <a href="https://doc.rust-lang.org/nightly/std/primitive.char.html" title="char"><code>char</code></a> is ASCII and has a literal escape code.</p>
-</div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="scolapasta_string_escape" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Literal.html" title="scolapasta_string_escape::Literal struct">Literal</a></div><div class="item-right docblock-short"><p>Iterator of Ruby debug escape sequences for a byte.</p>
+</div></div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.format_debug_escape_into.html" title="scolapasta_string_escape::format_debug_escape_into fn">format_debug_escape_into</a></div><div class="item-right docblock-short"><p>Write a UTF-8 debug representation of a byte slice into the given writer.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.is_ascii_char_with_escape.html" title="scolapasta_string_escape::is_ascii_char_with_escape fn">is_ascii_char_with_escape</a></div><div class="item-right docblock-short"><p>Returns whether a <a href="https://doc.rust-lang.org/nightly/std/primitive.char.html" title="char"><code>char</code></a> is ASCII and has a literal escape code.</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="scolapasta_string_escape" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
     <script src="../main.js"></script>
 </body></html>

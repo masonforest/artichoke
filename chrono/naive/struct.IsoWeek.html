@@ -4,7 +4,7 @@ constitues the ISO 8601 <a href="./struct.NaiveDate.html#week-date">week date</a
 One can retrieve this type from the existing <a href="../trait.Datelike.html"><code>Datelike</code></a> types
 via the <a href="../trait.Datelike.html#tymethod.iso_week"><code>Datelike::iso_week</code></a> method.</p>
 </div></details><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../../src/chrono/naive/isoweek.rs.html#48-107" title="goto source code">[src]</a></div><a href="#impl" class="anchor"></a><h3 class="code-header in-band">impl <a class="struct" href="struct.IsoWeek.html" title="struct chrono::naive::IsoWeek">IsoWeek</a></h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.year" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/chrono/naive/isoweek.rs.html#70-72" title="goto source code">[src]</a></div><a href="#method.year" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.year" class="fnname">year</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a></h4></div></summary><div class="docblock"><p>Returns the year number for this ISO week.</p>
-<h1 id="example" class="section-header"><a href="#example">Example</a></h1>
+<h5 id="example" class="section-header"><a href="#example">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">NaiveDate</span>, <span class="ident">Datelike</span>, <span class="ident">Weekday</span>};
 
 <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">NaiveDate::from_isoywd</span>(<span class="number">2015</span>, <span class="number">1</span>, <span class="ident">Weekday::Mon</span>);
@@ -16,14 +16,14 @@ Continuing the example…</p>
 <span class="macro">assert_eq!</span>(<span class="ident">d</span>, <span class="ident">NaiveDate::from_ymd</span>(<span class="number">2014</span>, <span class="number">12</span>, <span class="number">29</span>));</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.week" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/chrono/naive/isoweek.rs.html#87-89" title="goto source code">[src]</a></div><a href="#method.week" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.week" class="fnname">week</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></h4></div></summary><div class="docblock"><p>Returns the ISO week number starting from 1.</p>
 <p>The return value ranges from 1 to 53. (The last week of year differs by years.)</p>
-<h1 id="example-1" class="section-header"><a href="#example-1">Example</a></h1>
+<h5 id="example-1" class="section-header"><a href="#example-1">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">NaiveDate</span>, <span class="ident">Datelike</span>, <span class="ident">Weekday</span>};
 
 <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">NaiveDate::from_isoywd</span>(<span class="number">2015</span>, <span class="number">15</span>, <span class="ident">Weekday::Mon</span>);
 <span class="macro">assert_eq!</span>(<span class="ident">d</span>.<span class="ident">iso_week</span>().<span class="ident">week</span>(), <span class="number">15</span>);</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.week0" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/chrono/naive/isoweek.rs.html#104-106" title="goto source code">[src]</a></div><a href="#method.week0" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.week0" class="fnname">week0</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></h4></div></summary><div class="docblock"><p>Returns the ISO week number starting from 0.</p>
 <p>The return value ranges from 0 to 52. (The last week of year differs by years.)</p>
-<h1 id="example-2" class="section-header"><a href="#example-2">Example</a></h1>
+<h5 id="example-2" class="section-header"><a href="#example-2">Example</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">NaiveDate</span>, <span class="ident">Datelike</span>, <span class="ident">Weekday</span>};
 
 <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">NaiveDate::from_isoywd</span>(<span class="number">2015</span>, <span class="number">15</span>, <span class="ident">Weekday::Mon</span>);
@@ -33,7 +33,7 @@ Continuing the example…</p>
 </div></details></div></details><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl-Debug" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../../src/chrono/naive/isoweek.rs.html#130-141" title="goto source code">[src]</a></div><a href="#impl-Debug" class="anchor"></a><h3 class="code-header in-band">impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="struct.IsoWeek.html" title="struct chrono::naive::IsoWeek">IsoWeek</a></h3></div></summary><div class="docblock"><p>The <code>Debug</code> output of the ISO week <code>w</code> is the same as
 <a href="../format/strftime/index.html"><code>d.format(&quot;%G-W%V&quot;)</code></a>
 where <code>d</code> is any <code>NaiveDate</code> value in that week.</p>
-<h1 id="example-3" class="section-header"><a href="#example-3">Example</a></h1>
+<h2 id="example-3" class="section-header"><a href="#example-3">Example</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">NaiveDate</span>, <span class="ident">Datelike</span>};
 
 <span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">NaiveDate::from_ymd</span>(<span class="number">2015</span>,  <span class="number">9</span>,  <span class="number">5</span>).<span class="ident">iso_week</span>()), <span class="string">&quot;2015-W36&quot;</span>);

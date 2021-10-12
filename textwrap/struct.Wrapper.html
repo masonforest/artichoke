@@ -30,7 +30,7 @@ wrapping at the specified width. By default, we allow words
 longer than <code>width</code> to be broken.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.initial_indent" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/textwrap/lib.rs.html#165-170" title="goto source code">[src]</a></div><a href="#method.initial_indent" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.initial_indent" class="fnname">initial_indent</a>(self, indent: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="struct" href="struct.Wrapper.html" title="struct textwrap::Wrapper">Wrapper</a>&lt;'a, S&gt;</h4></div></summary><div class="docblock"><p>Change <a href="#structfield.initial_indent"><code>self.initial_indent</code></a>. The initial indentation is
 used on the very first line of output.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h5 id="examples" class="section-header"><a href="#examples">Examples</a></h5>
 <p>Classic paragraph indentation can be achieved by specifying an
 initial indentation and wrapping each paragraph by itself:</p>
 
@@ -39,7 +39,7 @@ initial indentation and wrapping each paragraph by itself:</p>
 <span class="kw">let</span> <span class="ident">wrapper</span> <span class="op">=</span> <span class="ident">Wrapper::new</span>(<span class="number">15</span>).<span class="ident">initial_indent</span>(<span class="string">&quot;    &quot;</span>);</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.subsequent_indent" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/textwrap/lib.rs.html#190-195" title="goto source code">[src]</a></div><a href="#method.subsequent_indent" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.subsequent_indent" class="fnname">subsequent_indent</a>(self, indent: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="struct" href="struct.Wrapper.html" title="struct textwrap::Wrapper">Wrapper</a>&lt;'a, S&gt;</h4></div></summary><div class="docblock"><p>Change <a href="#structfield.subsequent_indent"><code>self.subsequent_indent</code></a>. The subsequent indentation
 is used on lines following the first line of output.</p>
-<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
+<h5 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h5>
 <p>Combining initial and subsequent indentation lets you format a
 single paragraph as a bullet list:</p>
 
@@ -56,11 +56,11 @@ wrapped based on their displayed width, not their size in
 bytes.</p>
 <p>The result is a string with newlines between each line. Use
 the <code>wrap</code> method if you need access to the individual lines.</p>
-<h1 id="complexities" class="section-header"><a href="#complexities">Complexities</a></h1>
+<h5 id="complexities" class="section-header"><a href="#complexities">Complexities</a></h5>
 <p>This method simply joins the lines produced by <code>wrap_iter</code>. As
 such, it inherits the O(<em>n</em>) time and memory complexity where
 <em>n</em> is the input string length.</p>
-<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
+<h5 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">textwrap::Wrapper</span>;
 
 <span class="kw">let</span> <span class="ident">wrapper</span> <span class="op">=</span> <span class="ident">Wrapper::new</span>(<span class="number">15</span>);
@@ -69,11 +69,11 @@ such, it inherits the O(<em>n</em>) time and memory complexity where
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.wrap" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/textwrap/lib.rs.html#285-287" title="goto source code">[src]</a></div><a href="#method.wrap" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.wrap" class="fnname">wrap</a>(&amp;self, s: &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'a, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;&gt;</h4></div></summary><div class="docblock"><p>Wrap a line of text at <code>self.width</code> characters. Strings are
 wrapped based on their displayed width, not their size in
 bytes.</p>
-<h1 id="complexities-1" class="section-header"><a href="#complexities-1">Complexities</a></h1>
+<h5 id="complexities-1" class="section-header"><a href="#complexities-1">Complexities</a></h5>
 <p>This method simply collects the lines produced by <code>wrap_iter</code>.
 As such, it inherits the O(<em>n</em>) overall time and memory
 complexity where <em>n</em> is the input string length.</p>
-<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
+<h5 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">textwrap::Wrapper</span>;
 
 <span class="kw">let</span> <span class="ident">wrap15</span> <span class="op">=</span> <span class="ident">Wrapper::new</span>(<span class="number">15</span>);
@@ -102,7 +102,7 @@ bytes.</p>
 whenever when a word is too large to fit on the current line.
 By changing the field, different hyphenation strategies can be
 implemented.</p>
-<h1 id="complexities-2" class="section-header"><a href="#complexities-2">Complexities</a></h1>
+<h5 id="complexities-2" class="section-header"><a href="#complexities-2">Complexities</a></h5>
 <p>This method returns a <a href="struct.WrapIter.html"><code>WrapIter</code></a> iterator which borrows this
 <code>Wrapper</code>. The algorithm used has a linear complexity, so
 getting the next line from the iterator will take O(<em>w</em>) time,
@@ -111,7 +111,7 @@ will take O(<em>n</em>) time for an input string of length <em>n</em>.</p>
 <p>When no indentation is used, each line returned is a slice of
 the input string and the memory overhead is thus constant.
 Otherwise new memory is allocated for each line returned.</p>
-<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
+<h5 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
 <span class="kw">use</span> <span class="ident">textwrap::Wrapper</span>;
 
@@ -132,12 +132,12 @@ bytes.</p>
 whenever when a word is too large to fit on the current line.
 By changing the field, different hyphenation strategies can be
 implemented.</p>
-<h1 id="complexities-3" class="section-header"><a href="#complexities-3">Complexities</a></h1>
+<h5 id="complexities-3" class="section-header"><a href="#complexities-3">Complexities</a></h5>
 <p>This method consumes the <code>Wrapper</code> and returns a
 <a href="struct.IntoWrapIter.html"><code>IntoWrapIter</code></a> iterator. Fully processing the iterator has
 the same O(<em>n</em>) time complexity as <a href="#method.wrap_iter"><code>wrap_iter</code></a>, where <em>n</em> is
 the length of the input string.</p>
-<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
+<h5 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
 <span class="kw">use</span> <span class="ident">textwrap::Wrapper</span>;
 

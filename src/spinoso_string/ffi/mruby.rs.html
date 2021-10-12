@@ -39,8 +39,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// [mruby 3.0.0]: https://github.com/artichoke/mruby/blob/3.0.0/src/string.c#L1751-L1769</span>
 <span class="doccomment">/// [MRI Ruby 1.8.7]: https://github.com/ruby/ruby/blob/v1_8_7/string.c#L869-L903</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mrb_str_hash</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
-    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mrb_str_hash</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="ident">T</span>) -&gt; <span class="ident">u32</span> {
+    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">u32</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">Wrapping</span>(<span class="number">0_u32</span>);
         <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">b</span> <span class="kw">in</span> <span class="ident">s</span>.<span class="ident">iter</span>() {
             <span class="ident">hash</span> <span class="op">+</span><span class="op">=</span> <span class="ident">Wrapping</span>(<span class="ident">u32::from</span>(<span class="ident">b</span>));

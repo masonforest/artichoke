@@ -1275,10 +1275,10 @@
 <span class="kw">const</span> <span class="ident">BRACKETED_PASTE_OFF</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;\x1b[?2004l&quot;</span>;
 
 <span class="kw">impl</span> <span class="ident">AsRawFd</span> <span class="kw">for</span> <span class="ident">OutputStreamType</span> {
-    <span class="kw">fn</span> <span class="ident">as_raw_fd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawFd</span> {
+    <span class="kw">fn</span> <span class="ident">as_raw_fd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RawFd</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">OutputStreamType::Stdout</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">libc::STDOUT_FILENO</span>,
-            <span class="ident">OutputStreamType::Stderr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">libc::STDERR_FILENO</span>,
+            <span class="ident">OutputStreamType::Stdout</span> =&gt; <span class="ident">libc::STDOUT_FILENO</span>,
+            <span class="ident">OutputStreamType::Stderr</span> =&gt; <span class="ident">libc::STDERR_FILENO</span>,
         }
     }
 }
@@ -1286,7 +1286,7 @@
 <span class="macro">nix::ioctl_read_bad!</span>(<span class="ident">win_size</span>, <span class="ident">libc::TIOCGWINSZ</span>, <span class="ident">libc::winsize</span>);
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::useless_conversion</span>)]</span>
-<span class="kw">fn</span> <span class="ident">get_win_size</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsRawFd</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="ident">fileno</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
+<span class="kw">fn</span> <span class="ident">get_win_size</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsRawFd</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="ident">fileno</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; (<span class="ident">usize</span>, <span class="ident">usize</span>) {
     <span class="kw">use</span> <span class="ident">std::mem::zeroed</span>;
 
     <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">test</span>) {
@@ -1296,33 +1296,33 @@
     <span class="kw">unsafe</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">size</span>: <span class="ident">libc::winsize</span> <span class="op">=</span> <span class="ident">zeroed</span>();
         <span class="kw">match</span> <span class="ident">win_size</span>(<span class="ident">fileno</span>.<span class="ident">as_raw_fd</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">size</span>) {
-            <span class="prelude-val">Ok</span>(<span class="number">0</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Ok</span>(<span class="number">0</span>) =&gt; {
                 <span class="comment">// In linux pseudo-terminals are created with dimensions of</span>
                 <span class="comment">// zero. If host application didn&#39;t initialize the correct</span>
                 <span class="comment">// size before start we treat zero size as 80 columns and</span>
                 <span class="comment">// infinite rows</span>
-                <span class="kw">let</span> <span class="ident">cols</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">size</span>.<span class="ident">ws_col</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+                <span class="kw">let</span> <span class="ident">cols</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">size</span>.<span class="ident">ws_col</span> <span class="op">==</span> <span class="number">0</span> {
                     <span class="number">80</span>
                 } <span class="kw">else</span> {
                     <span class="ident">size</span>.<span class="ident">ws_col</span> <span class="kw">as</span> <span class="ident">usize</span>
                 };
-                <span class="kw">let</span> <span class="ident">rows</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">size</span>.<span class="ident">ws_row</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+                <span class="kw">let</span> <span class="ident">rows</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">size</span>.<span class="ident">ws_row</span> <span class="op">==</span> <span class="number">0</span> {
                     <span class="ident">usize::MAX</span>
                 } <span class="kw">else</span> {
                     <span class="ident">size</span>.<span class="ident">ws_row</span> <span class="kw">as</span> <span class="ident">usize</span>
                 };
                 (<span class="ident">cols</span>, <span class="ident">rows</span>)
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="number">80</span>, <span class="number">24</span>),
+            <span class="kw">_</span> =&gt; (<span class="number">80</span>, <span class="number">24</span>),
         }
     }
 }
 
 <span class="doccomment">/// Check TERM environment variable to see if current term is in our</span>
 <span class="doccomment">/// unsupported list</span>
-<span class="kw">fn</span> <span class="ident">is_unsupported_term</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">is_unsupported_term</span>() -&gt; <span class="ident">bool</span> {
     <span class="kw">match</span> <span class="ident">std::env::var</span>(<span class="string">&quot;TERM&quot;</span>) {
-        <span class="prelude-val">Ok</span>(<span class="ident">term</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">term</span>) =&gt; {
             <span class="kw">for</span> <span class="ident">iter</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">UNSUPPORTED_TERM</span> {
                 <span class="kw">if</span> (<span class="kw-2">*</span><span class="ident">iter</span>).<span class="ident">eq_ignore_ascii_case</span>(<span class="kw-2">&amp;</span><span class="ident">term</span>) {
                     <span class="kw">return</span> <span class="bool-val">true</span>;
@@ -1330,12 +1330,12 @@
             }
             <span class="bool-val">false</span>
         }
-        <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+        <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">false</span>,
     }
 }
 
 <span class="doccomment">/// Return whether or not STDIN, STDOUT or STDERR is a TTY</span>
-<span class="kw">fn</span> <span class="ident">is_a_tty</span>(<span class="ident">fd</span>: <span class="ident">RawFd</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">is_a_tty</span>(<span class="ident">fd</span>: <span class="ident">RawFd</span>) -&gt; <span class="ident">bool</span> {
     <span class="kw">unsafe</span> { <span class="ident">libc::isatty</span>(<span class="ident">fd</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> }
 }
 
@@ -1350,7 +1350,7 @@
 
 <span class="kw">impl</span> <span class="ident">RawMode</span> <span class="kw">for</span> <span class="ident">PosixMode</span> {
     <span class="doccomment">/// Disable RAW mode for the terminal.</span>
-    <span class="kw">fn</span> <span class="ident">disable_raw_mode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">disable_raw_mode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="ident">termios::tcsetattr</span>(<span class="ident">STDIN_FILENO</span>, <span class="ident">SetArg::TCSADRAIN</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">termios</span>)<span class="question-mark">?</span>;
         <span class="comment">// disable bracketed paste</span>
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">out</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">out</span> {
@@ -1365,7 +1365,7 @@
 <span class="kw">struct</span> <span class="ident">StdinRaw</span> {}
 
 <span class="kw">impl</span> <span class="ident">Read</span> <span class="kw">for</span> <span class="ident">StdinRaw</span> {
-    <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
             <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">unsafe</span> {
                 <span class="ident">libc::read</span>(
@@ -1374,7 +1374,7 @@
                     <span class="ident">buf</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">libc::size_t</span>,
                 )
             };
-            <span class="kw">if</span> <span class="ident">res</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
+            <span class="kw">if</span> <span class="ident">res</span> <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
                 <span class="kw">let</span> <span class="ident">error</span> <span class="op">=</span> <span class="ident">io::Error::last_os_error</span>();
                 <span class="kw">if</span> <span class="ident">error</span>.<span class="ident">kind</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">ErrorKind::Interrupted</span> <span class="op">|</span><span class="op">|</span> <span class="ident">SIGWINCH</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>) {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error</span>);
@@ -1428,7 +1428,7 @@
 <span class="kw">const</span> <span class="ident">RXVT_CTRL_SHIFT</span>: <span class="ident">char</span> <span class="op">=</span> <span class="string">&#39;@&#39;</span>;
 
 <span class="kw">impl</span> <span class="ident">PosixRawReader</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">stdin</span>: <span class="ident">StdinRaw</span> {},
             <span class="ident">timeout_ms</span>: <span class="ident">config</span>.<span class="ident">keyseq_timeout</span>(),
@@ -1443,22 +1443,22 @@
 
     <span class="doccomment">/// Handle \E &lt;seq1&gt; sequences</span>
     <span class="comment">// https://invisible-island.net/xterm/xterm-function-keys.html</span>
-    <span class="kw">fn</span> <span class="ident">escape_sequence</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">escape_sequence</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">_do_escape_sequence</span>(<span class="bool-val">true</span>)
     }
 
     <span class="doccomment">/// Don&#39;t call directly, call `PosixRawReader::escape_sequence` instead</span>
-    <span class="kw">fn</span> <span class="ident">_do_escape_sequence</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">allow_recurse</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">_do_escape_sequence</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">allow_recurse</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="comment">// Read the next byte representing the escape sequence.</span>
         <span class="kw">let</span> <span class="ident">seq1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">seq1</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;[&#39;</span> {
+        <span class="kw">if</span> <span class="ident">seq1</span> <span class="op">==</span> <span class="string">&#39;[&#39;</span> {
             <span class="comment">// \E[ sequences. (CSI)</span>
             <span class="self">self</span>.<span class="ident">escape_csi</span>()
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq1</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;O&#39;</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq1</span> <span class="op">==</span> <span class="string">&#39;O&#39;</span> {
             <span class="comment">// xterm</span>
             <span class="comment">// \EO sequences. (SS3)</span>
             <span class="self">self</span>.<span class="ident">escape_o</span>()
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq1</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;\x1b&#39;</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq1</span> <span class="op">==</span> <span class="string">&#39;\x1b&#39;</span> {
             <span class="comment">// \E\E — used by rxvt, iTerm (under default config), etc.</span>
             <span class="comment">// ```</span>
             <span class="comment">// \E\E[A =&gt; Alt-Up</span>
@@ -1485,8 +1485,8 @@
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">poll</span>(<span class="ident">timeout</span>) {
                 <span class="comment">// Ignore poll errors, it&#39;s very likely we&#39;ll pick them up on</span>
                 <span class="comment">// the next read anyway.</span>
-                <span class="prelude-val">Ok</span>(<span class="number">0</span>) <span class="op">|</span> <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">E::ESC</span>),
-                <span class="prelude-val">Ok</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">Ok</span>(<span class="number">0</span>) <span class="op">|</span> <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">E::ESC</span>),
+                <span class="prelude-val">Ok</span>(<span class="ident">n</span>) =&gt; {
                     <span class="macro">debug_assert!</span>(<span class="ident">n</span> <span class="op">&gt;</span> <span class="number">0</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">n</span>);
                     <span class="comment">// recurse, and add the alt modifier.</span>
                     <span class="kw">let</span> <span class="ident">E</span>(<span class="ident">k</span>, <span class="ident">m</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">_do_escape_sequence</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
@@ -1499,29 +1499,29 @@
     }
 
     <span class="doccomment">/// Handle \E[ &lt;seq2&gt; escape sequences</span>
-    <span class="kw">fn</span> <span class="ident">escape_csi</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">escape_csi</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">seq2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="ident">seq2</span>.<span class="ident">is_digit</span>(<span class="number">10</span>) {
             <span class="kw">match</span> <span class="ident">seq2</span> {
-                <span class="string">&#39;0&#39;</span> <span class="op">|</span> <span class="string">&#39;9&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&#39;0&#39;</span> <span class="op">|</span> <span class="string">&#39;9&#39;</span> =&gt; {
                     <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;unsupported esc sequence: \\E[{:?}&quot;</span>, <span class="ident">seq2</span>);
                     <span class="prelude-val">Ok</span>(<span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>))
                 }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">_</span> =&gt; {
                     <span class="comment">// Extended escape, read additional byte.</span>
                     <span class="self">self</span>.<span class="ident">extended_escape</span>(<span class="ident">seq2</span>)
                 }
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq2</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;[&#39;</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq2</span> <span class="op">==</span> <span class="string">&#39;[&#39;</span> {
             <span class="kw">let</span> <span class="ident">seq3</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
             <span class="comment">// Linux console</span>
             <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">seq3</span> {
-                <span class="string">&#39;A&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">1</span>), <span class="ident">M::NONE</span>),
-                <span class="string">&#39;B&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">2</span>), <span class="ident">M::NONE</span>),
-                <span class="string">&#39;C&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">3</span>), <span class="ident">M::NONE</span>),
-                <span class="string">&#39;D&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">4</span>), <span class="ident">M::NONE</span>),
-                <span class="string">&#39;E&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">5</span>), <span class="ident">M::NONE</span>),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&#39;A&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">1</span>), <span class="ident">M::NONE</span>),
+                <span class="string">&#39;B&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">2</span>), <span class="ident">M::NONE</span>),
+                <span class="string">&#39;C&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">3</span>), <span class="ident">M::NONE</span>),
+                <span class="string">&#39;D&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">4</span>), <span class="ident">M::NONE</span>),
+                <span class="string">&#39;E&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">5</span>), <span class="ident">M::NONE</span>),
+                <span class="kw">_</span> =&gt; {
                     <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;unsupported esc sequence: \\E[[{:?}&quot;</span>, <span class="ident">seq3</span>);
                     <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
                 }
@@ -1529,25 +1529,25 @@
         } <span class="kw">else</span> {
             <span class="comment">// ANSI</span>
             <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">seq2</span> {
-                <span class="ident">UP</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::NONE</span>),
-                <span class="ident">DOWN</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::NONE</span>),
-                <span class="ident">RIGHT</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>),
-                <span class="ident">LEFT</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::NONE</span>),
+                <span class="ident">UP</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::NONE</span>),
+                <span class="ident">DOWN</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::NONE</span>),
+                <span class="ident">RIGHT</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>),
+                <span class="ident">LEFT</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::NONE</span>),
                 <span class="comment">//&#39;E&#39; =&gt; E(K::, M::), // Ignore</span>
-                <span class="ident">END</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>),
+                <span class="ident">END</span> =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>),
                 <span class="comment">//&#39;G&#39; =&gt; E(K::, M::), // Ignore</span>
-                <span class="ident">HOME</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::NONE</span>), <span class="comment">// khome</span>
+                <span class="ident">HOME</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::NONE</span>), <span class="comment">// khome</span>
                 <span class="comment">//&#39;J&#39; =&gt; E(K::, M::), // clr_eos</span>
                 <span class="comment">//&#39;K&#39; =&gt; E(K::, M::), // clr_eol</span>
                 <span class="comment">//&#39;L&#39; =&gt; E(K::, M::), // il1</span>
                 <span class="comment">//&#39;M&#39; =&gt; E(K::, M::), // kmous</span>
                 <span class="comment">//&#39;P&#39; =&gt; E(K::Delete, M::NONE), // dch1</span>
-                <span class="string">&#39;Z&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::BackTab</span>, <span class="ident">M::NONE</span>),
-                <span class="string">&#39;a&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::SHIFT</span>),    <span class="comment">// rxvt: kind or kUP</span>
-                <span class="string">&#39;b&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::SHIFT</span>),  <span class="comment">// rxvt: kri or kDN</span>
-                <span class="string">&#39;c&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::SHIFT</span>), <span class="comment">// rxvt</span>
-                <span class="string">&#39;d&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::SHIFT</span>),  <span class="comment">// rxvt</span>
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&#39;Z&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::BackTab</span>, <span class="ident">M::NONE</span>),
+                <span class="string">&#39;a&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::SHIFT</span>),    <span class="comment">// rxvt: kind or kUP</span>
+                <span class="string">&#39;b&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::SHIFT</span>),  <span class="comment">// rxvt: kri or kDN</span>
+                <span class="string">&#39;c&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::SHIFT</span>), <span class="comment">// rxvt</span>
+                <span class="string">&#39;d&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::SHIFT</span>),  <span class="comment">// rxvt</span>
+                <span class="kw">_</span> =&gt; {
                     <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;unsupported esc sequence: \\E[{:?}&quot;</span>, <span class="ident">seq2</span>);
                     <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
                 }
@@ -1557,17 +1557,17 @@
 
     <span class="doccomment">/// Handle \E[ &lt;seq2:digit&gt; escape sequences</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cognitive_complexity</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">extended_escape</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">seq2</span>: <span class="ident">char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">extended_escape</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">seq2</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">seq3</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">seq3</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;~&#39;</span> {
+        <span class="kw">if</span> <span class="ident">seq3</span> <span class="op">==</span> <span class="string">&#39;~&#39;</span> {
             <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">seq2</span> {
-                <span class="string">&#39;1&#39;</span> <span class="op">|</span> <span class="ident">RXVT_HOME</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::NONE</span>), <span class="comment">// tmux, xrvt</span>
-                <span class="ident">INSERT</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::NONE</span>),
-                <span class="ident">DELETE</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::NONE</span>),
-                <span class="string">&#39;4&#39;</span> <span class="op">|</span> <span class="ident">RXVT_END</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>), <span class="comment">// tmux, xrvt</span>
-                <span class="ident">PAGE_UP</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::NONE</span>),
-                <span class="ident">PAGE_DOWN</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::NONE</span>),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&#39;1&#39;</span> <span class="op">|</span> <span class="ident">RXVT_HOME</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::NONE</span>), <span class="comment">// tmux, xrvt</span>
+                <span class="ident">INSERT</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::NONE</span>),
+                <span class="ident">DELETE</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::NONE</span>),
+                <span class="string">&#39;4&#39;</span> <span class="op">|</span> <span class="ident">RXVT_END</span> =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>), <span class="comment">// tmux, xrvt</span>
+                <span class="ident">PAGE_UP</span> =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::NONE</span>),
+                <span class="ident">PAGE_DOWN</span> =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::NONE</span>),
+                <span class="kw">_</span> =&gt; {
                     <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>,
                            <span class="string">&quot;unsupported esc sequence: \\E[{}~&quot;</span>, <span class="ident">seq2</span>);
                     <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
@@ -1575,55 +1575,55 @@
             })
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq3</span>.<span class="ident">is_digit</span>(<span class="number">10</span>) {
             <span class="kw">let</span> <span class="ident">seq4</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="ident">seq4</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;~&#39;</span> {
+            <span class="kw">if</span> <span class="ident">seq4</span> <span class="op">==</span> <span class="string">&#39;~&#39;</span> {
                 <span class="prelude-val">Ok</span>(<span class="kw">match</span> (<span class="ident">seq2</span>, <span class="ident">seq3</span>) {
-                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;1&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">1</span>), <span class="ident">M::NONE</span>),  <span class="comment">// rxvt-unicode</span>
-                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;2&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">2</span>), <span class="ident">M::NONE</span>),  <span class="comment">// rxvt-unicode</span>
-                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;3&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">3</span>), <span class="ident">M::NONE</span>),  <span class="comment">// rxvt-unicode</span>
-                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;4&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">4</span>), <span class="ident">M::NONE</span>),  <span class="comment">// rxvt-unicode</span>
-                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;5&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">5</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf5</span>
-                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;7&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">6</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf6</span>
-                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;8&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">7</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf7</span>
-                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;9&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">8</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf8</span>
-                    (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;0&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">9</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf9</span>
-                    (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;1&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">10</span>), <span class="ident">M::NONE</span>), <span class="comment">// kf10</span>
-                    (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;3&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">11</span>), <span class="ident">M::NONE</span>), <span class="comment">// kf11</span>
-                    (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;4&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">12</span>), <span class="ident">M::NONE</span>), <span class="comment">// kf12</span>
+                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;1&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">1</span>), <span class="ident">M::NONE</span>),  <span class="comment">// rxvt-unicode</span>
+                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;2&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">2</span>), <span class="ident">M::NONE</span>),  <span class="comment">// rxvt-unicode</span>
+                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;3&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">3</span>), <span class="ident">M::NONE</span>),  <span class="comment">// rxvt-unicode</span>
+                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;4&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">4</span>), <span class="ident">M::NONE</span>),  <span class="comment">// rxvt-unicode</span>
+                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;5&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">5</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf5</span>
+                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;7&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">6</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf6</span>
+                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;8&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">7</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf7</span>
+                    (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;9&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">8</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf8</span>
+                    (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;0&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">9</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf9</span>
+                    (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;1&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">10</span>), <span class="ident">M::NONE</span>), <span class="comment">// kf10</span>
+                    (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;3&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">11</span>), <span class="ident">M::NONE</span>), <span class="comment">// kf11</span>
+                    (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;4&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">12</span>), <span class="ident">M::NONE</span>), <span class="comment">// kf12</span>
                     <span class="comment">//(&#39;6&#39;, &#39;2&#39;) =&gt; KeyCode::ScrollUp,</span>
                     <span class="comment">//(&#39;6&#39;, &#39;3&#39;) =&gt; KeyCode::ScrollDown,</span>
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">_</span> =&gt; {
                         <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>,
                                <span class="string">&quot;unsupported esc sequence: \\E[{}{}~&quot;</span>, <span class="ident">seq2</span>, <span class="ident">seq3</span>);
                         <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
                     }
                 })
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq4</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;;&#39;</span> {
+            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq4</span> <span class="op">==</span> <span class="string">&#39;;&#39;</span> {
                 <span class="kw">let</span> <span class="ident">seq5</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
                 <span class="kw">if</span> <span class="ident">seq5</span>.<span class="ident">is_digit</span>(<span class="number">10</span>) {
                     <span class="kw">let</span> <span class="ident">seq6</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
                     <span class="kw">if</span> <span class="ident">seq6</span>.<span class="ident">is_digit</span>(<span class="number">10</span>) {
                         <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>; <span class="comment">// &#39;R&#39; expected</span>
                         <span class="prelude-val">Ok</span>(<span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>))
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq6</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;R&#39;</span> {
+                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq6</span> <span class="op">==</span> <span class="string">&#39;R&#39;</span> {
                         <span class="prelude-val">Ok</span>(<span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>))
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq6</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;~&#39;</span> {
+                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq6</span> <span class="op">==</span> <span class="string">&#39;~&#39;</span> {
                         <span class="prelude-val">Ok</span>(<span class="kw">match</span> (<span class="ident">seq2</span>, <span class="ident">seq3</span>, <span class="ident">seq5</span>) {
-                            (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;5&#39;</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">5</span>), <span class="ident">M::CTRL</span>),
+                            (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;5&#39;</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">5</span>), <span class="ident">M::CTRL</span>),
                             <span class="comment">//(&#39;1&#39;, &#39;5&#39;, &#39;6&#39;) =&gt; E(K::F(17), M::CTRL),</span>
-                            (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;7&#39;</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">6</span>), <span class="ident">M::CTRL</span>),
+                            (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;7&#39;</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">6</span>), <span class="ident">M::CTRL</span>),
                             <span class="comment">//(&#39;1&#39;, &#39;7&#39;, &#39;6&#39;) =&gt; E(K::F(18), M::CTRL),</span>
-                            (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;8&#39;</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">7</span>), <span class="ident">M::CTRL</span>),
-                            (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;9&#39;</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">8</span>), <span class="ident">M::CTRL</span>),
+                            (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;8&#39;</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">7</span>), <span class="ident">M::CTRL</span>),
+                            (<span class="string">&#39;1&#39;</span>, <span class="string">&#39;9&#39;</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">8</span>), <span class="ident">M::CTRL</span>),
                             <span class="comment">//(&#39;1&#39;, &#39;9&#39;, &#39;6&#39;) =&gt; E(K::F(19), M::CTRL),</span>
-                            (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;0&#39;</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">9</span>), <span class="ident">M::CTRL</span>),
+                            (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;0&#39;</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">9</span>), <span class="ident">M::CTRL</span>),
                             <span class="comment">//(&#39;2&#39;, &#39;0&#39;, &#39;6&#39;) =&gt; E(K::F(21), M::CTRL),</span>
-                            (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;1&#39;</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">10</span>), <span class="ident">M::CTRL</span>),
+                            (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;1&#39;</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">10</span>), <span class="ident">M::CTRL</span>),
                             <span class="comment">//(&#39;2&#39;, &#39;1&#39;, &#39;6&#39;) =&gt; E(K::F(22), M::CTRL),</span>
-                            (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;3&#39;</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">11</span>), <span class="ident">M::CTRL</span>),
+                            (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;3&#39;</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">11</span>), <span class="ident">M::CTRL</span>),
                             <span class="comment">//(&#39;2&#39;, &#39;3&#39;, &#39;6&#39;) =&gt; E(K::F(23), M::CTRL),</span>
-                            (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;4&#39;</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">12</span>), <span class="ident">M::CTRL</span>),
+                            (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;4&#39;</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">12</span>), <span class="ident">M::CTRL</span>),
                             <span class="comment">//(&#39;2&#39;, &#39;4&#39;, &#39;6&#39;) =&gt; E(K::F(24), M::CTRL),</span>
-                            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                            <span class="kw">_</span> =&gt; {
                                 <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>,
                                        <span class="string">&quot;unsupported esc sequence: \\E[{}{};{}~&quot;</span>, <span class="ident">seq2</span>, <span class="ident">seq3</span>, <span class="ident">seq5</span>);
                                 <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
@@ -1641,11 +1641,11 @@
                 }
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq4</span>.<span class="ident">is_digit</span>(<span class="number">10</span>) {
                 <span class="kw">let</span> <span class="ident">seq5</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
-                <span class="kw">if</span> <span class="ident">seq5</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;~&#39;</span> {
+                <span class="kw">if</span> <span class="ident">seq5</span> <span class="op">==</span> <span class="string">&#39;~&#39;</span> {
                     <span class="prelude-val">Ok</span>(<span class="kw">match</span> (<span class="ident">seq2</span>, <span class="ident">seq3</span>, <span class="ident">seq4</span>) {
-                        (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;0&#39;</span>, <span class="string">&#39;0&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::BracketedPasteStart</span>, <span class="ident">M::NONE</span>),
-                        (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;0&#39;</span>, <span class="string">&#39;1&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::BracketedPasteEnd</span>, <span class="ident">M::NONE</span>),
-                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;0&#39;</span>, <span class="string">&#39;0&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::BracketedPasteStart</span>, <span class="ident">M::NONE</span>),
+                        (<span class="string">&#39;2&#39;</span>, <span class="string">&#39;0&#39;</span>, <span class="string">&#39;1&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::BracketedPasteEnd</span>, <span class="ident">M::NONE</span>),
+                        <span class="kw">_</span> =&gt; {
                             <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>,
                                    <span class="string">&quot;unsupported esc sequence: \\E[{}{}{}~&quot;</span>, <span class="ident">seq2</span>, <span class="ident">seq3</span>, <span class="ident">seq4</span>);
                             <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
@@ -1661,7 +1661,7 @@
                        <span class="string">&quot;unsupported esc sequence: \\E[{}{}{:?}&quot;</span>, <span class="ident">seq2</span>, <span class="ident">seq3</span>, <span class="ident">seq4</span>);
                 <span class="prelude-val">Ok</span>(<span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>))
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq3</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;;&#39;</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq3</span> <span class="op">==</span> <span class="string">&#39;;&#39;</span> {
             <span class="kw">let</span> <span class="ident">seq4</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
             <span class="kw">if</span> <span class="ident">seq4</span>.<span class="ident">is_digit</span>(<span class="number">10</span>) {
                 <span class="kw">let</span> <span class="ident">seq5</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
@@ -1669,141 +1669,141 @@
                     <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>; <span class="comment">// &#39;R&#39; expected</span>
                                        <span class="comment">//(&#39;1&#39;, &#39;0&#39;, UP) =&gt; E(K::, M::), // Alt + Shift + Up</span>
                     <span class="prelude-val">Ok</span>(<span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>))
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq2</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;1&#39;</span> {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq2</span> <span class="op">==</span> <span class="string">&#39;1&#39;</span> {
                     <span class="prelude-val">Ok</span>(<span class="kw">match</span> (<span class="ident">seq4</span>, <span class="ident">seq5</span>) {
-                        (<span class="ident">SHIFT</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::SHIFT</span>),     <span class="comment">// ~ key_sr</span>
-                        (<span class="ident">SHIFT</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::SHIFT</span>), <span class="comment">// ~ key_sf</span>
-                        (<span class="ident">SHIFT</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::SHIFT</span>),
-                        (<span class="ident">SHIFT</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::SHIFT</span>),
-                        (<span class="ident">SHIFT</span>, <span class="ident">END</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::SHIFT</span>), <span class="comment">// kEND</span>
-                        (<span class="ident">SHIFT</span>, <span class="ident">HOME</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::SHIFT</span>), <span class="comment">// kHOM</span>
+                        (<span class="ident">SHIFT</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::SHIFT</span>),     <span class="comment">// ~ key_sr</span>
+                        (<span class="ident">SHIFT</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::SHIFT</span>), <span class="comment">// ~ key_sf</span>
+                        (<span class="ident">SHIFT</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::SHIFT</span>),
+                        (<span class="ident">SHIFT</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::SHIFT</span>),
+                        (<span class="ident">SHIFT</span>, <span class="ident">END</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::SHIFT</span>), <span class="comment">// kEND</span>
+                        (<span class="ident">SHIFT</span>, <span class="ident">HOME</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::SHIFT</span>), <span class="comment">// kHOM</span>
                         <span class="comment">//(&#39;2&#39;, &#39;P&#39;) =&gt; E(K::F(13), M::NONE),</span>
                         <span class="comment">//(&#39;2&#39;, &#39;Q&#39;) =&gt; E(K::F(14), M::NONE),</span>
                         <span class="comment">//(&#39;2&#39;, &#39;S&#39;) =&gt; E(K::F(16), M::NONE),</span>
-                        (<span class="ident">ALT</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">ALT</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">ALT</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">ALT</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">ALT</span>, <span class="ident">END</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">ALT</span>, <span class="ident">HOME</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">END</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">HOME</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">CTRL</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="ident">END</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="ident">HOME</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;P&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">1</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;Q&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">2</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;S&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">4</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;p&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;q&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;1&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;r&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;2&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;s&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;3&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;t&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;4&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;u&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;5&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;v&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;6&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;w&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;7&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;x&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;8&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL</span>, <span class="string">&#39;y&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;9&#39;</span>), <span class="ident">M::CTRL</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">END</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">HOME</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">ALT</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">ALT</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">ALT</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">ALT</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">ALT</span>, <span class="ident">END</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">ALT</span>, <span class="ident">HOME</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">END</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">ALT_SHIFT</span>, <span class="ident">HOME</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">CTRL</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="ident">END</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="ident">HOME</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;P&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">1</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;Q&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">2</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;S&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">4</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;p&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;q&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;1&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;r&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;2&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;s&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;3&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;t&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;4&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;u&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;5&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;v&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;6&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;w&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;7&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;x&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;8&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL</span>, <span class="string">&#39;y&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;9&#39;</span>), <span class="ident">M::CTRL</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">END</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="ident">HOME</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL_SHIFT</span>),
                         <span class="comment">//(&#39;6&#39;, &#39;P&#39;) =&gt; E(K::F(13), M::CTRL),</span>
                         <span class="comment">//(&#39;6&#39;, &#39;Q&#39;) =&gt; E(K::F(14), M::CTRL),</span>
                         <span class="comment">//(&#39;6&#39;, &#39;S&#39;) =&gt; E(K::F(16), M::CTRL),</span>
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;p&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;q&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;1&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;r&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;2&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;s&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;3&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;t&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;4&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;u&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;5&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;v&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;6&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;w&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;7&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;x&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;8&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;y&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;9&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="ident">END</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="ident">HOME</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;p&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;q&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;1&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;r&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;2&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;s&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;3&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;t&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;4&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;u&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;5&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;v&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;6&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;w&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;7&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;x&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;8&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;y&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;9&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">END</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">HOME</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;p&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;q&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;1&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;r&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;2&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;s&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;3&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;t&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;4&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;u&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;5&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;v&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;6&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;w&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;7&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;x&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;8&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;y&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;9&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;p&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;q&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;1&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;r&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;2&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;s&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;3&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;t&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;4&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;u&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;5&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;v&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;6&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;w&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;7&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;x&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;8&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_SHIFT</span>, <span class="string">&#39;y&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;9&#39;</span>), <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="ident">END</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="ident">HOME</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;p&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;q&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;1&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;r&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;2&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;s&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;3&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;t&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;4&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;u&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;5&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;v&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;6&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;w&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;7&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;x&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;8&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT</span>, <span class="string">&#39;y&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;9&#39;</span>), <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">END</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="ident">HOME</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;p&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;q&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;1&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;r&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;2&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;s&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;3&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;t&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;4&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;u&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;5&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;v&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;6&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;w&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;7&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;x&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;8&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">CTRL_ALT_SHIFT</span>, <span class="string">&#39;y&#39;</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;9&#39;</span>), <span class="ident">M::CTRL_ALT_SHIFT</span>),
                         <span class="comment">// Meta + arrow on (some?) Macs when using iTerm defaults</span>
-                        (<span class="string">&#39;9&#39;</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::ALT</span>),
-                        (<span class="string">&#39;9&#39;</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::ALT</span>),
-                        (<span class="string">&#39;9&#39;</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::ALT</span>),
-                        (<span class="string">&#39;9&#39;</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::ALT</span>),
-                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        (<span class="string">&#39;9&#39;</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::ALT</span>),
+                        (<span class="string">&#39;9&#39;</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::ALT</span>),
+                        (<span class="string">&#39;9&#39;</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::ALT</span>),
+                        (<span class="string">&#39;9&#39;</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::ALT</span>),
+                        <span class="kw">_</span> =&gt; {
                             <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>,
                                    <span class="string">&quot;unsupported esc sequence: \\E[1;{}{:?}&quot;</span>, <span class="ident">seq4</span>, <span class="ident">seq5</span>);
                             <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
                         }
                     })
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq5</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;~&#39;</span> {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">seq5</span> <span class="op">==</span> <span class="string">&#39;~&#39;</span> {
                     <span class="prelude-val">Ok</span>(<span class="kw">match</span> (<span class="ident">seq2</span>, <span class="ident">seq4</span>) {
-                        (<span class="ident">INSERT</span>, <span class="ident">SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::SHIFT</span>),
-                        (<span class="ident">INSERT</span>, <span class="ident">ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">INSERT</span>, <span class="ident">ALT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">INSERT</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">INSERT</span>, <span class="ident">CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">INSERT</span>, <span class="ident">CTRL_ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">INSERT</span>, <span class="ident">CTRL_ALT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">DELETE</span>, <span class="ident">SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::SHIFT</span>),
-                        (<span class="ident">DELETE</span>, <span class="ident">ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">DELETE</span>, <span class="ident">ALT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">DELETE</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">DELETE</span>, <span class="ident">CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">DELETE</span>, <span class="ident">CTRL_ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">DELETE</span>, <span class="ident">CTRL_ALT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">PAGE_UP</span>, <span class="ident">SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::SHIFT</span>),
-                        (<span class="ident">PAGE_UP</span>, <span class="ident">ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">PAGE_UP</span>, <span class="ident">ALT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">PAGE_UP</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">PAGE_UP</span>, <span class="ident">CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">PAGE_UP</span>, <span class="ident">CTRL_ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">PAGE_UP</span>, <span class="ident">CTRL_ALT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::SHIFT</span>),
-                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::ALT</span>),
-                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">ALT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::ALT_SHIFT</span>),
-                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL</span>),
-                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">CTRL_ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL_ALT</span>),
-                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">CTRL_ALT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
-                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        (<span class="ident">INSERT</span>, <span class="ident">SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::SHIFT</span>),
+                        (<span class="ident">INSERT</span>, <span class="ident">ALT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">INSERT</span>, <span class="ident">ALT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">INSERT</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">INSERT</span>, <span class="ident">CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">INSERT</span>, <span class="ident">CTRL_ALT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">INSERT</span>, <span class="ident">CTRL_ALT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Insert</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">DELETE</span>, <span class="ident">SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::SHIFT</span>),
+                        (<span class="ident">DELETE</span>, <span class="ident">ALT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">DELETE</span>, <span class="ident">ALT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">DELETE</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">DELETE</span>, <span class="ident">CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">DELETE</span>, <span class="ident">CTRL_ALT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">DELETE</span>, <span class="ident">CTRL_ALT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">PAGE_UP</span>, <span class="ident">SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::SHIFT</span>),
+                        (<span class="ident">PAGE_UP</span>, <span class="ident">ALT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">PAGE_UP</span>, <span class="ident">ALT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">PAGE_UP</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">PAGE_UP</span>, <span class="ident">CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">PAGE_UP</span>, <span class="ident">CTRL_ALT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">PAGE_UP</span>, <span class="ident">CTRL_ALT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::SHIFT</span>),
+                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">ALT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::ALT</span>),
+                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">ALT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::ALT_SHIFT</span>),
+                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL</span>),
+                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">CTRL_ALT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL_ALT</span>),
+                        (<span class="ident">PAGE_DOWN</span>, <span class="ident">CTRL_ALT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL_ALT_SHIFT</span>),
+                        <span class="kw">_</span> =&gt; {
                             <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>,
                                    <span class="string">&quot;unsupported esc sequence: \\E[{};{:?}~&quot;</span>, <span class="ident">seq2</span>, <span class="ident">seq4</span>);
                             <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
@@ -1821,25 +1821,25 @@
             }
         } <span class="kw">else</span> {
             <span class="prelude-val">Ok</span>(<span class="kw">match</span> (<span class="ident">seq2</span>, <span class="ident">seq3</span>) {
-                (<span class="ident">DELETE</span>, <span class="ident">RXVT_CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL</span>),
-                (<span class="ident">DELETE</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                (<span class="ident">CTRL</span>, <span class="ident">UP</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL</span>),
-                (<span class="ident">CTRL</span>, <span class="ident">DOWN</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL</span>),
-                (<span class="ident">CTRL</span>, <span class="ident">RIGHT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL</span>),
-                (<span class="ident">CTRL</span>, <span class="ident">LEFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL</span>),
-                (<span class="ident">PAGE_UP</span>, <span class="ident">RXVT_CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL</span>),
-                (<span class="ident">PAGE_UP</span>, <span class="ident">RXVT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::SHIFT</span>),
-                (<span class="ident">PAGE_UP</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                (<span class="ident">PAGE_DOWN</span>, <span class="ident">RXVT_CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL</span>),
-                (<span class="ident">PAGE_DOWN</span>, <span class="ident">RXVT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::SHIFT</span>),
-                (<span class="ident">PAGE_DOWN</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                (<span class="ident">RXVT_HOME</span>, <span class="ident">RXVT_CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL</span>),
-                (<span class="ident">RXVT_HOME</span>, <span class="ident">RXVT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::SHIFT</span>),
-                (<span class="ident">RXVT_HOME</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                (<span class="ident">RXVT_END</span>, <span class="ident">RXVT_CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL</span>), <span class="comment">// kEND5 or kel</span>
-                (<span class="ident">RXVT_END</span>, <span class="ident">RXVT_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::SHIFT</span>),
-                (<span class="ident">RXVT_END</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL_SHIFT</span>),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                (<span class="ident">DELETE</span>, <span class="ident">RXVT_CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL</span>),
+                (<span class="ident">DELETE</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                (<span class="ident">CTRL</span>, <span class="ident">UP</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL</span>),
+                (<span class="ident">CTRL</span>, <span class="ident">DOWN</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL</span>),
+                (<span class="ident">CTRL</span>, <span class="ident">RIGHT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL</span>),
+                (<span class="ident">CTRL</span>, <span class="ident">LEFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL</span>),
+                (<span class="ident">PAGE_UP</span>, <span class="ident">RXVT_CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL</span>),
+                (<span class="ident">PAGE_UP</span>, <span class="ident">RXVT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::SHIFT</span>),
+                (<span class="ident">PAGE_UP</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageUp</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                (<span class="ident">PAGE_DOWN</span>, <span class="ident">RXVT_CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL</span>),
+                (<span class="ident">PAGE_DOWN</span>, <span class="ident">RXVT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::SHIFT</span>),
+                (<span class="ident">PAGE_DOWN</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::PageDown</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                (<span class="ident">RXVT_HOME</span>, <span class="ident">RXVT_CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL</span>),
+                (<span class="ident">RXVT_HOME</span>, <span class="ident">RXVT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::SHIFT</span>),
+                (<span class="ident">RXVT_HOME</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                (<span class="ident">RXVT_END</span>, <span class="ident">RXVT_CTRL</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL</span>), <span class="comment">// kEND5 or kel</span>
+                (<span class="ident">RXVT_END</span>, <span class="ident">RXVT_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::SHIFT</span>),
+                (<span class="ident">RXVT_END</span>, <span class="ident">RXVT_CTRL_SHIFT</span>) =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::CTRL_SHIFT</span>),
+                <span class="kw">_</span> =&gt; {
                     <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>,
                            <span class="string">&quot;unsupported esc sequence: \\E[{}{:?}&quot;</span>, <span class="ident">seq2</span>, <span class="ident">seq3</span>);
                     <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
@@ -1849,86 +1849,86 @@
     }
 
     <span class="doccomment">/// Handle \EO &lt;seq2&gt; escape sequences</span>
-    <span class="kw">fn</span> <span class="ident">escape_o</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">escape_o</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">seq2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">seq2</span> {
-            <span class="ident">UP</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::NONE</span>),
-            <span class="ident">DOWN</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::NONE</span>),
-            <span class="ident">RIGHT</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>),
-            <span class="ident">LEFT</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::NONE</span>),
+            <span class="ident">UP</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::NONE</span>),
+            <span class="ident">DOWN</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::NONE</span>),
+            <span class="ident">RIGHT</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>),
+            <span class="ident">LEFT</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::NONE</span>),
             <span class="comment">//&#39;E&#39; =&gt; E(K::, M::),// key_b2, kb2</span>
-            <span class="ident">END</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>),   <span class="comment">// kend</span>
-            <span class="ident">HOME</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::NONE</span>), <span class="comment">// khome</span>
-            <span class="string">&#39;M&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E::ENTER</span>,             <span class="comment">// kent</span>
-            <span class="string">&#39;P&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">1</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf1</span>
-            <span class="string">&#39;Q&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">2</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf2</span>
-            <span class="string">&#39;R&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">3</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf3</span>
-            <span class="string">&#39;S&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">4</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf4</span>
-            <span class="string">&#39;a&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL</span>),
-            <span class="string">&#39;b&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL</span>),
-            <span class="string">&#39;c&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL</span>), <span class="comment">// rxvt</span>
-            <span class="string">&#39;d&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL</span>),  <span class="comment">// rxvt</span>
-            <span class="string">&#39;l&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">8</span>), <span class="ident">M::NONE</span>),
-            <span class="string">&#39;t&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">5</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf5 or kb1</span>
-            <span class="string">&#39;u&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">6</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf6 or kb2</span>
-            <span class="string">&#39;v&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">7</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf7 or kb3</span>
-            <span class="string">&#39;w&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">9</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf9 or ka1</span>
-            <span class="string">&#39;x&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">10</span>), <span class="ident">M::NONE</span>), <span class="comment">// kf10 or ka2</span>
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">END</span> =&gt; <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>),   <span class="comment">// kend</span>
+            <span class="ident">HOME</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::NONE</span>), <span class="comment">// khome</span>
+            <span class="string">&#39;M&#39;</span> =&gt; <span class="ident">E::ENTER</span>,             <span class="comment">// kent</span>
+            <span class="string">&#39;P&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">1</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf1</span>
+            <span class="string">&#39;Q&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">2</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf2</span>
+            <span class="string">&#39;R&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">3</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf3</span>
+            <span class="string">&#39;S&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">4</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf4</span>
+            <span class="string">&#39;a&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::CTRL</span>),
+            <span class="string">&#39;b&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::CTRL</span>),
+            <span class="string">&#39;c&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL</span>), <span class="comment">// rxvt</span>
+            <span class="string">&#39;d&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL</span>),  <span class="comment">// rxvt</span>
+            <span class="string">&#39;l&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">8</span>), <span class="ident">M::NONE</span>),
+            <span class="string">&#39;t&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">5</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf5 or kb1</span>
+            <span class="string">&#39;u&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">6</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf6 or kb2</span>
+            <span class="string">&#39;v&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">7</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf7 or kb3</span>
+            <span class="string">&#39;w&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">9</span>), <span class="ident">M::NONE</span>),  <span class="comment">// kf9 or ka1</span>
+            <span class="string">&#39;x&#39;</span> =&gt; <span class="ident">E</span>(<span class="ident">K::F</span>(<span class="number">10</span>), <span class="ident">M::NONE</span>), <span class="comment">// kf10 or ka2</span>
+            <span class="kw">_</span> =&gt; {
                 <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;unsupported esc sequence: \\EO{:?}&quot;</span>, <span class="ident">seq2</span>);
                 <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>)
             }
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">timeout_ms</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">::nix::Result</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">timeout_ms</span>: <span class="ident">i32</span>) -&gt; <span class="ident">::nix::Result</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fds</span> <span class="op">=</span> [<span class="ident">poll::PollFd::new</span>(<span class="ident">STDIN_FILENO</span>, <span class="ident">PollFlags::POLLIN</span>)];
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">poll::poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fds</span>, <span class="ident">timeout_ms</span>);
         <span class="kw">match</span> <span class="ident">r</span> {
-            <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">r</span>,
-            <span class="prelude-val">Err</span>(<span class="ident">nix::errno::Errno::EINTR</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="ident">r</span>,
+            <span class="prelude-val">Err</span>(<span class="ident">nix::errno::Errno::EINTR</span>) =&gt; {
                 <span class="kw">if</span> <span class="ident">SIGWINCH</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>) {
                     <span class="ident">r</span>
                 } <span class="kw">else</span> {
                     <span class="prelude-val">Ok</span>(<span class="number">0</span>) <span class="comment">// Ignore EINTR while polling</span>
                 }
             }
-            <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">r</span>,
+            <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="ident">r</span>,
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">RawReader</span> <span class="kw">for</span> <span class="ident">PosixRawReader</span> {
-    <span class="kw">fn</span> <span class="ident">next_key</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">single_esc_abort</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_key</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">single_esc_abort</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">KeyEvent::new</span>(<span class="ident">c</span>, <span class="ident">M::NONE</span>);
-        <span class="kw">if</span> <span class="ident">key</span> <span class="op">=</span><span class="op">=</span> <span class="ident">E::ESC</span> {
-            <span class="kw">let</span> <span class="ident">timeout_ms</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">single_esc_abort</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">timeout_ms</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
+        <span class="kw">if</span> <span class="ident">key</span> <span class="op">==</span> <span class="ident">E::ESC</span> {
+            <span class="kw">let</span> <span class="ident">timeout_ms</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">single_esc_abort</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">timeout_ms</span> <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
                 <span class="number">0</span>
             } <span class="kw">else</span> {
                 <span class="self">self</span>.<span class="ident">timeout_ms</span>
             };
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">poll</span>(<span class="ident">timeout_ms</span>) {
-                <span class="prelude-val">Ok</span>(<span class="ident">n</span>) <span class="kw">if</span> <span class="ident">n</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">Ok</span>(<span class="ident">n</span>) <span class="kw">if</span> <span class="ident">n</span> <span class="op">==</span> <span class="number">0</span> =&gt; {
                     <span class="comment">// single escape</span>
                 }
-                <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; {
                     <span class="comment">// escape sequence</span>
                     <span class="ident">key</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">escape_sequence</span>()<span class="question-mark">?</span>
                 }
                 <span class="comment">// Err(ref e) if e.kind() == ErrorKind::Interrupted =&gt; continue,</span>
-                <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>.<span class="ident">into</span>()),
+                <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>.<span class="ident">into</span>()),
             }
         }
         <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;c: {:?} =&gt; key: {:?}&quot;</span>, <span class="ident">c</span>, <span class="ident">key</span>);
         <span class="prelude-val">Ok</span>(<span class="ident">key</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">next_char</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_char</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
             <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stdin</span>.<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">buf</span>)<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="ident">n</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="kw">if</span> <span class="ident">n</span> <span class="op">==</span> <span class="number">0</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error::ReadlineError::Eof</span>);
             }
             <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>[<span class="number">0</span>];
@@ -1941,19 +1941,19 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">read_pasted_text</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read_pasted_text</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">String::new</span>();
         <span class="kw">loop</span> {
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span> {
-                <span class="string">&#39;\x1b&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="string">&#39;\x1b&#39;</span> =&gt; {
                     <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">escape_sequence</span>()<span class="question-mark">?</span>;
-                    <span class="kw">if</span> <span class="ident">key</span> <span class="op">=</span><span class="op">=</span> <span class="ident">E</span>(<span class="ident">K::BracketedPasteEnd</span>, <span class="ident">M::NONE</span>) {
+                    <span class="kw">if</span> <span class="ident">key</span> <span class="op">==</span> <span class="ident">E</span>(<span class="ident">K::BracketedPasteEnd</span>, <span class="ident">M::NONE</span>) {
                         <span class="kw">break</span>;
                     } <span class="kw">else</span> {
                         <span class="kw">continue</span>; <span class="comment">// TODO validate</span>
                     }
                 }
-                <span class="ident">c</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">buffer</span>.<span class="ident">push</span>(<span class="ident">c</span>),
+                <span class="ident">c</span> =&gt; <span class="ident">buffer</span>.<span class="ident">push</span>(<span class="ident">c</span>),
             };
         }
         <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">replace</span>(<span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;\n&quot;</span>);
@@ -1992,7 +1992,7 @@
         <span class="ident">tab_stop</span>: <span class="ident">usize</span>,
         <span class="ident">colors_enabled</span>: <span class="ident">bool</span>,
         <span class="ident">bell_style</span>: <span class="ident">BellStyle</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    ) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">cols</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">get_win_size</span>(<span class="kw-2">&amp;</span><span class="ident">out</span>);
         <span class="self">Self</span> {
             <span class="ident">out</span>,
@@ -2027,40 +2027,40 @@
 <span class="kw">impl</span> <span class="ident">Renderer</span> <span class="kw">for</span> <span class="ident">PosixRenderer</span> {
     <span class="kw">type</span> <span class="ident">Reader</span> <span class="op">=</span> <span class="ident">PosixRawReader</span>;
 
-    <span class="kw">fn</span> <span class="ident">move_cursor</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">old</span>: <span class="ident">Position</span>, <span class="ident">new</span>: <span class="ident">Position</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">move_cursor</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">old</span>: <span class="ident">Position</span>, <span class="ident">new</span>: <span class="ident">Position</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">std::fmt::Write</span>;
         <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">clear</span>();
         <span class="kw">let</span> <span class="ident">row_ordering</span> <span class="op">=</span> <span class="ident">new</span>.<span class="ident">row</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">old</span>.<span class="ident">row</span>);
-        <span class="kw">if</span> <span class="ident">row_ordering</span> <span class="op">=</span><span class="op">=</span> <span class="ident">cmp::Ordering::Greater</span> {
+        <span class="kw">if</span> <span class="ident">row_ordering</span> <span class="op">==</span> <span class="ident">cmp::Ordering::Greater</span> {
             <span class="comment">// move down</span>
             <span class="kw">let</span> <span class="ident">row_shift</span> <span class="op">=</span> <span class="ident">new</span>.<span class="ident">row</span> <span class="op">-</span> <span class="ident">old</span>.<span class="ident">row</span>;
-            <span class="kw">if</span> <span class="ident">row_shift</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+            <span class="kw">if</span> <span class="ident">row_shift</span> <span class="op">==</span> <span class="number">1</span> {
                 <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">push_str</span>(<span class="string">&quot;\x1b[B&quot;</span>);
             } <span class="kw">else</span> {
                 <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">buffer</span>, <span class="string">&quot;\x1b[{}B&quot;</span>, <span class="ident">row_shift</span>).<span class="ident">unwrap</span>();
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">row_ordering</span> <span class="op">=</span><span class="op">=</span> <span class="ident">cmp::Ordering::Less</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">row_ordering</span> <span class="op">==</span> <span class="ident">cmp::Ordering::Less</span> {
             <span class="comment">// move up</span>
             <span class="kw">let</span> <span class="ident">row_shift</span> <span class="op">=</span> <span class="ident">old</span>.<span class="ident">row</span> <span class="op">-</span> <span class="ident">new</span>.<span class="ident">row</span>;
-            <span class="kw">if</span> <span class="ident">row_shift</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+            <span class="kw">if</span> <span class="ident">row_shift</span> <span class="op">==</span> <span class="number">1</span> {
                 <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">push_str</span>(<span class="string">&quot;\x1b[A&quot;</span>);
             } <span class="kw">else</span> {
                 <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">buffer</span>, <span class="string">&quot;\x1b[{}A&quot;</span>, <span class="ident">row_shift</span>).<span class="ident">unwrap</span>();
             }
         }
         <span class="kw">let</span> <span class="ident">col_ordering</span> <span class="op">=</span> <span class="ident">new</span>.<span class="ident">col</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">old</span>.<span class="ident">col</span>);
-        <span class="kw">if</span> <span class="ident">col_ordering</span> <span class="op">=</span><span class="op">=</span> <span class="ident">cmp::Ordering::Greater</span> {
+        <span class="kw">if</span> <span class="ident">col_ordering</span> <span class="op">==</span> <span class="ident">cmp::Ordering::Greater</span> {
             <span class="comment">// move right</span>
             <span class="kw">let</span> <span class="ident">col_shift</span> <span class="op">=</span> <span class="ident">new</span>.<span class="ident">col</span> <span class="op">-</span> <span class="ident">old</span>.<span class="ident">col</span>;
-            <span class="kw">if</span> <span class="ident">col_shift</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+            <span class="kw">if</span> <span class="ident">col_shift</span> <span class="op">==</span> <span class="number">1</span> {
                 <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">push_str</span>(<span class="string">&quot;\x1b[C&quot;</span>);
             } <span class="kw">else</span> {
                 <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">buffer</span>, <span class="string">&quot;\x1b[{}C&quot;</span>, <span class="ident">col_shift</span>).<span class="ident">unwrap</span>();
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">col_ordering</span> <span class="op">=</span><span class="op">=</span> <span class="ident">cmp::Ordering::Less</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">col_ordering</span> <span class="op">==</span> <span class="ident">cmp::Ordering::Less</span> {
             <span class="comment">// move left</span>
             <span class="kw">let</span> <span class="ident">col_shift</span> <span class="op">=</span> <span class="ident">old</span>.<span class="ident">col</span> <span class="op">-</span> <span class="ident">new</span>.<span class="ident">col</span>;
-            <span class="kw">if</span> <span class="ident">col_shift</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+            <span class="kw">if</span> <span class="ident">col_shift</span> <span class="op">==</span> <span class="number">1</span> {
                 <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">push_str</span>(<span class="string">&quot;\x1b[D&quot;</span>);
             } <span class="kw">else</span> {
                 <span class="macro">write!</span>(<span class="self">self</span>.<span class="ident">buffer</span>, <span class="string">&quot;\x1b[{}D&quot;</span>, <span class="ident">col_shift</span>).<span class="ident">unwrap</span>();
@@ -2077,7 +2077,7 @@
         <span class="ident">old_layout</span>: <span class="kw-2">&amp;</span><span class="ident">Layout</span>,
         <span class="ident">new_layout</span>: <span class="kw-2">&amp;</span><span class="ident">Layout</span>,
         <span class="ident">highlighter</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">Highlighter</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">std::fmt::Write</span>;
         <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">clear</span>();
 
@@ -2109,7 +2109,7 @@
             }
         }
         <span class="comment">// we have to generate our own newline on line wrap</span>
-        <span class="kw">if</span> <span class="ident">end_pos</span>.<span class="ident">col</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
+        <span class="kw">if</span> <span class="ident">end_pos</span>.<span class="ident">col</span> <span class="op">==</span> <span class="number">0</span>
             <span class="op">&amp;&amp;</span> <span class="ident">end_pos</span>.<span class="ident">row</span> <span class="op">&gt;</span> <span class="number">0</span>
             <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">hint</span>
                 .<span class="ident">map</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> <span class="ident">h</span>.<span class="ident">ends_with</span>(<span class="string">&#39;\n&#39;</span>))
@@ -2135,22 +2135,22 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">write_and_flush</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">write_and_flush</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="ident">write_and_flush</span>(<span class="self">self</span>.<span class="ident">out</span>, <span class="ident">buf</span>)
     }
 
     <span class="doccomment">/// Control characters are treated as having zero width.</span>
     <span class="doccomment">/// Characters with 2 column width are correctly handled (not split).</span>
-    <span class="kw">fn</span> <span class="ident">calculate_position</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">orig</span>: <span class="ident">Position</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Position</span> {
+    <span class="kw">fn</span> <span class="ident">calculate_position</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">orig</span>: <span class="ident">Position</span>) -&gt; <span class="ident">Position</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="ident">orig</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">esc_seq</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="ident">s</span>.<span class="ident">graphemes</span>(<span class="bool-val">true</span>) {
-            <span class="kw">if</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;\n&quot;</span> {
+            <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&quot;\n&quot;</span> {
                 <span class="ident">pos</span>.<span class="ident">row</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                 <span class="ident">pos</span>.<span class="ident">col</span> <span class="op">=</span> <span class="number">0</span>;
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">cw</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;\t&quot;</span> {
+            <span class="kw">let</span> <span class="ident">cw</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&quot;\t&quot;</span> {
                 <span class="self">self</span>.<span class="ident">tab_stop</span> <span class="op">-</span> (<span class="ident">pos</span>.<span class="ident">col</span> <span class="op">%</span> <span class="self">self</span>.<span class="ident">tab_stop</span>)
             } <span class="kw">else</span> {
                 <span class="ident">width</span>(<span class="ident">c</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">esc_seq</span>)
@@ -2161,31 +2161,31 @@
                 <span class="ident">pos</span>.<span class="ident">col</span> <span class="op">=</span> <span class="ident">cw</span>;
             }
         }
-        <span class="kw">if</span> <span class="ident">pos</span>.<span class="ident">col</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">cols</span> {
+        <span class="kw">if</span> <span class="ident">pos</span>.<span class="ident">col</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">cols</span> {
             <span class="ident">pos</span>.<span class="ident">col</span> <span class="op">=</span> <span class="number">0</span>;
             <span class="ident">pos</span>.<span class="ident">row</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         }
         <span class="ident">pos</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">beep</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">beep</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">bell_style</span> {
-            <span class="ident">BellStyle::Audible</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">BellStyle::Audible</span> =&gt; {
                 <span class="ident">io::stderr</span>().<span class="ident">write_all</span>(<span class="string">b&quot;\x07&quot;</span>)<span class="question-mark">?</span>;
                 <span class="ident">io::stderr</span>().<span class="ident">flush</span>()<span class="question-mark">?</span>;
                 <span class="prelude-val">Ok</span>(())
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(()),
+            <span class="kw">_</span> =&gt; <span class="prelude-val">Ok</span>(()),
         }
     }
 
     <span class="doccomment">/// Clear the screen. Used to handle ctrl+l</span>
-    <span class="kw">fn</span> <span class="ident">clear_screen</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">clear_screen</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">write_and_flush</span>(<span class="string">b&quot;\x1b[H\x1b[2J&quot;</span>)
     }
 
     <span class="doccomment">/// Check if a SIGWINCH signal has been received</span>
-    <span class="kw">fn</span> <span class="ident">sigwinch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">sigwinch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="ident">SIGWINCH</span>
             .<span class="ident">compare_exchange</span>(<span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="ident">Ordering::SeqCst</span>, <span class="ident">Ordering::SeqCst</span>)
             .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
@@ -2197,22 +2197,22 @@
         <span class="self">self</span>.<span class="ident">cols</span> <span class="op">=</span> <span class="ident">cols</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">get_columns</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">get_columns</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">cols</span>
     }
 
     <span class="doccomment">/// Try to get the number of rows in the current terminal,</span>
     <span class="doccomment">/// or assume 24 if it fails.</span>
-    <span class="kw">fn</span> <span class="ident">get_rows</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">get_rows</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">rows</span>) <span class="op">=</span> <span class="ident">get_win_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">out</span>);
         <span class="ident">rows</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">colors_enabled</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">colors_enabled</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">colors_enabled</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">move_cursor_at_leftmost</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">PosixRawReader</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">move_cursor_at_leftmost</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">PosixRawReader</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">rdr</span>.<span class="ident">poll</span>(<span class="number">0</span>)<span class="question-mark">?</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
             <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;cannot request cursor location&quot;</span>);
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
@@ -2220,7 +2220,7 @@
         <span class="comment">/* Report cursor location */</span>
         <span class="self">self</span>.<span class="ident">write_and_flush</span>(<span class="string">b&quot;\x1b[6n&quot;</span>)<span class="question-mark">?</span>;
         <span class="comment">/* Read the response: ESC [ rows ; cols R */</span>
-        <span class="kw">if</span> <span class="ident">rdr</span>.<span class="ident">poll</span>(<span class="number">100</span>)<span class="question-mark">?</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
+        <span class="kw">if</span> <span class="ident">rdr</span>.<span class="ident">poll</span>(<span class="number">100</span>)<span class="question-mark">?</span> <span class="op">==</span> <span class="number">0</span>
             <span class="op">|</span><span class="op">|</span> <span class="ident">rdr</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span> <span class="op">!</span><span class="op">=</span> <span class="string">&#39;\x1b&#39;</span>
             <span class="op">|</span><span class="op">|</span> <span class="ident">rdr</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span> <span class="op">!</span><span class="op">=</span> <span class="string">&#39;[&#39;</span>
             <span class="op">|</span><span class="op">|</span> <span class="ident">read_digits_until</span>(<span class="ident">rdr</span>, <span class="string">&#39;;&#39;</span>)<span class="question-mark">?</span>.<span class="ident">is_none</span>()
@@ -2237,18 +2237,18 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">read_digits_until</span>(<span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">PosixRawReader</span>, <span class="ident">sep</span>: <span class="ident">char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">read_digits_until</span>(<span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">PosixRawReader</span>, <span class="ident">sep</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">num</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">loop</span> {
         <span class="kw">match</span> <span class="ident">rdr</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span> {
-            <span class="ident">digit</span> @ <span class="string">&#39;0&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">digit</span> @ <span class="string">&#39;0&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span> =&gt; {
                 <span class="ident">num</span> <span class="op">=</span> <span class="ident">num</span>
                     .<span class="ident">saturating_mul</span>(<span class="number">10</span>)
                     .<span class="ident">saturating_add</span>(<span class="ident">digit</span>.<span class="ident">to_digit</span>(<span class="number">10</span>).<span class="ident">unwrap</span>());
                 <span class="kw">continue</span>;
             }
-            <span class="ident">c</span> <span class="kw">if</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="ident">sep</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+            <span class="ident">c</span> <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="ident">sep</span> =&gt; <span class="kw">break</span>,
+            <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
         }
     }
     <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">num</span>))
@@ -2289,11 +2289,11 @@
 }
 
 <span class="kw">impl</span> <span class="ident">PosixTerminal</span> {
-    <span class="kw">fn</span> <span class="ident">colors_enabled</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">colors_enabled</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">color_mode</span> {
-            <span class="ident">ColorMode::Enabled</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">stdstream_isatty</span>,
-            <span class="ident">ColorMode::Forced</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ColorMode::Disabled</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">ColorMode::Enabled</span> =&gt; <span class="self">self</span>.<span class="ident">stdstream_isatty</span>,
+            <span class="ident">ColorMode::Forced</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ColorMode::Disabled</span> =&gt; <span class="bool-val">false</span>,
         }
     }
 }
@@ -2309,7 +2309,7 @@
         <span class="ident">tab_stop</span>: <span class="ident">usize</span>,
         <span class="ident">bell_style</span>: <span class="ident">BellStyle</span>,
         <span class="ident">enable_bracketed_paste</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    ) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">term</span> <span class="op">=</span> <span class="self">Self</span> {
             <span class="ident">unsupported</span>: <span class="ident">is_unsupported_term</span>(),
             <span class="ident">stdin_isatty</span>: <span class="ident">is_a_tty</span>(<span class="ident">STDIN_FILENO</span>),
@@ -2330,22 +2330,22 @@
 
     <span class="doccomment">/// Check if current terminal can provide a rich line-editing user</span>
     <span class="doccomment">/// interface.</span>
-    <span class="kw">fn</span> <span class="ident">is_unsupported</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_unsupported</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">unsupported</span>
     }
 
     <span class="doccomment">/// check if stdin is connected to a terminal.</span>
-    <span class="kw">fn</span> <span class="ident">is_stdin_tty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_stdin_tty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">stdin_isatty</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">is_output_tty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_output_tty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">stdstream_isatty</span>
     }
 
     <span class="comment">// Interactive loop:</span>
 
-    <span class="kw">fn</span> <span class="ident">enable_raw_mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Mode</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">enable_raw_mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Mode</span><span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">nix::errno::Errno::ENOTTY</span>;
         <span class="kw">use</span> <span class="ident">nix::sys::termios</span>::{<span class="ident">ControlFlags</span>, <span class="ident">InputFlags</span>, <span class="ident">LocalFlags</span>, <span class="ident">SpecialCharacterIndices</span>};
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">stdin_isatty</span> {
@@ -2389,11 +2389,11 @@
     }
 
     <span class="doccomment">/// Create a RAW reader</span>
-    <span class="kw">fn</span> <span class="ident">create_reader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PosixRawReader</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">create_reader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PosixRawReader</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">PosixRawReader::new</span>(<span class="ident">config</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">create_writer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PosixRenderer</span> {
+    <span class="kw">fn</span> <span class="ident">create_writer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">PosixRenderer</span> {
         <span class="ident">PosixRenderer::new</span>(
             <span class="self">self</span>.<span class="ident">stream_type</span>,
             <span class="self">self</span>.<span class="ident">tab_stop</span>,
@@ -2404,20 +2404,20 @@
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">test</span>))]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suspend</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suspend</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">use</span> <span class="ident">nix::unistd::Pid</span>;
     <span class="comment">// suspend the whole process group</span>
     <span class="ident">signal::kill</span>(<span class="ident">Pid::from_raw</span>(<span class="number">0</span>), <span class="ident">signal::SIGTSTP</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">write_and_flush</span>(<span class="ident">out</span>: <span class="ident">OutputStreamType</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_and_flush</span>(<span class="ident">out</span>: <span class="ident">OutputStreamType</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">out</span> {
-        <span class="ident">OutputStreamType::Stdout</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">OutputStreamType::Stdout</span> =&gt; {
             <span class="ident">io::stdout</span>().<span class="ident">write_all</span>(<span class="ident">buf</span>)<span class="question-mark">?</span>;
             <span class="ident">io::stdout</span>().<span class="ident">flush</span>()<span class="question-mark">?</span>;
         }
-        <span class="ident">OutputStreamType::Stderr</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">OutputStreamType::Stderr</span> =&gt; {
             <span class="ident">io::stderr</span>().<span class="ident">write_all</span>(<span class="ident">buf</span>)<span class="question-mark">?</span>;
             <span class="ident">io::stderr</span>().<span class="ident">flush</span>()<span class="question-mark">?</span>;
         }

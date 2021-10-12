@@ -28,7 +28,7 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::extn::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">impl</span> <span class="ident">ConvertMut</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Options</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Artichoke</span> {
-    <span class="kw">fn</span> <span class="ident">convert_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Options</span> {
+    <span class="kw">fn</span> <span class="ident">convert_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">Value</span>) -&gt; <span class="ident">Options</span> {
         <span class="comment">// If options is an Integer, it should be one or more of the constants</span>
         <span class="comment">// Regexp::EXTENDED, Regexp::IGNORECASE, and Regexp::MULTILINE, logically</span>
         <span class="comment">// or-ed together. Otherwise, if options is not nil or false, the regexp</span>

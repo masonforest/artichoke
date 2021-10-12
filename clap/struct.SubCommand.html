@@ -2,7 +2,7 @@
 <p>This struct describes all the valid options of the subcommand for the program. Subcommands are
 essentially “sub-<a href="./struct.App.html"><code>App</code></a>s” and contain all the same possibilities (such as their own
 <a href="./struct.Arg.html">arguments</a>, subcommands, and settings).</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">App::new</span>(<span class="string">&quot;myprog&quot;</span>)
     .<span class="ident">subcommand</span>(
         <span class="ident">SubCommand::with_name</span>(<span class="string">&quot;config&quot;</span>)
@@ -12,7 +12,7 @@ essentially “sub-<a href="./struct.App.html"><code>App</code></a>s” and cont
                 .<span class="ident">index</span>(<span class="number">1</span>)))</code></pre></div>
 </div></details><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/subcommand.rs.html#38-72" title="goto source code">[src]</a></div><a href="#impl" class="anchor"></a><h3 class="code-header in-band">impl&lt;'a&gt; <a class="struct" href="struct.SubCommand.html" title="struct clap::SubCommand">SubCommand</a>&lt;'a&gt;</h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.with_name" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/clap/args/subcommand.rs.html#51-53" title="goto source code">[src]</a></div><a href="#method.with_name" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.with_name" class="fnname">with_name</a>&lt;'b&gt;(name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="struct" href="struct.App.html" title="struct clap::App">App</a>&lt;'a, 'b&gt;</h4></div></summary><div class="docblock"><p>Creates a new instance of a subcommand requiring a name. The name will be displayed
 to the user when they print version or help and usage information.</p>
-<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
+<h5 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">App::new</span>(<span class="string">&quot;myprog&quot;</span>)
     .<span class="ident">subcommand</span>(
         <span class="ident">SubCommand::with_name</span>(<span class="string">&quot;config&quot;</span>))</code></pre></div>

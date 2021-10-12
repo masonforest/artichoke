@@ -382,7 +382,7 @@
     <span class="doccomment">/// represented as a [`Vec&lt;u8&gt;`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Vec&lt;u8&gt;`]: alloc::vec::Vec</span>
-    <span class="kw">fn</span> <span class="ident">message</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">message</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span>;
 
     <span class="doccomment">/// The exception&#39;s class name.</span>
     <span class="doccomment">///</span>
@@ -403,7 +403,7 @@
     <span class="doccomment">/// represented as a [`Vec&lt;u8&gt;`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Vec&lt;u8&gt;`]: alloc::vec::Vec</span>
-    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">str</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">str</span><span class="op">&gt;</span>;
 }
 
 <span class="comment">// Assert that `RubyException` is object-safe (i.e. supports dynamic dispatch).</span>

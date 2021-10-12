@@ -581,7 +581,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Source</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Source&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;pattern&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pattern</span>.<span class="ident">as_bstr</span>())
             .<span class="ident">field</span>(<span class="string">&quot;options&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">options</span>)
@@ -590,13 +590,13 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Config</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Source</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">config</span>: <span class="ident">Config</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">config</span>: <span class="ident">Config</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::with_pattern_and_options</span>(<span class="ident">config</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">config</span>.<span class="ident">options</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Config</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Source</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::with_pattern_and_options</span>(<span class="ident">config</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">config</span>.<span class="ident">options</span>)
     }
 }
@@ -614,7 +614,7 @@
     <span class="doccomment">/// assert!(SOURCE.options().as_display_modifier().is_empty());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">pattern</span>: <span class="ident">Vec::new</span>(),
             <span class="ident">options</span>: <span class="ident">Options::new</span>(),
@@ -636,7 +636,7 @@
     <span class="doccomment">/// assert_eq!(source.options().as_display_modifier(), &quot;i&quot;);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">with_pattern_and_options</span>(<span class="ident">pattern</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">options</span>: <span class="ident">Options</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">with_pattern_and_options</span>(<span class="ident">pattern</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">options</span>: <span class="ident">Options</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> { <span class="ident">pattern</span>, <span class="ident">options</span> }
     }
 
@@ -657,7 +657,7 @@
     <span class="doccomment">/// assert!(source.is_casefold());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_casefold</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_casefold</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">ignore_case</span>().<span class="ident">is_enabled</span>()
     }
 
@@ -669,7 +669,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// A source&#39;s literal flag can only be set using [`Options::try_from_int`].</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_literal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_literal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">is_literal</span>()
     }
 
@@ -687,7 +687,7 @@
     <span class="doccomment">/// assert_eq!(source.pattern(), b&quot;Artichoke( Ruby)?&quot;);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pattern</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pattern</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
         <span class="self">self</span>.<span class="ident">pattern</span>.<span class="ident">as_slice</span>()
     }
 
@@ -705,7 +705,7 @@
     <span class="doccomment">/// assert_eq!(source.options().as_display_modifier(), &quot;i&quot;);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">options</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Options</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">options</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Options</span> {
         <span class="self">self</span>.<span class="ident">options</span>
     }
 }
@@ -723,7 +723,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Config</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Source&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;pattern&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pattern</span>.<span class="ident">as_bstr</span>())
             .<span class="ident">field</span>(<span class="string">&quot;options&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">options</span>)
@@ -732,13 +732,13 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Source</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Config</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">source</span>: <span class="ident">Source</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">source</span>: <span class="ident">Source</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::with_pattern_and_options</span>(<span class="ident">source</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">source</span>.<span class="ident">options</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Source</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Config</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Source</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Source</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::with_pattern_and_options</span>(<span class="ident">source</span>.<span class="ident">pattern</span>.<span class="ident">clone</span>(), <span class="ident">source</span>.<span class="ident">options</span>)
     }
 }
@@ -756,7 +756,7 @@
     <span class="doccomment">/// assert!(CONFIG.options().as_display_modifier().is_empty());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">pattern</span>: <span class="ident">Vec::new</span>(),
             <span class="ident">options</span>: <span class="ident">Options::new</span>(),
@@ -778,7 +778,7 @@
     <span class="doccomment">/// assert_eq!(config.options().as_display_modifier(), &quot;i&quot;);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">with_pattern_and_options</span>(<span class="ident">pattern</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">options</span>: <span class="ident">Options</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">with_pattern_and_options</span>(<span class="ident">pattern</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">options</span>: <span class="ident">Options</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> { <span class="ident">pattern</span>, <span class="ident">options</span> }
     }
 
@@ -796,7 +796,7 @@
     <span class="doccomment">/// assert_eq!(config.pattern(), b&quot;Artichoke( Ruby)?&quot;);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pattern</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pattern</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
         <span class="self">self</span>.<span class="ident">pattern</span>.<span class="ident">as_slice</span>()
     }
 
@@ -814,7 +814,7 @@
     <span class="doccomment">/// assert_eq!(config.options().as_display_modifier(), &quot;i&quot;);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">options</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Options</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">options</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Options</span> {
         <span class="self">self</span>.<span class="ident">options</span>
     }
 }
@@ -849,29 +849,29 @@
 <span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">must_use</span>]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nth_match_group</span>(<span class="ident">group</span>: <span class="ident">NonZeroUsize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nth_match_group</span>(<span class="ident">group</span>: <span class="ident">NonZeroUsize</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">group</span>.<span class="ident">get</span>() {
-        <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$1&quot;</span>),
-        <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$2&quot;</span>),
-        <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$3&quot;</span>),
-        <span class="number">4</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$4&quot;</span>),
-        <span class="number">5</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$5&quot;</span>),
-        <span class="number">6</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$6&quot;</span>),
-        <span class="number">7</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$7&quot;</span>),
-        <span class="number">8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$8&quot;</span>),
-        <span class="number">9</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$9&quot;</span>),
-        <span class="number">10</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$10&quot;</span>),
-        <span class="number">11</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$11&quot;</span>),
-        <span class="number">12</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$12&quot;</span>),
-        <span class="number">13</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$13&quot;</span>),
-        <span class="number">14</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$14&quot;</span>),
-        <span class="number">15</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$15&quot;</span>),
-        <span class="number">16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$16&quot;</span>),
-        <span class="number">17</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$17&quot;</span>),
-        <span class="number">18</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$18&quot;</span>),
-        <span class="number">19</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$19&quot;</span>),
-        <span class="number">20</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$20&quot;</span>),
-        <span class="ident">num</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="number">1</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$1&quot;</span>),
+        <span class="number">2</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$2&quot;</span>),
+        <span class="number">3</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$3&quot;</span>),
+        <span class="number">4</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$4&quot;</span>),
+        <span class="number">5</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$5&quot;</span>),
+        <span class="number">6</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$6&quot;</span>),
+        <span class="number">7</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$7&quot;</span>),
+        <span class="number">8</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$8&quot;</span>),
+        <span class="number">9</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$9&quot;</span>),
+        <span class="number">10</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$10&quot;</span>),
+        <span class="number">11</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$11&quot;</span>),
+        <span class="number">12</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$12&quot;</span>),
+        <span class="number">13</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$13&quot;</span>),
+        <span class="number">14</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$14&quot;</span>),
+        <span class="number">15</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$15&quot;</span>),
+        <span class="number">16</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$16&quot;</span>),
+        <span class="number">17</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$17&quot;</span>),
+        <span class="number">18</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$18&quot;</span>),
+        <span class="number">19</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$19&quot;</span>),
+        <span class="number">20</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$20&quot;</span>),
+        <span class="ident">num</span> =&gt; {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;$&quot;</span>);
             <span class="comment">// Suppress fmt errors because this function is infallible.</span>
             <span class="comment">//</span>
@@ -914,10 +914,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`Vec&lt;u8&gt;`]: std::vec::Vec</span>
 <span class="attribute">#[<span class="ident">must_use</span>]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nth_match_group_bytes</span>(<span class="ident">group</span>: <span class="ident">NonZeroUsize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nth_match_group_bytes</span>(<span class="ident">group</span>: <span class="ident">NonZeroUsize</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">nth_match_group</span>(<span class="ident">group</span>) {
-        <span class="ident">Cow::Borrowed</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Borrowed</span>(<span class="ident">s</span>.<span class="ident">as_bytes</span>()),
-        <span class="ident">Cow::Owned</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cow::Owned</span>(<span class="ident">s</span>.<span class="ident">into_bytes</span>()),
+        <span class="ident">Cow::Borrowed</span>(<span class="ident">s</span>) =&gt; <span class="ident">Cow::Borrowed</span>(<span class="ident">s</span>.<span class="ident">as_bytes</span>()),
+        <span class="ident">Cow::Owned</span>(<span class="ident">s</span>) =&gt; <span class="ident">Cow::Owned</span>(<span class="ident">s</span>.<span class="ident">into_bytes</span>()),
     }
 }
 

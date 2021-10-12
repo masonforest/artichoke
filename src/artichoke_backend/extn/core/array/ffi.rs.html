@@ -301,26 +301,26 @@
 
 <span class="comment">// MRB_API mrb_value mrb_ary_new(mrb_state *mrb);</span>
 <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_new</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_new</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Array::new</span>();
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Array::alloc_value</span>(<span class="ident">result</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
 <span class="comment">// MRB_API mrb_value mrb_ary_new_capa(mrb_state*, mrb_int);</span>
 <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_new_capa</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">capa</span>: <span class="ident">sys::mrb_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_new_capa</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">capa</span>: <span class="ident">sys::mrb_int</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">capacity</span> <span class="op">=</span> <span class="ident">usize::try_from</span>(<span class="ident">capa</span>).<span class="ident">unwrap_or_default</span>();
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Array::with_capacity</span>(<span class="ident">capacity</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Array::alloc_value</span>(<span class="ident">result</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">value</span>.<span class="ident">inner</span>(),
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
@@ -330,19 +330,19 @@
     <span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>,
     <span class="ident">size</span>: <span class="ident">sys::mrb_int</span>,
     <span class="ident">vals</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">sys::mrb_value</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">usize::try_from</span>(<span class="ident">size</span>).<span class="ident">unwrap_or_default</span>();
     <span class="kw">let</span> <span class="ident">values</span> <span class="op">=</span> <span class="ident">slice::from_raw_parts</span>(<span class="ident">vals</span>, <span class="ident">size</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Array::from</span>(<span class="ident">values</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Array::alloc_value</span>(<span class="ident">result</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">basic</span> <span class="op">=</span> <span class="ident">sys::mrb_sys_basic_ptr</span>(<span class="ident">value</span>.<span class="ident">inner</span>());
             <span class="ident">sys::mrb_write_barrier</span>(<span class="ident">mrb</span>, <span class="ident">basic</span>);
             <span class="ident">value</span>.<span class="ident">inner</span>()
         }
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
@@ -352,24 +352,24 @@
     <span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>,
     <span class="ident">one</span>: <span class="ident">sys::mrb_value</span>,
     <span class="ident">two</span>: <span class="ident">sys::mrb_value</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Array::assoc</span>(<span class="ident">one</span>.<span class="ident">into</span>(), <span class="ident">two</span>.<span class="ident">into</span>());
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Array::alloc_value</span>(<span class="ident">result</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">basic</span> <span class="op">=</span> <span class="ident">sys::mrb_sys_basic_ptr</span>(<span class="ident">value</span>.<span class="ident">inner</span>());
             <span class="ident">sys::mrb_write_barrier</span>(<span class="ident">mrb</span>, <span class="ident">basic</span>);
             <span class="ident">value</span>.<span class="ident">inner</span>()
         }
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
 <span class="comment">// MRB_API mrb_value mrb_ary_splat(mrb_state *mrb, mrb_value value);</span>
 <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_splat</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">value</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_splat</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">value</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">value</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">value</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>).<span class="ident">is_ok</span>() {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>)
@@ -379,12 +379,12 @@
         <span class="ident">Array::alloc_value</span>(<span class="ident">result</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>)
     };
     <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">basic</span> <span class="op">=</span> <span class="ident">sys::mrb_sys_basic_ptr</span>(<span class="ident">value</span>.<span class="ident">inner</span>());
             <span class="ident">sys::mrb_write_barrier</span>(<span class="ident">mrb</span>, <span class="ident">basic</span>);
             <span class="ident">value</span>.<span class="ident">inner</span>()
         }
-        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
+        <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
@@ -393,7 +393,7 @@
 <span class="comment">// This function corresponds to the `OP_ARYCAT` VM opcode.</span>
 <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_concat</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">ary</span>: <span class="ident">sys::mrb_value</span>, <span class="ident">other</span>: <span class="ident">sys::mrb_value</span>) {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>, <span class="ident">or_else</span> <span class="op">=</span> ());
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>, <span class="ident">or_else</span> <span class="op">=</span> ());
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">other</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
@@ -421,8 +421,8 @@
 
 <span class="comment">// MRB_API mrb_value mrb_ary_pop(mrb_state *mrb, mrb_value ary);</span>
 <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_pop</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">ary</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_pop</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">ary</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
         <span class="comment">// Safety:</span>
@@ -447,7 +447,7 @@
 <span class="comment">// MRB_API void mrb_ary_push(mrb_state *mrb, mrb_value array, mrb_value value);</span>
 <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
 <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_push</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">ary</span>: <span class="ident">sys::mrb_value</span>, <span class="ident">value</span>: <span class="ident">sys::mrb_value</span>) {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>, <span class="ident">or_else</span> <span class="op">=</span> ());
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>, <span class="ident">or_else</span> <span class="op">=</span> ());
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">value</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
@@ -471,8 +471,8 @@
     <span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>,
     <span class="ident">ary</span>: <span class="ident">sys::mrb_value</span>,
     <span class="ident">offset</span>: <span class="ident">sys::mrb_int</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">usize::try_from</span>(<span class="ident">offset</span>).<span class="ident">unwrap_or_default</span>();
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ary</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
@@ -491,7 +491,7 @@
     <span class="ident">offset</span>: <span class="ident">sys::mrb_int</span>,
     <span class="ident">value</span>: <span class="ident">sys::mrb_value</span>,
 ) {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>, <span class="ident">or_else</span> <span class="op">=</span> ());
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>, <span class="ident">or_else</span> <span class="op">=</span> ());
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">value</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
@@ -528,8 +528,8 @@
 
 <span class="comment">// MRB_API mrb_value mrb_ary_shift(mrb_state *mrb, mrb_value self)</span>
 <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_shift</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">ary</span>: <span class="ident">sys::mrb_value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">mrb_ary_shift</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">ary</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
         <span class="comment">// Safety:</span>
@@ -557,8 +557,8 @@
     <span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>,
     <span class="ident">ary</span>: <span class="ident">sys::mrb_value</span>,
     <span class="ident">value</span>: <span class="ident">sys::mrb_value</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sys::mrb_value</span> {
-    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">guard</span>);
+) -&gt; <span class="ident">sys::mrb_value</span> {
+    <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">array</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">ary</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">array</span>) <span class="op">=</span> <span class="ident">Array::unbox_from_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>) {
         <span class="comment">// Safety:</span>

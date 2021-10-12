@@ -10,7 +10,7 @@ submitting many AIO operations.  It can also be used with
 <code>LioMode::LIO_WAIT</code> to block on the result of several independent
 operations.  Used that way, it is often useful in programs that
 otherwise make little use of AIO.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h5 id="examples" class="section-header"><a href="#examples">Examples</a></h5>
 <p>Use <code>listio</code> to submit an aio operation and wait for its completion.  In
 this case, there is no need to use <a href="fn.aio_suspend.html"><code>aio_suspend</code></a> to wait or
 <a href="struct.AioCb.html#method.error"><code>AioCb::error</code></a> to poll.</p>
@@ -29,7 +29,7 @@ this case, there is no need to use <a href="fn.aio_suspend.html"><code>aio_suspe
 <span class="ident">liocb</span>.<span class="ident">listio</span>(<span class="ident">LioMode::LIO_WAIT</span>,
              <span class="ident">SigevNotify::SigevNone</span>).<span class="ident">unwrap</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">liocb</span>.<span class="ident">aio_return</span>(<span class="number">0</span>).<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">WBUF</span>.<span class="ident">len</span>());</code></pre></div>
-<h1 id="references" class="section-header"><a href="#references">References</a></h1>
+<h5 id="references" class="section-header"><a href="#references">References</a></h5>
 <p><a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/lio_listio.html"><code>lio_listio</code></a></p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.listio_resubmit" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../../src/nix/sys/aio.rs.html#966-1001" title="goto source code">[src]</a></div><a href="#method.listio_resubmit" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.listio_resubmit" class="fnname">listio_resubmit</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;mut self, <br>&nbsp;&nbsp;&nbsp;&nbsp;mode: <a class="enum" href="enum.LioMode.html" title="enum nix::sys::aio::LioMode">LioMode</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;sigev_notify: <a class="enum" href="../signal/enum.SigevNotify.html" title="enum nix::sys::signal::SigevNotify">SigevNotify</a><br>) -&gt; <a class="type" href="../../type.Result.html" title="type nix::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt;</h4></div></summary><div class="docblock"><p>Resubmits any incomplete operations with <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/lio_listio.html"><code>lio_listio</code></a>.</p>
 <p>Sometimes, due to system resource limitations, an <code>lio_listio</code> call will
@@ -39,7 +39,7 @@ operations will actually have been initiated.  <code>listio_resubmit</code> will
 resubmit any operations that are still uninitiated.</p>
 <p>After calling <code>listio_resubmit</code>, results should be collected by
 <a href="struct.LioCb.html#method.aio_return"><code>LioCb::aio_return</code></a>.</p>
-<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
+<h5 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">const</span> <span class="ident">WBUF</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="string">b&quot;abcdef123456&quot;</span>;
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">tempfile</span>().<span class="ident">unwrap</span>();
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">liocb</span> <span class="op">=</span> <span class="ident">LioCbBuilder::with_capacity</span>(<span class="number">1</span>)
@@ -52,13 +52,13 @@ resubmit any operations that are still uninitiated.</p>
         <span class="ident">LioOpcode::LIO_WRITE</span>
     ).<span class="ident">finish</span>();
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">liocb</span>.<span class="ident">listio</span>(<span class="ident">LioMode::LIO_WAIT</span>, <span class="ident">SigevNotify::SigevNone</span>);
-<span class="kw">while</span> <span class="ident">err</span> <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Err</span>(<span class="ident">Error::from</span>(<span class="ident">Errno::EIO</span>)) <span class="op">|</span><span class="op">|</span>
-      <span class="ident">err</span> <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Err</span>(<span class="ident">Error::from</span>(<span class="ident">Errno::EAGAIN</span>)) {
+<span class="kw">while</span> <span class="ident">err</span> <span class="op">==</span> <span class="prelude-val">Err</span>(<span class="ident">Error::from</span>(<span class="ident">Errno::EIO</span>)) <span class="op">|</span><span class="op">|</span>
+      <span class="ident">err</span> <span class="op">==</span> <span class="prelude-val">Err</span>(<span class="ident">Error::from</span>(<span class="ident">Errno::EAGAIN</span>)) {
     <span class="ident">thread::sleep</span>(<span class="ident">time::Duration::from_millis</span>(<span class="number">10</span>));
     <span class="ident">err</span> <span class="op">=</span> <span class="ident">liocb</span>.<span class="ident">listio_resubmit</span>(<span class="ident">LioMode::LIO_WAIT</span>, <span class="ident">SigevNotify::SigevNone</span>);
 }
 <span class="macro">assert_eq!</span>(<span class="ident">liocb</span>.<span class="ident">aio_return</span>(<span class="number">0</span>).<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">WBUF</span>.<span class="ident">len</span>());</code></pre></div>
-<h1 id="references-1" class="section-header"><a href="#references-1">References</a></h1>
+<h5 id="references-1" class="section-header"><a href="#references-1">References</a></h5>
 <p><a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/lio_listio.html"><code>lio_listio</code></a></p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.aio_return" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../../src/nix/sys/aio.rs.html#1011-1017" title="goto source code">[src]</a></div><a href="#method.aio_return" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.aio_return" class="fnname">aio_return</a>(&amp;mut self, i: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="type" href="../../type.Result.html" title="type nix::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.isize.html">isize</a>&gt;</h4></div></summary><div class="docblock"><p>Collect final status for an individual <code>AioCb</code> submitted as part of an
 <code>LioCb</code>.</p>

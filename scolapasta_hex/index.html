@@ -8,7 +8,7 @@ alphabet for encoding arbitrary octets.</p>
 <li>Encode into a <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Write.html" title="fmt::Write"><code>fmt::Write</code></a>: <a href="fn.format_into.html" title="format_into"><code>format_into</code></a>.</li>
 <li>Encode into a <a href="https://doc.rust-lang.org/std/io/trait.Write.html"><code>io::Write</code></a>: <a href="fn.write_into.html" title="write_into"><code>write_into</code></a>.</li>
 </ul>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="string">b&quot;Artichoke Ruby&quot;</span>;
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">String::new</span>();
 <span class="ident">scolapasta_hex::encode_into</span>(<span class="ident">data</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
@@ -18,10 +18,10 @@ alphabet for encoding arbitrary octets.</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="string">&quot;Artichoke Ruby&quot;</span>;
 <span class="kw">let</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">Hex::from</span>(<span class="ident">data</span>);
 <span class="macro">assert_eq!</span>(<span class="ident">iter</span>.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>(), <span class="string">&quot;4172746963686f6b652052756279&quot;</span>);</code></pre></div>
-<h1 id="no_std" class="section-header"><a href="#no_std"><code>no_std</code></a></h1>
+<h2 id="no_std" class="section-header"><a href="#no_std"><code>no_std</code></a></h2>
 <p>This crate is <code>no_std</code> compatible when built without the <code>std</code> feature. This
 crate optionally depends on <a href="https://doc.rust-lang.org/nightly/alloc/index.html" title="alloc"><code>alloc</code></a> when the <code>alloc</code> feature is enabled.</p>
-<h1 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h1>
+<h2 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h2>
 <p>All features are enabled by default.</p>
 <ul>
 <li><strong>std</strong> - Enables a dependency on the Rust Standard Library. Activating
@@ -31,14 +31,14 @@ feature also activates the <strong>alloc</strong> feature.</li>
 this feature enables APIs that require <a href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="alloc::string::String"><code>alloc::string::String</code></a>.</li>
 </ul>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="struct" href="struct.Hex.html" title="scolapasta_hex::Hex struct">Hex</a></div><div class="item-right docblock-short"><p>An iterator over a byte slice that returns the data as a sequence of hex
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Hex.html" title="scolapasta_hex::Hex struct">Hex</a></div><div class="item-right docblock-short"><p>An iterator over a byte slice that returns the data as a sequence of hex
 encoded <a href="https://doc.rust-lang.org/nightly/std/primitive.char.html" title="char"><code>char</code></a>s.</p>
-</div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="fn" href="fn.encode.html" title="scolapasta_hex::encode fn">encode</a><span class="stab portability" title="This is supported on crate feature `alloc` only"><code>alloc</code></span></div><div class="item-right docblock-short"><p>Encode arbitrary octets as base16. Returns a <a href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="String"><code>String</code></a>.</p>
-</div><div class="item-left module-item"><a class="fn" href="fn.encode_into.html" title="scolapasta_hex::encode_into fn">encode_into</a><span class="stab portability" title="This is supported on crate feature `alloc` only"><code>alloc</code></span></div><div class="item-right docblock-short"><p>Encode arbitrary octets as base16 into the given <a href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="String"><code>String</code></a>.</p>
-</div><div class="item-left module-item"><a class="fn" href="fn.escape_byte.html" title="scolapasta_hex::escape_byte fn">escape_byte</a></div><div class="item-right docblock-short"><p>Map from a <code>u8</code> to a hex encoded string literal.</p>
-</div><div class="item-left module-item"><a class="fn" href="fn.format_into.html" title="scolapasta_hex::format_into fn">format_into</a></div><div class="item-right docblock-short"><p>Write hex-encoded octets into the given <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Write.html" title="fmt::Write"><code>fmt::Write</code></a>.</p>
-</div><div class="item-left module-item"><a class="fn" href="fn.write_into.html" title="scolapasta_hex::write_into fn">write_into</a><span class="stab portability" title="This is supported on crate feature `std` only"><code>std</code></span></div><div class="item-right docblock-short"><p>Write hex-encoded octets into the given <a href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="io::Write"><code>io::Write</code></a>.</p>
-</div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="scolapasta_hex" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+</div></div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.encode.html" title="scolapasta_hex::encode fn">encode</a><span class="stab portability" title="This is supported on crate feature `alloc` only"><code>alloc</code></span></div><div class="item-right docblock-short"><p>Encode arbitrary octets as base16. Returns a <a href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="String"><code>String</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.encode_into.html" title="scolapasta_hex::encode_into fn">encode_into</a><span class="stab portability" title="This is supported on crate feature `alloc` only"><code>alloc</code></span></div><div class="item-right docblock-short"><p>Encode arbitrary octets as base16 into the given <a href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="String"><code>String</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.escape_byte.html" title="scolapasta_hex::escape_byte fn">escape_byte</a></div><div class="item-right docblock-short"><p>Map from a <code>u8</code> to a hex encoded string literal.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.format_into.html" title="scolapasta_hex::format_into fn">format_into</a></div><div class="item-right docblock-short"><p>Write hex-encoded octets into the given <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Write.html" title="fmt::Write"><code>fmt::Write</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.write_into.html" title="scolapasta_hex::write_into fn">write_into</a><span class="stab portability" title="This is supported on crate feature `std` only"><code>std</code></span></div><div class="item-right docblock-short"><p>Write hex-encoded octets into the given <a href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="io::Write"><code>io::Write</code></a>.</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="scolapasta_hex" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
     <script src="../main.js"></script>
 </body></html>

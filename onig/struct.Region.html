@@ -3,7 +3,7 @@
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.with_capacity" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/onig/region.rs.html#41-45" title="goto source code">[src]</a></div><a href="#method.with_capacity" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.with_capacity" class="fnname">with_capacity</a>(capacity: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="struct" href="struct.Region.html" title="struct onig::Region">Region</a></h4></div></summary><div class="docblock"><p>Create a new region with a given capacity. This function allocates
 a new region object as in <code>Region::new</code> and resizes it to
 contain at least <code>capacity</code> regions.</p>
-<h1 id="arguments" class="section-header"><a href="#arguments">Arguments</a></h1>
+<h5 id="arguments" class="section-header"><a href="#arguments">Arguments</a></h5>
 <ul>
 <li><code>capacity</code> - the number of captures this region should be
 capable of storing without allocation.</li>
@@ -17,7 +17,7 @@ again. See <a href="./onig_sys/fn.onig_region_clear.html"><code>onig_sys::onig_r
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.reserve" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/onig/region.rs.html#81-86" title="goto source code">[src]</a></div><a href="#method.reserve" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.reserve" class="fnname">reserve</a>(&amp;mut self, new_capacity: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>)</h4></div></summary><div class="docblock"><p>Updates the region to contain <code>new_capacity</code> slots. See
 <a href="./onig_sys/fn.onig_region_resize.html"><code>onig_sys::onig_region_resize</code></a> for mor
 information.</p>
-<h1 id="arguments-1" class="section-header"><a href="#arguments-1">Arguments</a></h1>
+<h5 id="arguments-1" class="section-header"><a href="#arguments-1">Arguments</a></h5>
 <ul>
 <li><code>new_capacity</code> - The new number of groups in the region.</li>
 </ul>

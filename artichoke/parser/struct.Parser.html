@@ -3,7 +3,7 @@
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.parse" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke/parser.rs.html#115-191" title="goto source code">[src]</a></div><a href="#method.parse" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.parse" class="fnname">parse</a>(&amp;mut self, code: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; <a class="enum" href="enum.State.html" title="enum artichoke::parser::State">State</a></h4></div></summary><div class="docblock"><p>Parse the code buffer to determine if the code is a complete expression
 that could be evaluated even though it may not be syntactically or
 semantically valid.</p>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+<h5 id="errors" class="section-header"><a href="#errors">Errors</a></h5>
 <p>If the supplied code is more than <code>isize::MAX</code> bytes long, an error is
 returned,</p>
 <p>If the underlying parser returns a UTF-8 invalid error message, an error

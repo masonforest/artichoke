@@ -15,14 +15,14 @@ conversions:</p>
 <a href="../extn/core/exception/struct.TypeError.html" title="TypeError"><code>TypeError</code></a>.</li>
 </ul>
 <p><a href="../extn/core/symbol/struct.Symbol.html"><code>Symbol</code></a>s are not coerced to byte slice by this implicit conversion.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">artichoke_backend::interpreter</span>()<span class="question-mark">?</span>;
 <span class="comment">// successful conversions</span>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">try_convert_mut</span>(<span class="string">&quot;artichoke&quot;</span>)<span class="question-mark">?</span>;
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="string">b&quot;class A; def to_str; &#39;spinoso&#39;; end; end; A.new&quot;</span>)<span class="question-mark">?</span>;
 
-<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">implicitly_convert_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">string</span>), <span class="prelude-val">Ok</span>(<span class="ident">s</span>) <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">s</span> <span class="op">=</span><span class="op">=</span> <span class="string">b&quot;artichoke&quot;</span>[..]));
-<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">implicitly_convert_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">a</span>), <span class="prelude-val">Ok</span>(<span class="ident">s</span>) <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">s</span> <span class="op">=</span><span class="op">=</span> <span class="string">b&quot;spinoso&quot;</span>[..]));
+<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">implicitly_convert_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">string</span>), <span class="prelude-val">Ok</span>(<span class="ident">s</span>) <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">s</span> <span class="op">==</span> <span class="string">b&quot;artichoke&quot;</span>[..]));
+<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">implicitly_convert_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">a</span>), <span class="prelude-val">Ok</span>(<span class="ident">s</span>) <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">s</span> <span class="op">==</span> <span class="string">b&quot;spinoso&quot;</span>[..]));
 
 <span class="comment">// failed conversions</span>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">nil</span> <span class="op">=</span> <span class="ident">Value::nil</span>();
@@ -38,7 +38,7 @@ conversions:</p>
 <span class="macro">assert!</span>(<span class="ident">implicitly_convert_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">d</span>).<span class="ident">is_err</span>());
 <span class="macro">assert!</span>(<span class="ident">implicitly_convert_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">e</span>).<span class="ident">is_err</span>());
 <span class="macro">assert!</span>(<span class="ident">implicitly_convert_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">f</span>).<span class="ident">is_err</span>());</code></pre></div>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
 <p>This function returns an error if:</p>
 <ul>
 <li>The given value is <code>nil</code>.</li>
@@ -48,7 +48,7 @@ conversions:</p>
 <li>The given value is not a string and raises an error in its <code>:to_str</code>
 method.</li>
 </ul>
-<h1 id="safety" class="section-header"><a href="#safety">Safety</a></h1>
+<h2 id="safety" class="section-header"><a href="#safety">Safety</a></h2>
 <p>Callers must ensure that <code>value</code> does not outlive the given interpreter.</p>
 <p>If a garbage collection can possibly run between calling this function and
 using the returned slice, callers should convert the slice to an owned byte

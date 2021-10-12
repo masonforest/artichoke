@@ -16,7 +16,7 @@ conversions:</p>
 </ul>
 <p>Floats and other numeric types are not coerced to integer by this implicit
 conversion.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident">artichoke_backend::interpreter</span>()<span class="question-mark">?</span>;
 <span class="comment">// successful conversions</span>
 <span class="kw">let</span> <span class="ident">integer</span> <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">convert</span>(<span class="number">17</span>);
@@ -39,7 +39,7 @@ conversion.</p>
 <span class="macro">assert!</span>(<span class="ident">implicitly_convert_to_int</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="ident">d</span>).<span class="ident">is_err</span>());
 <span class="macro">assert!</span>(<span class="ident">implicitly_convert_to_int</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="ident">e</span>).<span class="ident">is_err</span>());
 <span class="macro">assert!</span>(<span class="ident">implicitly_convert_to_int</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="ident">f</span>).<span class="ident">is_err</span>());</code></pre></div>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
 <p>This function returns an error if:</p>
 <ul>
 <li>The given value is <code>nil</code>.</li>

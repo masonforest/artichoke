@@ -4,11 +4,11 @@ in time. The write portion of this lock typically allows modification of the
 underlying data (exclusive access) and the read portion of this lock typically
 allows for read-only access (shared access).</p>
 </div></details><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/fd_lock/rw_lock.rs.html#17-126" title="goto source code">[src]</a></div><a href="#impl" class="anchor"></a><h3 class="code-header in-band">impl&lt;T:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/std/os/fd/raw/trait.AsRawFd.html" title="trait std::os::fd::raw::AsRawFd">AsRaw</a>&gt; <a class="struct" href="struct.RwLock.html" title="struct fd_lock::RwLock">RwLock</a>&lt;T&gt;</h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.new" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/fd_lock/rw_lock.rs.html#32-36" title="goto source code">[src]</a></div><a href="#method.new" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.new" class="fnname">new</a>(inner: T) -&gt; Self</h4></div></summary><div class="docblock"><p>Create a new instance.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h5 id="examples" class="section-header"><a href="#examples">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">fd_lock::RwLock</span>;
 <span class="kw">use</span> <span class="ident">std::fs::File</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std::io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">main</span>() -&gt; <span class="ident">std::io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">RwLock::new</span>(<span class="ident">File::open</span>(<span class="string">&quot;foo.txt&quot;</span>)<span class="question-mark">?</span>);
     <span class="prelude-val">Ok</span>(())
 }</code></pre></div>
@@ -21,7 +21,7 @@ respect to the ordering of whether contentious readers or writers will
 acquire the lock first.</p>
 <p>Returns an RAII guard which will release this thread’s shared access
 once it is dropped.</p>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+<h5 id="errors" class="section-header"><a href="#errors">Errors</a></h5>
 <p>On Unix this may return an <code>ErrorKind::Interrupted</code> if the operation was
 interrupted by a signal handler.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.try_read" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/fd_lock/rw_lock.rs.html#77-80" title="goto source code">[src]</a></div><a href="#method.try_read" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.try_read" class="fnname">try_read</a>(&amp;self) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="struct" href="struct.RwLockReadGuard.html" title="struct fd_lock::RwLockReadGuard">RwLockReadGuard</a>&lt;'_, T&gt;&gt;</h4></div></summary><div class="docblock"><p>Attempts to acquire this lock with shared read access.</p>
@@ -31,7 +31,7 @@ when it is dropped.</p>
 <p>This function does not block.</p>
 <p>This function does not provide any guarantees with respect to the ordering
 of whether contentious readers or writers will acquire the lock first.</p>
-<h1 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h1>
+<h5 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h5>
 <p>If the lock is already held and <code>ErrorKind::WouldBlock</code> error is returned.
 On Unix this may return an <code>ErrorKind::Interrupted</code> if the operation was
 interrupted by a signal handler.</p>
@@ -41,14 +41,14 @@ until it can be acquired.</p>
 currently have access to the lock.</p>
 <p>Returns an RAII guard which will drop the write access of this rwlock
 when dropped.</p>
-<h1 id="errors-2" class="section-header"><a href="#errors-2">Errors</a></h1>
+<h5 id="errors-2" class="section-header"><a href="#errors-2">Errors</a></h5>
 <p>On Unix this may return an <code>ErrorKind::Interrupted</code> if the operation was
 interrupted by a signal handler.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.try_write" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/fd_lock/rw_lock.rs.html#113-116" title="goto source code">[src]</a></div><a href="#method.try_write" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.try_write" class="fnname">try_write</a>(&amp;mut self) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="struct" href="struct.RwLockWriteGuard.html" title="struct fd_lock::RwLockWriteGuard">RwLockWriteGuard</a>&lt;'_, T&gt;&gt;</h4></div></summary><div class="docblock"><p>Attempts to lock this lock with exclusive write access.</p>
 <p>If the lock could not be acquired at this time, then <code>Err</code> is returned.
 Otherwise, an RAII guard is returned which will release the lock when
 it is dropped.</p>
-<h1 id="errors-3" class="section-header"><a href="#errors-3">Errors</a></h1>
+<h5 id="errors-3" class="section-header"><a href="#errors-3">Errors</a></h5>
 <p>If the lock is already held and <code>ErrorKind::WouldBlock</code> error is returned.
 On Unix this may return an <code>ErrorKind::Interrupted</code> if the operation was
 interrupted by a signal handler.</p>

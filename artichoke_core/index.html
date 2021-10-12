@@ -5,7 +5,7 @@ complete Ruby interpreter.</p>
 <p>Interpreters implement the traits in Artichoke Core to indicate which
 capabilities they offer. Defining interpreters by their capabilities allows
 for interpreter agnostic implementations of Ruby Core and Standard Library.</p>
-<h1 id="interpreter-apis" class="section-header"><a href="#interpreter-apis">Interpreter APIs</a></h1>
+<h2 id="interpreter-apis" class="section-header"><a href="#interpreter-apis">Interpreter APIs</a></h2>
 <p>Artichoke Core defines traits for the following interpreter capabilities:</p>
 <ul>
 <li><a href="constant/trait.DefineConstant.html"><code>DefineConstant</code></a>: Define global, class, and
@@ -33,14 +33,14 @@ interpreters to describe themselves.</li>
 <p>Artichoke Core also describes what capabilities a Ruby
 <a href="value/trait.Value.html"><code>Value</code></a> must have and how to <a href="convert/index.html">convert</a> between Ruby VM and
 Rust types.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <p><a href="https://artichoke.github.io/artichoke/artichoke_backend/"><code>artichoke-backend</code></a>
 is one implementation of the <code>artichoke-core</code> traits.</p>
 <p>To use all of the APIs defined in Artichoke Core, bring the traits into
 scope by importing the prelude:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">artichoke_core::prelude</span>::<span class="kw-2">*</span>;</code></pre></div>
-<h1 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h1>
+<h2 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h2>
 <p>All features are enabled by default:</p>
 <ul>
 <li><strong>std</strong>: By default, <code>artichoke-core</code> is <code>no_std</code> + <code>alloc</code>. Enabling
@@ -48,27 +48,27 @@ this feature adds several trait methods that depend on <code>OsStr</code> and <c
 as well as several implementations of <code>std::error::Error</code>.</li>
 </ul>
 </div></details><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="mod" href="class_registry/index.html" title="artichoke_core::class_registry mod">class_registry</a></div><div class="item-right docblock-short"><p>Define and store class specs on an interpreter.</p>
-</div><div class="item-left module-item"><a class="mod" href="coerce_to_numeric/index.html" title="artichoke_core::coerce_to_numeric mod">coerce_to_numeric</a></div><div class="item-right docblock-short"><p>Coerce Ruby values to native numerics.</p>
-</div><div class="item-left module-item"><a class="mod" href="constant/index.html" title="artichoke_core::constant mod">constant</a></div><div class="item-right docblock-short"><p>Define constants on an interpreter.</p>
-</div><div class="item-left module-item"><a class="mod" href="convert/index.html" title="artichoke_core::convert mod">convert</a></div><div class="item-right docblock-short"><p>Convert between Rust and Ruby objects.</p>
-</div><div class="item-left module-item"><a class="mod" href="debug/index.html" title="artichoke_core::debug mod">debug</a></div><div class="item-right docblock-short"><p>Routines for debugging and printing exception messages.</p>
-</div><div class="item-left module-item"><a class="mod" href="eval/index.html" title="artichoke_core::eval mod">eval</a></div><div class="item-right docblock-short"><p>Run code on an Artichoke interpreter.</p>
-</div><div class="item-left module-item"><a class="mod" href="file/index.html" title="artichoke_core::file mod">file</a></div><div class="item-right docblock-short"><p>File-backed Rust extensions for the Artichoke VM.</p>
-</div><div class="item-left module-item"><a class="mod" href="globals/index.html" title="artichoke_core::globals mod">globals</a></div><div class="item-right docblock-short"><p>Get and set global variables on an interpreter.</p>
-</div><div class="item-left module-item"><a class="mod" href="intern/index.html" title="artichoke_core::intern mod">intern</a></div><div class="item-right docblock-short"><p>Intern <a href="https://ruby-doc.org/core-2.6.3/Symbol.html"><code>Symbol</code></a>s on an interpreter.</p>
-</div><div class="item-left module-item"><a class="mod" href="io/index.html" title="artichoke_core::io mod">io</a></div><div class="item-right docblock-short"><p>I/O read and write APIs.</p>
-</div><div class="item-left module-item"><a class="mod" href="load/index.html" title="artichoke_core::load mod">load</a></div><div class="item-right docblock-short"><p>Load Ruby and Rust sources into the VM.</p>
-</div><div class="item-left module-item"><a class="mod" href="module_registry/index.html" title="artichoke_core::module_registry mod">module_registry</a></div><div class="item-right docblock-short"><p>Define and store module specs on an interpreter.</p>
-</div><div class="item-left module-item"><a class="mod" href="parser/index.html" title="artichoke_core::parser mod">parser</a></div><div class="item-right docblock-short"><p>Parse code on an Artichoke interpreter.</p>
-</div><div class="item-left module-item"><a class="mod" href="prelude/index.html" title="artichoke_core::prelude mod">prelude</a></div><div class="item-right docblock-short"><p>A “prelude” for users of the <code>artichoke-core</code> crate.</p>
-</div><div class="item-left module-item"><a class="mod" href="prng/index.html" title="artichoke_core::prng mod">prng</a></div><div class="item-right docblock-short"><p>Interpreter global psuedorandom number generator.</p>
-</div><div class="item-left module-item"><a class="mod" href="regexp/index.html" title="artichoke_core::regexp mod">regexp</a></div><div class="item-right docblock-short"><p>Track <code>Regexp</code> global state.</p>
-</div><div class="item-left module-item"><a class="mod" href="release_metadata/index.html" title="artichoke_core::release_metadata mod">release_metadata</a></div><div class="item-right docblock-short"><p>Information about an Artichoke build.</p>
-</div><div class="item-left module-item"><a class="mod" href="top_self/index.html" title="artichoke_core::top_self mod">top_self</a></div><div class="item-right docblock-short"><p>Expose the global context, called <a href="https://www.sitepoint.com/rubys-top-self-object/"><em>top self</em></a>, to the interpreter.</p>
-</div><div class="item-left module-item"><a class="mod" href="types/index.html" title="artichoke_core::types mod">types</a></div><div class="item-right docblock-short"><p>Ruby and Rust type mappings.</p>
-</div><div class="item-left module-item"><a class="mod" href="value/index.html" title="artichoke_core::value mod">value</a></div><div class="item-right docblock-short"><p>Types that implement <code>Value</code> can be represented in the Artichoke VM.</p>
-</div><div class="item-left module-item"><a class="mod" href="warn/index.html" title="artichoke_core::warn mod">warn</a></div><div class="item-right docblock-short"><p>Emit warnings during interpreter execution.</p>
-</div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="artichoke_core" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="class_registry/index.html" title="artichoke_core::class_registry mod">class_registry</a></div><div class="item-right docblock-short"><p>Define and store class specs on an interpreter.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="coerce_to_numeric/index.html" title="artichoke_core::coerce_to_numeric mod">coerce_to_numeric</a></div><div class="item-right docblock-short"><p>Coerce Ruby values to native numerics.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="constant/index.html" title="artichoke_core::constant mod">constant</a></div><div class="item-right docblock-short"><p>Define constants on an interpreter.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="convert/index.html" title="artichoke_core::convert mod">convert</a></div><div class="item-right docblock-short"><p>Convert between Rust and Ruby objects.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="debug/index.html" title="artichoke_core::debug mod">debug</a></div><div class="item-right docblock-short"><p>Routines for debugging and printing exception messages.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="eval/index.html" title="artichoke_core::eval mod">eval</a></div><div class="item-right docblock-short"><p>Run code on an Artichoke interpreter.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="file/index.html" title="artichoke_core::file mod">file</a></div><div class="item-right docblock-short"><p>File-backed Rust extensions for the Artichoke VM.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="globals/index.html" title="artichoke_core::globals mod">globals</a></div><div class="item-right docblock-short"><p>Get and set global variables on an interpreter.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="intern/index.html" title="artichoke_core::intern mod">intern</a></div><div class="item-right docblock-short"><p>Intern <a href="https://ruby-doc.org/core-2.6.3/Symbol.html"><code>Symbol</code></a>s on an interpreter.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="io/index.html" title="artichoke_core::io mod">io</a></div><div class="item-right docblock-short"><p>I/O read and write APIs.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="load/index.html" title="artichoke_core::load mod">load</a></div><div class="item-right docblock-short"><p>Load Ruby and Rust sources into the VM.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="module_registry/index.html" title="artichoke_core::module_registry mod">module_registry</a></div><div class="item-right docblock-short"><p>Define and store module specs on an interpreter.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="parser/index.html" title="artichoke_core::parser mod">parser</a></div><div class="item-right docblock-short"><p>Parse code on an Artichoke interpreter.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="prelude/index.html" title="artichoke_core::prelude mod">prelude</a></div><div class="item-right docblock-short"><p>A “prelude” for users of the <code>artichoke-core</code> crate.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="prng/index.html" title="artichoke_core::prng mod">prng</a></div><div class="item-right docblock-short"><p>Interpreter global psuedorandom number generator.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="regexp/index.html" title="artichoke_core::regexp mod">regexp</a></div><div class="item-right docblock-short"><p>Track <code>Regexp</code> global state.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="release_metadata/index.html" title="artichoke_core::release_metadata mod">release_metadata</a></div><div class="item-right docblock-short"><p>Information about an Artichoke build.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="top_self/index.html" title="artichoke_core::top_self mod">top_self</a></div><div class="item-right docblock-short"><p>Expose the global context, called <a href="https://www.sitepoint.com/rubys-top-self-object/"><em>top self</em></a>, to the interpreter.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="types/index.html" title="artichoke_core::types mod">types</a></div><div class="item-right docblock-short"><p>Ruby and Rust type mappings.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="value/index.html" title="artichoke_core::value mod">value</a></div><div class="item-right docblock-short"><p>Types that implement <code>Value</code> can be represented in the Artichoke VM.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="warn/index.html" title="artichoke_core::warn mod">warn</a></div><div class="item-right docblock-short"><p>Emit warnings during interpreter execution.</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="artichoke_core" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
     <script src="../main.js"></script>
 </body></html>

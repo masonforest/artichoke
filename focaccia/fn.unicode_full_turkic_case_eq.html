@@ -2,10 +2,10 @@
 languages.</p>
 <p>This function is implemented with a lookup table generated from Unicode case
 folding tables.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert!</span>(<span class="ident">unicode_full_turkic_case_eq</span>(<span class="string">&quot;İstanbul&quot;</span>, <span class="string">&quot;istanbul&quot;</span>));
 <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">unicode_full_turkic_case_eq</span>(<span class="string">&quot;İstanbul&quot;</span>, <span class="string">&quot;Istanbul&quot;</span>));</code></pre></div>
-<h1 id="examples--full" class="section-header"><a href="#examples--full">Examples – Full</a></h1>
+<h2 id="examples--full" class="section-header"><a href="#examples--full">Examples – Full</a></h2>
 <p>Turkic case folding is largely compatible with full Unicode case folding.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert!</span>(<span class="ident">unicode_full_turkic_case_eq</span>(<span class="string">&quot;MASSE&quot;</span>, <span class="string">&quot;Maße&quot;</span>));

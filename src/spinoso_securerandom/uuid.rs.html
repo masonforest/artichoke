@@ -124,7 +124,7 @@
 <span class="kw">const</span> <span class="ident">ENCODED_LENGTH</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">36</span>;
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">v4</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">RandomBytesError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">v4</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">RandomBytesError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> [<span class="number">0</span>; <span class="ident">OCTETS</span>];
     <span class="kw">if</span> <span class="ident">rand::thread_rng</span>().<span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">bytes</span>).<span class="ident">is_err</span>() {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RandomBytesError::new</span>());
@@ -159,7 +159,7 @@
         <span class="kw">let</span> <span class="ident">escaped</span> <span class="op">=</span> <span class="ident">hex::escape_byte</span>(<span class="ident">byte</span>);
         <span class="ident">buf</span>.<span class="ident">push_str</span>(<span class="ident">escaped</span>);
     }
-    <span class="macro">debug_assert!</span>(<span class="ident">buf</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">ENCODED_LENGTH</span>);
+    <span class="macro">debug_assert!</span>(<span class="ident">buf</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">ENCODED_LENGTH</span>);
     <span class="prelude-val">Ok</span>(<span class="ident">buf</span>)
 }
 

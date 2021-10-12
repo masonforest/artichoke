@@ -243,7 +243,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">State</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">sys::mrbc_context_new</span>(<span class="ident">mrb</span>) };
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">NonNull::new</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
         <span class="ident">reset_context_filename</span>(<span class="ident">mrb</span>, <span class="kw">unsafe</span> { <span class="ident">context</span>.<span class="ident">as_mut</span>() });
@@ -257,7 +257,7 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">context_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrbc_context</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">context_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrbc_context</span> {
         <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_mut</span>() }
     }
 
@@ -273,7 +273,7 @@
 
     <span class="doccomment">/// Fetch the current line number from the parser state.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fetch_lineno</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fetch_lineno</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_ref</span>() };
         <span class="ident">usize::from</span>(<span class="ident">ctx</span>.<span class="ident">lineno</span>)
     }
@@ -284,7 +284,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function returns [`IncrementLinenoError`] if the increment results</span>
     <span class="doccomment">/// in an overflow of the internal parser line number counter.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_fetch_lineno</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">IncrementLinenoError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_fetch_lineno</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">IncrementLinenoError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">old</span> <span class="op">=</span> <span class="ident">usize::from</span>(<span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_ref</span>() }.<span class="ident">lineno</span>);
         <span class="kw">let</span> <span class="ident">new</span> <span class="op">=</span> <span class="ident">old</span>
             .<span class="ident">checked_add</span>(<span class="ident">val</span>)
@@ -315,7 +315,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Calls to this function modify the parser state so subsequently `eval`ed</span>
     <span class="doccomment">/// code will use the current active [`Context`].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pop_context</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Context</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pop_context</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Context</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">pop</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">current</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">last</span>() {
             <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">current</span>.<span class="ident">filename_as_c_str</span>();
@@ -334,7 +334,7 @@
 
     <span class="doccomment">/// Returns the last [`Context`], or `None` if the context stack is empty.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">peek_context</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Context</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">peek_context</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Context</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">last</span>()
     }
 }
@@ -363,7 +363,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Context</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="comment">// Safety:</span>
         <span class="comment">//</span>
         <span class="comment">// - The `TOP_FILENAME` constant is controlled by this module.</span>
@@ -375,7 +375,7 @@
 
 <span class="kw">impl</span> <span class="ident">Context</span> {
     <span class="doccomment">/// Create a new [`Context`].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">filename</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">filename</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>,
     {
@@ -393,7 +393,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// `filename` must not contain any NUL bytes. `filename` must not contain a</span>
     <span class="doccomment">/// trailing `NUL`.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_unchecked</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">filename</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_unchecked</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">filename</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>,
     {
@@ -409,13 +409,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The root context sets the `__FILE__` magic constant to &quot;(eval)&quot;.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">root</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">root</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::default</span>()
     }
 
     <span class="doccomment">/// Filename of this `Context`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filename</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filename</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
         <span class="self">self</span>.<span class="ident">filename</span>.<span class="ident">as_ref</span>()
     }
 
@@ -423,7 +423,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This [`CStr`] is valid as long as this `Context` is not dropped.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filename_as_c_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">CStr</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filename_as_c_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">CStr</span> {
         <span class="self">self</span>.<span class="ident">filename_cstr</span>.<span class="ident">as_ref</span>()
     }
 }
@@ -432,7 +432,7 @@
 <span class="kw">mod</span> <span class="ident">context_test</span> {
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">top_filename_does_not_contain_nul_byte</span>() {
-        <span class="kw">let</span> <span class="ident">contains_nul_byte</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::TOP_FILENAME</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">b</span><span class="op">|</span> <span class="ident">b</span> <span class="op">=</span><span class="op">=</span> <span class="string">b&#39;\0&#39;</span>);
+        <span class="kw">let</span> <span class="ident">contains_nul_byte</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::TOP_FILENAME</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">b</span><span class="op">|</span> <span class="ident">b</span> <span class="op">==</span> <span class="string">b&#39;\0&#39;</span>);
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">contains_nul_byte</span>);
     }
 }

@@ -20,7 +20,7 @@ Ruby items when invoked via <code>Kernel#require</code>.</p>
 filesystem relative to <code>RUBY_LOAD_PATH</code>. If the path is absolute, the
 file is placed directly on the filesystem. Anscestor directories are
 created automatically.</p>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+<h5 id="errors" class="section-header"><a href="#errors">Errors</a></h5>
 <p>If the underlying filesystem is inaccessible, an error is returned.</p>
 <p>If writes to the underlying filesystem fail, an error is returned.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="tymethod.def_rb_source_file" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke_core/load.rs.html#56-59" title="goto source code">[src]</a></div><h4 class="code-header">fn <a href="#tymethod.def_rb_source_file" class="fnname">def_rb_source_file</a>&lt;P, T&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;mut self, <br>&nbsp;&nbsp;&nbsp;&nbsp;path: P, <br>&nbsp;&nbsp;&nbsp;&nbsp;contents: T<br>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>, Self::<a class="type" href="trait.LoadSources.html#associatedtype.Error" title="type artichoke_backend::core::LoadSources::Error">Error</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;P: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html" title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'static, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>&gt;&gt;,&nbsp;</span></h4></div></summary><div class="docblock"><p>Add a Ruby source to the virtual filesystem.</p>
@@ -28,7 +28,7 @@ created automatically.</p>
 filesystem relative to <code>RUBY_LOAD_PATH</code>. If the path is absolute, the
 file is placed directly on the filesystem. Anscestor directories are
 created automatically.</p>
-<h1 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h1>
+<h5 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h5>
 <p>If the underlying filesystem is inaccessible, an error is returned.</p>
 <p>If writes to the underlying filesystem fail, an error is returned.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="tymethod.resolve_source_path" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke_core/load.rs.html#73-75" title="goto source code">[src]</a></div><h4 class="code-header">fn <a href="#tymethod.resolve_source_path" class="fnname">resolve_source_path</a>&lt;P&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;path: P<br>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/alloc/struct.Global.html" title="struct alloc::alloc::Global">Global</a>&gt;&gt;, Self::<a class="type" href="trait.LoadSources.html#associatedtype.Error" title="type artichoke_backend::core::LoadSources::Error">Error</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;P: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html" title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;,&nbsp;</span></h4></div></summary><div class="docblock"><p>Test for a source file at a path and return the absolute path of the
@@ -37,14 +37,14 @@ resolved file.</p>
 source file.</p>
 <p>This function returns <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="None"><code>None</code></a> if <code>path</code> does not exist in the virtual
 filesystem.</p>
-<h1 id="errors-2" class="section-header"><a href="#errors-2">Errors</a></h1>
+<h5 id="errors-2" class="section-header"><a href="#errors-2">Errors</a></h5>
 <p>If the underlying filesystem is inaccessible, an error is returned.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="tymethod.source_is_file" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke_core/load.rs.html#88-90" title="goto source code">[src]</a></div><h4 class="code-header">fn <a href="#tymethod.source_is_file" class="fnname">source_is_file</a>&lt;P&gt;(&amp;self, path: P) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>, Self::<a class="type" href="trait.LoadSources.html#associatedtype.Error" title="type artichoke_backend::core::LoadSources::Error">Error</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;P: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html" title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;,&nbsp;</span></h4></div></summary><div class="docblock"><p>Test for a source file at a path.</p>
 <p>Query the underlying virtual filesystem to check if <code>path</code> points to a
 source file.</p>
 <p>This function returns <code>false</code> if <code>path</code> does not exist in the virtual
 filesystem.</p>
-<h1 id="errors-3" class="section-header"><a href="#errors-3">Errors</a></h1>
+<h5 id="errors-3" class="section-header"><a href="#errors-3">Errors</a></h5>
 <p>If the underlying filesystem is inaccessible, an error is returned.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="tymethod.load_source" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke_core/load.rs.html#113-115" title="goto source code">[src]</a></div><h4 class="code-header">fn <a href="#tymethod.load_source" class="fnname">load_source</a>&lt;P&gt;(&amp;mut self, path: P) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>, Self::<a class="type" href="trait.LoadSources.html#associatedtype.Error" title="type artichoke_backend::core::LoadSources::Error">Error</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;P: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html" title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;,&nbsp;</span></h4></div></summary><div class="docblock"><p>Load source located at the given path.</p>
 <p>Query the underlying virtual filesystem for a source file and load it
@@ -56,7 +56,7 @@ onto the interpreter. This loads files with the following steps:</p>
 <p>If this function returns without error, the feature specified by <code>path</code>
 is loaded, but is not added to <code>$LOADED_FEATURES</code>. This function is
 equivalent to <code>Kernel#load</code>.</p>
-<h1 id="errors-4" class="section-header"><a href="#errors-4">Errors</a></h1>
+<h5 id="errors-4" class="section-header"><a href="#errors-4">Errors</a></h5>
 <p>If the underlying filesystem is inaccessible, an error is returned.</p>
 <p>If reads to the underlying filesystem fail, an error is returned.</p>
 <p>If <code>path</code> does not point to a source file, an error is returned.</p>
@@ -72,7 +72,7 @@ onto the interpreter. This requires files with the following steps:</p>
 <p>If this function returns without error, the feature specified by <code>path</code>
 is loaded and added to <code>$LOADED_FEATURES</code>. This function is equivalent
 to <code>Kernel#require</code>.</p>
-<h1 id="errors-5" class="section-header"><a href="#errors-5">Errors</a></h1>
+<h5 id="errors-5" class="section-header"><a href="#errors-5">Errors</a></h5>
 <p>If the underlying filesystem is inaccessible, an error is returned.</p>
 <p>If reads to the underlying filesystem fail, an error is returned.</p>
 <p>If <code>path</code> does not point to a source file, an error is returned.</p>
@@ -80,7 +80,7 @@ to <code>Kernel#require</code>.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="tymethod.read_source_file_contents" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/artichoke_core/load.rs.html#155-157" title="goto source code">[src]</a></div><h4 class="code-header">fn <a href="#tymethod.read_source_file_contents" class="fnname">read_source_file_contents</a>&lt;P&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;path: P<br>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/alloc/borrow/enum.Cow.html" title="enum alloc::borrow::Cow">Cow</a>&lt;'_, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>&gt;, Self::<a class="type" href="trait.LoadSources.html#associatedtype.Error" title="type artichoke_backend::core::LoadSources::Error">Error</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;P: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html" title="trait core::convert::AsRef">AsRef</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>&gt;,&nbsp;</span></h4></div></summary><div class="docblock"><p>Retrieve file contents for a source file.</p>
 <p>Query the underlying virtual filesystem for the file contents of the
 source file at <code>path</code>.</p>
-<h1 id="errors-6" class="section-header"><a href="#errors-6">Errors</a></h1>
+<h5 id="errors-6" class="section-header"><a href="#errors-6">Errors</a></h5>
 <p>If the underlying filesystem is inaccessible, an error is returned.</p>
 <p>If reads to the underlying filesystem fail, an error is returned.</p>
 <p>If <code>path</code> does not point to a source file, an error is returned.</p>

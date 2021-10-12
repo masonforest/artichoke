@@ -18,7 +18,7 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Options</span>;
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Options</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RegexOptions</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">opts</span>: <span class="ident">Options</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">opts</span>: <span class="ident">Options</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bits</span> <span class="op">=</span> <span class="ident">RegexOptions::REGEX_OPTION_NONE</span>;
 
         <span class="ident">bits</span>.<span class="ident">set</span>(<span class="ident">RegexOptions::REGEX_OPTION_MULTILINE</span>, <span class="ident">opts</span>.<span class="ident">multiline</span>().<span class="ident">is_enabled</span>());

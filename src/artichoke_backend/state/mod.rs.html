@@ -146,7 +146,7 @@
     <span class="doccomment">/// [Ruby parser and file context]: parser::State</span>
     <span class="doccomment">/// [Intepreter-level PRNG]: Random</span>
     <span class="doccomment">/// [IO capturing]: output::Strategy</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">InterpreterAllocError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">InterpreterAllocError</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
             <span class="ident">parser</span>: <span class="prelude-val">None</span>,
             <span class="ident">classes</span>: <span class="ident">class::Registry::new</span>(),

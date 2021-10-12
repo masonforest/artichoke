@@ -27,13 +27,13 @@ needle returned must necessarily be the shorter of the two.</p>
 haystack.</p>
 <p>The haystack may be any type that can be cheaply converted into a
 <code>&amp;[u8]</code>. This includes, but is not limited to, <code>&amp;str</code> and <code>&amp;[u8]</code>.</p>
-<h1 id="complexity" class="section-header"><a href="#complexity">Complexity</a></h1>
+<h5 id="complexity" class="section-header"><a href="#complexity">Complexity</a></h5>
 <p>This routine is guaranteed to have worst case linear time complexity
 with respect to both the needle and the haystack. That is, this runs
 in <code>O(needle.len() + haystack.len())</code> time.</p>
 <p>This routine is also guaranteed to have worst case constant space
 complexity.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h5 id="examples" class="section-header"><a href="#examples">Examples</a></h5>
 <p>Basic usage:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">bstr::Finder</span>;

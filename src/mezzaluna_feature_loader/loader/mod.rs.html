@@ -99,7 +99,7 @@
 
 <span class="kw">impl</span> <span class="ident">Loader</span> {
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rubylib&quot;</span>)]</span>
         <span class="kw">let</span> <span class="ident">rubylib</span> <span class="op">=</span> <span class="ident">Rubylib::new</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">loaded_features</span> <span class="op">=</span> <span class="ident">LoadedFeatures::new</span>();
@@ -112,7 +112,7 @@
 
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rubylib&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_rubylib</span>(<span class="ident">rubylib</span>: <span class="kw-2">&amp;</span><span class="ident">OsStr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_rubylib</span>(<span class="ident">rubylib</span>: <span class="kw-2">&amp;</span><span class="ident">OsStr</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">rubylib</span> <span class="op">=</span> <span class="ident">Rubylib::with_rubylib</span>(<span class="ident">rubylib</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">loaded_features</span> <span class="op">=</span> <span class="ident">LoadedFeatures::new</span>();
         <span class="prelude-val">Some</span>(<span class="self">Self</span> {
@@ -123,7 +123,7 @@
 
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rubylib&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>: <span class="kw-2">&amp;</span><span class="ident">OsStr</span>, <span class="ident">cwd</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>: <span class="kw-2">&amp;</span><span class="ident">OsStr</span>, <span class="ident">cwd</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rubylib&quot;</span>)]</span>
         <span class="kw">let</span> <span class="ident">rubylib</span> <span class="op">=</span> <span class="ident">Rubylib::with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>, <span class="ident">cwd</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">loaded_features</span> <span class="op">=</span> <span class="ident">LoadedFeatures::new</span>();
@@ -135,7 +135,7 @@
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_errors_doc</span>)]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_panics_doc</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rubylib&quot;</span>)]</span>
         {
             <span class="kw">use</span> <span class="ident">std::io::Read</span>;

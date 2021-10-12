@@ -1270,22 +1270,22 @@
 
 <span class="kw">impl</span> <span class="ident">Cmd</span> {
     <span class="doccomment">/// Tells if current command should reset kill ring.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">should_reset_kill_ring</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">should_reset_kill_ring</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::match_same_arms</span>)]</span>
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="kw">_</span>)) <span class="op">|</span> <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::ForwardChar</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="kw">_</span>)) <span class="op">|</span> <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::ForwardChar</span>(<span class="kw">_</span>)) =&gt; <span class="bool-val">true</span>,
             <span class="ident">Cmd::ClearScreen</span>
             <span class="op">|</span> <span class="ident">Cmd::Kill</span>(<span class="kw">_</span>)
             <span class="op">|</span> <span class="ident">Cmd::Replace</span>(..)
             <span class="op">|</span> <span class="ident">Cmd::Noop</span>
             <span class="op">|</span> <span class="ident">Cmd::Suspend</span>
             <span class="op">|</span> <span class="ident">Cmd::Yank</span>(..)
-            <span class="op">|</span> <span class="ident">Cmd::YankPop</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="op">|</span> <span class="ident">Cmd::YankPop</span> =&gt; <span class="bool-val">false</span>,
+            <span class="kw">_</span> =&gt; <span class="bool-val">true</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">is_repeatable_change</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_repeatable_change</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="macro">matches!</span>(
             <span class="kw-2">*</span><span class="self">self</span>,
             <span class="ident">Cmd::Dedent</span>(..)
@@ -1300,25 +1300,25 @@
         )
     }
 
-    <span class="kw">fn</span> <span class="ident">is_repeatable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_repeatable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Cmd::Move</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">is_repeatable_change</span>(),
+            <span class="ident">Cmd::Move</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>,
+            <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">is_repeatable_change</span>(),
         }
     }
 
     <span class="comment">// Replay this command with a possible different `RepeatCount`.</span>
-    <span class="kw">fn</span> <span class="ident">redo</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">new</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RepeatCount</span><span class="op">&gt;</span>, <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">Refresher</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">redo</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">new</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RepeatCount</span><span class="op">&gt;</span>, <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">Refresher</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Cmd::Dedent</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Dedent</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
-            <span class="ident">Cmd::Indent</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Indent</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
-            <span class="ident">Cmd::Insert</span>(<span class="ident">previous</span>, <span class="kw-2">ref</span> <span class="ident">text</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Cmd::Dedent</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::Dedent</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
+            <span class="ident">Cmd::Indent</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::Indent</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
+            <span class="ident">Cmd::Insert</span>(<span class="ident">previous</span>, <span class="kw-2">ref</span> <span class="ident">text</span>) =&gt; {
                 <span class="ident">Cmd::Insert</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">text</span>.<span class="ident">clone</span>())
             }
-            <span class="ident">Cmd::Kill</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
-            <span class="ident">Cmd::Move</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
-            <span class="ident">Cmd::ReplaceChar</span>(<span class="ident">previous</span>, <span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::ReplaceChar</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">c</span>),
-            <span class="ident">Cmd::Replace</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>, <span class="kw-2">ref</span> <span class="ident">text</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Cmd::Kill</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
+            <span class="ident">Cmd::Move</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
+            <span class="ident">Cmd::ReplaceChar</span>(<span class="ident">previous</span>, <span class="ident">c</span>) =&gt; <span class="ident">Cmd::ReplaceChar</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">c</span>),
+            <span class="ident">Cmd::Replace</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>, <span class="kw-2">ref</span> <span class="ident">text</span>) =&gt; {
                 <span class="kw">if</span> <span class="ident">text</span>.<span class="ident">is_none</span>() {
                     <span class="kw">let</span> <span class="ident">last_insert</span> <span class="op">=</span> <span class="ident">wrt</span>.<span class="ident">last_insert</span>();
                     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Movement::ForwardChar</span>(<span class="number">0</span>) <span class="op">=</span> <span class="ident">mvt</span> {
@@ -1333,7 +1333,7 @@
                     <span class="ident">Cmd::Replace</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>), <span class="ident">text</span>.<span class="ident">clone</span>())
                 }
             }
-            <span class="ident">Cmd::SelfInsert</span>(<span class="ident">previous</span>, <span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Cmd::SelfInsert</span>(<span class="ident">previous</span>, <span class="ident">c</span>) =&gt; {
                 <span class="comment">// consecutive char inserts are repeatable not only the last one...</span>
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">text</span>) <span class="op">=</span> <span class="ident">wrt</span>.<span class="ident">last_insert</span>() {
                     <span class="ident">Cmd::Insert</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">text</span>)
@@ -1342,17 +1342,17 @@
                 }
             }
             <span class="comment">// Cmd::TransposeChars =&gt; Cmd::TransposeChars,</span>
-            <span class="ident">Cmd::ViYankTo</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::ViYankTo</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
-            <span class="ident">Cmd::Yank</span>(<span class="ident">previous</span>, <span class="ident">anchor</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Yank</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">anchor</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
+            <span class="ident">Cmd::ViYankTo</span>(<span class="kw-2">ref</span> <span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::ViYankTo</span>(<span class="ident">mvt</span>.<span class="ident">redo</span>(<span class="ident">new</span>)),
+            <span class="ident">Cmd::Yank</span>(<span class="ident">previous</span>, <span class="ident">anchor</span>) =&gt; <span class="ident">Cmd::Yank</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">anchor</span>),
+            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">repeat_count</span>(<span class="ident">previous</span>: <span class="ident">RepeatCount</span>, <span class="ident">new</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RepeatCount</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RepeatCount</span> {
+<span class="kw">fn</span> <span class="ident">repeat_count</span>(<span class="ident">previous</span>: <span class="ident">RepeatCount</span>, <span class="ident">new</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RepeatCount</span><span class="op">&gt;</span>) -&gt; <span class="ident">RepeatCount</span> {
     <span class="kw">match</span> <span class="ident">new</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">n</span>,
-        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">previous</span>,
+        <span class="prelude-val">Some</span>(<span class="ident">n</span>) =&gt; <span class="ident">n</span>,
+        <span class="prelude-val">None</span> =&gt; <span class="ident">previous</span>,
     }
 }
 
@@ -1401,12 +1401,12 @@
 }
 
 <span class="kw">impl</span> <span class="ident">CharSearch</span> {
-    <span class="kw">fn</span> <span class="ident">opposite</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">opposite</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">CharSearch::Forward</span>(<span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch::Backward</span>(<span class="ident">c</span>),
-            <span class="ident">CharSearch::ForwardBefore</span>(<span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch::BackwardAfter</span>(<span class="ident">c</span>),
-            <span class="ident">CharSearch::Backward</span>(<span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch::Forward</span>(<span class="ident">c</span>),
-            <span class="ident">CharSearch::BackwardAfter</span>(<span class="ident">c</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch::ForwardBefore</span>(<span class="ident">c</span>),
+            <span class="ident">CharSearch::Forward</span>(<span class="ident">c</span>) =&gt; <span class="ident">CharSearch::Backward</span>(<span class="ident">c</span>),
+            <span class="ident">CharSearch::ForwardBefore</span>(<span class="ident">c</span>) =&gt; <span class="ident">CharSearch::BackwardAfter</span>(<span class="ident">c</span>),
+            <span class="ident">CharSearch::Backward</span>(<span class="ident">c</span>) =&gt; <span class="ident">CharSearch::Forward</span>(<span class="ident">c</span>),
+            <span class="ident">CharSearch::BackwardAfter</span>(<span class="ident">c</span>) =&gt; <span class="ident">CharSearch::ForwardBefore</span>(<span class="ident">c</span>),
         }
     }
 }
@@ -1447,28 +1447,28 @@
 
 <span class="kw">impl</span> <span class="ident">Movement</span> {
     <span class="comment">// Replay this movement with a possible different `RepeatCount`.</span>
-    <span class="kw">fn</span> <span class="ident">redo</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">new</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RepeatCount</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">redo</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">new</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RepeatCount</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Movement::WholeLine</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::WholeLine</span>,
-            <span class="ident">Movement::BeginningOfLine</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::BeginningOfLine</span>,
-            <span class="ident">Movement::ViFirstPrint</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::ViFirstPrint</span>,
-            <span class="ident">Movement::EndOfLine</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::EndOfLine</span>,
-            <span class="ident">Movement::BackwardWord</span>(<span class="ident">previous</span>, <span class="ident">word</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Movement::WholeLine</span> =&gt; <span class="ident">Movement::WholeLine</span>,
+            <span class="ident">Movement::BeginningOfLine</span> =&gt; <span class="ident">Movement::BeginningOfLine</span>,
+            <span class="ident">Movement::ViFirstPrint</span> =&gt; <span class="ident">Movement::ViFirstPrint</span>,
+            <span class="ident">Movement::EndOfLine</span> =&gt; <span class="ident">Movement::EndOfLine</span>,
+            <span class="ident">Movement::BackwardWord</span>(<span class="ident">previous</span>, <span class="ident">word</span>) =&gt; {
                 <span class="ident">Movement::BackwardWord</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">word</span>)
             }
-            <span class="ident">Movement::ForwardWord</span>(<span class="ident">previous</span>, <span class="ident">at</span>, <span class="ident">word</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Movement::ForwardWord</span>(<span class="ident">previous</span>, <span class="ident">at</span>, <span class="ident">word</span>) =&gt; {
                 <span class="ident">Movement::ForwardWord</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">at</span>, <span class="ident">word</span>)
             }
-            <span class="ident">Movement::ViCharSearch</span>(<span class="ident">previous</span>, <span class="ident">char_search</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Movement::ViCharSearch</span>(<span class="ident">previous</span>, <span class="ident">char_search</span>) =&gt; {
                 <span class="ident">Movement::ViCharSearch</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>), <span class="ident">char_search</span>)
             }
-            <span class="ident">Movement::BackwardChar</span>(<span class="ident">previous</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::BackwardChar</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>)),
-            <span class="ident">Movement::ForwardChar</span>(<span class="ident">previous</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::ForwardChar</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>)),
-            <span class="ident">Movement::LineUp</span>(<span class="ident">previous</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::LineUp</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>)),
-            <span class="ident">Movement::LineDown</span>(<span class="ident">previous</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::LineDown</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>)),
-            <span class="ident">Movement::WholeBuffer</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::WholeBuffer</span>,
-            <span class="ident">Movement::BeginningOfBuffer</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::BeginningOfBuffer</span>,
-            <span class="ident">Movement::EndOfBuffer</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Movement::EndOfBuffer</span>,
+            <span class="ident">Movement::BackwardChar</span>(<span class="ident">previous</span>) =&gt; <span class="ident">Movement::BackwardChar</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>)),
+            <span class="ident">Movement::ForwardChar</span>(<span class="ident">previous</span>) =&gt; <span class="ident">Movement::ForwardChar</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>)),
+            <span class="ident">Movement::LineUp</span>(<span class="ident">previous</span>) =&gt; <span class="ident">Movement::LineUp</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>)),
+            <span class="ident">Movement::LineDown</span>(<span class="ident">previous</span>) =&gt; <span class="ident">Movement::LineDown</span>(<span class="ident">repeat_count</span>(<span class="ident">previous</span>, <span class="ident">new</span>)),
+            <span class="ident">Movement::WholeBuffer</span> =&gt; <span class="ident">Movement::WholeBuffer</span>,
+            <span class="ident">Movement::BeginningOfBuffer</span> =&gt; <span class="ident">Movement::BeginningOfBuffer</span>,
+            <span class="ident">Movement::EndOfBuffer</span> =&gt; <span class="ident">Movement::EndOfBuffer</span>,
         }
     }
 }
@@ -1498,13 +1498,13 @@
 <span class="doccomment">/// Provide indirect mutation to user input.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Invoke</span> {
     <span class="doccomment">/// currently edited line</span>
-    <span class="kw">fn</span> <span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
     <span class="comment">// TODO</span>
     <span class="comment">//fn invoke(&amp;mut self, cmd: Cmd) -&gt; Result&lt;?&gt;;</span>
 }
 
 <span class="kw">impl</span> <span class="ident">Invoke</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
-    <span class="kw">fn</span> <span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+    <span class="kw">fn</span> <span class="ident">input</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="self">self</span>
     }
 }
@@ -1512,31 +1512,31 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Refresher</span> {
     <span class="doccomment">/// Rewrite the currently edited line accordingly to the buffer content,</span>
     <span class="doccomment">/// cursor position, and number of columns of the terminal.</span>
-    <span class="kw">fn</span> <span class="ident">refresh_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">refresh_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
     <span class="doccomment">/// Same as [`refresh_line`] with a specific message instead of hint</span>
-    <span class="kw">fn</span> <span class="ident">refresh_line_with_msg</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">refresh_line_with_msg</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
     <span class="doccomment">/// Same as `refresh_line` but with a dynamic prompt.</span>
-    <span class="kw">fn</span> <span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">prompt</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">prompt</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
     <span class="doccomment">/// Vi only, switch to insert mode.</span>
     <span class="kw">fn</span> <span class="ident">doing_insert</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
     <span class="doccomment">/// Vi only, switch to command mode.</span>
     <span class="kw">fn</span> <span class="ident">done_inserting</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
     <span class="doccomment">/// Vi only, last text inserted.</span>
-    <span class="kw">fn</span> <span class="ident">last_insert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">last_insert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>;
     <span class="doccomment">/// Returns `true` if the cursor is currently at the end of the line.</span>
-    <span class="kw">fn</span> <span class="ident">is_cursor_at_end</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">is_cursor_at_end</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
     <span class="doccomment">/// Returns `true` if there is a hint displayed.</span>
-    <span class="kw">fn</span> <span class="ident">has_hint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">has_hint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
     <span class="doccomment">/// Returns the hint text that is shown after the current cursor position.</span>
-    <span class="kw">fn</span> <span class="ident">hint_text</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">hint_text</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>;
     <span class="doccomment">/// currently edited line</span>
-    <span class="kw">fn</span> <span class="ident">line</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span>;
+    <span class="kw">fn</span> <span class="ident">line</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span>;
     <span class="doccomment">/// Current cursor position (byte position)</span>
-    <span class="kw">fn</span> <span class="ident">pos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>;
+    <span class="kw">fn</span> <span class="ident">pos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">InputState</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>, <span class="ident">custom_bindings</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Trie</span><span class="op">&lt;</span><span class="ident">Event</span>, <span class="ident">EventHandler</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Config</span>, <span class="ident">custom_bindings</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Trie</span><span class="op">&lt;</span><span class="ident">Event</span>, <span class="ident">EventHandler</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">mode</span>: <span class="ident">config</span>.<span class="ident">edit_mode</span>(),
             <span class="ident">custom_bindings</span>,
@@ -1547,8 +1547,8 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_emacs_mode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">mode</span> <span class="op">=</span><span class="op">=</span> <span class="ident">EditMode::Emacs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_emacs_mode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">mode</span> <span class="op">==</span> <span class="ident">EditMode::Emacs</span>
     }
 
     <span class="doccomment">/// Parse user input into one command</span>
@@ -1559,17 +1559,17 @@
         <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="ident">Terminal</span> <span class="kw">as</span> <span class="ident">Term</span><span class="op">&gt;</span><span class="ident">::Reader</span>,
         <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Refresher</span>,
         <span class="ident">single_esc_abort</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">mode</span> {
-            <span class="ident">EditMode::Emacs</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">EditMode::Emacs</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="ident">single_esc_abort</span>)<span class="question-mark">?</span>;
                 <span class="self">self</span>.<span class="ident">emacs</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>)
             }
-            <span class="ident">EditMode::Vi</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">!</span><span class="op">=</span> <span class="ident">InputMode::Command</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">EditMode::Vi</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">!</span><span class="op">=</span> <span class="ident">InputMode::Command</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
                 <span class="self">self</span>.<span class="ident">vi_insert</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>)
             }
-            <span class="ident">EditMode::Vi</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">EditMode::Vi</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
                 <span class="self">self</span>.<span class="ident">vi_command</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>)
             }
@@ -1582,13 +1582,13 @@
         <span class="ident">evt</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>,
         <span class="ident">n</span>: <span class="ident">RepeatCount</span>,
         <span class="ident">positive</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">bindings</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">custom_bindings</span>.<span class="ident">read</span>().<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">handler</span> <span class="op">=</span> <span class="ident">bindings</span>.<span class="ident">get</span>(<span class="ident">evt</span>).<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">bindings</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Event::Any</span>));
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">handler</span>) <span class="op">=</span> <span class="ident">handler</span> {
             <span class="kw">match</span> <span class="ident">handler</span> {
-                <span class="ident">EventHandler::Simple</span>(<span class="ident">cmd</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">cmd</span>.<span class="ident">clone</span>()),
-                <span class="ident">EventHandler::Conditional</span>(<span class="ident">handler</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">EventHandler::Simple</span>(<span class="ident">cmd</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">cmd</span>.<span class="ident">clone</span>()),
+                <span class="ident">EventHandler::Conditional</span>(<span class="ident">handler</span>) =&gt; {
                     <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">EventContext::new</span>(<span class="self">self</span>, <span class="ident">wrt</span>);
                     <span class="ident">handler</span>.<span class="ident">handle</span>(<span class="ident">evt</span>, <span class="ident">n</span>, <span class="ident">positive</span>, <span class="kw-2">&amp;</span><span class="ident">ctx</span>)
                 }
@@ -1605,7 +1605,7 @@
         <span class="ident">evt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Event</span>,
         <span class="ident">n</span>: <span class="ident">RepeatCount</span>,
         <span class="ident">positive</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">bindings</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">custom_bindings</span>.<span class="ident">read</span>().<span class="ident">unwrap</span>();
         <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">subtrie</span>) <span class="op">=</span> <span class="ident">bindings</span>.<span class="ident">get_raw_descendant</span>(<span class="ident">evt</span>) {
             <span class="kw">let</span> <span class="ident">snd_key</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>;
@@ -1617,8 +1617,8 @@
             <span class="kw">let</span> <span class="ident">handler</span> <span class="op">=</span> <span class="ident">subtrie</span>.<span class="ident">get</span>(<span class="ident">evt</span>).<span class="ident">unwrap</span>();
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">handler</span>) <span class="op">=</span> <span class="ident">handler</span> {
                 <span class="kw">let</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">handler</span> {
-                    <span class="ident">EventHandler::Simple</span>(<span class="ident">cmd</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">cmd</span>.<span class="ident">clone</span>()),
-                    <span class="ident">EventHandler::Conditional</span>(<span class="ident">handler</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">EventHandler::Simple</span>(<span class="ident">cmd</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">cmd</span>.<span class="ident">clone</span>()),
+                    <span class="ident">EventHandler::Conditional</span>(<span class="ident">handler</span>) =&gt; {
                         <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">EventContext::new</span>(<span class="self">self</span>, <span class="ident">wrt</span>);
                         <span class="ident">handler</span>.<span class="ident">handle</span>(<span class="ident">evt</span>, <span class="ident">n</span>, <span class="ident">positive</span>, <span class="kw-2">&amp;</span><span class="ident">ctx</span>)
                     }
@@ -1636,24 +1636,24 @@
         <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>,
         <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Refresher</span>,
         <span class="ident">digit</span>: <span class="ident">char</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_possible_truncation</span>)]</span>
         <span class="kw">match</span> <span class="ident">digit</span> {
-            <span class="string">&#39;0&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&#39;0&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span> =&gt; {
                 <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">=</span> <span class="ident">digit</span>.<span class="ident">to_digit</span>(<span class="number">10</span>).<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="ident">i16</span>;
             }
-            <span class="string">&#39;-&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="string">&#39;-&#39;</span> =&gt; {
                 <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">=</span> <span class="op">-</span><span class="number">1</span>;
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
+            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
         }
         <span class="kw">loop</span> {
             <span class="ident">wrt</span>.<span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;(arg: {}) &quot;</span>, <span class="self">self</span>.<span class="ident">num_args</span>))<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>;
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_possible_truncation</span>)]</span>
             <span class="kw">match</span> <span class="ident">key</span> {
-                <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">digit</span> @ <span class="string">&#39;0&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span>), <span class="ident">m</span>) <span class="kw">if</span> <span class="ident">m</span> <span class="op">=</span><span class="op">=</span> <span class="ident">M::NONE</span> <span class="op">|</span><span class="op">|</span> <span class="ident">m</span> <span class="op">=</span><span class="op">=</span> <span class="ident">M::ALT</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
+                <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">digit</span> @ <span class="string">&#39;0&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span>), <span class="ident">m</span>) <span class="kw">if</span> <span class="ident">m</span> <span class="op">==</span> <span class="ident">M::NONE</span> <span class="op">|</span><span class="op">|</span> <span class="ident">m</span> <span class="op">==</span> <span class="ident">M::ALT</span> =&gt; {
+                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
                         <span class="self">self</span>.<span class="ident">num_args</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">digit</span>.<span class="ident">to_digit</span>(<span class="number">10</span>).<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="ident">i16</span>;
                     } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">num_args</span>.<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="number">1000</span> {
                         <span class="comment">// shouldn&#39;t ever need more than 4 digits</span>
@@ -1663,8 +1663,8 @@
                             .<span class="ident">saturating_add</span>(<span class="ident">digit</span>.<span class="ident">to_digit</span>(<span class="number">10</span>).<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="ident">i16</span>);
                     }
                 }
-                <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;-&#39;</span>), <span class="ident">m</span>) <span class="kw">if</span> <span class="ident">m</span> <span class="op">=</span><span class="op">=</span> <span class="ident">M::NONE</span> <span class="op">|</span><span class="op">|</span> <span class="ident">m</span> <span class="op">=</span><span class="op">=</span> <span class="ident">M::ALT</span> <span class="op">=</span><span class="op">&gt;</span> {}
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;-&#39;</span>), <span class="ident">m</span>) <span class="kw">if</span> <span class="ident">m</span> <span class="op">==</span> <span class="ident">M::NONE</span> <span class="op">|</span><span class="op">|</span> <span class="ident">m</span> <span class="op">==</span> <span class="ident">M::ALT</span> =&gt; {}
+                <span class="kw">_</span> =&gt; {
                     <span class="ident">wrt</span>.<span class="ident">refresh_line</span>()<span class="question-mark">?</span>;
                     <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">key</span>);
                 }
@@ -1677,7 +1677,7 @@
         <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>,
         <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Refresher</span>,
         <span class="kw-2">mut</span> <span class="ident">key</span>: <span class="ident">KeyEvent</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">digit</span> @ <span class="string">&#39;-&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span> <span class="ident">key</span> {
             <span class="ident">key</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">emacs_digit_argument</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">digit</span>)<span class="question-mark">?</span>;
         } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">digit</span> @ <span class="string">&#39;0&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span> <span class="ident">key</span> {
@@ -1694,33 +1694,33 @@
             });
         }
         <span class="kw">let</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">key</span> {
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="kw">if</span> <span class="ident">positive</span> {
                     <span class="ident">Cmd::SelfInsert</span>(<span class="ident">n</span>, <span class="ident">c</span>)
                 } <span class="kw">else</span> {
                     <span class="ident">Cmd::Unknown</span>
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;B&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;B&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;E&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;F&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;E&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;F&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::ESC</span> <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">M::CTRL_ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Abort</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::BACKSPACE</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::ESC</span> <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">M::CTRL_ALT</span>) =&gt; <span class="ident">Cmd::Abort</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::BACKSPACE</span> =&gt; <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::BackTab</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::CompleteBackward</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;I&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Tab</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::BackTab</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::CompleteBackward</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;I&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Tab</span>, <span class="ident">M::NONE</span>) =&gt; {
                 <span class="kw">if</span> <span class="ident">positive</span> {
                     <span class="ident">Cmd::Complete</span>
                 } <span class="kw">else</span> {
@@ -1728,41 +1728,41 @@
                 }
             }
             <span class="comment">// Don&#39;t complete hints when the cursor is not at the end of a line</span>
-            <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>) <span class="kw">if</span> <span class="ident">wrt</span>.<span class="ident">has_hint</span>() <span class="op">&amp;&amp;</span> <span class="ident">wrt</span>.<span class="ident">is_cursor_at_end</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::CompleteHint</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;K&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>) <span class="kw">if</span> <span class="ident">wrt</span>.<span class="ident">has_hint</span>() <span class="op">&amp;&amp;</span> <span class="ident">wrt</span>.<span class="ident">is_cursor_at_end</span>() =&gt; <span class="ident">Cmd::CompleteHint</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;K&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::EndOfLine</span>
             } <span class="kw">else</span> {
                 <span class="ident">Movement::BeginningOfLine</span>
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;L&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::ClearScreen</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;N&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::NextHistory</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;P&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::PreviousHistory</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;X&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;L&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::ClearScreen</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;N&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::NextHistory</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;P&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::PreviousHistory</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;X&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">cmd</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">custom_seq_binding</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">evt</span>, <span class="ident">n</span>, <span class="ident">positive</span>)<span class="question-mark">?</span> {
                     <span class="ident">cmd</span>
                 } <span class="kw">else</span> {
                     <span class="kw">let</span> <span class="ident">snd_key</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">evt</span> {
                         <span class="comment">// we may have already read the second key in custom_seq_binding</span>
-                        <span class="ident">Event::KeySeq</span>(<span class="kw-2">ref</span> <span class="ident">key_seq</span>) <span class="kw">if</span> <span class="ident">key_seq</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">key_seq</span>[<span class="number">1</span>],
-                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>,
+                        <span class="ident">Event::KeySeq</span>(<span class="kw-2">ref</span> <span class="ident">key_seq</span>) <span class="kw">if</span> <span class="ident">key_seq</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> =&gt; <span class="ident">key_seq</span>[<span class="number">1</span>],
+                        <span class="kw">_</span> =&gt; <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>,
                     };
                     <span class="kw">match</span> <span class="ident">snd_key</span> {
-                        <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::ESC</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Abort</span>,
-                        <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;U&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Undo</span>(<span class="ident">n</span>),
-                        <span class="ident">E</span>(<span class="ident">K::Backspace</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+                        <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::ESC</span> =&gt; <span class="ident">Cmd::Abort</span>,
+                        <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;U&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Undo</span>(<span class="ident">n</span>),
+                        <span class="ident">E</span>(<span class="ident">K::Backspace</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                             <span class="ident">Movement::BeginningOfLine</span>
                         } <span class="kw">else</span> {
                             <span class="ident">Movement::EndOfLine</span>
                         }),
-                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+                        <span class="kw">_</span> =&gt; <span class="ident">Cmd::Unknown</span>,
                     }
                 }
             }
             <span class="comment">// character-search, character-search-backward</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;]&#39;</span>), <span class="ident">m</span> @ <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;]&#39;</span>), <span class="ident">m</span> @ <span class="ident">M::CTRL_ALT</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;]&#39;</span>), <span class="ident">m</span> @ <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;]&#39;</span>), <span class="ident">m</span> @ <span class="ident">M::CTRL_ALT</span>) =&gt; {
                 <span class="kw">let</span> <span class="ident">ch</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
                 <span class="kw">match</span> <span class="ident">ch</span> {
-                    <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">ch</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(
+                    <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">ch</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(
                         <span class="ident">n</span>,
                         <span class="kw">if</span> <span class="ident">positive</span> {
                             <span class="kw">if</span> <span class="ident">m</span>.<span class="ident">contains</span>(<span class="ident">M::ALT</span>) {
@@ -1776,26 +1776,26 @@
                             <span class="ident">CharSearch::Backward</span>(<span class="ident">ch</span>)
                         },
                     )),
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+                    <span class="kw">_</span> =&gt; <span class="ident">Cmd::Unknown</span>,
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Backspace</span>, <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Backspace</span>, <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Emacs</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;&lt;&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::BeginningOfHistory</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;&gt;&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::EndOfHistory</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;&lt;&#39;</span>), <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::BeginningOfHistory</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;&gt;&#39;</span>), <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::EndOfHistory</span>,
             <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;B&#39;</span>), <span class="ident">M::ALT</span>)
             <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;b&#39;</span>), <span class="ident">M::ALT</span>)
             <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::CTRL</span>)
-            <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Emacs</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;C&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;c&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::CapitalizeWord</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;D&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;d&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;C&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;c&#39;</span>), <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::CapitalizeWord</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;D&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;d&#39;</span>), <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Emacs</span>)
@@ -1803,17 +1803,17 @@
             <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;F&#39;</span>), <span class="ident">M::ALT</span>)
             <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;f&#39;</span>), <span class="ident">M::ALT</span>)
             <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::CTRL</span>)
-            <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Emacs</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Emacs</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;L&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;l&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::DowncaseWord</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;T&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;t&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::TransposeWords</span>(<span class="ident">n</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;L&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;l&#39;</span>), <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::DowncaseWord</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;T&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;t&#39;</span>), <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::TransposeWords</span>(<span class="ident">n</span>),
             <span class="comment">// TODO ESC-R (r): Undo all changes made to this line.</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;U&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;u&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::UpcaseWord</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Y&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;y&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::YankPop</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="ident">n</span>, <span class="ident">positive</span>)<span class="question-mark">?</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;U&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;u&#39;</span>), <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::UpcaseWord</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Y&#39;</span>), <span class="ident">M::ALT</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;y&#39;</span>), <span class="ident">M::ALT</span>) =&gt; <span class="ident">Cmd::YankPop</span>,
+            <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="ident">n</span>, <span class="ident">positive</span>)<span class="question-mark">?</span>,
         };
         <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Emacs command: {:?}&quot;</span>, <span class="ident">cmd</span>);
         <span class="prelude-val">Ok</span>(<span class="ident">cmd</span>)
@@ -1825,7 +1825,7 @@
         <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>,
         <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Refresher</span>,
         <span class="ident">digit</span>: <span class="ident">char</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">=</span> <span class="ident">digit</span>.<span class="ident">to_digit</span>(<span class="number">10</span>).<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="ident">i16</span>;
         <span class="kw">loop</span> {
             <span class="ident">wrt</span>.<span class="ident">refresh_prompt_and_line</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;(arg: {}) &quot;</span>, <span class="self">self</span>.<span class="ident">num_args</span>))<span class="question-mark">?</span>;
@@ -1850,11 +1850,11 @@
         <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>,
         <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Refresher</span>,
         <span class="kw-2">mut</span> <span class="ident">key</span>: <span class="ident">KeyEvent</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">digit</span> @ <span class="string">&#39;1&#39;</span>..<span class="op">=</span><span class="string">&#39;9&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span> <span class="ident">key</span> {
             <span class="ident">key</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vi_arg_digit</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">digit</span>)<span class="question-mark">?</span>;
         }
-        <span class="kw">let</span> <span class="ident">no_num_args</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let</span> <span class="ident">no_num_args</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">==</span> <span class="number">0</span>;
         <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vi_num_args</span>(); <span class="comment">// consume them in all cases</span>
         <span class="kw">let</span> <span class="ident">evt</span> <span class="op">=</span> <span class="ident">key</span>.<span class="ident">into</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">cmd</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">custom_binding</span>(<span class="ident">wrt</span>, <span class="kw-2">&amp;</span><span class="ident">evt</span>, <span class="ident">n</span>, <span class="bool-val">true</span>) {
@@ -1869,8 +1869,8 @@
             });
         }
         <span class="kw">let</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">key</span> {
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;$&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;.&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;$&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;.&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// vi-redo (repeat last command)</span>
                 <span class="kw">if</span> <span class="ident">no_num_args</span> {
                     <span class="self">self</span>.<span class="ident">last_cmd</span>.<span class="ident">redo</span>(<span class="prelude-val">None</span>, <span class="ident">wrt</span>)
@@ -1880,143 +1880,143 @@
             }
             <span class="comment">// TODO E(K::Char(&#39;%&#39;), M::NONE) =&gt; Cmd::???, Move to the corresponding opening/closing</span>
             <span class="comment">// bracket</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;^&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViFirstPrint</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;a&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;^&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViFirstPrint</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;a&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// vi-append-mode</span>
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>;
                 <span class="ident">wrt</span>.<span class="ident">doing_insert</span>();
                 <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>))
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;A&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// vi-append-eol</span>
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>;
                 <span class="ident">wrt</span>.<span class="ident">doing_insert</span>();
                 <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfLine</span>)
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;b&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Vi</span>)), <span class="comment">/* vi-prev-word */</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;B&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Big</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;c&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;b&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Vi</span>)), <span class="comment">/* vi-prev-word */</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;B&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Big</span>)),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;c&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>;
                 <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Replace</span>(<span class="ident">mvt</span>, <span class="prelude-val">None</span>),
-                    <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+                    <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::Replace</span>(<span class="ident">mvt</span>, <span class="prelude-val">None</span>),
+                    <span class="prelude-val">None</span> =&gt; <span class="ident">Cmd::Unknown</span>,
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;C&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;C&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>;
                 <span class="ident">Cmd::Replace</span>(<span class="ident">Movement::EndOfLine</span>, <span class="prelude-val">None</span>)
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;d&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="ident">mvt</span>),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;d&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="ident">mvt</span>),
+                <span class="prelude-val">None</span> =&gt; <span class="ident">Cmd::Unknown</span>,
             },
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;D&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;K&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::EndOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;e&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;D&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;K&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::EndOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;e&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::BeforeEnd</span>, <span class="ident">Word::Vi</span>))
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;E&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;E&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::BeforeEnd</span>, <span class="ident">Word::Big</span>))
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;i&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;i&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// vi-insertion-mode</span>
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>;
                 <span class="ident">wrt</span>.<span class="ident">doing_insert</span>();
                 <span class="ident">Cmd::Noop</span>
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;I&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;I&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// vi-insert-beg</span>
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>;
                 <span class="ident">wrt</span>.<span class="ident">doing_insert</span>();
                 <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfLine</span>)
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) <span class="kw">if</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;f&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;F&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;t&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;T&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;f&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;F&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;t&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;T&#39;</span> =&gt; {
                 <span class="comment">// vi-char-search</span>
                 <span class="kw">let</span> <span class="ident">cs</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vi_char_search</span>(<span class="ident">rdr</span>, <span class="ident">c</span>)<span class="question-mark">?</span>;
                 <span class="kw">match</span> <span class="ident">cs</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">cs</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>)),
-                    <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+                    <span class="prelude-val">Some</span>(<span class="ident">cs</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>)),
+                    <span class="prelude-val">None</span> =&gt; <span class="ident">Cmd::Unknown</span>,
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;;&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">last_char_search</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">cs</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>)),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Noop</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;;&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">last_char_search</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">cs</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>)),
+                <span class="prelude-val">None</span> =&gt; <span class="ident">Cmd::Noop</span>,
             },
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;,&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">last_char_search</span> {
-                <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">cs</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>.<span class="ident">opposite</span>())),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Noop</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;,&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">last_char_search</span> {
+                <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">cs</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>.<span class="ident">opposite</span>())),
+                <span class="prelude-val">None</span> =&gt; <span class="ident">Cmd::Noop</span>,
             },
             <span class="comment">// TODO E(K::Char(&#39;G&#39;), M::NONE) =&gt; Cmd::???, Move to the history line n</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;p&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Yank</span>(<span class="ident">n</span>, <span class="ident">Anchor::After</span>), <span class="comment">// vi-put</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;P&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Yank</span>(<span class="ident">n</span>, <span class="ident">Anchor::Before</span>), <span class="comment">// vi-put</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;r&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;p&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Yank</span>(<span class="ident">n</span>, <span class="ident">Anchor::After</span>), <span class="comment">// vi-put</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;P&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Yank</span>(<span class="ident">n</span>, <span class="ident">Anchor::Before</span>), <span class="comment">// vi-put</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;r&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// vi-replace-char:</span>
                 <span class="kw">let</span> <span class="ident">ch</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
                 <span class="kw">match</span> <span class="ident">ch</span> {
-                    <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::ReplaceChar</span>(<span class="ident">n</span>, <span class="ident">c</span>),
-                    <span class="ident">E::ESC</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Noop</span>,
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+                    <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::ReplaceChar</span>(<span class="ident">n</span>, <span class="ident">c</span>),
+                    <span class="ident">E::ESC</span> =&gt; <span class="ident">Cmd::Noop</span>,
+                    <span class="kw">_</span> =&gt; <span class="ident">Cmd::Unknown</span>,
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;R&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;R&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">//  vi-replace-mode (overwrite-mode)</span>
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Replace</span>;
                 <span class="ident">Cmd::Replace</span>(<span class="ident">Movement::ForwardChar</span>(<span class="number">0</span>), <span class="prelude-val">None</span>)
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;s&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;s&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// vi-substitute-char:</span>
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>;
                 <span class="ident">Cmd::Replace</span>(<span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>), <span class="prelude-val">None</span>)
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;S&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;S&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// vi-substitute-line:</span>
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>;
                 <span class="ident">Cmd::Replace</span>(<span class="ident">Movement::WholeLine</span>, <span class="prelude-val">None</span>)
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;u&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Undo</span>(<span class="ident">n</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;u&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Undo</span>(<span class="ident">n</span>),
             <span class="comment">// E(K::Char(&#39;U&#39;), M::NONE) =&gt; Cmd::???, // revert-line</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;w&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::Start</span>, <span class="ident">Word::Vi</span>)), <span class="comment">/* vi-next-word */</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;W&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::Start</span>, <span class="ident">Word::Big</span>)), <span class="comment">/* vi-next-word */</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;w&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::Start</span>, <span class="ident">Word::Vi</span>)), <span class="comment">/* vi-next-word */</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;W&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::Start</span>, <span class="ident">Word::Big</span>)), <span class="comment">/* vi-next-word */</span>
             <span class="comment">// TODO move backward if eol</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;x&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)), <span class="comment">// vi-delete</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;X&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)), <span class="comment">// vi-rubout</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;y&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::ViYankTo</span>(<span class="ident">mvt</span>),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;x&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)), <span class="comment">// vi-delete</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;X&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)), <span class="comment">// vi-rubout</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;y&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::ViYankTo</span>(<span class="ident">mvt</span>),
+                <span class="prelude-val">None</span> =&gt; <span class="ident">Cmd::Unknown</span>,
             },
             <span class="comment">// E(K::Char(&#39;Y&#39;), M::NONE) =&gt; Cmd::???, // vi-yank-to</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;h&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::BACKSPACE</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;h&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::BACKSPACE</span> =&gt; {
                 <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>))
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Abort</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;l&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39; &#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;G&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Abort</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;l&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39; &#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="ident">Cmd::Move</span>(<span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>))
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;L&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::ClearScreen</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;+&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;j&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::LineDownOrNextHistory</span>(<span class="ident">n</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;L&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::ClearScreen</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;+&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;j&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::LineDownOrNextHistory</span>(<span class="ident">n</span>),
             <span class="comment">// TODO: move to the start of the line.</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;N&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::NextHistory</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;-&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;k&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::LineUpOrPreviousHistory</span>(<span class="ident">n</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;N&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::NextHistory</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;-&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;k&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::LineUpOrPreviousHistory</span>(<span class="ident">n</span>),
             <span class="comment">// TODO: move to the start of the line.</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;P&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::PreviousHistory</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;R&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;P&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::PreviousHistory</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;R&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; {
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>; <span class="comment">// TODO Validate</span>
                 <span class="ident">Cmd::ReverseSearchHistory</span>
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;S&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;S&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; {
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Insert</span>; <span class="comment">// TODO Validate</span>
                 <span class="ident">Cmd::ForwardSearchHistory</span>
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;&lt;&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Dedent</span>(<span class="ident">mvt</span>),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;&lt;&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::Dedent</span>(<span class="ident">mvt</span>),
+                <span class="prelude-val">None</span> =&gt; <span class="ident">Cmd::Unknown</span>,
             },
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;&gt;&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Indent</span>(<span class="ident">mvt</span>),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Unknown</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;&gt;&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vi_cmd_motion</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">key</span>, <span class="ident">n</span>)<span class="question-mark">?</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">mvt</span>) =&gt; <span class="ident">Cmd::Indent</span>(<span class="ident">mvt</span>),
+                <span class="prelude-val">None</span> =&gt; <span class="ident">Cmd::Unknown</span>,
             },
-            <span class="ident">E::ESC</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Noop</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="ident">n</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>,
+            <span class="ident">E::ESC</span> =&gt; <span class="ident">Cmd::Noop</span>,
+            <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="ident">n</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>,
         };
         <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi command: {:?}&quot;</span>, <span class="ident">cmd</span>);
         <span class="kw">if</span> <span class="ident">cmd</span>.<span class="ident">is_repeatable_change</span>() {
@@ -2030,7 +2030,7 @@
         <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>,
         <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Refresher</span>,
         <span class="ident">key</span>: <span class="ident">KeyEvent</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">evt</span> <span class="op">=</span> <span class="ident">key</span>.<span class="ident">into</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">cmd</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">custom_binding</span>(<span class="ident">wrt</span>, <span class="kw-2">&amp;</span><span class="ident">evt</span>, <span class="number">0</span>, <span class="bool-val">true</span>) {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="kw">if</span> <span class="ident">cmd</span>.<span class="ident">is_repeatable</span>() {
@@ -2040,32 +2040,32 @@
             });
         }
         <span class="kw">let</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">key</span> {
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span><span class="op">=</span> <span class="ident">InputMode::Replace</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) =&gt; {
+                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">==</span> <span class="ident">InputMode::Replace</span> {
                     <span class="ident">Cmd::Overwrite</span>(<span class="ident">c</span>)
                 } <span class="kw">else</span> {
                     <span class="ident">Cmd::SelfInsert</span>(<span class="number">1</span>, <span class="ident">c</span>)
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::BACKSPACE</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="number">1</span>)),
-            <span class="ident">E</span>(<span class="ident">K::BackTab</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::CompleteBackward</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;I&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Tab</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Complete</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::BACKSPACE</span> =&gt; <span class="ident">Cmd::Kill</span>(<span class="ident">Movement::BackwardChar</span>(<span class="number">1</span>)),
+            <span class="ident">E</span>(<span class="ident">K::BackTab</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::CompleteBackward</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;I&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Tab</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Complete</span>,
             <span class="comment">// Don&#39;t complete hints when the cursor is not at the end of a line</span>
-            <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>) <span class="kw">if</span> <span class="ident">wrt</span>.<span class="ident">has_hint</span>() <span class="op">&amp;&amp;</span> <span class="ident">wrt</span>.<span class="ident">is_cursor_at_end</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::CompleteHint</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">k</span>), <span class="ident">M::ALT</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>) <span class="kw">if</span> <span class="ident">wrt</span>.<span class="ident">has_hint</span>() <span class="op">&amp;&amp;</span> <span class="ident">wrt</span>.<span class="ident">is_cursor_at_end</span>() =&gt; <span class="ident">Cmd::CompleteHint</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">k</span>), <span class="ident">M::ALT</span>) =&gt; {
                 <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi fast command mode: {}&quot;</span>, <span class="ident">k</span>);
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Command</span>;
                 <span class="ident">wrt</span>.<span class="ident">done_inserting</span>();
 
                 <span class="self">self</span>.<span class="ident">vi_command</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">k</span>), <span class="ident">M::NONE</span>))<span class="question-mark">?</span>
             }
-            <span class="ident">E::ESC</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E::ESC</span> =&gt; {
                 <span class="comment">// vi-movement-mode/vi-command-mode</span>
                 <span class="self">self</span>.<span class="ident">input_mode</span> <span class="op">=</span> <span class="ident">InputMode::Command</span>;
                 <span class="ident">wrt</span>.<span class="ident">done_inserting</span>();
                 <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BackwardChar</span>(<span class="number">1</span>))
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="number">1</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>,
+            <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">common</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="ident">evt</span>, <span class="ident">key</span>, <span class="number">1</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>,
         };
         <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;Vi insert: {:?}&quot;</span>, <span class="ident">cmd</span>);
         <span class="kw">if</span> <span class="ident">cmd</span>.<span class="ident">is_repeatable_change</span>() {
@@ -2086,9 +2086,9 @@
         <span class="ident">wrt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Refresher</span>,
         <span class="ident">key</span>: <span class="ident">KeyEvent</span>,
         <span class="ident">n</span>: <span class="ident">RepeatCount</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Movement</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Movement</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mvt</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">mvt</span> <span class="op">=</span><span class="op">=</span> <span class="ident">key</span> {
+        <span class="kw">if</span> <span class="ident">mvt</span> <span class="op">==</span> <span class="ident">key</span> {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">Movement::WholeLine</span>));
         }
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">n</span>;
@@ -2098,46 +2098,46 @@
             <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vi_num_args</span>().<span class="ident">saturating_mul</span>(<span class="ident">n</span>);
         }
         <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">mvt</span> {
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;$&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::EndOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::BeginningOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;^&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::ViFirstPrint</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;b&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Vi</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;B&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Big</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;e&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Vi</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;E&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Big</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) <span class="kw">if</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;f&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;F&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;t&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;T&#39;</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;$&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::EndOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;0&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::BeginningOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;^&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::ViFirstPrint</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;b&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Vi</span>)),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;B&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Big</span>)),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;e&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Vi</span>)),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;E&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Big</span>)),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">c</span>), <span class="ident">M::NONE</span>) <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;f&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;F&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;t&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;T&#39;</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">cs</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vi_char_search</span>(<span class="ident">rdr</span>, <span class="ident">c</span>)<span class="question-mark">?</span>;
                 <span class="ident">cs</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">cs</span><span class="op">|</span> <span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>))
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;;&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;;&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="self">self</span>
                 .<span class="ident">last_char_search</span>
                 .<span class="ident">map</span>(<span class="op">|</span><span class="ident">cs</span><span class="op">|</span> <span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;,&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;,&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="self">self</span>
                 .<span class="ident">last_char_search</span>
                 .<span class="ident">map</span>(<span class="op">|</span><span class="ident">cs</span><span class="op">|</span> <span class="ident">Movement::ViCharSearch</span>(<span class="ident">n</span>, <span class="ident">cs</span>.<span class="ident">opposite</span>())),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;h&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::BACKSPACE</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;h&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;H&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::BACKSPACE</span> =&gt; {
                 <span class="prelude-val">Some</span>(<span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>))
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;l&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39; &#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;j&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;+&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::LineDown</span>(<span class="ident">n</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;k&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;-&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Movement::LineUp</span>(<span class="ident">n</span>)),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;w&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;l&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39; &#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;j&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;+&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::LineDown</span>(<span class="ident">n</span>)),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;k&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;-&#39;</span>), <span class="ident">M::NONE</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">Movement::LineUp</span>(<span class="ident">n</span>)),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;w&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// &#39;cw&#39; is &#39;ce&#39;</span>
-                <span class="kw">if</span> <span class="ident">key</span> <span class="op">=</span><span class="op">=</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;c&#39;</span>), <span class="ident">M::NONE</span>) {
+                <span class="kw">if</span> <span class="ident">key</span> <span class="op">==</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;c&#39;</span>), <span class="ident">M::NONE</span>) {
                     <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Vi</span>))
                 } <span class="kw">else</span> {
                     <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::Start</span>, <span class="ident">Word::Vi</span>))
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;W&#39;</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;W&#39;</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="comment">// &#39;cW&#39; is &#39;cE&#39;</span>
-                <span class="kw">if</span> <span class="ident">key</span> <span class="op">=</span><span class="op">=</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;c&#39;</span>), <span class="ident">M::NONE</span>) {
+                <span class="kw">if</span> <span class="ident">key</span> <span class="op">==</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;c&#39;</span>), <span class="ident">M::NONE</span>) {
                     <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Big</span>))
                 } <span class="kw">else</span> {
                     <span class="prelude-val">Some</span>(<span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::Start</span>, <span class="ident">Word::Big</span>))
                 }
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
         })
     }
 
@@ -2145,21 +2145,21 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>,
         <span class="ident">cmd</span>: <span class="ident">char</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CharSearch</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CharSearch</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">ch</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">next_key</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">ch</span> {
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">ch</span>), <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="ident">ch</span>), <span class="ident">M::NONE</span>) =&gt; {
                 <span class="kw">let</span> <span class="ident">cs</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">cmd</span> {
-                    <span class="string">&#39;f&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch::Forward</span>(<span class="ident">ch</span>),
-                    <span class="string">&#39;t&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch::ForwardBefore</span>(<span class="ident">ch</span>),
-                    <span class="string">&#39;F&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch::Backward</span>(<span class="ident">ch</span>),
-                    <span class="string">&#39;T&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CharSearch::BackwardAfter</span>(<span class="ident">ch</span>),
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
+                    <span class="string">&#39;f&#39;</span> =&gt; <span class="ident">CharSearch::Forward</span>(<span class="ident">ch</span>),
+                    <span class="string">&#39;t&#39;</span> =&gt; <span class="ident">CharSearch::ForwardBefore</span>(<span class="ident">ch</span>),
+                    <span class="string">&#39;F&#39;</span> =&gt; <span class="ident">CharSearch::Backward</span>(<span class="ident">ch</span>),
+                    <span class="string">&#39;T&#39;</span> =&gt; <span class="ident">CharSearch::BackwardAfter</span>(<span class="ident">ch</span>),
+                    <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
                 };
                 <span class="self">self</span>.<span class="ident">last_char_search</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">cs</span>);
                 <span class="prelude-val">Some</span>(<span class="ident">cs</span>)
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
         })
     }
 
@@ -2171,16 +2171,16 @@
         <span class="ident">key</span>: <span class="ident">KeyEvent</span>,
         <span class="ident">n</span>: <span class="ident">RepeatCount</span>,
         <span class="ident">positive</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cmd</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">key</span> {
-            <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Home</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::BeginningOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Left</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;C&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Interrupt</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;D&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;C&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Interrupt</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;D&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; {
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_emacs_mode</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">wrt</span>.<span class="ident">line</span>().<span class="ident">is_empty</span>() {
                     <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                         <span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)
@@ -2191,75 +2191,75 @@
                     <span class="ident">Cmd::EndOfFile</span>
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Delete</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfLine</span>),
-            <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::End</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="ident">Movement::EndOfLine</span>),
+            <span class="ident">E</span>(<span class="ident">K::Right</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Move</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::ForwardChar</span>(<span class="ident">n</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::BackwardChar</span>(<span class="ident">n</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;J&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;M&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::ENTER</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;J&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;M&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">|</span> <span class="ident">E::ENTER</span> =&gt; {
                 <span class="ident">Cmd::AcceptOrInsertLine</span> {
                     <span class="ident">accept_in_the_middle</span>: <span class="bool-val">true</span>,
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::LineDownOrNextHistory</span>(<span class="number">1</span>),
-            <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::LineUpOrPreviousHistory</span>(<span class="number">1</span>),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;R&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::ReverseSearchHistory</span>,
+            <span class="ident">E</span>(<span class="ident">K::Down</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::LineDownOrNextHistory</span>(<span class="number">1</span>),
+            <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::LineUpOrPreviousHistory</span>(<span class="number">1</span>),
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;R&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::ReverseSearchHistory</span>,
             <span class="comment">// most terminals override Ctrl+S to suspend execution</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;S&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::ForwardSearchHistory</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;T&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::TransposeChars</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;U&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;S&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::ForwardSearchHistory</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;T&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::TransposeChars</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;U&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::BeginningOfLine</span>
             } <span class="kw">else</span> {
                 <span class="ident">Movement::EndOfLine</span>
             }),
             <span class="comment">// most terminals override Ctrl+Q to resume execution</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Q&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::QuotedInsert</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Q&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::QuotedInsert</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">windows</span>))]</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;V&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::QuotedInsert</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;V&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::QuotedInsert</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;V&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::PasteFromClipboard</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;W&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;V&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::PasteFromClipboard</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;W&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Kill</span>(<span class="kw">if</span> <span class="ident">positive</span> {
                 <span class="ident">Movement::BackwardWord</span>(<span class="ident">n</span>, <span class="ident">Word::Big</span>)
             } <span class="kw">else</span> {
                 <span class="ident">Movement::ForwardWord</span>(<span class="ident">n</span>, <span class="ident">At::AfterEnd</span>, <span class="ident">Word::Big</span>)
             }),
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Y&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Y&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; {
                 <span class="kw">if</span> <span class="ident">positive</span> {
                     <span class="ident">Cmd::Yank</span>(<span class="ident">n</span>, <span class="ident">Anchor::Before</span>)
                 } <span class="kw">else</span> {
                     <span class="ident">Cmd::Unknown</span> <span class="comment">// TODO Validate</span>
                 }
             }
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Z&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Suspend</span>,
-            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;_&#39;</span>), <span class="ident">M::CTRL</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Undo</span>(<span class="ident">n</span>),
-            <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Cmd::Noop</span>,
-            <span class="ident">E</span>(<span class="ident">K::BracketedPasteStart</span>, <span class="ident">M::NONE</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;Z&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Suspend</span>,
+            <span class="ident">E</span>(<span class="ident">K::Char</span>(<span class="string">&#39;_&#39;</span>), <span class="ident">M::CTRL</span>) =&gt; <span class="ident">Cmd::Undo</span>(<span class="ident">n</span>),
+            <span class="ident">E</span>(<span class="ident">K::UnknownEscSeq</span>, <span class="ident">M::NONE</span>) =&gt; <span class="ident">Cmd::Noop</span>,
+            <span class="ident">E</span>(<span class="ident">K::BracketedPasteStart</span>, <span class="ident">M::NONE</span>) =&gt; {
                 <span class="kw">let</span> <span class="ident">paste</span> <span class="op">=</span> <span class="ident">rdr</span>.<span class="ident">read_pasted_text</span>()<span class="question-mark">?</span>;
                 <span class="ident">Cmd::Insert</span>(<span class="number">1</span>, <span class="ident">paste</span>)
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>
+            <span class="kw">_</span> =&gt; <span class="self">self</span>
                 .<span class="ident">custom_seq_binding</span>(<span class="ident">rdr</span>, <span class="ident">wrt</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">evt</span>, <span class="ident">n</span>, <span class="ident">positive</span>)<span class="question-mark">?</span>
                 .<span class="ident">unwrap_or</span>(<span class="ident">Cmd::Unknown</span>),
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">num_args</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i16</span> {
+    <span class="kw">fn</span> <span class="ident">num_args</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">i16</span> {
         <span class="kw">let</span> <span class="ident">num_args</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">num_args</span> {
-            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">num_args</span>,
+            <span class="number">0</span> =&gt; <span class="number">1</span>,
+            <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">num_args</span>,
         };
         <span class="self">self</span>.<span class="ident">num_args</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="ident">num_args</span>
     }
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_sign_loss</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">emacs_num_args</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">RepeatCount</span>, <span class="ident">bool</span>) {
+    <span class="kw">fn</span> <span class="ident">emacs_num_args</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; (<span class="ident">RepeatCount</span>, <span class="ident">bool</span>) {
         <span class="kw">let</span> <span class="ident">num_args</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">num_args</span>();
         <span class="kw">if</span> <span class="ident">num_args</span> <span class="op">&lt;</span> <span class="number">0</span> {
             <span class="kw">if</span> <span class="kw">let</span> (<span class="ident">n</span>, <span class="bool-val">false</span>) <span class="op">=</span> <span class="ident">num_args</span>.<span class="ident">overflowing_abs</span>() {
@@ -2273,7 +2273,7 @@
     }
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_sign_loss</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">vi_num_args</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RepeatCount</span> {
+    <span class="kw">fn</span> <span class="ident">vi_num_args</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">RepeatCount</span> {
         <span class="kw">let</span> <span class="ident">num_args</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">num_args</span>();
         <span class="kw">if</span> <span class="ident">num_args</span> <span class="op">&lt;</span> <span class="number">0</span> {
             <span class="macro">unreachable!</span>()

@@ -7,10 +7,10 @@ strings.</p>
 user-supplied seed value.</p>
 <p>PRNGs are currently implemented as a modified Mersenne Twister with a period
 of 2**19937-1.</p>
-<h1 id="implementation-notes" class="section-header"><a href="#implementation-notes">Implementation notes</a></h1>
+<h2 id="implementation-notes" class="section-header"><a href="#implementation-notes">Implementation notes</a></h2>
 <p>This RNG reproduces the same random bytes and floats as MRI. It may differ
 when returning elements confined to a distribution.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <p>Generate integers:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> [<span class="number">627457_u32</span>, <span class="number">697550</span>, <span class="number">16438</span>, <span class="number">41926</span>];
@@ -22,10 +22,10 @@ when returning elements confined to a distribution.</p>
 <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">Max::Integer</span>(<span class="number">10</span>);
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rand</span> <span class="op">=</span> <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">max</span>)<span class="question-mark">?</span>;
 <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>, <span class="ident">Rand::Integer</span>(<span class="ident">x</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="number">10</span>));</code></pre></div>
-<h1 id="no_std" class="section-header"><a href="#no_std"><code>no_std</code></a></h1>
+<h2 id="no_std" class="section-header"><a href="#no_std"><code>no_std</code></a></h2>
 <p>This crate is <code>no_std</code> compatible when built without the <code>std</code> feature. This
 crate does not depend on <a href="https://doc.rust-lang.org/alloc/"><code>alloc</code></a>.</p>
-<h1 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h1>
+<h2 id="crate-features" class="section-header"><a href="#crate-features">Crate features</a></h2>
 <p>All features are enabled by default.</p>
 <ul>
 <li><strong>random-rand</strong> - Enables range sampling methods for the <a href="fn.rand.html" title="rand()"><code>rand()</code></a>
@@ -38,27 +38,27 @@ this feature enables <a href="https://doc.rust-lang.org/nightly/std/error/trait.
 crate.</li>
 </ul>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="struct" href="struct.ArgumentError.html" title="spinoso_random::ArgumentError struct">ArgumentError</a></div><div class="item-right docblock-short"><p>Error that indicates a random number could not be generated with the given
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ArgumentError.html" title="spinoso_random::ArgumentError struct">ArgumentError</a></div><div class="item-right docblock-short"><p>Error that indicates a random number could not be generated with the given
 bounds.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.InitializeError.html" title="spinoso_random::InitializeError struct">InitializeError</a></div><div class="item-right docblock-short"><p>Error that indicates a <code>Random</code> random number generator failed to
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.InitializeError.html" title="spinoso_random::InitializeError struct">InitializeError</a></div><div class="item-right docblock-short"><p>Error that indicates a <code>Random</code> random number generator failed to
 initialize.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.Mt.html" title="spinoso_random::Mt struct">Mt</a></div><div class="item-right docblock-short"><p>The 32-bit Ruby flavor of the Mersenne Twister pseudorandom number
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Mt.html" title="spinoso_random::Mt struct">Mt</a></div><div class="item-right docblock-short"><p>The 32-bit Ruby flavor of the Mersenne Twister pseudorandom number
 generator.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.NewSeedError.html" title="spinoso_random::NewSeedError struct">NewSeedError</a></div><div class="item-right docblock-short"><p>Error that indicates the system source of cryptographically secure
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.NewSeedError.html" title="spinoso_random::NewSeedError struct">NewSeedError</a></div><div class="item-right docblock-short"><p>Error that indicates the system source of cryptographically secure
 randomness failed to read sufficient bytes to create a new seed.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.Random.html" title="spinoso_random::Random struct">Random</a></div><div class="item-right docblock-short"><p>Random provides an interface to Ruby’s pseudo-random number generator, or
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Random.html" title="spinoso_random::Random struct">Random</a></div><div class="item-right docblock-short"><p>Random provides an interface to Ruby’s pseudo-random number generator, or
 PRNG.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.UrandomError.html" title="spinoso_random::UrandomError struct">UrandomError</a></div><div class="item-right docblock-short"><p>Error that indicates the system source of cryptographically secure
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.UrandomError.html" title="spinoso_random::UrandomError struct">UrandomError</a></div><div class="item-right docblock-short"><p>Error that indicates the system source of cryptographically secure
 randomness failed to read the requested bytes.</p>
-</div></div><h2 id="enums" class="section-header"><a href="#enums">Enums</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="enum" href="enum.Error.html" title="spinoso_random::Error enum">Error</a></div><div class="item-right docblock-short"><p>Sum type of all errors possibly returned from <code>Random</code> functions.</p>
-</div><div class="item-left module-item"><a class="enum" href="enum.Max.html" title="spinoso_random::Max enum">Max</a><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span></div><div class="item-right docblock-short"><p>A range constraint for generating random numbers.</p>
-</div><div class="item-left module-item"><a class="enum" href="enum.Rand.html" title="spinoso_random::Rand enum">Rand</a><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span></div><div class="item-right docblock-short"><p>A generated random number.</p>
-</div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="fn" href="fn.new_seed.html" title="spinoso_random::new_seed fn">new_seed</a></div><div class="item-right docblock-short"><p>Read a new <a href="struct.Random.html" title="Random"><code>Random</code></a> seed, using platform-provided randomness.</p>
-</div><div class="item-left module-item"><a class="fn" href="fn.rand.html" title="spinoso_random::rand fn">rand</a><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span></div><div class="item-right docblock-short"><p>Generate random numbers bounded from below by 0 and above by the given max.</p>
-</div><div class="item-left module-item"><a class="fn" href="fn.seed_to_key.html" title="spinoso_random::seed_to_key fn">seed_to_key</a></div><div class="item-right docblock-short"><p>Convert a byte array into a reseeding key of <code>u32</code>s.</p>
-</div><div class="item-left module-item"><a class="fn" href="fn.urandom.html" title="spinoso_random::urandom fn">urandom</a></div><div class="item-right docblock-short"><p>Read random bytes, using platform-provided randomness.</p>
-</div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="spinoso_random" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+</div></div></div><h2 id="enums" class="section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Error.html" title="spinoso_random::Error enum">Error</a></div><div class="item-right docblock-short"><p>Sum type of all errors possibly returned from <code>Random</code> functions.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Max.html" title="spinoso_random::Max enum">Max</a><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span></div><div class="item-right docblock-short"><p>A range constraint for generating random numbers.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Rand.html" title="spinoso_random::Rand enum">Rand</a><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span></div><div class="item-right docblock-short"><p>A generated random number.</p>
+</div></div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.new_seed.html" title="spinoso_random::new_seed fn">new_seed</a></div><div class="item-right docblock-short"><p>Read a new <a href="struct.Random.html" title="Random"><code>Random</code></a> seed, using platform-provided randomness.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.rand.html" title="spinoso_random::rand fn">rand</a><span class="stab portability" title="This is supported on crate feature `random-rand` only"><code>random-rand</code></span></div><div class="item-right docblock-short"><p>Generate random numbers bounded from below by 0 and above by the given max.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.seed_to_key.html" title="spinoso_random::seed_to_key fn">seed_to_key</a></div><div class="item-right docblock-short"><p>Convert a byte array into a reseeding key of <code>u32</code>s.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.urandom.html" title="spinoso_random::urandom fn">urandom</a></div><div class="item-right docblock-short"><p>Read random bytes, using platform-provided randomness.</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="spinoso_random" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
     <script src="../main.js"></script>
 </body></html>

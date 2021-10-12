@@ -3,13 +3,13 @@
 random ASCII alphanumeric bytes. If <code>len</code> is <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="None"><code>None</code></a>, generate 16 random
 alphanumeric bytes.</p>
 <p>The returned <a href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html"><code>Vec&lt;u8&gt;</code></a> is guaranteed to contain only ASCII bytes.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">spinoso_securerandom::alphanumeric</span>(<span class="prelude-val">Some</span>(<span class="number">1024</span>))<span class="question-mark">?</span>;
 <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">String::from_utf8</span>(<span class="ident">bytes</span>)<span class="question-mark">?</span>;
 <span class="macro">assert_eq!</span>(<span class="ident">bytes</span>.<span class="ident">len</span>(), <span class="number">1024</span>);
 <span class="macro">assert!</span>(<span class="ident">bytes</span>.<span class="ident">is_ascii</span>());
 <span class="macro">assert!</span>(<span class="ident">bytes</span>.<span class="ident">find</span>(<span class="op">|</span><span class="ident">ch</span>: <span class="ident">char</span><span class="op">|</span> <span class="op">!</span><span class="ident">ch</span>.<span class="ident">is_ascii_alphanumeric</span>()).<span class="ident">is_none</span>());</code></pre></div>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
 <p>If the given length is negative, return an <a href="struct.ArgumentError.html" title="ArgumentError"><code>ArgumentError</code></a>.</p>
 <p>If the underlying source of randomness returns an error, return a
 <a href="struct.RandomBytesError.html" title="RandomBytesError"><code>RandomBytesError</code></a>.</p>

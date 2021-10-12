@@ -2,7 +2,7 @@
 <p>This symbol table is implemented by storing UTF-8 strings with a fast path
 for <code>&amp;str</code> that are already <code>'static</code>.</p>
 <p>See crate documentation for more.</p>
-<h1 id="usage" class="section-header"><a href="#usage">Usage</a></h1>
+<h2 id="usage" class="section-header"><a href="#usage">Usage</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="kw">let</span> <span class="ident">sym</span> <span class="op">=</span> <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>)<span class="question-mark">?</span>;
 <span class="macro">assert_eq!</span>(<span class="ident">sym</span>, <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>);
@@ -10,7 +10,7 @@ for <code>&amp;str</code> that are already <code>'static</code>.</p>
 <span class="macro">assert!</span>(<span class="ident">table</span>.<span class="ident">is_interned</span>(<span class="string">&quot;abc&quot;</span>));</code></pre></div>
 </div></details><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#287-326" title="goto source code">[src]</a></div><a href="#impl" class="anchor"></a><h3 class="code-header in-band">impl <a class="struct" href="struct.SymbolTable.html" title="struct intaglio::SymbolTable">SymbolTable</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/std/collections/hash/map/struct.RandomState.html" title="struct std::collections::hash::map::RandomState">RandomState</a>&gt;</h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.new" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#300-302" title="goto source code">[src]</a></div><a href="#method.new" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.new" class="fnname">new</a>() -&gt; Self</h4></div></summary><div class="docblock"><p>Constructs a new, empty <code>SymbolTable</code> with
 <a href="constant.DEFAULT_SYMBOL_TABLE_CAPACITY.html">default capacity</a>.</p>
-<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<h5 id="examples" class="section-header"><a href="#examples">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">table</span>.<span class="ident">len</span>());
 <span class="macro">assert!</span>(<span class="ident">table</span>.<span class="ident">capacity</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">4096</span>);</code></pre></div>
@@ -18,32 +18,32 @@ for <code>&amp;str</code> that are already <code>'static</code>.</p>
 <p>The symbol table will be able to hold at least <code>capacity</code> bytestrings
 without reallocating. If <code>capacity</code> is 0, the symbol table will not
 allocate.</p>
-<h1 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h1>
+<h5 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::with_capacity</span>(<span class="number">10</span>);
 <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">table</span>.<span class="ident">len</span>());
 <span class="macro">assert!</span>(<span class="ident">table</span>.<span class="ident">capacity</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">10</span>);</code></pre></div>
 </div></details></div></details><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl-1" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#328-612" title="goto source code">[src]</a></div><a href="#impl-1" class="anchor"></a><h3 class="code-header in-band">impl&lt;S&gt; <a class="struct" href="struct.SymbolTable.html" title="struct intaglio::SymbolTable">SymbolTable</a>&lt;S&gt;</h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.with_hasher" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#343-345" title="goto source code">[src]</a></div><a href="#method.with_hasher" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.with_hasher" class="fnname">with_hasher</a>(hash_builder: S) -&gt; Self</h4></div></summary><div class="docblock"><p>Constructs a new, empty <code>SymbolTable</code> with
 <a href="constant.DEFAULT_SYMBOL_TABLE_CAPACITY.html">default capacity</a> and the given hash
 builder.</p>
-<h1 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h1>
+<h5 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">hash_builder</span> <span class="op">=</span> <span class="ident">RandomState::new</span>();
 <span class="kw">let</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::with_hasher</span>(<span class="ident">hash_builder</span>);
 <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">table</span>.<span class="ident">len</span>());
 <span class="macro">assert!</span>(<span class="ident">table</span>.<span class="ident">capacity</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">4096</span>);</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.with_capacity_and_hasher" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#360-365" title="goto source code">[src]</a></div><a href="#method.with_capacity_and_hasher" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.with_capacity_and_hasher" class="fnname">with_capacity_and_hasher</a>(capacity: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, hash_builder: S) -&gt; Self</h4></div></summary><div class="docblock"><p>Constructs a new, empty <code>SymbolTable</code> with the specified capacity and
 the given hash builder.</p>
-<h1 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h1>
+<h5 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">hash_builder</span> <span class="op">=</span> <span class="ident">RandomState::new</span>();
 <span class="kw">let</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::with_capacity_and_hasher</span>(<span class="number">10</span>, <span class="ident">hash_builder</span>);
 <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">table</span>.<span class="ident">len</span>());
 <span class="macro">assert!</span>(<span class="ident">table</span>.<span class="ident">capacity</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">10</span>);</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.capacity" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#377-379" title="goto source code">[src]</a></div><a href="#method.capacity" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.capacity" class="fnname">capacity</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></h4></div></summary><div class="docblock"><p>Returns the number of bytestrings the table can hold without
 reallocating.</p>
-<h1 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h1>
+<h5 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::with_capacity</span>(<span class="number">10</span>);
 <span class="macro">assert!</span>(<span class="ident">table</span>.<span class="ident">capacity</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">10</span>);</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.len" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#400-402" title="goto source code">[src]</a></div><a href="#method.len" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.len" class="fnname">len</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></h4></div></summary><div class="docblock"><p>Returns the number of interned bytestrings in the table.</p>
-<h1 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h1>
+<h5 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">table</span>.<span class="ident">len</span>());
 
@@ -53,14 +53,14 @@ reallocating.</p>
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;xyz&quot;</span>)<span class="question-mark">?</span>;
 <span class="macro">assert_eq!</span>(<span class="number">2</span>, <span class="ident">table</span>.<span class="ident">len</span>());</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.is_empty" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#420-422" title="goto source code">[src]</a></div><a href="#method.is_empty" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.is_empty" class="fnname">is_empty</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></h4></div></summary><div class="docblock"><p>Returns <code>true</code> if the symbol table contains no interned bytestrings.</p>
-<h1 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h1>
+<h5 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="macro">assert!</span>(<span class="ident">table</span>.<span class="ident">is_empty</span>());
 
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>)<span class="question-mark">?</span>;
 <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">table</span>.<span class="ident">is_empty</span>());</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.contains" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#442-444" title="goto source code">[src]</a></div><a href="#method.contains" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.contains" class="fnname">contains</a>(&amp;self, id: <a class="struct" href="struct.Symbol.html" title="struct intaglio::Symbol">Symbol</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></h4></div></summary><div class="docblock"><p>Returns <code>true</code> if the symbol table contains the given symbol.</p>
-<h1 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h1>
+<h5 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">table</span>.<span class="ident">contains</span>(<span class="ident">Symbol::new</span>(<span class="number">0</span>)));
 
@@ -71,7 +71,7 @@ reallocating.</p>
 <p>If the given symbol does not exist in the underlying symbol table,
 <code>None</code> is returned.</p>
 <p>The lifetime of the returned reference is bound to the symbol table.</p>
-<h1 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h1>
+<h5 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="macro">assert!</span>(<span class="ident">table</span>.<span class="ident">get</span>(<span class="ident">Symbol::new</span>(<span class="number">0</span>)).<span class="ident">is_none</span>());
 
@@ -80,7 +80,7 @@ reallocating.</p>
 <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="string">&quot;abc&quot;</span>), <span class="ident">table</span>.<span class="ident">get</span>(<span class="ident">sym</span>));</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.iter" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#516-518" title="goto source code">[src]</a></div><a href="#method.iter" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.iter" class="fnname">iter</a>(&amp;self) -&gt; <a class="struct" href="struct.Iter.html" title="struct intaglio::Iter">Iter</a>&lt;'_&gt;<span class="notable-traits"><span class="notable-traits-tooltip">ⓘ<div class="notable-traits-tooltiptext"><span class="docblock"><div class="notable">Notable traits for <a class="struct" href="struct.Iter.html" title="struct intaglio::Iter">Iter</a>&lt;'a&gt;</div><code class="content"><span class="where fmt-newline">impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a> for <a class="struct" href="struct.Iter.html" title="struct intaglio::Iter">Iter</a>&lt;'a&gt;</span><span class="where fmt-newline">    type <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#associatedtype.Item" class="type">Item</a> = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a><a class="struct" href="struct.Symbol.html" title="struct intaglio::Symbol">Symbol</a>, &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a>;</span></code></span></div></span></span></h4></div></summary><div class="docblock"><p>Returns an iterator over all <a href="struct.Symbol.html" title="Symbol"><code>Symbol</code></a>s and bytestrings in the
 <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
-<h1 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h1>
+<h5 id="examples-9" class="section-header"><a href="#examples-9">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>)<span class="question-mark">?</span>;
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;xyz&quot;</span>)<span class="question-mark">?</span>;
@@ -104,7 +104,7 @@ reallocating.</p>
 <span class="kw">let</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">table</span>.<span class="ident">iter</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">table</span>.<span class="ident">len</span>(), <span class="ident">iter</span>.<span class="ident">count</span>());</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.all_symbols" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#557-570" title="goto source code">[src]</a></div><a href="#method.all_symbols" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.all_symbols" class="fnname">all_symbols</a>(&amp;self) -&gt; <a class="struct" href="struct.AllSymbols.html" title="struct intaglio::AllSymbols">AllSymbols</a>&lt;'_&gt;<span class="notable-traits"><span class="notable-traits-tooltip">ⓘ<div class="notable-traits-tooltiptext"><span class="docblock"><div class="notable">Notable traits for <a class="struct" href="struct.AllSymbols.html" title="struct intaglio::AllSymbols">AllSymbols</a>&lt;'a&gt;</div><code class="content"><span class="where fmt-newline">impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a> for <a class="struct" href="struct.AllSymbols.html" title="struct intaglio::AllSymbols">AllSymbols</a>&lt;'a&gt;</span><span class="where fmt-newline">    type <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#associatedtype.Item" class="type">Item</a> = <a class="struct" href="struct.Symbol.html" title="struct intaglio::Symbol">Symbol</a>;</span></code></span></div></span></span></h4></div></summary><div class="docblock"><p>Returns an iterator over all <a href="struct.Symbol.html" title="Symbol"><code>Symbol</code></a>s in the <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
-<h1 id="examples-10" class="section-header"><a href="#examples-10">Examples</a></h1>
+<h5 id="examples-10" class="section-header"><a href="#examples-10">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>)<span class="question-mark">?</span>;
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;xyz&quot;</span>)<span class="question-mark">?</span>;
@@ -125,7 +125,7 @@ reallocating.</p>
 <span class="kw">let</span> <span class="ident">all_symbols</span> <span class="op">=</span> <span class="ident">table</span>.<span class="ident">all_symbols</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">table</span>.<span class="ident">len</span>(), <span class="ident">all_symbols</span>.<span class="ident">count</span>());</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.strings" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#609-611" title="goto source code">[src]</a></div><a href="#method.strings" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.strings" class="fnname">strings</a>(&amp;self) -&gt; <a class="struct" href="struct.Strings.html" title="struct intaglio::Strings">Strings</a>&lt;'_&gt;<span class="notable-traits"><span class="notable-traits-tooltip">ⓘ<div class="notable-traits-tooltiptext"><span class="docblock"><div class="notable">Notable traits for <a class="struct" href="struct.Strings.html" title="struct intaglio::Strings">Strings</a>&lt;'a&gt;</div><code class="content"><span class="where fmt-newline">impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a> for <a class="struct" href="struct.Strings.html" title="struct intaglio::Strings">Strings</a>&lt;'a&gt;</span><span class="where fmt-newline">    type <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#associatedtype.Item" class="type">Item</a> = &amp;'a <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>;</span></code></span></div></span></span></h4></div></summary><div class="docblock"><p>Returns an iterator over all strings in the <a href="struct.SymbolTable.html" title="SymbolTable"><code>SymbolTable</code></a>.</p>
-<h1 id="examples-11" class="section-header"><a href="#examples-11">Examples</a></h1>
+<h5 id="examples-11" class="section-header"><a href="#examples-11">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>)<span class="question-mark">?</span>;
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;xyz&quot;</span>)<span class="question-mark">?</span>;
@@ -150,11 +150,11 @@ reallocating.</p>
 Equal bytestrings will be inserted into the symbol table exactly once.</p>
 <p>This function only allocates if the underlying symbol table has no
 remaining capacity.</p>
-<h1 id="errors" class="section-header"><a href="#errors">Errors</a></h1>
+<h5 id="errors" class="section-header"><a href="#errors">Errors</a></h5>
 <p>If the symbol table would grow larger than <code>u32::MAX</code> interned
 bytestrings, the <a href="struct.Symbol.html" title="Symbol"><code>Symbol</code></a> counter would overflow and a
 <a href="struct.SymbolOverflowError.html" title="SymbolOverflowError"><code>SymbolOverflowError</code></a> is returned.</p>
-<h1 id="examples-12" class="section-header"><a href="#examples-12">Examples</a></h1>
+<h5 id="examples-12" class="section-header"><a href="#examples-12">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="kw">let</span> <span class="ident">sym</span> <span class="op">=</span> <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>;
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;xyz&quot;</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>;
@@ -166,7 +166,7 @@ bytestrings, the <a href="struct.Symbol.html" title="Symbol"><code>Symbol</code>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.check_interned" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#706-708" title="goto source code">[src]</a></div><a href="#method.check_interned" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.check_interned" class="fnname">check_interned</a>(&amp;self, contents: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="struct.Symbol.html" title="struct intaglio::Symbol">Symbol</a>&gt;</h4></div></summary><div class="docblock"><p>Returns the <code>Symbol</code> identifier for <code>contents</code> if it has been interned
 before, <code>None</code> otherwise.</p>
 <p>This method does not modify the symbol table.</p>
-<h1 id="examples-13" class="section-header"><a href="#examples-13">Examples</a></h1>
+<h5 id="examples-13" class="section-header"><a href="#examples-13">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">table</span>.<span class="ident">is_interned</span>(<span class="string">&quot;abc&quot;</span>));
 <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">table</span>.<span class="ident">check_interned</span>(<span class="string">&quot;abc&quot;</span>));
@@ -176,7 +176,7 @@ before, <code>None</code> otherwise.</p>
 <span class="macro">assert_eq!</span>(<span class="prelude-val">Some</span>(<span class="ident">Symbol::new</span>(<span class="number">0</span>)), <span class="ident">table</span>.<span class="ident">check_interned</span>(<span class="string">&quot;abc&quot;</span>));</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.is_interned" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/intaglio/str.rs.html#731-733" title="goto source code">[src]</a></div><a href="#method.is_interned" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.is_interned" class="fnname">is_interned</a>(&amp;self, contents: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></h4></div></summary><div class="docblock"><p>Returns <code>true</code> if the given byte string has been interned before.</p>
 <p>This method does not modify the symbol table.</p>
-<h1 id="examples-14" class="section-header"><a href="#examples-14">Examples</a></h1>
+<h5 id="examples-14" class="section-header"><a href="#examples-14">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::new</span>();
 <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">table</span>.<span class="ident">is_interned</span>(<span class="string">&quot;abc&quot;</span>));
 <span class="macro">assert_eq!</span>(<span class="prelude-val">None</span>, <span class="ident">table</span>.<span class="ident">check_interned</span>(<span class="string">&quot;abc&quot;</span>));
@@ -189,9 +189,9 @@ in the given <code>SymbolTable</code>. The collection may reserve more space to
 avoid frequent reallocations. After calling reserve, capacity will be
 greater than or equal to <code>self.len() + additional</code>. Does nothing if
 capacity is already sufficient.</p>
-<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
+<h5 id="panics" class="section-header"><a href="#panics">Panics</a></h5>
 <p>Panics if the new capacity overflows <code>usize</code>.</p>
-<h1 id="examples-15" class="section-header"><a href="#examples-15">Examples</a></h1>
+<h5 id="examples-15" class="section-header"><a href="#examples-15">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::with_capacity</span>(<span class="number">1</span>);
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>)<span class="question-mark">?</span>;
 <span class="ident">table</span>.<span class="ident">reserve</span>(<span class="number">10</span>);
@@ -200,7 +200,7 @@ capacity is already sufficient.</p>
 <p>It will drop down as close as possible to the length but the allocator
 may still inform the symbol table that there is space for a few more
 elements.</p>
-<h1 id="examples-16" class="section-header"><a href="#examples-16">Examples</a></h1>
+<h5 id="examples-16" class="section-header"><a href="#examples-16">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">table</span> <span class="op">=</span> <span class="ident">SymbolTable::with_capacity</span>(<span class="number">10</span>);
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;abc&quot;</span>)<span class="question-mark">?</span>;
 <span class="ident">table</span>.<span class="ident">intern</span>(<span class="string">&quot;xyz&quot;</span>)<span class="question-mark">?</span>;
