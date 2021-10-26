@@ -1309,10 +1309,7 @@
 <span id="1309">1309</span>
 <span id="1310">1310</span>
 <span id="1311">1311</span>
-<span id="1312">1312</span>
-<span id="1313">1313</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::convert::TryFrom</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::fmt</span>;
 <span class="kw">use</span> <span class="ident">core::iter::FusedIterator</span>;
 <span class="kw">use</span> <span class="ident">core::slice</span>;
 <span class="kw">use</span> <span class="ident">core::str</span>;
@@ -1963,7 +1960,6 @@
 <span class="doccomment">/// on their own are invalid. All of these bytes should be hex escaped.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// # use core::convert::TryFrom;</span>
 <span class="doccomment">/// # use scolapasta_string_escape::InvalidUtf8ByteSequence;</span>
 <span class="doccomment">/// let invalid_byte_sequence = &amp;b&quot;\xF0\x9D\x9C&quot;[..];</span>
 <span class="doccomment">/// let iter = InvalidUtf8ByteSequence::try_from(invalid_byte_sequence).unwrap();</span>

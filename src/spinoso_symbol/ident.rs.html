@@ -1183,8 +1183,6 @@
 <span id="1183">1183</span>
 <span id="1184">1184</span>
 <span id="1185">1185</span>
-<span id="1186">1186</span>
-<span id="1187">1187</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Parser for classifying bytestrings as Ruby identifiers.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This module exposes a parser for determining if a sequence of bytes is a</span>
@@ -1236,7 +1234,6 @@
 <span class="doccomment">//! ```</span>
 
 <span class="kw">use</span> <span class="ident">bstr::ByteSlice</span>;
-<span class="kw">use</span> <span class="ident">core::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">core::fmt</span>;
 <span class="kw">use</span> <span class="ident">core::str::FromStr</span>;
 
@@ -1820,7 +1817,6 @@
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">is_ident_until</span>, <span class="ident">is_next_ident_exhausting</span>, <span class="ident">is_special_global_name</span>, <span class="ident">IdentifierType</span>, <span class="ident">ParseIdentifierError</span>,
     };
-    <span class="kw">use</span> <span class="ident">core::convert::TryFrom</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">special_global_name</span>() {

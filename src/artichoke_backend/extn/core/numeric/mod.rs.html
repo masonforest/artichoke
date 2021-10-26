@@ -211,7 +211,7 @@
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// # use artichoke_backend::prelude::*;</span>
 <span class="doccomment">/// # use artichoke_backend::extn::core::numeric::{self, Coercion};</span>
-<span class="doccomment">/// # fn example() -&gt; Result&lt;(), Box&lt;std::error::Error&gt;&gt; {</span>
+<span class="doccomment">/// # fn example() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {</span>
 <span class="doccomment">/// # let mut interp = artichoke_backend::interpreter()?;</span>
 <span class="doccomment">/// let x = interp.convert(1_i64);</span>
 <span class="doccomment">/// let y = interp.convert_mut(2.5_f64);</span>

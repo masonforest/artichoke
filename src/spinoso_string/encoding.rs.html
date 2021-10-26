@@ -363,10 +363,7 @@
 <span id="363">363</span>
 <span id="364">364</span>
 <span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::convert::TryFrom</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::fmt</span>;
 
 <span class="comment">// [2.6.3] &gt; Encoding::UTF_8.names</span>
 <span class="comment">// =&gt; [&quot;UTF-8&quot;, &quot;CP65001&quot;, &quot;locale&quot;, &quot;external&quot;, &quot;filesystem&quot;]</span>
@@ -389,7 +386,6 @@
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// # use core::convert::TryFrom;</span>
 <span class="doccomment">/// # use spinoso_string::{Encoding, InvalidEncodingError};</span>
 <span class="doccomment">/// assert_eq!(Encoding::try_from_flag(255), Err(InvalidEncodingError::new()));</span>
 <span class="doccomment">/// assert_eq!(Encoding::try_from(255), Err(InvalidEncodingError::new()));</span>
