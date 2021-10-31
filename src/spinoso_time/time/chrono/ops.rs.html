@@ -866,7 +866,7 @@
         <span class="macro">assert_ne!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_ne!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">0</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">500_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">500_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -886,7 +886,7 @@
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">59</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">700_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">700_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -903,7 +903,7 @@
         <span class="macro">assert_ne!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_ne!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">0</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">200_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">200_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -923,7 +923,7 @@
         <span class="macro">assert_ne!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_ne!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">0</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">700_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">700_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -940,7 +940,7 @@
         <span class="macro">assert_ne!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_ne!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">1</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">200_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">200_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -960,7 +960,7 @@
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">58</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">500_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">500_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -980,7 +980,7 @@
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">59</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">300_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">300_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -997,7 +997,7 @@
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">58</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">800_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">800_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -1017,7 +1017,7 @@
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">58</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">300_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">300_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {
@@ -1034,7 +1034,7 @@
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">hour</span>(), <span class="ident">succ</span>.<span class="ident">hour</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">dt</span>.<span class="ident">minute</span>(), <span class="ident">succ</span>.<span class="ident">minute</span>());
         <span class="macro">assert_eq!</span>(<span class="ident">succ</span>.<span class="ident">second</span>(), <span class="number">57</span>);
-        <span class="comment">// handle inexactitude of float arithmetic</span>
+        <span class="comment">// handle in-exactitude of float arithmetic</span>
         <span class="kw">if</span> <span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">&gt;</span> <span class="number">800_000_000</span> {
             <span class="macro">assert!</span>(<span class="ident">succ</span>.<span class="ident">nanosecond</span>() <span class="op">-</span> <span class="number">800_000_000</span> <span class="op">&lt;</span> <span class="number">50</span>);
         } <span class="kw">else</span> {

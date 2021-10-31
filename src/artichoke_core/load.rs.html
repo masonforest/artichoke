@@ -174,43 +174,43 @@
     <span class="doccomment">/// Concrete type for interpreter.</span>
     <span class="kw">type</span> <span class="ident">Artichoke</span>;
 
-    <span class="doccomment">/// Concrete type for errors returned from filesystem IO.</span>
+    <span class="doccomment">/// Concrete type for errors returned from file system IO.</span>
     <span class="kw">type</span> <span class="ident">Error</span>;
 
     <span class="doccomment">/// Concrete type for errors returned by `File::require`.</span>
     <span class="kw">type</span> <span class="ident">Exception</span>;
 
-    <span class="doccomment">/// Add a Rust extension hook to the virtual filesystem. A stub Ruby file is</span>
-    <span class="doccomment">/// added to the filesystem and [`File::require`] will dynamically define</span>
+    <span class="doccomment">/// Add a Rust extension hook to the virtual file system. A stub Ruby file is</span>
+    <span class="doccomment">/// added to the file system and [`File::require`] will dynamically define</span>
     <span class="doccomment">/// Ruby items when invoked via `Kernel#require`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `path` is a relative path, the Ruby source is added to the</span>
-    <span class="doccomment">/// filesystem relative to `RUBY_LOAD_PATH`. If the path is absolute, the</span>
-    <span class="doccomment">/// file is placed directly on the filesystem. Anscestor directories are</span>
+    <span class="doccomment">/// file system relative to `RUBY_LOAD_PATH`. If the path is absolute, the</span>
+    <span class="doccomment">/// file is placed directly on the file system. Ancestor directories are</span>
     <span class="doccomment">/// created automatically.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying filesystem is inaccessible, an error is returned.</span>
+    <span class="doccomment">/// If the underlying file system is inaccessible, an error is returned.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If writes to the underlying filesystem fail, an error is returned.</span>
+    <span class="doccomment">/// If writes to the underlying file system fail, an error is returned.</span>
     <span class="kw">fn</span> <span class="ident">def_file_for_type</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
         <span class="ident">T</span>: <span class="ident">File</span><span class="op">&lt;</span><span class="ident">Artichoke</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::Artichoke</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::Exception</span><span class="op">&gt;</span>;
 
-    <span class="doccomment">/// Add a Ruby source to the virtual filesystem.</span>
+    <span class="doccomment">/// Add a Ruby source to the virtual file system.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `path` is a relative path, the Ruby source is added to the</span>
-    <span class="doccomment">/// filesystem relative to `RUBY_LOAD_PATH`. If the path is absolute, the</span>
-    <span class="doccomment">/// file is placed directly on the filesystem. Anscestor directories are</span>
+    <span class="doccomment">/// file system relative to `RUBY_LOAD_PATH`. If the path is absolute, the</span>
+    <span class="doccomment">/// file is placed directly on the file system. Ancestor directories are</span>
     <span class="doccomment">/// created automatically.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying filesystem is inaccessible, an error is returned.</span>
+    <span class="doccomment">/// If the underlying file system is inaccessible, an error is returned.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If writes to the underlying filesystem fail, an error is returned.</span>
+    <span class="doccomment">/// If writes to the underlying file system fail, an error is returned.</span>
     <span class="kw">fn</span> <span class="ident">def_rb_source_file</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="ident">P</span>, <span class="ident">contents</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
@@ -219,37 +219,37 @@
     <span class="doccomment">/// Test for a source file at a path and return the absolute path of the</span>
     <span class="doccomment">/// resolved file.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Query the underlying virtual filesystem to check if `path` points to a</span>
+    <span class="doccomment">/// Query the underlying virtual file system to check if `path` points to a</span>
     <span class="doccomment">/// source file.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function returns [`None`] if `path` does not exist in the virtual</span>
-    <span class="doccomment">/// filesystem.</span>
+    <span class="doccomment">/// file system.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying filesystem is inaccessible, an error is returned.</span>
+    <span class="doccomment">/// If the underlying file system is inaccessible, an error is returned.</span>
     <span class="kw">fn</span> <span class="ident">resolve_source_path</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Test for a source file at a path.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Query the underlying virtual filesystem to check if `path` points to a</span>
+    <span class="doccomment">/// Query the underlying virtual file system to check if `path` points to a</span>
     <span class="doccomment">/// source file.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function returns `false` if `path` does not exist in the virtual</span>
-    <span class="doccomment">/// filesystem.</span>
+    <span class="doccomment">/// file system.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying filesystem is inaccessible, an error is returned.</span>
+    <span class="doccomment">/// If the underlying file system is inaccessible, an error is returned.</span>
     <span class="kw">fn</span> <span class="ident">source_is_file</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Load source located at the given path.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Query the underlying virtual filesystem for a source file and load it</span>
+    <span class="doccomment">/// Query the underlying virtual file system for a source file and load it</span>
     <span class="doccomment">/// onto the interpreter. This loads files with the following steps:</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// 1. Retrieve and execute the extension hook, if any.</span>
@@ -261,20 +261,20 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying filesystem is inaccessible, an error is returned.</span>
+    <span class="doccomment">/// If the underlying file system is inaccessible, an error is returned.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If reads to the underlying filesystem fail, an error is returned.</span>
+    <span class="doccomment">/// If reads to the underlying file system fail, an error is returned.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `path` does not point to a source file, an error is returned.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the souce file at `path` has no contents, an error is returned.</span>
+    <span class="doccomment">/// If the source file at `path` has no contents, an error is returned.</span>
     <span class="kw">fn</span> <span class="ident">load_source</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Require source located at the given path.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Query the underlying virtual filesystem for a source file and require it</span>
+    <span class="doccomment">/// Query the underlying virtual file system for a source file and require it</span>
     <span class="doccomment">/// onto the interpreter. This requires files with the following steps:</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// 1. Retrieve and execute the extension hook, if any.</span>
@@ -287,27 +287,27 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying filesystem is inaccessible, an error is returned.</span>
+    <span class="doccomment">/// If the underlying file system is inaccessible, an error is returned.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If reads to the underlying filesystem fail, an error is returned.</span>
+    <span class="doccomment">/// If reads to the underlying file system fail, an error is returned.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `path` does not point to a source file, an error is returned.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the souce file at `path` has no contents, an error is returned.</span>
+    <span class="doccomment">/// If the source file at `path` has no contents, an error is returned.</span>
     <span class="kw">fn</span> <span class="ident">require_source</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Retrieve file contents for a source file.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Query the underlying virtual filesystem for the file contents of the</span>
+    <span class="doccomment">/// Query the underlying virtual file system for the file contents of the</span>
     <span class="doccomment">/// source file at `path`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the underlying filesystem is inaccessible, an error is returned.</span>
+    <span class="doccomment">/// If the underlying file system is inaccessible, an error is returned.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If reads to the underlying filesystem fail, an error is returned.</span>
+    <span class="doccomment">/// If reads to the underlying file system fail, an error is returned.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `path` does not point to a source file, an error is returned.</span>
     <span class="kw">fn</span> <span class="ident">read_source_file_contents</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>

@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Prng","Interpreter global psuedorandom number generator."]]});
+initSidebarItems({"trait":[["Prng","Interpreter global pseudorandom number generator."]]});

@@ -105,14 +105,14 @@
 <span id="105">105</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Intern [`Symbol`][symbol]s on an interpreter.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! `Symbol`s are immutable bytestrings that have the same lifetime as the</span>
+<span class="doccomment">//! `Symbol`s are immutable byte strings that have the same lifetime as the</span>
 <span class="doccomment">//! interpreter.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [symbol]: https://ruby-doc.org/core-2.6.3/Symbol.html</span>
 
 <span class="kw">use</span> <span class="ident">alloc::borrow::Cow</span>;
 
-<span class="doccomment">/// Store and retrieve bytestrings that have the same lifetime as the</span>
+<span class="doccomment">/// Store and retrieve byte strings that have the same lifetime as the</span>
 <span class="doccomment">/// interpreter.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// See the [Ruby `Symbol` type][symbol].</span>
@@ -134,7 +134,7 @@
     <span class="doccomment">/// symbol identifiers must be representable by a `Range&lt;u32&gt;`.</span>
     <span class="kw">const</span> <span class="ident">SYMBOL_RANGE_START</span>: <span class="ident"><span class="self">Self</span>::Symbol</span>;
 
-    <span class="doccomment">/// Store an immutable bytestring for the life of the interpreter.</span>
+    <span class="doccomment">/// Store an immutable byte string for the life of the interpreter.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns an identifier that enables retrieving the original bytes.</span>
     <span class="doccomment">///</span>
@@ -147,7 +147,7 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>;
 
-    <span class="doccomment">/// Check if a bytestring is already interned and return its symbol</span>
+    <span class="doccomment">/// Check if a byte string is already interned and return its symbol</span>
     <span class="doccomment">/// identifier.  Return `None` if the string has not been interned before.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns an identifier that enables retrieving the original bytes.</span>
@@ -194,7 +194,7 @@
         <span class="self">self</span>.<span class="ident">check_interned_bytes</span>(<span class="ident">symbol</span>.<span class="ident">as_bytes</span>())
     }
 
-    <span class="doccomment">/// Retrieve the original byte content of an interned bytestring.</span>
+    <span class="doccomment">/// Retrieve the original byte content of an interned byte string.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns `None` if the symbol identifier is invalid.</span>
     <span class="doccomment">///</span>

@@ -7,7 +7,7 @@
     Constant,
     Local,
 }</code></pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Valid types for Ruby identifiers.</p>
-<p>Spinoso symbol parses bytestrings to determine if they are valid idents for
+<p>Spinoso symbol parses byte strings to determine if they are valid idents for
 the <a href="struct.Inspect.html"><code>Inspect</code></a> iterator (which requires the <strong>inspect</strong> Cargo feature to be
 enabled). Symbols that are valid idents do not get wrapped in <code>&quot;</code> when
 generating their debug output.</p>
@@ -94,8 +94,8 @@ bytes must be a valid <a href="enum.IdentifierType.html#variant.Constant"><code>
 <span class="macro">assert_eq!</span>(<span class="string">&quot;@@1&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Err</span>(<span class="ident">ParseIdentifierError::new</span>()));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;@@9&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Err</span>(<span class="ident">ParseIdentifierError::new</span>()));</code></pre></div>
 </div><div id="variant.AttrSet" class="variant small-section-header"><a href="#variant.AttrSet" class="anchor field"></a><code>AttrSet</code></div><div class="docblock"><p>Identifier that is an “attribute setter” method name.</p>
-<p>AttrSet end in the <code>=</code> sigil and are otherwise valid <a href="enum.IdentifierType.html#variant.Local"><code>Local</code></a> or
-<a href="enum.IdentifierType.html#variant.Constant"><code>Constant</code></a> idents.  AttrSet idents cannot have any other “junk”
+<p><code>AttrSet</code> idents end in the <code>=</code> sigil and are otherwise valid <a href="enum.IdentifierType.html#variant.Local"><code>Local</code></a>
+or <a href="enum.IdentifierType.html#variant.Constant"><code>Constant</code></a> idents. <code>AttrSet</code> idents cannot have any other “junk”
 symbols.</p>
 <h3 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(<span class="string">&quot;Foo=&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::AttrSet</span>));

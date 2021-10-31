@@ -239,7 +239,7 @@
     <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">run</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">data</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span>;
 }
 
-<span class="comment">// `Funcall` must be `Copy` because the we may unwind past the frames in which</span>
+<span class="comment">// `Funcall` must be `Copy` because we may unwind past the frames in which</span>
 <span class="comment">// it is used with `longjmp` which does not allow Rust  to run destructors.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="kw">struct</span> <span class="ident">Funcall</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -274,7 +274,7 @@
     }
 }
 
-<span class="comment">// `Eval` must be `Copy` because the we may unwind past the frames in which</span>
+<span class="comment">// `Eval` must be `Copy` because we may unwind past the frames in which</span>
 <span class="comment">// it is used with `longjmp` which does not allow Rust  to run destructors.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="kw">struct</span> <span class="ident">Eval</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -297,7 +297,7 @@
     }
 }
 
-<span class="comment">// `BlockYield` must be `Copy` because the we may unwind past the frames in which</span>
+<span class="comment">// `BlockYield` must be `Copy` because we may unwind past the frames in which</span>
 <span class="comment">// it is used with `longjmp` which does not allow Rust  to run destructors.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="kw">struct</span> <span class="ident">BlockYield</span> {
@@ -335,7 +335,7 @@
     <span class="kw">pub</span> <span class="ident">len</span>: <span class="ident">sys::mrb_int</span>,
 }
 
-<span class="comment">// `IsRange` must be `Copy` because the we may unwind past the frames in which</span>
+<span class="comment">// `IsRange` must be `Copy` because we may unwind past the frames in which</span>
 <span class="comment">// it is used with `longjmp` which does not allow Rust  to run destructors.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="kw">struct</span> <span class="ident">IsRange</span> {

@@ -408,7 +408,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Symbol</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">usize</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">sym</span>: <span class="ident">Symbol</span>) -&gt; <span class="self">Self</span> {
-        <span class="comment">// This conversion relies on size_of::&lt;usize&gt;() &gt;= size_of::&lt;u32&gt;(),</span>
+        <span class="comment">// This conversion relies on `size_of::&lt;usize&gt;() &gt;= size_of::&lt;u32&gt;()`,</span>
         <span class="comment">// which is ensured with a const assertion in `lib.rs`.</span>
         <span class="ident">sym</span>.<span class="ident">id</span>() <span class="kw">as</span> <span class="ident">usize</span>
     }

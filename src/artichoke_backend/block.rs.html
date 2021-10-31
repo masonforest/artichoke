@@ -304,7 +304,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">NoBlockGiven</span> {
-    <span class="doccomment">/// Construce a new, empty no block given error.</span>
+    <span class="doccomment">/// Construct a new, empty no block given error.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The inner Ruby type is `nil`.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
@@ -415,7 +415,7 @@
 
         <span class="macro">assert!</span>(<span class="ident">dead</span>.<span class="ident">is_dead</span>(<span class="kw-2">&amp;mut</span> <span class="ident">interp</span>));
 
-        <span class="comment">// now ensure that it produces a fatal error when passed to yield_arg</span>
+        <span class="comment">// now ensure that it produces a fatal error when passed to `yield_arg`</span>
         <span class="kw">let</span> <span class="ident">block</span> <span class="op">=</span> <span class="ident">Block::default</span>();
 
         <span class="kw">let</span> <span class="ident">error</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">yield_arg</span>(<span class="kw-2">&amp;mut</span> <span class="ident">interp</span>, <span class="kw-2">&amp;</span><span class="ident">dead</span>).<span class="ident">unwrap_err</span>();

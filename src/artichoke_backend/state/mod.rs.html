@@ -101,7 +101,7 @@
 <span class="doccomment">/// Container for interpreter global state.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// A Ruby interpreter requires various pieces of state to execute Ruby code. It</span>
-<span class="doccomment">/// needs an object heap, type registry, symbol table, psuedorandom number</span>
+<span class="doccomment">/// needs an object heap, type registry, symbol table, pseudorandom number</span>
 <span class="doccomment">/// generator, and more.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This struct stores all of these components and allows them to be passed</span>
@@ -127,7 +127,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// - [`Class`] and [`Module`] registries.</span>
     <span class="doccomment">/// - `Regexp` [global state][regexp-state].</span>
-    <span class="doccomment">/// - [In-memory virtual filesystem].</span>
+    <span class="doccomment">/// - [In-memory virtual file system].</span>
     <span class="doccomment">/// - [Ruby parser and file context].</span>
     <span class="doccomment">/// - [Intepreter-level PRNG] (requires activating the `core-random`</span>
     <span class="doccomment">///   feature).</span>
@@ -136,13 +136,13 @@
     <span class="doccomment">/// # Errors</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If the `core-random` feature is enabled, this function may return an</span>
-    <span class="doccomment">/// error if the interpreter-global psuedorandom number generator fails</span>
+    <span class="doccomment">/// error if the interpreter-global pseudorandom number generator fails</span>
     <span class="doccomment">/// to initialize using the platform source of randomness.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Class`]: crate::core::ClassRegistry</span>
     <span class="doccomment">/// [`Module`]: crate::core::ModuleRegistry</span>
     <span class="doccomment">/// [regexp-state]: regexp::State</span>
-    <span class="doccomment">/// [In-memory virtual filesystem]: load_path</span>
+    <span class="doccomment">/// [In-memory virtual file system]: load_path</span>
     <span class="doccomment">/// [Ruby parser and file context]: parser::State</span>
     <span class="doccomment">/// [Intepreter-level PRNG]: Random</span>
     <span class="doccomment">/// [IO capturing]: output::Strategy</span>

@@ -14,7 +14,7 @@ module constants to be arbitrary Ruby <a href="value/trait.Value.html"><code>Val
 various sources.</li>
 <li><a href="globals/trait.Globals.html"><code>Globals</code></a>: Get, set, and unset interpreter-level
 global variables.</li>
-<li><a href="intern/trait.Intern.html"><code>Intern</code></a>: Intern bytestrings to a cheap to copy and
+<li><a href="intern/trait.Intern.html"><code>Intern</code></a>: Intern byte strings to a cheap to copy and
 compare symbol type.</li>
 <li><a href="io/trait.Io.html"><code>Io</code></a>: External I/O APIs, such as writing to the standard output
 of the current process.</li>
@@ -36,7 +36,7 @@ Rust types.</p>
 <h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <p><a href="https://artichoke.github.io/artichoke/artichoke_backend/"><code>artichoke-backend</code></a>
 is one implementation of the <code>artichoke-core</code> traits.</p>
-<p>To use all of the APIs defined in Artichoke Core, bring the traits into
+<p>To use all the APIs defined in Artichoke Core, bring the traits into
 scope by importing the prelude:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">artichoke_core::prelude</span>::<span class="kw-2">*</span>;</code></pre></div>
@@ -62,7 +62,7 @@ as well as several implementations of <code>std::error::Error</code>.</li>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="module_registry/index.html" title="artichoke_core::module_registry mod">module_registry</a></div><div class="item-right docblock-short"><p>Define and store module specs on an interpreter.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="parser/index.html" title="artichoke_core::parser mod">parser</a></div><div class="item-right docblock-short"><p>Parse code on an Artichoke interpreter.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="prelude/index.html" title="artichoke_core::prelude mod">prelude</a></div><div class="item-right docblock-short"><p>A “prelude” for users of the <code>artichoke-core</code> crate.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="prng/index.html" title="artichoke_core::prng mod">prng</a></div><div class="item-right docblock-short"><p>Interpreter global psuedorandom number generator.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="prng/index.html" title="artichoke_core::prng mod">prng</a></div><div class="item-right docblock-short"><p>Interpreter global pseudorandom number generator.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="regexp/index.html" title="artichoke_core::regexp mod">regexp</a></div><div class="item-right docblock-short"><p>Track <code>Regexp</code> global state.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="release_metadata/index.html" title="artichoke_core::release_metadata mod">release_metadata</a></div><div class="item-right docblock-short"><p>Information about an Artichoke build.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="top_self/index.html" title="artichoke_core::top_self mod">top_self</a></div><div class="item-right docblock-short"><p>Expose the global context, called <a href="https://www.sitepoint.com/rubys-top-self-object/"><em>top self</em></a>, to the interpreter.</p>

@@ -128,7 +128,7 @@
 <span class="doccomment">//! Routines for debug escaping Ruby Strings.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Ruby Strings are conventionally UTF-8 byte sequences. When calling</span>
-<span class="doccomment">//! [`String#inspect`] or [`Symbol#inspect`], these maybe UTF-8 bytestrings are</span>
+<span class="doccomment">//! [`String#inspect`] or [`Symbol#inspect`], these maybe UTF-8 byte strings are</span>
 <span class="doccomment">//! escaped to have a valid and printable UTF-8 representation.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This crate exposes functions and iterators for encoding arbitrary byte</span>
@@ -190,7 +190,7 @@
 
 <span class="attribute">#![<span class="ident">no_std</span>]</span>
 
-<span class="comment">// Ensure code blocks in README.md compile</span>
+<span class="comment">// Ensure code blocks in `README.md` compile</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doctest</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">readme</span> {}

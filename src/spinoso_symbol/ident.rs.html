@@ -1183,7 +1183,7 @@
 <span id="1183">1183</span>
 <span id="1184">1184</span>
 <span id="1185">1185</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Parser for classifying bytestrings as Ruby identifiers.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Parser for classifying byte strings as Ruby identifiers.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This module exposes a parser for determining if a sequence of bytes is a</span>
 <span class="doccomment">//! valid Ruby identifier. These routines also classify idents by type, for</span>
@@ -1239,7 +1239,7 @@
 
 <span class="doccomment">/// Valid types for Ruby identifiers.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Spinoso symbol parses bytestrings to determine if they are valid idents for</span>
+<span class="doccomment">/// Spinoso symbol parses byte strings to determine if they are valid idents for</span>
 <span class="doccomment">/// the [`Inspect`] iterator (which requires the **inspect** Cargo feature to be</span>
 <span class="doccomment">/// enabled). Symbols that are valid idents do not get wrapped in `&quot;` when</span>
 <span class="doccomment">/// generating their debug output.</span>
@@ -1391,8 +1391,8 @@
     <span class="ident">Class</span>,
     <span class="doccomment">/// Identifier that is an &quot;attribute setter&quot; method name.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// AttrSet end in the `=` sigil and are otherwise valid [`Local`] or</span>
-    <span class="doccomment">/// [`Constant`] idents.  AttrSet idents cannot have any other &quot;junk&quot;</span>
+    <span class="doccomment">/// `AttrSet` idents end in the `=` sigil and are otherwise valid [`Local`]</span>
+    <span class="doccomment">/// or [`Constant`] idents. `AttrSet` idents cannot have any other &quot;junk&quot;</span>
     <span class="doccomment">/// symbols.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
@@ -1551,7 +1551,7 @@
         [] <span class="op">|</span> [<span class="string">b&#39;\0&#39;</span>] =&gt; <span class="prelude-val">None</span>,
         <span class="comment">// special global variable</span>
         [<span class="string">b&#39;$&#39;</span>, <span class="ident">name</span> @ ..] <span class="kw">if</span> <span class="ident">is_special_global_name</span>(<span class="ident">name</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">IdentifierType::Global</span>),
-        <span class="comment">// global vairable</span>
+        <span class="comment">// global variable</span>
         [<span class="string">b&#39;$&#39;</span>, <span class="ident">name</span> @ ..] =&gt; <span class="ident">parse_ident</span>(<span class="ident">name</span>, <span class="ident">IdentifierType::Global</span>),
         <span class="comment">// class variable</span>
         [<span class="string">b&#39;@&#39;</span>, <span class="string">b&#39;@&#39;</span>, <span class="ident">name</span> @ ..] =&gt; <span class="ident">parse_ident</span>(<span class="ident">name</span>, <span class="ident">IdentifierType::Class</span>),
@@ -1650,7 +1650,7 @@
     )
 }
 
-<span class="doccomment">/// Return whther the input is a valid constant name.</span>
+<span class="doccomment">/// Return whether the input is a valid constant name.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Constant names require the first character to be either ASCII or Unicode</span>
 <span class="doccomment">/// uppercase.</span>
@@ -2132,7 +2132,7 @@
 <span class="kw">mod</span> <span class="ident">specs</span> {
     <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::IdentifierType</span>;
 
-    <span class="comment">// From spec/core/symbol/inspect_spec.rb:</span>
+    <span class="comment">// From `spec/core/symbol/inspect_spec.rb`:</span>
     <span class="comment">//</span>
     <span class="comment">// ```ruby</span>
     <span class="comment">// symbols = {</span>

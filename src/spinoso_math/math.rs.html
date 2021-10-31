@@ -1057,7 +1057,7 @@
 <span class="doccomment">/// Computes the four quadrant arctangent of `value` (`y`) and `other` (`x`) in</span>
 <span class="doccomment">/// radians.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Return value is a angle in radians between the positive x-axis of cartesian</span>
+<span class="doccomment">/// Return value is a angle in radians between the positive x-axis of Cartesian</span>
 <span class="doccomment">/// plane and the point given by the coordinates (`x`, `y`) on it.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Domain: (-INFINITY, INFINITY)</span>
@@ -1383,7 +1383,7 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gamma</span>(<span class="ident">value</span>: <span class="ident">f64</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">DomainError</span><span class="op">&gt;</span> {
     <span class="comment">// `gamma(n)` is the same as `n!` for integer n &gt; 0. `gamma` returns float</span>
     <span class="comment">// and might be an approximation so include a lookup table for as many `n`</span>
-    <span class="comment">// as can fit in the float manitssa.</span>
+    <span class="comment">// as can fit in the float mantissa.</span>
     <span class="kw">const</span> <span class="ident">FACTORIAL_TABLE</span>: [<span class="ident">f64</span>; <span class="number">23</span>] <span class="op">=</span> [
         <span class="number">1.0_f64</span>,                         <span class="comment">// fact(0)</span>
         <span class="number">1.0</span>,                             <span class="comment">// fact(1)</span>
@@ -1724,7 +1724,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Domain: [0, INFINITY)</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Codomain:[0, INFINITY)</span>
+<span class="doccomment">/// Codomain: [0, INFINITY)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>

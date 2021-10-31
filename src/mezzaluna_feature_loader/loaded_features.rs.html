@@ -531,7 +531,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Features are identified by the (potentially relative) path used when loading</span>
 <span class="doccomment">/// the file for the first time. Features loaded from disk are deduplicated</span>
-<span class="doccomment">/// by their real position on the underlying filesystem (i.e. their device and</span>
+<span class="doccomment">/// by their real position on the underlying file system (i.e. their device and</span>
 <span class="doccomment">/// inode).</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Feature</span> {
@@ -647,7 +647,7 @@
 <span class="doccomment">/// `$LOADED_FEATURES`).</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `$LOADED_FEATURES` is an append only set. Disk-based features are</span>
-<span class="doccomment">/// deduplicated by their real position on the underlying filesystem (i.e. their</span>
+<span class="doccomment">/// deduplicated by their real position on the underlying file system (i.e. their</span>
 <span class="doccomment">/// device and inode).</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`require`]: https://ruby-doc.org/core-2.6.3/Kernel.html#method-i-require</span>
@@ -890,7 +890,7 @@
     <span class="doccomment">/// Returns true if the set contains a feature.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Features loaded from disk are compared based on whether they point to</span>
-    <span class="doccomment">/// the same file on the underlying filesystem. Features loaded from memory</span>
+    <span class="doccomment">/// the same file on the underlying file system. Features loaded from memory</span>
     <span class="doccomment">/// are compared by their paths.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">feature</span>: <span class="kw-2">&amp;</span><span class="ident">Feature</span>) -&gt; <span class="ident">bool</span> {
@@ -921,7 +921,7 @@
         <span class="self">self</span>.<span class="ident">insert</span>(<span class="ident">feature</span>);
     }
 
-    <span class="doccomment">/// Add a memory featre from its associated path.</span>
+    <span class="doccomment">/// Add a memory feature from its associated path.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>

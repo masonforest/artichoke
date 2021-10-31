@@ -5,19 +5,19 @@ documentation for more.</p>
 <p>To format a <code>String</code> directly into a writer, see <a href="struct.Inspect.html#method.format_into"><code>format_into</code></a> or
 <a href="struct.Inspect.html#method.write_into"><code>write_into</code></a>.</p>
 <h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
-<p>To inspect an empty bytestring:</p>
+<p>To inspect an empty byte string:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">alloc::string::String</span>;
 <span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">Inspect::default</span>();
 <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">inspect</span>.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">debug</span>, <span class="string">r#&quot;&quot;&quot;&quot;#</span>);</code></pre></div>
-<p>To inspect a well-formed UTF-8 bytestring:</p>
+<p>To inspect a well-formed UTF-8 byte string:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">alloc::string::String</span>;
 <span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">Inspect::from</span>(<span class="string">&quot;spinoso&quot;</span>);
 <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">inspect</span>.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">debug</span>, <span class="string">&quot;\&quot;spinoso\&quot;&quot;</span>);</code></pre></div>
-<p>To inspect a bytestring with invalid UTF-8 bytes:</p>
+<p>To inspect a byte string with invalid UTF-8 bytes:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">alloc::string::String</span>;
 <span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">Inspect::from</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;invalid-\xFF-utf8&quot;</span>[..]);

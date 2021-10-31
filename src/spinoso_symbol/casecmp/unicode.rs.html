@@ -66,7 +66,7 @@
 <span class="doccomment">/// Compare the byte contents of two symbols using Unicode case-folding</span>
 <span class="doccomment">/// comparison for equality.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// The byteslice associated with each symbol is resolved via the given</span>
+<span class="doccomment">/// The byte slice associated with each symbol is resolved via the given</span>
 <span class="doccomment">/// interner. Unresolved symbols are compared as if they resolve to `&amp;[]`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This comparison function attempts to convert each symbol&#39;s byte content to a</span>
@@ -104,7 +104,7 @@
         (<span class="prelude-val">Ok</span>(<span class="ident">left</span>), <span class="prelude-val">Ok</span>(<span class="ident">right</span>)) =&gt; <span class="ident">fold</span>.<span class="ident">case_eq</span>(<span class="ident">left</span>, <span class="ident">right</span>),
         <span class="comment">// Both slices are not UTF-8, fallback to ASCII comparator.</span>
         (<span class="prelude-val">Err</span>(<span class="kw">_</span>), <span class="prelude-val">Err</span>(<span class="kw">_</span>)) =&gt; <span class="ident">focaccia::ascii_case_eq</span>(<span class="ident">left</span>, <span class="ident">right</span>),
-        <span class="comment">// Encoding mismatch, the bytes are not comparable using unicode case</span>
+        <span class="comment">// Encoding mismatch, the bytes are not comparable using Unicode case</span>
         <span class="comment">// folding.</span>
         <span class="comment">//</span>
         <span class="comment">// &gt; `nil` is returned if the two symbols have incompatible encodings,</span>

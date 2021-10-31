@@ -334,8 +334,8 @@
             <span class="comment">//</span>
             <span class="comment">// Safety:</span>
             <span class="comment">//</span>
-            <span class="comment">// 1. Extract a `*mut sys::mrb_state` pointer from the `NonNull` mrb</span>
-            <span class="comment">//    field.</span>
+            <span class="comment">// 1. Extract a `*mut sys::mrb_state` pointer from the `NonNull`</span>
+            <span class="comment">//    `mrb` field.</span>
             <span class="comment">// 2. Function safety conditions declare that `Artichoke` is not</span>
             <span class="comment">//    accessed inside the closure.</span>
             <span class="comment">// 3. Rust borrowing rules enforce that `Artichoke` is not accessed</span>
@@ -451,7 +451,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// To ensure safety, the `State` must be moved back into the `mrb` userdata</span>
 <span class="doccomment">/// pointer before re-entering the FFI boundary. This guard implements [`Drop`]</span>
-<span class="doccomment">/// to reserialize the `State` into the `mrb` once it goes out of scope.</span>
+<span class="doccomment">/// to re-serialize the `State` into the `mrb` once it goes out of scope.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `Guard` is passed directly to [`error::raise`](crate::error::raise).</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -461,7 +461,7 @@
     <span class="doccomment">/// Create a new guard that wraps an interpreter.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function is most effective when the interpreter is temporarily</span>
-    <span class="doccomment">/// reified and stored on the stack.</span>
+    <span class="doccomment">/// created from a source `mrb_state` and stored on the stack.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span>(<span class="ident">interp</span>)
     }

@@ -607,7 +607,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RegexpOption</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">bool</span> {
-    <span class="doccomment">/// Convert from `RegexpOption` to its boolean representation.</span>
+    <span class="doccomment">/// Convert from `RegexpOption` to its Boolean representation.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// See also [`is_enabled`].</span>
     <span class="doccomment">///</span>
@@ -799,7 +799,7 @@
     <span class="doccomment">/// Whether the Regexp was parsed as a literal, e.g. `&#39;/artichoke/i`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This enables Ruby parsers to inject whether a Regexp is a literal to the</span>
-    <span class="doccomment">/// core library. Literal Regexps have some special behavior regrding</span>
+    <span class="doccomment">/// core library. Literal Regexps have some special behavior regarding</span>
     <span class="doccomment">/// capturing groups and report parse failures differently.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">is_literal</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {

@@ -230,6 +230,8 @@
 <span id="230">230</span>
 <span id="231">231</span>
 <span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">bstr::BString</span>;
 <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
 <span class="kw">use</span> <span class="ident">std::error</span>;
@@ -377,15 +379,17 @@
     <span class="comment">// message = exception.message</span>
     <span class="comment">// ```</span>
 
-    <span class="comment">// Sometimes when hacking on extn/core it is possible to enter a</span>
+    <span class="comment">// Sometimes when hacking on `extn/core` it is possible to enter a</span>
     <span class="comment">// crash loop where an exception is captured by this handler, but</span>
     <span class="comment">// extracting the exception name or backtrace throws again.</span>
-    <span class="comment">// Uncommenting the folllowing print statement will at least get you</span>
-    <span class="comment">// the exception class and message, which should help debugging.</span>
+    <span class="comment">// Un-commenting the following print statement will at least get you the</span>
+    <span class="comment">// exception class and message, which should help debugging.</span>
     <span class="comment">//</span>
+    <span class="comment">// ```</span>
     <span class="comment">// let message = exception.funcall(&amp;mut arena, &quot;message&quot;, &amp;[], None)?;</span>
     <span class="comment">// let message = message.try_convert_into_mut::&lt;String&gt;(&amp;mut arena);</span>
     <span class="comment">// println!(&quot;{:?}, {:?}&quot;, exception, message);</span>
+    <span class="comment">// ```</span>
 
     <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="ident">exception</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;mut</span> <span class="ident">arena</span>, <span class="string">&quot;class&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">classname</span> <span class="op">=</span> <span class="ident">class</span>.<span class="ident">funcall</span>(<span class="kw-2">&amp;mut</span> <span class="ident">arena</span>, <span class="string">&quot;name&quot;</span>, <span class="kw-2">&amp;</span>[], <span class="prelude-val">None</span>)<span class="question-mark">?</span>;

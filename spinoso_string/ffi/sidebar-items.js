@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["mruby","Helper routines for reimplementing functions in mruby."]]});
+initSidebarItems({"mod":[["mruby","Helper routines for re-implementing functions in mruby."]]});

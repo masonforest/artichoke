@@ -193,8 +193,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// MRI Ruby allows manipulating the [require] search path by setting the</span>
 <span class="doccomment">/// `RUBYLIB` environment variable before launching the Ruby CLI. The `RUBYLIB`</span>
-<span class="doccomment">/// variable is read on startup and is expected to contain a platform-native</span>
-<span class="doccomment">/// path separator-delimited list of filesystem paths.</span>
+<span class="doccomment">/// variable is read on start-up and is expected to contain a platform-native</span>
+<span class="doccomment">/// path separator-delimited list of file system paths.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This loader will attempt to resolve relative paths in any of the paths given</span>
 <span class="doccomment">/// in `RUBYLIB`. Absolute paths are rejected by this loader.</span>
@@ -241,12 +241,12 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rubylib&quot;</span>)))]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Rubylib</span> {
-    <span class="doccomment">/// Fixed set of paths on the host filesystem to search for Ruby sources.</span>
+    <span class="doccomment">/// Fixed set of paths on the host file system to search for Ruby sources.</span>
     <span class="ident">load_paths</span>: <span class="ident">Box</span><span class="op">&lt;</span>[<span class="ident">PathBuf</span>]<span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Rubylib</span> {
-    <span class="doccomment">/// Create a new native filesystem loader that searches the filesystem for</span>
+    <span class="doccomment">/// Create a new native file system loader that searches the file system for</span>
     <span class="doccomment">/// Ruby sources at the paths specified by the `RUBYLIB` environment</span>
     <span class="doccomment">/// variable.</span>
     <span class="doccomment">///</span>
@@ -257,7 +257,7 @@
     <span class="doccomment">/// absolute paths, they are absolutized relative to the current process&#39;s</span>
     <span class="doccomment">/// [current working directory] at the time this method is called.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This source loader grants access to the host filesystem. The Rubylib</span>
+    <span class="doccomment">/// This source loader grants access to the host file system. The `Rubylib`</span>
     <span class="doccomment">/// loader does not support native extensions.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method returns [`None`] if there are errors resolving the</span>
@@ -274,9 +274,9 @@
         <span class="ident"><span class="self">Self</span>::with_rubylib_and_cwd</span>(<span class="kw-2">&amp;</span><span class="ident">rubylib</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>)
     }
 
-    <span class="doccomment">/// Create a new native filesystem loader that searches the filesystem for</span>
+    <span class="doccomment">/// Create a new native file system loader that searches the file system for</span>
     <span class="doccomment">/// Ruby sources at the paths specified by the given `rubylib` platform</span>
-    <span class="doccomment">/// string. `rubylib` is expected to be a set of filesystem paths that are</span>
+    <span class="doccomment">/// string. `rubylib` is expected to be a set of file system paths that are</span>
     <span class="doccomment">/// delimited by the platform path separator.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The resolved load path is immutable.</span>
@@ -285,7 +285,7 @@
     <span class="doccomment">/// are absolutized relative to the current process&#39;s [current working</span>
     <span class="doccomment">/// directory] at the time this method is called.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This source loader grants access to the host filesystem. The Rubylib</span>
+    <span class="doccomment">/// This source loader grants access to the host file system. The `Rubylib`</span>
     <span class="doccomment">/// loader does not support native extensions.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method returns [`None`] if the current working directory cannot be</span>
@@ -299,9 +299,9 @@
         <span class="ident"><span class="self">Self</span>::with_rubylib_and_cwd</span>(<span class="ident">rubylib</span>, <span class="kw-2">&amp;</span><span class="ident">cwd</span>)
     }
 
-    <span class="doccomment">/// Create a new native filesystem loader that searches the filesystem for</span>
+    <span class="doccomment">/// Create a new native file system loader that searches the file system for</span>
     <span class="doccomment">/// Ruby sources at the paths specified by the given `rubylib` platform</span>
-    <span class="doccomment">/// string. `rubylib` is expected to be a set of filesystem paths that are</span>
+    <span class="doccomment">/// string. `rubylib` is expected to be a set of file system paths that are</span>
     <span class="doccomment">/// delimited by the platform path separator.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The resolved load path is immutable.</span>
@@ -310,7 +310,7 @@
     <span class="doccomment">/// are absolutized relative to the given current working directory at the</span>
     <span class="doccomment">/// time this method is called.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This source loader grants access to the host filesystem. The Rubylib</span>
+    <span class="doccomment">/// This source loader grants access to the host file system. The `Rubylib`</span>
     <span class="doccomment">/// loader does not support native extensions.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method returns [`None`] if the given `rubylib` does not contain any</span>
@@ -323,7 +323,7 @@
             .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
 
         <span class="comment">// If the `RUBYLIB` env variable is empty or otherwise results in no</span>
-        <span class="comment">// search paths being resolved, return `None` so the Rubylib loader is</span>
+        <span class="comment">// search paths being resolved, return `None` so the `Rubylib` loader is</span>
         <span class="comment">// not used.</span>
         <span class="kw">if</span> <span class="ident">load_paths</span>.<span class="ident">is_empty</span>() {
             <span class="kw">return</span> <span class="prelude-val">None</span>;
@@ -335,10 +335,10 @@
         <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">load_paths</span> })
     }
 
-    <span class="doccomment">/// Check whether `path` points to a file in the virtual filesystem and</span>
+    <span class="doccomment">/// Check whether `path` points to a file in the virtual file system and</span>
     <span class="doccomment">/// return the absolute path if it exists.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Returns [`Some`] if the filesystem object pointed to by `path` exists.</span>
+    <span class="doccomment">/// Returns [`Some`] if the file system object pointed to by `path` exists.</span>
     <span class="doccomment">/// If `path` is relative, it is joined to each path in the `RUBYLIB`</span>
     <span class="doccomment">/// environment variable at the time this loader was initialized.</span>
     <span class="doccomment">///</span>
@@ -347,7 +347,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resolve_file</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Handle</span><span class="op">&gt;</span> {
-        <span class="comment">// The Rubylib loader only loads relative paths in `RUBYLIB`.</span>
+        <span class="comment">// The `Rubylib` loader only loads relative paths in `RUBYLIB`.</span>
         <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_absolute</span>() {
             <span class="kw">return</span> <span class="prelude-val">None</span>;
         }

@@ -124,7 +124,7 @@ buffer.</p>
 <span class="ident">s</span>.<span class="ident">push_char</span>(<span class="string">&#39;x&#39;</span>);
 <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">s</span>.<span class="ident">is_empty</span>());</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.len" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/spinoso_string/lib.rs.html#921-923" title="goto source code">[src]</a></div><a href="#method.len" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.len" class="fnname">len</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></h4></div></summary><div class="docblock"><p>Returns the number of bytes in the string, also referred to as its
-‘length’ or ‘bytesize’.</p>
+“length” or “bytesize”.</p>
 <p>See also <a href="struct.String.html#method.bytesize"><code>bytesize</code></a>.</p>
 <h5 id="examples-8" class="section-header"><a href="#examples-8">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">spinoso_string::String</span>;
@@ -142,7 +142,7 @@ buffer.</p>
 <span class="macro">assert_eq!</span>(<span class="ident">iterator</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">b&#39;b&#39;</span>));
 <span class="macro">assert_eq!</span>(<span class="ident">iterator</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">b&#39;c&#39;</span>));
 <span class="macro">assert_eq!</span>(<span class="ident">iterator</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);</code></pre></div>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.iter_mut" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/spinoso_string/lib.rs.html#967-969" title="goto source code">[src]</a></div><a href="#method.iter_mut" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.iter_mut" class="fnname">iter_mut</a>(&amp;mut self) -&gt; <a class="struct" href="struct.IterMut.html" title="struct spinoso_string::IterMut">IterMut</a>&lt;'_&gt;<span class="notable-traits"><span class="notable-traits-tooltip">ⓘ<div class="notable-traits-tooltiptext"><span class="docblock"><div class="notable">Notable traits for <a class="struct" href="struct.IterMut.html" title="struct spinoso_string::IterMut">IterMut</a>&lt;'a&gt;</div><code class="content"><span class="where fmt-newline">impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a> for <a class="struct" href="struct.IterMut.html" title="struct spinoso_string::IterMut">IterMut</a>&lt;'a&gt;</span><span class="where fmt-newline">    type <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#associatedtype.Item" class="type">Item</a> = &amp;'a mut <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>;</span></code></span></div></span></span></h4></div></summary><div class="docblock"><p>Returns an iterator that allows modifiying this string’s underlying byte
+</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.iter_mut" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/spinoso_string/lib.rs.html#967-969" title="goto source code">[src]</a></div><a href="#method.iter_mut" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.iter_mut" class="fnname">iter_mut</a>(&amp;mut self) -&gt; <a class="struct" href="struct.IterMut.html" title="struct spinoso_string::IterMut">IterMut</a>&lt;'_&gt;<span class="notable-traits"><span class="notable-traits-tooltip">ⓘ<div class="notable-traits-tooltiptext"><span class="docblock"><div class="notable">Notable traits for <a class="struct" href="struct.IterMut.html" title="struct spinoso_string::IterMut">IterMut</a>&lt;'a&gt;</div><code class="content"><span class="where fmt-newline">impl&lt;'a&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a> for <a class="struct" href="struct.IterMut.html" title="struct spinoso_string::IterMut">IterMut</a>&lt;'a&gt;</span><span class="where fmt-newline">    type <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#associatedtype.Item" class="type">Item</a> = &amp;'a mut <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>;</span></code></span></div></span></span></h4></div></summary><div class="docblock"><p>Returns an iterator that allows modifying this string’s underlying byte
 slice.</p>
 <h5 id="examples-10" class="section-header"><a href="#examples-10">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">spinoso_string::String</span>;
@@ -378,7 +378,7 @@ yields the original bytes.</p>
 <p>If the given padding is <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="None"><code>None</code></a>, the <code>String</code> is padded with an ASCII
 space.</p>
 <h5 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h5>
-<p>If given an empty padding bytestring, this function returns an error.
+<p>If given an empty padding byte string, this function returns an error.
 This error is returned regardless of whether the <code>String</code> would be
 centered with the given</p>
 <h5 id="examples-28" class="section-header"><a href="#examples-28">Examples</a></h5>
@@ -560,7 +560,7 @@ this iterator yields slices of single bytes.</p>
 only <a href="enum.Encoding.html#variant.Utf8">conventionally UTF-8</a>. This function only returns <code>Ok</code> for
 <code>String</code>s with UTF-8 encoding if the underlying bytes in the <code>String</code>
 are valid UTF-8. For UTF-8 <code>String</code>s, this iterator yields the <code>u32</code>
-values of the <a href="https://doc.rust-lang.org/nightly/std/primitive.char.html" title="char"><code>char</code></a>s in the bytestring. For <a href="enum.Encoding.html#variant.Ascii">ASCII encoded</a> and
+values of the <a href="https://doc.rust-lang.org/nightly/std/primitive.char.html" title="char"><code>char</code></a>s in the byte string. For <a href="enum.Encoding.html#variant.Ascii">ASCII encoded</a> and
 <a href="enum.Encoding.html#variant.Binary">binary encoded</a> strings, this iterator yields slices of single bytes.</p>
 <p>For UTF-8 encoded strings, the yielded byte slices can be parsed into
 <a href="https://doc.rust-lang.org/nightly/std/primitive.char.html" title="char"><code>char</code></a>s with <code>.into()</code>.</p>

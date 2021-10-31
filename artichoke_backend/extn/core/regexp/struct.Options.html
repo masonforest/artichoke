@@ -18,7 +18,7 @@ see <code>From&lt;i64&gt;</code>.</p>
 insignificant whitespace.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.is_literal" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../../../src/spinoso_regexp/options.rs.html#253" title="goto source code">[src]</a></div><a href="#method.is_literal" class="anchor"></a><h4 class="code-header">pub const fn <a href="#method.is_literal" class="fnname">is_literal</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></h4></div></summary><div class="docblock"><p>Whether the Regexp was parsed as a literal, e.g. <code>'/artichoke/i</code>.</p>
 <p>This enables Ruby parsers to inject whether a Regexp is a literal to the
-core library. Literal Regexps have some special behavior regrding
+core library. Literal Regexps have some special behavior regarding
 capturing groups and report parse failures differently.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.as_display_modifier" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../../../src/spinoso_regexp/options.rs.html#264" title="goto source code">[src]</a></div><a href="#method.as_display_modifier" class="anchor"></a><h4 class="code-header">pub const fn <a href="#method.as_display_modifier" class="fnname">as_display_modifier</a>(self) -&gt; &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a></h4></div></summary><div class="docblock"><p>Serialize the option flags to a string suitable for a <code>Regexp</code> display
 or debug implementation.</p>

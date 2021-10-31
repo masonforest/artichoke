@@ -181,7 +181,7 @@
 <span class="doccomment">//!   various sources.</span>
 <span class="doccomment">//! - [`Globals`](globals::Globals): Get, set, and unset interpreter-level</span>
 <span class="doccomment">//!   global variables.</span>
-<span class="doccomment">//! - [`Intern`](intern::Intern): Intern bytestrings to a cheap to copy and</span>
+<span class="doccomment">//! - [`Intern`](intern::Intern): Intern byte strings to a cheap to copy and</span>
 <span class="doccomment">//!   compare symbol type.</span>
 <span class="doccomment">//! - [`Io`](io::Io): External I/O APIs, such as writing to the standard output</span>
 <span class="doccomment">//!   of the current process.</span>
@@ -206,7 +206,7 @@
 <span class="doccomment">//! [`artichoke-backend`](https://artichoke.github.io/artichoke/artichoke_backend/)</span>
 <span class="doccomment">//! is one implementation of the `artichoke-core` traits.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! To use all of the APIs defined in Artichoke Core, bring the traits into</span>
+<span class="doccomment">//! To use all the APIs defined in Artichoke Core, bring the traits into</span>
 <span class="doccomment">//! scope by importing the prelude:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
@@ -231,7 +231,7 @@
 <span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_favicon_url</span> <span class="op">=</span> <span class="string">&quot;https://www.artichokeruby.org/favicon-32x32.png&quot;</span>)]</span>
 <span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_logo_url</span> <span class="op">=</span> <span class="string">&quot;https://www.artichokeruby.org/artichoke-logo.svg&quot;</span>)]</span>
 
-<span class="comment">// Ensure code blocks in README.md compile</span>
+<span class="comment">// Ensure code blocks in `README.md` compile</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doctest</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">readme</span> {}

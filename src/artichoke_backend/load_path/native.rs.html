@@ -113,15 +113,15 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Native</span> {
-    <span class="doccomment">/// Create a new native virtual filesystem.</span>
+    <span class="doccomment">/// Create a new native virtual file system.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// This filesystem grants access to the host filesystem.</span>
+    <span class="doccomment">/// This file system grants access to the host file system.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::default</span>()
     }
 
-    <span class="doccomment">/// Check whether `path` points to a file in the virtual filesystem and</span>
+    <span class="doccomment">/// Check whether `path` points to a file in the virtual file system and</span>
     <span class="doccomment">/// return the absolute path if it exists.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This API is infallible and will return [`None`] for non-existent paths.</span>
@@ -135,7 +135,7 @@
         }
     }
 
-    <span class="doccomment">/// Check whether `path` points to a file in the virtual filesystem.</span>
+    <span class="doccomment">/// Check whether `path` points to a file in the virtual file system.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This API is infallible and will return `false` for non-existent paths.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>

@@ -2,8 +2,8 @@
 environment variable.</p>
 <p>MRI Ruby allows manipulating the <a href="https://ruby-doc.org/core-2.6.3/Kernel.html#method-i-require">require</a> search path by setting the
 <code>RUBYLIB</code> environment variable before launching the Ruby CLI. The <code>RUBYLIB</code>
-variable is read on startup and is expected to contain a platform-native
-path separator-delimited list of filesystem paths.</p>
+variable is read on start-up and is expected to contain a platform-native
+path separator-delimited list of file system paths.</p>
 <p>This loader will attempt to resolve relative paths in any of the paths given
 in <code>RUBYLIB</code>. Absolute paths are rejected by this loader.</p>
 <p>This loader tracks the files it has loaded, which MRI refers to as “loaded
@@ -31,7 +31,7 @@ have higher priority.</p>
     <span class="ident">OsStr::new</span>(<span class="string">&quot;/home/artichoke/src:/usr/share/artichoke:./_lib&quot;</span>),
     <span class="ident">Path::new</span>(<span class="string">&quot;/home/artichoke&quot;</span>)
 )<span class="question-mark">?</span>;</code></pre></div>
-</div></details><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#67-181" title="goto source code">[src]</a></div><a href="#impl" class="anchor"></a><h3 class="code-header in-band">impl <a class="struct" href="struct.Rubylib.html" title="struct mezzaluna_feature_loader::Rubylib">Rubylib</a></h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.new" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#90-94" title="goto source code">[src]</a></div><a href="#method.new" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.new" class="fnname">new</a>() -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</h4></div></summary><div class="docblock"><p>Create a new native filesystem loader that searches the filesystem for
+</div></details><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#67-181" title="goto source code">[src]</a></div><a href="#impl" class="anchor"></a><h3 class="code-header in-band">impl <a class="struct" href="struct.Rubylib.html" title="struct mezzaluna_feature_loader::Rubylib">Rubylib</a></h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.new" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#90-94" title="goto source code">[src]</a></div><a href="#method.new" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.new" class="fnname">new</a>() -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</h4></div></summary><div class="docblock"><p>Create a new native file system loader that searches the file system for
 Ruby sources at the paths specified by the <code>RUBYLIB</code> environment
 variable.</p>
 <p>The <code>RUBYLIB</code> environment variable is resolved once at the time this
@@ -39,39 +39,39 @@ method is called and the resolved load path is immutable.</p>
 <p>If any of the paths in the <code>RUBYLIB</code> environment variable are not
 absolute paths, they are absolutized relative to the current process’s
 <a href="https://doc.rust-lang.org/nightly/std/env/fn.current_dir.html">current working directory</a> at the time this method is called.</p>
-<p>This source loader grants access to the host filesystem. The Rubylib
+<p>This source loader grants access to the host file system. The <code>Rubylib</code>
 loader does not support native extensions.</p>
 <p>This method returns <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="None"><code>None</code></a> if there are errors resolving the
 <code>RUBYLIB</code> environment variable, if the <code>RUBYLIB</code> environment variable is
 not set, if the current working directory cannot be retrieved, or if the
 <code>RUBYLIB</code> environment variable does not contain any paths.</p>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.with_rubylib" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#116-119" title="goto source code">[src]</a></div><a href="#method.with_rubylib" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.with_rubylib" class="fnname">with_rubylib</a>(rubylib: &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</h4></div></summary><div class="docblock"><p>Create a new native filesystem loader that searches the filesystem for
+</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.with_rubylib" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#116-119" title="goto source code">[src]</a></div><a href="#method.with_rubylib" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.with_rubylib" class="fnname">with_rubylib</a>(rubylib: &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</h4></div></summary><div class="docblock"><p>Create a new native file system loader that searches the file system for
 Ruby sources at the paths specified by the given <code>rubylib</code> platform
-string. <code>rubylib</code> is expected to be a set of filesystem paths that are
+string. <code>rubylib</code> is expected to be a set of file system paths that are
 delimited by the platform path separator.</p>
 <p>The resolved load path is immutable.</p>
 <p>If any of the paths in the given <code>rubylib</code> are not absolute paths, they
 are absolutized relative to the current process’s <a href="https://doc.rust-lang.org/nightly/std/env/fn.current_dir.html">current working
 directory</a> at the time this method is called.</p>
-<p>This source loader grants access to the host filesystem. The Rubylib
+<p>This source loader grants access to the host file system. The <code>Rubylib</code>
 loader does not support native extensions.</p>
 <p>This method returns <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="None"><code>None</code></a> if the current working directory cannot be
 retrieved or if the given <code>rubylib</code> does not contain any paths.</p>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.with_rubylib_and_cwd" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#139-155" title="goto source code">[src]</a></div><a href="#method.with_rubylib_and_cwd" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.with_rubylib_and_cwd" class="fnname">with_rubylib_and_cwd</a>(rubylib: &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>, cwd: &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</h4></div></summary><div class="docblock"><p>Create a new native filesystem loader that searches the filesystem for
+</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.with_rubylib_and_cwd" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#139-155" title="goto source code">[src]</a></div><a href="#method.with_rubylib_and_cwd" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.with_rubylib_and_cwd" class="fnname">with_rubylib_and_cwd</a>(rubylib: &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html" title="struct std::ffi::os_str::OsStr">OsStr</a>, cwd: &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</h4></div></summary><div class="docblock"><p>Create a new native file system loader that searches the file system for
 Ruby sources at the paths specified by the given <code>rubylib</code> platform
-string. <code>rubylib</code> is expected to be a set of filesystem paths that are
+string. <code>rubylib</code> is expected to be a set of file system paths that are
 delimited by the platform path separator.</p>
 <p>The resolved load path is immutable.</p>
 <p>If any of the paths in the given <code>rubylib</code> are not absolute paths, they
 are absolutized relative to the given current working directory at the
 time this method is called.</p>
-<p>This source loader grants access to the host filesystem. The Rubylib
+<p>This source loader grants access to the host file system. The <code>Rubylib</code>
 loader does not support native extensions.</p>
 <p>This method returns <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="None"><code>None</code></a> if the given <code>rubylib</code> does not contain any
 paths.</p>
-</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.resolve_file" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#168-180" title="goto source code">[src]</a></div><a href="#method.resolve_file" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.resolve_file" class="fnname">resolve_file</a>(&amp;self, path: &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="struct.Handle.html" title="struct mezzaluna_feature_loader::Handle">Handle</a>&gt;</h4></div></summary><div class="docblock"><p>Check whether <code>path</code> points to a file in the virtual filesystem and
+</div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.resolve_file" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/mezzaluna_feature_loader/loader/rubylib.rs.html#168-180" title="goto source code">[src]</a></div><a href="#method.resolve_file" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.resolve_file" class="fnname">resolve_file</a>(&amp;self, path: &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/std/path/struct.Path.html" title="struct std::path::Path">Path</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="struct.Handle.html" title="struct mezzaluna_feature_loader::Handle">Handle</a>&gt;</h4></div></summary><div class="docblock"><p>Check whether <code>path</code> points to a file in the virtual file system and
 return the absolute path if it exists.</p>
-<p>Returns <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some" title="Some"><code>Some</code></a> if the filesystem object pointed to by <code>path</code> exists.
+<p>Returns <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some" title="Some"><code>Some</code></a> if the file system object pointed to by <code>path</code> exists.
 If <code>path</code> is relative, it is joined to each path in the <code>RUBYLIB</code>
 environment variable at the time this loader was initialized.</p>
 <p>This method is infallible and will return <a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.None" title="None"><code>None</code></a> for non-existent

@@ -5,7 +5,7 @@ pointer.</p>
 drops the resulting <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="Box"><code>Box</code></a>.</p>
 <h2 id="safety" class="section-header"><a href="#safety">Safety</a></h2>
 <p>This function assumes that the data pointer is to an <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="Box"><code>Box</code></a><code>&lt;T&gt;</code> created by
-<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw" title="Box::into_raw"><code>Box::into_raw</code></a>. This fuction bounds <code>T</code> by <a href="../convert/trait.BoxUnboxVmValue.html" title="BoxUnboxVmValue"><code>BoxUnboxVmValue</code></a> which
+<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw" title="Box::into_raw"><code>Box::into_raw</code></a>. This function bounds <code>T</code> by <a href="../convert/trait.BoxUnboxVmValue.html" title="BoxUnboxVmValue"><code>BoxUnboxVmValue</code></a> which
 boxes <code>T</code> for the mruby VM like this.</p>
 <p>This function assumes it is called by the mruby VM as a free function for
 an <a href="../sys/enum.mrb_vtype.html#variant.MRB_TT_DATA"><code>MRB_TT_DATA</code></a>.</p>

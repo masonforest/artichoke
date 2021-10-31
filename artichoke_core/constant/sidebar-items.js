@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["DefineConstant","Deifne constants on an interprter."]]});
+initSidebarItems({"trait":[["DefineConstant","Define constants on an interpreter."]]});

@@ -628,7 +628,7 @@
     <span class="comment">// be safely marked if an mruby allocation occurs and a GC is triggered in</span>
     <span class="comment">// `Array::initialize`.</span>
     <span class="comment">//</span>
-    <span class="comment">// This ensures the given `RArry *` is initalized even if a non-`Array`</span>
+    <span class="comment">// This ensures the given `RArry *` is initialized even if a non-`Array`</span>
     <span class="comment">// object is called with `Array#initialize_copy` and the</span>
     <span class="comment">// `Array::unbox_from_value` call below short circuits with an error.</span>
     <span class="ident">Array::box_into_value</span>(<span class="ident">Array::new</span>(), <span class="ident">ary</span>, <span class="ident">interp</span>)<span class="question-mark">?</span>;
@@ -758,7 +758,7 @@
         <span class="comment">// potential garbage collection, otherwise marking the children in `ary`</span>
         <span class="comment">// will have undefined behavior.</span>
         <span class="comment">//</span>
-        <span class="comment">// The call to `Array::alloc_value` happens outside of this block after</span>
+        <span class="comment">// The call to `Array::alloc_value` happens outside this block after</span>
         <span class="comment">// the `Array` has been repacked.</span>
         <span class="kw">let</span> <span class="ident">shifted</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();
@@ -781,7 +781,7 @@
         <span class="comment">// potential garbage collection, otherwise marking the children in `ary`</span>
         <span class="comment">// will have undefined behavior.</span>
         <span class="comment">//</span>
-        <span class="comment">// The call to `interp.convert` happens outside of this block after the</span>
+        <span class="comment">// The call to `interp.convert` happens outside this block after the</span>
         <span class="comment">// `Array` has been repacked.</span>
         <span class="kw">let</span> <span class="ident">shifted</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">array_mut</span> <span class="op">=</span> <span class="ident">array</span>.<span class="ident">as_inner_mut</span>();

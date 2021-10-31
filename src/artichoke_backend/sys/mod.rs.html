@@ -218,7 +218,7 @@
     <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span> <span class="ident">CStr::from_bytes_with_nul</span>(<span class="ident">MRUBY_RUBY_VERSION</span>);
     <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span> <span class="ident">version</span>.<span class="ident">ok</span>().<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">cstr</span><span class="op">|</span> <span class="ident">cstr</span>.<span class="ident">to_str</span>().<span class="ident">ok</span>()).<span class="ident">unwrap_or</span>(<span class="string">&quot;0.0.0&quot;</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">String::new</span>();
-    <span class="comment">// Explicitly supressed error since we are only generating debug info and</span>
+    <span class="comment">// Explicitly suppressed error since we are only generating debug info and</span>
     <span class="comment">// cannot panic.</span>
     <span class="comment">//</span>
     <span class="comment">// In practice, this call to `write!` will never panic because the `Display`</span>

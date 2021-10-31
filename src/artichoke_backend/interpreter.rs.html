@@ -177,10 +177,10 @@
 <span class="doccomment">/// Create and initialize an [`Artichoke`] interpreter.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function creates a new [`State`], embeds it in the [`sys::mrb_state`],</span>
-<span class="doccomment">/// initializes an [in memory virtual filesystem], and loads the [`extn`]</span>
+<span class="doccomment">/// initializes an [in memory virtual file system], and loads the [`extn`]</span>
 <span class="doccomment">/// extensions to Ruby Core and Stdlib.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// [in memory virtual filesystem]: crate::load_path</span>
+<span class="doccomment">/// [in memory virtual file system]: crate::load_path</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interpreter</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Artichoke</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">release_meta</span> <span class="op">=</span> <span class="ident">ReleaseMetadata::new</span>();
     <span class="ident">interpreter_with_config</span>(<span class="ident">release_meta</span>)
@@ -230,9 +230,9 @@
         <span class="ident">sys::mrb_sys_state_debug</span>(<span class="kw">unsafe</span> { <span class="ident">interp</span>.<span class="ident">mrb</span>.<span class="ident">as_mut</span>() })
     );
 
-    <span class="comment">// mruby lazily initializes some core objects like top_self and generates a</span>
-    <span class="comment">// lot of garbage on startup. Eagerly initialize the interpreter to provide</span>
-    <span class="comment">// predictable initialization behavior.</span>
+    <span class="comment">// mruby lazily initializes some core objects like `top_self` and generates</span>
+    <span class="comment">// a lot of garbage on start-up. Eagerly initialize the interpreter to</span>
+    <span class="comment">// provide predictable initialization behavior.</span>
     <span class="ident">interp</span>.<span class="ident">create_arena_savepoint</span>()<span class="question-mark">?</span>.<span class="ident">interp</span>().<span class="ident">eval</span>(<span class="kw-2">&amp;</span>[])<span class="question-mark">?</span>;
 
     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">GcState::Enabled</span> <span class="op">=</span> <span class="ident">prior_gc_state</span> {

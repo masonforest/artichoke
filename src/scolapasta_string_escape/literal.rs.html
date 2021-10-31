@@ -1309,6 +1309,10 @@
 <span id="1309">1309</span>
 <span id="1310">1310</span>
 <span id="1311">1311</span>
+<span id="1312">1312</span>
+<span id="1313">1313</span>
+<span id="1314">1314</span>
+<span id="1315">1315</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::fmt</span>;
 <span class="kw">use</span> <span class="ident">core::iter::FusedIterator</span>;
 <span class="kw">use</span> <span class="ident">core::slice</span>;
@@ -1349,7 +1353,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This iterator&#39;s item type is [`char`].</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Non printable bytes like `0xFF` or `0x0C` are escaped to `\xFF` or `\f`.</span>
+<span class="doccomment">/// Non-printable bytes like `0xFF` or `0x0C` are escaped to `\xFF` or `\f`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ASCII printable characters are passed through as is unless they are `&quot;` or</span>
 <span class="doccomment">/// `\` since these fields are used to delimit strings and escape sequences.</span>
@@ -1357,8 +1361,8 @@
 <span class="doccomment">/// # Usage notes</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This iterator operates on individual bytes, which makes it unsuitable for</span>
-<span class="doccomment">/// debug printing a conventionally UTF-8 bytestring on its own. See</span>
-<span class="doccomment">/// [`format_debug_escape_into`] to debug format an entire bytestring.</span>
+<span class="doccomment">/// debug printing a conventionally UTF-8 byte string on its own. See</span>
+<span class="doccomment">/// [`format_debug_escape_into`] to debug format an entire byte string.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
@@ -1590,12 +1594,14 @@
             <span class="number">31</span> =&gt; <span class="string">r&quot;\x1F&quot;</span>,
             <span class="number">32</span> =&gt; <span class="string">&quot; &quot;</span>,
             <span class="number">33</span> =&gt; <span class="string">&quot;!&quot;</span>,
+            <span class="comment">// ```</span>
             <span class="comment">// [2.6.3] &gt; &#39;&quot;&#39;.ord</span>
             <span class="comment">// =&gt; 34</span>
             <span class="comment">// [2.6.3] &gt; &#39;&quot;&#39;.ord.to_s(16)</span>
             <span class="comment">// =&gt; &quot;22&quot;</span>
             <span class="comment">// [2.6.3] &gt; :&quot;\x22&quot;</span>
             <span class="comment">// =&gt; :&quot;\&quot;&quot;</span>
+            <span class="comment">// ```</span>
             <span class="number">34</span> =&gt; <span class="string">r#&quot;\&quot;&quot;#</span>,
             <span class="number">35</span> =&gt; <span class="string">&quot;#&quot;</span>,
             <span class="number">36</span> =&gt; <span class="string">&quot;$&quot;</span>,
@@ -1654,12 +1660,14 @@
             <span class="number">89</span> =&gt; <span class="string">&quot;Y&quot;</span>,
             <span class="number">90</span> =&gt; <span class="string">&quot;Z&quot;</span>,
             <span class="number">91</span> =&gt; <span class="string">&quot;[&quot;</span>,
+            <span class="comment">// ```</span>
             <span class="comment">// [2.6.3] &gt; &#39;\\&#39;.ord</span>
             <span class="comment">// =&gt; 92</span>
             <span class="comment">// [2.6.3] &gt; &#39;\\&#39;.ord.to_s(16)</span>
             <span class="comment">// =&gt; &quot;5c&quot;</span>
             <span class="comment">// [2.6.3] &gt; :&quot;\x5C&quot;</span>
             <span class="comment">// =&gt; :&quot;\\&quot;</span>
+            <span class="comment">// ```</span>
             <span class="number">92</span> =&gt; <span class="string">r&quot;\\&quot;</span>,
             <span class="number">93</span> =&gt; <span class="string">&quot;]&quot;</span>,
             <span class="number">94</span> =&gt; <span class="string">&quot;^&quot;</span>,
@@ -1947,7 +1955,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This iterator&#39;s item type is [`char`].</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Non printable bytes like `0xFF` or `0x0C` are escaped to `\xFF` or `\f`.</span>
+<span class="doccomment">/// Non-printable bytes like `0xFF` or `0x0C` are escaped to `\xFF` or `\f`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Usage notes</span>
 <span class="doccomment">///</span>

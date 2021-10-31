@@ -187,7 +187,7 @@
 
 <span class="kw">impl</span> <span class="ident">Captured</span> {
     <span class="doccomment">/// Constructs a new, default `Captured` output strategy.</span>
-    <span class="comment">// This method cannot be const becuase of:</span>
+    <span class="comment">// This method cannot be const because of:</span>
     <span class="comment">// https://github.com/BurntSushi/bstr/issues/73</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {

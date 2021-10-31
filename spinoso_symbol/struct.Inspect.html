@@ -5,23 +5,23 @@ documentation for more.</p>
 <p>To format a <code>Symbol</code> directly into a writer, see <a href="struct.Inspect.html#method.format_into"><code>format_into</code></a> or
 <a href="struct.Inspect.html#method.write_into"><code>write_into</code></a>.</p>
 <h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
-<p>To inspect an empty bytestring:</p>
+<p>To inspect an empty byte string:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">Inspect::default</span>();
 <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">inspect</span>.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">debug</span>, <span class="string">r#&quot;:&quot;&quot;&quot;#</span>);</code></pre></div>
-<p>To inspect a well-formed UTF-8 bytestring:</p>
+<p>To inspect a well-formed UTF-8 byte string:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">Inspect::from</span>(<span class="string">&quot;spinoso&quot;</span>);
 <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">inspect</span>.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">debug</span>, <span class="string">&quot;:spinoso&quot;</span>);</code></pre></div>
-<p>To inspect a bytestring with invalid UTF-8 bytes:</p>
+<p>To inspect a byte string with invalid UTF-8 bytes:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">inspect</span> <span class="op">=</span> <span class="ident">Inspect::from</span>(<span class="kw-2">&amp;</span><span class="string">b&quot;invalid-\xFF-utf8&quot;</span>[..]);
 <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="ident">inspect</span>.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">debug</span>, <span class="string">r#&quot;:&quot;invalid-\xFF-utf8&quot;&quot;#</span>);</code></pre></div>
 </div></details><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../src/spinoso_symbol/inspect.rs.html#94-186" title="goto source code">[src]</a></div><a href="#impl" class="anchor"></a><h3 class="code-header in-band">impl&lt;'a&gt; <a class="struct" href="struct.Inspect.html" title="struct spinoso_symbol::Inspect">Inspect</a>&lt;'a&gt;</h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.format_into" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/spinoso_symbol/inspect.rs.html#129-137" title="goto source code">[src]</a></div><a href="#method.format_into" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.format_into" class="fnname">format_into</a>&lt;W&gt;(self, dest: W) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Write.html" title="trait core::fmt::Write">Write</a>,&nbsp;</span></h4></div></summary><div class="docblock"><p>Write an <code>Inspect</code> iterator into the given destination using the debug
-representation of the interned byteslice associated with the symbol in
+representation of the interned byte slice associated with the symbol in
 the underlying interner.</p>
 <p>This formatter writes content like <code>:spinoso</code> and <code>:&quot;invalid-\xFF-utf8&quot;</code>.
 To see example output of the underlying iterator, see the <code>Inspect</code>
@@ -42,7 +42,7 @@ error is returned.</p>
 <span class="ident">iter</span>.<span class="ident">format_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>);
 <span class="macro">assert_eq!</span>(<span class="ident">buf</span>, <span class="string">r#&quot;:&quot;\xFF&quot;&quot;#</span>);</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.write_into" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/spinoso_symbol/inspect.rs.html#175-185" title="goto source code">[src]</a></div><a href="#method.write_into" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.write_into" class="fnname">write_into</a>&lt;W&gt;(self, dest: W) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a>,&nbsp;</span></h4></div><div class="item-info"><div class="stab portability">This is supported on <strong>crate feature <code>std</code></strong> only.</div></div></summary><div class="docblock"><p>Write an <code>Inspect</code> iterator into the given destination using the debug
-representation of the interned byteslice associated with the symbol in
+representation of the interned byte slice associated with the symbol in
 the underlying interner.</p>
 <p>This formatter writes content like <code>:spinoso</code> and <code>:&quot;invalid-\xFF-utf8&quot;</code>.
 To see example output of the underlying iterator, see the <code>Inspect</code>

@@ -245,14 +245,14 @@
 <span class="doccomment">//! # example().unwrap();</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ## Virtual Filesystem and `Kernel#require`</span>
+<span class="doccomment">//! ## Virtual File System and `Kernel#require`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! The `artichoke-backend` interpreter includes an in-memory virtual</span>
-<span class="doccomment">//! filesystem.  The filesystem stores Ruby sources and Rust extension functions</span>
+<span class="doccomment">//! file system.  The file system stores Ruby sources and Rust extension functions</span>
 <span class="doccomment">//! that are similar to MRI C extensions.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! The virtual filesystem enables applications built with `artichoke-backend`</span>
-<span class="doccomment">//! to `require` sources that are embedded in the binary without host filesystem</span>
+<span class="doccomment">//! The virtual file system enables applications built with `artichoke-backend`</span>
+<span class="doccomment">//! to `require` sources that are embedded in the binary without host file system</span>
 <span class="doccomment">//! access.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Embed Rust Types in Ruby `Value`s</span>
@@ -280,7 +280,7 @@
 <span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_favicon_url</span> <span class="op">=</span> <span class="string">&quot;https://www.artichokeruby.org/favicon-32x32.png&quot;</span>)]</span>
 <span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_logo_url</span> <span class="op">=</span> <span class="string">&quot;https://www.artichokeruby.org/artichoke-logo.svg&quot;</span>)]</span>
 
-<span class="comment">// Ensure code blocks in README.md compile</span>
+<span class="comment">// Ensure code blocks in `README.md` compile</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doctest</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">readme</span> {}

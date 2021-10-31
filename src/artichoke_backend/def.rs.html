@@ -621,6 +621,7 @@
 <span id="621">621</span>
 <span id="622">622</span>
 <span id="623">623</span>
+<span id="624">624</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
 <span class="kw">use</span> <span class="ident">std::error</span>;
 <span class="kw">use</span> <span class="ident">std::ffi</span>::{<span class="ident">c_void</span>, <span class="ident">CStr</span>};
@@ -650,7 +651,7 @@
 <span class="doccomment">/// # Safety</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function assumes that the data pointer is to an [`Box`]`&lt;T&gt;` created by</span>
-<span class="doccomment">/// [`Box::into_raw`]. This fuction bounds `T` by [`BoxUnboxVmValue`] which</span>
+<span class="doccomment">/// [`Box::into_raw`]. This function bounds `T` by [`BoxUnboxVmValue`] which</span>
 <span class="doccomment">/// boxes `T` for the mruby VM like this.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function assumes it is called by the mruby VM as a free function for</span>
@@ -720,7 +721,7 @@
 <span class="doccomment">/// Typesafe wrapper for the [`RClass *`](sys::RClass) of the enclosing scope</span>
 <span class="doccomment">/// for an mruby `Module` or `Class`.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// In Ruby, classes and modules can be defined inside of another class or</span>
+<span class="doccomment">/// In Ruby, classes and modules can be defined inside another class or</span>
 <span class="doccomment">/// module. mruby only supports resolving [`RClass`](sys::RClass) pointers</span>
 <span class="doccomment">/// relative to an enclosing scope. This can be the top level with</span>
 <span class="doccomment">/// [`mrb_class_get`](sys::mrb_class_get) and</span>
@@ -774,7 +775,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Return [`None`] if the class-like has no [`EnclosingRubyScope`].</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// The current implemention results in recursive calls to this function</span>
+    <span class="doccomment">/// The current implementation results in recursive calls to this function</span>
     <span class="doccomment">/// for each enclosing scope.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
@@ -795,9 +796,10 @@
         }
     }
 
-    <span class="doccomment">/// Get the fully qualified name of the wrapped class or module.</span>
+    <span class="doccomment">/// Get the fully-qualified name of the wrapped class or module.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// For example, in the following Ruby code, `C` has an fqname of `A::B::C`.</span>
+    <span class="doccomment">/// For example, in the following Ruby code, `C` has a fully-qualified name</span>
+    <span class="doccomment">/// of `A::B::C`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```ruby</span>
     <span class="doccomment">/// module A</span>
@@ -809,7 +811,7 @@
     <span class="doccomment">/// end</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// The current implemention results in recursive calls to this function</span>
+    <span class="doccomment">/// The current implementation results in recursive calls to this function</span>
     <span class="doccomment">/// for each enclosing scope.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fqname</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">str</span><span class="op">&gt;</span> {

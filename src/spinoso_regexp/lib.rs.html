@@ -504,7 +504,7 @@
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">feature</span>(<span class="ident">doc_cfg</span>))]</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">feature</span>(<span class="ident">doc_alias</span>))]</span>
 
-<span class="comment">// Ensure code blocks in README.md compile</span>
+<span class="comment">// Ensure code blocks in `README.md` compile</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doctest</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">readme</span> {}
@@ -561,7 +561,7 @@
 <span class="doccomment">/// `Regexp`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// When [`Regexp`]s are constructed with a `/.../` literal, [`Regexp#source`]</span>
-<span class="doccomment">/// refers to the literal characters contained within the `/` delimeters.</span>
+<span class="doccomment">/// refers to the literal characters contained within the `/` delimiters.</span>
 <span class="doccomment">/// For example, `/\t/.source.bytes` has byte sequence `[92, 116]`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// When `Regexp`s are constructed with [`Regexp::compile`], [`Regexp#source`]</span>
@@ -664,7 +664,7 @@
     <span class="doccomment">/// Whether the Regexp was parsed as a literal, e.g. `&#39;/artichoke/i`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This enables Ruby parsers to inject whether a Regexp is a literal to the</span>
-    <span class="doccomment">/// core library. Literal Regexps have some special behavior regrding</span>
+    <span class="doccomment">/// core library. Literal Regexps have some special behavior regarding</span>
     <span class="doccomment">/// capturing groups and report parse failures differently.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// A source&#39;s literal flag can only be set using [`Options::try_from_int`].</span>
@@ -873,7 +873,7 @@
         <span class="number">20</span> =&gt; <span class="ident">Cow::Borrowed</span>(<span class="string">&quot;$20&quot;</span>),
         <span class="ident">num</span> =&gt; {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;$&quot;</span>);
-            <span class="comment">// Suppress fmt errors because this function is infallible.</span>
+            <span class="comment">// Suppress formatting errors because this function is infallible.</span>
             <span class="comment">//</span>
             <span class="comment">// In practice `itoa::fmt` will never error because the `fmt::Write`</span>
             <span class="comment">// impl for `String` never panics.</span>

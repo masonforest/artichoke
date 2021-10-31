@@ -696,7 +696,7 @@
     }
 }
 
-<span class="doccomment">/// Virtual filesystem for sources, extensions, and require metadata.</span>
+<span class="doccomment">/// Virtual file system for sources, extensions, and require metadata.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `Memory` is a [`HashMap`] from paths to an entry struct that contains:</span>
 <span class="doccomment">///</span>
@@ -720,7 +720,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Memory</span> {
-    <span class="doccomment">/// Virtual filesystem with current working directory set to</span>
+    <span class="doccomment">/// Virtual file system with current working directory set to</span>
     <span class="doccomment">/// [`RUBY_LOAD_PATH`].</span>
     <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">cwd</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="ident">RUBY_LOAD_PATH</span>);
@@ -733,11 +733,11 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Memory</span> {
-    <span class="doccomment">/// Create a new in memory virtual filesystem.</span>
+    <span class="doccomment">/// Create a new in memory virtual file system.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Sets the current working directory of the VFS to [`RUBY_LOAD_PATH`] for</span>
-    <span class="doccomment">/// storing Ruby source files. This path is searched by</span>
-    <span class="doccomment">/// [`Kernel::require`, `Kernel::require_relative`, and `Kernel::load`].</span>
+    <span class="doccomment">/// Sets the current working directory of the virtual file system to</span>
+    <span class="doccomment">/// [`RUBY_LOAD_PATH`] for storing Ruby source files. This path is searched</span>
+    <span class="doccomment">/// by [`Kernel::require`, `Kernel::require_relative`, and `Kernel::load`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Kernel::require`, `Kernel::require_relative`, and `Kernel::load`]: crate::extn::core::kernel::require</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
@@ -745,7 +745,7 @@
         <span class="ident"><span class="self">Self</span>::default</span>()
     }
 
-    <span class="doccomment">/// Create a new in memory virtual filesystem with the given working</span>
+    <span class="doccomment">/// Create a new in memory virtual file system with the given working</span>
     <span class="doccomment">/// directory.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_working_directory</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">cwd</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span>
@@ -760,7 +760,7 @@
         }
     }
 
-    <span class="doccomment">/// Check whether `path` points to a file in the virtual filesystem and</span>
+    <span class="doccomment">/// Check whether `path` points to a file in the virtual file system and</span>
     <span class="doccomment">/// return the absolute path if it exists.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This API is infallible and will return [`None`] for non-existent paths.</span>
@@ -776,7 +776,7 @@
         }
     }
 
-    <span class="doccomment">/// Check whether `path` points to a file in the virtual filesystem.</span>
+    <span class="doccomment">/// Check whether `path` points to a file in the virtual file system.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This API is infallible and will return `false` for non-existent paths.</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>

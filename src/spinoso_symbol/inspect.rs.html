@@ -1001,7 +1001,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// To inspect an empty bytestring:</span>
+<span class="doccomment">/// To inspect an empty byte string:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// # extern crate alloc;</span>
@@ -1012,7 +1012,7 @@
 <span class="doccomment">/// assert_eq!(debug, r#&quot;:&quot;&quot;&quot;#);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// To inspect a well-formed UTF-8 bytestring:</span>
+<span class="doccomment">/// To inspect a well-formed UTF-8 byte string:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// # extern crate alloc;</span>
@@ -1023,7 +1023,7 @@
 <span class="doccomment">/// assert_eq!(debug, &quot;:spinoso&quot;);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// To inspect a bytestring with invalid UTF-8 bytes:</span>
+<span class="doccomment">/// To inspect a byte string with invalid UTF-8 bytes:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// # extern crate alloc;</span>
@@ -1079,7 +1079,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Inspect</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Write an `Inspect` iterator into the given destination using the debug</span>
-    <span class="doccomment">/// representation of the interned byteslice associated with the symbol in</span>
+    <span class="doccomment">/// representation of the interned byte slice associated with the symbol in</span>
     <span class="doccomment">/// the underlying interner.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This formatter writes content like `:spinoso` and `:&quot;invalid-\xFF-utf8&quot;`.</span>
@@ -1123,7 +1123,7 @@
     }
 
     <span class="doccomment">/// Write an `Inspect` iterator into the given destination using the debug</span>
-    <span class="doccomment">/// representation of the interned byteslice associated with the symbol in</span>
+    <span class="doccomment">/// representation of the interned byte slice associated with the symbol in</span>
     <span class="doccomment">/// the underlying interner.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This formatter writes content like `:spinoso` and `:&quot;invalid-\xFF-utf8&quot;`.</span>
@@ -1730,7 +1730,7 @@
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">flags</span>.<span class="ident">is_ident</span>());
     }
 
-    <span class="comment">// From spec/core/symbol/inspect_spec.rb:</span>
+    <span class="comment">// From `spec/core/symbol/inspect_spec.rb`:</span>
     <span class="comment">//</span>
     <span class="comment">// ```ruby</span>
     <span class="comment">// symbols = {</span>

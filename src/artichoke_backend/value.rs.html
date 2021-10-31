@@ -1167,7 +1167,7 @@
         <span class="comment">// the result of the most recent eval is always live even after a full</span>
         <span class="comment">// garbage collection</span>
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">live</span>.<span class="ident">is_dead</span>(<span class="kw-2">&amp;mut</span> <span class="ident">interp</span>));
-        <span class="comment">// Fixnums are immediate even if they are created directly without an</span>
+        <span class="comment">// `Fixnum`s are immediate even if they are created directly without an</span>
         <span class="comment">// interpreter.</span>
         <span class="kw">let</span> <span class="ident">fixnum</span> <span class="op">=</span> <span class="ident">Convert</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Value</span><span class="op">&gt;</span><span class="ident">::convert</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">interp</span>, <span class="number">99</span>);
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">fixnum</span>.<span class="ident">is_dead</span>(<span class="kw-2">&amp;mut</span> <span class="ident">interp</span>));

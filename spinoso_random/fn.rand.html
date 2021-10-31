@@ -4,9 +4,9 @@ equal to zero and less than <code>max</code>.</p>
 <p>When <code>max</code> is an <code>f64</code>, <code>rand</code> returns a random floating point number
 between 0.0 and max, including 0.0 and excluding <code>max</code>.</p>
 <h2 id="implementation-notes" class="section-header"><a href="#implementation-notes">Implementation notes</a></h2>
-<p>This function does not yet support range constaints. When support is added,
+<p>This function does not yet support range constraints. When support is added,
 when <code>max</code> is a <code>Range</code>, <code>rand</code> will return a random number where
-range.member?(number) == true.</p>
+<code>range.member?(number) == true</code>.</p>
 <h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
 <p>Generate floats from <code>(0.0..1.0)</code>:</p>
 

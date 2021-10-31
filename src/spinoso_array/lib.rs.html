@@ -266,10 +266,10 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Panics</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! `Array`s in this crate do not expose panicking slicing operations (with the</span>
-<span class="doccomment">//! exception of [`Index`] and [`IndexMut`] implementations). Instead of</span>
-<span class="doccomment">//! panicking, slicing APIs operate until the end of the vector or return `&amp;[]`.</span>
-<span class="doccomment">//! Mutating APIs extend `Array`s on out of bounds access.</span>
+<span class="doccomment">//! `Array`s in this crate do not expose panicking slicing operations (except for</span>
+<span class="doccomment">//! their [`Index`] and [`IndexMut`] implementations). Instead of panicking,</span>
+<span class="doccomment">//! slicing APIs operate until the end of the vector or return `&amp;[]`. Mutating</span>
+<span class="doccomment">//! APIs extend `Array`s on out of bounds access.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [Ruby `Array`]: https://ruby-doc.org/core-2.6.3/Array.html</span>
 <span class="doccomment">//! [collection of crates]: https://crates.io/keywords/spinoso</span>
@@ -293,7 +293,7 @@
 <span class="comment">// This crate is `no_std` + `alloc`</span>
 <span class="attribute">#![<span class="ident">no_std</span>]</span>
 
-<span class="comment">// Ensure code blocks in README.md compile</span>
+<span class="comment">// Ensure code blocks in `README.md` compile</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doctest</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">readme</span> {}

@@ -1900,7 +1900,7 @@
         <span class="self">Self</span>(<span class="ident">Vec::with_capacity</span>(<span class="ident">capacity</span>))
     }
 
-    <span class="doccomment">/// Constuct a new two-element `Array` from the given arguments.</span>
+    <span class="doccomment">/// Construct a new two-element `Array` from the given arguments.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The vector is constructed with `capacity` of 2.</span>
     <span class="doccomment">///</span>
@@ -2256,7 +2256,7 @@
     }
 
     <span class="doccomment">/// Returns the number of elements in the vector, also referred to as its</span>
-    <span class="doccomment">/// &#39;length&#39;.</span>
+    <span class="doccomment">/// &quot;length&quot;.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
@@ -2833,7 +2833,7 @@
             <span class="kw-2">*</span><span class="ident">cell</span> <span class="op">=</span> <span class="ident">elem</span>;
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">buflen</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
-            <span class="comment">// index is *at least* buflen, so this calculation never underflows</span>
+            <span class="comment">// index is *at least* `buflen`, so this calculation never underflows</span>
             <span class="comment">// and ensures we allocate an additional slot.</span>
             <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> (<span class="ident">index</span> <span class="op">-</span> <span class="ident">buflen</span>).<span class="ident">checked_add</span>(<span class="number">1</span>).<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
@@ -2882,7 +2882,7 @@
                 }
             }
         } <span class="kw">else</span> {
-            <span class="comment">// start is *at least* buflen, so this calculation never underflows</span>
+            <span class="comment">// start is *at least* `buflen`, so this calculation never underflows</span>
             <span class="comment">// and ensures we allocate an additional slot.</span>
             <span class="kw">let</span> <span class="ident">additional</span> <span class="op">=</span> (<span class="ident">start</span> <span class="op">-</span> <span class="ident">buflen</span>).<span class="ident">checked_add</span>(<span class="number">1</span>).<span class="ident">expect</span>(<span class="string">&quot;capacity overflow&quot;</span>);
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
