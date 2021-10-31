@@ -388,7 +388,7 @@
     <span class="ident">W</span>: <span class="ident">io::Write</span> <span class="op">+</span> <span class="ident">WriteColor</span>,
 {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interp</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::interpreter</span>()<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">entrypoint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">interp</span>, <span class="ident">args</span>, <span class="ident">input</span>, <span class="ident">error</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">entrypoint</span>(<span class="kw-2">&amp;mut</span> <span class="ident">interp</span>, <span class="ident">args</span>, <span class="ident">input</span>, <span class="ident">error</span>);
     <span class="ident">interp</span>.<span class="ident">close</span>();
     <span class="ident">result</span>
 }
@@ -399,7 +399,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// If an exception is raised on the interpreter, then an error is returned.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">entrypoint</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">W</span><span class="op">&gt;</span>(
-    <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>,
+    <span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>,
     <span class="ident">args</span>: <span class="ident">Args</span>,
     <span class="kw-2">mut</span> <span class="ident">input</span>: <span class="ident">R</span>,
     <span class="ident">error</span>: <span class="ident">W</span>,
@@ -431,7 +431,7 @@
     } <span class="kw">else</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">program</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="ident">input</span>
-            .<span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">program</span>)
+            .<span class="ident">read_to_end</span>(<span class="kw-2">&amp;mut</span> <span class="ident">program</span>)
             .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">IOError::from</span>(<span class="string">&quot;Could not read program from STDIN&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="ident">exc</span>) <span class="op">=</span> <span class="ident">interp</span>.<span class="ident">eval</span>(<span class="ident">program</span>.<span class="ident">as_slice</span>()) {
             <span class="ident">backtrace::format_cli_trace_into</span>(<span class="ident">error</span>, <span class="ident">interp</span>, <span class="ident">exc</span>)<span class="question-mark">?</span>;
@@ -442,7 +442,7 @@
 }
 
 <span class="kw">fn</span> <span class="ident">execute_inline_eval</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span>(
-    <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>,
+    <span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>,
     <span class="ident">error</span>: <span class="ident">W</span>,
     <span class="ident">commands</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">OsString</span><span class="op">&gt;</span>,
     <span class="ident">fixture</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>,
@@ -480,7 +480,7 @@
 }
 
 <span class="kw">fn</span> <span class="ident">execute_program_file</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span>(
-    <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>,
+    <span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>,
     <span class="ident">error</span>: <span class="ident">W</span>,
     <span class="ident">programfile</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
     <span class="ident">fixture</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Path</span><span class="op">&gt;</span>,
@@ -502,7 +502,7 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="ident">message</span>);
     <span class="ident">buf</span>.<span class="ident">push_str</span>(<span class="string">&quot; -- &quot;</span>);
     <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">os_str_to_bytes</span>(<span class="ident">file</span>.<span class="ident">as_ref</span>())<span class="question-mark">?</span>;
-    <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>, <span class="ident">path</span>)<span class="question-mark">?</span>;
+    <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>, <span class="ident">path</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">buf</span>)
 }
 
@@ -513,7 +513,7 @@
 <span class="comment">// at `PATH` into memory and stores it in the interpreter bound to the</span>
 <span class="comment">// `$fixture` global.</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">setup_fixture_hack</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">fixture</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">setup_fixture_hack</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>, <span class="ident">fixture</span>: <span class="ident">P</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">data</span>) <span class="op">=</span> <span class="ident">fs::read</span>(<span class="ident">fixture</span>.<span class="ident">as_ref</span>()) {
         <span class="ident">data</span>
     } <span class="kw">else</span> {
@@ -537,7 +537,7 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Args::empty</span>().<span class="ident">with_copyright</span>(<span class="bool-val">true</span>);
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">Ansi::new</span>(<span class="ident">Vec::new</span>());
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="kw">_</span>))));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="kw">_</span>))));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -545,7 +545,7 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Args::empty</span>().<span class="ident">with_programfile</span>(<span class="prelude-val">Some</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;-&quot;</span>)));
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">b&quot;2 + 7&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">Ansi::new</span>(<span class="ident">Vec::new</span>());
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="kw">_</span>))));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="kw">_</span>))));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -553,7 +553,7 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Args::empty</span>().<span class="ident">with_programfile</span>(<span class="prelude-val">Some</span>(<span class="ident">PathBuf::from</span>(<span class="string">&quot;-&quot;</span>)));
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">b&quot;raise ArgumentError&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">Ansi::new</span>(<span class="ident">Vec::new</span>());
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="kw">_</span>))));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="kw">_</span>))));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -561,7 +561,7 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Args::empty</span>();
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">b&quot;2 + 7&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">Ansi::new</span>(<span class="ident">Vec::new</span>());
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="kw">_</span>))));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="kw">_</span>))));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -569,7 +569,7 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Args::empty</span>();
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">b&quot;raise ArgumentError&quot;</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">Ansi::new</span>(<span class="ident">Vec::new</span>());
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="kw">_</span>))));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="kw">_</span>))));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -577,7 +577,7 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Args::empty</span>().<span class="ident">with_commands</span>(<span class="macro">vec!</span>[<span class="ident">OsString::from</span>(<span class="string">&quot;2 + 7&quot;</span>)]);
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">Ansi::new</span>(<span class="ident">Vec::new</span>());
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="ident">input</span>.<span class="ident">as_slice</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="kw">_</span>))));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="ident">input</span>.<span class="ident">as_slice</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="kw">_</span>))));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -585,7 +585,7 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Args::empty</span>().<span class="ident">with_commands</span>(<span class="macro">vec!</span>[<span class="ident">OsString::from</span>(<span class="string">&quot;raise ArgumentError&quot;</span>)]);
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="ident">::new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="ident">Ansi::new</span>(<span class="ident">Vec::new</span>());
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="kw">_</span>))));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">run</span>(<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>[..], <span class="kw-2">&amp;mut</span> <span class="ident">err</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="kw">_</span>))));
     }
 }
 </code></pre></div>

@@ -605,7 +605,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Kernel#require`]: https://ruby-doc.org/core-2.6.3/Kernel.html#method-i-require</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mark_required</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mark_required</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">for</span> <span class="ident">load_path</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">load_paths</span> {
             <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">load_path</span>.<span class="ident">join</span>(<span class="ident">path</span>);
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">handle</span>) <span class="op">=</span> <span class="ident">Handle::from_path</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>) {

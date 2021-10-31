@@ -70,10 +70,10 @@ multiple of 4.</p>
 <h5 id="examples-7" class="section-header"><a href="#examples-7">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::new</span>()<span class="question-mark">?</span>;
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">32</span>];
-<span class="ident">random</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
+<span class="ident">random</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>);
 <span class="macro">assert_ne!</span>([<span class="number">0</span>; <span class="number">32</span>], <span class="ident">buf</span>);
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">31</span>];
-<span class="ident">random</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
+<span class="ident">random</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>);
 <span class="macro">assert_ne!</span>([<span class="number">0</span>; <span class="number">31</span>], <span class="ident">buf</span>);</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.seed" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/spinoso_random/random/mod.rs.html#283-285" title="goto source code">[src]</a></div><a href="#method.seed" class="anchor"></a><h4 class="code-header">pub const fn <a href="#method.seed" class="fnname">seed</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 4]</a></h4></div></summary><div class="docblock"><p>Returns the seed value used to initialize the generator.</p>
 <p>This may be used to initialize another generator with the same state at
@@ -114,10 +114,10 @@ multiple of 4.</p>
 <h5 id="examples-11" class="section-header"><a href="#examples-11">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_seed</span>(<span class="number">33</span>);
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">32</span>];
-<span class="ident">random</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
+<span class="ident">random</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>);
 <span class="macro">assert_ne!</span>([<span class="number">0</span>; <span class="number">32</span>], <span class="ident">buf</span>);
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">31</span>];
-<span class="ident">random</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
+<span class="ident">random</span>.<span class="ident">fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>);
 <span class="macro">assert_ne!</span>([<span class="number">0</span>; <span class="number">31</span>], <span class="ident">buf</span>);</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.try_fill_bytes" class="method trait-impl has-srclink"><div class="rightside"><a class="srclink" href="../src/spinoso_random/random/rand.rs.html#129-131" title="goto source code">[src]</a></div><a href="#method.try_fill_bytes" class="anchor"></a><h4 class="code-header">fn <a href="../rand_core/trait.RngCore.html#tymethod.try_fill_bytes" class="fnname">try_fill_bytes</a>(&amp;mut self, dest: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;mut [</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>, <a class="struct" href="../rand_core/error/struct.Error.html" title="struct rand_core::error::Error">Error</a>&gt;</h4></div></summary><div class="docblock"><p>Fill a buffer with bytes generated from the RNG.</p>
 <p>This method generates random <code>u32</code>s (the native output unit of the RNG)
@@ -128,10 +128,10 @@ multiple of 4.</p>
 <h5 id="examples-12" class="section-header"><a href="#examples-12">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_seed</span>(<span class="number">33</span>);
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">32</span>];
-<span class="ident">random</span>.<span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>)<span class="question-mark">?</span>;
+<span class="ident">random</span>.<span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>)<span class="question-mark">?</span>;
 <span class="macro">assert_ne!</span>([<span class="number">0</span>; <span class="number">32</span>], <span class="ident">buf</span>);
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">31</span>];
-<span class="ident">random</span>.<span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>)<span class="question-mark">?</span>;
+<span class="ident">random</span>.<span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>)<span class="question-mark">?</span>;
 <span class="macro">assert_ne!</span>([<span class="number">0</span>; <span class="number">31</span>], <span class="ident">buf</span>);</code></pre></div>
 <h5 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h5>
 <p>This method never returns an error. It is equivalent to calling the

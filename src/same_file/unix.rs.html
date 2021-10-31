@@ -128,7 +128,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Handle</span> {
-    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_std</span> {
             <span class="comment">// unwrap() will not panic. Since we were able to open an</span>
             <span class="comment">// std stream successfully, then `file` is guaranteed to be Some()</span>
@@ -162,7 +162,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Handle</span> {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">H</span>) {
+    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
         <span class="self">self</span>.<span class="ident">dev</span>.<span class="ident">hash</span>(<span class="ident">state</span>);
         <span class="self">self</span>.<span class="ident">ino</span>.<span class="ident">hash</span>(<span class="ident">state</span>);
     }
@@ -208,7 +208,7 @@
         <span class="self">self</span>.<span class="ident">file</span>.<span class="ident">as_ref</span>().<span class="ident">take</span>().<span class="ident">unwrap</span>()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_file_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">File</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_file_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">File</span> {
         <span class="comment">// unwrap() will not panic. Since we were able to open the</span>
         <span class="comment">// file successfully, then `file` is guaranteed to be Some()</span>
         <span class="self">self</span>.<span class="ident">file</span>.<span class="ident">as_mut</span>().<span class="ident">take</span>().<span class="ident">unwrap</span>()

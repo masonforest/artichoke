@@ -163,7 +163,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">mrb_value</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="kw">match</span> <span class="ident">types::ruby_from_mrb_value</span>(<span class="kw-2">*</span><span class="self">self</span>) {
             <span class="ident">Ruby::Nil</span> =&gt; <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;nil&quot;</span>),
             <span class="ident">Ruby::Bool</span> <span class="kw">if</span> <span class="kw">unsafe</span> { <span class="ident">mrb_sys_value_is_true</span>(<span class="kw-2">*</span><span class="self">self</span>) } =&gt; <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;true&quot;</span>),
@@ -212,7 +212,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function is infallible and guaranteed not to panic.</span>
 <span class="attribute">#[<span class="ident">must_use</span>]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mrb_sys_state_debug</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">mrb_state</span>) -&gt; <span class="ident">String</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mrb_sys_state_debug</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">mrb_state</span>) -&gt; <span class="ident">String</span> {
     <span class="kw">let</span> <span class="ident">engine</span> <span class="op">=</span> <span class="ident">CStr::from_bytes_with_nul</span>(<span class="ident">MRUBY_RUBY_ENGINE</span>);
     <span class="kw">let</span> <span class="ident">engine</span> <span class="op">=</span> <span class="ident">engine</span>.<span class="ident">ok</span>().<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">cstr</span><span class="op">|</span> <span class="ident">cstr</span>.<span class="ident">to_str</span>().<span class="ident">ok</span>()).<span class="ident">unwrap_or</span>(<span class="string">&quot;unknown&quot;</span>);
     <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span> <span class="ident">CStr::from_bytes_with_nul</span>(<span class="ident">MRUBY_RUBY_VERSION</span>);
@@ -225,7 +225,7 @@
     <span class="comment">// impls of `str` and `i64` are not buggy and writing to a `String`</span>
     <span class="comment">// `fmt::Write` will never panic on its own.</span>
     <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">debug</span>,
+        <span class="kw-2">&amp;mut</span> <span class="ident">debug</span>,
         <span class="string">&quot;{} {} (v{}.{}.{}) interpreter at {:p}&quot;</span>,
         <span class="ident">engine</span>, <span class="ident">version</span>, <span class="ident">MRUBY_RELEASE_MAJOR</span>, <span class="ident">MRUBY_RELEASE_MINOR</span>, <span class="ident">MRUBY_RELEASE_TEENY</span>, <span class="ident">mrb</span>
     );

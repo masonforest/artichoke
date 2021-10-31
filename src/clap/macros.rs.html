@@ -1466,7 +1466,7 @@
             }
         }
         <span class="kw">impl</span> <span class="ident">::std::fmt::Display</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span> {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">::std::fmt::Formatter</span>) -&gt; <span class="ident">::std::fmt::Result</span> {
+            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">::std::fmt::Formatter</span>) -&gt; <span class="ident">::std::fmt::Result</span> {
                 <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                     $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span> =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span>)),)<span class="op">+</span>
                 }
@@ -1608,7 +1608,7 @@
             <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
                 <span class="kw">static</span> <span class="ident">ONCE</span>: <span class="ident">Once</span> <span class="op">=</span> <span class="ident">ONCE_INIT</span>;
-                <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">VALUE</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">String</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">String</span>;
+                <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">VALUE</span>: <span class="kw-2">*const</span> <span class="ident">String</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">String</span>;
 
                 <span class="kw">unsafe</span> {
                     <span class="ident">ONCE</span>.<span class="ident">call_once</span>(<span class="op">|</span><span class="op">|</span> {
@@ -1943,13 +1943,13 @@
 
 <span class="macro">macro_rules!</span> <span class="ident">impl_settings</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span>:<span class="ident">ident</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">c</span>:<span class="ident">path</span>),<span class="op">+</span>) =&gt; {
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">s</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>) {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">s</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>) {
             <span class="kw">match</span> <span class="ident">s</span> {
                 $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span> =&gt; <span class="self">self</span>.<span class="number">0</span>.<span class="ident">insert</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">c</span>)),<span class="op">+</span>
             }
         }
 
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">s</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>) {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">s</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>) {
             <span class="kw">match</span> <span class="ident">s</span> {
                 $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span> =&gt; <span class="self">self</span>.<span class="number">0</span>.<span class="ident">remove</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">c</span>)),<span class="op">+</span>
             }
@@ -1967,7 +1967,7 @@
 <span class="macro">macro_rules!</span> <span class="ident">wlnerr</span>(
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; ({
         <span class="kw">use</span> <span class="ident">std::io</span>::{<span class="ident">Write</span>, <span class="ident">stderr</span>};
-        <span class="macro">writeln!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">stderr</span>(), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>)<span class="kw-2">*</span>).<span class="ident">ok</span>();
+        <span class="macro">writeln!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">stderr</span>(), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">arg</span>)<span class="kw-2">*</span>).<span class="ident">ok</span>();
     })
 );
 

@@ -264,7 +264,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Max</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident"><span class="self">Self</span>::Float</span>(<span class="ident">max</span>) =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">max</span>),
             <span class="ident"><span class="self">Self</span>::Integer</span>(<span class="ident">max</span>) =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">max</span>),
@@ -355,7 +355,7 @@
 <span class="doccomment">/// [`ArgumentError`].</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;random-rand&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;random-rand&quot;</span>)))]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Random</span>, <span class="ident">max</span>: <span class="ident">Max</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Rand</span>, <span class="ident">ArgumentError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Random</span>, <span class="ident">max</span>: <span class="ident">Max</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Rand</span>, <span class="ident">ArgumentError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">constraint</span> <span class="op">=</span> <span class="ident">max</span>;
     <span class="kw">match</span> <span class="ident">constraint</span> {
         <span class="ident">Max::Float</span>(<span class="ident">max</span>) <span class="kw">if</span> <span class="op">!</span><span class="ident">max</span>.<span class="ident">is_finite</span>() =&gt; {
@@ -397,33 +397,33 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">random_number_domain_error</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_seed</span>(<span class="number">33</span>);
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="ident">f64::NAN</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">is_domain_error</span>()));
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="ident">f64::INFINITY</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">is_domain_error</span>()));
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="ident">f64::NEG_INFINITY</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">is_domain_error</span>()));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="ident">f64::NAN</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">is_domain_error</span>()));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="ident">f64::INFINITY</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">is_domain_error</span>()));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="ident">f64::NEG_INFINITY</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">is_domain_error</span>()));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">random_number_in_float_out_float</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_seed</span>(<span class="number">33</span>);
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::None</span>), <span class="prelude-val">Ok</span>(<span class="ident">Rand::Float</span>(<span class="ident">num</span>)) <span class="kw">if</span> <span class="ident">num</span> <span class="op">&lt;</span> <span class="number">1.0</span>));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::None</span>), <span class="prelude-val">Ok</span>(<span class="ident">Rand::Float</span>(<span class="ident">num</span>)) <span class="kw">if</span> <span class="ident">num</span> <span class="op">&lt;</span> <span class="number">1.0</span>));
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
-            <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="number">0.5</span>)),
+            <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="number">0.5</span>)),
             <span class="prelude-val">Ok</span>(<span class="ident">Rand::Float</span>(<span class="ident">num</span>)) <span class="kw">if</span> <span class="ident">num</span> <span class="op">&lt;</span> <span class="number">0.5</span>
         ));
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
-            <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="number">1.0</span>)),
+            <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="number">1.0</span>)),
             <span class="prelude-val">Ok</span>(<span class="ident">Rand::Float</span>(<span class="ident">num</span>)) <span class="kw">if</span> <span class="ident">num</span> <span class="op">&lt;</span> <span class="number">1.0</span>
         ));
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
-            <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="number">9000.63</span>)),
+            <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="number">9000.63</span>)),
             <span class="prelude-val">Ok</span>(<span class="ident">Rand::Float</span>(<span class="ident">num</span>)) <span class="kw">if</span> <span class="ident">num</span> <span class="op">&lt;</span> <span class="number">9000.63</span>
         ));
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
-            <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="number">0.0</span>)),
+            <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="number">0.0</span>)),
             <span class="prelude-val">Ok</span>(<span class="ident">Rand::Float</span>(<span class="ident">num</span>)) <span class="kw">if</span> <span class="ident">num</span> <span class="op">&lt;</span> <span class="number">1.0</span>
         ));
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
-            <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="op">-</span><span class="number">0.0</span>)),
+            <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="op">-</span><span class="number">0.0</span>)),
             <span class="prelude-val">Ok</span>(<span class="ident">Rand::Float</span>(<span class="ident">num</span>)) <span class="kw">if</span> <span class="ident">num</span> <span class="op">&lt;</span> <span class="number">1.0</span>
         ));
     }
@@ -432,32 +432,32 @@
     <span class="kw">fn</span> <span class="ident">random_number_in_neg_float_out_err</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_seed</span>(<span class="number">33</span>);
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
-            <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="op">-</span><span class="number">1.0</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">message</span>() <span class="op">==</span> <span class="string">&quot;invalid argument&quot;</span>
+            <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Float</span>(<span class="op">-</span><span class="number">1.0</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">message</span>() <span class="op">==</span> <span class="string">&quot;invalid argument&quot;</span>
         ));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">random_number_in_neg_integer_out_err</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_seed</span>(<span class="number">33</span>);
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="op">-</span><span class="number">1</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">message</span>() <span class="op">==</span> <span class="string">&quot;invalid argument&quot;</span>));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="op">-</span><span class="number">1</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">message</span>() <span class="op">==</span> <span class="string">&quot;invalid argument&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">random_number_in_zero_integer_out_err</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_seed</span>(<span class="number">33</span>);
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="number">0</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">message</span>() <span class="op">==</span> <span class="string">&quot;invalid argument&quot;</span>));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="number">0</span>)), <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="kw">if</span> <span class="ident">err</span>.<span class="ident">message</span>() <span class="op">==</span> <span class="string">&quot;invalid argument&quot;</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">random_number_in_pos_integer_out_integer</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::with_seed</span>(<span class="number">33</span>);
-        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="number">1</span>)), <span class="prelude-val">Ok</span>(<span class="ident">Rand::Integer</span>(<span class="number">0</span>))));
+        <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="number">1</span>)), <span class="prelude-val">Ok</span>(<span class="ident">Rand::Integer</span>(<span class="number">0</span>))));
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
-            <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="number">9000</span>)),
+            <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="number">9000</span>)),
             <span class="prelude-val">Ok</span>(<span class="ident">Rand::Integer</span>(<span class="kw-2">ref</span> <span class="ident">num</span>)) <span class="kw">if</span> (<span class="number">0</span>..<span class="number">9000</span>).<span class="ident">contains</span>(<span class="ident">num</span>)
         ));
         <span class="macro">assert!</span>(<span class="macro">matches!</span>(
-            <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="ident">i64::MAX</span>)),
+            <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">Max::Integer</span>(<span class="ident">i64::MAX</span>)),
             <span class="prelude-val">Ok</span>(<span class="ident">Rand::Integer</span>(<span class="ident">num</span>)) <span class="kw">if</span> <span class="ident">num</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span>
         ));
     }

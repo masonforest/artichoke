@@ -323,7 +323,7 @@
             }
             <span class="string">b&#39;u&#39;</span> =&gt; {
                 <span class="kw">let</span> (<span class="ident">c</span>, <span class="ident">rest</span>) <span class="op">=</span> <span class="ident">backslash_u</span>(<span class="ident">s</span>);
-                <span class="ident">result</span>.<span class="ident">extend_from_slice</span>(<span class="ident">c</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="number">0</span>; <span class="number">4</span>]).<span class="ident">as_bytes</span>());
+                <span class="ident">result</span>.<span class="ident">extend_from_slice</span>(<span class="ident">c</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;mut</span> [<span class="number">0</span>; <span class="number">4</span>]).<span class="ident">as_bytes</span>());
                 <span class="ident">s</span> <span class="op">=</span> <span class="ident">rest</span>;
             }
             <span class="string">b&#39;n&#39;</span> =&gt; <span class="ident">result</span>.<span class="ident">push</span>(<span class="string">b&#39;\n&#39;</span>),

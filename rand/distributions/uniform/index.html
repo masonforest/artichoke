@@ -61,7 +61,7 @@ to copy or clone the value, whatever is appropriate for your type.</p>
     {
         <span class="ident">UniformSampler::new</span>(<span class="ident">low</span>, <span class="ident">high</span>)
     }
-    <span class="kw">fn</span> <span class="ident">sample</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) -&gt; <span class="ident"><span class="self">Self</span>::X</span> {
+    <span class="kw">fn</span> <span class="ident">sample</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>) -&gt; <span class="ident"><span class="self">Self</span>::X</span> {
         <span class="ident">MyF32</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">sample</span>(<span class="ident">rng</span>))
     }
 }
@@ -72,7 +72,7 @@ to copy or clone the value, whatever is appropriate for your type.</p>
 
 <span class="kw">let</span> (<span class="ident">low</span>, <span class="ident">high</span>) <span class="op">=</span> (<span class="ident">MyF32</span>(<span class="number">17.0f32</span>), <span class="ident">MyF32</span>(<span class="number">22.0f32</span>));
 <span class="kw">let</span> <span class="ident">uniform</span> <span class="op">=</span> <span class="ident">Uniform::new</span>(<span class="ident">low</span>, <span class="ident">high</span>);
-<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">uniform</span>.<span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">thread_rng</span>());</code></pre></div>
+<span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">uniform</span>.<span class="ident">sample</span>(<span class="kw-2">&amp;mut</span> <span class="ident">thread_rng</span>());</code></pre></div>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Uniform.html" title="rand::distributions::uniform::Uniform struct">Uniform</a></div><div class="item-right docblock-short"><p>Sample values uniformly between two bounds.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.UniformChar.html" title="rand::distributions::uniform::UniformChar struct">UniformChar</a></div><div class="item-right docblock-short"><p>The back-end implementing <a href="trait.UniformSampler.html" title="UniformSampler"><code>UniformSampler</code></a> for <code>char</code>.</p>

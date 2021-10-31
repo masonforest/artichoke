@@ -80,7 +80,7 @@
 
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unbox_from_value</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
         <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Value</span>,
-        <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>,
+        <span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">UnboxedValueGuard</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident"><span class="self">Self</span>::Guarded</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
 
@@ -101,7 +101,7 @@
         <span class="prelude-val">Ok</span>(<span class="ident">UnboxedValueGuard::new</span>(<span class="ident">Immediate::new</span>(<span class="ident">symbol_id</span>.<span class="ident">into</span>())))
     }
 
-    <span class="kw">fn</span> <span class="ident">alloc_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">alloc_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
 
         <span class="kw">let</span> <span class="ident">symbol_id</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">value</span>);
@@ -109,14 +109,14 @@
         <span class="prelude-val">Ok</span>(<span class="ident">Value::from</span>(<span class="ident">obj</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">box_into_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">into</span>: <span class="ident">Value</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">box_into_value</span>(<span class="ident">value</span>: <span class="ident"><span class="self">Self</span>::Unboxed</span>, <span class="ident">into</span>: <span class="ident">Value</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">value</span>;
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">into</span>;
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">interp</span>;
         <span class="prelude-val">Err</span>(<span class="ident">Fatal::from</span>(<span class="string">&quot;Symbols are immutable and cannot be reinitialized&quot;</span>).<span class="ident">into</span>())
     }
 
-    <span class="kw">fn</span> <span class="ident">free</span>(<span class="ident">data</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) {
+    <span class="kw">fn</span> <span class="ident">free</span>(<span class="ident">data</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>) {
         <span class="comment">// this function is never called. `Symbol` is `Copy`/immediate and does</span>
         <span class="comment">// not have a destructor registered in the class registry.</span>
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">data</span>;

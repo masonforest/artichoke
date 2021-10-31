@@ -143,7 +143,7 @@
     <span class="doccomment">/// If the symbol store cannot be accessed, an error is returned.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If the symbol table overflows, an error is returned.</span>
-    <span class="kw">fn</span> <span class="ident">intern_bytes</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">symbol</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Symbol</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">intern_bytes</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">symbol</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Symbol</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>;
 
@@ -169,7 +169,7 @@
     <span class="doccomment">/// If the symbol store cannot be accessed, an error is returned.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If the symbol table overflows, an error is returned.</span>
-    <span class="kw">fn</span> <span class="ident">intern_string</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">symbol</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Symbol</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">intern_string</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">symbol</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Symbol</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {

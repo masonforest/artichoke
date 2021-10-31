@@ -206,7 +206,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method requires that the [`sys::mrb_state`] has a valid `top_self`</span>
     <span class="doccomment">/// object.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">define</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>, <span class="ident">into</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::RClass</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">NotDefinedError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">define</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>, <span class="ident">into</span>: <span class="kw-2">&amp;mut</span> <span class="ident">sys::RClass</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">NotDefinedError</span><span class="op">&gt;</span> {
         <span class="ident">interp</span>
             .<span class="ident">with_ffi_boundary</span>(<span class="op">|</span><span class="ident">mrb</span><span class="op">|</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">method_type</span> {
                 <span class="ident">Type::Class</span> =&gt; {
@@ -247,7 +247,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">Spec</span> {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">H</span>) {
+    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
         <span class="self">self</span>.<span class="ident">name</span>.<span class="ident">hash</span>(<span class="ident">state</span>);
         <span class="self">self</span>.<span class="ident">method_type</span>.<span class="ident">hash</span>(<span class="ident">state</span>);
     }

@@ -487,8 +487,8 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">l_buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">4</span>];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r_buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">4</span>];
         <span class="kw">for</span> (<span class="ident">left</span>, <span class="ident">right</span>) <span class="kw">in</span> <span class="ident">lower</span>.<span class="ident">zip</span>(<span class="ident">upper</span>) {
-            <span class="kw">let</span> <span class="ident">left</span> <span class="op">=</span> <span class="ident">left</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">l_buf</span>);
-            <span class="kw">let</span> <span class="ident">right</span> <span class="op">=</span> <span class="ident">right</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">r_buf</span>);
+            <span class="kw">let</span> <span class="ident">left</span> <span class="op">=</span> <span class="ident">left</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;mut</span> <span class="ident">l_buf</span>);
+            <span class="kw">let</span> <span class="ident">right</span> <span class="op">=</span> <span class="ident">right</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;mut</span> <span class="ident">r_buf</span>);
             <span class="macro">assert!</span>(<span class="macro">matches!</span>(
                 <span class="ident">casecmp</span>(<span class="ident">left</span>.<span class="ident">as_bytes</span>(), <span class="ident">right</span>.<span class="ident">as_bytes</span>()),
                 <span class="ident">Ordering::Equal</span>

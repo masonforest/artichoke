@@ -659,7 +659,7 @@
 <span class="kw">impl</span> <span class="ident">TryConvertMut</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Radix</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Artichoke</span> {
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">try_convert_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Radix</span><span class="op">&gt;</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_convert_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Radix</span><span class="op">&gt;</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">value</span>) <span class="op">=</span> <span class="ident">value</span> {
             <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">implicitly_convert_to_int</span>(<span class="self">self</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">radix</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">radix</span>) <span class="op">=</span> <span class="ident">u32::try_from</span>(<span class="ident">num</span>) {
@@ -674,7 +674,7 @@
                     <span class="prelude-val">Ok</span>(<span class="ident">radix</span>) =&gt; <span class="ident">radix</span>,
                     <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;invalid radix &quot;</span>);
-                        <span class="ident">itoa::fmt</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">num</span>).<span class="ident">map_err</span>(<span class="ident">WriteError::from</span>)<span class="question-mark">?</span>;
+                        <span class="ident">itoa::fmt</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">num</span>).<span class="ident">map_err</span>(<span class="ident">WriteError::from</span>)<span class="question-mark">?</span>;
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
                     }
                 }
@@ -686,7 +686,7 @@
                 <span class="prelude-val">None</span> <span class="kw">if</span> <span class="ident">radix</span> <span class="op">==</span> <span class="number">0</span> =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
                 <span class="prelude-val">None</span> =&gt; {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;invalid radix &quot;</span>);
-                    <span class="ident">itoa::fmt</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">radix</span>).<span class="ident">map_err</span>(<span class="ident">WriteError::from</span>)<span class="question-mark">?</span>;
+                    <span class="ident">itoa::fmt</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">radix</span>).<span class="ident">map_err</span>(<span class="ident">WriteError::from</span>)<span class="question-mark">?</span>;
                     <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>())
                 }
             }
@@ -734,7 +734,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Utf8Error</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident"><span class="self">Self</span>::NulByte</span> =&gt; <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;String contained forbidden NUL byte&quot;</span>),
             <span class="ident"><span class="self">Self</span>::InvalidUtf8</span>(<span class="kw">_</span>) =&gt; <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;String contained invalid UTF-8 bytes&quot;</span>),
@@ -777,7 +777,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">TryConvertMut</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Value</span>, <span class="ident">IntegerString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Artichoke</span> {
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">try_convert_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Value</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">IntegerString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_convert_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Value</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">IntegerString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;can&#39;t convert &quot;</span>);
         <span class="ident">message</span>.<span class="ident">push_str</span>(<span class="self">self</span>.<span class="ident">inspect_type_name_for_value</span>(<span class="kw-2">*</span><span class="ident">value</span>));
         <span class="ident">message</span>.<span class="ident">push_str</span>(<span class="string">&quot; into Integer&quot;</span>);
@@ -791,7 +791,7 @@
                 <span class="prelude-val">Ok</span>(<span class="ident">converted</span>)
             } <span class="kw">else</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">r#&quot;invalid value for Integer(): &quot;&quot;#</span>);
-                <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">arg</span>)<span class="question-mark">?</span>;
+                <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">arg</span>)<span class="question-mark">?</span>;
                 <span class="ident">message</span>.<span class="ident">push</span>(<span class="string">&#39;&quot;&#39;</span>);
                 <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>())
             }
@@ -844,7 +844,7 @@
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident"><span class="self">Self</span>::Sign</span>(<span class="ident">arg</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::Accumulate</span>(<span class="ident">arg</span>, <span class="kw">_</span>, <span class="kw">_</span>) =&gt; {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">r#&quot;invalid value for Integer(): &quot;&quot;#</span>);
-                <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
+                <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
                 <span class="ident">message</span>.<span class="ident">push</span>(<span class="string">&#39;&quot;&#39;</span>);
                 <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>())
             }
@@ -876,7 +876,7 @@
             <span class="ident"><span class="self">Self</span>::Accumulate</span>(<span class="ident">arg</span>, <span class="ident">sign</span>, <span class="ident">digits</span>) =&gt; (<span class="ident">arg</span>, <span class="ident">sign</span>, <span class="ident">digits</span>),
             <span class="ident"><span class="self">Self</span>::Initial</span>(<span class="ident">arg</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::Sign</span>(<span class="ident">arg</span>, <span class="kw">_</span>) =&gt; {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">r#&quot;invalid value for Integer(): &quot;&quot;#</span>);
-                <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
+                <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
                 <span class="ident">message</span>.<span class="ident">push</span>(<span class="string">&#39;&quot;&#39;</span>);
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
             }
@@ -903,7 +903,7 @@
                 <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="ident">char::from</span>(<span class="kw-2">*</span><span class="ident">y</span>);
                 <span class="kw">if</span> <span class="op">!</span><span class="ident">next</span>.<span class="ident">is_numeric</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">next</span>.<span class="ident">is_alphabetic</span>() {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">r#&quot;invalid value for Integer(): &quot;&quot;#</span>);
-                    <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
+                    <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
                     <span class="ident">message</span>.<span class="ident">push</span>(<span class="string">&#39;&quot;&#39;</span>);
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="string">&#39;0&#39;</span> <span class="op">==</span> <span class="ident">first</span> {
@@ -940,7 +940,7 @@
         <span class="kw">if</span> <span class="ident">current</span>.<span class="ident">is_whitespace</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="string">&#39;+&#39;</span> <span class="op">|</span> <span class="string">&#39;-&#39;</span>) <span class="op">=</span> <span class="ident">prev</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">r#&quot;invalid value for Integer(): &quot;&quot;#</span>);
-                <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
+                <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
                 <span class="ident">message</span>.<span class="ident">push</span>(<span class="string">&#39;&quot;&#39;</span>);
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>());
             }
@@ -970,7 +970,7 @@
         <span class="prelude-val">Ok</span>(<span class="ident">parsed_int</span>)
     } <span class="kw">else</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">r#&quot;invalid value for Integer(): &quot;&quot;#</span>);
-        <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
+        <span class="ident">format_unicode_debug_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">arg</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
         <span class="ident">message</span>.<span class="ident">push</span>(<span class="string">&#39;&quot;&#39;</span>);
         <span class="prelude-val">Err</span>(<span class="ident">ArgumentError::from</span>(<span class="ident">message</span>).<span class="ident">into</span>())
     }

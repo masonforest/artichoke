@@ -241,26 +241,26 @@
 }
 
 <span class="kw">impl</span> <span class="ident">State</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">mrb</span>: <span class="kw-2">&amp;mut</span> <span class="ident">sys::mrb_state</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">sys::mrbc_context_new</span>(<span class="ident">mrb</span>) };
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">context</span> <span class="op">=</span> <span class="ident">NonNull::new</span>(<span class="ident">context</span>)<span class="question-mark">?</span>;
         <span class="ident">reset_context_filename</span>(<span class="ident">mrb</span>, <span class="kw">unsafe</span> { <span class="ident">context</span>.<span class="ident">as_mut</span>() });
         <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">context</span>, <span class="ident">stack</span>: <span class="macro">vec!</span>[] })
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;mut</span> <span class="ident">sys::mrb_state</span>) {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_mut</span>();
             <span class="ident">sys::mrbc_context_free</span>(<span class="ident">mrb</span>, <span class="ident">ctx</span>);
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">context_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrbc_context</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">context_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">sys::mrbc_context</span> {
         <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_mut</span>() }
     }
 
     <span class="doccomment">/// Reset line number to `1`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;mut</span> <span class="ident">sys::mrb_state</span>) {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_mut</span>();
             <span class="ident">ctx</span>.<span class="ident">lineno</span> <span class="op">=</span> <span class="number">1</span>;
@@ -282,7 +282,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function returns [`IncrementLinenoError`] if the increment results</span>
     <span class="doccomment">/// in an overflow of the internal parser line number counter.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_fetch_lineno</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">IncrementLinenoError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_fetch_lineno</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">IncrementLinenoError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">old</span> <span class="op">=</span> <span class="ident">usize::from</span>(<span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_ref</span>() }.<span class="ident">lineno</span>);
         <span class="kw">let</span> <span class="ident">new</span> <span class="op">=</span> <span class="ident">old</span>
             .<span class="ident">checked_add</span>(<span class="ident">val</span>)
@@ -299,7 +299,7 @@
     <span class="doccomment">/// The supplied [`Context`] becomes the currently active context. This</span>
     <span class="doccomment">/// function modifies the parser state so subsequently `eval`ed code will</span>
     <span class="doccomment">/// use the current active `Context`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_context</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">context</span>: <span class="ident">Context</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_context</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">context</span>: <span class="ident">Context</span>) {
         <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">context</span>.<span class="ident">filename_as_c_str</span>();
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">context</span>.<span class="ident">as_mut</span>();
@@ -313,7 +313,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Calls to this function modify the parser state so subsequently `eval`ed</span>
     <span class="doccomment">/// code will use the current active [`Context`].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pop_context</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Context</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pop_context</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">mrb</span>: <span class="kw-2">&amp;mut</span> <span class="ident">sys::mrb_state</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Context</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">context</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">pop</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">current</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">last</span>() {
             <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">current</span>.<span class="ident">filename_as_c_str</span>();
@@ -337,7 +337,7 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">reset_context_filename</span>(<span class="ident">mrb</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">context</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">sys::mrbc_context</span>) {
+<span class="kw">fn</span> <span class="ident">reset_context_filename</span>(<span class="ident">mrb</span>: <span class="kw-2">&amp;mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">sys::mrbc_context</span>) {
     <span class="kw">let</span> <span class="ident">frame</span> <span class="op">=</span> <span class="ident">Context::root</span>();
     <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">frame</span>.<span class="ident">filename_as_c_str</span>();
     <span class="kw">unsafe</span> {

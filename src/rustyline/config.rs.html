@@ -579,7 +579,7 @@
         <span class="self">self</span>.<span class="ident">max_history_size</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_max_history_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">max_size</span>: <span class="ident">usize</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_max_history_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">max_size</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">max_history_size</span> <span class="op">=</span> <span class="ident">max_size</span>;
     }
 
@@ -591,7 +591,7 @@
         <span class="self">self</span>.<span class="ident">history_duplicates</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_history_ignore_dups</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_history_ignore_dups</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
         <span class="self">self</span>.<span class="ident">history_duplicates</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">yes</span> {
             <span class="ident">HistoryDuplicates::IgnoreConsecutive</span>
         } <span class="kw">else</span> {
@@ -607,7 +607,7 @@
         <span class="self">self</span>.<span class="ident">history_ignore_space</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_history_ignore_space</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_history_ignore_space</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
         <span class="self">self</span>.<span class="ident">history_ignore_space</span> <span class="op">=</span> <span class="ident">yes</span>;
     }
 
@@ -658,7 +658,7 @@
         <span class="self">self</span>.<span class="ident">color_mode</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_color_mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">color_mode</span>: <span class="ident">ColorMode</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_color_mode</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">color_mode</span>: <span class="ident">ColorMode</span>) {
         <span class="self">self</span>.<span class="ident">color_mode</span> <span class="op">=</span> <span class="ident">color_mode</span>;
     }
 
@@ -669,7 +669,7 @@
         <span class="self">self</span>.<span class="ident">output_stream</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_output_stream</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">stream</span>: <span class="ident">OutputStreamType</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_output_stream</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">stream</span>: <span class="ident">OutputStreamType</span>) {
         <span class="self">self</span>.<span class="ident">output_stream</span> <span class="op">=</span> <span class="ident">stream</span>;
     }
 
@@ -680,7 +680,7 @@
         <span class="self">self</span>.<span class="ident">tab_stop</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_tab_stop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">tab_stop</span>: <span class="ident">usize</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_tab_stop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">tab_stop</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">tab_stop</span> <span class="op">=</span> <span class="ident">tab_stop</span>;
     }
 
@@ -698,7 +698,7 @@
         <span class="self">self</span>.<span class="ident">indent_size</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_indent_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">indent_size</span>: <span class="ident">usize</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_indent_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">indent_size</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">indent_size</span> <span class="op">=</span> <span class="ident">indent_size</span>;
     }
 
@@ -954,18 +954,18 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Configurer</span> <span class="kw">for</span> <span class="ident">Builder</span> {
-    <span class="kw">fn</span> <span class="ident">config_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Config</span> {
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">p</span>
+    <span class="kw">fn</span> <span class="ident">config_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">Config</span> {
+        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">p</span>
     }
 }
 
 <span class="doccomment">/// Trait for component that holds a `Config`.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Configurer</span> {
     <span class="doccomment">/// `Config` accessor.</span>
-    <span class="kw">fn</span> <span class="ident">config_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Config</span>;
+    <span class="kw">fn</span> <span class="ident">config_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">Config</span>;
 
     <span class="doccomment">/// Set the maximum length for the history.</span>
-    <span class="kw">fn</span> <span class="ident">set_max_history_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">max_size</span>: <span class="ident">usize</span>) {
+    <span class="kw">fn</span> <span class="ident">set_max_history_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">max_size</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">set_max_history_size</span>(<span class="ident">max_size</span>);
     }
 
@@ -973,7 +973,7 @@
     <span class="doccomment">/// in the history list.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, they are ignored.</span>
-    <span class="kw">fn</span> <span class="ident">set_history_ignore_dups</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
+    <span class="kw">fn</span> <span class="ident">set_history_ignore_dups</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">set_history_ignore_dups</span>(<span class="ident">yes</span>);
     }
 
@@ -981,27 +981,27 @@
     <span class="doccomment">/// the history list.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, they are saved.</span>
-    <span class="kw">fn</span> <span class="ident">set_history_ignore_space</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
+    <span class="kw">fn</span> <span class="ident">set_history_ignore_space</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">set_history_ignore_space</span>(<span class="ident">yes</span>);
     }
     <span class="doccomment">/// Set `completion_type`.</span>
-    <span class="kw">fn</span> <span class="ident">set_completion_type</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">completion_type</span>: <span class="ident">CompletionType</span>) {
+    <span class="kw">fn</span> <span class="ident">set_completion_type</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">completion_type</span>: <span class="ident">CompletionType</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">completion_type</span> <span class="op">=</span> <span class="ident">completion_type</span>;
     }
 
     <span class="doccomment">/// The number of possible completions that determines when the user is</span>
     <span class="doccomment">/// asked whether the list of possibilities should be displayed.</span>
-    <span class="kw">fn</span> <span class="ident">set_completion_prompt_limit</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">completion_prompt_limit</span>: <span class="ident">usize</span>) {
+    <span class="kw">fn</span> <span class="ident">set_completion_prompt_limit</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">completion_prompt_limit</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">completion_prompt_limit</span> <span class="op">=</span> <span class="ident">completion_prompt_limit</span>;
     }
 
     <span class="doccomment">/// Timeout for ambiguous key sequences in milliseconds.</span>
-    <span class="kw">fn</span> <span class="ident">set_keyseq_timeout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">keyseq_timeout_ms</span>: <span class="ident">i32</span>) {
+    <span class="kw">fn</span> <span class="ident">set_keyseq_timeout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">keyseq_timeout_ms</span>: <span class="ident">i32</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">keyseq_timeout</span> <span class="op">=</span> <span class="ident">keyseq_timeout_ms</span>;
     }
 
     <span class="doccomment">/// Choose between Emacs or Vi mode.</span>
-    <span class="kw">fn</span> <span class="ident">set_edit_mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">edit_mode</span>: <span class="ident">EditMode</span>) {
+    <span class="kw">fn</span> <span class="ident">set_edit_mode</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">edit_mode</span>: <span class="ident">EditMode</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">edit_mode</span> <span class="op">=</span> <span class="ident">edit_mode</span>;
         <span class="kw">match</span> <span class="ident">edit_mode</span> {
             <span class="ident">EditMode::Emacs</span> =&gt; <span class="self">self</span>.<span class="ident">set_keyseq_timeout</span>(<span class="op">-</span><span class="number">1</span>), <span class="comment">// no timeout</span>
@@ -1012,53 +1012,53 @@
     <span class="doccomment">/// Tell if lines are automatically added to the history.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, they are not.</span>
-    <span class="kw">fn</span> <span class="ident">set_auto_add_history</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
+    <span class="kw">fn</span> <span class="ident">set_auto_add_history</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">auto_add_history</span> <span class="op">=</span> <span class="ident">yes</span>;
     }
 
     <span class="doccomment">/// Set bell style: beep, flash or nothing.</span>
-    <span class="kw">fn</span> <span class="ident">set_bell_style</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bell_style</span>: <span class="ident">BellStyle</span>) {
+    <span class="kw">fn</span> <span class="ident">set_bell_style</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">bell_style</span>: <span class="ident">BellStyle</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">bell_style</span> <span class="op">=</span> <span class="ident">bell_style</span>;
     }
 
     <span class="doccomment">/// Forces colorization on or off.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, colorization is on except if stdout is not a TTY.</span>
-    <span class="kw">fn</span> <span class="ident">set_color_mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">color_mode</span>: <span class="ident">ColorMode</span>) {
+    <span class="kw">fn</span> <span class="ident">set_color_mode</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">color_mode</span>: <span class="ident">ColorMode</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">set_color_mode</span>(<span class="ident">color_mode</span>);
     }
 
     <span class="doccomment">/// Whether to use stdout or stderr</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, use stdout</span>
-    <span class="kw">fn</span> <span class="ident">set_output_stream</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">stream</span>: <span class="ident">OutputStreamType</span>) {
+    <span class="kw">fn</span> <span class="ident">set_output_stream</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">stream</span>: <span class="ident">OutputStreamType</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">set_output_stream</span>(<span class="ident">stream</span>);
     }
 
     <span class="doccomment">/// Horizontal space taken by a tab.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, `8`</span>
-    <span class="kw">fn</span> <span class="ident">set_tab_stop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">tab_stop</span>: <span class="ident">usize</span>) {
+    <span class="kw">fn</span> <span class="ident">set_tab_stop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">tab_stop</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">set_tab_stop</span>(<span class="ident">tab_stop</span>);
     }
 
     <span class="doccomment">/// Check if cursor position is at leftmost before displaying prompt.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, we don&#39;t check.</span>
-    <span class="kw">fn</span> <span class="ident">set_check_cursor_position</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
+    <span class="kw">fn</span> <span class="ident">set_check_cursor_position</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">yes</span>: <span class="ident">bool</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">check_cursor_position</span> <span class="op">=</span> <span class="ident">yes</span>;
     }
     <span class="doccomment">/// Indentation size for indent/dedent commands</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, `2`</span>
-    <span class="kw">fn</span> <span class="ident">set_indent_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">size</span>: <span class="ident">usize</span>) {
+    <span class="kw">fn</span> <span class="ident">set_indent_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">size</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">set_indent_size</span>(<span class="ident">size</span>);
     }
 
     <span class="doccomment">/// Enable or disable bracketed paste on unix platform</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// By default, it&#39;s enabled.</span>
-    <span class="kw">fn</span> <span class="ident">enable_bracketed_paste</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">enabled</span>: <span class="ident">bool</span>) {
+    <span class="kw">fn</span> <span class="ident">enable_bracketed_paste</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">enabled</span>: <span class="ident">bool</span>) {
         <span class="self">self</span>.<span class="ident">config_mut</span>().<span class="ident">enable_bracketed_paste</span> <span class="op">=</span> <span class="ident">enabled</span>;
     }
 }

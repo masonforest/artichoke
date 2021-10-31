@@ -941,7 +941,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">AllSymbols</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Symbol</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">range</span> {
             <span class="prelude-val">Ok</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">range</span>) =&gt; <span class="ident">range</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="ident">Symbol::from</span>),
             <span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">range</span>) =&gt; <span class="ident">range</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="ident">Symbol::from</span>),
@@ -969,7 +969,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">nth</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">nth</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">range</span> {
             <span class="prelude-val">Ok</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">range</span>) =&gt; <span class="ident">range</span>.<span class="ident">nth</span>(<span class="ident">n</span>).<span class="ident">map</span>(<span class="ident">Symbol::from</span>),
             <span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">range</span>) =&gt; <span class="ident">range</span>.<span class="ident">nth</span>(<span class="ident">n</span>).<span class="ident">map</span>(<span class="ident">Symbol::from</span>),
@@ -985,14 +985,14 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">DoubleEndedIterator</span> <span class="kw">for</span> <span class="ident">AllSymbols</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">range</span> {
             <span class="prelude-val">Ok</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">range</span>) =&gt; <span class="ident">range</span>.<span class="ident">next_back</span>().<span class="ident">map</span>(<span class="ident">Symbol::from</span>),
             <span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">range</span>) =&gt; <span class="ident">range</span>.<span class="ident">next_back</span>().<span class="ident">map</span>(<span class="ident">Symbol::from</span>),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">nth_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">nth_back</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">range</span> {
             <span class="prelude-val">Ok</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">range</span>) =&gt; <span class="ident">range</span>.<span class="ident">nth_back</span>(<span class="ident">n</span>).<span class="ident">map</span>(<span class="ident">Symbol::from</span>),
             <span class="prelude-val">Err</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">range</span>) =&gt; <span class="ident">range</span>.<span class="ident">nth_back</span>(<span class="ident">n</span>).<span class="ident">map</span>(<span class="ident">Symbol::from</span>),
@@ -1025,7 +1025,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Strings</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="ident">Interned::as_slice</span>)
     }
 
@@ -1041,7 +1041,7 @@
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">last</span>().<span class="ident">map</span>(<span class="ident">Interned::as_slice</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">nth</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">nth</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">nth</span>(<span class="ident">n</span>).<span class="ident">map</span>(<span class="ident">Interned::as_slice</span>)
     }
 
@@ -1051,11 +1051,11 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">DoubleEndedIterator</span> <span class="kw">for</span> <span class="ident">Strings</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next_back</span>().<span class="ident">map</span>(<span class="ident">Interned::as_slice</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">nth_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">nth_back</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">nth_back</span>(<span class="ident">n</span>).<span class="ident">map</span>(<span class="ident">Interned::as_slice</span>)
     }
 
@@ -1101,7 +1101,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">Symbol</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>);
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next</span>()
     }
 
@@ -1117,7 +1117,7 @@
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">last</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">nth</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">nth</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">nth</span>(<span class="ident">n</span>)
     }
 
@@ -1165,7 +1165,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">SymbolTable</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="comment">// Safety:</span>
         <span class="comment">//</span>
         <span class="comment">// `Interned` requires that the `&#39;static` references it gives out are</span>
@@ -1176,8 +1176,8 @@
         <span class="comment">// out by `SymbolTable`, `map` and `vec` are guaranteed to be</span>
         <span class="comment">// initialized.</span>
         <span class="kw">unsafe</span> {
-            <span class="ident">ManuallyDrop::drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">map</span>);
-            <span class="ident">ManuallyDrop::drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">vec</span>);
+            <span class="ident">ManuallyDrop::drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">map</span>);
+            <span class="ident">ManuallyDrop::drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">vec</span>);
         }
     }
 }
@@ -1545,7 +1545,7 @@
     <span class="doccomment">/// # example().unwrap();</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_panics_doc</span>)]</span> <span class="comment">// clippy in 1.51.0 gives a false positive on `debug_assert!`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intern</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">contents</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Symbol</span>, <span class="ident">SymbolOverflowError</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intern</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">contents</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Symbol</span>, <span class="ident">SymbolOverflowError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
@@ -1653,7 +1653,7 @@
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// # example().unwrap();</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reserve</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">additional</span>: <span class="ident">usize</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reserve</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">additional</span>: <span class="ident">usize</span>) {
         <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
         <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">reserve</span>(<span class="ident">additional</span>);
     }
@@ -1679,7 +1679,7 @@
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// # example().unwrap();</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to_fit</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to_fit</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">shrink_to_fit</span>();
         <span class="self">self</span>.<span class="ident">vec</span>.<span class="ident">shrink_to_fit</span>();
     }

@@ -82,7 +82,7 @@
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stderr</span> <span class="op">=</span> <span class="ident">StandardStream::stderr</span>(<span class="ident">ColorChoice::Auto</span>);
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">repl::run</span>(<span class="ident">io::stdout</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">stderr</span>, <span class="prelude-val">None</span>) {
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">repl::run</span>(<span class="ident">io::stdout</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">stderr</span>, <span class="prelude-val">None</span>) {
         <span class="comment">// Reset colors and write the error message to stderr.</span>
         <span class="comment">//</span>
         <span class="comment">// Suppress all errors at this point (e.g. from a broken pipe) since</span>

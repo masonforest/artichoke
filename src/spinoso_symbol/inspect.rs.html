@@ -1064,13 +1064,13 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Inspect</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">char</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">DoubleEndedIterator</span> <span class="kw">for</span> <span class="ident">Inspect</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">next_back</span>()
     }
 }
@@ -1164,7 +1164,7 @@
     {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">4</span>];
         <span class="kw">for</span> <span class="ident">ch</span> <span class="kw">in</span> <span class="self">self</span> {
-            <span class="kw">let</span> <span class="ident">utf8</span> <span class="op">=</span> <span class="ident">ch</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
+            <span class="kw">let</span> <span class="ident">utf8</span> <span class="op">=</span> <span class="ident">ch</span>.<span class="ident">encode_utf8</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>);
             <span class="ident">dest</span>.<span class="ident">write_all</span>(<span class="ident">utf8</span>.<span class="ident">as_bytes</span>())<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
@@ -1192,7 +1192,7 @@
     };
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">emit_leading_colon</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">emit_leading_colon</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
         <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::EMIT_LEADING_COLON</span>.<span class="ident">bits</span>) <span class="op">==</span> <span class="ident"><span class="self">Self</span>::EMIT_LEADING_COLON</span>.<span class="ident">bits</span> {
             <span class="self">self</span>.<span class="ident">bits</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="ident"><span class="self">Self</span>::EMIT_LEADING_COLON</span>.<span class="ident">bits</span>;
             <span class="prelude-val">Some</span>(<span class="string">&#39;:&#39;</span>)
@@ -1202,7 +1202,7 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">emit_leading_quote</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">emit_leading_quote</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
         <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::EMIT_LEADING_QUOTE</span>.<span class="ident">bits</span>) <span class="op">==</span> <span class="ident"><span class="self">Self</span>::EMIT_LEADING_QUOTE</span>.<span class="ident">bits</span> {
             <span class="self">self</span>.<span class="ident">bits</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="ident"><span class="self">Self</span>::EMIT_LEADING_QUOTE</span>.<span class="ident">bits</span>;
             <span class="prelude-val">Some</span>(<span class="string">&#39;&quot;&#39;</span>)
@@ -1212,7 +1212,7 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">emit_trailing_quote</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">emit_trailing_quote</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
         <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">bits</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::EMIT_TRAILING_QUOTE</span>.<span class="ident">bits</span>) <span class="op">==</span> <span class="ident"><span class="self">Self</span>::EMIT_TRAILING_QUOTE</span>.<span class="ident">bits</span> {
             <span class="self">self</span>.<span class="ident">bits</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="ident"><span class="self">Self</span>::EMIT_TRAILING_QUOTE</span>.<span class="ident">bits</span>;
             <span class="prelude-val">Some</span>(<span class="string">&#39;&quot;&#39;</span>)
@@ -1279,7 +1279,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">char</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">flags</span>.<span class="ident">emit_leading_colon</span>() {
             <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>);
         }
@@ -1334,7 +1334,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">DoubleEndedIterator</span> <span class="kw">for</span> <span class="ident">State</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">flags</span>.<span class="ident">emit_trailing_quote</span>() {
             <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">ch</span>);
         }

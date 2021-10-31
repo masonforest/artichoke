@@ -645,7 +645,7 @@
 
 <span class="kw">const</span> <span class="ident">TIME_CSTR</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span> <span class="op">=</span> <span class="macro">cstr::cstr!</span>(<span class="string">&quot;Time&quot;</span>);
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="ident">InitializeResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="ident">InitializeResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">interp</span>.<span class="ident">is_class_defined</span>::<span class="op">&lt;</span><span class="ident">time::Time</span><span class="op">&gt;</span>() {
         <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
     }
@@ -739,44 +739,44 @@
 
 <span class="comment">// Constructor</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_now</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_now</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::now</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::now</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_at</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_at</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> (<span class="ident">seconds</span>, <span class="ident">microseconds</span>) <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">seconds</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">seconds</span>);
     <span class="kw">let</span> <span class="ident">microseconds</span> <span class="op">=</span> <span class="ident">microseconds</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::at</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">seconds</span>, <span class="ident">microseconds</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::at</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">seconds</span>, <span class="ident">microseconds</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_mkutc</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_mkutc</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Value::from</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::mkutc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">args</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::mkutc</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">args</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_mktime</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_self_mktime</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">_slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Value::from</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::mktime</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">args</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::mktime</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">args</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -785,92 +785,92 @@
 
 <span class="comment">// Core</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_int</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_int</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_int</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_int</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_float</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_float</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_float</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_float</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_rational</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_rational</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_rational</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_rational</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_cmp</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_cmp</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">other</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::cmp</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::cmp</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_eql</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_eql</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">other</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::eql</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::eql</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_hash</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_hash</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::hash</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::hash</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_initialize</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_initialize</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="kw-2">*</span><span class="ident">args</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">map</span>(<span class="ident">Value::from</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::initialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">args</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::initialize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">args</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_initialize_copy</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_initialize_copy</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">other</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::initialize_copy</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::initialize_copy</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -879,46 +879,46 @@
 
 <span class="comment">// Mutators and converters</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_mutate_to_local</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_mutate_to_local</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="ident">utc_offset</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::mutate_to_local</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">utc_offset</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::mutate_to_local</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">utc_offset</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_mutate_to_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_mutate_to_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::mutate_to_utc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::mutate_to_utc</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_as_local</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_as_local</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">utc_offset</span> <span class="op">=</span> <span class="ident">utc_offset</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::as_local</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">utc_offset</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::as_local</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">utc_offset</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_as_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_as_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::as_utc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::as_utc</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -927,33 +927,33 @@
 
 <span class="comment">// Inspect</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_asctime</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_asctime</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::asctime</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::asctime</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_string</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_string</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_string</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_array</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_to_array</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_array</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::to_array</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -962,24 +962,24 @@
 
 <span class="comment">// Math</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_plus</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_plus</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">other</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::plus</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::plus</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_minus</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_minus</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">other</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::minus</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::minus</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">other</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -988,23 +988,23 @@
 
 <span class="comment">// Coarse math</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_succ</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_succ</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::succ</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::succ</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_round</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_round</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">num_digits</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">optional</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">num_digits</span> <span class="op">=</span> <span class="ident">num_digits</span>.<span class="ident">map</span>(<span class="ident">Value::from</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::round</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">num_digits</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::round</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">num_digits</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -1013,121 +1013,121 @@
 
 <span class="comment">// Datetime</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_second</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_second</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::second</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::second</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_minute</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_minute</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::minute</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::minute</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_hour</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_hour</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::hour</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::hour</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_day</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_day</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::day</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::day</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_month</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_month</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::month</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::month</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_year</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_year</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::year</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::year</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_weekday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_weekday</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::weekday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::weekday</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_year_day</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_year_day</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::year_day</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::year_day</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_dst</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_dst</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_dst</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_dst</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_zone</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_zone</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::timezone</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::timezone</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_utc_offset</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_utc_offset</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::utc_offset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::utc_offset</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -1136,11 +1136,11 @@
 
 <span class="comment">// Timezone mode</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_utc</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_utc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_utc</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -1149,77 +1149,77 @@
 
 <span class="comment">// Day of week</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_sunday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_sunday</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_sunday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_sunday</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_monday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_monday</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_monday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_monday</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_tuesday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_tuesday</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_tuesday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_tuesday</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_wednesday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_wednesday</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_wednesday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_wednesday</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_thursday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_thursday</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_thursday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_thursday</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_friday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_friday</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_friday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_friday</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_saturday</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_is_saturday</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_saturday</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::is_saturday</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -1228,33 +1228,33 @@
 
 <span class="comment">// Unix time value</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_microsecond</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_microsecond</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::microsecond</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::microsecond</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_nanosecond</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_nanosecond</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::nanosecond</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::nanosecond</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_subsec</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_subsec</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">none</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::subsec</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::subsec</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),
@@ -1263,12 +1263,12 @@
 
 <span class="comment">// Time format</span>
 
-<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_strftime</span>(<span class="ident">mrb</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
+<span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">time_strftime</span>(<span class="ident">mrb</span>: <span class="kw-2">*mut</span> <span class="ident">sys::mrb_state</span>, <span class="ident">slf</span>: <span class="ident">sys::mrb_value</span>) -&gt; <span class="ident">sys::mrb_value</span> {
     <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="macro">mrb_get_args!</span>(<span class="ident">mrb</span>, <span class="ident">required</span> <span class="op">=</span> <span class="number">1</span>);
     <span class="macro">unwrap_interpreter!</span>(<span class="ident">mrb</span>, <span class="ident">to</span> =&gt; <span class="ident">guard</span>);
     <span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">slf</span>);
     <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">Value::from</span>(<span class="ident">format</span>);
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::strftime</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">format</span>);
+    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">trampoline::strftime</span>(<span class="kw-2">&amp;mut</span> <span class="ident">guard</span>, <span class="ident">time</span>, <span class="ident">format</span>);
     <span class="kw">match</span> <span class="ident">result</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>.<span class="ident">inner</span>(),
         <span class="prelude-val">Err</span>(<span class="ident">exception</span>) =&gt; <span class="ident">error::raise</span>(<span class="ident">guard</span>, <span class="ident">exception</span>),

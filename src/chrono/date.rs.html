@@ -912,7 +912,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Tz</span>: <span class="ident">TimeZone</span><span class="op">&gt;</span> <span class="ident">hash::Hash</span> <span class="kw">for</span> <span class="ident">Date</span><span class="op">&lt;</span><span class="ident">Tz</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">hash::Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">H</span>) {
+    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">hash::Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">hash</span>(<span class="ident">state</span>)
     }
 }
@@ -945,7 +945,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Tz</span>: <span class="ident">TimeZone</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Date</span><span class="op">&lt;</span><span class="ident">Tz</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{:?}{:?}&quot;</span>, <span class="self">self</span>.<span class="ident">naive_local</span>(), <span class="self">self</span>.<span class="ident">offset</span>)
     }
 }
@@ -954,7 +954,7 @@
 <span class="kw">where</span>
     <span class="ident">Tz::Offset</span>: <span class="ident">fmt::Display</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}{}&quot;</span>, <span class="self">self</span>.<span class="ident">naive_local</span>(), <span class="self">self</span>.<span class="ident">offset</span>)
     }
 }

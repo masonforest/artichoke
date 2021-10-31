@@ -110,12 +110,12 @@
         <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="kw-2">&amp;</span>[<span class="ident">u32</span>]) -&gt; <span class="ident">bool</span>,
     {
         <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">foreach_cb</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
-            <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">OnigUChar</span>,
-            <span class="ident">name_end</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">OnigUChar</span>,
+            <span class="ident">name</span>: <span class="kw-2">*const</span> <span class="ident">OnigUChar</span>,
+            <span class="ident">name_end</span>: <span class="kw-2">*const</span> <span class="ident">OnigUChar</span>,
             <span class="ident">ngroup_num</span>: <span class="ident">c_int</span>,
-            <span class="ident">group_nums</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_int</span>,
+            <span class="ident">group_nums</span>: <span class="kw-2">*mut</span> <span class="ident">c_int</span>,
             <span class="ident">_regex</span>: <span class="ident">OnigRegex</span>,
-            <span class="ident">arg</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+            <span class="ident">arg</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>,
         ) -&gt; <span class="ident">c_int</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="kw-2">&amp;</span>[<span class="ident">u32</span>]) -&gt; <span class="ident">bool</span>,
@@ -125,9 +125,9 @@
                 <span class="ident">name_end</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">-</span> <span class="ident">name</span> <span class="kw">as</span> <span class="ident">usize</span>,
             ));
 
-            <span class="kw">let</span> <span class="ident">groups</span> <span class="op">=</span> <span class="ident">slice::from_raw_parts</span>(<span class="ident">group_nums</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u32</span>, <span class="ident">ngroup_num</span> <span class="kw">as</span> <span class="ident">usize</span>);
+            <span class="kw">let</span> <span class="ident">groups</span> <span class="op">=</span> <span class="ident">slice::from_raw_parts</span>(<span class="ident">group_nums</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">u32</span>, <span class="ident">ngroup_num</span> <span class="kw">as</span> <span class="ident">usize</span>);
 
-            <span class="kw">let</span> <span class="ident">callback</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span>(<span class="ident">arg</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">F</span>);
+            <span class="kw">let</span> <span class="ident">callback</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span>(<span class="ident">arg</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">F</span>);
 
             <span class="kw">if</span> <span class="ident">callback</span>(<span class="ident">name</span>, <span class="ident">groups</span>) {
                 <span class="number">0</span>
@@ -140,7 +140,7 @@
             <span class="ident">onig_sys::onig_foreach_name</span>(
                 <span class="self">self</span>.<span class="ident">raw</span>,
                 <span class="prelude-val">Some</span>(<span class="ident">foreach_cb</span>::<span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>),
-                <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">callback</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">F</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+                <span class="kw-2">&amp;mut</span> <span class="ident">callback</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">F</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">c_void</span>,
             )
         }
     }

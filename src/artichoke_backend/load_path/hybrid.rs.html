@@ -452,7 +452,7 @@
     <span class="doccomment">/// returned. See [`Memory::write_file`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`RUBY_LOAD_PATH`]: super::RUBY_LOAD_PATH</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">buf</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_file</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">buf</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">memory</span>.<span class="ident">write_file</span>(<span class="ident">path</span>, <span class="ident">buf</span>)
     }
 
@@ -477,7 +477,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If the given path does not resolve to the virtual filesystem, an error</span>
     <span class="doccomment">/// is returned.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register_extension</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">extension</span>: <span class="ident">ExtensionHook</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register_extension</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">extension</span>: <span class="ident">ExtensionHook</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">memory</span>.<span class="ident">register_extension</span>(<span class="ident">path</span>, <span class="ident">extension</span>)
     }
 
@@ -514,7 +514,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `path` does not exist, an [`io::Error`] with error kind</span>
     <span class="doccomment">/// [`io::ErrorKind::NotFound`] is returned.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mark_required</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mark_required</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">is_explicit_relative</span>(<span class="ident">path</span>) {
             <span class="kw">return</span> <span class="self">self</span>
                 .<span class="ident">memory</span>

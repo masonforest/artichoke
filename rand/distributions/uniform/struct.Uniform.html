@@ -23,7 +23,7 @@ be taken to ensure that rounding never results values <code>&lt; low</code> or <
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sum</span> <span class="op">=</span> <span class="number">0</span>;
 <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">1000</span> {
-    <span class="ident">sum</span> <span class="op">+</span><span class="op">=</span> <span class="ident">between</span>.<span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>);
+    <span class="ident">sum</span> <span class="op">+</span><span class="op">=</span> <span class="ident">between</span>.<span class="ident">sample</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>);
 }
 <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">sum</span>);</code></pre></div>
 <p>For a single sample, <a href="../../trait.Rng.html#method.gen_range"><code>Rng::gen_range</code></a> may be prefered:</p>

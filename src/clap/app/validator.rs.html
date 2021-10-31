@@ -609,10 +609,10 @@
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">validate</span>(
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">needs_val_of</span>: <span class="ident">ParseResult</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
         <span class="ident">subcmd_name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-        <span class="ident">matcher</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ArgMatcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+        <span class="ident">matcher</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ArgMatcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
     ) -&gt; <span class="ident">ClapResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="macro">debugln!</span>(<span class="string">&quot;Validator::validate;&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reqs_validated</span> <span class="op">=</span> <span class="bool-val">false</span>;
@@ -649,7 +649,7 @@
             <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">is_set</span>(<span class="ident">AS::ArgRequiredElseHelp</span>)
         {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">write_help_err</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>)<span class="question-mark">?</span>;
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">write_help_err</span>(<span class="kw-2">&amp;mut</span> <span class="ident">out</span>)<span class="question-mark">?</span>;
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span> {
                 <span class="ident">message</span>: <span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">out</span>).<span class="ident">into_owned</span>(),
                 <span class="ident">kind</span>: <span class="ident">ErrorKind::MissingArgumentOrSubcommand</span>,
@@ -772,7 +772,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">validate_blacklist</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">matcher</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ArgMatcher</span>) -&gt; <span class="ident">ClapResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">validate_blacklist</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">matcher</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ArgMatcher</span>) -&gt; <span class="ident">ClapResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="macro">debugln!</span>(<span class="string">&quot;Validator::validate_blacklist;&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">conflicts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[];
         <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">name</span>, <span class="kw">_</span>) <span class="kw">in</span> <span class="ident">matcher</span>.<span class="ident">iter</span>() {
@@ -862,7 +862,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">validate_matched_args</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">matcher</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ArgMatcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">ClapResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">validate_matched_args</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">matcher</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ArgMatcher</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">ClapResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="macro">debugln!</span>(<span class="string">&quot;Validator::validate_matched_args;&quot;</span>);
         <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">ma</span>) <span class="kw">in</span> <span class="ident">matcher</span>.<span class="ident">iter</span>() {
             <span class="macro">debugln!</span>(
@@ -1032,7 +1032,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">validate_required</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">matcher</span>: <span class="kw-2">&amp;</span><span class="ident">ArgMatcher</span>) -&gt; <span class="ident">ClapResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">validate_required</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">matcher</span>: <span class="kw-2">&amp;</span><span class="ident">ArgMatcher</span>) -&gt; <span class="ident">ClapResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="macro">debugln!</span>(
             <span class="string">&quot;Validator::validate_required: required={:?};&quot;</span>,
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">required</span>

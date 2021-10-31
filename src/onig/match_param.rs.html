@@ -83,26 +83,26 @@
 
 <span class="doccomment">/// Parameters for a Match or Search.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MatchParam</span> {
-    <span class="ident">raw</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigMatchParam</span>,
+    <span class="ident">raw</span>: <span class="kw-2">*mut</span> <span class="ident">onig_sys::OnigMatchParam</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">MatchParam</span> {
     <span class="doccomment">/// Set the match stack limit</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_match_stack_limit</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">u32</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_match_stack_limit</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">u32</span>) {
         <span class="kw">unsafe</span> {
             <span class="ident">onig_sys::onig_set_match_stack_limit_size_of_match_param</span>(<span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">limit</span> <span class="kw">as</span> <span class="ident">c_uint</span>);
         }
     }
 
     <span class="doccomment">/// Set the retry limit in match</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_retry_limit_in_match</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">u32</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_retry_limit_in_match</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">u32</span>) {
         <span class="kw">unsafe</span> {
             <span class="ident">onig_sys::onig_set_retry_limit_in_match_of_match_param</span>(<span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">c_ulong::from</span>(<span class="ident">limit</span>));
         }
     }
 
     <span class="doccomment">/// Get the Raw `OnigMatchParam` Pointer</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigMatchParam</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">onig_sys::OnigMatchParam</span> {
         <span class="self">self</span>.<span class="ident">raw</span>
     }
 }
@@ -119,7 +119,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">MatchParam</span> {
-    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="kw">unsafe</span> {
             <span class="ident">onig_sys::onig_free_match_param</span>(<span class="self">self</span>.<span class="ident">raw</span>);
         }

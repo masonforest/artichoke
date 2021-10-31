@@ -269,7 +269,7 @@
 
     <span class="doccomment">/// Write any ANSI codes that go *before* a piece of text. These should be</span>
     <span class="doccomment">/// the codes to set the terminal to a different colour or font style.</span>
-    <span class="kw">fn</span> <span class="ident">write_prefix</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">AnyWrite</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">W::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">write_prefix</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">AnyWrite</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">W</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">W::Error</span><span class="op">&gt;</span> {
 
         <span class="comment">// If there are actually no styles here, then don’t write *any* codes</span>
         <span class="comment">// as the prefix. An empty ANSI code may not affect the terminal</span>
@@ -323,7 +323,7 @@
 
     <span class="doccomment">/// Write any ANSI codes that go *after* a piece of text. These should be</span>
     <span class="doccomment">/// the codes to *reset* the terminal back to its normal colour and style.</span>
-    <span class="kw">fn</span> <span class="ident">write_suffix</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">AnyWrite</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">W::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">write_suffix</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">AnyWrite</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">W</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">W::Error</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_plain</span>() {
             <span class="prelude-val">Ok</span>(())
         }
@@ -340,7 +340,7 @@
 
 
 <span class="kw">impl</span> <span class="ident">Colour</span> {
-    <span class="kw">fn</span> <span class="ident">write_foreground_code</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">AnyWrite</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">W::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">write_foreground_code</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">AnyWrite</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">W</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">W::Error</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">Colour::Black</span>      =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;30&quot;</span>),
             <span class="ident">Colour::Red</span>        =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;31&quot;</span>),
@@ -355,7 +355,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">write_background_code</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">AnyWrite</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">W::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">write_background_code</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">AnyWrite</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">W</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">W::Error</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">Colour::Black</span>      =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;40&quot;</span>),
             <span class="ident">Colour::Red</span>        =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;41&quot;</span>),
@@ -425,24 +425,24 @@
 
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Prefix</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="kw">let</span> <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Write</span> <span class="op">=</span> <span class="ident">f</span>;
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+        <span class="kw">let</span> <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Write</span> <span class="op">=</span> <span class="ident">f</span>;
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">write_prefix</span>(<span class="ident">f</span>)
     }
 }
 
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Infix</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="kw">use</span> <span class="ident">difference::Difference</span>;
 
         <span class="kw">match</span> <span class="ident">Difference::between</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">1</span>) {
             <span class="ident">Difference::ExtraStyles</span>(<span class="ident">style</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Write</span> <span class="op">=</span> <span class="ident">f</span>;
+                <span class="kw">let</span> <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Write</span> <span class="op">=</span> <span class="ident">f</span>;
                 <span class="ident">style</span>.<span class="ident">write_prefix</span>(<span class="ident">f</span>)
             },
             <span class="ident">Difference::Reset</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Write</span> <span class="op">=</span> <span class="ident">f</span>;
+                <span class="kw">let</span> <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Write</span> <span class="op">=</span> <span class="ident">f</span>;
                 <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}{}&quot;</span>, <span class="ident">RESET</span>, <span class="self">self</span>.<span class="number">0</span>.<span class="ident">prefix</span>())
             },
             <span class="ident">Difference::NoDifference</span> =&gt; {
@@ -454,8 +454,8 @@
 
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Suffix</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="kw">let</span> <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Write</span> <span class="op">=</span> <span class="ident">f</span>;
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+        <span class="kw">let</span> <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Write</span> <span class="op">=</span> <span class="ident">f</span>;
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">write_suffix</span>(<span class="ident">f</span>)
     }
 }
@@ -474,7 +474,7 @@
                 <span class="macro">assert_eq!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">style</span>.<span class="ident">paint</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">input</span>).<span class="ident">to_string</span>(), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">result</span>.<span class="ident">to_string</span>());
 
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">style</span>.<span class="ident">paint</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">input</span>.<span class="ident">as_bytes</span>()).<span class="ident">write_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">v</span>).<span class="ident">unwrap</span>();
+                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">style</span>.<span class="ident">paint</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">input</span>.<span class="ident">as_bytes</span>()).<span class="ident">write_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">v</span>).<span class="ident">unwrap</span>();
                 <span class="macro">assert_eq!</span>(<span class="ident">v</span>.<span class="ident">as_slice</span>(), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">result</span>.<span class="ident">as_bytes</span>());
             }
         };

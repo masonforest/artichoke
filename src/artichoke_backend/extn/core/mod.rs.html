@@ -124,7 +124,7 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">trueclass</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">warning</span>;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="ident">InitializeResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">init</span>(<span class="ident">interp</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Artichoke</span>) -&gt; <span class="ident">InitializeResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="comment">// These core classes are ordered according to the dependency DAG between</span>
     <span class="comment">// them.</span>
     <span class="ident">enumerable::init</span>(<span class="ident">interp</span>)<span class="question-mark">?</span>;

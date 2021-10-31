@@ -374,7 +374,7 @@
 
 <span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Mt</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;Mt {}&quot;</span>)
     }
 }
@@ -442,7 +442,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_int32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_int32</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="comment">// Failing this check indicates that, somehow, the structure</span>
         <span class="comment">// was not initialized.</span>
         <span class="macro">debug_assert!</span>(<span class="self">self</span>.<span class="ident">idx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
@@ -467,7 +467,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_real</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">f64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next_real</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">f64</span> {
         <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_int32</span>();
         <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_int32</span>();
         <span class="ident">int_pair_to_real_exclusive</span>(<span class="ident">a</span>, <span class="ident">b</span>)
@@ -494,7 +494,7 @@
     <span class="doccomment">/// assert_ne!([0; 31], buf);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>]) {
         <span class="kw">const</span> <span class="ident">CHUNK</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">left</span> <span class="op">=</span> <span class="ident">dest</span>;
         <span class="kw">while</span> <span class="ident">left</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">CHUNK</span> {
@@ -524,7 +524,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_possible_truncation</span>)]</span> <span class="comment">// N is less than u32::MAX</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reseed</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">seed</span>: <span class="ident">u32</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reseed</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">seed</span>: <span class="ident">u32</span>) {
         <span class="kw">let</span> <span class="self">Self</span> { <span class="ident">state</span>, <span class="ident">idx</span> } <span class="op">=</span> <span class="self">self</span>;
         <span class="kw-2">*</span><span class="ident">idx</span> <span class="op">=</span> <span class="ident">N</span>;
         <span class="ident">state</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">Wrapping</span>(<span class="ident">seed</span>);
@@ -539,7 +539,7 @@
     <span class="doccomment">/// Key can have any length.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cast_possible_truncation</span>)]</span> <span class="comment">// N is less than u32::MAX</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reseed_with_key</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="ident">I</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reseed_with_key</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="ident">I</span>)
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">u32</span><span class="op">&gt;</span>,
         <span class="ident">I::IntoIter</span>: <span class="ident">Clone</span>,
@@ -573,7 +573,7 @@
 }
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">next_state</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Mt</span>) {
+<span class="kw">fn</span> <span class="ident">next_state</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Mt</span>) {
     <span class="kw">let</span> <span class="ident">Mt</span> { <span class="ident">state</span>, <span class="ident">idx</span> } <span class="op">=</span> <span class="ident">rng</span>;
 
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">N</span> <span class="op">-</span> <span class="ident">M</span> {

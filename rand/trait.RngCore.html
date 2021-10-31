@@ -53,20 +53,20 @@ External / hardware RNGs can choose to implement <code>Default</code>.</li>
 <span class="kw">struct</span> <span class="ident">CountingRng</span>(<span class="ident">u64</span>);
 
 <span class="kw">impl</span> <span class="ident">RngCore</span> <span class="kw">for</span> <span class="ident">CountingRng</span> {
-    <span class="kw">fn</span> <span class="ident">next_u32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+    <span class="kw">fn</span> <span class="ident">next_u32</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="self">self</span>.<span class="ident">next_u64</span>() <span class="kw">as</span> <span class="ident">u32</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">next_u64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">u64</span> {
+    <span class="kw">fn</span> <span class="ident">next_u64</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="self">self</span>.<span class="number">0</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         <span class="self">self</span>.<span class="number">0</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) {
+    <span class="kw">fn</span> <span class="ident">fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>]) {
         <span class="ident">impls::fill_bytes_via_next</span>(<span class="self">self</span>, <span class="ident">dest</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">fill_bytes</span>(<span class="ident">dest</span>))
     }
 }</code></pre></div>

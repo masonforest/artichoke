@@ -9,7 +9,7 @@ sequences (e.g. <code>\a</code>).</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code>
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="string">&quot;cannot load such file -- &quot;</span>);
 <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="string">b&quot;utf8-invalid-name-\xFF&quot;</span>;
-<span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">message</span>, <span class="ident">filename</span>);
+<span class="ident">format_debug_escape_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>, <span class="ident">filename</span>);
 <span class="macro">assert_eq!</span>(<span class="string">r&quot;cannot load such file -- utf8-invalid-name-\xFF&quot;</span>, <span class="ident">message</span>);</code></pre></div>
 <h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
 <p>This method only returns an error when the given writer returns an

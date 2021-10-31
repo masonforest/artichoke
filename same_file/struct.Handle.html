@@ -112,7 +112,7 @@ and copy the data to it:</p>
 
 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
 <span class="comment">// data copy is simplified for the purposes of the example</span>
-<span class="ident">source</span>.<span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>)<span class="question-mark">?</span>;
+<span class="ident">source</span>.<span class="ident">read_to_end</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>)<span class="question-mark">?</span>;
 <span class="ident">target</span>.<span class="ident">write_all</span>(<span class="kw-2">&amp;</span><span class="ident">buffer</span>)<span class="question-mark">?</span>;</code></pre></div>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><div id="method.as_file_mut" class="method has-srclink"><div class="rightside"><a class="srclink" href="../src/same_file/lib.rs.html#330-332" title="goto source code">[src]</a></div><a href="#method.as_file_mut" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.as_file_mut" class="fnname">as_file_mut</a>(&amp;mut self) -&gt; &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/std/fs/struct.File.html" title="struct std::fs::File">File</a></h4></div></summary><div class="docblock"><p>Return a mutable reference to the underlying file.</p>
 <h5 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h5>

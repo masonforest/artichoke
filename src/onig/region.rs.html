@@ -409,9 +409,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Construct a new region based on an existing raw</span>
     <span class="doccomment">/// `*onig_sys::OnigRegion` pointer by copying.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">clone_from_raw</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigRegion</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">clone_from_raw</span>(<span class="ident">ptr</span>: <span class="kw-2">*mut</span> <span class="ident">onig_sys::OnigRegion</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>();
-        <span class="ident">onig_sys::onig_region_copy</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">region</span>.<span class="ident">raw</span>, <span class="ident">ptr</span>);
+        <span class="ident">onig_sys::onig_region_copy</span>(<span class="kw-2">&amp;mut</span> <span class="ident">region</span>.<span class="ident">raw</span>, <span class="ident">ptr</span>);
         <span class="ident">region</span>
     }
 
@@ -419,9 +419,9 @@
     <span class="doccomment">/// again. See [`onig_sys::onig_region_clear`][region_clear]</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [region_clear]: ./onig_sys/fn.onig_region_clear.html</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="kw">unsafe</span> {
-            <span class="ident">onig_sys::onig_region_clear</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>);
+            <span class="ident">onig_sys::onig_region_clear</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">raw</span>);
         }
     }
 
@@ -439,8 +439,8 @@
     <span class="doccomment">/// # Arguments</span>
     <span class="doccomment">///</span>
     <span class="doccomment">///  * `new_capacity` - The new number of groups in the region.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reserve</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">new_capacity</span>: <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">onig_sys::onig_region_resize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">new_capacity</span> <span class="kw">as</span> <span class="ident">c_int</span>) };
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reserve</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">new_capacity</span>: <span class="ident">usize</span>) {
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">onig_sys::onig_region_resize</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">new_capacity</span> <span class="kw">as</span> <span class="ident">c_int</span>) };
         <span class="kw">if</span> <span class="ident">r</span> <span class="op">!</span><span class="op">=</span> <span class="ident">onig_sys::ONIG_NORMAL</span> <span class="kw">as</span> <span class="ident">i32</span> {
             <span class="macro">panic!</span>(<span class="string">&quot;Onig: fail to memory allocation during region resize&quot;</span>)
         }
@@ -527,12 +527,12 @@
             <span class="ident">end</span>: <span class="ident">c_int</span>,
             <span class="ident">level</span>: <span class="ident">c_int</span>,
             <span class="ident">_at</span>: <span class="ident">c_int</span>,
-            <span class="ident">ud</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+            <span class="ident">ud</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>,
         ) -&gt; <span class="ident">c_int</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">u32</span>, (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">u32</span>) -&gt; <span class="ident">bool</span>,
         {
-            <span class="kw">let</span> <span class="ident">callback</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="ident">ud</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">F</span>) };
+            <span class="kw">let</span> <span class="ident">callback</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="ident">ud</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">F</span>) };
             <span class="kw">if</span> <span class="ident">callback</span>(<span class="ident">group</span> <span class="kw">as</span> <span class="ident">u32</span>, (<span class="ident">beg</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">end</span> <span class="kw">as</span> <span class="ident">usize</span>), <span class="ident">level</span> <span class="kw">as</span> <span class="ident">u32</span>) {
                 <span class="number">0</span>
             } <span class="kw">else</span> {
@@ -545,7 +545,7 @@
                 <span class="self">self</span>.<span class="ident">raw_mut</span>(),
                 <span class="ident">at</span>.<span class="ident">bits</span>() <span class="kw">as</span> <span class="ident">c_int</span>,
                 <span class="prelude-val">Some</span>(<span class="ident">traverse_cb</span>::<span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>),
-                <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">callback</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">F</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
+                <span class="kw-2">&amp;mut</span> <span class="ident">callback</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">F</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">c_void</span>,
             )
         }
     }
@@ -553,8 +553,8 @@
     <span class="doccomment">/// Convert a reference to self to a mutable pointer. This</span>
     <span class="doccomment">/// shouldn&#39;t ever actually be used to mutate the underlying</span>
     <span class="doccomment">/// region. It&#39;s needed to match the bindgened types though.</span>
-    <span class="kw">fn</span> <span class="ident">raw_mut</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigRegion</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">raw</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigRegion</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigRegion</span>
+    <span class="kw">fn</span> <span class="ident">raw_mut</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">onig_sys::OnigRegion</span> {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">raw</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">onig_sys::OnigRegion</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">onig_sys::OnigRegion</span>
     }
 }
 
@@ -565,9 +565,9 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Region</span> {
-    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="kw">unsafe</span> {
-            <span class="ident">onig_sys::onig_region_free</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="number">0</span>);
+            <span class="ident">onig_sys::onig_region_free</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="number">0</span>);
         }
     }
 }
@@ -598,7 +598,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">RegionIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">usize</span>, <span class="ident">usize</span>);
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">region</span>.<span class="ident">pos</span>(<span class="self">self</span>.<span class="ident">pos</span>);
         <span class="self">self</span>.<span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         <span class="ident">next</span>
@@ -684,7 +684,7 @@
             <span class="number">0</span>,
             <span class="number">9</span>,
             <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
-            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">region</span>),
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;mut</span> <span class="ident">region</span>),
         );
         <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_some</span>());
         <span class="kw">let</span> <span class="ident">all</span> <span class="op">=</span> <span class="ident">region</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
@@ -700,7 +700,7 @@
             <span class="number">0</span>,
             <span class="number">7</span>,
             <span class="ident">SearchOptions::SEARCH_OPTION_NONE</span>,
-            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">region</span>),
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;mut</span> <span class="ident">region</span>),
         );
         <span class="macro">assert!</span>(<span class="ident">res</span>.<span class="ident">is_some</span>());
 

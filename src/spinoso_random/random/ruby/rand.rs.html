@@ -175,7 +175,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">fn</span> <span class="ident">next_u64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">u64</span> {
+    <span class="kw">fn</span> <span class="ident">next_u64</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="ident">next_u64_via_u32</span>(<span class="self">self</span>)
     }
 
@@ -194,7 +194,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">fn</span> <span class="ident">next_u32</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+    <span class="kw">fn</span> <span class="ident">next_u32</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="self">self</span>.<span class="ident">next_int32</span>()
     }
 
@@ -220,7 +220,7 @@
     <span class="doccomment">/// assert_ne!([0; 31], buf);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) {
+    <span class="kw">fn</span> <span class="ident">fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>]) {
         <span class="ident"><span class="self">Self</span>::fill_bytes</span>(<span class="self">self</span>, <span class="ident">dest</span>);
     }
 
@@ -259,7 +259,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`fill_bytes`]: Mt::fill_bytes</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_fill_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dest</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="ident"><span class="self">Self</span>::fill_bytes</span>(<span class="self">self</span>, <span class="ident">dest</span>);
         <span class="prelude-val">Ok</span>(())
     }

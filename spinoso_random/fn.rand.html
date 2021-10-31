@@ -12,13 +12,13 @@ range.member?(number) == true.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::new</span>()<span class="question-mark">?</span>;
 <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">Max::None</span>;
-<span class="kw">let</span> <span class="ident">rand</span> <span class="op">=</span> <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">max</span>)<span class="question-mark">?</span>;
+<span class="kw">let</span> <span class="ident">rand</span> <span class="op">=</span> <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">max</span>)<span class="question-mark">?</span>;
 <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>, <span class="ident">Rand::Float</span>(<span class="ident">x</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="number">1.0</span>));</code></pre></div>
 <p>Generate random integers:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">random</span> <span class="op">=</span> <span class="ident">Random::new</span>()<span class="question-mark">?</span>;
 <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">Max::Integer</span>(<span class="number">10</span>);
-<span class="kw">let</span> <span class="ident">rand</span> <span class="op">=</span> <span class="ident">rand</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">random</span>, <span class="ident">max</span>)<span class="question-mark">?</span>;
+<span class="kw">let</span> <span class="ident">rand</span> <span class="op">=</span> <span class="ident">rand</span>(<span class="kw-2">&amp;mut</span> <span class="ident">random</span>, <span class="ident">max</span>)<span class="question-mark">?</span>;
 <span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="ident">rand</span>, <span class="ident">Rand::Integer</span>(<span class="ident">x</span>) <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="number">10</span>));</code></pre></div>
 <h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
 <p>When <code>max</code> is a negative integer or zero, <code>rand</code> returns an

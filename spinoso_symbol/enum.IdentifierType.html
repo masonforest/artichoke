@@ -36,7 +36,7 @@ generating their debug output.</p>
 <p>Junk mostly equates to non-sigil ASCII symbols. Identifiers like
 <code>empty?</code> and <code>flatten!</code> are junk idents. All special symbolic Ruby
 methods like <code>&lt;=&gt;</code> and <code>!~</code> are junk identifiers.</p>
-<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
+<h3 id="examples" class="section-header"><a href="#examples">Examples</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(<span class="string">&quot;empty?&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Junk</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;flatten!&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Junk</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;&lt;=&gt;&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Junk</span>));
@@ -54,7 +54,7 @@ global variables:</p>
 <li>Special global variables, which include <code>Regexp</code> globals (<code>$1</code>..<code>$9</code>)
 and <code>$-w</code> type globals.</li>
 </ul>
-<h2 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h2>
+<h3 id="examples-1" class="section-header"><a href="#examples-1">Examples</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(<span class="string">&quot;$&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Err</span>(<span class="ident">ParseIdentifierError::new</span>()));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;$foo&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Global</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;$@foo&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Err</span>(<span class="ident">ParseIdentifierError::new</span>()));
@@ -66,7 +66,7 @@ and <code>$-w</code> type globals.</li>
 </div><div id="variant.Instance" class="variant small-section-header"><a href="#variant.Instance" class="anchor field"></a><code>Instance</code></div><div class="docblock"><p>Identifier that is an instance variable name.</p>
 <p>Instance variables are prefixed with a single <code>@</code> sigil. The remaining
 bytes must be a valid <a href="enum.IdentifierType.html#variant.Constant"><code>Constant</code></a> or <a href="enum.IdentifierType.html#variant.Local"><code>Local</code></a> ident.</p>
-<h2 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h2>
+<h3 id="examples-2" class="section-header"><a href="#examples-2">Examples</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(<span class="string">&quot;@&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Err</span>(<span class="ident">ParseIdentifierError::new</span>()));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;@foo&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Instance</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;@Foo&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Instance</span>));
@@ -81,7 +81,7 @@ bytes must be a valid <a href="enum.IdentifierType.html#variant.Constant"><code>
 </div><div id="variant.Class" class="variant small-section-header"><a href="#variant.Class" class="anchor field"></a><code>Class</code></div><div class="docblock"><p>Identifier that is a class variable name.</p>
 <p>Class variables are prefixed with a double <code>@@</code> sigil. The remaining
 bytes must be a valid <a href="enum.IdentifierType.html#variant.Constant"><code>Constant</code></a> or <a href="enum.IdentifierType.html#variant.Local"><code>Local</code></a> ident.</p>
-<h2 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h2>
+<h3 id="examples-3" class="section-header"><a href="#examples-3">Examples</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(<span class="string">&quot;@@&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Err</span>(<span class="ident">ParseIdentifierError::new</span>()));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;@@foo&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Class</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;@@Foo&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Class</span>));
@@ -97,7 +97,7 @@ bytes must be a valid <a href="enum.IdentifierType.html#variant.Constant"><code>
 <p>AttrSet end in the <code>=</code> sigil and are otherwise valid <a href="enum.IdentifierType.html#variant.Local"><code>Local</code></a> or
 <a href="enum.IdentifierType.html#variant.Constant"><code>Constant</code></a> idents.  AttrSet idents cannot have any other “junk”
 symbols.</p>
-<h2 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h2>
+<h3 id="examples-4" class="section-header"><a href="#examples-4">Examples</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(<span class="string">&quot;Foo=&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::AttrSet</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;foo=&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::AttrSet</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;foo_bar=&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::AttrSet</span>));
@@ -106,7 +106,7 @@ symbols.</p>
 </div><div id="variant.Constant" class="variant small-section-header"><a href="#variant.Constant" class="anchor field"></a><code>Constant</code></div><div class="docblock"><p>Identifier that is a constant name.</p>
 <p>Constant names can be either ASCII or Unicode and must start with a
 uppercase character.</p>
-<h2 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h2>
+<h3 id="examples-5" class="section-header"><a href="#examples-5">Examples</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(<span class="string">&quot;Foo&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Constant</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;FOO&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Constant</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;FooBar&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Constant</span>));
@@ -115,7 +115,7 @@ uppercase character.</p>
 </div><div id="variant.Local" class="variant small-section-header"><a href="#variant.Local" class="anchor field"></a><code>Local</code></div><div class="docblock"><p>Identifier that is a local variable or method name.</p>
 <p>Local names can be either ASCII or Unicode and must start with a
 lowercase character.</p>
-<h2 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h2>
+<h3 id="examples-6" class="section-header"><a href="#examples-6">Examples</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">assert_eq!</span>(<span class="string">&quot;foo&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Local</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;fOO&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Local</span>));
 <span class="macro">assert_eq!</span>(<span class="string">&quot;fooBar&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">IdentifierType</span><span class="op">&gt;</span>(), <span class="prelude-val">Ok</span>(<span class="ident">IdentifierType::Local</span>));

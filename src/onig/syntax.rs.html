@@ -307,12 +307,12 @@
     }
 
     <span class="doccomment">/// Replace the operators for this syntax</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_operators</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">operators</span>: <span class="ident">SyntaxOperator</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_operators</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">operators</span>: <span class="ident">SyntaxOperator</span>) {
         <span class="kw">let</span> <span class="ident">op</span> <span class="op">=</span> <span class="ident">operators</span>.<span class="ident">bits</span>() <span class="kw">as</span> <span class="ident">onig_sys::OnigSyntaxOp</span>;
         <span class="kw">let</span> <span class="ident">op2</span> <span class="op">=</span> (<span class="ident">operators</span>.<span class="ident">bits</span>() <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">32</span>) <span class="kw">as</span> <span class="ident">onig_sys::OnigSyntaxOp2</span>;
         <span class="kw">unsafe</span> {
-            <span class="ident">onig_sys::onig_set_syntax_op</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">op</span>);
-            <span class="ident">onig_sys::onig_set_syntax_op2</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">op2</span>)
+            <span class="ident">onig_sys::onig_set_syntax_op</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">op</span>);
+            <span class="ident">onig_sys::onig_set_syntax_op2</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">op2</span>)
         }
     }
 
@@ -320,7 +320,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Updates the operators for this syntax to enable the chosen</span>
     <span class="doccomment">/// ones.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_operators</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">operators</span>: <span class="ident">SyntaxOperator</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_operators</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">operators</span>: <span class="ident">SyntaxOperator</span>) {
         <span class="kw">let</span> <span class="ident">operators</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">operators</span>() <span class="op">|</span> <span class="ident">operators</span>;
         <span class="self">self</span>.<span class="ident">set_operators</span>(<span class="ident">operators</span>)
     }
@@ -329,7 +329,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Updates the operators for this syntax to remove the specified</span>
     <span class="doccomment">/// operators.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_operators</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">operators</span>: <span class="ident">SyntaxOperator</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_operators</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">operators</span>: <span class="ident">SyntaxOperator</span>) {
         <span class="kw">let</span> <span class="ident">operators</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">operators</span>() <span class="op">&amp;</span> <span class="op">!</span><span class="ident">operators</span>;
         <span class="self">self</span>.<span class="ident">set_operators</span>(<span class="ident">operators</span>)
     }
@@ -342,21 +342,21 @@
     }
 
     <span class="doccomment">/// Overwrite the syntax behaviour for this syntax.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_behavior</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">behavior</span>: <span class="ident">SyntaxBehavior</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_behavior</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">behavior</span>: <span class="ident">SyntaxBehavior</span>) {
         <span class="kw">let</span> <span class="ident">behavior</span> <span class="op">=</span> <span class="ident">behavior</span>.<span class="ident">bits</span>() <span class="kw">as</span> <span class="ident">onig_sys::OnigSyntaxBehavior</span>;
         <span class="kw">unsafe</span> {
-            <span class="ident">onig_sys::onig_set_syntax_behavior</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">behavior</span>);
+            <span class="ident">onig_sys::onig_set_syntax_behavior</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">behavior</span>);
         }
     }
 
     <span class="doccomment">/// Enable a given behaviour for this syntax</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_behavior</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">behavior</span>: <span class="ident">SyntaxBehavior</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_behavior</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">behavior</span>: <span class="ident">SyntaxBehavior</span>) {
         <span class="kw">let</span> <span class="ident">behavior</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">behavior</span>() <span class="op">|</span> <span class="ident">behavior</span>;
         <span class="self">self</span>.<span class="ident">set_behavior</span>(<span class="ident">behavior</span>)
     }
 
     <span class="doccomment">/// Disable a given behaviour for this syntax</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_behavior</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">behavior</span>: <span class="ident">SyntaxBehavior</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_behavior</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">behavior</span>: <span class="ident">SyntaxBehavior</span>) {
         <span class="kw">let</span> <span class="ident">behavior</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">behavior</span>() <span class="op">&amp;</span> <span class="op">!</span><span class="ident">behavior</span>;
         <span class="self">self</span>.<span class="ident">set_behavior</span>(<span class="ident">behavior</span>)
     }
@@ -369,10 +369,10 @@
     }
 
     <span class="doccomment">/// Replace the syntax options for this syntax</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_options</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">options</span>: <span class="ident">RegexOptions</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_options</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">options</span>: <span class="ident">RegexOptions</span>) {
         <span class="kw">let</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">options</span>.<span class="ident">bits</span>() <span class="kw">as</span> <span class="ident">onig_sys::OnigOptionType</span>;
         <span class="kw">unsafe</span> {
-            <span class="ident">onig_sys::onig_set_syntax_options</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">options</span>);
+            <span class="ident">onig_sys::onig_set_syntax_options</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">options</span>);
         }
     }
 
@@ -381,19 +381,19 @@
     <span class="doccomment">/// Arguments:</span>
     <span class="doccomment">///  - `what`: The meta character to update</span>
     <span class="doccomment">///  - `meta`: The value to set the meta character to</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_meta_char</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">what</span>: <span class="ident">MetaCharType</span>, <span class="ident">meta</span>: <span class="ident">MetaChar</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_meta_char</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">what</span>: <span class="ident">MetaCharType</span>, <span class="ident">meta</span>: <span class="ident">MetaChar</span>) {
         <span class="kw">let</span> <span class="ident">what</span> <span class="op">=</span> <span class="ident">what</span>.<span class="ident">bits</span>();
         <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">meta</span> {
             <span class="ident">MetaChar::Ineffective</span> =&gt; <span class="ident">onig_sys::ONIG_INEFFECTIVE_META_CHAR</span>,
             <span class="ident">MetaChar::Character</span>(<span class="ident">char</span>) =&gt; <span class="ident">char</span> <span class="kw">as</span> <span class="ident">u32</span>,
         };
         <span class="kw">unsafe</span> {
-            <span class="ident">onig_sys::onig_set_meta_char</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">what</span>, <span class="ident">code</span>);
+            <span class="ident">onig_sys::onig_set_meta_char</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">what</span>, <span class="ident">code</span>);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">raw_mut</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigSyntaxType</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">raw</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">onig_sys::OnigSyntaxType</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">onig_sys::OnigSyntaxType</span>
+    <span class="kw">fn</span> <span class="ident">raw_mut</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">onig_sys::OnigSyntaxType</span> {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">raw</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">onig_sys::OnigSyntaxType</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">onig_sys::OnigSyntaxType</span>
     }
 }
 </code></pre></div>

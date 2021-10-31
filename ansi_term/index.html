@@ -127,7 +127,7 @@ it does provide a method <code>write_to</code> to write the result to any
 <code>io::Write</code>:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">ansi_term::Colour::Green</span>;
-<span class="ident">Green</span>.<span class="ident">paint</span>(<span class="string">&quot;user data&quot;</span>.<span class="ident">as_bytes</span>()).<span class="ident">write_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">std::io::stdout</span>()).<span class="ident">unwrap</span>();</code></pre></div>
+<span class="ident">Green</span>.<span class="ident">paint</span>(<span class="string">&quot;user data&quot;</span>.<span class="ident">as_bytes</span>()).<span class="ident">write_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">std::io::stdout</span>()).<span class="ident">unwrap</span>();</code></pre></div>
 <p>Similarly, the type <code>ANSIByteStrings</code> supports writing a list of
 <code>ANSIByteString</code> values with minimal escape sequences:</p>
 
@@ -136,7 +136,7 @@ it does provide a method <code>write_to</code> to write the result to any
 <span class="ident">ANSIByteStrings</span>(<span class="kw-2">&amp;</span>[
     <span class="ident">Green</span>.<span class="ident">paint</span>(<span class="string">&quot;user data 1\n&quot;</span>.<span class="ident">as_bytes</span>()),
     <span class="ident">Green</span>.<span class="ident">bold</span>().<span class="ident">paint</span>(<span class="string">&quot;user data 2\n&quot;</span>.<span class="ident">as_bytes</span>()),
-]).<span class="ident">write_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">std::io::stdout</span>()).<span class="ident">unwrap</span>();</code></pre></div>
+]).<span class="ident">write_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">std::io::stdout</span>()).<span class="ident">unwrap</span>();</code></pre></div>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ANSIGenericString.html" title="ansi_term::ANSIGenericString struct">ANSIGenericString</a></div><div class="item-right docblock-short"><p>An <code>ANSIGenericString</code> includes a generic string type and a <code>Style</code> to
 display that string.  <code>ANSIString</code> and <code>ANSIByteString</code> are aliases for

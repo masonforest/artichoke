@@ -1295,7 +1295,7 @@
 
     <span class="kw">unsafe</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">size</span>: <span class="ident">libc::winsize</span> <span class="op">=</span> <span class="ident">zeroed</span>();
-        <span class="kw">match</span> <span class="ident">win_size</span>(<span class="ident">fileno</span>.<span class="ident">as_raw_fd</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">size</span>) {
+        <span class="kw">match</span> <span class="ident">win_size</span>(<span class="ident">fileno</span>.<span class="ident">as_raw_fd</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">size</span>) {
             <span class="prelude-val">Ok</span>(<span class="number">0</span>) =&gt; {
                 <span class="comment">// In linux pseudo-terminals are created with dimensions of</span>
                 <span class="comment">// zero. If host application didn&#39;t initialize the correct</span>
@@ -1365,12 +1365,12 @@
 <span class="kw">struct</span> <span class="ident">StdinRaw</span> {}
 
 <span class="kw">impl</span> <span class="ident">Read</span> <span class="kw">for</span> <span class="ident">StdinRaw</span> {
-    <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
             <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">unsafe</span> {
                 <span class="ident">libc::read</span>(
                     <span class="ident">STDIN_FILENO</span>,
-                    <span class="ident">buf</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">libc::c_void</span>,
+                    <span class="ident">buf</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">libc::c_void</span>,
                     <span class="ident">buf</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">libc::size_t</span>,
                 )
             };
@@ -1443,12 +1443,12 @@
 
     <span class="doccomment">/// Handle \E &lt;seq1&gt; sequences</span>
     <span class="comment">// https://invisible-island.net/xterm/xterm-function-keys.html</span>
-    <span class="kw">fn</span> <span class="ident">escape_sequence</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">escape_sequence</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">_do_escape_sequence</span>(<span class="bool-val">true</span>)
     }
 
     <span class="doccomment">/// Don&#39;t call directly, call `PosixRawReader::escape_sequence` instead</span>
-    <span class="kw">fn</span> <span class="ident">_do_escape_sequence</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">allow_recurse</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">_do_escape_sequence</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">allow_recurse</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="comment">// Read the next byte representing the escape sequence.</span>
         <span class="kw">let</span> <span class="ident">seq1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="ident">seq1</span> <span class="op">==</span> <span class="string">&#39;[&#39;</span> {
@@ -1499,7 +1499,7 @@
     }
 
     <span class="doccomment">/// Handle \E[ &lt;seq2&gt; escape sequences</span>
-    <span class="kw">fn</span> <span class="ident">escape_csi</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">escape_csi</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">seq2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="ident">seq2</span>.<span class="ident">is_digit</span>(<span class="number">10</span>) {
             <span class="kw">match</span> <span class="ident">seq2</span> {
@@ -1557,7 +1557,7 @@
 
     <span class="doccomment">/// Handle \E[ &lt;seq2:digit&gt; escape sequences</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::cognitive_complexity</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">extended_escape</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">seq2</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">extended_escape</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">seq2</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">seq3</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="ident">seq3</span> <span class="op">==</span> <span class="string">&#39;~&#39;</span> {
             <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">seq2</span> {
@@ -1849,7 +1849,7 @@
     }
 
     <span class="doccomment">/// Handle \EO &lt;seq2&gt; escape sequences</span>
-    <span class="kw">fn</span> <span class="ident">escape_o</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">escape_o</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">seq2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">seq2</span> {
             <span class="ident">UP</span> =&gt; <span class="ident">E</span>(<span class="ident">K::Up</span>, <span class="ident">M::NONE</span>),
@@ -1881,9 +1881,9 @@
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">timeout_ms</span>: <span class="ident">i32</span>) -&gt; <span class="ident">::nix::Result</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">poll</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">timeout_ms</span>: <span class="ident">i32</span>) -&gt; <span class="ident">::nix::Result</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fds</span> <span class="op">=</span> [<span class="ident">poll::PollFd::new</span>(<span class="ident">STDIN_FILENO</span>, <span class="ident">PollFlags::POLLIN</span>)];
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">poll::poll</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fds</span>, <span class="ident">timeout_ms</span>);
+        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">poll::poll</span>(<span class="kw-2">&amp;mut</span> <span class="ident">fds</span>, <span class="ident">timeout_ms</span>);
         <span class="kw">match</span> <span class="ident">r</span> {
             <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="ident">r</span>,
             <span class="prelude-val">Err</span>(<span class="ident">nix::errno::Errno::EINTR</span>) =&gt; {
@@ -1899,7 +1899,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">RawReader</span> <span class="kw">for</span> <span class="ident">PosixRawReader</span> {
-    <span class="kw">fn</span> <span class="ident">next_key</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">single_esc_abort</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_key</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">single_esc_abort</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">KeyEvent</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">KeyEvent::new</span>(<span class="ident">c</span>, <span class="ident">M::NONE</span>);
@@ -1925,14 +1925,14 @@
         <span class="prelude-val">Ok</span>(<span class="ident">key</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">next_char</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_char</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
         <span class="kw">loop</span> {
-            <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stdin</span>.<span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">buf</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stdin</span>.<span class="ident">read</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buf</span>)<span class="question-mark">?</span>;
             <span class="kw">if</span> <span class="ident">n</span> <span class="op">==</span> <span class="number">0</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error::ReadlineError::Eof</span>);
             }
             <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>[<span class="number">0</span>];
-            <span class="self">self</span>.<span class="ident">parser</span>.<span class="ident">advance</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">receiver</span>, <span class="ident">b</span>);
+            <span class="self">self</span>.<span class="ident">parser</span>.<span class="ident">advance</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">receiver</span>, <span class="ident">b</span>);
             <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">receiver</span>.<span class="ident">valid</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error::ReadlineError::Utf8Error</span>);
             } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">receiver</span>.<span class="ident">c</span>.<span class="ident">take</span>() {
@@ -1941,7 +1941,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">read_pasted_text</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read_pasted_text</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">String::new</span>();
         <span class="kw">loop</span> {
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span> {
@@ -1964,13 +1964,13 @@
 
 <span class="kw">impl</span> <span class="ident">Receiver</span> <span class="kw">for</span> <span class="ident">Utf8</span> {
     <span class="doccomment">/// Called whenever a code point is parsed successfully</span>
-    <span class="kw">fn</span> <span class="ident">codepoint</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">c</span>: <span class="ident">char</span>) {
+    <span class="kw">fn</span> <span class="ident">codepoint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">c</span>: <span class="ident">char</span>) {
         <span class="self">self</span>.<span class="ident">c</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>);
         <span class="self">self</span>.<span class="ident">valid</span> <span class="op">=</span> <span class="bool-val">true</span>;
     }
 
     <span class="doccomment">/// Called when an invalid_sequence is detected</span>
-    <span class="kw">fn</span> <span class="ident">invalid_sequence</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">fn</span> <span class="ident">invalid_sequence</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="self">self</span>.<span class="ident">c</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         <span class="self">self</span>.<span class="ident">valid</span> <span class="op">=</span> <span class="bool-val">false</span>;
     }
@@ -2004,7 +2004,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">clear_old_rows</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">layout</span>: <span class="kw-2">&amp;</span><span class="ident">Layout</span>) {
+    <span class="kw">fn</span> <span class="ident">clear_old_rows</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">layout</span>: <span class="kw-2">&amp;</span><span class="ident">Layout</span>) {
         <span class="kw">use</span> <span class="ident">std::fmt::Write</span>;
         <span class="kw">let</span> <span class="ident">current_row</span> <span class="op">=</span> <span class="ident">layout</span>.<span class="ident">cursor</span>.<span class="ident">row</span>;
         <span class="kw">let</span> <span class="ident">old_rows</span> <span class="op">=</span> <span class="ident">layout</span>.<span class="ident">end</span>.<span class="ident">row</span>;
@@ -2027,7 +2027,7 @@
 <span class="kw">impl</span> <span class="ident">Renderer</span> <span class="kw">for</span> <span class="ident">PosixRenderer</span> {
     <span class="kw">type</span> <span class="ident">Reader</span> <span class="op">=</span> <span class="ident">PosixRawReader</span>;
 
-    <span class="kw">fn</span> <span class="ident">move_cursor</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">old</span>: <span class="ident">Position</span>, <span class="ident">new</span>: <span class="ident">Position</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">move_cursor</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">old</span>: <span class="ident">Position</span>, <span class="ident">new</span>: <span class="ident">Position</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">std::fmt::Write</span>;
         <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">clear</span>();
         <span class="kw">let</span> <span class="ident">row_ordering</span> <span class="op">=</span> <span class="ident">new</span>.<span class="ident">row</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">old</span>.<span class="ident">row</span>);
@@ -2070,7 +2070,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">refresh_line</span>(
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">prompt</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">LineBuffer</span>,
         <span class="ident">hint</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>,
@@ -2153,7 +2153,7 @@
             <span class="kw">let</span> <span class="ident">cw</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&quot;\t&quot;</span> {
                 <span class="self">self</span>.<span class="ident">tab_stop</span> <span class="op">-</span> (<span class="ident">pos</span>.<span class="ident">col</span> <span class="op">%</span> <span class="self">self</span>.<span class="ident">tab_stop</span>)
             } <span class="kw">else</span> {
-                <span class="ident">width</span>(<span class="ident">c</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">esc_seq</span>)
+                <span class="ident">width</span>(<span class="ident">c</span>, <span class="kw-2">&amp;mut</span> <span class="ident">esc_seq</span>)
             };
             <span class="ident">pos</span>.<span class="ident">col</span> <span class="op">+</span><span class="op">=</span> <span class="ident">cw</span>;
             <span class="kw">if</span> <span class="ident">pos</span>.<span class="ident">col</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">cols</span> {
@@ -2168,7 +2168,7 @@
         <span class="ident">pos</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">beep</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">beep</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">bell_style</span> {
             <span class="ident">BellStyle::Audible</span> =&gt; {
                 <span class="ident">io::stderr</span>().<span class="ident">write_all</span>(<span class="string">b&quot;\x07&quot;</span>)<span class="question-mark">?</span>;
@@ -2180,7 +2180,7 @@
     }
 
     <span class="doccomment">/// Clear the screen. Used to handle ctrl+l</span>
-    <span class="kw">fn</span> <span class="ident">clear_screen</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">clear_screen</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">write_and_flush</span>(<span class="string">b&quot;\x1b[H\x1b[2J&quot;</span>)
     }
 
@@ -2192,7 +2192,7 @@
     }
 
     <span class="doccomment">/// Try to update the number of columns in the current terminal,</span>
-    <span class="kw">fn</span> <span class="ident">update_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">fn</span> <span class="ident">update_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="kw">let</span> (<span class="ident">cols</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">get_win_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">out</span>);
         <span class="self">self</span>.<span class="ident">cols</span> <span class="op">=</span> <span class="ident">cols</span>;
     }
@@ -2212,7 +2212,7 @@
         <span class="self">self</span>.<span class="ident">colors_enabled</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">move_cursor_at_leftmost</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">PosixRawReader</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">move_cursor_at_leftmost</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">rdr</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PosixRawReader</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">rdr</span>.<span class="ident">poll</span>(<span class="number">0</span>)<span class="question-mark">?</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
             <span class="macro">debug!</span>(<span class="ident">target</span>: <span class="string">&quot;rustyline&quot;</span>, <span class="string">&quot;cannot request cursor location&quot;</span>);
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
@@ -2237,7 +2237,7 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">read_digits_until</span>(<span class="ident">rdr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">PosixRawReader</span>, <span class="ident">sep</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">read_digits_until</span>(<span class="ident">rdr</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PosixRawReader</span>, <span class="ident">sep</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">num</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">loop</span> {
         <span class="kw">match</span> <span class="ident">rdr</span>.<span class="ident">next_char</span>()<span class="question-mark">?</span> {
@@ -2345,7 +2345,7 @@
 
     <span class="comment">// Interactive loop:</span>
 
-    <span class="kw">fn</span> <span class="ident">enable_raw_mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Mode</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">enable_raw_mode</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Mode</span><span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">nix::errno::Errno::ENOTTY</span>;
         <span class="kw">use</span> <span class="ident">nix::sys::termios</span>::{<span class="ident">ControlFlags</span>, <span class="ident">InputFlags</span>, <span class="ident">LocalFlags</span>, <span class="ident">SpecialCharacterIndices</span>};
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">stdin_isatty</span> {

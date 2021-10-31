@@ -14,7 +14,7 @@ or statically-allocated buffer).</p>
     <span class="ident">buf</span>.<span class="ident">resize</span>(<span class="ident">s</span>.<span class="ident">len</span>() <span class="op">*</span> <span class="number">4</span> <span class="op">/</span> <span class="number">3</span> <span class="op">+</span> <span class="number">4</span>, <span class="number">0</span>);
 
     <span class="kw">let</span> <span class="ident">bytes_written</span> <span class="op">=</span> <span class="ident">base64::encode_config_slice</span>(<span class="ident">s</span>,
-                            <span class="ident">base64::STANDARD</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>);
+                            <span class="ident">base64::STANDARD</span>, <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>);
 
     <span class="comment">// shorten our vec down to just what was written</span>
     <span class="ident">buf</span>.<span class="ident">resize</span>(<span class="ident">bytes_written</span>, <span class="number">0</span>);

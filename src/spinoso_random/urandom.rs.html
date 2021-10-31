@@ -82,7 +82,7 @@
 <span class="doccomment">/// as a [Ruby `RuntimeError`].</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [Ruby `RuntimeError`]: https://ruby-doc.org/core-2.6.3/RuntimeError.html</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">urandom</span>(<span class="ident">dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">UrandomError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">urandom</span>(<span class="ident">dest</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">UrandomError</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">getrandom::getrandom</span>(<span class="ident">dest</span>).<span class="ident">is_err</span>() {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">UrandomError::new</span>());
     }
@@ -97,8 +97,8 @@
     <span class="kw">fn</span> <span class="ident">read_random_bytes</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf_a</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">256</span>];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf_b</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">256</span>];
-        <span class="ident">urandom</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf_a</span>).<span class="ident">unwrap</span>();
-        <span class="ident">urandom</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf_b</span>).<span class="ident">unwrap</span>();
+        <span class="ident">urandom</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf_a</span>).<span class="ident">unwrap</span>();
+        <span class="ident">urandom</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf_b</span>).<span class="ident">unwrap</span>();
         <span class="macro">assert_ne!</span>(<span class="ident">buf_a</span>, <span class="ident">buf_b</span>);
     }
 }

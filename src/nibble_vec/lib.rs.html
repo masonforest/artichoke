@@ -436,7 +436,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Only the 4 least-significant bits of the value are used.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">u8</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">val</span>: <span class="ident">u8</span>) {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">length</span> <span class="op">%</span> <span class="number">2</span> <span class="op">==</span> <span class="number">0</span> {
             <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">push</span>(<span class="ident">val</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">4</span>);
         } <span class="kw">else</span> {
@@ -457,7 +457,7 @@
     <span class="doccomment">/// with exactly `idx` elements remaining in this vector.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if `idx &gt; self.len()`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>) -&gt; <span class="ident">NibbleVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>) -&gt; <span class="ident">NibbleVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
         <span class="comment">// assert! is a few percent slower surprisingly</span>
         <span class="kw">if</span> <span class="ident">idx</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">length</span> {
             <span class="macro">panic!</span>(
@@ -475,7 +475,7 @@
 
     <span class="doccomment">/// Split function for odd *indices*.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">split_odd</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>) -&gt; <span class="ident">NibbleVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">split_odd</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>) -&gt; <span class="ident">NibbleVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tail</span> <span class="op">=</span> <span class="ident">NibbleVec::new</span>();
 
         <span class="comment">// Perform an overlap copy, copying the last nibble of the original vector only if</span>
@@ -485,8 +485,8 @@
         <span class="self">self</span>.<span class="ident">overlap_copy</span>(
             <span class="ident">idx</span> <span class="op">/</span> <span class="number">2</span>,
             <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>(),
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">tail</span>.<span class="ident">data</span>,
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">tail</span>.<span class="ident">length</span>,
+            <span class="kw-2">&amp;mut</span> <span class="ident">tail</span>.<span class="ident">data</span>,
+            <span class="kw-2">&amp;mut</span> <span class="ident">tail</span>.<span class="ident">length</span>,
             <span class="ident">take_last</span>,
         );
 
@@ -506,7 +506,7 @@
 
     <span class="doccomment">/// Split function for even *indices*.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">split_even</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>) -&gt; <span class="ident">NibbleVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">split_even</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">idx</span>: <span class="ident">usize</span>) -&gt; <span class="ident">NibbleVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
         <span class="comment">// Avoid allocating a temporary vector by copying all the bytes in order, then popping them.</span>
 
         <span class="comment">// Possible to prove: l_d - ⌊i / 2⌋ = ⌊(l_v - i + 1) / 2⌋</span>
@@ -541,8 +541,8 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">start</span>: <span class="ident">usize</span>,
         <span class="ident">end</span>: <span class="ident">usize</span>,
-        <span class="ident">vec</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">SmallVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>,
-        <span class="ident">length</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">usize</span>,
+        <span class="ident">vec</span>: <span class="kw-2">&amp;mut</span> <span class="ident">SmallVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>,
+        <span class="ident">length</span>: <span class="kw-2">&amp;mut</span> <span class="ident">usize</span>,
         <span class="ident">include_last</span>: <span class="ident">bool</span>,
     ) {
         <span class="comment">// Copy up to the first half of the last byte.</span>
@@ -588,8 +588,8 @@
         <span class="ident">other</span>.<span class="ident">overlap_copy</span>(
             <span class="number">0</span>,
             <span class="ident">other</span>.<span class="ident">data</span>.<span class="ident">len</span>(),
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>,
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">length</span>,
+            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">data</span>,
+            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">length</span>,
             <span class="ident">take_last</span>,
         );
 
@@ -625,7 +625,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>: <span class="ident">Array</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">NibbleVec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;NibbleVec [&quot;</span>)<span class="question-mark">?</span>;
 
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_empty</span>() {
